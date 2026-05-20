@@ -1,13 +1,13 @@
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Generado: 2026-05-20 16:58:14 CEST
+> Generado: 2026-05-20 17:14:42 CEST
 >
 > Leyenda: X = presente/relleno | - = vacio/original | ? = error
 
 | # | Alumno | Commits | Ultima actividad | QUE_HACE | ConvLog | README | Src | UML | Ultimo commit |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | 31Diego | 0 | 2026-05-19 | - | - | - | - | - | feat: sesión de vibecoding idsw2 |
-| 2 | Pareyor | 0 | 2026-05-19 | - | - | - | - | - | feat: sesión de vibecoding idsw2 |
+| 2 | Pareyor | 1 | 2026-05-20 | X | - | - | - | - | feat: QUE_HACE.md |
 | 3 | liamanderson873 | 0 | 2026-05-19 | - | - | - | - | - | feat: sesión de vibecoding idsw2 |
 | 4 | jerdier | 0 | 2026-05-19 | - | - | - | - | - | feat: sesión de vibecoding idsw2 |
 | 5 | jaimelinares6 | 0 | 2026-05-19 | - | - | - | - | - | feat: sesión de vibecoding idsw2 |
@@ -20,10 +20,16 @@
 ## Resumen rapido
 
 - Forks totales: 10
-- Alumnos con actividad (>1 commit): 1
-- Alumnos sin actividad: 9
+- Alumnos con actividad (>1 commit): 2
+- Alumnos sin actividad: 8
 
 ## Detalle por alumno
+
+### Pareyor (1 commits propios)
+
+| Fecha | Mensaje |
+|---|---|
+| 2026-05-20 | feat: QUE_HACE.md |
 
 ### martinlopez7 (2 commits propios)
 
