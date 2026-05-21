@@ -108,8 +108,8 @@
 
 ## [~23:30] Incidente: commit del log aterrizó en main
 
-**Prompt:** (no hubo — el AI detectó el problema al revisar el output del commit)
+**Prompt:** (no hubo — el AI detectó que el output del commit decía `[main ...]` en lugar de `[AUDIT ...]`, pero fue el usuario quien identificó la causa)
 
-**Resultado:** El commit `docs(audit): conversation-log...` apareció en `main` en lugar de `AUDIT`. Causa: el último paso de `update-dashboard.sh` es `git checkout main`, que se ejecutó mientras construíamos el log. El Write tool escribió el fichero con la rama ya en `main`, y el commit siguiente fue allí.
+**Resultado:** El commit `docs(audit): conversation-log...` apareció en `main` en lugar de `AUDIT`. El usuario señaló la causa: habíamos empezado a construir el log mientras el script de audit todavía se estaba ejecutando, y su último paso es `git checkout main`. El Write tool escribió el fichero con la rama ya en `main`, y el commit siguiente fue allí.
 
 **Decisión:** Corregido con cherry-pick a `AUDIT` y `reset --hard` en `main`. El fichero nunca llegó a pushearse a `origin/main`, por lo que el reset fue seguro. La lección: no construir nada en AUDIT mientras se ejecuta `git audit` — el script vuelve a main al terminar.
