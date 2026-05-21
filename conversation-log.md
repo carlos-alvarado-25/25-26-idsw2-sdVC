@@ -8,7 +8,7 @@
 
 ## [~22:00] Interiorización del repositorio
 
-**Prompt:** "interioriza profundamente este repo y su rama AUDIT: tenemos mucho trabajo bonito que hacer"
+**Prompt:** "interioriza este repo y su rama AUDIT: tenemos trabajo que hacer"
 
 **Resultado:** Exploración completa del repo: estructura de `main` (scaffold para alumnos, artefactos obligatorios, baremos en `2Think.md`), estructura de `AUDIT` (scripts de monitoreo via GitHub API, `DASHBOARD.md` autogenerado, alias `git audit`). Estado del dashboard: 27 forks, 16 con actividad.
 
@@ -18,7 +18,7 @@
 
 ## [~22:05] Reflexión sobre trazabilidad
 
-**Prompt:** "quisiera trabajar un poco más la trazabilidad de la actividad de mis alumnos en estas sesiones de vibecoding. Reflexionemos: yo creo que deberían tener regularidad: sesiones en las que podamos ver avance, trabajo, reflexión..."
+**Prompt:** "vamos a trabajar un poco más la trazabilidad de la actividad de mis alumnos en estas sesiones de vibecoding. Reflexionemos: debería emerger la regularidad: sesiones en las que podamos ver avance, trabajo, reflexión..."
 
 **Resultado:** El AI propuso cuatro indicadores: días únicos de actividad, gap máximo entre sesiones, progresión de artefactos, entradas en conversation-log.
 
@@ -98,8 +98,18 @@
 
 ## [~23:25] Este log
 
-**Prompt:** "oye, y si cuando termine el audit, ponemos nosotros también nuestro conversation-log?"
+**Prompt:** "cuando termine el audit, ponemos nosotros también nuestro conversation-log"
 
 **Resultado:** El AI reflexionó sobre el valor pedagógico: transparencia, ejemplo en acto de lo que se valora en `2Think.md`, muestra que el proceso honesto no es lineal.
 
 **Decisión:** Log en rama `AUDIT` para no contaminar el scaffold de los alumnos. El AI lo redactó a partir de la sesión completa con timestamps aproximados.
+
+---
+
+## [~23:30] Incidente: commit del log aterrizó en main
+
+**Prompt:** (no hubo — el AI detectó el problema al revisar el output del commit)
+
+**Resultado:** El commit `docs(audit): conversation-log...` apareció en `main` en lugar de `AUDIT`. Causa: el último paso de `update-dashboard.sh` es `git checkout main`, que se ejecutó mientras construíamos el log. El Write tool escribió el fichero con la rama ya en `main`, y el commit siguiente fue allí.
+
+**Decisión:** Corregido con cherry-pick a `AUDIT` y `reset --hard` en `main`. El fichero nunca llegó a pushearse a `origin/main`, por lo que el reset fue seguro. La lección: no construir nada en AUDIT mientras se ejecuta `git audit` — el script vuelve a main al terminar.
