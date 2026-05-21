@@ -88,15 +88,6 @@ get_artifact_day_offset() {
     echo "+${offset}d"
 }
 
-icon() {
-    case "$1" in
-        reescrito) echo "📄" ;;
-        relleno) echo "X" ;;
-        vacio | original) echo "-" ;;
-        *) echo "?" ;;
-    esac
-}
-
 log "Obteniendo lista de forks..."
 FORKS=$(gh api "repos/$REPO/forks" --jq '.[].owner.login' 2>/dev/null)
 
@@ -147,19 +138,6 @@ for user in $FORKS; do
     QUE_HACE_STATUS=$(check_file_has_content "$user" "QUE_HACE.md" "En una frase" 2>/dev/null || echo "?")
     CONVLOG_STATUS=$(check_file_has_content "$user" "conversation-log.md" "lo que le dijo al AI para arrancar" 2>/dev/null || echo "?")
     README=$(check_readme_rewritten "$user" 2>/dev/null || echo "?")
-    IR=$(icon "$README")
-
-    if [ "$QUE_HACE_STATUS" = "relleno" ]; then
-        QH_COL="[💡]($QUE_HACE_URL)"
-    else
-        QH_COL="-"
-    fi
-
-    if [ "$CONVLOG_STATUS" = "relleno" ]; then
-        CL_COL="[💬]($CONVLOG_URL)"
-    else
-        CL_COL="-"
-    fi
 
     # Progresión de artefactos: offset en días desde la fecha del scaffold
     SRC_OFFSET=$(get_artifact_day_offset "$user" "src" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
@@ -169,6 +147,24 @@ for user in $FORKS; do
     R02_OFFSET=$(get_artifact_day_offset "$user" "RUP/02-diseño" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
     R03_OFFSET=$(get_artifact_day_offset "$user" "RUP/03-desarrollo" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
 
+    if [ "$QUE_HACE_STATUS" = "relleno" ]; then
+        QH_COL="[💡]($QUE_HACE_URL)"
+    else
+        QH_COL="-"
+    fi
+
+    if [ "$CONVLOG_STATUS" = "relleno" ]; then
+        CL_COL="[💬]($CONVLOG_URL)<br>$CL_T_OFFSET"
+    else
+        CL_COL="-"
+    fi
+
+    if [ "$README" = "reescrito" ]; then
+        README_COL="[📄]($REPO_URL/blob/main/README.md)"
+    else
+        README_COL="-"
+    fi
+
     ALUMNO_LINK="<sub>[$user]($REPO_URL)</sub>"
     if [ "$COMMITS" -gt 0 ]; then
         LAST_MSG_LINK="<sub>[$LAST_MSG]($REPO_URL/commit/$LAST_SHA)</sub>"
@@ -176,7 +172,7 @@ for user in $FORKS; do
         LAST_MSG_LINK="<sub>$LAST_MSG</sub>"
     fi
 
-    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $COMMITS | $UNIQUE_DAYS | $GAP_DISPLAY | $LAST_DATE | $QH_COL | $CL_COL | $IR | $SRC_OFFSET | $UML_OFFSET | $CL_T_OFFSET | $R01_OFFSET | $R02_OFFSET | $R03_OFFSET |"
+    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $COMMITS | $UNIQUE_DAYS | $GAP_DISPLAY | $LAST_DATE | $QH_COL | $CL_COL | $README_COL | $SRC_OFFSET | $UML_OFFSET | $R01_OFFSET | $R02_OFFSET | $R03_OFFSET |"
     TABLE_ROWS="${TABLE_ROWS}${ROW}"$'\n'
 
     if [ "$COMMITS" -gt 0 ]; then
@@ -213,19 +209,18 @@ done
     echo "| Gap | Brecha máxima entre sesiones consecutivas, incluyendo hoy; **Nd!** = más de 3 días sin tocar el repo |"
     echo "| Ult. act. | Fecha del último commit (DD-MM) |"
     echo "| 💡 | QUE\\_HACE.md relleno — enlaza al fichero |"
-    echo "| 💬 | conversation-log.md relleno — enlaza al fichero |"
-    echo "| 📄 | README.md reescrito (deja de ser el original) |"
+    echo "| 💬 | conversation-log.md relleno — enlaza al fichero; segunda línea: días desde el scaffold hasta la primera edición |"
+    echo "| 📄 | README.md reescrito — enlaza al fichero |"
     echo "| /src | Offset en días desde el scaffold cuando apareció \`src/\` |"
     echo "| UML | Offset cuando apareció \`modelosUML/\` |"
-    echo "| CL-t | Offset cuando se editó \`conversation-log.md\` por primera vez |"
     echo "| A | Offset cuando apareció \`RUP/01-analisis/\` |"
     echo "| D | Offset cuando apareció \`RUP/02-diseño/\` |"
     echo "| Dev | Offset cuando apareció \`RUP/03-desarrollo/\` |"
     echo ""
     echo "## Tabla"
     echo ""
-    echo "| Alumno | Último commit | Commits | Días | Gap | Ult. act. | 💡 | 💬 | 📄 | /src | UML | CL-t | A | D | Dev |"
-    echo "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"
+    echo "| Alumno | Último commit | ![](https://img.shields.io/badge/commits-blue?logo=github) | Días | Gap | Ult. act. | 💡 | 💬 | 📄 | /src | UML | A | D | Dev |"
+    echo "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"
     printf '%s' "$TABLE_ROWS"
     echo ""
     echo "## Resumen"
