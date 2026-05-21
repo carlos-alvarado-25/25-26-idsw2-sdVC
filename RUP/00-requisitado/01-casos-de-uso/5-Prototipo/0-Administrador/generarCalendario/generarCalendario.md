@@ -4,9 +4,9 @@
 
 <div align=center>
 
-|       ![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/generarCalendario/generarCalendario.svg)        |
+|       ![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/generarCalendario/generarCalendario.svg)        |
 | :------------------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/generarCalendario/generarCalendario.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/generarCalendario/generarCalendario.puml) |
 
 </div>
 
@@ -18,7 +18,7 @@
 
 <div align=center>
 
-| ![](/documentos/01-casos-de-uso/5-Prototipo/0-Administrador/generarCalendario/generarCalendarioAdvertencia.png) |
+| ![](/images/01-casos-de-uso/5-Prototipo/0-Administrador/generarCalendario/generarCalendarioAdvertencia.png) |
 | :-------------------------------------------------------------------------------------------------------------: |
 
 </div>
@@ -27,7 +27,7 @@
 
 <div align=center>
 
-| ![](/documentos/01-casos-de-uso/5-Prototipo/0-Administrador/generarCalendario/generarCalendarioError.png) |
+| ![](/images/01-casos-de-uso/5-Prototipo/0-Administrador/generarCalendario/generarCalendarioError.png) |
 | :-------------------------------------------------------------------------------------------------------: |
 
 </div>
@@ -36,7 +36,7 @@
 
 <div align=center>
 
-| ![](/documentos/01-casos-de-uso/5-Prototipo/0-Administrador/generarCalendario/generarCalendarioGeneracion.png) |
+| ![](/images/01-casos-de-uso/5-Prototipo/0-Administrador/generarCalendario/generarCalendarioGeneracion.png) |
 | :------------------------------------------------------------------------------------------------------------: |
 
 </div>

@@ -4,9 +4,9 @@
 
 <div align=center>
 
-|       ![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/3-CasosDeUsoComunes/iniciarSesion/iniciarSesion.svg)        |
+|       ![](/images/01-casos-de-uso/4-DetallarCasosDeUso/3-CasosDeUsoComunes/iniciarSesion/iniciarSesion.svg)        |
 | :--------------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/3-CasosDeUsoComunes/iniciarSesion/iniciarSesion.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/3-CasosDeUsoComunes/iniciarSesion/iniciarSesion.puml) |
 
 </div>
 
@@ -18,7 +18,7 @@
 
 <div align=center>
 
-| ![](/documentos/01-casos-de-uso/5-Prototipo/3-CasosDeUsoComunes/iniciarSesion/iniciarSesion.png) |
+| ![](/images/01-casos-de-uso/5-Prototipo/3-CasosDeUsoComunes/iniciarSesion/iniciarSesion.png) |
 | :----------------------------------------------------------------------------------------------: |
 
 </div>
@@ -27,7 +27,7 @@
 
 <div align=center>
 
-| ![](/documentos/01-casos-de-uso/5-Prototipo/3-CasosDeUsoComunes/iniciarSesion/iniciarSesionExitoso.png) |
+| ![](/images/01-casos-de-uso/5-Prototipo/3-CasosDeUsoComunes/iniciarSesion/iniciarSesionExitoso.png) |
 | :-----------------------------------------------------------------------------------------------------: |
 
 </div>
@@ -36,7 +36,7 @@
 
 <div align=center>
 
-| ![](/documentos/01-casos-de-uso/5-Prototipo/3-CasosDeUsoComunes/iniciarSesion/iniciarSesionError.png) |
+| ![](/images/01-casos-de-uso/5-Prototipo/3-CasosDeUsoComunes/iniciarSesion/iniciarSesionError.png) |
 | :---------------------------------------------------------------------------------------------------: |
 
 </div>

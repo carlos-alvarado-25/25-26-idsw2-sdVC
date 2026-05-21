@@ -1,13 +1,13 @@
 <div align="right">
 
 [![](https://img.shields.io/badge/-Inicio-0A3B64?style=for-the-badge&logo=github&logoColor=white)](/README.md)
-[![](https://img.shields.io/badge/-Modelo_del_Dominio-0A3B64?style=for-the-badge&logo=drawio&logoColor=white)](/documentos/00-modelo-del-dominio/README.md)
-[![](https://img.shields.io/badge/-Actores_Y_Casos_de_Uso-0A3B64?style=for-the-badge&logo=use-case&logoColor=white)](/documentos/01-casos-de-uso/0-Actores/README.md)
-[![](https://img.shields.io/badge/-Diagramas_de_Contexto-0A3B64?style=for-the-badge&logo=flowchart&logoColor=white)](/documentos/01-casos-de-uso/2-DiagramaDeContexto/README.md)
-[![](https://img.shields.io/badge/-Detalle_de_Casos_de_Uso-0A3B64?style=for-the-badge&logo=notepad&logoColor=white)](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
-[![](https://img.shields.io/badge/-Prototipos-0A3B64?style=for-the-badge&logo=figma&logoColor=white)](/documentos/01-casos-de-uso/5-Prototipo/README.md)
-[![](https://img.shields.io/badge/-Priorización-0A3B64?style=for-the-badge&logo=priority&logoColor=white)](/documentos/01-casos-de-uso/3-PriorizarCasosDeUso/README.md)
-[![](https://img.shields.io/badge/-Sesiones-0A3B64?style=for-the-badge&logo=google-meet&logoColor=white)](/documentos/03-sesiones/README.md)
+[![](https://img.shields.io/badge/-Modelo_del_Dominio-0A3B64?style=for-the-badge&logo=drawio&logoColor=white)](/RUP/00-requisitado/00-modelo-del-dominio/README.md)
+[![](https://img.shields.io/badge/-Actores_Y_Casos_de_Uso-0A3B64?style=for-the-badge&logo=use-case&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/0-Actores/README.md)
+[![](https://img.shields.io/badge/-Diagramas_de_Contexto-0A3B64?style=for-the-badge&logo=flowchart&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/2-DiagramaDeContexto/README.md)
+[![](https://img.shields.io/badge/-Detalle_de_Casos_de_Uso-0A3B64?style=for-the-badge&logo=notepad&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
+[![](https://img.shields.io/badge/-Prototipos-0A3B64?style=for-the-badge&logo=figma&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/5-Prototipo/README.md)
+[![](https://img.shields.io/badge/-Priorización-0A3B64?style=for-the-badge&logo=priority&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/3-PriorizarCasosDeUso/README.md)
+[![](https://img.shields.io/badge/-Sesiones-0A3B64?style=for-the-badge&logo=google-meet&logoColor=white)](/RUP/00-requisitado/03-sesiones/README.md)
 [![](https://img.shields.io/badge/-IA-0A3B64?style=for-the-badge&logo=openai&logoColor=white)](/IA/README.md)
 
 </div>
@@ -53,9 +53,9 @@ Se presentan diagramas individuales para:
 
 **Diagrama de contexto – Administrador**
 
-|       ![](/documentos/01-casos-de-uso/2-DiagramaDeContexto/0-Administrador/DiagramaDeContextoAdministrador.svg)        |
+|       ![](/images/01-casos-de-uso/2-DiagramaDeContexto/0-Administrador/DiagramaDeContextoAdministrador.svg)        |
 | :--------------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/2-DiagramaDeContexto/0-Administrador/DiagramaDeContextoAdministrador.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/2-DiagramaDeContexto/0-Administrador/DiagramaDeContextoAdministrador.puml) |
 
 </div>
 
@@ -67,9 +67,9 @@ Se presentan diagramas individuales para:
 
 **Diagrama de contexto – Profesor**
 
-|       ![](/documentos/01-casos-de-uso/2-DiagramaDeContexto/1-Profesor/DiagramaDeContextoProfesor.svg)        |
+|       ![](/images/01-casos-de-uso/2-DiagramaDeContexto/1-Profesor/DiagramaDeContextoProfesor.svg)        |
 | :----------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/2-DiagramaDeContexto/1-Profesor/DiagramaDeContextoProfesor.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/2-DiagramaDeContexto/1-Profesor/DiagramaDeContextoProfesor.puml) |
 
 </div>
 
@@ -81,9 +81,9 @@ Se presentan diagramas individuales para:
 
 **Diagrama de contexto – Alumno**
 
-|       ![](/documentos/01-casos-de-uso/2-DiagramaDeContexto/2-Alumno/DiagramaDeContextoAlumno.svg)        |
+|       ![](/images/01-casos-de-uso/2-DiagramaDeContexto/2-Alumno/DiagramaDeContextoAlumno.svg)        |
 | :------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/2-DiagramaDeContexto/2-Alumno/DiagramaDeContextoAlumno.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/2-DiagramaDeContexto/2-Alumno/DiagramaDeContextoAlumno.puml) |
 
 </div>
 

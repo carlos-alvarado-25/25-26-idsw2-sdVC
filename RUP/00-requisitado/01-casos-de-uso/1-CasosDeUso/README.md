@@ -4,42 +4,42 @@
 
 **Administrador**
 
-|![](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministrador.svg)
+|![](/images/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministrador.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministrador.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministrador.puml)
 
 > Aquí se puede observar al actor **Administrador**, ha sido dividido en varios diagramas para mejorar la legibilidad,
 > manteniendo **exactamente los mismos casos de uso y relaciones** que el diagrama original.
 
 ### Administración Académica
 
-|       ![](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAcadémica.svg)        |
+|       ![](/images/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAcadémica.svg)        |
 | :--------------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAcadémica.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAcadémica.puml) |
 
 ### Administración de Exámenes
 
-|       ![](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónExámenes.svg)        |
+|       ![](/images/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónExámenes.svg)        |
 | :-------------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónExámenes.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónExámenes.puml) |
 
 ### Administración de Profesores
 
-|       ![](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónProfesores.svg)        |
+|       ![](/images/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónProfesores.svg)        |
 | :---------------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónProfesores.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónProfesores.puml) |
 
 ### Administración de Aulas
 
-|       ![](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAulas.svg)        |
+|       ![](/images/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAulas.svg)        |
 | :----------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAulas.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAulas.puml) |
 
 ### Administración de Alumnos
 
-|       ![](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAlumnos.svg)        |
+|       ![](/images/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAlumnos.svg)        |
 | :------------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAlumnos.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/1-CasosDeUso/0-Administrador/CdUAdministradorAdministraciónAlumnos.puml) |
 
 > **Nota:**  
 > La descomposición del actor **Administrador** responde únicamente a criterios de **claridad visual**.
@@ -55,9 +55,9 @@
 
 **Profesor**
 
-|![](/documentos/01-casos-de-uso/1-CasosDeUso/1-Profesor/CdUProfesor.svg)
+|![](/images/01-casos-de-uso/1-CasosDeUso/1-Profesor/CdUProfesor.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/1-CasosDeUso/1-Profesor/CdUProfesor.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/1-CasosDeUso/1-Profesor/CdUProfesor.puml)
 
 </div>
 
@@ -67,9 +67,9 @@
 
 **Alumno**
 
-|![](/documentos/01-casos-de-uso/1-CasosDeUso/2-Alumno/CdUAlumno.svg)
+|![](/images/01-casos-de-uso/1-CasosDeUso/2-Alumno/CdUAlumno.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/1-CasosDeUso/2-Alumno/CdUAlumno.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/1-CasosDeUso/2-Alumno/CdUAlumno.puml)
 
 </div>
 

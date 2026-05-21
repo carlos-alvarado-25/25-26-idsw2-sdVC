@@ -4,9 +4,9 @@
 
 <div align=center>
 
-|       ![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAlumnos/importarAlumnos.svg)        |
+|       ![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAlumnos/importarAlumnos.svg)        |
 | :--------------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAlumnos/importarAlumnos.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAlumnos/importarAlumnos.puml) |
 
 </div>
 
@@ -18,7 +18,7 @@
 
 <div align=center>
 
-| ![](/documentos/01-casos-de-uso/5-Prototipo/0-Administrador/importarAlumnos/importarAlumnos.png) |
+| ![](/images/01-casos-de-uso/5-Prototipo/0-Administrador/importarAlumnos/importarAlumnos.png) |
 | :----------------------------------------------------------------------------------------------: |
 
 </div>

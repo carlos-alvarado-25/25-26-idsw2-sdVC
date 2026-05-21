@@ -1,13 +1,13 @@
 <div align="right">
 
 [![](https://img.shields.io/badge/-Inicio-0A3B64?style=for-the-badge&logo=github&logoColor=white)](/README.md)
-[![](https://img.shields.io/badge/-Modelo_del_Dominio-0A3B64?style=for-the-badge&logo=drawio&logoColor=white)](/documentos/00-modelo-del-dominio/README.md)
-[![](https://img.shields.io/badge/-Actores_Y_Casos_de_Uso-0A3B64?style=for-the-badge&logo=use-case&logoColor=white)](/documentos/01-casos-de-uso/0-Actores/README.md)
-[![](https://img.shields.io/badge/-Diagramas_de_Contexto-0A3B64?style=for-the-badge&logo=flowchart&logoColor=white)](/documentos/01-casos-de-uso/2-DiagramaDeContexto/README.md)
-[![](https://img.shields.io/badge/-Detalle_de_Casos_de_Uso-0A3B64?style=for-the-badge&logo=notepad&logoColor=white)](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
-[![](https://img.shields.io/badge/-Prototipos-0A3B64?style=for-the-badge&logo=figma&logoColor=white)](/documentos/01-casos-de-uso/5-Prototipo/README.md)
-[![](https://img.shields.io/badge/-Priorización-0A3B64?style=for-the-badge&logo=priority&logoColor=white)](/documentos/01-casos-de-uso/3-PriorizarCasosDeUso/README.md)
-[![](https://img.shields.io/badge/-Sesiones-0A3B64?style=for-the-badge&logo=google-meet&logoColor=white)](/documentos/03-sesiones/README.md)
+[![](https://img.shields.io/badge/-Modelo_del_Dominio-0A3B64?style=for-the-badge&logo=drawio&logoColor=white)](/RUP/00-requisitado/00-modelo-del-dominio/README.md)
+[![](https://img.shields.io/badge/-Actores_Y_Casos_de_Uso-0A3B64?style=for-the-badge&logo=use-case&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/0-Actores/README.md)
+[![](https://img.shields.io/badge/-Diagramas_de_Contexto-0A3B64?style=for-the-badge&logo=flowchart&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/2-DiagramaDeContexto/README.md)
+[![](https://img.shields.io/badge/-Detalle_de_Casos_de_Uso-0A3B64?style=for-the-badge&logo=notepad&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
+[![](https://img.shields.io/badge/-Prototipos-0A3B64?style=for-the-badge&logo=figma&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/5-Prototipo/README.md)
+[![](https://img.shields.io/badge/-Priorización-0A3B64?style=for-the-badge&logo=priority&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/3-PriorizarCasosDeUso/README.md)
+[![](https://img.shields.io/badge/-Sesiones-0A3B64?style=for-the-badge&logo=google-meet&logoColor=white)](/RUP/00-requisitado/03-sesiones/README.md)
 [![](https://img.shields.io/badge/-IA-0A3B64?style=for-the-badge&logo=openai&logoColor=white)](/IA/README.md)
 
 </div>
@@ -18,9 +18,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAlumnos/abrirAlumnos.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAlumnos/abrirAlumnos.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAlumnos/abrirAlumnos.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAlumnos/abrirAlumnos.puml)
 
 </div>
 
@@ -30,9 +30,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAsignaturas/abrirAsignaturas.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAsignaturas/abrirAsignaturas.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAsignaturas/abrirAsignaturas.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAsignaturas/abrirAsignaturas.puml)
 
 </div>
 
@@ -42,9 +42,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAulas/abrirAulas.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAulas/abrirAulas.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAulas/abrirAulas.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirAulas/abrirAulas.puml)
 
 </div>
 
@@ -54,9 +54,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirExamenes/abrirExamenes.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirExamenes/abrirExamenes.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirExamenes/abrirExamenes.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirExamenes/abrirExamenes.puml)
 
 </div>
 
@@ -66,9 +66,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirGrados/abrirGrados.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirGrados/abrirGrados.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirGrados/abrirGrados.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirGrados/abrirGrados.puml)
 
 </div>
 
@@ -78,9 +78,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirProfesores/abrirProfesores.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirProfesores/abrirProfesores.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirProfesores/abrirProfesores.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirProfesores/abrirProfesores.puml)
 
 </div>
 
@@ -90,9 +90,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/asignarProfesorAExamen/asignarProfesorAExamen.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/asignarProfesorAExamen/asignarProfesorAExamen.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/asignarProfesorAExamen/asignarProfesorAExamen.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/asignarProfesorAExamen/asignarProfesorAExamen.puml)
 
 </div>
 
@@ -102,9 +102,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/consultarCalendario/consultarCalendario.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/consultarCalendario/consultarCalendario.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/consultarCalendario/consultarCalendario.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/consultarCalendario/consultarCalendario.puml)
 
 </div>
 
@@ -114,9 +114,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAlumno/crearAlumno.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAlumno/crearAlumno.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAlumno/crearAlumno.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAlumno/crearAlumno.puml)
 
 </div>
 
@@ -126,9 +126,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAsignatura/crearAsignatura.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAsignatura/crearAsignatura.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAsignatura/crearAsignatura.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAsignatura/crearAsignatura.puml)
 
 </div>
 
@@ -138,9 +138,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAula/crearAula.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAula/crearAula.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAula/crearAula.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearAula/crearAula.puml)
 
 </div>
 
@@ -150,9 +150,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearExamen/crearExamen.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearExamen/crearExamen.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearExamen/crearExamen.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearExamen/crearExamen.puml)
 
 </div>
 
@@ -162,9 +162,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearGrado/crearGrado.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearGrado/crearGrado.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearGrado/crearGrado.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearGrado/crearGrado.puml)
 
 </div>
 
@@ -174,9 +174,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearProfesor/crearProfesor.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearProfesor/crearProfesor.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearProfesor/crearProfesor.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/crearProfesor/crearProfesor.puml)
 
 </div>
 
@@ -186,9 +186,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/descargarCalendarioExamenes/descargarCalendarioExamenes.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/descargarCalendarioExamenes/descargarCalendarioExamenes.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/descargarCalendarioExamenes/descargarCalendarioExamenes.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/descargarCalendarioExamenes/descargarCalendarioExamenes.puml)
 
 </div>
 
@@ -198,9 +198,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAlumno/editarAlumno.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAlumno/editarAlumno.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAlumno/editarAlumno.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAlumno/editarAlumno.puml)
 
 </div>
 
@@ -210,9 +210,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAsignatura/editarAsignatura.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAsignatura/editarAsignatura.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAsignatura/editarAsignatura.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAsignatura/editarAsignatura.puml)
 
 </div>
 
@@ -222,9 +222,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAula/editarAula.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAula/editarAula.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAula/editarAula.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarAula/editarAula.puml)
 
 </div>
 
@@ -234,9 +234,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarExamen/editarExamen.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarExamen/editarExamen.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarExamen/editarExamen.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarExamen/editarExamen.puml)
 
 </div>
 
@@ -246,9 +246,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarGrado/editarGrado.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarGrado/editarGrado.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarGrado/editarGrado.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarGrado/editarGrado.puml)
 
 </div>
 
@@ -258,9 +258,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarProfesor/editarProfesor.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarProfesor/editarProfesor.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarProfesor/editarProfesor.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/editarProfesor/editarProfesor.puml)
 
 </div>
 
@@ -270,9 +270,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAlumno/eliminarAlumno.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAlumno/eliminarAlumno.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAlumno/eliminarAlumno.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAlumno/eliminarAlumno.puml)
 
 </div>
 
@@ -282,9 +282,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAsignatura/eliminarAsignatura.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAsignatura/eliminarAsignatura.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAsignatura/eliminarAsignatura.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAsignatura/eliminarAsignatura.puml)
 
 </div>
 
@@ -294,9 +294,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAula/eliminarAula.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAula/eliminarAula.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAula/eliminarAula.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarAula/eliminarAula.puml)
 
 </div>
 
@@ -306,9 +306,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarExamen/eliminarExamen.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarExamen/eliminarExamen.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarExamen/eliminarExamen.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarExamen/eliminarExamen.puml)
 
 </div>
 
@@ -318,9 +318,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarGrado/eliminarGrado.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarGrado/eliminarGrado.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarGrado/eliminarGrado.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarGrado/eliminarGrado.puml)
 
 </div>
 
@@ -330,9 +330,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarProfesor/eliminarProfesor.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarProfesor/eliminarProfesor.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarProfesor/eliminarProfesor.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/eliminarProfesor/eliminarProfesor.puml)
 
 </div>
 
@@ -342,9 +342,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/generarCalendario/generarCalendario.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/generarCalendario/generarCalendario.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/generarCalendario/generarCalendario.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/generarCalendario/generarCalendario.puml)
 
 </div>
 
@@ -354,9 +354,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAlumnos/importarAlumnos.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAlumnos/importarAlumnos.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAlumnos/importarAlumnos.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAlumnos/importarAlumnos.puml)
 
 </div>
 
@@ -366,9 +366,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAsignaturas/importarAsignaturas.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAsignaturas/importarAsignaturas.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAsignaturas/importarAsignaturas.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAsignaturas/importarAsignaturas.puml)
 
 </div>
 
@@ -378,9 +378,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAulas/importarAulas.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAulas/importarAulas.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAulas/importarAulas.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarAulas/importarAulas.puml)
 
 </div>
 
@@ -390,9 +390,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarGrados/importarGrados.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarGrados/importarGrados.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarGrados/importarGrados.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarGrados/importarGrados.puml)
 
 </div>
 
@@ -402,9 +402,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarProfesores/importarProfesores.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarProfesores/importarProfesores.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarProfesores/importarProfesores.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/importarProfesores/importarProfesores.puml)
 
 </div>
 
@@ -414,9 +414,9 @@
 
 <div align=center>
 	
-|![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/listarConflictosExamenes/listarConflictosExamenes.svg)
+|![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/listarConflictosExamenes/listarConflictosExamenes.svg)
 |:-:
-|[Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/listarConflictosExamenes/listarConflictosExamenes.puml)
+|[Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/listarConflictosExamenes/listarConflictosExamenes.puml)
 
 </div>
 

@@ -20,6 +20,27 @@
 
 **Decisión:** Se añade el archivo para mantener la trazabilidad de los requisitos hacia su repositorio de origen.
 
+## [19:24] Corrección de enlaces y reversión de copia de imágenes
+
+**Prompt:** "Copia las imágenes también, ya que los links no funcionan" -> "Elimina los cambios de las imágenes, y únicamente arregla los archivos para que referencien a este repositorio, y no al anterior"
+
+**Resultado:** 
+1. Se ha eliminado la copia redundante de imágenes en el directorio raíz `images/`.
+2. Se han actualizado todos los archivos Markdown dentro de `RUP/` para que los enlaces apunten a la nueva estructura del repositorio (`/RUP/00-requisitado/...`) en lugar de la ruta antigua (`/documentos/...`).
+
+**Decisión:** Se opta por corregir las rutas internas para que apunten a los archivos ya existentes dentro de la carpeta `RUP/`, evitando la duplicidad de archivos y manteniendo la coherencia con la nueva estructura del proyecto.
+
+## [19:33] Migración de imágenes a /images/ y actualización de referencias
+
+**Prompt:** "Ahora, mueve todas las imágenes al directorio de images/ agrupandolas como está en RUP/, osea imaginate que tenemos el DiagramaDeClases/ y dentro hay un .puml y un svg. Mueve el .svg a la carpeta images/ y solo deja el .puml en requisitado/... Con el mismo orden que requisitado/"
+
+**Resultado:** 
+1. Se han movido todos los archivos de imagen (`.svg`, `.png`, `.jpg`, `.webp`) desde `RUP/00-requisitado/` al directorio raíz `images/`, manteniendo la misma estructura de subdirectorios.
+2. Los archivos fuente (como `.puml`) permanecen en su ubicación original dentro de `RUP/00-requisitado/`.
+3. Se han actualizado todas las referencias a imágenes en los archivos Markdown dentro de `RUP/` para que apunten a la nueva ubicación en `/images/...`, mientras que los enlaces a documentos y archivos fuente siguen apuntando a `/RUP/00-requisitado/...`.
+
+**Decisión:** Se reorganizan los activos visuales para separarlos del contenido de texto y fuentes, siguiendo una estructura limpia y estandarizada en el repositorio, asegurando que todos los enlaces sigan funcionando.
+
 ---
 
 > El log no se reescribe. Se escribe mientras ocurre.

@@ -4,9 +4,9 @@
 
 <div align=center>
 
-|       ![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirExamenes/abrirExamenes.svg)        |
+|       ![](/images/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirExamenes/abrirExamenes.svg)        |
 | :----------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirExamenes/abrirExamenes.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/abrirExamenes/abrirExamenes.puml) |
 
 </div>
 
@@ -18,7 +18,7 @@
 
 <div align=center>
 
-| ![](/documentos/01-casos-de-uso/5-Prototipo/0-Administrador/abrirExamenes/abrirExamenes.png) |
+| ![](/images/01-casos-de-uso/5-Prototipo/0-Administrador/abrirExamenes/abrirExamenes.png) |
 | :------------------------------------------------------------------------------------------: |
 
 </div>

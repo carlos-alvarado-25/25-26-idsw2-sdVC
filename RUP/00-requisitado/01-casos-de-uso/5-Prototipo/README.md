@@ -1,13 +1,13 @@
 <div align="right">
 
 [![](https://img.shields.io/badge/-Inicio-0A3B64?style=for-the-badge&logo=github&logoColor=white)](/README.md)
-[![](https://img.shields.io/badge/-Modelo_del_Dominio-0A3B64?style=for-the-badge&logo=drawio&logoColor=white)](/documentos/00-modelo-del-dominio/README.md)
-[![](https://img.shields.io/badge/-Actores_Y_Casos_de_Uso-0A3B64?style=for-the-badge&logo=use-case&logoColor=white)](/documentos/01-casos-de-uso/0-Actores/README.md)
-[![](https://img.shields.io/badge/-Diagramas_de_Contexto-0A3B64?style=for-the-badge&logo=flowchart&logoColor=white)](/documentos/01-casos-de-uso/2-DiagramaDeContexto/README.md)
-[![](https://img.shields.io/badge/-Detalle_de_Casos_de_Uso-0A3B64?style=for-the-badge&logo=notepad&logoColor=white)](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
-[![](https://img.shields.io/badge/-Prototipos-0A3B64?style=for-the-badge&logo=figma&logoColor=white)](/documentos/01-casos-de-uso/5-Prototipo/README.md)
-[![](https://img.shields.io/badge/-Priorización-0A3B64?style=for-the-badge&logo=priority&logoColor=white)](/documentos/01-casos-de-uso/3-PriorizarCasosDeUso/README.md)
-[![](https://img.shields.io/badge/-Sesiones-0A3B64?style=for-the-badge&logo=google-meet&logoColor=white)](/documentos/03-sesiones/README.md)
+[![](https://img.shields.io/badge/-Modelo_del_Dominio-0A3B64?style=for-the-badge&logo=drawio&logoColor=white)](/RUP/00-requisitado/00-modelo-del-dominio/README.md)
+[![](https://img.shields.io/badge/-Actores_Y_Casos_de_Uso-0A3B64?style=for-the-badge&logo=use-case&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/0-Actores/README.md)
+[![](https://img.shields.io/badge/-Diagramas_de_Contexto-0A3B64?style=for-the-badge&logo=flowchart&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/2-DiagramaDeContexto/README.md)
+[![](https://img.shields.io/badge/-Detalle_de_Casos_de_Uso-0A3B64?style=for-the-badge&logo=notepad&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
+[![](https://img.shields.io/badge/-Prototipos-0A3B64?style=for-the-badge&logo=figma&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/5-Prototipo/README.md)
+[![](https://img.shields.io/badge/-Priorización-0A3B64?style=for-the-badge&logo=priority&logoColor=white)](/RUP/00-requisitado/01-casos-de-uso/3-PriorizarCasosDeUso/README.md)
+[![](https://img.shields.io/badge/-Sesiones-0A3B64?style=for-the-badge&logo=google-meet&logoColor=white)](/RUP/00-requisitado/03-sesiones/README.md)
 [![](https://img.shields.io/badge/-IA-0A3B64?style=for-the-badge&logo=openai&logoColor=white)](/IA/README.md)
 
 </div>
@@ -47,7 +47,7 @@ Este nivel de detalle complementa:
 >
 > Si se busca un **caso de uso concreto** o se desea consultar **su detalle junto con su prototipo**, accede directamente aquí
 >
-> **[Detalle y prototipo de los casos de uso por actor](/documentos/01-casos-de-uso/0-Actores/README.md#detalle-y-prototipo-de-los-casos-de-uso)**
+> **[Detalle y prototipo de los casos de uso por actor](/RUP/00-requisitado/01-casos-de-uso/0-Actores/README.md#detalle-y-prototipo-de-los-casos-de-uso)**
 >
 > Allí encontrarás **tablas por actor** con enlaces individuales a cada caso de uso.
 
@@ -69,7 +69,7 @@ Los prototipos del Administrador cubren la **administración completa del sistem
 
 **Ubicación de los prototipos**:
 
-[README](/documentos/01-casos-de-uso/5-Prototipo/0-Administrador/README.md) con los 34 prototipos del actor **Administrador**
+[README](/RUP/00-requisitado/01-casos-de-uso/5-Prototipo/0-Administrador/README.md) con los 34 prototipos del actor **Administrador**
 
 **Prototipos desarrollados (34):**
 
@@ -88,7 +88,7 @@ Los prototipos del Profesor permiten la **consulta personalizada del calendario*
 
 **Ubicación de los prototipos**:
 
-[README](/documentos/01-casos-de-uso/5-Prototipo/1-Profesor/README.md) con los 3 prototipos del actor **Profesor**
+[README](/RUP/00-requisitado/01-casos-de-uso/5-Prototipo/1-Profesor/README.md) con los 3 prototipos del actor **Profesor**
 
 **Prototipos desarrollados (3):**
 
@@ -104,7 +104,7 @@ Los prototipos del Alumno se centran exclusivamente en la **consulta y descarga 
 
 **Ubicación de los prototipos**:
 
-[README](/documentos/01-casos-de-uso/5-Prototipo/2-Alumno/README.md) con los 2 prototipos del actor **Alumno**
+[README](/RUP/00-requisitado/01-casos-de-uso/5-Prototipo/2-Alumno/README.md) con los 2 prototipos del actor **Alumno**
 
 **Prototipos desarrollados (2):**
 

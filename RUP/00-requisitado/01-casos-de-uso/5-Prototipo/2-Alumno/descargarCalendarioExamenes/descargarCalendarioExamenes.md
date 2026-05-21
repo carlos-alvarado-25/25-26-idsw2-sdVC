@@ -4,9 +4,9 @@
 
 <div align=center>
 
-|       ![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/2-Alumno/descargarCalendarioExamenes/descargarCalendarioExamenes.svg)        |
+|       ![](/images/01-casos-de-uso/4-DetallarCasosDeUso/2-Alumno/descargarCalendarioExamenes/descargarCalendarioExamenes.svg)        |
 | :-------------------------------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/2-Alumno/descargarCalendarioExamenes/descargarCalendarioExamenes.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/2-Alumno/descargarCalendarioExamenes/descargarCalendarioExamenes.puml) |
 
 </div>
 
@@ -18,7 +18,7 @@
 
 <div align=center>
 
-| ![](/documentos/01-casos-de-uso/5-Prototipo/2-Alumno/descargarCalendarioExamenes/descargarCalendarioExamenes.png) |
+| ![](/images/01-casos-de-uso/5-Prototipo/2-Alumno/descargarCalendarioExamenes/descargarCalendarioExamenes.png) |
 | :---------------------------------------------------------------------------------------------------------------: |
 
 </div>

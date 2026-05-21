@@ -4,9 +4,9 @@
 
 <div align=center>
 
-|       ![](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/1-Profesor/comunicarIncidenciasHorario/comunicarIncidenciasHorario.svg)        |
+|       ![](/images/01-casos-de-uso/4-DetallarCasosDeUso/1-Profesor/comunicarIncidenciasHorario/comunicarIncidenciasHorario.svg)        |
 | :---------------------------------------------------------------------------------------------------------------------------------------: |
-| [Código fuente](/documentos/01-casos-de-uso/4-DetallarCasosDeUso/1-Profesor/comunicarIncidenciasHorario/comunicarIncidenciasHorario.puml) |
+| [Código fuente](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/1-Profesor/comunicarIncidenciasHorario/comunicarIncidenciasHorario.puml) |
 
 </div>
 
@@ -18,7 +18,7 @@
 
 <div align=center>
 
-| ![](/documentos/01-casos-de-uso/5-Prototipo/1-Profesor/comunicarIncidenciasHorario/comunicarIncidenciasHorario.png) |
+| ![](/images/01-casos-de-uso/5-Prototipo/1-Profesor/comunicarIncidenciasHorario/comunicarIncidenciasHorario.png) |
 | :-----------------------------------------------------------------------------------------------------------------: |
 
 </div>

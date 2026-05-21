@@ -1,6 +1,3 @@
-Carpeta para incluir las imágenes que considere oportunas.
+# Imágenes
 
-# FORMATO
-
-- .svg para diagramas
-- .png para imágenes
+Este directorio contiene las imágenes del proyecto.
