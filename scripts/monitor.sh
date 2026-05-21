@@ -165,14 +165,20 @@ for user in $FORKS; do
         README_COL="-"
     fi
 
-    ALUMNO_LINK="<sub>[$user]($REPO_URL)</sub>"
+    if [ "$COMMITS" -eq 1 ]; then
+        COMMITS_LABEL="1 commit"
+    else
+        COMMITS_LABEL="$COMMITS commits"
+    fi
+    ALUMNO_LINK="<sub>[$user]($REPO_URL)<br>$COMMITS_LABEL</sub>"
+
     if [ "$COMMITS" -gt 0 ]; then
         LAST_MSG_LINK="<sub>[$LAST_MSG]($REPO_URL/commit/$LAST_SHA)</sub>"
     else
         LAST_MSG_LINK="<sub>$LAST_MSG</sub>"
     fi
 
-    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $COMMITS | $UNIQUE_DAYS | $GAP_DISPLAY | $LAST_DATE | $QH_COL | $CL_COL | $README_COL | $SRC_OFFSET | $UML_OFFSET | $R01_OFFSET | $R02_OFFSET | $R03_OFFSET |"
+    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $UNIQUE_DAYS | $GAP_DISPLAY | $LAST_DATE | $QH_COL | $CL_COL | $README_COL | $SRC_OFFSET | $UML_OFFSET | $R01_OFFSET | $R02_OFFSET | $R03_OFFSET |"
     TABLE_ROWS="${TABLE_ROWS}${ROW}"$'\n'
 
     if [ "$COMMITS" -gt 0 ]; then
@@ -204,14 +210,14 @@ done
     echo ""
     echo "| Columna | Significado |"
     echo "|---|---|"
-    echo "| Commits | Commits propios (excluye el inicial inicial) |"
+    echo "| Alumno | Nombre y número de commits propios (excluye el commit inicial) |"
     echo "| Días | Días únicos con actividad propia |"
     echo "| Gap | Brecha máxima entre sesiones consecutivas, incluyendo hoy; **Nd!** = más de 3 días sin tocar el repo |"
     echo "| Ult. act. | Fecha del último commit (DD-MM) |"
     echo "| 💡 | QUE\\_HACE.md relleno — enlaza al fichero |"
-    echo "| 💬 | conversation-log.md relleno — enlaza al fichero; segunda línea: días desde el inicial hasta la primera edición |"
+    echo "| 💬 | conversation-log.md relleno — enlaza al fichero; segunda línea: días desde el commit inicial hasta la primera edición |"
     echo "| 📄 | README.md reescrito — enlaza al fichero |"
-    echo "| /src | Offset en días desde el inicial cuando apareció \`src/\` |"
+    echo "| /src | Offset en días desde el commit inicial cuando apareció \`src/\` |"
     echo "| UML | Offset cuando apareció \`modelosUML/\` |"
     echo "| A | Offset cuando apareció \`RUP/01-analisis/\` |"
     echo "| D | Offset cuando apareció \`RUP/02-diseño/\` |"
@@ -219,8 +225,8 @@ done
     echo ""
     echo "## Tabla"
     echo ""
-    echo "| Alumno | Último commit | ![](https://img.shields.io/badge/commits-blue?logo=github) | Días | Gap | Ult. act. | 💡 | 💬 | 📄 | /src | UML | A | D | Dev |"
-    echo "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"
+    echo "| Alumno | Último commit | Días | Gap | Ult. act. | 💡 | 💬 | 📄 | /src | UML | A | D | Dev |"
+    echo "|---|---|---|---|---|---|---|---|---|---|---|---|---|"
     printf '%s' "$TABLE_ROWS"
     echo ""
     echo "## Resumen"
