@@ -111,10 +111,8 @@ TABLE_ROWS=""
 DETAIL_SECTIONS=""
 ACTIVOS=0
 
-IDX=0
 for user in $FORKS; do
-    IDX=$((IDX + 1))
-    log "[$IDX/$N_FORKS] Procesando $user..."
+    log "Procesando $user..."
 
     REPO_URL="https://github.com/$user/25-26-idsw2-sdVC"
     QUE_HACE_URL="$REPO_URL/blob/main/QUE_HACE.md"
@@ -125,8 +123,9 @@ for user in $FORKS; do
 
     TOTAL_C=$(echo "$COMMITS_JSON" | jq 'length' 2>/dev/null || echo "1")
     COMMITS=$((TOTAL_C - 1))
-    LAST_DATE=$(echo "$COMMITS_JSON" | jq -r '.[0].commit.author.date | split("T")[0]' 2>/dev/null || echo "N/A")
+    LAST_DATE=$(echo "$COMMITS_JSON" | jq -r '.[0].commit.author.date | split("T")[0] | split("-") | .[2]+"-"+.[1]' 2>/dev/null || echo "N/A")
     LAST_MSG=$(echo "$COMMITS_JSON" | jq -r '.[0].commit.message | split("\n")[0]' 2>/dev/null || echo "N/A")
+    LAST_SHA=$(echo "$COMMITS_JSON" | jq -r '.[0].sha' 2>/dev/null || echo "")
 
     SCAFFOLD_SHA=$(echo "$COMMITS_JSON" | jq -r 'last | .sha' 2>/dev/null || echo "")
     SCAFFOLD_DATE=$(echo "$COMMITS_JSON" | jq -r 'last | .commit.author.date | split("T")[0]' 2>/dev/null || echo "2026-05-19")
@@ -169,21 +168,24 @@ for user in $FORKS; do
     R02_OFFSET=$(get_artifact_day_offset "$user" "RUP/02-diseño" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
     R03_OFFSET=$(get_artifact_day_offset "$user" "RUP/03-desarrollo" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
 
-    ALUMNO_LINK="[$user]($REPO_URL)"
+    ALUMNO_LINK="<sub>[$user]($REPO_URL)</sub>"
+    LAST_MSG_LINK="<sub>[$LAST_MSG]($REPO_URL/commit/$LAST_SHA)</sub>"
 
-    ROW="| $IDX | $ALUMNO_LINK | $COMMITS | $UNIQUE_DAYS | $GAP_DISPLAY | $LAST_DATE | $QH_COL | $CL_COL | $IR | $SRC_OFFSET | $UML_OFFSET | $CL_T_OFFSET | $R01_OFFSET | $R02_OFFSET | $R03_OFFSET | $LAST_MSG |"
+    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $COMMITS | $UNIQUE_DAYS | $GAP_DISPLAY | $LAST_DATE | $QH_COL | $CL_COL | $IR | $SRC_OFFSET | $UML_OFFSET | $CL_T_OFFSET | $R01_OFFSET | $R02_OFFSET | $R03_OFFSET |"
     TABLE_ROWS="${TABLE_ROWS}${ROW}"$'\n'
 
     if [ "$COMMITS" -gt 0 ]; then
         ACTIVOS=$((ACTIVOS + 1))
 
-        SECTION="### $user ($COMMITS commits · $UNIQUE_DAYS días activos · gap máx: ${MAX_GAP}d)"$'\n'
+        SECTION="### [$user]($REPO_URL) ($COMMITS commits · $UNIQUE_DAYS días activos · gap máx: ${MAX_GAP}d)"$'\n'
         SECTION+=""$'\n'
         SECTION+="| Fecha | Mensaje |"$'\n'
         SECTION+="|---|---|"$'\n'
         COMMITS_TABLE=$(echo "$COMMITS_JSON" | jq -r \
             --arg marker "$SCAFFOLD_MSG_MARKER" \
-            '.[] | select(.commit.message | test($marker) | not) | "| \(.commit.author.date | split("T")[0]) | \(.commit.message | split("\n")[0]) |"' \
+            --arg repo_url "$REPO_URL" \
+            '.[] | select(.commit.message | test($marker) | not) |
+             "| \(.commit.author.date | split("T")[0] | split("-") | .[2]+"-"+.[1]) | [\(.commit.message | split("\n")[0])](" + $repo_url + "/commit/" + .sha + ") |"' \
             2>/dev/null || true)
         SECTION+="${COMMITS_TABLE}"$'\n'
         SECTION+=""$'\n'
@@ -199,8 +201,8 @@ done
     echo ">"
     echo "> Leyenda: +Nd = artefacto apareció N días tras el scaffold | **Nd!** = brecha de actividad > 3 días"
     echo ""
-    echo "| # | Alumno | Commits | Días | Gap | Ult. act. | QH | CL | README | Src | UML | CL-t | RUP01 | RUP02 | RUP03 | Último commit |"
-    echo "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"
+    echo "| Alumno | Último commit | Commits | Días | Gap | Ult. act. | QH | CL | README | Src | UML | CL-t | RUP01 | RUP02 | RUP03 |"
+    echo "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"
     printf '%s' "$TABLE_ROWS"
     echo ""
     echo "## Resumen"
