@@ -3,7 +3,7 @@ set -euo pipefail
 
 REPO="mmasias/25-26-idsw2-sdVC"
 DASHBOARD="DASHBOARD.md"
-SCAFFOLD_MSG_MARKER="sesión de vibecoding idsw2"
+INICIAL_MSG_MARKER="sesión de vibecoding idsw2"
 TODAY_EPOCH=$(date +%s)
 
 log() { echo ":: $*" >&2; }
@@ -64,16 +64,16 @@ compute_max_gap() {
     echo "$max_gap"
 }
 
-# Offset en días desde el scaffold hasta la primera aparición del artefacto.
-# Para ficheros presentes en el scaffold (ej: conversation-log.md), excluye el commit inicial.
+# Offset en días desde el inicial hasta la primera aparición del artefacto.
+# Para ficheros presentes en el inicial (ej: conversation-log.md), excluye el commit inicial.
 get_artifact_day_offset() {
-    local user="$1" path="$2" scaffold_epoch="$3" scaffold_sha="$4"
+    local user="$1" path="$2" inicial_epoch="$3" inicial_sha="$4"
     local encoded_path
     encoded_path=$(url_encode_path "$path")
 
     local first_date
     first_date=$(gh api "repos/$user/25-26-idsw2-sdVC/commits?path=$encoded_path&per_page=100" 2>/dev/null | \
-        jq -r --arg sha "$scaffold_sha" \
+        jq -r --arg sha "$inicial_sha" \
         '[.[] | select(.sha != $sha)] | if length > 0 then last | .commit.author.date | split("T")[0] else "null" end' \
         2>/dev/null || echo "null")
 
@@ -84,7 +84,7 @@ get_artifact_day_offset() {
 
     local t_artifact
     t_artifact=$(date -d "$first_date" +%s 2>/dev/null) || { echo "?"; return; }
-    local offset=$(( (t_artifact - scaffold_epoch) / 86400 ))
+    local offset=$(( (t_artifact - inicial_epoch) / 86400 ))
     echo "+${offset}d"
 }
 
@@ -119,11 +119,11 @@ for user in $FORKS; do
     LAST_MSG=$(echo "$COMMITS_JSON" | jq -r '.[0].commit.message | split("\n")[0]' 2>/dev/null || echo "N/A")
     LAST_SHA=$(echo "$COMMITS_JSON" | jq -r '.[0].sha' 2>/dev/null || echo "")
 
-    SCAFFOLD_SHA=$(echo "$COMMITS_JSON" | jq -r 'last | .sha' 2>/dev/null || echo "")
-    SCAFFOLD_DATE=$(echo "$COMMITS_JSON" | jq -r 'last | .commit.author.date | split("T")[0]' 2>/dev/null || echo "2026-05-19")
-    SCAFFOLD_EPOCH=$(date -d "$SCAFFOLD_DATE" +%s 2>/dev/null || echo "0")
+    INICIAL_SHA=$(echo "$COMMITS_JSON" | jq -r 'last | .sha' 2>/dev/null || echo "")
+    INICIAL_DATE=$(echo "$COMMITS_JSON" | jq -r 'last | .commit.author.date | split("T")[0]' 2>/dev/null || echo "2026-05-19")
+    INICIAL_EPOCH=$(date -d "$INICIAL_DATE" +%s 2>/dev/null || echo "0")
 
-    # Días únicos con commits propios (excluye el commit del scaffold)
+    # Días únicos con commits propios (excluye el commit del inicial)
     UNIQUE_DAYS=$(echo "$COMMITS_JSON" | jq '[.[:-1][].commit.author.date | split("T")[0]] | unique | length' 2>/dev/null || echo "0")
 
     MAX_GAP=$(compute_max_gap "$COMMITS_JSON")
@@ -139,13 +139,13 @@ for user in $FORKS; do
     CONVLOG_STATUS=$(check_file_has_content "$user" "conversation-log.md" "lo que le dijo al AI para arrancar" 2>/dev/null || echo "?")
     README=$(check_readme_rewritten "$user" 2>/dev/null || echo "?")
 
-    # Progresión de artefactos: offset en días desde la fecha del scaffold
-    SRC_OFFSET=$(get_artifact_day_offset "$user" "src" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
-    UML_OFFSET=$(get_artifact_day_offset "$user" "modelosUML" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
-    CL_T_OFFSET=$(get_artifact_day_offset "$user" "conversation-log.md" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
-    R01_OFFSET=$(get_artifact_day_offset "$user" "RUP/01-analisis" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
-    R02_OFFSET=$(get_artifact_day_offset "$user" "RUP/02-diseño" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
-    R03_OFFSET=$(get_artifact_day_offset "$user" "RUP/03-desarrollo" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
+    # Progresión de artefactos: offset en días desde la fecha del inicial
+    SRC_OFFSET=$(get_artifact_day_offset "$user" "src" "$INICIAL_EPOCH" "$INICIAL_SHA")
+    UML_OFFSET=$(get_artifact_day_offset "$user" "modelosUML" "$INICIAL_EPOCH" "$INICIAL_SHA")
+    CL_T_OFFSET=$(get_artifact_day_offset "$user" "conversation-log.md" "$INICIAL_EPOCH" "$INICIAL_SHA")
+    R01_OFFSET=$(get_artifact_day_offset "$user" "RUP/01-analisis" "$INICIAL_EPOCH" "$INICIAL_SHA")
+    R02_OFFSET=$(get_artifact_day_offset "$user" "RUP/02-diseño" "$INICIAL_EPOCH" "$INICIAL_SHA")
+    R03_OFFSET=$(get_artifact_day_offset "$user" "RUP/03-desarrollo" "$INICIAL_EPOCH" "$INICIAL_SHA")
 
     if [ "$QUE_HACE_STATUS" = "relleno" ]; then
         QH_COL="[💡]($QUE_HACE_URL)"
@@ -183,7 +183,7 @@ for user in $FORKS; do
         SECTION+="| Fecha | Mensaje |"$'\n'
         SECTION+="|---|---|"$'\n'
         COMMITS_TABLE=$(echo "$COMMITS_JSON" | jq -r \
-            --arg marker "$SCAFFOLD_MSG_MARKER" \
+            --arg marker "$INICIAL_MSG_MARKER" \
             --arg repo_url "$REPO_URL" \
             '.[] | select(.commit.message | test($marker) | not) |
              "| \(.commit.author.date | split("T")[0] | split("-") | .[2]+"-"+.[1]) | [\(.commit.message | split("\n")[0])](" + $repo_url + "/commit/" + .sha + ") |"' \
@@ -204,14 +204,14 @@ done
     echo ""
     echo "| Columna | Significado |"
     echo "|---|---|"
-    echo "| Commits | Commits propios (excluye el scaffold inicial) |"
+    echo "| Commits | Commits propios (excluye el inicial inicial) |"
     echo "| Días | Días únicos con actividad propia |"
     echo "| Gap | Brecha máxima entre sesiones consecutivas, incluyendo hoy; **Nd!** = más de 3 días sin tocar el repo |"
     echo "| Ult. act. | Fecha del último commit (DD-MM) |"
     echo "| 💡 | QUE\\_HACE.md relleno — enlaza al fichero |"
-    echo "| 💬 | conversation-log.md relleno — enlaza al fichero; segunda línea: días desde el scaffold hasta la primera edición |"
+    echo "| 💬 | conversation-log.md relleno — enlaza al fichero; segunda línea: días desde el inicial hasta la primera edición |"
     echo "| 📄 | README.md reescrito — enlaza al fichero |"
-    echo "| /src | Offset en días desde el scaffold cuando apareció \`src/\` |"
+    echo "| /src | Offset en días desde el inicial cuando apareció \`src/\` |"
     echo "| UML | Offset cuando apareció \`modelosUML/\` |"
     echo "| A | Offset cuando apareció \`RUP/01-analisis/\` |"
     echo "| D | Offset cuando apareció \`RUP/02-diseño/\` |"
