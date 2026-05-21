@@ -90,7 +90,8 @@ get_artifact_day_offset() {
 
 icon() {
     case "$1" in
-        relleno | reescrito) echo "X" ;;
+        reescrito) echo "📄" ;;
+        relleno) echo "X" ;;
         vacio | original) echo "-" ;;
         *) echo "?" ;;
     esac
@@ -149,13 +150,13 @@ for user in $FORKS; do
     IR=$(icon "$README")
 
     if [ "$QUE_HACE_STATUS" = "relleno" ]; then
-        QH_COL="[QH]($QUE_HACE_URL)"
+        QH_COL="[💡]($QUE_HACE_URL)"
     else
         QH_COL="-"
     fi
 
     if [ "$CONVLOG_STATUS" = "relleno" ]; then
-        CL_COL="[CL]($CONVLOG_URL)"
+        CL_COL="[💬]($CONVLOG_URL)"
     else
         CL_COL="-"
     fi
@@ -169,7 +170,11 @@ for user in $FORKS; do
     R03_OFFSET=$(get_artifact_day_offset "$user" "RUP/03-desarrollo" "$SCAFFOLD_EPOCH" "$SCAFFOLD_SHA")
 
     ALUMNO_LINK="<sub>[$user]($REPO_URL)</sub>"
-    LAST_MSG_LINK="<sub>[$LAST_MSG]($REPO_URL/commit/$LAST_SHA)</sub>"
+    if [ "$COMMITS" -gt 0 ]; then
+        LAST_MSG_LINK="<sub>[$LAST_MSG]($REPO_URL/commit/$LAST_SHA)</sub>"
+    else
+        LAST_MSG_LINK="<sub>$LAST_MSG</sub>"
+    fi
 
     ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $COMMITS | $UNIQUE_DAYS | $GAP_DISPLAY | $LAST_DATE | $QH_COL | $CL_COL | $IR | $SRC_OFFSET | $UML_OFFSET | $CL_T_OFFSET | $R01_OFFSET | $R02_OFFSET | $R03_OFFSET |"
     TABLE_ROWS="${TABLE_ROWS}${ROW}"$'\n'
@@ -198,10 +203,28 @@ done
     echo "# Dashboard de seguimiento - 25-26-idsw2-sdVC"
     echo ""
     echo "> Generado: $(date '+%Y-%m-%d %H:%M:%S %Z')"
-    echo ">"
-    echo "> Leyenda: +Nd = artefacto apareció N días tras el scaffold | **Nd!** = brecha de actividad > 3 días"
     echo ""
-    echo "| Alumno | Último commit | Commits | Días | Gap | Ult. act. | QH | CL | README | Src | UML | CL-t | RUP01 | RUP02 | RUP03 |"
+    echo "## Leyenda"
+    echo ""
+    echo "| Columna | Significado |"
+    echo "|---|---|"
+    echo "| Commits | Commits propios (excluye el scaffold inicial) |"
+    echo "| Días | Días únicos con actividad propia |"
+    echo "| Gap | Brecha máxima entre sesiones consecutivas, incluyendo hoy; **Nd!** = más de 3 días sin tocar el repo |"
+    echo "| Ult. act. | Fecha del último commit (DD-MM) |"
+    echo "| 💡 | QUE\\_HACE.md relleno — enlaza al fichero |"
+    echo "| 💬 | conversation-log.md relleno — enlaza al fichero |"
+    echo "| 📄 | README.md reescrito (deja de ser el original) |"
+    echo "| /src | Offset en días desde el scaffold cuando apareció \`src/\` |"
+    echo "| UML | Offset cuando apareció \`modelosUML/\` |"
+    echo "| CL-t | Offset cuando se editó \`conversation-log.md\` por primera vez |"
+    echo "| A | Offset cuando apareció \`RUP/01-analisis/\` |"
+    echo "| D | Offset cuando apareció \`RUP/02-diseño/\` |"
+    echo "| Dev | Offset cuando apareció \`RUP/03-desarrollo/\` |"
+    echo ""
+    echo "## Tabla"
+    echo ""
+    echo "| Alumno | Último commit | Commits | Días | Gap | Ult. act. | 💡 | 💬 | 📄 | /src | UML | CL-t | A | D | Dev |"
     echo "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"
     printf '%s' "$TABLE_ROWS"
     echo ""
