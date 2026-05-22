@@ -226,7 +226,7 @@ done
     echo "## Tabla"
     echo ""
     echo "| Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | /src | UML | A | D | Dev |"
-    echo "|---|---|---|---|---|---|---|---|---|---|---|---|---|"
+    echo "|---|---|---|---|---|---|---|---|---|---|---|---|"
     printf '%s' "$TABLE_ROWS"
     echo ""
     echo "## Resumen"
