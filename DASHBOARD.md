@@ -1,6 +1,6 @@
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Generado: 2026-05-22 19:31:07 CEST
+> Generado: 2026-05-22 22:01:28 CEST
 
 ## Leyenda
 
@@ -50,7 +50,7 @@
 | <sub>[alejandrofondo](https://github.com/alejandrofondo/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | :red_circle: | - | - | - | - | - | - | - | - |
 | <sub>[marcosgutierrez6](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC)<br>3 commits</sub> | <sub>[feat: Setup y ajustes del turbo repo para comenzar con el codigo](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/62f9e58a591162f33778ac28fa553c367f7be79d)<br>21-05</sub> | 2 | :green_circle: | [💡](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | +2d | - | - | - | - |
 | <sub>[beatriizorozco](https://github.com/beatriizorozco/25-26-idsw2-sdVC)<br>2 commits</sub> | <sub>[feat(codex): agregar skill session-memory](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/fe592bf71c1ecd276f26a2d7f5fb660fe5f30030)<br>21-05</sub> | 1 | :green_circle: | [💡](https://github.com/beatriizorozco/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
-| <sub>[martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC)<br>16 commits</sub> | <sub>[fix: corrección del analisis de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/f9f074cd978d2f2d5dd8808f5748062c1b7c0f94)<br>22-05</sub> | 3 | :green_circle: | [💡](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+1d | [📄](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/README.md) | - | +2d | - | - | - |
+| <sub>[martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC)<br>17 commits</sub> | <sub>[fix: redaccion de protocolo de analisis mejorada](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/cf9ead135818ff298fb60d9a2ff5ae2b70e1f878)<br>22-05</sub> | 3 | :green_circle: | [💡](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+1d | [📄](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/README.md) | - | +2d | - | - | - |
 | <sub>[Camila-Lesly](https://github.com/Camila-Lesly/25-26-idsw2-sdVC)<br>28 commits</sub> | <sub>[feat(docs):update conversation-log](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/commit/f7aeb36966cb1f9a0cbaac86efa08d0b586b3bb3)<br>22-05</sub> | 2 | :green_circle: | [💡](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+2d | [📄](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/README.md) | - | +2d | - | - | - |
 
 ## Resumen
@@ -186,10 +186,11 @@
 | 21-05 | [feat(codex): agregar skill session-memory](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/fe592bf71c1ecd276f26a2d7f5fb660fe5f30030) |
 | 21-05 | [docs: añadir especificación inicial del proyecto](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/06bf7c3e4f9e20631e9d2d522d24639d170ef282) |
 
-### [martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC) (16 commits · 3 días activos · gap máx: 1d)
+### [martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC) (17 commits · 3 días activos · gap máx: 1d)
 
 | Fecha | Mensaje |
 |---|---|
+| 22-05 | [fix: redaccion de protocolo de analisis mejorada](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/cf9ead135818ff298fb60d9a2ff5ae2b70e1f878) |
 | 22-05 | [fix: corrección del analisis de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/f9f074cd978d2f2d5dd8808f5748062c1b7c0f94) |
 | 22-05 | [feat: análisis de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/dcc4d9c1282fd586947a806492a562cfba264689) |
 | 22-05 | [fix: correccion del analisis de cerrarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/0a52c92cd5c114c34a9d3845d8f3c948f39c1317) |
