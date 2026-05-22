@@ -36,9 +36,23 @@ check_readme_rewritten() {
 
 # Max gap en días entre sesiones consecutivas, incluyendo brecha hasta hoy
 compute_max_gap() {
-    local commits_json="$1"
+    local commits_json="$1" total_commits="$2"
     local dates
-    mapfile -t dates < <(echo "$commits_json" | jq -r '[.[].commit.author.date | split("T")[0]] | unique | sort[]' 2>/dev/null)
+
+    if [ "$total_commits" -le 1 ]; then
+        local first_date
+        first_date=$(echo "$commits_json" | jq -r 'last | .commit.author.date | split("T")[0]' 2>/dev/null)
+        if [ -n "$first_date" ] && [ "$first_date" != "null" ]; then
+            local first_epoch
+            first_epoch=$(date -d "$first_date" +%s 2>/dev/null) || { echo "0"; return; }
+            echo $(( (TODAY_EPOCH - first_epoch) / 86400 ))
+        else
+            echo "0"
+        fi
+        return
+    fi
+
+    mapfile -t dates < <(echo "$commits_json" | jq -r '.[:-1] | [.[].commit.author.date | split("T")[0]] | unique | sort[]' 2>/dev/null)
 
     if [ "${#dates[@]}" -eq 0 ]; then
         echo "0"
@@ -57,7 +71,6 @@ compute_max_gap() {
         prev_epoch=$epoch
     done
 
-    # Brecha desde el último día activo hasta hoy
     local gap_to_today=$(( (TODAY_EPOCH - prev_epoch) / 86400 ))
     [ "$gap_to_today" -gt "$max_gap" ] && max_gap=$gap_to_today
 
@@ -102,6 +115,7 @@ log "Encontrados $N_FORKS forks."
 TABLE_ROWS=""
 DETAIL_SECTIONS=""
 ACTIVOS=0
+RECENT_DATA=""
 
 for user in $FORKS; do
     log "Procesando $user..."
@@ -126,7 +140,7 @@ for user in $FORKS; do
     # Días únicos con commits propios (excluye el commit del inicial)
     UNIQUE_DAYS=$(echo "$COMMITS_JSON" | jq '[.[:-1][].commit.author.date | split("T")[0]] | unique | length' 2>/dev/null || echo "0")
 
-    MAX_GAP=$(compute_max_gap "$COMMITS_JSON")
+    MAX_GAP=$(compute_max_gap "$COMMITS_JSON" "$COMMITS")
     if [ "$MAX_GAP" -gt 3 ]; then
         GAP_DISPLAY="**${MAX_GAP}d!**"
     elif [ "$MAX_GAP" -gt 0 ]; then
@@ -184,6 +198,9 @@ for user in $FORKS; do
     if [ "$COMMITS" -gt 0 ]; then
         ACTIVOS=$((ACTIVOS + 1))
 
+        LAST_DATE_EPOCH=$(date -d "$LAST_DATE" +%s 2>/dev/null || echo "0")
+        RECENT_DATA+="${LAST_DATE_EPOCH}|${user}|${REPO_URL}"$'\n'
+
         SECTION="### [$user]($REPO_URL) ($COMMITS commits · $UNIQUE_DAYS días activos · gap máx: ${MAX_GAP}d)"$'\n'
         SECTION+=""$'\n'
         SECTION+="| Fecha | Mensaje |"$'\n'
@@ -201,10 +218,28 @@ for user in $FORKS; do
     fi
 done
 
+RECENT_LINE=""
+if [ -n "$RECENT_DATA" ]; then
+    RECENT_SORTED=$(echo "$RECENT_DATA" | sort -t'|' -k1 -rn | head -5)
+    RECENT_LINKS=""
+    while IFS='|' read -r _ user repo_url; do
+        [ -z "$user" ] && continue
+        if [ -n "$RECENT_LINKS" ]; then
+            RECENT_LINKS="$RECENT_LINKS, "
+        fi
+        RECENT_LINKS="${RECENT_LINKS}[$user]($repo_url)"
+    done <<< "$RECENT_SORTED"
+    RECENT_LINE="$RECENT_LINKS"
+fi
+
 {
     echo "# Dashboard de seguimiento - 25-26-idsw2-sdVC"
     echo ""
     echo "> Generado: $(date '+%Y-%m-%d %H:%M:%S %Z')"
+    echo ">"
+    if [ -n "$RECENT_LINE" ]; then
+        echo "> <sub>Ultimas actualizaciones: $RECENT_LINE</sub>"
+    fi
     echo ""
     echo "## Leyenda"
     echo ""
