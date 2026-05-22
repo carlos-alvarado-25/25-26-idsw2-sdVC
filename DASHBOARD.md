@@ -22,7 +22,7 @@
 ## Tabla
 
 | Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | /src | UML | A | D | Dev |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|---|---|---|
 | <sub>[rubentresgallob](https://github.com/rubentresgallob/25-26-idsw2-sdVC)<br>3 commits</sub> | <sub>[Stack inicial y gestión de commits](https://github.com/rubentresgallob/25-26-idsw2-sdVC/commit/6822ab2a8852df78cbbf66c807ecf330e5793a90)<br>21-05</sub> | 1 | 2d | [💡](https://github.com/rubentresgallob/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/rubentresgallob/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+2d | - | - | - | - | - | - |
 | <sub>[miguelrivasmorantes-devu](https://github.com/miguelrivasmorantes-devu/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | 3d | - | - | - | - | - | - | - | - |
 | <sub>[enmabry](https://github.com/enmabry/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[QUE_HACE.md](https://github.com/enmabry/25-26-idsw2-sdVC/commit/8c3fe6462e591d66cc201529146e2642a80fb92c)<br>21-05</sub> | 1 | 2d | [💡](https://github.com/enmabry/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
