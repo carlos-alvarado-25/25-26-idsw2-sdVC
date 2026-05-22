@@ -173,12 +173,12 @@ for user in $FORKS; do
     ALUMNO_LINK="<sub>[$user]($REPO_URL)<br>$COMMITS_LABEL</sub>"
 
     if [ "$COMMITS" -gt 0 ]; then
-        LAST_MSG_LINK="<sub>[$LAST_MSG]($REPO_URL/commit/$LAST_SHA)</sub>"
+        LAST_MSG_LINK="<sub>[$LAST_MSG]($REPO_URL/commit/$LAST_SHA)<br>$LAST_DATE</sub>"
     else
-        LAST_MSG_LINK="<sub>$LAST_MSG</sub>"
+        LAST_MSG_LINK="<sub>$LAST_MSG<br>$LAST_DATE</sub>"
     fi
 
-    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $UNIQUE_DAYS | $GAP_DISPLAY | $LAST_DATE | $QH_COL | $CL_COL | $README_COL | $SRC_OFFSET | $UML_OFFSET | $R01_OFFSET | $R02_OFFSET | $R03_OFFSET |"
+    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $UNIQUE_DAYS | $GAP_DISPLAY | $QH_COL | $CL_COL | $README_COL | $SRC_OFFSET | $UML_OFFSET | $R01_OFFSET | $R02_OFFSET | $R03_OFFSET |"
     TABLE_ROWS="${TABLE_ROWS}${ROW}"$'\n'
 
     if [ "$COMMITS" -gt 0 ]; then
@@ -211,9 +211,9 @@ done
     echo "| Columna | Significado |"
     echo "|---|---|"
     echo "| Alumno | Nombre y número de commits propios (excluye el commit inicial) |"
+    echo "| Último commit | Mensaje del último commit (enlaza al commit) y fecha (DD-MM) |"
     echo "| Días | Días únicos con actividad propia |"
     echo "| Gap | Brecha máxima entre sesiones consecutivas, incluyendo hoy; **Nd!** = más de 3 días sin tocar el repo |"
-    echo "| Ult. act. | Fecha del último commit (DD-MM) |"
     echo "| 💡 | QUE\\_HACE.md relleno — enlaza al fichero |"
     echo "| 💬 | conversation-log.md relleno — enlaza al fichero; segunda línea: días desde el commit inicial hasta la primera edición |"
     echo "| 📄 | README.md reescrito — enlaza al fichero |"
@@ -225,7 +225,7 @@ done
     echo ""
     echo "## Tabla"
     echo ""
-    echo "| Alumno | Último commit | Días | Gap | Ult. act. | 💡 | 💬 | 📄 | /src | UML | A | D | Dev |"
+    echo "| Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | /src | UML | A | D | Dev |"
     echo "|---|---|---|---|---|---|---|---|---|---|---|---|---|"
     printf '%s' "$TABLE_ROWS"
     echo ""
