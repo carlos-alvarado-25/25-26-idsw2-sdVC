@@ -141,12 +141,12 @@ for user in $FORKS; do
     UNIQUE_DAYS=$(echo "$COMMITS_JSON" | jq '[.[:-1][].commit.author.date | split("T")[0]] | unique | length' 2>/dev/null || echo "0")
 
     MAX_GAP=$(compute_max_gap "$COMMITS_JSON" "$COMMITS")
-    if [ "$MAX_GAP" -gt 3 ]; then
-        GAP_DISPLAY="**${MAX_GAP}d!**"
-    elif [ "$MAX_GAP" -gt 0 ]; then
-        GAP_DISPLAY="${MAX_GAP}d"
+    if [ "$MAX_GAP" -ge 3 ]; then
+        GAP_DISPLAY=":red_circle:"
+    elif [ "$MAX_GAP" -ge 2 ]; then
+        GAP_DISPLAY=":yellow_circle:"
     else
-        GAP_DISPLAY="-"
+        GAP_DISPLAY=":green_circle:"
     fi
 
     QUE_HACE_STATUS=$(check_file_has_content "$user" "QUE_HACE.md" "En una frase" 2>/dev/null || echo "?")
@@ -236,10 +236,6 @@ fi
     echo "# Dashboard de seguimiento - 25-26-idsw2-sdVC"
     echo ""
     echo "> Generado: $(date '+%Y-%m-%d %H:%M:%S %Z')"
-    echo ">"
-    if [ -n "$RECENT_LINE" ]; then
-        echo "> <sub>Ultimas actualizaciones: $RECENT_LINE</sub>"
-    fi
     echo ""
     echo "## Leyenda"
     echo ""
@@ -248,7 +244,7 @@ fi
     echo "| Alumno | Nombre y número de commits propios (excluye el commit inicial) |"
     echo "| Último commit | Mensaje del último commit (enlaza al commit) y fecha (DD-MM) |"
     echo "| Días | Días únicos con actividad propia |"
-    echo "| Gap | Brecha máxima entre sesiones consecutivas, incluyendo hoy; **Nd!** = más de 3 días sin tocar el repo |"
+    echo "| Gap | :green_circle: trabajó hoy o ayer | :yellow_circle: 2-3 días sin actividad | :red_circle: más de 3 días sin tocar el repo |"
     echo "| 💡 | QUE\\_HACE.md relleno — enlaza al fichero |"
     echo "| 💬 | conversation-log.md relleno — enlaza al fichero; segunda línea: días desde el commit inicial hasta la primera edición |"
     echo "| 📄 | README.md reescrito — enlaza al fichero |"
@@ -260,6 +256,10 @@ fi
     echo ""
     echo "## Tabla"
     echo ""
+    if [ -n "$RECENT_LINE" ]; then
+        echo "<sub>Ultimas actualizaciones: $RECENT_LINE</sub>"
+        echo ""
+    fi
     echo "| Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | /src | UML | A | D | Dev |"
     echo "|---|---|---|---|---|---|---|---|---|---|---|---|"
     printf '%s' "$TABLE_ROWS"
