@@ -1,6 +1,6 @@
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Generado: 2026-05-21 23:12:18 CEST
+> Generado: 2026-05-22 08:30:31 CEST
 
 ## Leyenda
 
@@ -24,30 +24,30 @@
 | Alumno | Último commit | Días | Gap | Ult. act. | 💡 | 💬 | 📄 | /src | UML | A | D | Dev |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | <sub>[rubentresgallob](https://github.com/rubentresgallob/25-26-idsw2-sdVC)<br>3 commits</sub> | <sub>[Stack inicial y gestión de commits](https://github.com/rubentresgallob/25-26-idsw2-sdVC/commit/6822ab2a8852df78cbbf66c807ecf330e5793a90)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/rubentresgallob/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/rubentresgallob/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+2d | - | - | - | - | - | - |
-| <sub>[miguelrivasmorantes-devu](https://github.com/miguelrivasmorantes-devu/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 2d | 19-05 | - | - | - | - | - | - | - | - |
+| <sub>[miguelrivasmorantes-devu](https://github.com/miguelrivasmorantes-devu/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 3d | 19-05 | - | - | - | - | - | - | - | - |
 | <sub>[enmabry](https://github.com/enmabry/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[QUE_HACE.md](https://github.com/enmabry/25-26-idsw2-sdVC/commit/8c3fe6462e591d66cc201529146e2642a80fb92c)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/enmabry/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
-| <sub>[franvenero](https://github.com/franvenero/25-26-idsw2-sdVC)<br>2 commits</sub> | <sub>[docs: define estructura de artefactos RUP en analisis y diseño](https://github.com/franvenero/25-26-idsw2-sdVC/commit/6bfdb57300c8f5ef1a50b71db760b0f4cab06259)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+2d | - | - | - | +2d | +2d | - |
-| <sub>[Sergiorl2](https://github.com/Sergiorl2/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 2d | 19-05 | - | - | - | - | - | - | - | - |
-| <sub>[Andecochea](https://github.com/Andecochea/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 2d | 19-05 | - | - | - | - | - | - | - | - |
-| <sub>[alejandroateca](https://github.com/alejandroateca/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 2d | 19-05 | - | - | - | - | - | - | - | - |
+| <sub>[franvenero](https://github.com/franvenero/25-26-idsw2-sdVC)<br>3 commits</sub> | <sub>[docs: análisis BCE para iniciarSesion, cerrarSesion y completarGestion](https://github.com/franvenero/25-26-idsw2-sdVC/commit/cd1ff3f85f43d5ed44d86a6e4bf91258e160f24c)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+2d | - | - | - | +2d | +2d | - |
+| <sub>[Sergiorl2](https://github.com/Sergiorl2/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 3d | 19-05 | - | - | - | - | - | - | - | - |
+| <sub>[Andecochea](https://github.com/Andecochea/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 3d | 19-05 | - | - | - | - | - | - | - | - |
+| <sub>[alejandroateca](https://github.com/alejandroateca/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 3d | 19-05 | - | - | - | - | - | - | - | - |
 | <sub>[eirik-rosete](https://github.com/eirik-rosete/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[feat: Answering what the system does in the QUE_HACE.md file.](https://github.com/eirik-rosete/25-26-idsw2-sdVC/commit/98d3c1ae20c3425298c13ce6e5a0ea5c83c90120)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/eirik-rosete/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
-| <sub>[KelviaBarros05](https://github.com/KelviaBarros05/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 2d | 19-05 | - | - | - | - | - | - | - | - |
-| <sub>[DylanNrj](https://github.com/DylanNrj/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 2d | 19-05 | - | - | - | - | - | - | - | - |
+| <sub>[KelviaBarros05](https://github.com/KelviaBarros05/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 3d | 19-05 | - | - | - | - | - | - | - | - |
+| <sub>[DylanNrj](https://github.com/DylanNrj/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 3d | 19-05 | - | - | - | - | - | - | - | - |
 | <sub>[aeRomeroz](https://github.com/aeRomeroz/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[docs: añadir resúmen del sistema a QUE_HACE.md](https://github.com/aeRomeroz/25-26-idsw2-sdVC/commit/d218732902e13e32f2ef3a5e864526ad0d8f0237)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/aeRomeroz/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
 | <sub>[carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)<br>4 commits</sub> | <sub>[feat: Cierre de preparación del entorno RUP](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/43e463dbfb6c5fc18178ca9944e93058d17a1cd9)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+2d | - | - | - | - | - | - |
 | <sub>[manuelmunoz8](https://github.com/manuelmunoz8/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[QUE_HACE](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c0274187926a7d042b97ebceda22785bb93d09f4)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
-| <sub>[Alejandrojuarez0105](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[docs: primer commit, QUE_HACE.md](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/7dc2e48dada807135c363a4c185de5b2d12ff50e)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
-| <sub>[SdeCos](https://github.com/SdeCos/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 2d | 19-05 | - | - | - | - | - | - | - | - |
+| <sub>[Alejandrojuarez0105](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)<br>3 commits</sub> | <sub>[refactor: corregir estructura de conversation-log.md sin modificar el contenido](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/0a1b8f83b4e3b9a0c34818d5ee276aaf3167874b)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+2d | - | - | - | - | - | - |
+| <sub>[SdeCos](https://github.com/SdeCos/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 3d | 19-05 | - | - | - | - | - | - | - | - |
 | <sub>[inigovaqueroo04](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[feat: QUE_HACE](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/54902be9450fc6d64fe30d7eb4b8d20d0b446319)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
 | <sub>[xImRaul](https://github.com/xImRaul/25-26-idsw2-sdVC)<br>2 commits</sub> | <sub>[feat: configuración inicial para dar contexto al trabajo](https://github.com/xImRaul/25-26-idsw2-sdVC/commit/058429dc84b229328928ff17ada66fe7b7f7cafb)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/xImRaul/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
 | <sub>[31Diego](https://github.com/31Diego/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[feat: QUE_HACE.md](https://github.com/31Diego/25-26-idsw2-sdVC/commit/f034ff8f486f3bb665493c6e2d1e8b8ffc9bfa6c)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/31Diego/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
 | <sub>[Pareyor](https://github.com/Pareyor/25-26-idsw2-sdVC)<br>5 commits</sub> | <sub>[fix: corrige un error en la exportación de la sesión conversada con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/78a0ddb5e8ca9fbcf62d5c9a53a7bd4385095cfc)</sub> | 2 | 1d | 21-05 | [💡](https://github.com/Pareyor/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/Pareyor/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+1d | - | - | +2d | - | - | - |
-| <sub>[liamanderson873](https://github.com/liamanderson873/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 2d | 19-05 | - | - | - | - | - | - | - | - |
-| <sub>[jerdier](https://github.com/jerdier/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[feat: QUE_HACE.md](https://github.com/jerdier/25-26-idsw2-sdVC/commit/8bbeba4cc0fc6bb3f55304137660d7a8dd340a23)</sub> | 1 | 1d | 20-05 | [💡](https://github.com/jerdier/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
-| <sub>[jaimelinares6](https://github.com/jaimelinares6/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 2d | 19-05 | - | - | - | - | - | - | - | - |
-| <sub>[alejandrofondo](https://github.com/alejandrofondo/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 2d | 19-05 | - | - | - | - | - | - | - | - |
+| <sub>[liamanderson873](https://github.com/liamanderson873/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 3d | 19-05 | - | - | - | - | - | - | - | - |
+| <sub>[jerdier](https://github.com/jerdier/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[feat: QUE_HACE.md](https://github.com/jerdier/25-26-idsw2-sdVC/commit/8bbeba4cc0fc6bb3f55304137660d7a8dd340a23)</sub> | 1 | 2d | 20-05 | [💡](https://github.com/jerdier/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
+| <sub>[jaimelinares6](https://github.com/jaimelinares6/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 3d | 19-05 | - | - | - | - | - | - | - | - |
+| <sub>[alejandrofondo](https://github.com/alejandrofondo/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2</sub> | 0 | 3d | 19-05 | - | - | - | - | - | - | - | - |
 | <sub>[marcosgutierrez6](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC)<br>3 commits</sub> | <sub>[feat: Setup y ajustes del turbo repo para comenzar con el codigo](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/62f9e58a591162f33778ac28fa553c367f7be79d)</sub> | 2 | 1d | 21-05 | [💡](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | +2d | - | - | - | - |
-| <sub>[beatriizorozco](https://github.com/beatriizorozco/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[docs: añadir especificación inicial del proyecto](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/06bf7c3e4f9e20631e9d2d522d24639d170ef282)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/beatriizorozco/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
+| <sub>[beatriizorozco](https://github.com/beatriizorozco/25-26-idsw2-sdVC)<br>2 commits</sub> | <sub>[feat(codex): agregar skill session-memory](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/fe592bf71c1ecd276f26a2d7f5fb660fe5f30030)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/beatriizorozco/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - |
 | <sub>[martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC)<br>8 commits</sub> | <sub>[feat: analisis de verAsignaturas](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/7528330087fd0a963b9ff6f6c488d10ce03e9460)</sub> | 2 | 1d | 21-05 | [💡](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+1d | [📄](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/README.md) | - | +2d | - | - | - |
 | <sub>[Camila-Lesly](https://github.com/Camila-Lesly/25-26-idsw2-sdVC)<br>21 commits</sub> | <sub>[feat(docs):update conversation-log](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/commit/ab50d810f621af4a2277fa4acbdb9a04dc21bc8e)</sub> | 1 | 2d | 21-05 | [💡](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br>+2d | [📄](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/README.md) | - | +2d | - | - | - |
 
@@ -73,10 +73,11 @@
 |---|---|
 | 21-05 | [QUE_HACE.md](https://github.com/enmabry/25-26-idsw2-sdVC/commit/8c3fe6462e591d66cc201529146e2642a80fb92c) |
 
-### [franvenero](https://github.com/franvenero/25-26-idsw2-sdVC) (2 commits · 1 días activos · gap máx: 2d)
+### [franvenero](https://github.com/franvenero/25-26-idsw2-sdVC) (3 commits · 1 días activos · gap máx: 2d)
 
 | Fecha | Mensaje |
 |---|---|
+| 21-05 | [docs: análisis BCE para iniciarSesion, cerrarSesion y completarGestion](https://github.com/franvenero/25-26-idsw2-sdVC/commit/cd1ff3f85f43d5ed44d86a6e4bf91258e160f24c) |
 | 21-05 | [docs: define estructura de artefactos RUP en analisis y diseño](https://github.com/franvenero/25-26-idsw2-sdVC/commit/6bfdb57300c8f5ef1a50b71db760b0f4cab06259) |
 | 21-05 | [docs: commit inicial QUE_HACE.md](https://github.com/franvenero/25-26-idsw2-sdVC/commit/be29d0f3d5ad3242f581f687e7103ee9d03d59ef) |
 
@@ -107,10 +108,12 @@
 |---|---|
 | 21-05 | [QUE_HACE](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c0274187926a7d042b97ebceda22785bb93d09f4) |
 
-### [Alejandrojuarez0105](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC) (1 commits · 1 días activos · gap máx: 2d)
+### [Alejandrojuarez0105](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC) (3 commits · 1 días activos · gap máx: 2d)
 
 | Fecha | Mensaje |
 |---|---|
+| 21-05 | [refactor: corregir estructura de conversation-log.md sin modificar el contenido](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/0a1b8f83b4e3b9a0c34818d5ee276aaf3167874b) |
+| 21-05 | [chore: migración de la estructura RUP, corrección de rutas de imágenes y enlaces, README con enlace a Davidario](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/925a477f3f436320a68a376aac42651f97db99c0) |
 | 21-05 | [docs: primer commit, QUE_HACE.md](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/7dc2e48dada807135c363a4c185de5b2d12ff50e) |
 
 ### [inigovaqueroo04](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC) (1 commits · 1 días activos · gap máx: 2d)
@@ -142,7 +145,7 @@
 | 20-05 | [feat: Reescribe README.md provisionalmente y actualiza conversation-log.md del dia](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/306e151a13074bd34790d343d12649e16a9675f5) |
 | 20-05 | [feat: QUE_HACE.md](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/b4b488d29498c15ea8a4d9ebafe1806597a103c1) |
 
-### [jerdier](https://github.com/jerdier/25-26-idsw2-sdVC) (1 commits · 1 días activos · gap máx: 1d)
+### [jerdier](https://github.com/jerdier/25-26-idsw2-sdVC) (1 commits · 1 días activos · gap máx: 2d)
 
 | Fecha | Mensaje |
 |---|---|
@@ -156,10 +159,11 @@
 | 21-05 | [feat: Setup inicial de proyecto (contexto, reglas etc.)](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/e9370574e1997febcd84ab71b5c1b0992b2cd5c7) |
 | 20-05 | [feat: QUE_HACE.md commit inicial](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/675e5cfe4472f178904237b6b1664ebdffc5c54a) |
 
-### [beatriizorozco](https://github.com/beatriizorozco/25-26-idsw2-sdVC) (1 commits · 1 días activos · gap máx: 2d)
+### [beatriizorozco](https://github.com/beatriizorozco/25-26-idsw2-sdVC) (2 commits · 1 días activos · gap máx: 2d)
 
 | Fecha | Mensaje |
 |---|---|
+| 21-05 | [feat(codex): agregar skill session-memory](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/fe592bf71c1ecd276f26a2d7f5fb660fe5f30030) |
 | 21-05 | [docs: añadir especificación inicial del proyecto](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/06bf7c3e4f9e20631e9d2d522d24639d170ef282) |
 
 ### [martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC) (8 commits · 2 días activos · gap máx: 1d)
