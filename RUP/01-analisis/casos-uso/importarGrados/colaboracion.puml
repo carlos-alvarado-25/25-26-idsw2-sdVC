@@ -1,0 +1,28 @@
+@startuml importarGrados-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Grados Abierto" as GradosAbierto
+
+package importarGrados as "importarGrados()" {
+    rectangle #629EF9 ImportarGradosView
+    rectangle #b5bd68 GradoController
+    rectangle #F2AC4E GradoRepository
+    rectangle #F2AC4E Grado
+}
+
+rectangle #CDEBA5 ":Grados Abierto" as GradosAbiertoSalida
+
+GradosAbierto -r-> ImportarGradosView: importarGrados()
+
+ImportarGradosView -d-> GradoController: obtenerFormatoRequerido() : String
+
+ImportarGradosView -d-> GradoController: importar(archivo) : ImportResult
+
+GradoController --> GradoRepository: guardarLote(grados) : List<Grado>
+
+GradoRepository -- Grado
+
+ImportarGradosView ..> GradosAbiertoSalida: finalizarImportacion()
+ImportarGradosView ..> GradosAbiertoSalida: cancelarImportacion()
+
+@enduml
