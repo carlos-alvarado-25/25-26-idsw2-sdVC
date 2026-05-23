@@ -25,8 +25,8 @@ Análisis completo de cada caso de uso especificado mediante:
 
 ## Cobertura de análisis
 
-### Importación de Datos
-- **Gestión académica**: importarGrados()
+### Gestión de Grados
+- **Gestión académica**: abrirGrados(), importarGrados()
 
 ## Trazabilidad
 

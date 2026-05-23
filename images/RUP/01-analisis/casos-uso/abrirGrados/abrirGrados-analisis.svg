@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="465px" preserveAspectRatio="none" style="width:1854px;height:465px;" version="1.1" viewBox="0 0 1854 465" width="1854px" zoomAndPan="magnify"><defs><filter height="300%" id="f7i68287krh8p" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[6bdb967d2a01a95808000df8d1a291f3]
+cluster abrirGrados--><polygon fill="#FFFFFF" filter="url(#f7i68287krh8p)" points="175.5,24,273.5,24,280.5,49.0679,696.5,49.0679,696.5,453,175.5,453,175.5,24" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="175.5" x2="280.5" y1="49.0679" y2="49.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="92" x="179.5" y="40.9659">abrirGrados()</text><!--MD5=[74b1eb018ef6a9cc6945d5f7e5b4e724]
+entity ListarGradosView--><rect fill="#629EF9" filter="url(#f7i68287krh8p)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="136" x="544.5" y="62"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="116" x="554.5" y="86.9659">ListarGradosView</text><!--MD5=[a3e98a5f49c68695f130a43f280d8ecf]
+entity GradoController--><rect fill="#B5BD68" filter="url(#f7i68287krh8p)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="128" x="291.5" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="108" x="301.5" y="204.9659">GradoController</text><!--MD5=[9db62e2c3b018035cc77fb2476be44ee]
+entity GradoRepository--><rect fill="#F2AC4E" filter="url(#f7i68287krh8p)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="132" x="283.5" y="298"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="112" x="293.5" y="322.9659">GradoRepository</text><!--MD5=[cbab0994e6ada9fe76b72748ce5407a5]
+entity Grado--><rect fill="#F2AC4E" filter="url(#f7i68287krh8p)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="61" x="319" y="398"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="41" x="329" y="422.9659">Grado</text><!--MD5=[84b54a619bbffa34e5a84b7fd9e3d121]
+entity SistemaDisponible--><rect fill="#CDEBA5" filter="url(#f7i68287krh8p)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="153" x="6" y="62"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="133" x="16" y="86.9659">:Sistema Disponible</text><!--MD5=[e2c1600d4246acc39257d663d2b4cdcf]
+entity SistemaDisponibleSalida--><rect fill="#CDEBA5" filter="url(#f7i68287krh8p)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="153" x="713" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="133" x="723" y="204.9659">:Sistema Disponible</text><!--MD5=[8bd8eb30876109f5c9c6550febeadb84]
+entity CrearGrado--><rect fill="#CDEBA5" filter="url(#f7i68287krh8p)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="196" x="901.5" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="176" x="911.5" y="204.9659">:Collaboration CrearGrado</text><!--MD5=[7b22484268822c9ed07139d2a78b3338]
+entity EditarGrado--><rect fill="#CDEBA5" filter="url(#f7i68287krh8p)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="199" x="1133" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="179" x="1143" y="204.9659">:Collaboration EditarGrado</text><!--MD5=[5360fec6623188ca4e48d2bdd228e8ae]
+entity EliminarGrado--><rect fill="#CDEBA5" filter="url(#f7i68287krh8p)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="215" x="1367" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="195" x="1377" y="204.9659">:Collaboration EliminarGrado</text><!--MD5=[4551da61c5ad3d1ada5ebb928f4e4396]
+entity ImportarGrados--><rect fill="#CDEBA5" filter="url(#f7i68287krh8p)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="226" x="1617.5" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="206" x="1627.5" y="204.9659">:Collaboration ImportarGrados</text><!--MD5=[c3ffc44dd4c08da8ceecaa1bf7589ab6]
+link SistemaDisponible to ListarGradosView--><path d="M159,81.5 C260.67,81.5 439.08,81.5 539.14,81.5 " fill="none" id="SistemaDisponible-&gt;ListarGradosView" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="544.44,81.5,535.44,77.5,539.44,81.5,535.44,85.5,544.44,81.5" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="79" x="312.25" y="74.397">abrirGrados()</text><!--MD5=[2c506d434f386afaf1c043362dae58f9]
+link ListarGradosView to GradoController--><path d="M544.14,92.08 C443.31,106.22 266.5,131 266.5,131 C266.5,131 266.5,150 266.5,150 C266.5,150 292.86,164.37 316.89,177.46 " fill="none" id="ListarGradosView-&gt;GradoController" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="321.34,179.89,315.3454,172.0756,316.9478,177.5008,311.5226,179.1031,321.34,179.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="161" x="267.5" y="145.897">listarGrados() : List&lt;Grado&gt;</text><!--MD5=[2c506d434f386afaf1c043362dae58f9]
+link ListarGradosView to GradoController--><path d="M558.77,101.11 C519.29,114.79 472.5,131 472.5,131 C472.5,131 426.62,157.47 392.33,177.25 " fill="none" id="ListarGradosView-&gt;GradoController-1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="387.78,179.88,397.5741,178.8426,392.1097,177.3793,393.573,171.915,387.78,179.88" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="206" x="473.5" y="145.897">filtrarGrados(criterio) : List&lt;Grado&gt;</text><!--MD5=[e1d8aaea052639662974e84b9c6de6e8]
+link GradoController to GradoRepository--><path d="M304.84,219.11 C267.62,232.79 223.5,249 223.5,249 C223.5,249 223.5,268 223.5,268 C223.5,268 261.76,282.73 296.11,295.95 " fill="none" id="GradoController-&gt;GradoRepository" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="301.15,297.89,294.1973,290.9144,296.4862,296.0874,291.3132,298.3764,301.15,297.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="174" x="224.5" y="263.897">obtenerTodos() : List&lt;Grado&gt;</text><!--MD5=[e1d8aaea052639662974e84b9c6de6e8]
+link GradoController to GradoRepository--><path d="M373.92,219.11 C387.46,232.79 403.5,249 403.5,249 C403.5,249 403.5,268 403.5,268 C403.5,268 388.42,281.54 374.2,294.32 " fill="none" id="GradoController-&gt;GradoRepository-1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="370.22,297.89,379.5913,294.8604,373.9428,294.5523,374.2509,288.9038,370.22,297.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="236" x="404.5" y="263.897">buscarPorCriterio(criterio) : List&lt;Grado&gt;</text><!--MD5=[aa358040f2fb0976a0f9fba190c9f6ed]
+link GradoRepository to Grado--><path d="M349.5,337.4 C349.5,354.86 349.5,380.66 349.5,397.99 " fill="none" id="GradoRepository-Grado" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[ff3945b2d3fcbb5907c8a37622f5180f]
+link ListarGradosView to SistemaDisponibleSalida--><path d="M641.67,101.11 C663.1,114.79 688.5,131 688.5,131 C688.5,131 727.78,157.25 757.35,177.01 " fill="none" id="ListarGradosView-&gt;SistemaDisponibleSalida" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="761.63,179.88,756.3801,171.547,757.4763,177.0966,751.9267,178.1928,761.63,179.88" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="115" x="716.5" y="145.897">completarGestion()</text><!--MD5=[7d42a168c4964a1b63d04607db123288]
+link ListarGradosView to CrearGrado--><path d="M680.6,96.99 C747.78,111.28 840.5,131 840.5,131 C840.5,131 904.12,158.01 950.88,177.86 " fill="none" id="ListarGradosView-&gt;CrearGrado" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="955.63,179.88,948.8955,172.6935,951.024,177.9346,945.7828,180.0631,955.63,179.88" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="75" x="883.5" y="145.897">crearGrado()</text><!--MD5=[e7e33b88be005c37354213c2b64208f5]
+link ListarGradosView to EditarGrado--><path d="M680.53,91.79 C783.61,105.88 967.5,131 967.5,131 C967.5,131 1076.45,158.75 1154.63,178.67 " fill="none" id="ListarGradosView-&gt;EditarGrado" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="1159.74,179.97,1151.9999,173.8797,1154.8935,178.7405,1150.0327,181.6341,1159.74,179.97" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="80" x="1039.5" y="145.897">editarGrado()</text><!--MD5=[db7cb3a1c36bc40b4e2539b345ffaae6]
+link ListarGradosView to EliminarGrado--><path d="M680.75,88.92 C820.99,102.1 1128.5,131 1128.5,131 C1128.5,131 1272.17,159.03 1374.36,178.96 " fill="none" id="ListarGradosView-&gt;EliminarGrado" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="1379.5,179.97,1371.4307,174.3232,1374.5922,179.0141,1369.9013,182.1756,1379.5,179.97" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="93" x="1221.5" y="145.897">eliminarGrado()</text><!--MD5=[21930a0fcb69a936e02948f0cc26f6da]
+link ListarGradosView to ImportarGrados--><path d="M680.67,87.15 C858.63,99.29 1323.5,131 1323.5,131 C1323.5,131 1493.51,159.2 1613.78,179.14 " fill="none" id="ListarGradosView-&gt;ImportarGrados" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="1618.75,179.97,1610.5224,174.5564,1613.8169,179.155,1609.2183,182.4494,1618.75,179.97" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="1433.5" y="145.897">importarGrados()</text><!--MD5=[9b5db52af5778a65839a1e0736cf121a]
+@startuml abrirGrados-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+package abrirGrados as "abrirGrados()" {
+    rectangle #629EF9 ListarGradosView
+    rectangle #b5bd68 GradoController
+    rectangle #F2AC4E GradoRepository
+    rectangle #F2AC4E Grado
+}
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
+rectangle #CDEBA5 ":Collaboration CrearGrado" as CrearGrado
+rectangle #CDEBA5 ":Collaboration EditarGrado" as EditarGrado
+rectangle #CDEBA5 ":Collaboration EliminarGrado" as EliminarGrado
+rectangle #CDEBA5 ":Collaboration ImportarGrados" as ImportarGrados
+
+SistemaDisponible -r-> ListarGradosView: abrirGrados()
+
+ListarGradosView -d-> GradoController: listarGrados() : List<Grado>
+
+GradoController - -> GradoRepository: obtenerTodos() : List<Grado>
+
+GradoRepository - - Grado
+
+ListarGradosView - -> GradoController: filtrarGrados(criterio) : List<Grado>
+
+GradoController - -> GradoRepository: buscarPorCriterio(criterio) : List<Grado>
+
+ListarGradosView ..> SistemaDisponibleSalida: completarGestion()
+ListarGradosView ..> CrearGrado: crearGrado()
+ListarGradosView ..> EditarGrado: editarGrado()
+ListarGradosView ..> EliminarGrado: eliminarGrado()
+ListarGradosView ..> ImportarGrados: importarGrados()
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.10+7-Ubuntu-125.10
+Operating System: Linux
+Default Encoding: UTF-8
+Language: es
+Country: ES
+--></g></svg>

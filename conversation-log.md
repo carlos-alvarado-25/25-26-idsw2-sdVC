@@ -71,6 +71,19 @@
 
 **Decisión:** Se adopta un enfoque MVC estricto con el patrón Repository para desacoplar la lógica de importación masiva de la interfaz y el modelo. Se prioriza la simplicidad inicial (uso de Strings para formatos) y la trazabilidad total con los estados de requisitos. Se centralizan los enlaces de detalle hacia el README principal de especificación para mantener la coherencia de la documentación.
 
+## [12:11] Sesión 3: Rama de Grados - Hub de Gestión (abrirGrados)
+
+**Prompt:** "Bueno, entonces iniciemos la sesión de hoy de vibecoding. Vamos ahora por el caso de uso que sigue en la rama de Grados. ... genera las decisiones que hemos tomado para ese caso de uso en el workspace externo por favor ... Porqué de ListarGradosView hay una salida a importarGrados ?"
+
+**Resultado:** 
+- Análisis completo del caso de uso **`abrirGrados()`**, estableciendo la rama funcional de la entidad "Grado".
+- Creación del diagrama de colaboración MVC y su documentación técnica en `RUP/01-analisis/casos-uso/abrirGrados/`.
+- Generación y organización del activo visual SVG, creando la nueva estructura de subdirectorios dentro de `/images/` para soportar organizadamente los diagramas de la fase de análisis (`/images/RUP/01-analisis/...`).
+- Actualización de los índices de la disciplina de Análisis.
+- Registro de las decisiones de diseño en el documento externo `Explicaciones de Diseño - Fase de Análisis.md`.
+
+**Decisión:** Se decide centralizar la gestión de la entidad en un único controlador (`GradoController`) y delegar la eficiencia de búsqueda al repositorio. Se establece la vista de listado como el punto de navegación natural hacia las operaciones dependientes (CRUD e Importación), respetando fielmente la topología del diagrama de contexto para mejorar la experiencia de usuario y la coherencia del sistema.
+
 ---
 
 > El log no se reescribe. Se escribe mientras ocurre.
