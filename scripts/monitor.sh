@@ -101,6 +101,12 @@ get_artifact_day_offset() {
 # --- Parsear dashboard existente como cache ---
 declare -A CACHE_SHA CACHE_ROW CACHE_DETAIL
 if [ -f "$DASHBOARD" ]; then
+FORMAT_TOKEN="monitor-format: v$(md5sum "$0" | cut -c1-8)"
+FORMAT_CACHED=$(grep -oP '(?<=<!-- )monitor-format: v[a-f0-9]+(?= -->)' "$DASHBOARD" 2>/dev/null || echo "")
+
+if [ "$FORMAT_CACHED" != "$FORMAT_TOKEN" ]; then
+    log "Formato de dashboard cambiado. Cache descartado."
+else
     log "Cargando cache desde $DASHBOARD..."
     while IFS= read -r line; do
         USER_MATCH=$(echo "$line" | grep -oP '\[([^\]]+)\]\(https://github\.com/[^\)]+/25-26-idsw2-sdVC\)' | head -1 | grep -oP '(?<=\[)[^\]]+(?=\])' || true)
@@ -113,33 +119,7 @@ if [ -f "$DASHBOARD" ]; then
     CACHE_COUNT=0
     for _k in "${!CACHE_SHA[@]}"; do CACHE_COUNT=$((CACHE_COUNT+1)); done 2>/dev/null || true
     log "Cache: $CACHE_COUNT alumnos cacheados."
-
-    CACHED_DETAILS=""
-    IN_DETAIL=0
-    CURRENT_DETAIL_USER=""
-    while IFS= read -r line; do
-        if echo "$line" | grep -qP '^### \['; then
-            CURRENT_DETAIL_USER=$(echo "$line" | grep -oP '(?<=\[)[^\]]+(?=\])' | head -1)
-            IN_DETAIL=1
-            CACHED_DETAILS=""
-            CACHED_DETAILS="${CACHED_DETAILS}${line}"$'\n'
-        elif [ "$IN_DETAIL" -eq 1 ]; then
-            if echo "$line" | grep -qP '^### \[' || echo "$line" | grep -qP '^---$'; then
-                if [ -n "$CURRENT_DETAIL_USER" ] && echo "$line" | grep -qP '^### \['; then
-                    CACHE_DETAIL["$CURRENT_DETAIL_USER"]="$CACHED_DETAILS"
-                    CURRENT_DETAIL_USER=$(echo "$line" | grep -oP '(?<=\[)[^\]]+(?=\])' | head -1)
-                    CACHED_DETAILS="${CACHED_DETAILS}${line}"$'\n'
-                else
-                    CACHED_DETAILS="${CACHED_DETAILS}${line}"$'\n'
-                fi
-            else
-                CACHED_DETAILS="${CACHED_DETAILS}${line}"$'\n'
-            fi
-        fi
-    done < "$DASHBOARD"
-    if [ -n "$CURRENT_DETAIL_USER" ]; then
-        CACHE_DETAIL["$CURRENT_DETAIL_USER"]="$CACHED_DETAILS"
-    fi
+fi
 fi
 
 # --- Obtener forks ---
@@ -154,12 +134,11 @@ fi
 N_FORKS=$(echo "$FORKS" | wc -l)
 log "Encontrados $N_FORKS forks."
 
-TABLE_ROWS=""
-DETAIL_SECTIONS=""
-ACTIVOS=0
-RECENT_DATA=""
-SKIPPED=0
-PROCESSED=0
+    TABLE_ROWS=""
+    ACTIVOS=0
+    RECENT_DATA=""
+    SKIPPED=0
+    PROCESSED=0
 
 for user in $FORKS; do
     REPO_URL="https://github.com/$user/25-26-idsw2-sdVC"
@@ -169,6 +148,8 @@ for user in $FORKS; do
     # Consulta ligera: solo el ultimo commit
     LATEST_SHA=$(gh api "repos/$user/25-26-idsw2-sdVC/commits?per_page=1" --jq '.[0].sha' 2>/dev/null || echo "")
     LATEST_SHORT=$(echo "$LATEST_SHA" | cut -c1-7)
+    LATEST_DATE_RAW=$(gh api "repos/$user/25-26-idsw2-sdVC/commits?per_page=1" --jq '.[0].commit.author.date' 2>/dev/null || echo "")
+    LATEST_DATE_EPOCH_CACHE=$(date -d "$LATEST_DATE_RAW" +%s 2>/dev/null || echo "0")
 
     # Cache hit: reutilizar fila y detalle
     if [ -n "$LATEST_SHORT" ] && [ "${CACHE_SHA[$user]:-}" = "$LATEST_SHORT" ]; then
@@ -176,12 +157,10 @@ for user in $FORKS; do
         CACHED_ROW="${CACHE_ROW[$user]:-}"
         if [ -n "$CACHED_ROW" ]; then
             TABLE_ROWS="${TABLE_ROWS}${CACHED_ROW}"$'\n'
-            DETAIL_SECTIONS="${DETAIL_SECTIONS}${CACHE_DETAIL[$user]:-}"
-            if echo "$CACHED_ROW" | grep -qP '>\d+ commits<'; then
+            if echo "$CACHED_ROW" | grep -qP '>\d+ commits?<'; then
                 ACTIVOS=$((ACTIVOS + 1))
             fi
-            LAST_DATE_EPOCH=$(echo "$CACHED_ROW" | grep -oP '\d{2}-\d{2}' | head -1 | xargs -I{} date -d "2026-{}" +%s 2>/dev/null || echo "0")
-            RECENT_DATA+="${LAST_DATE_EPOCH}|${user}|${REPO_URL}"$'\n'
+            RECENT_DATA+="${LATEST_DATE_EPOCH_CACHE}|${user}|${REPO_URL}"$'\n'
         fi
         SKIPPED=$((SKIPPED + 1))
         continue
@@ -195,6 +174,7 @@ for user in $FORKS; do
     TOTAL_C=$(echo "$COMMITS_JSON" | jq 'length' 2>/dev/null || echo "1")
     COMMITS=$((TOTAL_C - 1))
     LAST_DATE=$(echo "$COMMITS_JSON" | jq -r '.[0].commit.author.date | split("T")[0] | split("-") | .[2]+"-"+.[1]' 2>/dev/null || echo "N/A")
+    LAST_TIME=$(echo "$COMMITS_JSON" | jq -r '[.[0].commit.author.date | split("T")[1] | split(":")[0:2][] | tonumber] | ((.[0] + 2) % 24) as $h | (if $h < 10 then "0\($h)" else "\($h)" end) as $hs | (if .[1] < 10 then "0\(.[1])" else "\(.[1])" end) as $ms | "\($hs):\($ms)"' 2>/dev/null || echo "")
     LAST_MSG=$(echo "$COMMITS_JSON" | jq -r '.[0].commit.message | split("\n")[0]' 2>/dev/null || echo "N/A")
     LAST_SHA=$(echo "$COMMITS_JSON" | jq -r '.[0].sha' 2>/dev/null || echo "")
     LAST_SHORT=$(echo "$LAST_SHA" | cut -c1-7)
@@ -266,7 +246,7 @@ for user in $FORKS; do
     ALUMNO_LINK="<sub>[$user]($REPO_URL)<br>$COMMITS_LABEL</sub>"
 
     if [ "$COMMITS" -gt 0 ]; then
-        LAST_MSG_LINK="<sub>[$LAST_MSG]($REPO_URL/commit/$LAST_SHA)<br>$LAST_DATE</sub>"
+        LAST_MSG_LINK="<sub>[$LAST_MSG]($REPO_URL/commit/$LAST_SHA)<br>$LAST_DATE $LAST_TIME</sub>"
     else
         LAST_MSG_LINK="<sub>$LAST_MSG<br>$LAST_DATE</sub>"
     fi
@@ -281,21 +261,6 @@ for user in $FORKS; do
 
         LAST_DATE_EPOCH=$(date -d "$LAST_DATE" +%s 2>/dev/null || echo "0")
         RECENT_DATA+="${LAST_DATE_EPOCH}|${user}|${REPO_URL}"$'\n'
-
-        SECTION="### [$user]($REPO_URL) ($COMMITS commits · $UNIQUE_DAYS días activos · gap máx: ${MAX_GAP}d)"$'\n'
-        SECTION+=""$'\n'
-        SECTION+="| Fecha | Mensaje |"$'\n'
-        SECTION+="|---|---|"$'\n'
-        COMMITS_TABLE=$(echo "$COMMITS_JSON" | jq -r \
-            --arg marker "$INICIAL_MSG_MARKER" \
-            --arg repo_url "$REPO_URL" \
-            '.[] | select(.commit.message | test($marker) | not) |
-             "| \(.commit.author.date | split("T")[0] | split("-") | .[2]+"-"+.[1]) | [\(.commit.message | split("\n")[0])](" + $repo_url + "/commit/" + .sha + ") |"' \
-            2>/dev/null || true)
-        SECTION+="${COMMITS_TABLE}"$'\n'
-        SECTION+=""$'\n'
-
-        DETAIL_SECTIONS="${DETAIL_SECTIONS}${SECTION}"
     fi
 done
 
@@ -316,6 +281,7 @@ fi
 {
     INICIO_ACTIVIDAD="2026-05-20"
     DIAS_TOTALES=$(( ($(date +%s) - $(date -d "$INICIO_ACTIVIDAD" +%s)) / 86400 ))
+    echo "<!-- $FORMAT_TOKEN -->"
     echo "# Dashboard de seguimiento - 25-26-idsw2-sdVC"
     echo ""
     echo "> Inicio de actividad: $INICIO_ACTIVIDAD | Dashboard generado: $(date '+%Y-%m-%d %H:%M:%S %Z') | $DIAS_TOTALES días totales"
@@ -345,10 +311,6 @@ fi
     echo "- Forks totales: $N_FORKS"
     echo "- Alumnos con actividad (>0 commits propios): $ACTIVOS"
     echo "- Alumnos sin actividad: $((N_FORKS - ACTIVOS))"
-    echo ""
-    echo "## Detalle por alumno"
-    echo ""
-    printf '%s' "$DETAIL_SECTIONS"
 } > "$DASHBOARD"
 
 log "Dashboard generado: $DASHBOARD ($SKIPPED cacheados / $PROCESSED procesados)"
