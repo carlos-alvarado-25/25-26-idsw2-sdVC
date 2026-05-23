@@ -179,3 +179,15 @@
 4. `mkdir -p TIMELINES && OUTPUT="TIMELINES/${USER}.md"` para ubicación correcta del output
 
 **Script final:** `scripts/timeline.sh`, 248 líneas. Estructura principal: commits a JSON con conversión UTC+2 en campo `time`, parsing de conversation-log con 3 patrones de fecha via `grep -P`, `get_artifact_day()` por ruta de artefacto, render por día con correlación commit/log, tabla "Patrón observado" al final.
+
+---
+
+## [2026-05-23] Reflexión de optimización — dashboard como cache
+
+**Prompt:** Observación: el coste actual es ~27 forks × (1 commit list + 5 artifact checks + 3 file content checks) = ~243 llamadas API por ejecución. Propuesta: cachear SHA del último commit por fork en `.audit-cache` y reutilizar la fila si el SHA no cambia. En el caso típico (3-4 alumnos con push desde la última ejecución): de ~243 llamadas a ~60. Un 75% menos.
+
+**Resultado:** El AI validó la estrategia y señaló un problema técnico: la fila de tabla Markdown contiene `|`, por lo que usar `|` como separador de campos en el cache lo rompe. Alternativa recomendada: tabulador como separador. También se propuso incluir un hash del propio `monitor.sh` en la cabecera del cache para invalidarlo automáticamente cuando cambia el formato de la tabla.
+
+Evolución del diseño: el usuario propuso eliminar `.audit-cache` por completo y usar el propio `DASHBOARD.md` como cache — parsear el dashboard existente para extraer `usuario → SHA`, comparar con una llamada ligera (`commits?per_page=1`) por fork, y reutilizar la fila si coincide.
+
+**Decisión:** El dashboard como su propio cache. Ventajas: sin ficheros extra, auto-documentado, regeneración completa al borrar el dashboard, sin estado fantasma. Se añadirá el SHA corto (7 caracteres) como columna al final de la tabla para que el parser pueda extraerlo sin ambigüedad. Validación mínima antes de reutilizar: que el SHA extraído tenga exactamente 7 caracteres hex. Pendiente de implementar.
