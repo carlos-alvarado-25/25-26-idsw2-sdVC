@@ -1,7 +1,7 @@
 <!-- monitor-format: v37d5d9cd -->
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-23 13:43:10 CEST | 3 días totales
+> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-23 14:24:31 CEST | 3 días totales
 
 ## Leyenda
 
@@ -15,7 +15,7 @@
 
 ## Tabla
 
-<sub>Ultimas actualizaciones: [carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC), [Alejandrojuarez0105](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC), [franvenero](https://github.com/franvenero/25-26-idsw2-sdVC), [martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC), [SdeCos](https://github.com/SdeCos/25-26-idsw2-sdVC)</sub>
+<sub>Ultimas actualizaciones: [Pareyor](https://github.com/Pareyor/25-26-idsw2-sdVC), [carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC), [Alejandrojuarez0105](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC), [franvenero](https://github.com/franvenero/25-26-idsw2-sdVC), [martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC)</sub>
 
 | Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | 📐 | 🔍 | 🧩 | ⚙️ | 🔌 | SHA |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -37,7 +37,7 @@
 | <sub>[inigovaqueroo04](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[feat: QUE_HACE](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/54902be9450fc6d64fe30d7eb4b8d20d0b446319)<br>21-05 13:05</sub> | 1 | :red_circle: | [💡](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - | <sub>54902be</sub> |
 | <sub>[xImRaul](https://github.com/xImRaul/25-26-idsw2-sdVC)<br>2 commits</sub> | <sub>[feat: configuración inicial para dar contexto al trabajo](https://github.com/xImRaul/25-26-idsw2-sdVC/commit/058429dc84b229328928ff17ada66fe7b7f7cafb)<br>21-05 20:43</sub> | 1 | :yellow_circle: | [💡](https://github.com/xImRaul/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - | <sub>058429d</sub> |
 | <sub>[31Diego](https://github.com/31Diego/25-26-idsw2-sdVC)<br>3 commits</sub> | <sub>[feat: análisis de abrirConvocatorias y corrección de estructura de carpetas](https://github.com/31Diego/25-26-idsw2-sdVC/commit/5dcc693f105aa41de1f884d7934c3780c7b38dfa)<br>22-05 22:44</sub> | 2 | :green_circle: | [💡](https://github.com/31Diego/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | [📐](https://github.com/31Diego/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+3d</sub> | - | - | - | - | <sub>5dcc693</sub> |
-| <sub>[Pareyor](https://github.com/Pareyor/25-26-idsw2-sdVC)<br>9 commits</sub> | <sub>[feat: actualiza conversation-log.md con la última sesión conversada con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/f1d5f3bb8bb9f59283619c9e24857e8e20e1d630)<br>22-05 18:14</sub> | 3 | :green_circle: | [💡](https://github.com/Pareyor/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/Pareyor/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+1d</sub> | - | [📐](https://github.com/Pareyor/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+2d</sub> | - | - | - | - | <sub>f1d5f3b</sub> |
+| <sub>[Pareyor](https://github.com/Pareyor/25-26-idsw2-sdVC)<br>12 commits</sub> | <sub>[fix: corrige nombre en apartado proyecto.](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/32b53bd451ec0c067811f1da86d77f89cb79f5c9)<br>23-05 14:15</sub> | 4 | :green_circle: | [💡](https://github.com/Pareyor/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/Pareyor/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+1d</sub> | - | [📐](https://github.com/Pareyor/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+2d</sub> | - | - | - | - | <sub>32b53bd</sub> |
 | <sub>[liamanderson873](https://github.com/liamanderson873/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | :red_circle: | - | - | - | - | - | - | - | - | <sub>9ff5cbe</sub> |
 | <sub>[jerdier](https://github.com/jerdier/25-26-idsw2-sdVC)<br>5 commits</sub> | <sub>[Merge branch 'main' of https://github.com/jerdier/25-26-idsw2-sdVC](https://github.com/jerdier/25-26-idsw2-sdVC/commit/252e1e0664ecf7039e419b0ff0573c7ce7ccad48)<br>22-05 17:54</sub> | 2 | :yellow_circle: | [💡](https://github.com/jerdier/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/jerdier/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+3d</sub> | - | - | - | - | - | [🔌](https://github.com/jerdier/25-26-idsw2-sdVC/blob/main/src)<br><sub>+3d</sub> | <sub>252e1e0</sub> |
 | <sub>[jaimelinares6](https://github.com/jaimelinares6/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | :red_circle: | - | - | - | - | - | - | - | - | <sub>9ff5cbe</sub> |
