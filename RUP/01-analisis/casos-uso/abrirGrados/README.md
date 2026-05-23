@@ -1,6 +1,6 @@
 # IdSw 2 > abrirGrados > Análisis
 
-> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitado/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -20,9 +20,9 @@ Análisis de colaboración del caso de uso `abrirGrados()` mediante el patrón M
 
 <div align=center>
 
-|![Análisis: abrirGrados()](/images/RUP/01-analisis/casos-uso/abrirGrados/abrirGrados-analisis.svg)|
+|![Análisis: abrirGrados()](/images/01-analisis/casos-uso/abrirGrados/abrirGrados-analisis.svg)|
 |-|
-|Código fuente: [colaboracion.puml](colaboracion.puml)|
+|Código fuente: [colaboracion.puml](/modelosUML/01-analisis/casos-uso/abrirGrados/colaboracion.puml)|
 
 </div>
 
@@ -119,5 +119,5 @@ Asegura que la presentación de la lista sea independiente de cómo se recuperan
 
 ## referencias
 
-- [Especificación detallada: Detalle de Casos de Uso](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
-- [Diagrama de contexto - Administrador](/RUP/00-requisitado/01-casos-de-uso/2-DiagramaDeContexto/README.md)
+- [Especificación detallada: Detalle de Casos de Uso](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
+- [Diagrama de contexto - Administrador](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)

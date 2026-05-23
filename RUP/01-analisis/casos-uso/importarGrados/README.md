@@ -1,6 +1,6 @@
 # IdSw 2 > importarGrados > Análisis
 
-> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitado/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -20,9 +20,9 @@ Análisis de colaboración del caso de uso `importarGrados()` mediante el patró
 
 <div align=center>
 
-|![Análisis: importarGrados()](/images/RUP/01-analisis/casos-uso/importarGrados/importarGrados-analisis.svg)|
+|![Análisis: importarGrados()](/images/01-analisis/casos-uso/importarGrados/importarGrados-analisis.svg)|
 |-|
-|Código fuente: [colaboracion.puml](colaboracion.puml)|
+|Código fuente: [colaboracion.puml](/modelosUML/01-analisis/casos-uso/importarGrados/colaboracion.puml)|
 
 </div>
 
@@ -130,5 +130,5 @@ Desacoplamiento total entre la UI de importación y el almacenamiento de datos.
 
 ## referencias
 
-- [Especificación detallada: Detalle de Casos de Uso](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
-- [Diagrama de contexto - Administrador](/RUP/00-requisitado/01-casos-de-uso/2-DiagramaDeContexto/README.md)
+- [Especificación detallada: Detalle de Casos de Uso](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
+- [Diagrama de contexto - Administrador](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)

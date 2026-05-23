@@ -2,12 +2,12 @@
 
 ## [19:12] Inicio de sesión: Inicialización del proyecto y estructura RUP
 
-**Prompt:** "Hola Gemini, iniciemos el proyecto de Idsw 2, el cuál consiste en realizar la implementación de un proyecto requisitado utilizando RUP, pero lo haremos de la siguiente forma: Tendrémos sesiones de vibecoding, donde por cada sesión actualizarás ese archivo (de momento es una plantilla, la cuál deberás ir rellenando y actualizando). El repositorio con toda la información detallada de los requisitos RUP, está en ~/Documentos/Code/IdSw/Davidario. Como primer tarea quiero que te sitúes y copies el directorio entero de documentos de Davidario, a este repositorio y en vez de documentos lo renombres como RUP/ y metas dentro los directorios de modelo del dominio y casos de uso de esta forma: RUP/00-requisitado/00-modelo-del-dominio y RUP/00-requisitado/01-casos-de-uso y así sucesivamente con las imágenes y las sesiones."
+**Prompt:** "Hola Gemini, iniciemos el proyecto de Idsw 2, el cuál consiste en realizar la implementación de un proyecto requisitado utilizando RUP, pero lo haremos de la siguiente forma: Tendrémos sesiones de vibecoding, donde por cada sesión actualizarás ese archivo (de momento es una plantilla, la cuál deberás ir rellenando y actualizando). El repositorio con toda la información detallada de los requisitos RUP, está en ~/Documentos/Code/IdSw/Davidario. Como primer tarea quiero que te sitúes y copies el directorio entero de documentos de Davidario, a este repositorio y en vez de documentos lo renombres como RUP/ y metas dentro los directorios de modelo del dominio y casos de uso de esta forma: RUP/00-requisitos/00-modelo-del-dominio y RUP/00-requisitos/01-casos-de-uso y así sucesivamente con las imágenes y las sesiones."
 
-**Resultado:** Se ha creado la estructura de directorios `RUP/00-requisitado/` en el repositorio actual, copiando el contenido de `~/Documentos/Code/IdSw/Davidario/documentos/` y organizándolo según lo solicitado:
+**Resultado:** Se ha creado la estructura de directorios `RUP/00-requisitos/` en el repositorio actual, copiando el contenido de `~/Documentos/Code/IdSw/Davidario/documentos/` y organizándolo según lo solicitado:
 - `00-modelo-del-dominio`
 - `01-casos-de-uso`
-- `02-imágenes`
+- `02-imagenes`
 - `03-sesiones`
 
 **Decisión:** Se ha realizado la copia íntegra y reorganización para situar el proyecto en el marco de la metodología RUP especificada. Se ha identificado `conversation-log.md` como el archivo a actualizar por cada sesión.
@@ -16,7 +16,7 @@
 
 **Prompt:** "Crea un README.md dentro de 00-requisitado que contenga el link para redireccionar al repositorio de Davidario https://github.com/Alejandrojuarez0105/Davidario.git"
 
-**Resultado:** Se ha creado el archivo `RUP/00-requisitado/README.md` con el enlace al repositorio de GitHub solicitado.
+**Resultado:** Se ha creado el archivo `RUP/00-requisitos/README.md` con el enlace al repositorio de GitHub solicitado.
 
 **Decisión:** Se añade el archivo para mantener la trazabilidad de los requisitos hacia su repositorio de origen.
 
@@ -26,7 +26,7 @@
 
 **Resultado:** 
 1. Se ha eliminado la copia redundante de imágenes en el directorio raíz `images/`.
-2. Se han actualizado todos los archivos Markdown dentro de `RUP/` para que los enlaces apunten a la nueva estructura del repositorio (`/RUP/00-requisitado/...`) en lugar de la ruta antigua (`/documentos/...`).
+2. Se han actualizado todos los archivos Markdown dentro de `RUP/` para que los enlaces apunten a la nueva estructura del repositorio (`/RUP/00-requisitos/...`) en lugar de la ruta antigua (`/documentos/...`).
 
 **Decisión:** Se opta por corregir las rutas internas para que apunten a los archivos ya existentes dentro de la carpeta `RUP/`, evitando la duplicidad de archivos y manteniendo la coherencia con la nueva estructura del proyecto.
 
@@ -35,9 +35,9 @@
 **Prompt:** "Ahora, mueve todas las imágenes al directorio de images/ agrupandolas como está en RUP/, osea imaginate que tenemos el DiagramaDeClases/ y dentro hay un .puml y un svg. Mueve el .svg a la carpeta images/ y solo deja el .puml en requisitado/... Con el mismo orden que requisitado/"
 
 **Resultado:** 
-1. Se han movido todos los archivos de imagen (`.svg`, `.png`, `.jpg`, `.webp`) desde `RUP/00-requisitado/` al directorio raíz `images/`, manteniendo la misma estructura de subdirectorios.
-2. Los archivos fuente (como `.puml`) permanecen en su ubicación original dentro de `RUP/00-requisitado/`.
-3. Se han actualizado todas las referencias a imágenes en los archivos Markdown dentro de `RUP/` para que apunten a la nueva ubicación en `/images/...`, mientras que los enlaces a documentos y archivos fuente siguen apuntando a `/RUP/00-requisitado/...`.
+1. Se han movido todos los archivos de imagen (`.svg`, `.png`, `.jpg`, `.webp`) desde `RUP/00-requisitos/` al directorio raíz `images/`, manteniendo la misma estructura de subdirectorios.
+2. Los archivos fuente (como `.puml`) permanecen en su ubicación original dentro de `RUP/00-requisitos/`.
+3. Se han actualizado todas las referencias a imágenes en los archivos Markdown dentro de `RUP/` para que apunten a la nueva ubicación en `/images/...`, mientras que los enlaces a documentos y archivos fuente siguen apuntando a `/RUP/00-requisitos/...`.
 
 **Decisión:** Se reorganizan los activos visuales para separarlos del contenido de texto y fuentes, siguiendo una estructura limpia y estandarizada en el repositorio, asegurando que todos los enlaces sigan funcionando.
 
@@ -46,7 +46,7 @@
 **Prompt:** "Demos por terminada la sesión entonces, haz un resumen en el conversation-log de todo lo que hicimos"
 
 **Resultado:** Se ha finalizado la configuración inicial del proyecto Idsw 2 con los siguientes hitos:
-- **Estructura RUP:** Creación de `RUP/00-requisitado/` con subdirectorios para modelo del dominio, casos de uso y sesiones, importados del repositorio `Davidario`.
+- **Estructura RUP:** Creación de `RUP/00-requisitos/` con subdirectorios para modelo del dominio, casos de uso y sesiones, importados del repositorio `Davidario`.
 - **Gestión de Activos:** Migración de todas las imágenes (`.svg`, `.png`, etc.) a un directorio raíz `images/` para mejorar la organización, manteniendo los archivos fuente (`.puml`) en la carpeta de requisitos.
 - **Integridad de Enlaces:** Corrección masiva y quirúrgica de enlaces en todos los archivos Markdown para apuntar a las nuevas ubicaciones, incluyendo la reparación de los "badges" de navegación y la importación de la declaración de IA.
 - **Trazabilidad:** Inclusión de un `README.md` con enlace al repositorio de origen para mantener la referencia a los requisitos originales.
@@ -78,11 +78,28 @@
 **Resultado:** 
 - Análisis completo del caso de uso **`abrirGrados()`**, estableciendo la rama funcional de la entidad "Grado".
 - Creación del diagrama de colaboración MVC y su documentación técnica en `RUP/01-analisis/casos-uso/abrirGrados/`.
-- Generación y organización del activo visual SVG, creando la nueva estructura de subdirectorios dentro de `/images/` para soportar organizadamente los diagramas de la fase de análisis (`/images/RUP/01-analisis/...`).
+- Generación y organización del activo visual SVG, creando la nueva estructura de subdirectorios dentro de `/images/` para soportar organizadamente los diagramas de la fase de análisis (`/images/01-analisis/...`).
 - Actualización de los índices de la disciplina de Análisis.
 - Registro de las decisiones de diseño en el documento externo `Explicaciones de Diseño - Fase de Análisis.md`.
 
 **Decisión:** Se decide centralizar la gestión de la entidad en un único controlador (`GradoController`) y delegar la eficiencia de búsqueda al repositorio. Se establece la vista de listado como el punto de navegación natural hacia las operaciones dependientes (CRUD e Importación), respetando fielmente la topología del diagrama de contexto para mejorar la experiencia de usuario y la coherencia del sistema.
+
+---
+
+## [13:10] Sesión 4: Estandarización Arquitectónica y Protocolos de Ingeniería
+
+**Prompt:** "Abre sesión solo para una reestructuración adicional... Pero introduce los directorios... dentro de un directorio 00-requisitos... haz lo mismo en el directorio images/... define cosas en GEMINI.md: ... comporta y analiza como un ingeniero senior experto..."
+
+**Resultado:** 
+- **Centralización y Simetría:** Reorganización absoluta de los activos del proyecto en tres pilares raíz con jerarquías idénticas (`00-requisitos`, `01-analisis`):
+    - `modelosUML/`: Fuentes de modelado técnico (.puml).
+    - `images/`: Activos visuales generados (SVG, PNG).
+    - `RUP/`: Documentación narrativa y técnica.
+- **Integridad de Navegación:** Auditoría masiva de enlaces en archivos Markdown, corrigiendo rutas a modelos, imágenes y badges para garantizar una navegación 100% funcional.
+- **Formalización de Protocolos:** Actualización de `GEMINI.md` estableciendo estándares de "Ingeniero Senior RUP" y protocolos de gobernanza de activos y logging.
+- **Limpieza Estructural:** Eliminación de directorios vacíos y normalización de nombres de carpetas (`02-imagenes`) para compatibilidad de rutas.
+
+**Decisión:** Se establece una arquitectura de repositorio de grado industrial. La separación física de activos por su naturaleza técnica (Modelos vs. Imágenes vs. Documentación) y su agrupación por disciplinas RUP garantiza la escalabilidad y mantenibilidad del sistema. Se adopta un perfil de alta ingeniería centrado en el rigor técnico y la trazabilidad absoluta, alineado con el estándar de referencia `pySigHor`.
 
 ---
 

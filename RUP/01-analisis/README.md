@@ -39,5 +39,5 @@ Análisis completo de cada caso de uso especificado mediante:
 
 ## Referencias
 
-- [Casos de uso especificados](/RUP/00-requisitado/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
+- [Casos de uso especificados](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
 - [Log de conversaciones](/conversation-log.md)
