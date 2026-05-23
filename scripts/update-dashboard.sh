@@ -3,9 +3,9 @@ set -euo pipefail
 
 REPO_DIR="$(git rev-parse --show-toplevel)"
 BRANCH="AUDIT"
-CURRENT=$(git -C "$REPO_DIR" branch --show-current)
+ORIGINAL=$(git -C "$REPO_DIR" branch --show-current)
 
-if [ "$CURRENT" != "$BRANCH" ]; then
+if [ "$ORIGINAL" != "$BRANCH" ]; then
     git -C "$REPO_DIR" checkout "$BRANCH" -q
 fi
 
@@ -15,6 +15,8 @@ git -C "$REPO_DIR" add DASHBOARD.md
 git -C "$REPO_DIR" commit -m "audit: actualizacion $(date +%Y-%m-%d)" -q
 git -C "$REPO_DIR" push -q
 
-git -C "$REPO_DIR" checkout main -q 2>/dev/null || true
+if [ "$ORIGINAL" != "$BRANCH" ]; then
+    git -C "$REPO_DIR" checkout "$ORIGINAL" -q 2>/dev/null || true
+fi
 
 echo "Dashboard actualizado y pusheado."

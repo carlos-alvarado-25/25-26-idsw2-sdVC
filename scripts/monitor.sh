@@ -168,7 +168,7 @@ for user in $FORKS; do
     fi
 
     if [ "$CONVLOG_STATUS" = "relleno" ]; then
-        CL_COL="[💬]($CONVLOG_URL)<br>$CL_T_OFFSET"
+        CL_COL="[💬]($CONVLOG_URL)<br><sub>$CL_T_OFFSET</sub>"
     else
         CL_COL="-"
     fi
@@ -178,6 +178,21 @@ for user in $FORKS; do
     else
         README_COL="-"
     fi
+
+    make_artifact_col() {
+        local emoji="$1" path="$2" offset="$3"
+        if [ "$offset" = "-" ]; then
+            echo "-"
+        else
+            echo "[$emoji]($REPO_URL/blob/main/$path)<br><sub>$offset</sub>"
+        fi
+    }
+
+    SRC_COL=$(make_artifact_col "🔌" "src" "$SRC_OFFSET")
+    UML_COL=$(make_artifact_col "📐" "modelosUML" "$UML_OFFSET")
+    R01_COL=$(make_artifact_col "🔍" "RUP/01-analisis" "$R01_OFFSET")
+    R02_COL=$(make_artifact_col "🧩" "RUP/02-diseño" "$R02_OFFSET")
+    R03_COL=$(make_artifact_col "⚙️" "RUP/03-desarrollo" "$R03_OFFSET")
 
     if [ "$COMMITS" -eq 1 ]; then
         COMMITS_LABEL="1 commit"
@@ -192,7 +207,7 @@ for user in $FORKS; do
         LAST_MSG_LINK="<sub>$LAST_MSG<br>$LAST_DATE</sub>"
     fi
 
-    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $UNIQUE_DAYS | $GAP_DISPLAY | $QH_COL | $CL_COL | $README_COL | $SRC_OFFSET | $UML_OFFSET | $R01_OFFSET | $R02_OFFSET | $R03_OFFSET |"
+    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $UNIQUE_DAYS | $GAP_DISPLAY | $QH_COL | $CL_COL | $README_COL | $UML_COL | $R01_COL | $R02_COL | $R03_COL | $SRC_COL |"
     TABLE_ROWS="${TABLE_ROWS}${ROW}"$'\n'
 
     if [ "$COMMITS" -gt 0 ]; then
@@ -233,26 +248,21 @@ if [ -n "$RECENT_DATA" ]; then
 fi
 
 {
+    INICIO_ACTIVIDAD="2026-05-20"
+    DIAS_TOTALES=$(( ($(date +%s) - $(date -d "$INICIO_ACTIVIDAD" +%s)) / 86400 ))
     echo "# Dashboard de seguimiento - 25-26-idsw2-sdVC"
     echo ""
-    echo "> Generado: $(date '+%Y-%m-%d %H:%M:%S %Z')"
+    echo "> Inicio de actividad: $INICIO_ACTIVIDAD | Dashboard generado: $(date '+%Y-%m-%d %H:%M:%S %Z') | $DIAS_TOTALES días totales"
     echo ""
     echo "## Leyenda"
     echo ""
-    echo "| Columna | Significado |"
-    echo "|---|---|"
-    echo "| Alumno | Nombre y número de commits propios (excluye el commit inicial) |"
-    echo "| Último commit | Mensaje del último commit (enlaza al commit) y fecha (DD-MM) |"
-    echo "| Días | Días únicos con actividad propia |"
-    echo "| Gap | :green_circle: trabajó hoy o ayer | :yellow_circle: 2-3 días sin actividad | :red_circle: más de 3 días sin tocar el repo |"
-    echo "| 💡 | QUE\\_HACE.md relleno — enlaza al fichero |"
-    echo "| 💬 | conversation-log.md relleno — enlaza al fichero; segunda línea: días desde el commit inicial hasta la primera edición |"
-    echo "| 📄 | README.md reescrito — enlaza al fichero |"
-    echo "| /src | Offset en días desde el commit inicial cuando apareció \`src/\` |"
-    echo "| UML | Offset cuando apareció \`modelosUML/\` |"
-    echo "| A | Offset cuando apareció \`RUP/01-analisis/\` |"
-    echo "| D | Offset cuando apareció \`RUP/02-diseño/\` |"
-    echo "| Dev | Offset cuando apareció \`RUP/03-desarrollo/\` |"
+    echo "| Columna | Significado | Columna | Significado |"
+    echo "|---|---|---|---|"
+    echo "| Días | <sub>Días únicos con actividad propia</sub> | Gap | <sub>:green_circle: hoy/ayer :yellow_circle: 2-3d :red_circle: >3d</sub> |"
+    echo "| 💡 | <sub>QUE\\_HACE.md relleno</sub> | 💬 | <sub>conversation-log.md relleno</sub> |"
+    echo "| 📄 | <sub>README.md reescrito</sub> | 📐 | <sub>Día en que apareció \`modelosUML/\`</sub> |"
+    echo "| 🔍 | <sub>Día en que apareció \`RUP/01-analisis/\`</sub> | 🧩 | <sub>Día en que apareció \`RUP/02-diseño/\`</sub> |"
+    echo "| ⚙️ | <sub>Día en que apareció \`RUP/03-desarrollo/\`</sub> | 🔌 | <sub>Día en que apareció \`src/\`</sub> |"
     echo ""
     echo "## Tabla"
     echo ""
@@ -260,8 +270,8 @@ fi
         echo "<sub>Ultimas actualizaciones: $RECENT_LINE</sub>"
         echo ""
     fi
-    echo "| Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | /src | UML | A | D | Dev |"
-    echo "|---|---|---|---|---|---|---|---|---|---|---|---|"
+    echo "| Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | 📐 | 🔍 | 🧩 | ⚙️ | 🔌 |"
+    echo "|---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|"
     printf '%s' "$TABLE_ROWS"
     echo ""
     echo "## Resumen"

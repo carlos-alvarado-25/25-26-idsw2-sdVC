@@ -113,3 +113,69 @@
 **Resultado:** El commit `docs(audit): conversation-log...` apareció en `main` en lugar de `AUDIT`. El usuario señaló la causa: habíamos empezado a construir el log mientras el script de audit todavía se estaba ejecutando, y su último paso es `git checkout main`. El Write tool escribió el fichero con la rama ya en `main`, y el commit siguiente fue allí.
 
 **Decisión:** Corregido con cherry-pick a `AUDIT` y `reset --hard` en `main`. El fichero nunca llegó a pushearse a `origin/main`, por lo que el reset fue seguro. La lección: no construir nada en AUDIT mientras se ejecuta `git audit` — el script vuelve a main al terminar.
+
+---
+
+# Conversation log — rama AUDIT
+
+> Sesión: 2026-05-22
+> Herramienta: Claude Code (claude-sonnet-4-6)
+> Contexto: revisión del estado de AUDIT, análisis forense de Pareyor, ajustes de dashboard
+
+---
+
+## [2026-05-22] Revisión de cambios en AUDIT desde la sesión anterior
+
+**Prompt:** "repasa el audit porque lo hemos cambiado"
+
+**Resultado:** El AI exploró los commits recientes en AUDIT y encontró tres cambios aplicados desde la sesión del 21:
+- Gap pasó de columna numérica a semáforo (🟢 <2d, 🟡 2-3d, 🔴 ≥3d)
+- Celdas de artefacto ahora tienen enlace: `[🔌](url)<br><sub>+2d</sub>` en lugar de texto plano
+- Cabeceras de columnas de artefactos cambiadas a emojis puros (antes: `/src | UML | A | D | Dev`)
+
+**Decisión:** Aceptado. El AI internalizó el nuevo estado como punto de partida para la sesión.
+
+---
+
+# Conversation log — rama AUDIT
+
+> Sesión: 2026-05-23
+> Herramienta: Claude Code (claude-sonnet-4-6)
+> Contexto: nuevo formato de dashboard, diseño e implementación de timeline.sh via OpenCode
+
+---
+
+## [2026-05-23] Revisión del nuevo dashboard (formato 2026-05-23)
+
+**Prompt:** "Hemos hecho ajustes al reporte y hay un reporte nuevo. Miralo y comentamos!"
+
+**Resultado:** El AI revisó el DASHBOARD.md actualizado. 18 alumnos activos. Hallazgos destacados:
+- El semáforo de gap funciona visualmente como herramienta de screening rápido
+
+---
+
+## [2026-05-23] Concepto de timeline por alumno (origen: conversación con Z.AI)
+
+**Prompt:** El usuario pegó un extracto de conversación con Z.AI donde proponía un "timeline" que correlacionara entradas del conversation-log con commits del día correspondiente.
+
+**Resultado:** El AI valoró el concepto y planteó la decisión de diseño central: correlación por día (robusto, forgiving con desfases de minutos entre log y commit) vs. correlación por minuto (frágil, falsos negativos). Se eligió correlación diaria. Las métricas forenses útiles: días con commits pero sin log, días con log pero sin commits.
+
+**Decisión:** Correlación diaria. Artefactos rastreados: `src/`, `modelosUML/`, `RUP/01-analisis`, `RUP/02-diseño`, `RUP/03-desarrollo`.
+
+---
+
+## [2026-05-23] Delegación a OpenCode — implementación de timeline.sh
+
+**Prompt:** "pideselo a opencode y que trabaje de fondo"
+
+**Resultado:** Se lanzaron dos instancias de OpenCode:
+- **Background** (`job_id: 0d42c424c115`): produjo `output.md` vacío. Cancelado al final de la sesión.
+- **Terminal** (interactivo): produjo una primera versión funcional y detectó de forma autónoma tres bugs antes de que el usuario los reportara: directorio `/tmp/opencode/` asumido como existente, commits serializados en pipe-delimitado que se rompía con saltos de línea en mensajes, orden cronológico invertido.
+
+**Bugs corregidos por OpenCode terminal:**
+1. `TMPDIR=$(mktemp -d)` + `trap "rm -rf $TMPDIR" EXIT` en lugar de asumir `/tmp/opencode/`
+2. Commits guardados como JSON (`$TMPDIR/commits.json`) y consultados con `jq` durante el render, eliminando la serialización pipe-delimitada
+3. `sort -u` en lugar de `sort -u -r` para orden cronológico ascendente
+4. `mkdir -p TIMELINES && OUTPUT="TIMELINES/${USER}.md"` para ubicación correcta del output
+
+**Script final:** `scripts/timeline.sh`, 248 líneas. Estructura principal: commits a JSON con conversión UTC+2 en campo `time`, parsing de conversation-log con 3 patrones de fecha via `grep -P`, `get_artifact_day()` por ruta de artefacto, render por día con correlación commit/log, tabla "Patrón observado" al final.
