@@ -34,7 +34,6 @@ check_readme_rewritten() {
     fi
 }
 
-# Max gap en días entre sesiones consecutivas, incluyendo brecha hasta hoy
 compute_max_gap() {
     local commits_json="$1" total_commits="$2"
     local dates
@@ -77,8 +76,6 @@ compute_max_gap() {
     echo "$max_gap"
 }
 
-# Offset en días desde el inicial hasta la primera aparición del artefacto.
-# Para ficheros presentes en el inicial (ej: conversation-log.md), excluye el commit inicial.
 get_artifact_day_offset() {
     local user="$1" path="$2" inicial_epoch="$3" inicial_sha="$4"
     local encoded_path
@@ -101,6 +98,51 @@ get_artifact_day_offset() {
     echo "+${offset}d"
 }
 
+# --- Parsear dashboard existente como cache ---
+declare -A CACHE_SHA CACHE_ROW CACHE_DETAIL
+if [ -f "$DASHBOARD" ]; then
+    log "Cargando cache desde $DASHBOARD..."
+    while IFS= read -r line; do
+        USER_MATCH=$(echo "$line" | grep -oP '\[([^\]]+)\]\(https://github\.com/[^\)]+/25-26-idsw2-sdVC\)' | head -1 | grep -oP '(?<=\[)[^\]]+(?=\])' || true)
+        SHA_MATCH=$(echo "$line" | grep -oP '<sub>[a-f0-9]{7}</sub>\s*\|$' | grep -oP '[a-f0-9]{7}' || true)
+        if [ -n "$USER_MATCH" ] && [ -n "$SHA_MATCH" ]; then
+            CACHE_SHA["$USER_MATCH"]="$SHA_MATCH"
+            CACHE_ROW["$USER_MATCH"]="$line"
+        fi
+    done < "$DASHBOARD"
+    CACHE_COUNT=0
+    for _k in "${!CACHE_SHA[@]}"; do CACHE_COUNT=$((CACHE_COUNT+1)); done 2>/dev/null || true
+    log "Cache: $CACHE_COUNT alumnos cacheados."
+
+    CACHED_DETAILS=""
+    IN_DETAIL=0
+    CURRENT_DETAIL_USER=""
+    while IFS= read -r line; do
+        if echo "$line" | grep -qP '^### \['; then
+            CURRENT_DETAIL_USER=$(echo "$line" | grep -oP '(?<=\[)[^\]]+(?=\])' | head -1)
+            IN_DETAIL=1
+            CACHED_DETAILS=""
+            CACHED_DETAILS="${CACHED_DETAILS}${line}"$'\n'
+        elif [ "$IN_DETAIL" -eq 1 ]; then
+            if echo "$line" | grep -qP '^### \[' || echo "$line" | grep -qP '^---$'; then
+                if [ -n "$CURRENT_DETAIL_USER" ] && echo "$line" | grep -qP '^### \['; then
+                    CACHE_DETAIL["$CURRENT_DETAIL_USER"]="$CACHED_DETAILS"
+                    CURRENT_DETAIL_USER=$(echo "$line" | grep -oP '(?<=\[)[^\]]+(?=\])' | head -1)
+                    CACHED_DETAILS="${CACHED_DETAILS}${line}"$'\n'
+                else
+                    CACHED_DETAILS="${CACHED_DETAILS}${line}"$'\n'
+                fi
+            else
+                CACHED_DETAILS="${CACHED_DETAILS}${line}"$'\n'
+            fi
+        fi
+    done < "$DASHBOARD"
+    if [ -n "$CURRENT_DETAIL_USER" ]; then
+        CACHE_DETAIL["$CURRENT_DETAIL_USER"]="$CACHED_DETAILS"
+    fi
+fi
+
+# --- Obtener forks ---
 log "Obteniendo lista de forks..."
 FORKS=$(gh api "repos/$REPO/forks" --jq '.[].owner.login' 2>/dev/null)
 
@@ -116,15 +158,38 @@ TABLE_ROWS=""
 DETAIL_SECTIONS=""
 ACTIVOS=0
 RECENT_DATA=""
+SKIPPED=0
+PROCESSED=0
 
 for user in $FORKS; do
-    log "Procesando $user..."
-
     REPO_URL="https://github.com/$user/25-26-idsw2-sdVC"
     QUE_HACE_URL="$REPO_URL/blob/main/QUE_HACE.md"
     CONVLOG_URL="$REPO_URL/blob/main/conversation-log.md"
 
-    # Una sola llamada a la API para todos los commits
+    # Consulta ligera: solo el ultimo commit
+    LATEST_SHA=$(gh api "repos/$user/25-26-idsw2-sdVC/commits?per_page=1" --jq '.[0].sha' 2>/dev/null || echo "")
+    LATEST_SHORT=$(echo "$LATEST_SHA" | cut -c1-7)
+
+    # Cache hit: reutilizar fila y detalle
+    if [ -n "$LATEST_SHORT" ] && [ "${CACHE_SHA[$user]:-}" = "$LATEST_SHORT" ]; then
+        log "$user: sin cambios (cache hit)"
+        CACHED_ROW="${CACHE_ROW[$user]:-}"
+        if [ -n "$CACHED_ROW" ]; then
+            TABLE_ROWS="${TABLE_ROWS}${CACHED_ROW}"$'\n'
+            DETAIL_SECTIONS="${DETAIL_SECTIONS}${CACHE_DETAIL[$user]:-}"
+            if echo "$CACHED_ROW" | grep -qP '>\d+ commits<'; then
+                ACTIVOS=$((ACTIVOS + 1))
+            fi
+            LAST_DATE_EPOCH=$(echo "$CACHED_ROW" | grep -oP '\d{2}-\d{2}' | head -1 | xargs -I{} date -d "2026-{}" +%s 2>/dev/null || echo "0")
+            RECENT_DATA+="${LAST_DATE_EPOCH}|${user}|${REPO_URL}"$'\n'
+        fi
+        SKIPPED=$((SKIPPED + 1))
+        continue
+    fi
+
+    log "Procesando $user (nuevo o cambiado)..."
+    PROCESSED=$((PROCESSED + 1))
+
     COMMITS_JSON=$(gh api "repos/$user/25-26-idsw2-sdVC/commits?per_page=100" 2>/dev/null || echo "[]")
 
     TOTAL_C=$(echo "$COMMITS_JSON" | jq 'length' 2>/dev/null || echo "1")
@@ -132,12 +197,12 @@ for user in $FORKS; do
     LAST_DATE=$(echo "$COMMITS_JSON" | jq -r '.[0].commit.author.date | split("T")[0] | split("-") | .[2]+"-"+.[1]' 2>/dev/null || echo "N/A")
     LAST_MSG=$(echo "$COMMITS_JSON" | jq -r '.[0].commit.message | split("\n")[0]' 2>/dev/null || echo "N/A")
     LAST_SHA=$(echo "$COMMITS_JSON" | jq -r '.[0].sha' 2>/dev/null || echo "")
+    LAST_SHORT=$(echo "$LAST_SHA" | cut -c1-7)
 
     INICIAL_SHA=$(echo "$COMMITS_JSON" | jq -r 'last | .sha' 2>/dev/null || echo "")
     INICIAL_DATE=$(echo "$COMMITS_JSON" | jq -r 'last | .commit.author.date | split("T")[0]' 2>/dev/null || echo "2026-05-19")
     INICIAL_EPOCH=$(date -d "$INICIAL_DATE" +%s 2>/dev/null || echo "0")
 
-    # Días únicos con commits propios (excluye el commit del inicial)
     UNIQUE_DAYS=$(echo "$COMMITS_JSON" | jq '[.[:-1][].commit.author.date | split("T")[0]] | unique | length' 2>/dev/null || echo "0")
 
     MAX_GAP=$(compute_max_gap "$COMMITS_JSON" "$COMMITS")
@@ -153,7 +218,6 @@ for user in $FORKS; do
     CONVLOG_STATUS=$(check_file_has_content "$user" "conversation-log.md" "lo que le dijo al AI para arrancar" 2>/dev/null || echo "?")
     README=$(check_readme_rewritten "$user" 2>/dev/null || echo "?")
 
-    # Progresión de artefactos: offset en días desde la fecha del inicial
     SRC_OFFSET=$(get_artifact_day_offset "$user" "src" "$INICIAL_EPOCH" "$INICIAL_SHA")
     UML_OFFSET=$(get_artifact_day_offset "$user" "modelosUML" "$INICIAL_EPOCH" "$INICIAL_SHA")
     CL_T_OFFSET=$(get_artifact_day_offset "$user" "conversation-log.md" "$INICIAL_EPOCH" "$INICIAL_SHA")
@@ -207,7 +271,9 @@ for user in $FORKS; do
         LAST_MSG_LINK="<sub>$LAST_MSG<br>$LAST_DATE</sub>"
     fi
 
-    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $UNIQUE_DAYS | $GAP_DISPLAY | $QH_COL | $CL_COL | $README_COL | $UML_COL | $R01_COL | $R02_COL | $R03_COL | $SRC_COL |"
+    SHA_COL="<sub>$LAST_SHORT</sub>"
+
+    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $UNIQUE_DAYS | $GAP_DISPLAY | $QH_COL | $CL_COL | $README_COL | $UML_COL | $R01_COL | $R02_COL | $R03_COL | $SRC_COL | $SHA_COL |"
     TABLE_ROWS="${TABLE_ROWS}${ROW}"$'\n'
 
     if [ "$COMMITS" -gt 0 ]; then
@@ -270,8 +336,8 @@ fi
         echo "<sub>Ultimas actualizaciones: $RECENT_LINE</sub>"
         echo ""
     fi
-    echo "| Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | 📐 | 🔍 | 🧩 | ⚙️ | 🔌 |"
-    echo "|---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|"
+    echo "| Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | 📐 | 🔍 | 🧩 | ⚙️ | 🔌 | SHA |"
+    echo "|---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|"
     printf '%s' "$TABLE_ROWS"
     echo ""
     echo "## Resumen"
@@ -285,4 +351,4 @@ fi
     printf '%s' "$DETAIL_SECTIONS"
 } > "$DASHBOARD"
 
-log "Dashboard generado: $DASHBOARD"
+log "Dashboard generado: $DASHBOARD ($SKIPPED cacheados / $PROCESSED procesados)"
