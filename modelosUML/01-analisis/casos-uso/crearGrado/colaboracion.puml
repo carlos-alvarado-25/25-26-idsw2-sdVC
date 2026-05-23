@@ -1,0 +1,27 @@
+@startuml crearGrado-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Grados Abierto" as GradosAbierto
+
+package crearGrado as "crearGrado()" {
+    rectangle #629EF9 CrearGradoView
+    rectangle #b5bd68 GradoController
+    rectangle #F2AC4E GradoRepository
+    rectangle #F2AC4E Grado
+}
+
+rectangle #CDEBA5 ":Grado Abierto" as GradoAbierto
+rectangle #CDEBA5 ":Grados Abierto" as GradosAbiertoSalida
+
+GradosAbierto -r-> CrearGradoView: crearGrado()
+
+CrearGradoView -d-> GradoController: crear(codigo, nombre, descripcion) : Grado
+
+GradoController -d-> GradoRepository: existeCodigo(codigo) : Boolean
+GradoController -r-> Grado: <<create>>
+GradoController -d-> GradoRepository: guardar(grado)
+
+CrearGradoView ..> GradoAbierto: <<finalizar>> editarGrado(nuevoGrado)
+CrearGradoView ..> GradosAbiertoSalida: <<cancelar>>
+
+@enduml

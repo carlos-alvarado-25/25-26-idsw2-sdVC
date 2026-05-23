@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="365px" preserveAspectRatio="none" style="width:918px;height:365px;" version="1.1" viewBox="0 0 918 365" width="918px" zoomAndPan="magnify"><defs><filter height="300%" id="f1xxneoku1lrwt" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[eeddb8c8c97b168ba0ba284e55d79f71]
+cluster crearGrado--><polygon fill="#FFFFFF" filter="url(#f1xxneoku1lrwt)" points="147.5,24,240.5,24,247.5,49.0679,535.5,49.0679,535.5,353,147.5,353,147.5,24" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="147.5" x2="247.5" y1="49.0679" y2="49.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="87" x="151.5" y="40.9659">crearGrado()</text><!--MD5=[013ee04a7e209ac50b3318a94a8e81ae]
+entity CrearGradoView--><rect fill="#629EF9" filter="url(#f1xxneoku1lrwt)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="129" x="316" y="62"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="109" x="326" y="86.9659">CrearGradoView</text><!--MD5=[a3e98a5f49c68695f130a43f280d8ecf]
+entity GradoController--><rect fill="#B5BD68" filter="url(#f1xxneoku1lrwt)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="128" x="200.5" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="108" x="210.5" y="204.9659">GradoController</text><!--MD5=[9db62e2c3b018035cc77fb2476be44ee]
+entity GradoRepository--><rect fill="#F2AC4E" filter="url(#f1xxneoku1lrwt)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="132" x="261.5" y="298"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="112" x="271.5" y="322.9659">GradoRepository</text><!--MD5=[cbab0994e6ada9fe76b72748ce5407a5]
+entity Grado--><rect fill="#F2AC4E" filter="url(#f1xxneoku1lrwt)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="61" x="416" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="41" x="426" y="204.9659">Grado</text><!--MD5=[3e6950dcd7c5974da44e54c6a1f84818]
+entity GradosAbierto--><rect fill="#CDEBA5" filter="url(#f1xxneoku1lrwt)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="125" x="6" y="62"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="105" x="16" y="86.9659">:Grados Abierto</text><!--MD5=[8a6a5e847b3a99eed7505c6540bca045]
+entity GradoAbierto--><rect fill="#CDEBA5" filter="url(#f1xxneoku1lrwt)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="118" x="551.5" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="98" x="561.5" y="204.9659">:Grado Abierto</text><!--MD5=[8e378021382d6056b9e85f89fdf49294]
+entity GradosAbiertoSalida--><rect fill="#CDEBA5" filter="url(#f1xxneoku1lrwt)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="125" x="782" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="105" x="792" y="204.9659">:Grados Abierto</text><!--MD5=[bd314ba6a0df3eb2cd2da30245c49407]
+link GradosAbierto to CrearGradoView--><path d="M131.26,81.5 C183.24,81.5 257.02,81.5 310.82,81.5 " fill="none" id="GradosAbierto-&gt;CrearGradoView" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="315.96,81.5,306.96,77.5,310.96,81.5,306.96,85.5,315.96,81.5" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="75" x="186" y="74.397">crearGrado()</text><!--MD5=[1e8bf0228dd3b036ee5fb996bf29fcc3]
+link CrearGradoView to GradoController--><path d="M344.43,101.11 C317.92,114.79 286.5,131 286.5,131 C286.5,131 278.54,155.41 272.2,174.87 " fill="none" id="CrearGradoView-&gt;GradoController" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="270.63,179.7,277.2313,172.3909,272.1854,174.9481,269.6282,169.9022,270.63,179.7" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="253" x="287.5" y="145.897">crear(codigo, nombre, descripcion) : Grado</text><!--MD5=[e1d8aaea052639662974e84b9c6de6e8]
+link GradoController to GradoRepository--><path d="M238.02,219.11 C218.56,232.79 195.5,249 195.5,249 C195.5,249 195.5,268 195.5,268 C195.5,268 235.91,282.85 272.01,296.11 " fill="none" id="GradoController-&gt;GradoRepository" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="276.84,297.89,269.7555,291.0482,272.1427,296.1767,267.0142,298.5639,276.84,297.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="185" x="196.5" y="263.897">existeCodigo(codigo) : Boolean</text><!--MD5=[e1d8aaea052639662974e84b9c6de6e8]
+link GradoController to GradoRepository--><path d="M311.32,219.11 C345.72,232.79 386.5,249 386.5,249 C386.5,249 386.5,268 386.5,268 C386.5,268 369.74,281.78 354.09,294.64 " fill="none" id="GradoController-&gt;GradoRepository-1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="350.14,297.89,359.6264,295.2428,353.9951,294.706,354.532,289.0746,350.14,297.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="92" x="387.5" y="263.897">guardar(grado)</text><!--MD5=[93bfaa4fffc67940d12682b33dd034b6]
+link GradoController to Grado--><path d="M328.67,199.5 C356.26,199.5 387.47,199.5 410.83,199.5 " fill="none" id="GradoController-&gt;Grado" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="415.99,199.5,406.99,195.5,410.99,199.5,406.99,203.5,415.99,199.5" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="51" x="346.75" y="192.397">«create»</text><!--MD5=[70bf18adbbaa4301d5ee3da4ba50455b]
+link CrearGradoView to GradoAbierto--><path d="M443.82,101.11 C490.35,114.79 545.5,131 545.5,131 C545.5,131 569.81,156.25 588.7,175.86 " fill="none" id="CrearGradoView-&gt;GradoAbierto" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="592.39,179.7,589.0222,170.4449,588.9193,176.1008,583.2634,175.9979,592.39,179.7" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="218" x="563.5" y="145.897">«finalizar» editarGrado(nuevoGrado)</text><!--MD5=[b77c3f7a99daf0dfb28d73a2dc3e9130]
+link CrearGradoView to GradosAbiertoSalida--><path d="M445.01,90.13 C560.48,103.79 790.5,131 790.5,131 C790.5,131 810.36,155.83 825.99,175.37 " fill="none" id="CrearGradoView-&gt;GradosAbiertoSalida" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="829.46,179.7,826.9485,170.1768,826.3313,175.7998,820.7082,175.1827,829.46,179.7" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="63" x="805.5" y="145.897">«cancelar»</text><!--MD5=[ec70e18813bef6c36dc1fcdc5498cfca]
+@startuml crearGrado-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Grados Abierto" as GradosAbierto
+
+package crearGrado as "crearGrado()" {
+    rectangle #629EF9 CrearGradoView
+    rectangle #b5bd68 GradoController
+    rectangle #F2AC4E GradoRepository
+    rectangle #F2AC4E Grado
+}
+
+rectangle #CDEBA5 ":Grado Abierto" as GradoAbierto
+rectangle #CDEBA5 ":Grados Abierto" as GradosAbiertoSalida
+
+GradosAbierto -r-> CrearGradoView: crearGrado()
+
+CrearGradoView -d-> GradoController: crear(codigo, nombre, descripcion) : Grado
+
+GradoController -d-> GradoRepository: existeCodigo(codigo) : Boolean
+GradoController -r-> Grado: <<create>>
+GradoController -d-> GradoRepository: guardar(grado)
+
+CrearGradoView ..> GradoAbierto: <<finalizar>> editarGrado(nuevoGrado)
+CrearGradoView ..> GradosAbiertoSalida: <<cancelar>>
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.10+7-Ubuntu-125.10
+Operating System: Linux
+Default Encoding: UTF-8
+Language: es
+Country: ES
+--></g></svg>

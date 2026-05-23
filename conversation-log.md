@@ -103,6 +103,21 @@
 
 ---
 
+## [15:04] Sesión 6: Rama de Grados - Creación Manual (crearGrado)
+
+**Prompt:** "Iniciemos la nueva sesión ahora amigo, siguiendo con la rama de Grados del diagrama de contexto, el siguiente que nos tocá es crearGrado. ... porqué en pySigHor en el caso de uso de crearAul existe un cargarEdificios() ... Podríamos meter el importarGrados y crearGrados en uno mismo?"
+
+**Resultado:** 
+- **Análisis de `crearGrado()`:** Implementación completa del artefacto de análisis bajo el patrón MVC y la filosofía "El Delgado" (Create -> Update).
+- **Modelado Técnico:** Creación del diagrama de colaboración en `modelosUML/01-analisis/` y su exportación visual SVG en `/images/`.
+- **Documentación de Análisis:** Redacción del `README.md` en `RUP/01-analisis/` detallando responsabilidades de clases y flujo de operaciones.
+- **Clarificación Arquitectónica:** Análisis comparativo con `pySigHor` sobre la carga de dependencias en creación vs. importación masiva.
+- **Registro de Diseño:** Actualización del documento externo de Explicaciones de Diseño con el racional del patrón "El Delgado" y validación proactiva de unicidad.
+
+**Decisión:** Se mantiene la separación entre creación manual e importación masiva para preservar la trazabilidad de requisitos y la simplicidad de las interfaces, aunque compartan la misma lógica de negocio en el controlador y el repositorio. Se adopta el patrón "El Delgado" para la creación, permitiendo una captura de datos minimalista que transiciona inmediatamente a la edición completa, optimizando el flujo de trabajo del Administrador.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:

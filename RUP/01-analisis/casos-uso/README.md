@@ -5,8 +5,10 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 ## Casos de uso analizados
 
 ### Gestión de Grados (Administrador)
-- [abrirGrados](abrirGrados/README.md) - Hub de gestión y listado de grados académicos.
-- [importarGrados](importarGrados/README.md) - Análisis de carga masiva de grados académicos.
+- [abrirGrados](abrirGrados/) - Hub de gestión y listado de grados académicos.
+- [crearGrado](crearGrado/) - Análisis de creación manual de grados.
+- [importarGrados](importarGrados/) - Análisis de carga masiva de grados académicos.
+
 
 ## Estructura de análisis
 
