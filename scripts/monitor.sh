@@ -124,7 +124,7 @@ fi
 
 # --- Obtener forks ---
 log "Obteniendo lista de forks..."
-FORKS=$(gh api "repos/$REPO/forks" --jq '.[].owner.login' 2>/dev/null)
+FORKS=$(gh api "repos/$REPO/forks" --paginate --jq '.[].owner.login' 2>/dev/null)
 
 if [ -z "$FORKS" ]; then
     log "No se encontraron forks."
