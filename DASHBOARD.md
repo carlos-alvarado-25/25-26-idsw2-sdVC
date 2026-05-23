@@ -1,6 +1,7 @@
+<!-- monitor-format: v37d5d9cd -->
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-23 12:54:28 CEST | 3 días totales
+> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-23 13:43:10 CEST | 3 días totales
 
 ## Leyenda
 
@@ -14,7 +15,7 @@
 
 ## Tabla
 
-<sub>Ultimas actualizaciones: [franvenero](https://github.com/franvenero/25-26-idsw2-sdVC), [carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC), [martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC), [SdeCos](https://github.com/SdeCos/25-26-idsw2-sdVC), [31Diego](https://github.com/31Diego/25-26-idsw2-sdVC)</sub>
+<sub>Ultimas actualizaciones: [carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC), [Alejandrojuarez0105](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC), [franvenero](https://github.com/franvenero/25-26-idsw2-sdVC), [martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC), [SdeCos](https://github.com/SdeCos/25-26-idsw2-sdVC)</sub>
 
 | Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | 📐 | 🔍 | 🧩 | ⚙️ | 🔌 | SHA |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -29,9 +30,9 @@
 | <sub>[KelviaBarros05](https://github.com/KelviaBarros05/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | :red_circle: | - | - | - | - | - | - | - | - | <sub>9ff5cbe</sub> |
 | <sub>[DylanNrj](https://github.com/DylanNrj/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | :red_circle: | - | - | - | - | - | - | - | - | <sub>9ff5cbe</sub> |
 | <sub>[aeRomeroz](https://github.com/aeRomeroz/25-26-idsw2-sdVC)<br>2 commits</sub> | <sub>[rup: creación de carpetas correspondientes al requisitado realizado previamente en Ingeniería del Software 1.](https://github.com/aeRomeroz/25-26-idsw2-sdVC/commit/3906cb7b9c93d6f01bde0008a9a472c0256d2671)<br>22-05 12:16</sub> | 2 | :green_circle: | [💡](https://github.com/aeRomeroz/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/aeRomeroz/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+3d</sub> | - | - | - | - | - | - | <sub>3906cb7</sub> |
-| <sub>[carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)<br>6 commits</sub> | <sub>[Add new images and analysis diagrams for various functionalities in the project](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/a315ef19878f904b193145a02a66c0f5c8ba79fe)<br>23-05 12:16</sub> | 3 | :green_circle: | [💡](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+2d</sub> | - | - | [🔍](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/blob/main/RUP/01-analisis)<br><sub>+3d</sub> | - | - | - | <sub>a315ef1</sub> |
+| <sub>[carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)<br>7 commits</sub> | <sub>[fix: Reestructuración de directorios de imagenes y modelosUML, y corrección de enlaces para asegurar la integridad de la estructura del repositorio](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/a679757f55c682e4c735995e1e3c4d704a94098b)<br>23-05 13:33</sub> | 3 | :green_circle: | [💡](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+2d</sub> | - | [📐](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+4d</sub> | [🔍](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/blob/main/RUP/01-analisis)<br><sub>+3d</sub> | - | - | - | <sub>a679757</sub> |
 | <sub>[manuelmunoz8](https://github.com/manuelmunoz8/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[QUE_HACE](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c0274187926a7d042b97ebceda22785bb93d09f4)<br>21-05 13:17</sub> | 1 | :red_circle: | [💡](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - | <sub>c027418</sub> |
-| <sub>[Alejandrojuarez0105](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)<br>4 commits</sub> | <sub>[refactor: centralizar imágenes y modelos UML para una estructura global organizada](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/b10f76784adf63ee46501898f03c93dd2e6d7087)<br>22-05 18:25</sub> | 2 | :green_circle: | [💡](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+2d</sub> | - | [📐](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+3d</sub> | - | - | - | - | <sub>b10f767</sub> |
+| <sub>[Alejandrojuarez0105](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)<br>5 commits</sub> | <sub>[docs: añadir AGENTES.md y actualizar conservation-log.md con nueva estructura de sesiones](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/f0166f7851878e684b5ff7825ae440a57b9c79df)<br>23-05 12:59</sub> | 3 | :green_circle: | [💡](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+2d</sub> | - | [📐](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+3d</sub> | - | - | - | - | <sub>f0166f7</sub> |
 | <sub>[SdeCos](https://github.com/SdeCos/25-26-idsw2-sdVC)<br>3 commits</sub> | <sub>[migracion 00-requisitos, seguimiento de progreso desde README.md y mejora de configuracion de claude](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/d3462b34fc5c494a29780d7a72ec52c888fc674c)<br>23-05 10:52</sub> | 2 | :green_circle: | [💡](https://github.com/SdeCos/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/SdeCos/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+3d</sub> | [📄](https://github.com/SdeCos/25-26-idsw2-sdVC/blob/main/README.md) | - | - | - | - | - | <sub>d3462b3</sub> |
 | <sub>[inigovaqueroo04](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[feat: QUE_HACE](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/54902be9450fc6d64fe30d7eb4b8d20d0b446319)<br>21-05 13:05</sub> | 1 | :red_circle: | [💡](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - | <sub>54902be</sub> |
 | <sub>[xImRaul](https://github.com/xImRaul/25-26-idsw2-sdVC)<br>2 commits</sub> | <sub>[feat: configuración inicial para dar contexto al trabajo](https://github.com/xImRaul/25-26-idsw2-sdVC/commit/058429dc84b229328928ff17ada66fe7b7f7cafb)<br>21-05 20:43</sub> | 1 | :yellow_circle: | [💡](https://github.com/xImRaul/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - | <sub>058429d</sub> |
@@ -49,5 +50,5 @@
 ## Resumen
 
 - Forks totales: 27
-- Alumnos con actividad (>0 commits propios): 23
-- Alumnos sin actividad: 4
+- Alumnos con actividad (>0 commits propios): 27
+- Alumnos sin actividad: 0
