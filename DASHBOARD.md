@@ -1,7 +1,7 @@
-<!-- monitor-format: v37d5d9cd -->
+<!-- monitor-format: vd95b8c19 -->
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-23 19:44:09 CEST | 3 días totales
+> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-23 20:15:53 CEST | 3 días totales
 
 ## Leyenda
 
@@ -15,14 +15,14 @@
 
 ## Tabla
 
-<sub>Ultimas actualizaciones: [Andecochea](https://github.com/Andecochea/25-26-idsw2-sdVC), [Pareyor](https://github.com/Pareyor/25-26-idsw2-sdVC), [Alejandrojuarez0105](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC), [carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC), [franvenero](https://github.com/franvenero/25-26-idsw2-sdVC)</sub>
+<sub>Ultimas actualizaciones: [SdeCos](https://github.com/SdeCos/25-26-idsw2-sdVC), [Pareyor](https://github.com/Pareyor/25-26-idsw2-sdVC), [martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC), [franvenero](https://github.com/franvenero/25-26-idsw2-sdVC), [carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)</sub>
 
 | Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | 📐 | 🔍 | 🧩 | ⚙️ | 🔌 | SHA |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | <sub>[rubentresgallob](https://github.com/rubentresgallob/25-26-idsw2-sdVC)<br>3 commits</sub> | <sub>[Stack inicial y gestión de commits](https://github.com/rubentresgallob/25-26-idsw2-sdVC/commit/6822ab2a8852df78cbbf66c807ecf330e5793a90)<br>21-05 21:04</sub> | 1 | :yellow_circle: | [💡](https://github.com/rubentresgallob/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/rubentresgallob/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+2d</sub> | - | - | - | - | - | - | <sub>6822ab2</sub> |
 | <sub>[miguelrivasmorantes-devu](https://github.com/miguelrivasmorantes-devu/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | :red_circle: | - | - | - | - | - | - | - | - | <sub>9ff5cbe</sub> |
 | <sub>[enmabry](https://github.com/enmabry/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[QUE_HACE.md](https://github.com/enmabry/25-26-idsw2-sdVC/commit/8c3fe6462e591d66cc201529146e2642a80fb92c)<br>21-05 14:23</sub> | 1 | :red_circle: | [💡](https://github.com/enmabry/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - | <sub>8c3fe64</sub> |
-| <sub>[franvenero](https://github.com/franvenero/25-26-idsw2-sdVC)<br>4 commits</sub> | <sub>[docs: análisis BCE completo para el módulo de Gestión de Tareas](https://github.com/franvenero/25-26-idsw2-sdVC/commit/f5a8392e819485608b275ed74c7697bca678290e)<br>23-05 12:27</sub> | 2 | :yellow_circle: | [💡](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+2d</sub> | - | - | [🔍](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/RUP/01-analisis)<br><sub>+2d</sub> | [🧩](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/RUP/02-diseño)<br><sub>+2d</sub> | - | - | <sub>f5a8392</sub> |
+| <sub>[franvenero](https://github.com/franvenero/25-26-idsw2-sdVC)<br>5 commits</sub> | <sub>[chore: Organizar estructura de casos de uso en módulos funcionales (RUP)](https://github.com/franvenero/25-26-idsw2-sdVC/commit/6bb48ca10b4e4e7c72a6df063e68e208c09cf9b9)<br>23-05 17:50</sub> | 2 | :yellow_circle: | [💡](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+2d</sub> | - | - | [🔍](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/RUP/01-analisis)<br><sub>+2d</sub> | [🧩](https://github.com/franvenero/25-26-idsw2-sdVC/blob/main/RUP/02-diseño)<br><sub>+2d</sub> | - | - | <sub>6bb48ca</sub> |
 | <sub>[Sergiorl2](https://github.com/Sergiorl2/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | :red_circle: | - | - | - | - | - | - | - | - | <sub>9ff5cbe</sub> |
 | <sub>[Andecochea](https://github.com/Andecochea/25-26-idsw2-sdVC)<br>1 commit</sub> | <sub>[feat: primer commit, QUE_HACE](https://github.com/Andecochea/25-26-idsw2-sdVC/commit/2fe6ee96156f167dc74d89703b9fadac26b1af46)<br>23-05 19:19</sub> | 1 | :red_circle: | [💡](https://github.com/Andecochea/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - | <sub>2fe6ee9</sub> |
 | <sub>[alejandroateca](https://github.com/alejandroateca/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | :red_circle: | - | - | - | - | - | - | - | - | <sub>9ff5cbe</sub> |
@@ -50,5 +50,5 @@
 ## Resumen
 
 - Forks totales: 27
-- Alumnos con actividad (>0 commits propios): 27
-- Alumnos sin actividad: 0
+- Alumnos con actividad (>0 commits propios): 19
+- Alumnos sin actividad: 8
