@@ -204,6 +204,19 @@
 
 ---
 
+## [2026-05-24 17:44] Sesión 12: Estandarización Visual de Diagramas (Fondo Blanco y Texto Legible)
+
+**Prompt:** "Vuelvelo a intentar, quiero que el fondo sea blanco y que el texto se vea"
+
+**Resultado:** 
+- **Refuerzo de Estilo UML:** Aplicación masiva de un bloque de `skinparam` en todos los archivos `.puml` que fuerza: `backgroundColor white`, `shadowing false`, `DefaultFontColor black` y `DefaultFontSize 12`.
+- **Regeneración Forzada:** Re-ejecución de PlantUML utilizando el flag `-SbackgroundColor=white` para garantizar la opacidad absoluta y el contraste óptimo en los archivos SVG generados.
+- **Portabilidad Visual:** Comprobación de que los activos en `/images/` son ahora perfectamente legibles tanto en temas claros como oscuros, eliminando problemas de visibilidad por transparencia.
+
+**Decisión:** Se consolida el estándar visual del proyecto eliminando cualquier rastro de transparencia en los activos visuales. Esta medida técnica asegura que la documentación técnica mantenga siempre el máximo contraste, garantizando que el contenido (flechas, texto y estereotipos) sea legible en cualquier plataforma o visor de imágenes.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:
