@@ -27,6 +27,7 @@ Este archivo contiene los compromisos, protocolos y estándares de ingeniería o
 3.  **Actualización del Log (`conversation-log.md`):**
     *   **PROHIBIDO** actualizar este archivo durante el transcurso de la sesión.
     *   **ÚNICAMENTE** se realizará una entrada detallada (resumen y reflexiones) cuando el usuario indique explícitamente: *"Terminamos la sesión"* o similar.
+    *   **Formato de Fecha:** Todas las entradas en `conversation-log.md` deben incluir la fecha actual en su encabezado (ej. `## [YYYY-MM-DD HH:MM] ...`).
 4.  **Decisiones de Diseño:** Las decisiones técnicas deben registrarse en el archivo externo de `Explicaciones de Diseño` en el workspace del usuario al final de cada hito relevante.
 
 ## Estándares de Documentación

@@ -118,6 +118,21 @@
 
 ---
 
+## [2026-05-24 12:03] Sesión 7: Rama de Grados - Edición y Refinamiento de Contratos
+
+**Prompt:** "Perfecto, ahora abramos sesión de vibecoding e iniciemos el análisis de editarGrados ... Porque el update de Controller a Grado directamente? Sin pasar por el GradoRepository ... Me parece, ahora porqué pones nuevosDatos ? en vez de los datos que refleja el caso de uso en la parte de requisitos?"
+
+**Resultado:** 
+- **Análisis de `editarGrado()`:** Completado el ciclo de vida principal de la entidad Grado. Se definió la colaboración MVC, detallando la carga de datos previos, la validación de unicidad en la modificación y la persistencia final.
+- **Modelado Visual:** Creación del diagrama `colaboracion.puml` y su correspondiente `SVG`.
+- **Refinamiento de Contratos:** Corrección en el diagrama y en el documento de análisis para utilizar parámetros explícitos `(grado, codigo, nombre, descripcion)` en lugar de objetos genéricos, incrementando la fidelidad técnica con los requisitos.
+- **Protocolo GEMINI:** Actualización del archivo de compromisos para exigir obligatoriamente la fecha (YYYY-MM-DD) en cada cabecera del `conversation-log.md`.
+- **Registro de Diseño:** Documentación en el workspace externo del uso de Controladores Reutilizables y el porqué de la validación directa en la entidad antes de la persistencia.
+
+**Decisión:** Se establece que las firmas de los métodos en el análisis deben reflejar fielmente los campos capturados en la Vista, prefiriendo la especificidad sobre la generalización temprana. Asimismo, se define la separación estricta entre el "Cambio de Estado" (actualizar el objeto `Grado` en memoria) y la "Sincronización" (guardar los cambios vía `GradoRepository`) para proteger la integridad del dominio.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:
