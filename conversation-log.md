@@ -133,6 +133,20 @@
 
 ---
 
+## [2026-05-24 12:22] Sesión 8: Rama de Grados - Eliminación Segura e Integridad Referencial
+
+**Prompt:** "Procedamos a abrir sesión de nuevo, para el caso de uso de eliminarGrados y finalizar la rama de Grados ... Porqué verificarAsignaturasAsociadas me devuelve un entero?"
+
+**Resultado:** 
+- **Análisis de `eliminarGrado()`:** Culminación de la rama funcional de la entidad Grado. Se ha diseñado una colaboración MVC centrada en la seguridad destructiva.
+- **Validación de Dependencias:** Incorporación del conteo de asignaturas asociadas mediante `AsignaturaRepository` para advertir al usuario antes de la eliminación física.
+- **Artefactos Técnicos:** Creación del diagrama de colaboración (`PUML` + `SVG`) y documentación detallada de responsabilidades y flujo en `RUP/01-analisis/`.
+- **Registro de Diseño:** Actualización del workspace externo con la decisión de utilizar retornos de tipo `Integer` en las validaciones de impacto para mejorar la riqueza informativa de la interfaz (UX).
+
+**Decisión:** Se finaliza la rama de Grados estableciendo un estándar de "Eliminación Segura". Se decide que los métodos de verificación de impacto deben devolver datos cuantitativos (Integers) en lugar de booleanos para permitir una comunicación más transparente y específica con el Administrador, reforzando la integridad referencial desde la capa de análisis.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:

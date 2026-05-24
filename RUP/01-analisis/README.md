@@ -26,7 +26,7 @@ Análisis completo de cada caso de uso especificado mediante:
 ## Cobertura de análisis
 
 ### Gestión de Grados
-- **Gestión académica**: abrirGrados(), crearGrado(), editarGrado(), importarGrados()
+- **Gestión académica**: abrirGrados(), crearGrado(), editarGrado(), eliminarGrado(), importarGrados()
 
 ## Trazabilidad
 
