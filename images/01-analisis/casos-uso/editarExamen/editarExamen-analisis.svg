@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="365px" preserveAspectRatio="none" style="width:1558px;height:365px;" version="1.1" viewBox="0 0 1558 365" width="1558px" zoomAndPan="magnify"><defs><filter height="300%" id="fjbmcs7gkpk1y" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[bf0b3feb2f0e6ef78b6ba026f0c8b95c]
+cluster editarExamen--><polygon fill="#FFFFFF" filter="url(#fjbmcs7gkpk1y)" points="167.5,24,279.5,24,286.5,49.0679,1367.5,49.0679,1367.5,353,167.5,353,167.5,24" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="167.5" x2="286.5" y1="49.0679" y2="49.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="106" x="171.5" y="40.9659">editarExamen()</text><!--MD5=[024cff4ddb35c7d8b14f273d1d3df3bc]
+entity EditarExamenView--><rect fill="#629EF9" filter="url(#fjbmcs7gkpk1y)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="144" x="693.5" y="62"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="124" x="703.5" y="86.9659">EditarExamenView</text><!--MD5=[a0cc848f358757d9ed156c143613f0f9]
+entity ExamenController--><rect fill="#B5BD68" filter="url(#fjbmcs7gkpk1y)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="140" x="561.5" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="120" x="571.5" y="204.9659">ExamenController</text><!--MD5=[97050d334ed30f4c908ad0f304c354e6]
+entity ExamenRepository--><rect fill="#F2AC4E" filter="url(#fjbmcs7gkpk1y)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="144" x="351.5" y="298"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="124" x="361.5" y="322.9659">ExamenRepository</text><!--MD5=[e2226bdb67ed4b44a20a11abd64e4519]
+entity AsignaturaRepository--><rect fill="#F2AC4E" filter="url(#fjbmcs7gkpk1y)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="165" x="627" y="298"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="145" x="637" y="322.9659">AsignaturaRepository</text><!--MD5=[989b321c1f082c74e290d030d0bd2397]
+entity AulaRepository--><rect fill="#F2AC4E" filter="url(#fjbmcs7gkpk1y)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="121" x="1053" y="298"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="101" x="1063" y="322.9659">AulaRepository</text><!--MD5=[36e1cd41f0b9a6266d1c26662ca7763f]
+entity Examen--><rect fill="#F2AC4E" filter="url(#fjbmcs7gkpk1y)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="73" x="795" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="53" x="805" y="204.9659">Examen</text><!--MD5=[1b59c6b49b3ec9d0c99e18c672ed8f68]
+entity ExamenesAbierto--><rect fill="#CDEBA5" filter="url(#fjbmcs7gkpk1y)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="145" x="6" y="62"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="125" x="16" y="86.9659">:Exámenes Abierto</text><!--MD5=[042054d2ac44d5dab263878681d8c220]
+entity ExamenesAbiertoSalida--><rect fill="#CDEBA5" filter="url(#fjbmcs7gkpk1y)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="145" x="1402" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="125" x="1412" y="204.9659">:Exámenes Abierto</text><!--MD5=[f693dc7b7d03af686bd8c91d07a151df]
+link ExamenesAbierto to EditarExamenView--><path d="M151.05,81.5 C281.47,81.5 554.4,81.5 688.2,81.5 " fill="none" id="ExamenesAbierto-&gt;EditarExamenView" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="693.3,81.5,684.3,77.5,688.3,81.5,684.3,85.5,693.3,81.5" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="139" x="352.75" y="74.397">editarExamen(examen)</text><!--MD5=[31163ee824c8f64068c87bdc1ec5daa5]
+link EditarExamenView to ExamenController--><path d="M693.31,88.87 C544.1,102.02 215.5,131 215.5,131 C215.5,131 215.5,150 215.5,150 C215.5,150 436.23,175.73 556.12,189.71 " fill="none" id="EditarExamenView-&gt;ExamenController" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="561.4,190.33,552.9298,185.3044,556.4343,189.745,551.9938,193.2495,561.4,190.33" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="371" x="216.5" y="145.897">buscarAsignaturas(criterio, pagina) : PagedResult&lt;Asignatura&gt;</text><!--MD5=[31163ee824c8f64068c87bdc1ec5daa5]
+link EditarExamenView to ExamenController--><path d="M712.92,101.11 C674.29,114.79 628.5,131 628.5,131 C628.5,131 628.5,150 628.5,150 C628.5,150 629.27,162.41 630.03,174.68 " fill="none" id="EditarExamenView-&gt;ExamenController-1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="630.35,179.89,633.8038,170.6666,630.0505,174.899,625.8182,171.1457,630.35,179.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="227" x="629.5" y="145.897">obtenerAulasDisponibles() : List&lt;Aula&gt;</text><!--MD5=[31163ee824c8f64068c87bdc1ec5daa5]
+link EditarExamenView to ExamenController--><path d="M802.34,101.11 C829.41,114.79 861.5,131 861.5,131 C861.5,131 861.5,150 861.5,150 C861.5,150 774.01,168.45 706.95,182.59 " fill="none" id="EditarExamenView-&gt;ExamenController-2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="701.76,183.68,711.3898,185.7458,706.6534,182.6528,709.7463,177.9164,701.76,183.68" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="449" x="862.5" y="145.897">actualizar(examen, codigo, fecha, duracion, id_asignatura, id_aula) : Examen</text><!--MD5=[afdd2eaf9ae4ab60538e204ba0ac2006]
+link ExamenController to AsignaturaRepository--><path d="M646.47,219.11 C657.47,232.79 670.5,249 670.5,249 C670.5,249 684.84,273.83 696.13,293.37 " fill="none" id="ExamenController-&gt;AsignaturaRepository" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="698.64,297.7,697.6026,287.9059,696.1393,293.3703,690.675,291.907,698.64,297.7" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="362" x="681.5" y="263.897">buscarPaginadas(criterio, pagina) : PagedResult&lt;Asignatura&gt;</text><!--MD5=[6def3d101f874e883f5be332e5172184]
+link ExamenController to AulaRepository--><path d="M701.51,209.37 C738.98,214.12 777.5,219 777.5,219 C777.5,219 1052.5,249 1052.5,249 C1052.5,249 1075.32,274.25 1093.04,293.86 " fill="none" id="ExamenController-&gt;AulaRepository" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="1096.51,297.7,1093.4247,288.3469,1093.1502,293.9971,1087.5,293.7226,1096.51,297.7" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="143" x="1069.5" y="263.897">listarTodas() : List&lt;Aula&gt;</text><!--MD5=[25dbe8fda5b022b223b27082467dfbc5]
+link ExamenController to ExamenRepository--><path d="M561.45,211.57 C470.84,225.88 324.5,249 324.5,249 C324.5,249 324.5,268 324.5,268 C324.5,268 354.07,282.49 380.89,295.62 " fill="none" id="ExamenController-&gt;ExamenRepository" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="385.51,297.89,379.1909,290.3356,381.0208,295.6883,375.6682,297.5183,385.51,297.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="185" x="325.5" y="263.897">existeCodigo(codigo) : Boolean</text><!--MD5=[25dbe8fda5b022b223b27082467dfbc5]
+link ExamenController to ExamenRepository--><path d="M599.26,219.11 C575.58,232.79 547.5,249 547.5,249 C547.5,249 515.5,268 515.5,268 C515.5,268 488.25,282.37 463.41,295.46 " fill="none" id="ExamenController-&gt;ExamenRepository-1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="458.81,297.89,468.6349,297.2039,463.2265,295.546,464.8845,290.1375,458.81,297.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="113" x="548.5" y="263.897">actualizar(examen)</text><!--MD5=[bd7382ca98c26930cd008fdd9aea203c]
+link ExamenController to Examen--><path d="M701.73,199.5 C731.05,199.5 764.12,199.5 789.54,199.5 " fill="none" id="ExamenController-&gt;Examen" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="794.85,199.5,785.85,195.5,789.85,199.5,785.85,203.5,794.85,199.5" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="57" x="719.75" y="192.397">«update»</text><!--MD5=[82daf2ffe7e6cfe4db83cb2a268fa360]
+link EditarExamenView to ExamenesAbiertoSalida--><path d="M837.77,88.82 C988.08,101.95 1320.5,131 1320.5,131 C1320.5,131 1382.12,158.01 1427.41,177.86 " fill="none" id="EditarExamenView-&gt;ExamenesAbiertoSalida" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="1432.01,179.88,1425.3679,172.608,1427.4292,177.8759,1422.1613,179.9373,1432.01,179.88" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="60" x="1362.5" y="145.897">«finalizar»</text><!--MD5=[82daf2ffe7e6cfe4db83cb2a268fa360]
+link EditarExamenView to ExamenesAbiertoSalida--><path d="M837.72,87.76 C1010.14,100.32 1431.5,131 1431.5,131 C1431.5,131 1447.32,155.83 1459.76,175.37 " fill="none" id="EditarExamenView-&gt;ExamenesAbiertoSalida-1" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="1462.52,179.7,1461.0564,169.9605,1459.8328,175.4835,1454.3099,174.2599,1462.52,179.7" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="63" x="1443.5" y="145.897">«cancelar»</text><!--MD5=[dea1f6db0c994fb05181596b1f4235e1]
+@startuml editarExamen-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Exámenes Abierto" as ExamenesAbierto
+
+package editarExamen as "editarExamen()" {
+    rectangle #629EF9 EditarExamenView
+    rectangle #b5bd68 ExamenController
+    rectangle #F2AC4E ExamenRepository
+    rectangle #F2AC4E AsignaturaRepository
+    rectangle #F2AC4E AulaRepository
+    rectangle #F2AC4E Examen
+}
+
+rectangle #CDEBA5 ":Exámenes Abierto" as ExamenesAbiertoSalida
+
+ExamenesAbierto -r-> EditarExamenView: editarExamen(examen)
+
+EditarExamenView -d-> ExamenController: buscarAsignaturas(criterio, pagina) : PagedResult<Asignatura>
+ExamenController -d-> AsignaturaRepository: buscarPaginadas(criterio, pagina) : PagedResult<Asignatura>
+
+EditarExamenView -d-> ExamenController: obtenerAulasDisponibles() : List<Aula>
+ExamenController -d-> AulaRepository: listarTodas() : List<Aula>
+
+EditarExamenView -d-> ExamenController: actualizar(examen, codigo, fecha, duracion, id_asignatura, id_aula) : Examen
+
+ExamenController -d-> ExamenRepository: existeCodigo(codigo) : Boolean
+ExamenController -r-> Examen: <<update>>
+ExamenController -d-> ExamenRepository: actualizar(examen)
+
+EditarExamenView ..> ExamenesAbiertoSalida: <<finalizar>>
+EditarExamenView ..> ExamenesAbiertoSalida: <<cancelar>>
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.10+7-Ubuntu-125.10
+Operating System: Linux
+Default Encoding: UTF-8
+Language: es
+Country: ES
+--></g></svg>
