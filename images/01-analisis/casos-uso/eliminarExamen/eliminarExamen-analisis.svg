@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="470px" preserveAspectRatio="none" style="width:653px;height:470px;" version="1.1" viewBox="0 0 653 470" width="653px" zoomAndPan="magnify"><defs><filter height="300%" id="fm4de2j50etwm" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[9e0701bf55cdf5aab29d39d86545e205]
+cluster eliminarExamen--><polygon fill="#FFFFFF" filter="url(#fm4de2j50etwm)" points="179.5,107,307.5,107,314.5,132.0679,480.5,132.0679,480.5,458,179.5,458,179.5,107" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="179.5" x2="314.5" y1="132.0679" y2="132.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="122" x="183.5" y="123.9659">eliminarExamen()</text><!--MD5=[e4467a92ccf62c3153583aed6e000a09]
+entity EliminarExamenView--><rect fill="#629EF9" filter="url(#fm4de2j50etwm)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="160" x="304.5" y="167"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="140" x="314.5" y="191.9659">EliminarExamenView</text><!--MD5=[a0cc848f358757d9ed156c143613f0f9]
+entity ExamenController--><rect fill="#B5BD68" filter="url(#fm4de2j50etwm)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="140" x="251.5" y="285"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="120" x="261.5" y="309.9659">ExamenController</text><!--MD5=[97050d334ed30f4c908ad0f304c354e6]
+entity ExamenRepository--><rect fill="#F2AC4E" filter="url(#fm4de2j50etwm)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="144" x="249.5" y="403"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="124" x="259.5" y="427.9659">ExamenRepository</text><!--MD5=[36e1cd41f0b9a6266d1c26662ca7763f]
+entity Examen--><rect fill="#F2AC4E" filter="url(#fm4de2j50etwm)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="73" x="196" y="167"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="53" x="206" y="191.9659">Examen</text><!--MD5=[1b59c6b49b3ec9d0c99e18c672ed8f68]
+entity ExamenesAbierto--><rect fill="#CDEBA5" filter="url(#fm4de2j50etwm)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="145" x="6" y="167"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="125" x="16" y="191.9659">:Exámenes Abierto</text><!--MD5=[042054d2ac44d5dab263878681d8c220]
+entity ExamenesAbiertoSalida--><rect fill="#CDEBA5" filter="url(#fm4de2j50etwm)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="145" x="497" y="285"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="125" x="507" y="309.9659">:Exámenes Abierto</text><!--MD5=[18e6e6a2b3c3432f907aa2ef14331345]
+link ExamenesAbierto to EliminarExamenView--><path d="M101.42,166.87 C131.22,141.35 179.5,100 179.5,100 C179.5,100 286.5,100 286.5,100 C286.5,100 329.41,137.87 358.44,163.5 " fill="none" id="ExamenesAbierto-&gt;EliminarExamenView" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="362.26,166.87,358.1376,157.9254,358.5033,163.5704,352.8583,163.9361,362.26,166.87" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="152" x="151.5" y="86.897">eliminarExamen(examen)</text><!--MD5=[803246e4b4beae906b26ad7e77278d9c]
+link EliminarExamenView to ExamenController--><path d="M359.17,206.11 C340.56,219.79 318.5,236 318.5,236 C318.5,236 318.5,255 318.5,255 C318.5,255 319.27,267.41 320.03,279.68 " fill="none" id="EliminarExamenView-&gt;ExamenController" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="320.35,284.89,323.8038,275.6666,320.0505,279.899,315.8182,276.1457,320.35,284.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="319.5" y="250.897">eliminar(examen)</text><!--MD5=[25dbe8fda5b022b223b27082467dfbc5]
+link ExamenController to ExamenRepository--><path d="M321.5,324.14 C321.5,344.18 321.5,376.09 321.5,397.88 " fill="none" id="ExamenController-&gt;ExamenRepository" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="321.5,402.91,325.5,393.91,321.5,397.91,317.5,393.91,321.5,402.91" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="322.5" y="368.897">eliminar(examen)</text><!--MD5=[22d40a7e3369590fd961c472415c5eed]
+link EliminarExamenView to ExamenesAbiertoSalida--><path d="M406.78,206.3 C430.46,226.28 464.5,255 464.5,255 C464.5,255 496.12,269.61 524.66,282.79 " fill="none" id="EliminarExamenView-&gt;ExamenesAbiertoSalida" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="529.2,284.89,522.709,277.4828,524.6615,282.792,519.3522,284.7444,529.2,284.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="60" x="465.5" y="250.897">«finalizar»</text><!--MD5=[22d40a7e3369590fd961c472415c5eed]
+link EliminarExamenView to ExamenesAbiertoSalida--><path d="M440.53,206.11 C481.7,219.79 530.5,236 530.5,236 C530.5,236 544.84,260.83 556.13,280.37 " fill="none" id="EliminarExamenView-&gt;ExamenesAbiertoSalida-1" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="558.64,284.7,557.6026,274.9059,556.1393,280.3703,550.675,278.907,558.64,284.7" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="63" x="541.5" y="250.897">«cancelar»</text><!--MD5=[5e636276c04eff9247403422f9dad958]
+@startuml eliminarExamen-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Exámenes Abierto" as ExamenesAbierto
+
+package eliminarExamen as "eliminarExamen()" {
+    rectangle #629EF9 EliminarExamenView
+    rectangle #b5bd68 ExamenController
+    rectangle #F2AC4E ExamenRepository
+    rectangle #F2AC4E Examen
+}
+
+rectangle #CDEBA5 ":Exámenes Abierto" as ExamenesAbiertoSalida
+
+ExamenesAbierto -r-> EliminarExamenView: eliminarExamen(examen)
+
+EliminarExamenView -d-> ExamenController: eliminar(examen)
+
+ExamenController -d-> ExamenRepository: eliminar(examen)
+
+EliminarExamenView ..> ExamenesAbiertoSalida: <<finalizar>>
+EliminarExamenView ..> ExamenesAbiertoSalida: <<cancelar>>
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.10+7-Ubuntu-125.10
+Operating System: Linux
+Default Encoding: UTF-8
+Language: es
+Country: ES
+--></g></svg>

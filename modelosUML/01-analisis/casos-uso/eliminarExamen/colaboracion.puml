@@ -1,0 +1,24 @@
+@startuml eliminarExamen-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Exámenes Abierto" as ExamenesAbierto
+
+package eliminarExamen as "eliminarExamen()" {
+    rectangle #629EF9 EliminarExamenView
+    rectangle #b5bd68 ExamenController
+    rectangle #F2AC4E ExamenRepository
+    rectangle #F2AC4E Examen
+}
+
+rectangle #CDEBA5 ":Exámenes Abierto" as ExamenesAbiertoSalida
+
+ExamenesAbierto -r-> EliminarExamenView: eliminarExamen(examen)
+
+EliminarExamenView -d-> ExamenController: eliminar(examen)
+
+ExamenController -d-> ExamenRepository: eliminar(examen)
+
+EliminarExamenView ..> ExamenesAbiertoSalida: <<finalizar>>
+EliminarExamenView ..> ExamenesAbiertoSalida: <<cancelar>>
+
+@enduml

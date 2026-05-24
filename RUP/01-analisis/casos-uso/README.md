@@ -15,6 +15,7 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 - [abrirExamenes](abrirExamenes/README.md) - Hub de gestión y listado de exámenes.
 - [crearExamen](crearExamen/README.md) - Análisis de creación manual de exámenes.
 - [editarExamen](editarExamen/README.md) - Análisis de modificación de exámenes y asignación de recursos.
+- [eliminarExamen](eliminarExamen/README.md) - Análisis de eliminación de exámenes programados.
 
 
 ## Estructura de análisis
