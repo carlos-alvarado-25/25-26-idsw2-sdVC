@@ -175,6 +175,20 @@
 
 ---
 
+## [2026-05-24 14:58] Sesión 10: Rama de Exámenes - Creación, Dependencias
+
+**Prompt:** "Perfecto, iniciemos otra sesión para hacer el análisis del caso de uso crearExamen() ... Y aquí lo que discutimos de la paginación no entra? Porque listar las asignaturas así van a ser muchisimas para una seleccion ... imaginate que sean 1000 asignaturas y paginas de 10 en 10 pero sin un orden específico, Como funcionaría el formulario de creación?"
+
+**Resultado:** 
+- **Análisis de `crearExamen()`:** Diseño de la colaboración MVC. Se definió la inyección de dependencias (`AsignaturaRepository`) necesaria para poblar el formulario de creación con materias válidas.
+- **Modelado Visual:** Creación del diagrama `colaboracion.puml` en `/modelosUML/` y su versión SVG en la nueva estructura `/images/01-analisis/`.
+- **Escalabilidad en Selectores:** Revisión crítica del modelo y aplicación de la "Indirección para Alto Volumen" a los selectores del formulario, utilizando `buscarAsignaturas(criterio, pagina) : PagedResult<Asignatura>` en lugar de una carga masiva.
+- **Registro Teórico:** Actualización de `Notas Importantes.md` y de las `Explicaciones de Diseño` con los patrones de UX para selectores de alto volumen y la necesidad técnica de un ordenamiento determinista en base de datos.
+
+**Decisión:** Se adopta el patrón "El Delgado" para la creación de exámenes (capturando solo lo esencial y transicionando a la edición). Además, se decreta como estándar arquitectónico que cualquier formulario que requiera seleccionar dependencias de alto volumen debe modelarse obligatoriamente con contratos de búsqueda paginada y filtrable, protegiendo así la usabilidad y la infraestructura desde la fase de análisis.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:

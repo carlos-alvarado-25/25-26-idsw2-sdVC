@@ -5,14 +5,15 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 ## Casos de uso analizados
 
 ### Gestión de Grados (Administrador)
-- [abrirGrados](abrirGrados/) - Hub de gestión y listado de grados académicos.
-- [crearGrado](crearGrado/) - Análisis de creación manual de grados.
-- [editarGrado](editarGrado/) - Análisis de modificación de grados existentes.
-- [eliminarGrado](eliminarGrado/) - Análisis de eliminación segura de grados.
-- [importarGrados](importarGrados/) - Análisis de carga masiva de grados académicos.
+- [abrirGrados](abrirGrados/README.md) - Hub de gestión y listado de grados académicos.
+- [crearGrado](crearGrado/README.md) - Análisis de creación manual de grados.
+- [editarGrado](editarGrado/README.md) - Análisis de modificación de grados existentes.
+- [eliminarGrado](eliminarGrado/README.md) - Análisis de eliminación segura de grados.
+- [importarGrados](importarGrados/README.md) - Análisis de carga masiva de grados académicos.
 
 ### Gestión de Exámenes (Administrador)
-- [abrirExamenes](abrirExamenes/) - Hub de gestión y listado de exámenes.
+- [abrirExamenes](abrirExamenes/README.md) - Hub de gestión y listado de exámenes.
+- [crearExamen](crearExamen/README.md) - Análisis de creación manual de exámenes.
 
 
 ## Estructura de análisis
