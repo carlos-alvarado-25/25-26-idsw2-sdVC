@@ -1,7 +1,7 @@
 <!-- monitor-format: vd95b8c19 -->
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-24 19:41:55 CEST | 4 días totales
+> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-24 21:03:48 CEST | 4 días totales
 
 ## Leyenda
 
@@ -15,7 +15,7 @@
 
 ## Tabla
 
-<sub>Ultimas actualizaciones: [martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC), [Camila-Lesly](https://github.com/Camila-Lesly/25-26-idsw2-sdVC), [franvenero](https://github.com/franvenero/25-26-idsw2-sdVC), [KelviaBarros05](https://github.com/KelviaBarros05/25-26-idsw2-sdVC), [31Diego](https://github.com/31Diego/25-26-idsw2-sdVC)</sub>
+<sub>Ultimas actualizaciones: [Pareyor](https://github.com/Pareyor/25-26-idsw2-sdVC), [Alejandrojuarez0105](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC), [rubentresgallob](https://github.com/rubentresgallob/25-26-idsw2-sdVC), [carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC), [jerdier](https://github.com/jerdier/25-26-idsw2-sdVC)</sub>
 
 | Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | 📐 | 🔍 | 🧩 | ⚙️ | 🔌 | SHA |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -38,7 +38,7 @@
 | <sub>[xImRaul](https://github.com/xImRaul/25-26-idsw2-sdVC)<br>2 commits</sub> | <sub>[feat: configuración inicial para dar contexto al trabajo](https://github.com/xImRaul/25-26-idsw2-sdVC/commit/058429dc84b229328928ff17ada66fe7b7f7cafb)<br>21-05 20:43</sub> | 1 | :yellow_circle: | [💡](https://github.com/xImRaul/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - | <sub>058429d</sub> |
 | <sub>[31Diego](https://github.com/31Diego/25-26-idsw2-sdVC)<br>4 commits</sub> | <sub>[feat: análisis completo del coordinador — 43 casos de uso](https://github.com/31Diego/25-26-idsw2-sdVC/commit/4fee52742993c2e7c23ec774cc234803d1b3ebab)<br>23-05 22:53</sub> | 3 | :green_circle: | [💡](https://github.com/31Diego/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | [📐](https://github.com/31Diego/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+3d</sub> | - | - | - | - | <sub>4fee527</sub> |
 | <sub>[Pareyor](https://github.com/Pareyor/25-26-idsw2-sdVC)<br>16 commits</sub> | <sub>[feat: Implementa las imágenes de los diagramas de los casos de uso analizados en esta sesión (16-20) y agrega el apartado decisión tomada en el conversation-log de esta sesión.](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/865d4492f48e7a49b5840aa4f0020bd3071346a4)<br>24-05 18:53</sub> | 5 | :green_circle: | [💡](https://github.com/Pareyor/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/Pareyor/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+1d</sub> | - | [📐](https://github.com/Pareyor/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+2d</sub> | - | - | - | - | <sub>865d449</sub> |
-| <sub>[liamanderson873](https://github.com/liamanderson873/25-26-idsw2-sdVC)<br>11 commits</sub> | <sub>[Merge pull request #4 from liamanderson873/feat/analisis-puro-bloque-3](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/1f6b59ce5921ff571a11c67db9f8514fbed0235c)<br>24-05 18:46</sub> | 2 | :red_circle: | [💡](https://github.com/liamanderson873/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/liamanderson873/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+2d</sub> | - | [📐](https://github.com/liamanderson873/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+2d</sub> | [🔍](https://github.com/liamanderson873/25-26-idsw2-sdVC/blob/main/RUP/01-analisis)<br><sub>+2d</sub> | - | - | - | <sub>1f6b59c</sub> |
+| <sub>[liamanderson873](https://github.com/liamanderson873/25-26-idsw2-sdVC)<br>18 commits</sub> | <sub>[fix(analisis): habilitar visualizacion de diagramas PlantUML en GitHub](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/4427234c7b7262cd88da5bc8be843e2b416b0c10)<br>24-05 18:29</sub> | 2 | :red_circle: | [💡](https://github.com/liamanderson873/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/liamanderson873/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+2d</sub> | - | [📐](https://github.com/liamanderson873/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+2d</sub> | [🔍](https://github.com/liamanderson873/25-26-idsw2-sdVC/blob/main/RUP/01-analisis)<br><sub>+2d</sub> | - | - | - | <sub>4427234</sub> |
 | <sub>[jerdier](https://github.com/jerdier/25-26-idsw2-sdVC)<br>8 commits</sub> | <sub>[feat: Conversación tercera sesión BD prisma](https://github.com/jerdier/25-26-idsw2-sdVC/commit/06b3eb4abdf5265b2208f3607aa176d1dca34348)<br>24-05 15:54</sub> | 3 | :yellow_circle: | [💡](https://github.com/jerdier/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/jerdier/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+3d</sub> | - | - | - | - | - | [🔌](https://github.com/jerdier/25-26-idsw2-sdVC/blob/main/src)<br><sub>+3d</sub> | <sub>06b3eb4</sub> |
 | <sub>[jaimelinares6](https://github.com/jaimelinares6/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | :red_circle: | - | - | - | - | - | - | - | - | <sub>9ff5cbe</sub> |
 | <sub>[alejandrofondo](https://github.com/alejandrofondo/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | :red_circle: | - | - | - | - | - | - | - | - | <sub>9ff5cbe</sub> |
