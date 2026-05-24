@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="465px" preserveAspectRatio="none" style="width:1911px;height:465px;" version="1.1" viewBox="0 0 1911 465" width="1911px" zoomAndPan="magnify"><defs><filter height="300%" id="fq1pr5hdrmepp" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[4a778cb99ebc7ec43473370d8c6eb335]
+cluster abrirExamenes--><polygon fill="#FFFFFF" filter="url(#fq1pr5hdrmepp)" points="175.5,24,294.5,24,301.5,49.0679,978.5,49.0679,978.5,453,175.5,453,175.5,24" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="175.5" x2="301.5" y1="49.0679" y2="49.0679"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="113" x="179.5" y="40.9659">abrirExamenes()</text><!--MD5=[65d9c8130fc899ca5926449200190fb5]
+entity ListarExamenesView--><rect fill="#629EF9" filter="url(#fq1pr5hdrmepp)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="156" x="806.5" y="62"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="136" x="816.5" y="86.9659">ListarExamenesView</text><!--MD5=[a0cc848f358757d9ed156c143613f0f9]
+entity ExamenController--><rect fill="#B5BD68" filter="url(#fq1pr5hdrmepp)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="140" x="367.5" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="120" x="377.5" y="204.9659">ExamenController</text><!--MD5=[97050d334ed30f4c908ad0f304c354e6]
+entity ExamenRepository--><rect fill="#F2AC4E" filter="url(#fq1pr5hdrmepp)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="144" x="366.5" y="298"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="124" x="376.5" y="322.9659">ExamenRepository</text><!--MD5=[36e1cd41f0b9a6266d1c26662ca7763f]
+entity Examen--><rect fill="#F2AC4E" filter="url(#fq1pr5hdrmepp)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="73" x="402" y="398"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="53" x="412" y="422.9659">Examen</text><!--MD5=[84b54a619bbffa34e5a84b7fd9e3d121]
+entity SistemaDisponible--><rect fill="#CDEBA5" filter="url(#fq1pr5hdrmepp)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="153" x="6" y="62"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="133" x="16" y="86.9659">:Sistema Disponible</text><!--MD5=[e2c1600d4246acc39257d663d2b4cdcf]
+entity SistemaDisponibleSalida--><rect fill="#CDEBA5" filter="url(#fq1pr5hdrmepp)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="153" x="995" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="133" x="1005" y="204.9659">:Sistema Disponible</text><!--MD5=[832af3c33d54f0e0e32d8fcf0d0d1921]
+entity CrearExamen--><rect fill="#CDEBA5" filter="url(#fq1pr5hdrmepp)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="208" x="1183.5" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="188" x="1193.5" y="204.9659">:Collaboration CrearExamen</text><!--MD5=[d009b79cf559f95a45cd35adb354b038]
+entity EditarExamen--><rect fill="#CDEBA5" filter="url(#fq1pr5hdrmepp)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="211" x="1427" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="191" x="1437" y="204.9659">:Collaboration EditarExamen</text><!--MD5=[292e4e766c554fec0976052363e37b52]
+entity EliminarExamen--><rect fill="#CDEBA5" filter="url(#fq1pr5hdrmepp)" height="39.0679" style="stroke: #000000; stroke-width: 1.5;" width="227" x="1673" y="180"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="207" x="1683" y="204.9659">:Collaboration EliminarExamen</text><!--MD5=[ffa431b036c8a0bf7d31ba19cc4413a5]
+link SistemaDisponible to ListarExamenesView--><path d="M159.04,81.5 C310,81.5 645,81.5 801.25,81.5 " fill="none" id="SistemaDisponible-&gt;ListarExamenesView" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="806.27,81.5,797.27,77.5,801.27,81.5,797.27,85.5,806.27,81.5" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="97" x="434.25" y="74.397">abrirExamenes()</text><!--MD5=[4922a75b11b223cca908a6b027e641ab]
+link ListarExamenesView to ExamenController--><path d="M806.3,88.52 C637.58,101.51 254.5,131 254.5,131 C254.5,131 254.5,150 254.5,150 C254.5,150 312.09,165.26 362.66,178.67 " fill="none" id="ListarExamenesView-&gt;ExamenController" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="367.53,179.96,359.8577,173.7845,362.6974,178.677,357.8049,181.5167,367.53,179.96" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="325" x="255.5" y="145.897">listarExamenes(filtros, pagina) : PagedResult&lt;Examen&gt;</text><!--MD5=[4922a75b11b223cca908a6b027e641ab]
+link ListarExamenesView to ExamenController--><path d="M806.49,97.05 C729.91,111.34 624.5,131 624.5,131 C624.5,131 585.5,150 585.5,150 C585.5,150 539.82,164.97 499.22,178.27 " fill="none" id="ListarExamenesView-&gt;ExamenController-1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="494.3,179.89,504.0987,180.883,499.0505,178.3303,501.6032,173.2822,494.3,179.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="336" x="625.5" y="145.897">filtrarExamenes(criterio, pagina) : PagedResult&lt;Examen&gt;</text><!--MD5=[25dbe8fda5b022b223b27082467dfbc5]
+link ExamenController to ExamenRepository--><path d="M367.43,216.38 C305.02,230.53 223.5,249 223.5,249 C223.5,249 223.5,268 223.5,268 C223.5,268 299.52,285.15 361.15,299.05 " fill="none" id="ExamenController-&gt;ExamenRepository" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="366.31,300.22,358.4121,294.3359,361.4328,299.1187,356.65,302.1394,366.31,300.22" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="346" x="224.5" y="263.897">obtenerPaginados(filtros, pagina) : PagedResult&lt;Examen&gt;</text><!--MD5=[25dbe8fda5b022b223b27082467dfbc5]
+link ExamenController to ExamenRepository--><path d="M490.46,219.11 C529.38,232.79 575.5,249 575.5,249 C575.5,249 575.5,268 575.5,268 C575.5,268 533.56,282.85 496.09,296.11 " fill="none" id="ExamenController-&gt;ExamenRepository-1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="491.08,297.89,500.8972,298.679,495.7971,296.2319,498.2442,291.1317,491.08,297.89" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="346" x="576.5" y="263.897">buscarPaginados(criterio, pagina) : PagedResult&lt;Examen&gt;</text><!--MD5=[e1991ade7070912d0900c8e37d6da9e8]
+link ExamenRepository to Examen--><path d="M438.5,337.4 C438.5,354.86 438.5,380.66 438.5,397.99 " fill="none" id="ExamenRepository-Examen" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[1062e250160ec2471228941e4a7c03b8]
+link ListarExamenesView to SistemaDisponibleSalida--><path d="M917.5,101.11 C941.76,114.79 970.5,131 970.5,131 C970.5,131 1009.78,157.25 1039.35,177.01 " fill="none" id="ListarExamenesView-&gt;SistemaDisponibleSalida" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="1043.63,179.88,1038.3801,171.547,1039.4763,177.0966,1033.9267,178.1928,1043.63,179.88" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="115" x="998.5" y="145.897">completarGestion()</text><!--MD5=[371376a2a430d6b2b740fcd22116d76b]
+link ListarExamenesView to CrearExamen--><path d="M962.76,98.45 C1032.13,112.58 1122.5,131 1122.5,131 C1122.5,131 1188.79,158.12 1237.34,177.98 " fill="none" id="ListarExamenesView-&gt;CrearExamen" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="1241.98,179.88,1235.1544,172.78,1237.3495,177.9935,1232.136,180.1887,1241.98,179.88" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="86" x="1167.5" y="145.897">crearExamen()</text><!--MD5=[e560345dc156bf8f77f6e7200d1809a2]
+link ListarExamenesView to EditarExamen--><path d="M962.82,92.55 C1073.54,106.76 1262.5,131 1262.5,131 C1262.5,131 1373.51,158.75 1453.16,178.67 " fill="none" id="ListarExamenesView-&gt;EditarExamen" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="1458.36,179.97,1450.6031,173.9012,1453.5101,178.754,1448.6574,181.661,1458.36,179.97" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="91" x="1335.5" y="145.897">editarExamen()</text><!--MD5=[c961962c1384fd3b1de6cc1354915e38]
+link ListarExamenesView to EliminarExamen--><path d="M962.57,89.37 C1114.57,102.75 1435.5,131 1435.5,131 C1435.5,131 1581.25,159.03 1684.91,178.96 " fill="none" id="ListarExamenesView-&gt;EliminarExamen" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="1690.12,179.97,1682.0349,174.3458,1685.2096,179.0279,1680.5275,182.2025,1690.12,179.97" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="104" x="1530.5" y="145.897">eliminarExamen()</text><!--MD5=[37bd3d783ae98c4822ef62a623bbfa3f]
+@startuml abrirExamenes-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+package abrirExamenes as "abrirExamenes()" {
+    rectangle #629EF9 ListarExamenesView
+    rectangle #b5bd68 ExamenController
+    rectangle #F2AC4E ExamenRepository
+    rectangle #F2AC4E Examen
+}
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
+rectangle #CDEBA5 ":Collaboration CrearExamen" as CrearExamen
+rectangle #CDEBA5 ":Collaboration EditarExamen" as EditarExamen
+rectangle #CDEBA5 ":Collaboration EliminarExamen" as EliminarExamen
+
+SistemaDisponible -r-> ListarExamenesView: abrirExamenes()
+
+ListarExamenesView -d-> ExamenController: listarExamenes(filtros, pagina) : PagedResult<Examen>
+
+ExamenController - -> ExamenRepository: obtenerPaginados(filtros, pagina) : PagedResult<Examen>
+
+ExamenRepository - - Examen
+
+ListarExamenesView - -> ExamenController: filtrarExamenes(criterio, pagina) : PagedResult<Examen>
+
+ExamenController - -> ExamenRepository: buscarPaginados(criterio, pagina) : PagedResult<Examen>
+
+ListarExamenesView ..> SistemaDisponibleSalida: completarGestion()
+ListarExamenesView ..> CrearExamen: crearExamen()
+ListarExamenesView ..> EditarExamen: editarExamen()
+ListarExamenesView ..> EliminarExamen: eliminarExamen()
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.10+7-Ubuntu-125.10
+Operating System: Linux
+Default Encoding: UTF-8
+Language: es
+Country: ES
+--></g></svg>

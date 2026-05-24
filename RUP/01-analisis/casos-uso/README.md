@@ -11,6 +11,9 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 - [eliminarGrado](eliminarGrado/) - Análisis de eliminación segura de grados.
 - [importarGrados](importarGrados/) - Análisis de carga masiva de grados académicos.
 
+### Gestión de Exámenes (Administrador)
+- [abrirExamenes](abrirExamenes/) - Hub de gestión y listado de exámenes.
+
 
 ## Estructura de análisis
 
