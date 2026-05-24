@@ -162,6 +162,19 @@
 
 ---
 
+## [2026-05-24 14:25] Sesión Extraordinaria: Refinamiento de Entidades Conceptuales para Alto Volumen
+
+**Prompt:** "Reitera la decisión de que PagedResult es una entidad inventada que, a priori, no es paginación. Solo algo que contiene lo que necesitamos por si hay mucho volumen de datos para una entidad en concreto."
+
+**Resultado:** 
+- **Evolución del Análisis:** Reflexión sobre el uso de tipos de retorno en diagramas de colaboración. Se concluye que términos como `List<T>` deben interpretarse como "Listas Conceptuales" (abstracciones lógicas de pluralidad) y no como implementaciones atadas a lenguajes específicos.
+- **Indirección mediante Entidades Inventadas:** Se reafirma la decisión de utilizar `PagedResult<T>` como una "entidad inventada" mediante indirección. A priori, esta entidad no representa una técnica de paginación forzada, sino un contenedor conceptual diseñado para albergar las características y metadatos necesarios para gestionar el alto volumen de datos previsto en el dominio del negocio (ej. Exámenes).
+- **Aviso Arquitectónico:** El uso de este patrón permite que el análisis y el diseño se retroalimenten, identificando puntos de unión críticos donde la estructura del dominio debe anticipar soluciones a problemas de escala sin comprometer el agnosticismo tecnológico.
+
+**Decisión:** Se mantiene el uso de `PagedResult` como una entidad lógica. Esta abstracción actúa como un compromiso de ingeniería que permite al análisis capturar la complejidad de grandes colecciones, delegando la decisión técnica final (paginación de base de datos, cursores o caché) a la disciplina de Diseño.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:
