@@ -12,7 +12,7 @@ fi
 bash "$REPO_DIR/scripts/monitor.sh"
 
 git -C "$REPO_DIR" add DASHBOARD.md
-git -C "$REPO_DIR" commit -m "audit: actualizacion $(date +%Y-%m-%d)" -q
+git -C "$REPO_DIR" commit -m "audit: actualizacion $(date '+%Y-%m-%d %H:%M')" -q
 git -C "$REPO_DIR" push -q
 
 if [ "$ORIGINAL" != "$BRANCH" ]; then
