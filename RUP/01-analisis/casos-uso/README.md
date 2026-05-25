@@ -11,6 +11,9 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 - [eliminarGrado](eliminarGrado/README.md) - Análisis de eliminación segura de grados.
 - [importarGrados](importarGrados/README.md) - Análisis de carga masiva de grados académicos.
 
+### Gestión de Asignaturas (Administrador)
+- [abrirAsignaturas](abrirAsignaturas/README.md) - Hub de gestión y listado paginado de asignaturas.
+
 ### Gestión de Exámenes (Administrador)
 - [abrirExamenes](abrirExamenes/README.md) - Hub de gestión y listado de exámenes.
 - [crearExamen](crearExamen/README.md) - Análisis de creación manual de exámenes.

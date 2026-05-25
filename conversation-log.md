@@ -217,6 +217,21 @@
 
 ---
 
+## [2026-05-25 12:45] Sesión 13: Rama de Asignaturas - Hub de Gestión y Ley de Demeter
+
+**Prompt:** "Ok, ahora si abramos sesión para continuar con la rama de asignaturas del diagrama de contexto. Lee el conversation log para situarte y las documentaciones externas. Vamos con abrirAsignaturas() ... Porque la línea de Asignatura a Grado? ... ahi estas introduciendo un code smell ... Es un encadenamiento de trenes ... escribe en GEMINI.md que de ahora en adelante para decisiones de diseño o code smells puedas tomar en cuenta este directorio"
+
+**Resultado:** 
+- **Análisis de `abrirAsignaturas()`:** Inicio de la rama de gestión de Asignaturas. Se diseñó la colaboración MVC para el listado, aplicando la estrategia de "Indirección para Alto Volumen" con `PagedResult<Asignatura>`.
+- **Refinamiento Arquitectónico (Code Smell):** Identificación y corrección de un potencial *Train Wreck* (encadenamiento de métodos). Se aplicó el Principio de Delegación en la entidad `Asignatura` para proveer datos de su asociación (`Grado`) sin romper el encapsulamiento.
+- **Modelado Visual:** Creación del diagrama de colaboración `colaboracion.puml` y generación de su versión `SVG` en `/images/01-analisis/`.
+- **Registro de Diseño:** Documentación en el workspace externo de la aplicación de la **Ley de Demeter** en el análisis de entidades.
+- **Actualización de Protocolos:** Modificación de `GEMINI.md` para incluir formalmente el directorio del workspace externo como **Base de Conocimiento Obligatoria** para futuras decisiones de diseño.
+
+**Decisión:** Se establece como regla arquitectónica el respeto estricto al encapsulamiento (*Information Expert*). Las entidades deben implementar métodos de delegación plana para exponer datos de sus relaciones, prohibiendo la navegación anidada (ej. `asignatura.getGrado().getNombre()`) desde Controladores o Vistas. Se oficializa el uso del conocimiento externo para guiar el rigor técnico del proyecto.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:

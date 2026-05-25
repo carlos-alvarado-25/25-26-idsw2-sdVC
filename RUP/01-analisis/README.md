@@ -28,6 +28,9 @@ Análisis completo de cada caso de uso especificado mediante:
 ### Gestión de Grados
 - **Gestión académica**: abrirGrados(), crearGrado(), editarGrado(), eliminarGrado(), importarGrados()
 
+### Gestión de Asignaturas
+- **Gestión académica**: abrirAsignaturas()
+
 ### Gestión de Exámenes
 - **Programación académica**: abrirExamenes(), crearExamen(), editarExamen(), eliminarExamen()
 
