@@ -1,0 +1,34 @@
+@startuml importarAsignaturas-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Asignaturas Abierta" as AsignaturasAbierto
+
+package importarAsignaturas as "importarAsignaturas()" {
+    rectangle #629EF9 ImportarAsignaturasView
+    rectangle #b5bd68 AsignaturaController
+    rectangle #F2AC4E AsignaturaRepository
+    rectangle #F2AC4E Asignatura
+    rectangle #F2AC4E Grado
+}
+
+rectangle #CDEBA5 ":Asignaturas Abierto" as AsignaturasAbiertoSalida
+
+AsignaturasAbierto -r-> ImportarAsignaturasView: importarAsignaturas()
+
+ImportarAsignaturasView -d-> AsignaturaController: obtenerFormatoRequerido() : String
+
+ImportarAsignaturasView -d-> AsignaturaController: importar(archivo) : ImportResult
+
+AsignaturaController -d-> AsignaturaRepository: guardarLote(asignaturas) : List<Asignatura>
+
+AsignaturaRepository -- Asignatura
+Asignatura -- Grado
+
+ImportarAsignaturasView ..> AsignaturasAbiertoSalida: finalizarImportacion()
+ImportarAsignaturasView ..> AsignaturasAbiertoSalida: cancelarImportacion()
+
+@enduml

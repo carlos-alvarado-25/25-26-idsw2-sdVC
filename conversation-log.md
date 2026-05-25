@@ -232,6 +232,20 @@
 
 ---
 
+## [2026-05-25 13:28] Sesión 14: Rama de Asignaturas - Importación y Resolución de Dependencias
+
+**Prompt:** "Iniciemos ahora una nueva sesión para el caso de uso de importarAsignaturas(), situate leyendo el conversation-log ... Es necesario que tenga la relación con Grado en el diagrama?"
+
+**Resultado:** 
+- **Análisis de `importarAsignaturas()`:** Diseño de la colaboración MVC para la carga masiva de materias. Se identificó la necesidad crítica de vincular cada registro del archivo con un `Grado` preexistente.
+- **Orquestación de Dependencias:** El `AsignaturaController` asume la responsabilidad de validar la integridad referencial antes de delegar la persistencia al repositorio.
+- **Modelado Técnico:** Creación del diagrama de colaboración aplicando los estándares visuales de fondo blanco. Se incluyó explícitamente la entidad `Grado` para justificar la lógica de validación del controlador y asegurar que la `Asignatura` se cree como un objeto íntegro.
+- **Registro de Diseño:** Documentación en el workspace externo sobre la resolución de dependencias en procesos por lote y el uso de `ImportResult` para informar errores de vinculación.
+
+**Decisión:** Se ratifica la política de mostrar entidades dependientes en los diagramas de colaboración cuando la operación de negocio implique un vínculo de datos obligatorio. Esta práctica previene la creación de objetos "huérfanos" y asegura que el análisis capture todas las colaboraciones necesarias para cumplir con las reglas de integridad del dominio.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:

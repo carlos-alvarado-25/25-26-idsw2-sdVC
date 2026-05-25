@@ -13,6 +13,7 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 
 ### Gestión de Asignaturas (Administrador)
 - [abrirAsignaturas](abrirAsignaturas/README.md) - Hub de gestión y listado paginado de asignaturas.
+- [importarAsignaturas](importarAsignaturas/README.md) - Análisis de carga masiva de asignaturas con resolución de dependencias.
 
 ### Gestión de Exámenes (Administrador)
 - [abrirExamenes](abrirExamenes/README.md) - Hub de gestión y listado de exámenes.
