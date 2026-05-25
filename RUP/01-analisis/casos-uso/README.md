@@ -14,6 +14,7 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 ### Gestión de Asignaturas (Administrador)
 - [abrirAsignaturas](abrirAsignaturas/README.md) - Hub de gestión y listado paginado de asignaturas.
 - [crearAsignatura](crearAsignatura/README.md) - Análisis de creación manual de asignaturas vinculadas a Grados.
+- [editarAsignatura](editarAsignatura/README.md) - Análisis de modificación de asignaturas existentes y reasignación de grados.
 - [importarAsignaturas](importarAsignaturas/README.md) - Análisis de carga masiva de asignaturas con resolución de dependencias.
 
 ### Gestión de Exámenes (Administrador)

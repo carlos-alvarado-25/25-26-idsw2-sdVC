@@ -16,13 +16,13 @@ package crearAsignatura as "crearAsignatura()" {
     rectangle #F2AC4E Grado
 }
 
-rectangle #CDEBA5 ":Asignatura Abierta" as AsignaturaAbierto
+rectangle #CDEBA5 ":Asignatura Abierto" as AsignaturaAbierto
 rectangle #CDEBA5 ":Asignaturas Abierta" as AsignaturasAbiertoSalida
 
 AsignaturasAbierto -r-> CrearAsignaturaView: crearAsignatura()
 
-CrearAsignaturaView -d-> AsignaturaController: buscarGrados(criterio, pagina) : PagedResult<Grado>
-AsignaturaController -d-> GradoRepository: buscarPaginados(criterio, pagina) : PagedResult<Grado>
+CrearAsignaturaView -d-> AsignaturaController: obtenerGradosDisponibles() : List<Grado>
+AsignaturaController -d-> GradoRepository: obtenerTodos() : List<Grado>
 
 CrearAsignaturaView -d-> AsignaturaController: crear(codigo, nombre, creditos, id_grado) : Asignatura
 

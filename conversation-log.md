@@ -261,6 +261,20 @@
 
 ---
 
+## [2026-05-25 16:47] Sesión 16: Rama de Asignaturas - Edición y Consistencia Estructural
+
+**Prompt:** "Iniciemos una nueva sesión ahora para el caso de uso de editarAsignaturas ... fijate en algo que no nos dimos cuenta antes, para editarAsignaturas y crearAsignaturas, traemos los grados como la colección conceptual? o como pagedresult? Considerando que en el análisis de grados, viene con list<> ... Reviertelos por favor"
+
+**Resultado:** 
+- **Análisis de `editarAsignatura()`:** Finalización del ciclo de gestión manual de materias. Se definió la colaboración MVC asegurando la carga del estado actual y la reasignación de dependencias académicas.
+- **Corrección Arquitectónica (Coherencia de Volumen):** Identificación y resolución de una inconsistencia en el diseño. Se revirtió el uso de `PagedResult<Grado>` a `List<Grado>` tanto en `crearAsignatura` como en `editarAsignatura`, alineando los selectores con la clasificación de "Bajo Volumen" previamente definida para la entidad Grado.
+- **Modelado Visual:** Actualización y regeneración de diagramas y SVGs para reflejar el uso de Colecciones Conceptuales simples en lugar de indirección paginada para dependencias ligeras.
+- **Registro de Diseño:** Actualización del workspace externo justificando la eliminación de sobre-ingeniería en selectores de bajo impacto para optimizar la implementación y la UX.
+
+**Decisión:** Se establece el principio de **Consistencia de Volumen por Entidad**. Una vez clasificada una entidad como "Bajo Volumen" (ej. Grados), todos sus puntos de acceso y selección en el sistema deben utilizar contratos de lista simples, evitando el uso de técnicas de escalabilidad masiva (como `PagedResult`) donde no aportan valor real y añaden complejidad innecesaria.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:

@@ -8,7 +8,7 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
+- **Versión**: 1.1
 - **Fecha**: 2026-05-25
 - **Autor**: Gemini CLI
 
@@ -34,7 +34,7 @@ Análisis de colaboración del caso de uso `crearAsignatura()` mediante el patr�
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Presentar el formulario de creación de asignatura (Código, Nombre, Créditos).
-- Proveer una interfaz de búsqueda y selección de Grado (paginada y searchable).
+- Proveer una interfaz de selección de Grado (lista conceptual).
 - Capturar la entrada del Administrador y gestionar las acciones de guardado y cancelación.
 - Notificar el éxito de la creación y redirigir a la edición completa de la materia.
 
@@ -48,7 +48,7 @@ Análisis de colaboración del caso de uso `crearAsignatura()` mediante el patr�
 #### AsignaturaController
 **Estereotipo**: Control  
 **Responsabilidades**:
-- Coordinar la búsqueda paginada de Grados para el formulario.
+- Proporcionar la lista conceptual de Grados para el formulario.
 - Validar la integridad de los datos recibidos de la vista.
 - Verificar la unicidad del código de la asignatura.
 - Orquestar la instanciación de `Asignatura` y su persistencia.
@@ -68,7 +68,7 @@ Análisis de colaboración del caso de uso `crearAsignatura()` mediante el patr�
 #### GradoRepository
 **Estereotipo**: Entidad (Repository)  
 **Responsabilidades**:
-- Proveer la búsqueda paginada de Grados académicos (`buscarPaginados`).
+- Proveer la lista conceptual de Grados académicos (`obtenerTodos`).
 
 #### Asignatura
 **Estereotipo**: Entidad  
@@ -86,9 +86,9 @@ Análisis de colaboración del caso de uso `crearAsignatura()` mediante el patr�
 ### secuencia de operaciones
 
 1. **Carga de Formulario**: `:Asignaturas Abierta` invoca `CrearAsignaturaView.crearAsignatura()`.
-2. **Selección de Dependencia**: La vista permite buscar el grado; solicita `buscarGrados(criterio, pagina)` al controlador.
-3. **Consulta Paginada**: El controlador recupera los grados filtrados desde `GradoRepository` usando la entidad conceptual `PagedResult`.
-4. **Captura**: El Administrador selecciona el grado, introduce los datos de la asignatura (código, nombre, créditos) y solicita guardar.
+2. **Selección de Dependencia**: La vista solicita `obtenerGradosDisponibles()` al controlador.
+3. **Consulta de Datos**: El controlador recupera la lista conceptual de grados desde `GradoRepository.obtenerTodos()`.
+4. **Captura**: El Administrador selecciona el grado de la lista, introduce los datos de la asignatura (código, nombre, créditos) y solicita guardar.
 5. **Validación y Creación**: `AsignaturaController` verifica unicidad y crea la instancia de `Asignatura`.
 6. **Persistencia**: Se delega el guardado a `AsignaturaRepository.guardar(asignatura)`.
 7. **Transición**: Se redirige automáticamente a `editarAsignatura()` para permitir refinamientos posteriores.
@@ -100,7 +100,7 @@ Análisis de colaboración del caso de uso `crearAsignatura()` mediante el patr�
 |Requisito del caso de uso|Clase responsable|Método/Colaboración|
 |-|-|-|
 |Introducir código, nombre y créditos|`CrearAsignaturaView`|Captura de formulario|
-|Seleccionar grado asociado|`GradoRepository`|`buscarPaginados(criterio, pagina)`|
+|Seleccionar grado asociado|`GradoRepository`|`obtenerTodos()`|
 |Validar campos requeridos|`AsignaturaController`|Lógica de creación|
 |Persistir en base de datos|`AsignaturaRepository`|`guardar(asignatura)`|
 

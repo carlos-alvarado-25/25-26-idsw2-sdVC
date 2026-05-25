@@ -1,0 +1,37 @@
+@startuml editarAsignatura-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Asignaturas Abierta" as AsignaturasAbierto
+
+package editarAsignatura as "editarAsignatura()" {
+    rectangle #629EF9 EditarAsignaturaView
+    rectangle #b5bd68 AsignaturaController
+    rectangle #F2AC4E AsignaturaRepository
+    rectangle #F2AC4E GradoRepository
+    rectangle #F2AC4E Asignatura
+    rectangle #F2AC4E Grado
+}
+
+rectangle #CDEBA5 ":Asignaturas Abierta" as AsignaturasAbiertoSalida
+
+AsignaturasAbierto -r-> EditarAsignaturaView: editarAsignatura(asignatura)
+
+EditarAsignaturaView -d-> AsignaturaController: obtenerGradosDisponibles() : List<Grado>
+AsignaturaController -d-> GradoRepository: obtenerTodos() : List<Grado>
+
+EditarAsignaturaView -d-> AsignaturaController: actualizar(asignatura, codigo, nombre, creditos, id_grado) : Asignatura
+
+AsignaturaController -d-> AsignaturaRepository: existeCodigo(codigo) : Boolean
+AsignaturaController -r-> Asignatura: <<update>>
+AsignaturaController -d-> AsignaturaRepository: actualizar(asignatura)
+
+Asignatura -- Grado
+
+EditarAsignaturaView ..> AsignaturasAbiertoSalida: <<finalizar>>
+EditarAsignaturaView ..> AsignaturasAbiertoSalida: <<cancelar>>
+
+@enduml
