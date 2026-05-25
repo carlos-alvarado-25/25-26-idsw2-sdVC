@@ -246,6 +246,21 @@
 
 ---
 
+## [2026-05-25 14:25] Sesión 15: Rama de Asignaturas - Creación Manual y Refuerzo de Leyes de Diseño
+
+**Prompt:** "Abramos sesión de nuevo para hacer el siguiente caso de uso crearAsignatura(). Situate leyendo exquisitamente el conversation-log y las decisiones que hemos tomado."
+
+**Resultado:** 
+- **Análisis de `crearAsignatura()`:** Diseño de la colaboración MVC para la creación de nuevas materias. Se aplicó el patrón "El Delgado" para la transición fluida hacia el modo de edición.
+- **Escalabilidad en el Formulario:** Implementación de la estrategia de "Búsqueda + Paginación" para la selección de la dependencia `Grado`, utilizando el contrato `buscarGrados(criterio, pagina) : PagedResult<Grado>`.
+- **Blindaje de Encapsulamiento:** Aplicación sistemática de la Ley de Demeter en el modelo de análisis. Se definió que la entidad `Asignatura` delega los datos de su relación (ej. nombre del grado) para evitar el acoplamiento excesivo en controladores y vistas.
+- **Modelado Visual:** Creación del diagrama de colaboración aplicando los estándares de legibilidad (fondo blanco) y su exportación SVG.
+- **Registro de Diseño:** Documentación en el workspace externo del racional detrás de la inyección de dependencias paginada y la delegación de responsabilidades.
+
+**Decisión:** Se ratifica el uso de contratos paginados para cualquier selector de entidades que, basándose en el conocimiento del dominio, prevea un volumen de datos significativo. Se establece el Principio de Delegación como requisito obligatorio para la interacción con asociaciones entre entidades, garantizando un código de implementación limpio y mantenible.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:
