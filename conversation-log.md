@@ -275,6 +275,21 @@
 
 ---
 
+## [2026-05-25 17:11] Sesión 17: Rama de Asignaturas - Eliminación Segura e Integridad Referencial
+
+**Prompt:** "Perfecto, abramos una última sesión por hoy para eliminarAsignaturas() ... finalicemos la sesión"
+
+**Resultado:** 
+- **Análisis de `eliminarAsignatura()`:** Finalización de la rama funcional de Asignaturas. Se diseñó la colaboración MVC enfocada en la preservación de la integridad del sistema ante borrados.
+- **Control de Impacto en Cascada Inversa:** Implementación de una consulta obligatoria al `ExamenRepository` para detectar y cuantificar exámenes vinculados a la materia antes de permitir la eliminación.
+- **Coherencia Transversal:** Replicación del patrón de "Confirmación Informada" y retorno de tipo `Integer` para dependencias, unificando la experiencia administrativa con la rama de Grados.
+- **Modelado Visual:** Creación del diagrama de colaboración aplicando los estándares de legibilidad y generación de su respectivo activo SVG.
+- **Actualización Documental:** Registro de las decisiones de diseño sobre integridad referencial en el workspace externo y actualización de índices.
+
+**Decisión:** Se consolida el patrón de "Borrado Seguro" como estándar para todas las entidades base del sistema (Grados, Asignaturas, Profesores, etc.). Se prioriza la integridad referencial sobre la simplicidad técnica, obligando a que cualquier operación destructiva pase por una fase de verificación cuantitativa de impacto en la capa de análisis.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:

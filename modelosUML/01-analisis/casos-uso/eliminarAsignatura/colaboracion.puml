@@ -1,0 +1,33 @@
+@startuml eliminarAsignatura-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Asignaturas Abierta" as AsignaturasAbierto
+
+package eliminarAsignatura as "eliminarAsignatura()" {
+    rectangle #629EF9 EliminarAsignaturaView
+    rectangle #b5bd68 AsignaturaController
+    rectangle #F2AC4E AsignaturaRepository
+    rectangle #F2AC4E Asignatura
+}
+
+rectangle #F2AC4E ExamenRepository
+rectangle #CDEBA5 ":Asignaturas Abierta" as AsignaturasAbiertoSalida
+
+AsignaturasAbierto -r-> EliminarAsignaturaView: eliminarAsignatura(asignatura)
+
+EliminarAsignaturaView -d-> AsignaturaController: verificarExamenesAsociados(asignatura) : Integer
+
+AsignaturaController -d-> ExamenRepository: contarPorAsignatura(asignatura) : Integer
+
+EliminarAsignaturaView -d-> AsignaturaController: eliminar(asignatura)
+
+AsignaturaController -d-> AsignaturaRepository: eliminar(asignatura)
+
+EliminarAsignaturaView ..> AsignaturasAbiertoSalida: <<finalizar>>
+EliminarAsignaturaView ..> AsignaturasAbiertoSalida: <<cancelar>>
+
+@enduml
