@@ -103,7 +103,7 @@
 
 ---
 
-## [15:04] Sesión 6: Rama de Grados - Creación Manual (crearGrado)
+## [15:04] Sesión 5: Rama de Grados - Creación Manual (crearGrado)
 
 **Prompt:** "Iniciemos la nueva sesión ahora amigo, siguiendo con la rama de Grados del diagrama de contexto, el siguiente que nos tocá es crearGrado. ... porqué en pySigHor en el caso de uso de crearAul existe un cargarEdificios() ... Podríamos meter el importarGrados y crearGrados en uno mismo?"
 
@@ -118,7 +118,7 @@
 
 ---
 
-## [2026-05-24 12:03] Sesión 7: Rama de Grados - Edición y Refinamiento de Contratos
+## [2026-05-24 12:03] Sesión 6: Rama de Grados - Edición y Refinamiento de Contratos
 
 **Prompt:** "Perfecto, ahora abramos sesión de vibecoding e iniciemos el análisis de editarGrados ... Porque el update de Controller a Grado directamente? Sin pasar por el GradoRepository ... Me parece, ahora porqué pones nuevosDatos ? en vez de los datos que refleja el caso de uso en la parte de requisitos?"
 
@@ -133,7 +133,7 @@
 
 ---
 
-## [2026-05-24 12:22] Sesión 8: Rama de Grados - Eliminación Segura e Integridad Referencial
+## [2026-05-24 12:22] Sesión 7: Rama de Grados - Eliminación Segura e Integridad Referencial
 
 **Prompt:** "Procedamos a abrir sesión de nuevo, para el caso de uso de eliminarGrados y finalizar la rama de Grados ... Porqué verificarAsignaturasAsociadas me devuelve un entero?"
 
@@ -147,7 +147,7 @@
 
 ---
 
-## [2026-05-24 13:49] Sesión 9: Rama de Exámenes - Hub de Programación y Escalabilidad
+## [2026-05-24 13:49] Sesión 8: Rama de Exámenes - Hub de Programación y Escalabilidad
 
 **Prompt:** "Ok gemini, iniciemos otra sesión ahora vamos a analizar los casos de uso de la rama de Examenes. Iniciemos por abrirExamenes ... Con lo que hablamos de List, tu crees que sea el mismo caso que Grados? Ya que exámenes pueden haber tanto parciales, finales y extraordinarios por asignatura"
 
@@ -162,7 +162,7 @@
 
 ---
 
-## [2026-05-24 14:25] Sesión Extraordinaria: Refinamiento de Entidades Conceptuales para Alto Volumen
+## [2026-05-24 14:25] Sesión 9: Refinamiento de Entidades Conceptuales para Alto Volumen
 
 **Prompt:** "Reitera la decisión de que PagedResult es una entidad inventada que, a priori, no es paginación. Solo algo que contiene lo que necesitamos por si hay mucho volumen de datos para una entidad en concreto."
 
