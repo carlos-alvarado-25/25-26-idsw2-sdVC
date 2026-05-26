@@ -336,6 +336,21 @@
 
 ---
 
+## [2026-05-26 21:13] Sesión 21: Rama de Exámenes - Control de Calidad y Resolución de Conflictos
+
+**Prompt:** "Abramos de nuevo otra sesión para el listarConflictosExamenes(), quiero que en esta seas minucioso y cuidadoso con los detalles. ... Dime un caso donde se aplicaría la secuencia de este caso de uso para verificarla ... anota en el conversation log estas decisiones, y en mi workspace externo esta secuencia que comentamos."
+
+**Resultado:** 
+- **Análisis de `listarConflictosExamenes()`:** Diseño de la colaboración MVC para el componente de aseguramiento de calidad del calendario. Se implementó el patrón de detección masiva delegada en infraestructura.
+- **Estrategia de Indirección Avanzada:** Creación de la entidad conceptual `Conflicto` para abstraer colisiones de horarios, aulas y personal, asegurando un tratamiento uniforme y escalable de las alertas de programación.
+- **Diseño de Resolución Asistida:** Definición de flujos donde el sistema busca activamente disponibilidad (`buscarDisponibilidad`) para sugerir soluciones al Administrador, transformando el listado en una herramienta de soporte a la decisión.
+- **Validación de Escenario:** Simulación y documentación de un caso real de "Sobreposición de Aula", verificando que la secuencia de operaciones (Detección -> Asistencia -> Resolución) cubre todas las necesidades del dominio.
+- **Modelado Visual:** Generación del diagrama `colaboracion.puml` y su activo `SVG` bajo los estándares de alta visibilidad.
+
+**Decisión:** Se oficializa el uso del patrón de "Resolución Asistida" para conflictos complejos. Se decide que el sistema no debe limitarse a informar de errores, sino que debe colaborar con el repositorio para proponer alternativas válidas basándose en el estado actual del calendario, reduciendo la carga cognitiva del Administrador y garantizando la coherencia sistémica.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:

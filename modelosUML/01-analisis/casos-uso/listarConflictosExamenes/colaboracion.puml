@@ -1,0 +1,38 @@
+@startuml listarConflictosExamenes-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Exámenes Abierto" as ExamenesAbierto
+
+package listarConflictosExamenes as "listarConflictosExamenes()" {
+    rectangle #629EF9 ListarConflictosView
+    rectangle #b5bd68 ExamenController
+    rectangle #F2AC4E ExamenRepository
+    rectangle #F2AC4E Conflicto
+    rectangle #F2AC4E Examen
+}
+
+rectangle #CDEBA5 ":Exámenes Abierto" as ExamenesAbiertoSalida
+
+ExamenesAbierto -r-> ListarConflictosView: listarConflictos()
+
+ListarConflictosView -d-> ExamenController: obtenerConflictos(filtros, pagina) : PagedResult<Conflicto>
+ExamenController -d-> ExamenRepository: detectarConflictos(filtros, pagina) : PagedResult<Conflicto>
+
+ExamenRepository -- Conflicto
+Conflicto -- Examen
+
+ListarConflictosView -d-> ExamenController: obtenerOpcionesResolucion(conflicto) : List<Resolucion>
+ExamenController -d-> ExamenRepository: buscarDisponibilidad(conflicto) : List<Resolucion>
+
+ListarConflictosView -d-> ExamenController: resolverConflicto(conflicto, resolucion) : Examen
+ExamenController -r-> Examen: <<update>>
+ExamenController -d-> ExamenRepository: actualizar(examen)
+
+ListarConflictosView ..> ExamenesAbiertoSalida: <<finalizar>>
+ListarConflictosView ..> ExamenesAbiertoSalida: <<cerrar>>
+
+@enduml
