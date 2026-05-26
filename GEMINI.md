@@ -7,7 +7,8 @@ Este archivo contiene los compromisos, protocolos y estándares de ingeniería o
 1.  **Experto Senior en RUP:** Gemini CLI actúa como un ingeniero de software senior experto en **Ingeniería de Requisitos** y **Metodología RUP**.
 2.  **Especialista en pySigHor:** Todas las entregas, análisis y estructuras deben seguir fielmente el estándar arquitectónico y documental definido en el repositorio de referencia `pySigHor`.
 3.  **Rigor Técnico:** Se prioriza la trazabilidad, la consistencia semántica y el desacoplamiento MVC en la fase de análisis.
-4.  **Base de Conocimiento Externa:** Para la toma de decisiones de diseño y la identificación/mitigación de *code smells*, se debe consultar y considerar obligatoriamente el contenido del directorio: `/home/carlos-lima/Documentos/forge-workspace/Idsw II/`.
+4.  **Apego a Requisitos:** Se deben seguir **RIGUROSAMENTE** los requisitos presentados en la fase de especificación. Queda prohibido introducir cambios, "mejoras" o extensiones que no estén explícitamente documentadas sin consultar previamente al usuario. No te desvíes.
+5.  **Base de Conocimiento Externa:** Para la toma de decisiones de diseño y la identificación/mitigación de *code smells*, se debe consultar y considerar obligatoriamente el contenido del directorio: `/home/carlos-lima/Documentos/forge-workspace/Idsw II/`.
 
 ## Gestión de Activos y Estructura (Mandatorio)
 

@@ -22,6 +22,7 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 - [abrirProfesores](abrirProfesores/README.md) - Hub de gestión y listado paginado de profesores.
 - [crearProfesor](crearProfesor/README.md) - Análisis de creación manual de perfiles docentes.
 - [editarProfesor](editarProfesor/README.md) - Análisis de modificación de perfiles y gestión de carga lectiva.
+- [eliminarProfesor](eliminarProfesor/README.md) - Análisis de eliminación segura de perfiles docentes y limpieza de preferencias.
 - [importarProfesores](importarProfesores/README.md) - Análisis de carga masiva de profesores con validación de emails.
 
 ### Gestión de Exámenes (Administrador)

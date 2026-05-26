@@ -366,6 +366,21 @@
 
 ---
 
+## [2026-05-26 22:45] Sesión 23: Rama de Profesores - Eliminación y Protocolo de Rigor en Requisitos
+
+**Prompt:** "Perfecto, y abramos sesión una última vez por hoy para el caso de uso de elminarProfesor() ... Porque utilizas un Map ? para verificarImpacto? ... Deja anotado ese Map como una entrada futura probable. Pero de momento rigete a los requisitos presentados. Además incrusta en GEMINI.md que sigas RIGUROSAMENTE los requisitos"
+
+**Resultado:** 
+- **Análisis de `eliminarProfesor()`:** Finalización de la rama de gestión docente. Se diseñó la colaboración MVC para la eliminación segura de perfiles, incluyendo la limpieza coordinada de preferencias de disponibilidad.
+- **Rigor en Trazabilidad:** Corrección minuciosa del análisis para eliminar el uso de estructuras genéricas (`Map`) en favor de retornos explícitos (`Integer`) para el conteo de exámenes asignados, cumpliendo estrictamente con el muestreo de datos definido en la especificación.
+- **Modelado Visual:** Actualización y regeneración del diagrama `colaboracion.puml` y su SVG para reflejar la simplificación técnica alineada con los requisitos actuales.
+- **Actualización de Protocolos:** Modificación de `GEMINI.md` para elevar el rigor técnico, prohibiendo explícitamente la introducción de cambios o "mejoras" no documentadas en los requisitos sin consulta previa.
+- **Registro de Diseño:** Documentación en el workspace externo de la propuesta del `Map` de impacto como una futura extensión probable, manteniendo el análisis actual centrado en la base instalada de requisitos.
+
+**Decisión:** Se establece el **Apego Riguroso a Requisitos** como máxima prioridad del proyecto. Se descartan estructuras genéricas o extensibles en favor de tipos de datos explícitos que mapeen 1 a 1 con la especificación de RUP. Se delega cualquier mejora proactiva a una fase de consulta con el usuario, asegurando que el análisis no se desvíe del dominio del negocio solicitado.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:
