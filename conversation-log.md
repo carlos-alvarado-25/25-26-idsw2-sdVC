@@ -305,6 +305,21 @@
 
 ---
 
+## [2026-05-26 20:33] Sesión 19: Rama de Profesores - Creación Manual y Coherencia de Catálogos
+
+**Prompt:** "Genial, ahora iniciemos otra sesión para el caso de uso de crearProfesor. Leé detenidamente el conversation-log para situarte y todo el material externo que tenemos y empecemos. ... Aquí los departamentos representan un dato o una entidad separada? Porqué en el caso de uso no veo reflejado eso de obtenerDepartamentosDisponibles() ?"
+
+**Resultado:** 
+- **Análisis de `crearProfesor()`:** Diseño de la colaboración MVC para el alta manual de docentes. Se aplicó el patrón "El Delgado" para transicionar a la edición tras el guardado básico.
+- **Validación de Identidad:** Integración obligatoria de la comprobación de email único en la capa de control, alineada con los requisitos de seguridad de acceso.
+- **Calidad de Datos:** Inclusión del método `obtenerDepartamentosDisponibles()` para poblar el selector de la vista, garantizando que los datos manuales coincidan con los catálogos de importación masiva.
+- **Modelado Visual:** Creación del diagrama `colaboracion.puml` con estándares visuales de alto contraste y su exportación SVG en `/images/01-analisis/`.
+- **Registro de Diseño:** Documentación en el workspace externo de la decisión de tratar el "Departamento" como un atributo de catálogo (String) gestionado centralizadamente para evitar inconsistencias tipográficas.
+
+**Decisión:** Se prioriza la coherencia sistémica sobre la literalidad estricta de un diagrama de requisitos individual. Se establece que cualquier atributo que actúe como filtro en el sistema (como el departamento) debe analizarse con métodos de apoyo que guíen al usuario, asegurando la integridad del listado general sin necesidad de elevar cada dato a la categoría de entidad completa.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:
