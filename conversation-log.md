@@ -320,6 +320,22 @@
 
 ---
 
+## [2026-05-26 20:50] Sesión 20: Rama de Profesores - Edición y Gestión de Carga Lectiva
+
+**Prompt:** "Abramos sesión ahora para el caso de uso de editarProfesor(), utiliza el conversation-log.md para situarte ... Perfecto todo, escribe en el conversation-log el contenido de las sesión"
+
+**Resultado:** 
+- **Análisis de `editarProfesor()`:** Finalización del ciclo de vida administrativo del docente. Se definió la colaboración MVC para la actualización de perfiles y la gestión dinámica de materias impartidas.
+- **Escalabilidad en Asignación:** Integración del patrón de "Búsqueda + Paginación" para la gestión de la carga docente, utilizando `PagedResult<Asignatura>` para asegurar que el selector sea eficiente ante catálogos extensos.
+- **Validación de Identidad Funcional:** Implementación de la comprobación de unicidad de email en el controlador de edición, protegiendo la integridad del sistema de acceso.
+- **Cumplimiento Normativo (Demeter):** Refuerzo de la delegación en la entidad `Profesor` para exponer datos de sus asociaciones, manteniendo el desacoplamiento de las vistas de edición.
+- **Artefactos Técnicos:** Creación del diagrama de colaboración (`PUML` + `SVG`) y documentación detallada en `RUP/01-analisis/`.
+- **Registro de Diseño:** Actualización del workspace externo con las decisiones sobre gestión de carga paginada y validación de conflictos de email.
+
+**Decisión:** Se consolida el uso de entidades inventadas para la gestión de relaciones de alto volumen dentro de formularios de edición. Se establece que el controlador de edición debe replicar las validaciones de identidad de la creación, garantizando que el mantenimiento manual de datos no comprometa las reglas de integridad globales del sistema.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:

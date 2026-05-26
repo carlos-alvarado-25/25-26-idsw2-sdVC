@@ -1,0 +1,39 @@
+@startuml editarProfesor-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Profesores Abierto" as ProfesoresAbierto
+
+package editarProfesor as "editarProfesor()" {
+    rectangle #629EF9 EditarProfesorView
+    rectangle #b5bd68 ProfesorController
+    rectangle #F2AC4E ProfesorRepository
+    rectangle #F2AC4E AsignaturaRepository
+    rectangle #F2AC4E Profesor
+    rectangle #F2AC4E Asignatura
+}
+
+rectangle #CDEBA5 ":Profesores Abierto" as ProfesoresAbiertoSalida
+
+ProfesoresAbierto -r-> EditarProfesorView: editarProfesor(profesor)
+
+EditarProfesorView -d-> ProfesorController: obtenerDepartamentosDisponibles() : List<String>
+
+EditarProfesorView -d-> ProfesorController: buscarAsignaturas(criterio, pagina) : PagedResult<Asignatura>
+ProfesorController -d-> AsignaturaRepository: buscarPaginadas(criterio, pagina) : PagedResult<Asignatura>
+
+EditarProfesorView -d-> ProfesorController: actualizar(profesor, codigo, nombre, email, departamento, id_asignaturas) : Profesor
+
+ProfesorController -d-> ProfesorRepository: existeEmailExcluyendo(email, profesorId) : Boolean
+ProfesorController -r-> Profesor: <<update>>
+ProfesorController -d-> ProfesorRepository: actualizar(profesor)
+
+Profesor -- Asignatura
+
+EditarProfesorView ..> ProfesoresAbiertoSalida: <<finalizar>>
+EditarProfesorView ..> ProfesoresAbiertoSalida: <<cancelar>>
+
+@enduml
