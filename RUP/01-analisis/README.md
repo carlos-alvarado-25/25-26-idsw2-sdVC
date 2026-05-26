@@ -31,6 +31,9 @@ Análisis completo de cada caso de uso especificado mediante:
 ### Gestión de Asignaturas
 - **Gestión académica**: abrirAsignaturas(), crearAsignatura(), editarAsignatura(), importarAsignaturas()
 
+### Gestión de Profesores
+- **Gestión académica**: abrirProfesores(), importarProfesores()
+
 ### Gestión de Exámenes
 - **Programación académica**: abrirExamenes(), crearExamen(), editarExamen(), eliminarExamen()
 

@@ -1,0 +1,43 @@
+@startuml abrirProfesores-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+package abrirProfesores as "abrirProfesores()" {
+    rectangle #629EF9 ListarProfesoresView
+    rectangle #b5bd68 ProfesorController
+    rectangle #F2AC4E ProfesorRepository
+    rectangle #F2AC4E Profesor
+    rectangle #F2AC4E Asignatura
+}
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
+rectangle #CDEBA5 ":Collaboration CrearProfesor" as CrearProfesor
+rectangle #CDEBA5 ":Collaboration EditarProfesor" as EditarProfesor
+rectangle #CDEBA5 ":Collaboration EliminarProfesor" as EliminarProfesor
+rectangle #CDEBA5 ":Collaboration ImportarProfesores" as ImportarProfesores
+
+SistemaDisponible -r-> ListarProfesoresView: abrirProfesores()
+
+ListarProfesoresView -d-> ProfesorController: listarProfesores(filtros, pagina) : PagedResult<Profesor>
+
+ProfesorController --> ProfesorRepository: obtenerPaginados(filtros, pagina) : PagedResult<Profesor>
+
+ProfesorRepository -- Profesor
+Profesor -- Asignatura
+
+ListarProfesoresView --> ProfesorController: filtrarProfesores(criterio, pagina) : PagedResult<Profesor>
+
+ProfesorController --> ProfesorRepository: buscarPaginados(criterio, pagina) : PagedResult<Profesor>
+
+ListarProfesoresView ..> SistemaDisponibleSalida: completarGestion()
+ListarProfesoresView ..> CrearProfesor: crearProfesor()
+ListarProfesoresView ..> EditarProfesor: editarProfesor()
+ListarProfesoresView ..> EliminarProfesor: eliminarProfesor()
+ListarProfesoresView ..> ImportarProfesores: importarProfesores()
+
+@enduml
