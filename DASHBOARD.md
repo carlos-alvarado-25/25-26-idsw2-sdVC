@@ -1,7 +1,7 @@
 <!-- monitor-format: vcc9d63c1 -->
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-26 12:28:01 CEST | 6 días totales
+> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-26 14:19:39 CEST | 6 días totales
 
 ## Leyenda
 
@@ -19,7 +19,7 @@
 
 ## Tabla
 
-<sub>Ultimas actualizaciones: [marcosgutierrez6](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC), [aeRomeroz](https://github.com/aeRomeroz/25-26-idsw2-sdVC), [SdeCos](https://github.com/SdeCos/25-26-idsw2-sdVC), [liamanderson873](https://github.com/liamanderson873/25-26-idsw2-sdVC), [jerdier](https://github.com/jerdier/25-26-idsw2-sdVC)</sub>
+<sub>Ultimas actualizaciones: [Pareyor](https://github.com/Pareyor/25-26-idsw2-sdVC), [marcosgutierrez6](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC), [aeRomeroz](https://github.com/aeRomeroz/25-26-idsw2-sdVC), [SdeCos](https://github.com/SdeCos/25-26-idsw2-sdVC), [liamanderson873](https://github.com/liamanderson873/25-26-idsw2-sdVC)</sub>
 
 | Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | 📐 | 🔍 | 🧩 | ⚙️ | 🔌 | SHA |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -49,7 +49,7 @@
 | <sub>[alejandrofondo](https://github.com/alejandrofondo/25-26-idsw2-sdVC)<br>0 commits</sub> | <sub>feat: sesión de vibecoding idsw2<br>19-05</sub> | 0 | :red_circle: | - | - | - | - | - | - | - | - | <sub>9ff5cbe</sub> |
 | <sub>[marcosgutierrez6](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC)<br>12 commits</sub> | <sub>[feat: Analisis del caso de uso de exportarAlumnos()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/e3ab1488f024674f0fd83e7706bd4a9477cad8fc)<br>26-05 10:32</sub> | 4 | :red_circle: | [💡](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | [📐](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+6d</sub> | - | - | - | [🔌](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/blob/main/src)<br><sub>+2d</sub> | <sub>e3ab148</sub> |
 | <sub>[beatriizorozco](https://github.com/beatriizorozco/25-26-idsw2-sdVC)<br>2 commits</sub> | <sub>[feat(codex): agregar skill session-memory](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/fe592bf71c1ecd276f26a2d7f5fb660fe5f30030)<br>21-05 01:28</sub> | 1 | :red_circle: | [💡](https://github.com/beatriizorozco/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - | <sub>fe592bf</sub> |
-| <sub>[martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC)<br>65 commits</sub> | <sub>[fix: correccion analisis eliminarRespuesta](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/bb6676467826a833fd88f732ab86668eaed2b85f)<br>26-05 12:02</sub> | 7 | :green_circle: | [💡](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+1d</sub> | [📄](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/README.md) | [📐](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+2d</sub> | - | - | - | - | <sub>bb66764</sub> |
+| <sub>[martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC)<br>67 commits</sub> | <sub>[fix: correccion analisis generarExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/f883774bf7cf4c7ad6f9ecfb754494e79cc5c33c)<br>26-05 12:57</sub> | 7 | :green_circle: | [💡](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+1d</sub> | [📄](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/README.md) | [📐](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+2d</sub> | - | - | - | - | <sub>f883774</sub> |
 | <sub>[Camila-Lesly](https://github.com/Camila-Lesly/25-26-idsw2-sdVC)<br>37 commits</sub> | <sub>[refactor(uml):update design diagrams and specs with new functions](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/commit/60c07a7de80661e28dbfd6daf32557ffcdb8b3cb)<br>25-05 23:49</sub> | 5 | :green_circle: | [💡](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+2d</sub> | [📄](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/README.md) | [📐](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+2d</sub> | [🔍](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/RUP/01-analisis)<br><sub>+4d</sub> | [🧩](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/RUP/02-diseño)<br><sub>+4d</sub> | [⚙️](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/RUP/03-desarrollo)<br><sub>+6d</sub> | [🔌](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/src)<br><sub>+5d</sub> | <sub>60c07a7</sub> |
 
 ## Resumen
