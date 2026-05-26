@@ -1,0 +1,39 @@
+@startuml asignarProfesorAExamen-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Profesor Abierto" as ProfesorAbiertoEstado
+
+package asignarProfesorAExamen as "asignarProfesorAExamen()" {
+    rectangle #629EF9 AsignarProfesorView
+    rectangle #b5bd68 ExamenController
+    rectangle #F2AC4E ExamenRepository
+    rectangle #F2AC4E ProfesorRepository
+    rectangle #F2AC4E Examen
+    rectangle #F2AC4E Profesor
+}
+
+rectangle #CDEBA5 ":Profesor Abierto" as ProfesorAbiertoSalida
+
+ProfesorAbiertoEstado -r-> AsignarProfesorView: asignarProfesor()
+
+AsignarProfesorView -d-> ExamenController: buscarProfesores(criterio, pagina) : PagedResult<Profesor>
+ExamenController -d-> ProfesorRepository: buscarPaginados(criterio, pagina) : PagedResult<Profesor>
+
+AsignarProfesorView -d-> ExamenController: buscarExamenesSinProfesor(pagina) : PagedResult<Examen>
+ExamenController -d-> ExamenRepository: obtenerPendientesAsignacion(pagina) : PagedResult<Examen>
+
+AsignarProfesorView -d-> ExamenController: verificarDisponibilidad(profesor, examen) : Boolean
+ExamenController -d-> ExamenRepository: hayCruceHorario(profesor, examen) : Boolean
+
+AsignarProfesorView -d-> ExamenController: asignar(examen, profesor)
+ExamenController -r-> Examen: <<update>>
+ExamenController -d-> ExamenRepository: actualizar(examen)
+
+AsignarProfesorView ..> ProfesorAbiertoSalida: <<finalizar>>
+AsignarProfesorView ..> ProfesorAbiertoSalida: <<cancelar>>
+
+@enduml

@@ -351,6 +351,21 @@
 
 ---
 
+## [2026-05-26 22:14] Sesión 22: Rama de Exámenes - Asignación de Recursos y Topología de Navegación
+
+**Prompt:** "Pasemos ahora con el caso de uso de asignarProfesorAExamen, igualmente se minucioso y atento al detalle ... Una duda, el proceso finaliza en Examenes Abierto, pero mi caso de uso es PROFESOR_EXAMENES_ABIERTO ... Corrige también listarConflictosExamenes ya que también finaliza en PROFESOR_PREFERENCIAS_ABIERTO ... y también soporta que las preferencias del profesor sean tipo: no puedo un día en concreto"
+
+**Resultado:** 
+- **Análisis de `asignarProfesorAExamen()`:** Diseño de la colaboración MVC para la orquestación de recursos docentes. Se implementó una doble validación de escalabilidad utilizando `PagedResult` tanto para Profesores disponibles como para Exámenes sin asignar.
+- **Topología de Navegación Estricta:** Re-estructuración profunda de los diagramas de colaboración de `asignarProfesorAExamen` y `listarConflictosExamenes` para alinear sus estados de entrada y salida exactamente con el Diagrama de Contexto del Administrador (naciendo desde la gestión del Profesor, no desde Exámenes).
+- **Integración de Preferencias:** Expansión del análisis de `listarConflictosExamenes` para incluir el `PreferenciaRepository`. Se definió que la búsqueda de disponibilidad de resolución debe cruzar obligatoriamente los datos de aulas vacías con las restricciones horarias y de días bloqueados ("no puedo un día en concreto") específicas de cada docente.
+- **Validación Lógica:** Creación de un caso de prueba documentado en `Explicaciones de Diseño` para verificar la robustez del flujo de resolución de colisiones y la justificación de delegar la detección al repositorio.
+- **Modelado Visual:** Actualización y regeneración de los activos `SVG` para reflejar la nueva topología de navegación centrada en el recurso humano.
+
+**Decisión:** Se establece que la resolución de conflictos y la asignación de recursos en este dominio son, intrínsecamente, herramientas de "Gestión de Personal Docente" antes que simples ajustes de calendario. Se determina que cualquier sugerencia automatizada del sistema debe someterse a una validación estricta contra las restricciones operativas (`PreferenciaRepository`) del profesor afectado para asegurar la viabilidad de la resolución propuesta. Se ratifica la **separación de `PreferenciaRepository` del repositorio de perfiles** aplicando el Principio de Responsabilidad Única (SRP); esta decisión técnica evita el sobrecrecimiento del controlador de profesores (*Fat Repository*) y permite optimizar de forma independiente la lógica de disponibilidad horaria y cruces de fechas, lo cual es crítico para la escalabilidad del algoritmo central de generación de calendarios.
+
+---
+
 > El log no se reescribe. Se escribe mientras ocurre.
 >
 > Para cada intercambio relevante con el AI, añada una entrada con este formato:

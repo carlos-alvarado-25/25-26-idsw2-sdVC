@@ -35,7 +35,7 @@ Análisis completo de cada caso de uso especificado mediante:
 - **Gestión académica**: abrirProfesores(), crearProfesor(), editarProfesor(), importarProfesores()
 
 ### Gestión de Exámenes
-- **Programación académica**: abrirExamenes(), crearExamen(), editarExamen(), eliminarExamen(), listarConflictosExamenes()
+- **Programación académica**: abrirExamenes(), crearExamen(), editarExamen(), eliminarExamen(), listarConflictosExamenes(), asignarProfesorAExamen()
 
 ## Trazabilidad
 

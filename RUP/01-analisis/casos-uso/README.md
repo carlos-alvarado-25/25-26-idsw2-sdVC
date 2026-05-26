@@ -30,6 +30,7 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 - [editarExamen](editarExamen/README.md) - Análisis de modificación de exámenes y asignación de recursos.
 - [eliminarExamen](eliminarExamen/README.md) - Análisis de eliminación de exámenes programados.
 - [listarConflictosExamenes](listarConflictosExamenes/README.md) - Análisis de detección y resolución de colisiones en el calendario.
+- [asignarProfesorAExamen](asignarProfesorAExamen/README.md) - Análisis de vinculación de docentes a la programación académica.
 
 
 ## Estructura de análisis
