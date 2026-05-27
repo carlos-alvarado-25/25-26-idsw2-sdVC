@@ -1,19 +1,28 @@
 # Timeline - carlos-alvarado-25
 
 > Repo: [carlos-alvarado-25/25-26-idsw2-sdVC](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)
-> Commits: 30 | Días activos: 7 | Sesiones log: 9
+> Commits: 31 | Días activos: 7 | Sesiones log: 9
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 30 (24 feat / 3 fix / 3 other) |
+| Commits propios | 31 (25 feat / 3 fix / 3 other) |
 | Ratio fix/feat | 0.12 |
 | Días activos | 7 |
 | Sesiones documentadas | 9 |
 | Sesiones sin fecha en log | 9 |
-| 📐 UML | 2026-05-23 |
-| 🔍 Análisis | 2026-05-22 |
+
+```mermaid
+gantt
+    title Progresion de artefactos
+    dateFormat YYYY-MM-DD
+    axisFormat %d/%m
+    section Artefactos
+        Inicio       :milestone, 2026-05-19, 0d
+        UML          :done, 2026-05-23, 2026-05-27
+        Analisis     :done, 2026-05-22, 2026-05-27
+```
 
 ---
 
@@ -118,10 +127,11 @@
 
 ## Día 9 · 2026-05-27
 
-### Commits (1: 0 feat / 0 fix)
+### Commits (2: 1 feat / 0 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 20:54 | [feat: Add analysis documentation and collaboration diagrams for abrirAulas and crearAula use cases](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/82be3f90dba2e76b5a624c05f03cba15227abd60) |
 | 20:37 | [Refactor use case diagrams for editing entities](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/a47154ad0208f80f98205c0110351b3e20878e9a) |
 
 > ⚠️ Commits sin entrada en log

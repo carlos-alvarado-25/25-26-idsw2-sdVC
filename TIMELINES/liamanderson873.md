@@ -11,8 +11,17 @@
 | Ratio fix/feat | 0.16 |
 | Días activos | 4 |
 | Sesiones documentadas | 0 |
-| 📐 UML | 2026-05-21 |
-| 🔍 Análisis | 2026-05-21 |
+
+```mermaid
+gantt
+    title Progresion de artefactos
+    dateFormat YYYY-MM-DD
+    axisFormat %d/%m
+    section Artefactos
+        Inicio       :milestone, 2026-05-19, 0d
+        UML          :done, 2026-05-21, 2026-05-27
+        Analisis     :done, 2026-05-21, 2026-05-27
+```
 
 ---
 

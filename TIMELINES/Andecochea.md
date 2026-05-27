@@ -13,7 +13,16 @@
 | Días log+commits | 1 |
 | Días solo log | 0 |
 | Días solo commits | 1 |
-| 🔍 Análisis | 2026-05-27 |
+
+```mermaid
+gantt
+    title Progresion de artefactos
+    dateFormat YYYY-MM-DD
+    axisFormat %d/%m
+    section Artefactos
+        Inicio       :milestone, 2026-05-19, 0d
+        Analisis     :done, 2026-05-27, 2026-05-27
+```
 
 ---
 

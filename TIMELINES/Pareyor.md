@@ -14,7 +14,16 @@
 | Días log+commits | 8 |
 | Días solo log | 0 |
 | Días solo commits | 0 |
-| 📐 UML | 2026-05-21 |
+
+```mermaid
+gantt
+    title Progresion de artefactos
+    dateFormat YYYY-MM-DD
+    axisFormat %d/%m
+    section Artefactos
+        Inicio       :milestone, 2026-05-19, 0d
+        UML          :done, 2026-05-21, 2026-05-27
+```
 
 ---
 

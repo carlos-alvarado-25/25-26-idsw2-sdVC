@@ -12,9 +12,18 @@
 | Días activos | 5 |
 | Sesiones documentadas | 5 |
 | Sesiones sin fecha en log | 5 |
-| 🔌 Código | 2026-05-22 |
-| 🔍 Análisis | 2026-05-25 |
-| 🧩 Diseño | 2026-05-25 |
+
+```mermaid
+gantt
+    title Progresion de artefactos
+    dateFormat YYYY-MM-DD
+    axisFormat %d/%m
+    section Artefactos
+        Inicio       :milestone, 2026-05-19, 0d
+        Analisis     :done, 2026-05-25, 2026-05-27
+        Diseno       :done, 2026-05-25, 2026-05-27
+        Codigo       :done, 2026-05-22, 2026-05-27
+```
 
 ---
 
