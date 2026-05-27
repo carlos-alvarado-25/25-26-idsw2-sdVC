@@ -22,14 +22,17 @@ Este archivo contiene los compromisos, protocolos y estándares de ingeniería o
     *   Contiene la narrativa y los artefactos de texto.
     *   Organizado por disciplinas: `00-requisitos/`, `01-analisis/`, etc.
 
-## Protocolo de Sesión y Seguimiento
+## Protocolo de Sesión y Seguimiento (MANDATORIO)
 
 1.  **Control de Sesión:** Solo el usuario inicia y finaliza formalmente una sesión.
-2.  **Registro Interno:** Durante la sesión, Gemini recopilará internamente todos los cambios y decisiones sin escribirlos en el log público.
+2.  **Registro Interno:** Durante la sesión, Gemini recopilará internamente todos los cambios, decisiones y razonamientos sin escribirlos en el log público.
 3.  **Actualización del Log (`conversation-log.md`):**
-    *   **PROHIBIDO** actualizar este archivo durante el transcurso de la sesión.
-    *   **ÚNICAMENTE** se realizará una entrada detallada (resumen y reflexiones) cuando el usuario indique explícitamente: *"Terminamos la sesión"* o similar.
-    *   **Formato de Fecha:** Todas las entradas en `conversation-log.md` deben incluir la fecha actual en su encabezado (ej. `## [YYYY-MM-DD HH:MM] ...`).
+    *   **PROHIBIDO** reescribir o modificar entradas anteriores. El log es una bitácora histórica incremental.
+    *   **ÚNICAMENTE** se realizará una **nueva entrada** (append) al final del archivo cuando el usuario indique explícitamente: *"Terminamos la sesión"*, *"Cerramos la sesión"* o similar.
+    *   **EXCEPCIÓN:** Solo se puede escribir en el log durante la sesión si el usuario lo ordena explícitamente mediante un comando directo.
+    *   **Formato de Cabecera (CRÍTICO):** Todas las entradas deben comenzar con un encabezado de segundo nivel (`##`) siguiendo **ESTRICTAMENTE** el formato: `## [DD/MM/YYYY HH:MM] Título de la Sesión`.
+    *   **Ejemplo:** `## [27/05/2026 22:15] Rama de Aulas - Estandarización`.
+    *   Este formato es vital para la compatibilidad con los scripts de generación de Timeline.
 4.  **Decisiones de Diseño:** Las decisiones técnicas deben registrarse en el archivo externo de `Explicaciones de Diseño` en el workspace del usuario al final de cada hito relevante.
 
 ## Estándares de Documentación

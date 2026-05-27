@@ -410,4 +410,33 @@
 - **Modelado Visual:** Creación de diagramas de colaboración (`PUML` + `SVG`) bajo los estándares de fondo blanco y alta legibilidad.
 - **Navegación Circular:** Aplicación del nuevo estándar de UX, vinculando la creación directamente con el estado singular `:Aula Abierta`.
 
-**Decisión:** Se clasifica a la entidad **Aula** como **"Bajo Volumen"**, descartando la sobre-ingeniería de paginación (`PagedResult`) en favor de listas simples (`List<Aula>`) para optimizar el rendimiento y la simplicidad del código. Se ratifica la topología de navegación por estados (Plural/Singular) para mantener la coherencia con el resto del sistema administrativo.
+**Decisión:** Se clasifica a la entidad **Aula** como **"Bajo Volumen"**, descartando la sobre-ingeniería de paginación (**PagedResult**) en favor de listas simples (**List<Aula>**) para optimizar el rendimiento y la simplicidad del código. Se ratifica la topología de navegación por estados (Plural/Singular) para mantener la coherencia con el resto del sistema administrativo.
+
+---
+
+## [27/05/2026 22:15] Sesión 26: Rama de Aulas - Estandarización de Importación
+
+**Prompt:** "Abramos una nueva sesión ahora para importarAulas()... para el importarAulas utiliza los otros ejemplos de importar para el diagrama de colaboración"
+
+**Resultado:** 
+- **Análisis de `importarAulas()`:** Se ha modelado la colaboración MVC para la carga masiva de aulas.
+- **Estandarización Arquitectónica:** Se ha refinado el diagrama de colaboración para alinearlo estrictamente con los patrones de importación del proyecto (como en `importarGrados`), utilizando métodos como `obtenerFormatoRequerido()` y `guardarLote(aulas)`.
+- **Enriquecimiento de Requisitos:** Se ha incluido el acceso al catálogo de tipos de aula disponibles (`obtenerTiposAulaDisponibles`) para facilitar la preparación del archivo.
+- **Artefactos:** Actualización del diagrama `.puml`, regeneración del activo `SVG` y redacción del `README.md` con la secuencia de operaciones estandarizada.
+
+**Decisión:** Se adopta el patrón de **Importación Estandarizada** para garantizar la homogeneidad en la capa de análisis. Se decide que el controlador debe proveer el formato de archivo y los catálogos de apoyo, delegando la persistencia en bloque al repositorio para optimizar el rendimiento.
+
+
+---
+
+## [27/05/2026 22:17] Sesión 27: Blindaje de Protocolos y Cierre de Jornada
+
+**Prompt:** "Ok perfecto, ya para terminar quiero que estas reglas de conversation-log.md las incrustes en el GEMINI.md... Cerramos la sesión por hoy gracias"
+
+**Resultado:** 
+- **Actualización de `GEMINI.md`:** Se han formalizado los protocolos de sesión y seguimiento como mandatos críticos.
+- **Protocolo de Log Incremental:** Se ha establecido la prohibición de reescribir el log, obligando a realizar únicamente `append` de nuevas entradas.
+- **Estandarización de Formatos:** Se ha fijado el formato `[DD/MM/YYYY HH:MM]` como obligatorio para garantizar la trazabilidad mediante scripts externos (Timeline).
+- **Control de Flujo:** Se ha definido el mecanismo de captura interna durante la sesión y escritura pública únicamente al cierre o bajo orden explícita.
+
+**Decisión:** Se eleva la gestión del log a la categoría de **Estándar de Ingeniería Crítico**. Se asume el compromiso de integridad histórica del `conversation-log.md`, asegurando que cada sesión de vibecoding quede documentada de forma inmutable y compatible con las herramientas de análisis del proyecto.
