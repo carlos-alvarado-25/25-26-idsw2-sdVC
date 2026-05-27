@@ -276,7 +276,13 @@ for user in $FORKS; do
 
     SHA_COL="<sub>$LAST_SHORT</sub>"
 
-    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $UNIQUE_DAYS | $GAP_DISPLAY | $QH_COL | $CL_COL | $README_COL | $UML_COL | $R01_COL | $R02_COL | $R03_COL | $SRC_COL | $SHA_COL |"
+    if [ "$COMMITS" -gt 0 ]; then
+        DAYS_COL="[$UNIQUE_DAYS](TIMELINES/$user.md)"
+    else
+        DAYS_COL="$UNIQUE_DAYS"
+    fi
+
+    ROW="| $ALUMNO_LINK | $LAST_MSG_LINK | $DAYS_COL | $GAP_DISPLAY | $QH_COL | $CL_COL | $README_COL | $UML_COL | $R01_COL | $R02_COL | $R03_COL | $SRC_COL | $SHA_COL |"
     TABLE_ROWS="${TABLE_ROWS}${ROW}"$'\n'
 
     if [ "$COMMITS" -gt 0 ]; then
