@@ -130,6 +130,7 @@ R02_DAY=$(get_artifact_day "RUP/02-diseño")
 R03_DAY=$(get_artifact_day "RUP/03-desarrollo")
 
 # --- Metricas globales ---
+TODAY_FMT=$(date '+%Y-%m-%d')
 TOTAL_FEATS=$(jq '[.[] | select(.type == "feat")] | length' "$TMPDIR/commits.json")
 TOTAL_FIXES=$(jq '[.[] | select(.type == "fix")] | length' "$TMPDIR/commits.json")
 TOTAL_OTHER=$(jq '[.[] | select(.type == "other")] | length' "$TMPDIR/commits.json")
@@ -180,11 +181,22 @@ OUTPUT="TIMELINES/${USER}.md"
         [ "$DATED_LOG" -gt 0 ] && echo "| Días solo commits | $COMMIT_ONLY |"
         [ "$NO_DATE_LOG" -gt 0 ] && echo "| Sesiones sin fecha en log | $NO_DATE_LOG |"
     fi
-    [ -n "$SRC_DAY" ] && echo "| 🔌 Código | $SRC_DAY |"
-    [ -n "$UML_DAY" ] && echo "| 📐 UML | $UML_DAY |"
-    [ -n "$R01_DAY" ] && echo "| 🔍 Análisis | $R01_DAY |"
-    [ -n "$R02_DAY" ] && echo "| 🧩 Diseño | $R02_DAY |"
-    [ -n "$R03_DAY" ] && echo "| ⚙️ Desarrollo | $R03_DAY |"
+    if [ -n "$UML_DAY" ] || [ -n "$R01_DAY" ] || [ -n "$R02_DAY" ] || [ -n "$R03_DAY" ] || [ -n "$SRC_DAY" ]; then
+        echo ""
+        echo '```mermaid'
+        echo "gantt"
+        echo "    title Progresion de artefactos"
+        echo "    dateFormat YYYY-MM-DD"
+        echo "    axisFormat %d/%m"
+        echo "    section Artefactos"
+        echo "        Inicio       :milestone, $INICIAL_DATE, 0d"
+        [ -n "$UML_DAY" ]  && echo "        UML          :done, $UML_DAY, $TODAY_FMT"
+        [ -n "$R01_DAY" ]  && echo "        Analisis     :done, $R01_DAY, $TODAY_FMT"
+        [ -n "$R02_DAY" ]  && echo "        Diseno       :done, $R02_DAY, $TODAY_FMT"
+        [ -n "$R03_DAY" ]  && echo "        Desarrollo   :done, $R03_DAY, $TODAY_FMT"
+        [ -n "$SRC_DAY" ]  && echo "        Codigo       :done, $SRC_DAY, $TODAY_FMT"
+        echo '```'
+    fi
     echo ""
     echo "---"
     echo ""
