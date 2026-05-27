@@ -1,0 +1,31 @@
+@startuml editarAula-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Aulas Abierto" as AulasAbierto
+rectangle #CDEBA5 ":Aula Abierta" as AulaAbierta
+
+package editarAula as "editarAula()" {
+    rectangle #629EF9 EditarAulaView
+    rectangle #b5bd68 AulaController
+    rectangle #F2AC4E AulaRepository
+    rectangle #F2AC4E Aula
+}
+
+AulasAbierto -r-> EditarAulaView: editarAula(aula)
+
+EditarAulaView -d-> AulaController: actualizar(aula, nombre, capacidad, edificio, planta, tipo) : Aula
+
+AulaController -r-> Aula: <<update>>
+AulaController -d-> AulaRepository: actualizar(aula)
+
+EditarAulaView ..> AulaAbierta: <<editar>>
+AulaAbierta --> AulaAbierta: editarAula()
+
+EditarAulaView ..> AulasAbierto: <<finalizar>> abrirAulas()
+EditarAulaView ..> AulasAbierto: <<cancelar>>
+
+@enduml

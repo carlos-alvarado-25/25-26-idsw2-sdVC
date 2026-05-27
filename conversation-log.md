@@ -440,3 +440,18 @@
 - **Control de Flujo:** Se ha definido el mecanismo de captura interna durante la sesión y escritura pública únicamente al cierre o bajo orden explícita.
 
 **Decisión:** Se eleva la gestión del log a la categoría de **Estándar de Ingeniería Crítico**. Se asume el compromiso de integridad histórica del `conversation-log.md`, asegurando que cada sesión de vibecoding quede documentada de forma inmutable y compatible con las herramientas de análisis del proyecto.
+
+---
+
+## [27/05/2026 23:05] Sesión 28: Rama de Aulas - Refinamiento y Consistencia Semántica
+
+**Prompt:** "Abramos una nueva sesión para el caso de uso de editarAula()... Perfecto, por cierto recuerda e INCRUSTALO EN GEMINI.md que debes actualizar los readmes de la raiz de casos-uso en RUP/... Perfecto, ahora pasemos a analizar el caso de uso eliminarAula()... Dime la razón del porqué introdujiste el método verificarImpacto ?"
+
+**Resultado:** 
+- **Análisis de `editarAula()`:** Implementación de la colaboración MVC aplicando el estándar de Navegación por Estados (Singular vs Plural), permitiendo la persistencia incremental en el estado `:Aula Abierta`.
+- **Análisis de `eliminarAula()`:** Diseño del flujo de Eliminación Segura con verificación de integridad referencial contra la entidad `Examen`.
+- **Refactorización Semántica:** Identificación y corrección de una inconsistencia en la nomenclatura de validaciones de impacto. Se renombró `verificarImpacto` a `verificarExamenesAsociados` y `contarPorAula`, alineando las Aulas con los estándares de Grados, Asignaturas y Profesores.
+- **Gobernanza de Documentación:** Actualización de `GEMINI.md` para exigir la actualización obligatoria de los índices de análisis (`RUP/01-analisis/casos-uso/README.md`) tras completar cada rama o caso de uso.
+- **Mantenimiento de Índices:** Poblado completo de la Rama de Aulas en el índice central de la disciplina de análisis.
+
+**Decisión:** Se ratifica la **Consistencia Semántica Transversal** como principio de diseño. Se decide que todos los controladores de "Eliminación Segura" deben utilizar firmas de métodos específicas a la dependencia consultada, evitando generalizaciones que oscurezcan el propósito técnico del código. Se oficializa la obligación de mantener la integridad de navegación en la documentación RUP mediante la actualización sistemática de índices centrales.

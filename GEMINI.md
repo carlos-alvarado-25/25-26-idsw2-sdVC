@@ -33,7 +33,8 @@ Este archivo contiene los compromisos, protocolos y estándares de ingeniería o
     *   **Formato de Cabecera (CRÍTICO):** Todas las entradas deben comenzar con un encabezado de segundo nivel (`##`) siguiendo **ESTRICTAMENTE** el formato: `## [DD/MM/YYYY HH:MM] Título de la Sesión`.
     *   **Ejemplo:** `## [27/05/2026 22:15] Rama de Aulas - Estandarización`.
     *   Este formato es vital para la compatibilidad con los scripts de generación de Timeline.
-4.  **Decisiones de Diseño:** Las decisiones técnicas deben registrarse en el archivo externo de `Explicaciones de Diseño` en el workspace del usuario al final de cada hito relevante.
+4.  **Actualización de Índices (CRÍTICO):** Al finalizar el análisis de un caso de uso o una rama funcional, es **OBLIGATORIO** actualizar el archivo `RUP/01-analisis/casos-uso/README.md` incluyendo los nuevos artefactos en la lista de casos de uso analizados, manteniendo la estructura de categorías por actor o entidad.
+5.  **Decisiones de Diseño:** Las decisiones técnicas deben registrarse en el archivo externo de `Explicaciones de Diseño` en el workspace del usuario al final de cada hito relevante.
 
 ## Estándares de Documentación
 
