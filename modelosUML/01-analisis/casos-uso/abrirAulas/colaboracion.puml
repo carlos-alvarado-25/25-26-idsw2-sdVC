@@ -1,0 +1,37 @@
+@startuml abrirAulas-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+package abrirAulas as "abrirAulas()" {
+    rectangle #629EF9 ListarAulasView
+    rectangle #b5bd68 AulaController
+    rectangle #F2AC4E AulaRepository
+    rectangle #F2AC4E Aula
+}
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
+rectangle #CDEBA5 ":Collaboration CrearAula" as CrearAula
+rectangle #CDEBA5 ":Collaboration EditarAula" as EditarAula
+rectangle #CDEBA5 ":Collaboration EliminarAula" as EliminarAula
+rectangle #CDEBA5 ":Collaboration ImportarAulas" as ImportarAulas
+
+SistemaDisponible -r-> ListarAulasView: abrirAulas()
+
+ListarAulasView -d-> AulaController: listarAulas() : List<Aula>
+AulaController -d-> AulaRepository: obtenerTodas() : List<Aula>
+
+ListarAulasView -d-> AulaController: filtrarAulas(criterio) : List<Aula>
+AulaController -d-> AulaRepository: buscarPorCriterio(criterio) : List<Aula>
+
+ListarAulasView ..> SistemaDisponibleSalida: <<finalizar>> completarGestion()
+ListarAulasView ..> CrearAula: <<crear>> crearAula()
+ListarAulasView ..> EditarAula: <<editar>> editarAula(aula)
+ListarAulasView ..> EliminarAula: <<eliminar>> eliminarAula(aula)
+ListarAulasView ..> ImportarAulas: <<importar>> importarAulas()
+
+@enduml

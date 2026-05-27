@@ -397,3 +397,17 @@
 - **Artefactos Técnicos:** Actualización de diagramas `.puml`, regeneración de activos `SVG` con estándares de fondo blanco y ajuste de las responsabilidades y secuencias de operaciones en los `README.md` de la disciplina de Análisis.
 
 **Decisión:** Se prioriza la **Eficiencia Operativa** y la **Experiencia de Usuario (UX)** sobre el flujo lineal simple. Se decide que el Administrador debe poder realizar múltiples cambios incrementales en una entidad sin perder el contexto de la vista singular. Esta decisión refuerza la consistencia arquitectónica del sistema, estableciendo un patrón de navegación circular para todas las entidades maestras y operativas, alineándose con las mejores prácticas de diseño de interfaces de gestión complejas.
+
+---
+
+## [2026-05-27 20:51] Sesión 25: Rama de Aulas - Hub de Gestión y Creación Manual
+
+**Prompt:** "Perfecto, ahora abramos una nueva sesión para hacer el detalle del análisis de la rama de Aulas. Iniciemos con abrirAulas... Las Aulas no necesitan la indirección de paginación... Perfecto, sigamos con crearAula() ahora."
+
+**Resultado:** 
+- **Análisis de `abrirAulas()`:** Definición del hub central de gestión de espacios físicos. Se implementó la colaboración MVC para el listado y filtrado de aulas.
+- **Análisis de `crearAula()`:** Diseño del flujo de alta manual siguiendo el patrón "El Delgado". Se capturan datos básicos (código, nombre, capacidad, ubicación) y se transiciona inmediatamente a la edición.
+- **Modelado Visual:** Creación de diagramas de colaboración (`PUML` + `SVG`) bajo los estándares de fondo blanco y alta legibilidad.
+- **Navegación Circular:** Aplicación del nuevo estándar de UX, vinculando la creación directamente con el estado singular `:Aula Abierta`.
+
+**Decisión:** Se clasifica a la entidad **Aula** como **"Bajo Volumen"**, descartando la sobre-ingeniería de paginación (`PagedResult`) en favor de listas simples (`List<Aula>`) para optimizar el rendimiento y la simplicidad del código. Se ratifica la topología de navegación por estados (Plural/Singular) para mantener la coherencia con el resto del sistema administrativo.
