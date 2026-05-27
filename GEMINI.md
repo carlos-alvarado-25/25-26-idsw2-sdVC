@@ -37,3 +37,101 @@ Este archivo contiene los compromisos, protocolos y estándares de ingeniería o
 *   **Enlaces:** Utilizar siempre rutas raíz-relativas (ej: `/modelosUML/00-requisitos/...`) para garantizar la integridad de la navegación.
 *   **Badges:** Mantener los badges de navegación en la parte superior de los README.md siguiendo el estilo de `pySigHor`.
 *   **Trazabilidad:** Cada artefacto de análisis debe mapear explícitamente los requisitos de la fase de especificación.
+
+
+## Protocolo de Ejecución (Mandatorio)
+
+1. **Autorización Explícita:** Queda **ESTRICTAMENTE PROHIBIDO** realizar modificaciones en el código, reestructuraciones de directorios o cambios en los archivos sin la autorización previa y explícita del usuario mediante la palabra clave: **`HAZLO!`**.
+2. Si se propone un plan o análisis, se debe esperar a recibir el comando **`HAZLO!`** antes de ejecutar cualquier herramienta de modificación (`write_file`, `replace`, `run_shell_command` que altere estado, etc.).
+
+## Estructura de Análisis de Casos de Uso
+
+Todos los archivos `README.md` de análisis de casos de uso deben seguir **EXACTAMENTE** la siguiente estructura de títulos, secciones, subtítulos y puntos, basándose en la plantilla a continuación:
+
+```markdown
+# IdSw 2 > [nombreCasoUso] > Análisis
+
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |-|-|-|-|-|-|-|
+
+## información del artefacto
+
+- **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
+- **Fase RUP**: Elaboration (Elaboración)
+- **Disciplina**: Análisis y Diseño
+- **Versión**: [X.X]
+- **Fecha**: [YYYY-MM-DD]
+- **Autor**: Gemini CLI
+
+## propósito
+
+[Descripción del propósito del análisis del caso de uso]
+
+## diagrama de colaboración
+
+<div align=center>
+
+|![Análisis: [nombreCasoUso]()](/images/01-analisis/casos-uso/[nombreCasoUso]/[nombreCasoUso]-analisis.svg)|
+|-|
+|Código fuente: [colaboracion.puml](/modelosUML/01-analisis/casos-uso/[nombreCasoUso]/colaboracion.puml)|
+
+</div>
+
+## clases de análisis identificadas
+
+### clases de vista (boundary)
+
+#### [NombreView]
+**Estereotipo**: Vista (Boundary)  
+**Responsabilidades**:
+- [Lista de responsabilidades]
+
+**Colaboraciones**:
+- **Entrada**: [Descripción de entrada]
+- **Control**: [Descripción de control]
+- **Salida**: [Descripción de salida]
+
+### clases de control
+
+#### [NombreController]
+**Estereotipo**: Control  
+**Responsabilidades**:
+- [Lista de responsabilidades]
+
+**Colaboraciones**:
+- **Vista**: [Descripción]
+- **Repositorio**: [Descripción]
+
+### clases de entidad (entity)
+
+#### [NombreRepository]
+**Estereotipo**: Entidad (Repository)  
+**Responsabilidades**:
+- [Lista de responsabilidades]
+
+#### [NombreEntidad]
+**Estereotipo**: Entidad  
+**Responsabilidades**:
+- [Lista de responsabilidades]
+
+## flujo de colaboración
+
+### secuencia de operaciones
+
+1. **[Paso 1]**: [Descripción]
+2. **[Paso 2]**: [Descripción]
+[... numeración secuencial]
+
+## correspondencia con requisitos
+
+### mapeado con especificación detallada
+
+|Requisito del caso de uso|Clase responsable|Método/Colaboración|
+|-|-|-|
+|[Requisito 1]|[Clase]|`metodo()`|
+
+## referencias
+
+- [Especificación detallada: Detalle de Casos de Uso](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
+- [Análisis relacionado si aplica]
+```

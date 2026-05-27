@@ -6,6 +6,7 @@ skinparam DefaultFontSize 12
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Asignaturas Abierta" as AsignaturasAbierto
+rectangle #CDEBA5 ":Asignatura Abierta" as AsignaturaAbierto
 
 package editarAsignatura as "editarAsignatura()" {
     rectangle #629EF9 EditarAsignaturaView
@@ -15,8 +16,6 @@ package editarAsignatura as "editarAsignatura()" {
     rectangle #F2AC4E Asignatura
     rectangle #F2AC4E Grado
 }
-
-rectangle #CDEBA5 ":Asignaturas Abierta" as AsignaturasAbiertoSalida
 
 AsignaturasAbierto -r-> EditarAsignaturaView: editarAsignatura(asignatura)
 
@@ -31,7 +30,10 @@ AsignaturaController -d-> AsignaturaRepository: actualizar(asignatura)
 
 Asignatura -- Grado
 
-EditarAsignaturaView ..> AsignaturasAbiertoSalida: <<finalizar>>
-EditarAsignaturaView ..> AsignaturasAbiertoSalida: <<cancelar>>
+EditarAsignaturaView ..> AsignaturaAbierto: <<editar>>
+AsignaturaAbierto --> AsignaturaAbierto: editarAsignatura()
+
+EditarAsignaturaView ..> AsignaturasAbierto: <<finalizar>> abrirAsignaturas()
+EditarAsignaturaView ..> AsignaturasAbierto: <<cancelar>>
 
 @enduml

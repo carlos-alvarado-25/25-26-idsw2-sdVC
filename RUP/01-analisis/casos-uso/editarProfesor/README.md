@@ -36,13 +36,15 @@ Análisis de colaboración del caso de uso `editarProfesor()` mediante el patró
 - Cargar y presentar los datos actuales del profesor al Administrador.
 - Proveer una interfaz de búsqueda paginada para la asignación/desvinculación de asignaturas.
 - Capturar las modificaciones en el formulario de perfil y el listado de materias impartidas.
-- Gestionar las acciones de guardado y cancelación.
-- Notificar el resultado de la actualización.
+- Gestionar la persistencia incremental permitiendo permanecer en el estado de edición.
+- Facilitar el retorno al listado general mediante las acciones de finalizar o cancelar.
 
 **Colaboraciones**:
 - **Entrada**: Recibe `editarProfesor(profesor)` desde `:Profesores Abierto`.
 - **Control**: Se comunica con `ProfesorController`.
-- **Salida**: Retorna a `:Profesores Abierto`.
+- **Salida**: 
+    - Transición `<<editar>>` hacia `:Profesor Abierto` (permanencia).
+    - Transición `<<finalizar>>` o `<<cancelar>>` hacia `:Profesores Abierto` (retorno al listado).
 
 ### clases de control
 
@@ -88,12 +90,12 @@ Análisis de colaboración del caso de uso `editarProfesor()` mediante el patró
 ### secuencia de operaciones
 
 1. **Carga**: `:Profesores Abierto` invoca `EditarProfesorView.editarProfesor(profesor)`.
-2. **Contexto**: La vista solicita al controlador los departamentos y la búsqueda de asignaturas para gestionar la carga docente.
-3. **Modificación**: El Administrador cambia datos de perfil y selecciona/deselecciona materias.
-4. **Validación**: `ProfesorController` verifica la unicidad del email y la validez de las nuevas asignaciones.
-5. **Cambio de Estado**: `ProfesorController` actualiza la entidad `Profesor` en memoria (`<<update>>`).
-6. **Sincronización**: `ProfesorController` entrega el objeto a `ProfesorRepository.actualizar(profesor)`.
-7. **Finalización**: Se notifica el éxito y se retorna al listado general.
+2. **Edición Incremental**: El Administrador modifica datos de perfil y carga docente, y selecciona **Guardar**.
+3. **Validación y Persistencia**: `ProfesorController` valida email y asociaciones, actualiza la entidad `Profesor` y sincroniza con `ProfesorRepository`.
+4. **Estado Estable (Singular)**: Se confirma el éxito y se transita al estado `:Profesor Abierto`, permitiendo continuar con la edición.
+5. **Retorno al Listado (Plural)**: 
+    - Al seleccionar **Finalizar**, se invoca `abrirProfesores()` y se retorna a `:Profesores Abierto`.
+    - Al seleccionar **Cancelar**, se retorna a `:Profesores Abierto` descartando cambios no guardados.
 
 ## correspondencia con requisitos
 

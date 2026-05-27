@@ -6,6 +6,7 @@ skinparam DefaultFontSize 12
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Profesores Abierto" as ProfesoresAbierto
+rectangle #CDEBA5 ":Profesor Abierto" as ProfesorAbierto
 
 package editarProfesor as "editarProfesor()" {
     rectangle #629EF9 EditarProfesorView
@@ -15,8 +16,6 @@ package editarProfesor as "editarProfesor()" {
     rectangle #F2AC4E Profesor
     rectangle #F2AC4E Asignatura
 }
-
-rectangle #CDEBA5 ":Profesores Abierto" as ProfesoresAbiertoSalida
 
 ProfesoresAbierto -r-> EditarProfesorView: editarProfesor(profesor)
 
@@ -33,7 +32,10 @@ ProfesorController -d-> ProfesorRepository: actualizar(profesor)
 
 Profesor -- Asignatura
 
-EditarProfesorView ..> ProfesoresAbiertoSalida: <<finalizar>>
-EditarProfesorView ..> ProfesoresAbiertoSalida: <<cancelar>>
+EditarProfesorView ..> ProfesorAbierto: <<editar>>
+ProfesorAbierto --> ProfesorAbierto: editarProfesor()
+
+EditarProfesorView ..> ProfesoresAbierto: <<finalizar>> abrirProfesores()
+EditarProfesorView ..> ProfesoresAbierto: <<cancelar>>
 
 @enduml

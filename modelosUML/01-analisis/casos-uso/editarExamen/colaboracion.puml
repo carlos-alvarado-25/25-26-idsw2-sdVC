@@ -1,7 +1,12 @@
 @startuml editarExamen-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Exámenes Abierto" as ExamenesAbierto
+rectangle #CDEBA5 ":Examen Abierto" as ExamenAbierto
 
 package editarExamen as "editarExamen()" {
     rectangle #629EF9 EditarExamenView
@@ -11,8 +16,6 @@ package editarExamen as "editarExamen()" {
     rectangle #F2AC4E AulaRepository
     rectangle #F2AC4E Examen
 }
-
-rectangle #CDEBA5 ":Exámenes Abierto" as ExamenesAbiertoSalida
 
 ExamenesAbierto -r-> EditarExamenView: editarExamen(examen)
 
@@ -28,7 +31,10 @@ ExamenController -d-> ExamenRepository: existeCodigo(codigo) : Boolean
 ExamenController -r-> Examen: <<update>>
 ExamenController -d-> ExamenRepository: actualizar(examen)
 
-EditarExamenView ..> ExamenesAbiertoSalida: <<finalizar>>
-EditarExamenView ..> ExamenesAbiertoSalida: <<cancelar>>
+EditarExamenView ..> ExamenAbierto: <<editar>>
+ExamenAbierto --> ExamenAbierto: editarExamen()
+
+EditarExamenView ..> ExamenesAbierto: <<finalizar>> abrirExamenes()
+EditarExamenView ..> ExamenesAbierto: <<cancelar>>
 
 @enduml

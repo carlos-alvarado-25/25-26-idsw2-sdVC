@@ -36,13 +36,15 @@ Análisis de colaboración del caso de uso `editarAsignatura()` mediante el patr
 - Cargar y presentar los datos actuales de la asignatura al Administrador.
 - Proveer una interfaz de selección para la reasignación de Grado (lista conceptual).
 - Capturar las modificaciones en el formulario (Código, Nombre, Créditos, Grado).
-- Gestionar las acciones de guardado y cancelación.
-- Notificar el resultado de la operación.
+- Gestionar la persistencia incremental permitiendo permanecer en el estado de edición.
+- Facilitar el retorno al listado general mediante las acciones de finalizar o cancelar.
 
 **Colaboraciones**:
 - **Entrada**: Recibe `editarAsignatura(asignatura)` desde `:Asignaturas Abierta`.
 - **Control**: Se comunica con `AsignaturaController`.
-- **Salida**: Retorna a `:Asignaturas Abierta`.
+- **Salida**: 
+    - Transición `<<editar>>` hacia `:Asignatura Abierta` (permanencia).
+    - Transición `<<finalizar>>` o `<<cancelar>>` hacia `:Asignaturas Abierta` (retorno al listado).
 
 ### clases de control
 
@@ -87,12 +89,12 @@ Análisis de colaboración del caso de uso `editarAsignatura()` mediante el patr
 ### secuencia de operaciones
 
 1. **Carga**: `:Asignaturas Abierta` invoca `EditarAsignaturaView.editarAsignatura(asignatura)`.
-2. **Carga de Contexto**: La vista solicita al controlador la lista conceptual de grados disponibles.
-3. **Modificación**: El Administrador cambia datos y solicita guardar.
-4. **Validación**: `AsignaturaController` verifica unicidad de código y la integridad de la nueva asociación con el grado.
-5. **Cambio de Estado**: `AsignaturaController` actualiza la entidad `Asignatura` en memoria (`<<update>>`).
-6. **Sincronización**: `AsignaturaController` entrega el objeto a `AsignaturaRepository.actualizar(asignatura)`.
-7. **Finalización**: Se notifica el éxito y se retorna al listado general.
+2. **Edición Incremental**: El Administrador modifica datos y selecciona **Guardar**.
+3. **Validación y Persistencia**: `AsignaturaController` valida integridad, actualiza la entidad `Asignatura` y sincroniza con `AsignaturaRepository`.
+4. **Estado Estable (Singular)**: Se confirma el éxito y se transita al estado `:Asignatura Abierta`, permitiendo continuar con la edición.
+5. **Retorno al Listado (Plural)**: 
+    - Al seleccionar **Finalizar**, se invoca `abrirAsignaturas()` y se retorna a `:Asignaturas Abierta`.
+    - Al seleccionar **Cancelar**, se retorna a `:Asignaturas Abierta` descartando cambios no guardados.
 
 ## correspondencia con requisitos
 

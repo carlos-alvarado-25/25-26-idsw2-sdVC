@@ -34,14 +34,16 @@ Análisis de colaboración del caso de uso `editarExamen()` mediante el patrón 
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Cargar y presentar los datos actuales del examen al Administrador.
-- Proveer interfaces para la búsqueda paginada de asignaturas.
-- Mostrar la lista de aulas disponibles para su reasignación.
-- Capturar las modificaciones y gestionar las acciones de guardado y cancelación.
+- Proveer interfaces para la búsqueda paginada de asignaturas y listado de aulas.
+- Capturar las modificaciones y gestionar la persistencia incremental.
+- Facilitar la navegación de retorno al listado general o la permanencia en el modo edición.
 
 **Colaboraciones**:
 - **Entrada**: Recibe `editarExamen(examen)` desde `:Exámenes Abierto`.
 - **Control**: Se comunica con `ExamenController`.
-- **Salida**: Retorna a `:Exámenes Abierto`.
+- **Salida**: 
+    - Transición `<<editar>>` hacia `:Examen Abierto` (permanencia).
+    - Transición `<<finalizar>>` o `<<cancelar>>` hacia `:Exámenes Abierto` (retorno al listado).
 
 ### clases de control
 
@@ -85,12 +87,12 @@ Análisis de colaboración del caso de uso `editarExamen()` mediante el patrón 
 ### secuencia de operaciones
 
 1. **Carga**: `:Exámenes Abierto` invoca `EditarExamenView.editarExamen(examen)`.
-2. **Carga de Contexto**: La vista solicita al controlador las listas de apoyo (Asignaturas searchable y Aulas).
-3. **Modificación**: El Administrador realiza cambios en fecha, duración, asignatura o aula y solicita guardar.
-4. **Validación de Negocio**: `ExamenController` verifica que el nuevo código (si cambia) sea único y valida las nuevas asociaciones.
-5. **Cambio de Estado**: `ExamenController` actualiza la entidad `Examen` en memoria (`<<update>>`).
-6. **Sincronización**: `ExamenController` entrega el objeto modificado a `ExamenRepository.actualizar(examen)`.
-7. **Finalización**: Se notifica el éxito y se retorna al listado general.
+2. **Edición Incremental**: El Administrador modifica datos y selecciona **Guardar**.
+3. **Validación y Cambio**: `ExamenController` valida la integridad, actualiza la entidad `Examen` (`<<update>>`) y sincroniza con `ExamenRepository`.
+4. **Estado Estable (Singular)**: Se confirma el éxito y se transita al estado `:Examen Abierto`, permitiendo continuar con la edición.
+5. **Retorno al Listado (Plural)**: 
+    - Al seleccionar **Finalizar**, se invoca `abrirExamenes()` y se retorna a `:Exámenes Abierto`.
+    - Al seleccionar **Cancelar**, se retorna a `:Exámenes Abierto` descartando cambios no guardados.
 
 ## correspondencia con requisitos
 

@@ -35,13 +35,15 @@ Análisis de colaboración del caso de uso `editarGrado()` mediante el patrón M
 **Responsabilidades**:
 - Cargar y presentar los datos actuales del grado al Administrador.
 - Capturar las modificaciones realizadas en el formulario (Código, Nombre, Descripción).
-- Gestionar las acciones de "Guardar" y "Cancelar".
-- Notificar el resultado de la actualización al usuario.
+- Gestionar la persistencia incremental permitiendo permanecer en el estado de edición.
+- Facilitar el retorno al listado general mediante las acciones de finalizar o cancelar.
 
 **Colaboraciones**:
 - **Entrada**: Recibe `editarGrado(grado)` desde `:Grados Abierto`.
 - **Control**: Se comunica con `GradoController`.
-- **Salida**: Retorna a `:Grados Abierto` tras finalizar o cancelar.
+- **Salida**: 
+    - Transición `<<editar>>` hacia `:Grado Abierto` (permanencia).
+    - Transición `<<finalizar>>` o `<<cancelar>>` hacia `:Grados Abierto` (retorno al listado).
 
 ### clases de control
 
@@ -83,12 +85,12 @@ Análisis de colaboración del caso de uso `editarGrado()` mediante el patrón M
 ### secuencia de operaciones
 
 1. **Carga**: `:Grados Abierto` solicita `editarGrado(grado)` y la vista muestra los datos actuales.
-2. **Modificación**: El Administrador cambia valores y solicita guardar.
-3. **Petición de Actualización**: `EditarGradoView` → `GradoController.actualizar(grado, codigo, nombre, descripcion)`.
-4. **Validación de Unicidad**: `GradoController` → `GradoRepository.existeCodigo(nuevoCodigo)` (para prevenir duplicidad de códigos).
-5. **Cambio de Estado**: `GradoController` actualiza la entidad `Grado`.
-6. **Persistencia**: `GradoController` → `GradoRepository.actualizar(grado)`.
-7. **Retorno**: La vista informa el éxito y redirige a `:Grados Abierto`.
+2. **Edición Incremental**: El Administrador cambia valores y selecciona **Guardar**.
+3. **Validación y Persistencia**: `GradoController` valida unicidad, actualiza la entidad `Grado` y sincroniza con `GradoRepository`.
+4. **Estado Estable (Singular)**: Se confirma el éxito y se transita al estado `:Grado Abierto`, permitiendo continuar con la edición.
+5. **Retorno al Listado (Plural)**: 
+    - Al seleccionar **Finalizar**, se invoca `abrirGrados()` y se retorna a `:Grados Abierto`.
+    - Al seleccionar **Cancelar**, se retorna a `:Grados Abierto` descartando cambios no guardados.
 
 ## correspondencia con requisitos
 
