@@ -122,6 +122,16 @@ else
 fi
 fi
 
+# --- PRs abiertas ---
+log "Obteniendo PRs abiertas..."
+OPEN_PR_USERS=$(gh api "repos/$REPO/pulls?state=open" --paginate --jq '.[].head.repo.owner.login' 2>/dev/null | sort -u || echo "")
+PR_COUNT=$(echo "$OPEN_PR_USERS" | grep -c . 2>/dev/null || echo "0")
+log "PRs abiertas: $PR_COUNT."
+
+# --- Inicializar .regen ---
+mkdir -p TIMELINES
+> TIMELINES/.regen
+
 # --- Obtener forks ---
 log "Obteniendo lista de forks..."
 FORKS=$(gh api "repos/$REPO/forks" --paginate --jq '.[].owner.login' 2>/dev/null)
@@ -144,6 +154,19 @@ for user in $FORKS; do
     REPO_URL="https://github.com/$user/25-26-idsw2-sdVC"
     QUE_HACE_URL="$REPO_URL/blob/main/QUE_HACE.md"
     CONVLOG_URL="$REPO_URL/blob/main/conversation-log.md"
+
+    # PR abierta: congelar fila desde cache sin llamadas API
+    if echo "$OPEN_PR_USERS" | grep -qx "$user"; then
+        log "$user: PR abierta — congelado"
+        CACHED_ROW="${CACHE_ROW[$user]:-}"
+        if [ -n "$CACHED_ROW" ]; then
+            TABLE_ROWS="${TABLE_ROWS}${CACHED_ROW}"$'\n'
+            if echo "$CACHED_ROW" | grep -qP '>\d+ commits?<'; then
+                ACTIVOS=$((ACTIVOS + 1))
+            fi
+        fi
+        continue
+    fi
 
     # Consulta ligera: solo el ultimo commit
     LATEST_SHA=$(gh api "repos/$user/25-26-idsw2-sdVC/commits?per_page=1" --jq '.[0].sha' 2>/dev/null || echo "")
@@ -261,6 +284,7 @@ for user in $FORKS; do
 
         LAST_DATE_EPOCH=$(date -d "$LAST_DATE" +%s 2>/dev/null || echo "0")
         RECENT_DATA+="${LAST_DATE_EPOCH}|${user}|${REPO_URL}"$'\n'
+        echo "$user" >> "TIMELINES/.regen"
     fi
 done
 
