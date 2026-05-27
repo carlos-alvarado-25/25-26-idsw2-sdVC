@@ -1,7 +1,7 @@
-<!-- monitor-format: vc1f3fa06 -->
+<!-- monitor-format: v8a0edba8 -->
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-27 21:25:11 CEST | 7 días totales
+> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-27 21:31:15 CEST | 7 días totales
 
 ## Leyenda
 
@@ -50,9 +50,10 @@
 | <sub>[marcosgutierrez6](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC)<br>12 commits</sub> | <sub>[feat: Analisis del caso de uso de exportarAlumnos()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/e3ab1488f024674f0fd83e7706bd4a9477cad8fc)<br>26-05 10:32</sub> | [4](TIMELINES/marcosgutierrez6.md) | :red_circle: | [💡](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | [📐](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+6d</sub> | - | - | - | [🔌](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/blob/main/src)<br><sub>+2d</sub> | <sub>e3ab148</sub> |
 | <sub>[beatriizorozco](https://github.com/beatriizorozco/25-26-idsw2-sdVC)<br>2 commits</sub> | <sub>[feat(codex): agregar skill session-memory](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/fe592bf71c1ecd276f26a2d7f5fb660fe5f30030)<br>21-05 01:28</sub> | [1](TIMELINES/beatriizorozco.md) | :red_circle: | [💡](https://github.com/beatriizorozco/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | - | - | - | - | - | - | - | <sub>fe592bf</sub> |
 | <sub>[martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC)<br>84 commits</sub> | <sub>[docs: aceptación diseño editarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/55c28aa4a61163da8cfb47bab2097e26b8d33c2f)<br>27-05 12:35</sub> | [8](TIMELINES/martinlopez7.md) | :green_circle: | [💡](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+1d</sub> | [📄](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/README.md) | [📐](https://github.com/martinlopez7/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+2d</sub> | - | - | - | - | <sub>55c28aa</sub> |
+| <sub>[Camila-Lesly](https://github.com/Camila-Lesly/25-26-idsw2-sdVC)<br>54 commits</sub> | <sub>[fix(docs): fix alignment issue in README.md](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/commit/cbd2ffd9a7ddf6c30aa90a0764bba6c620a227d5)<br>27-05 12:40</sub> | [7](TIMELINES/Camila-Lesly.md) | :green_circle: | [💡](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/QUE_HACE.md) | [💬](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/conversation-log.md)<br><sub>+2d</sub> | [📄](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/README.md) | [📐](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/modelosUML)<br><sub>+2d</sub> | [🔍](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/RUP/01-analisis)<br><sub>+4d</sub> | [🧩](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/RUP/02-diseño)<br><sub>+4d</sub> | [⚙️](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/RUP/03-desarrollo)<br><sub>+6d</sub> | [🔌](https://github.com/Camila-Lesly/25-26-idsw2-sdVC/blob/main/src)<br><sub>+5d</sub> | <sub>cbd2ffd</sub> |
 
 ## Resumen
 
 - Forks totales: 28
-- Alumnos con actividad (>0 commits propios): 22
-- Alumnos sin actividad: 6
+- Alumnos con actividad (>0 commits propios): 23
+- Alumnos sin actividad: 5
