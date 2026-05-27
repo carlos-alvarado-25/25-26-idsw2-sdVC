@@ -155,17 +155,19 @@ for user in $FORKS; do
     QUE_HACE_URL="$REPO_URL/blob/main/QUE_HACE.md"
     CONVLOG_URL="$REPO_URL/blob/main/conversation-log.md"
 
-    # PR abierta: congelar fila desde cache sin llamadas API
+    # PR abierta: congelar fila desde cache sin llamadas API (solo si hay cache)
     if echo "$OPEN_PR_USERS" | grep -qx "$user"; then
-        log "$user: PR abierta — congelado"
         CACHED_ROW="${CACHE_ROW[$user]:-}"
         if [ -n "$CACHED_ROW" ]; then
+            log "$user: PR abierta — congelado"
             TABLE_ROWS="${TABLE_ROWS}${CACHED_ROW}"$'\n'
             if echo "$CACHED_ROW" | grep -qP '>\d+ commits?<'; then
                 ACTIVOS=$((ACTIVOS + 1))
             fi
+            continue
+        else
+            log "$user: PR abierta pero sin cache — procesando"
         fi
-        continue
     fi
 
     # Consulta ligera: solo el ultimo commit
