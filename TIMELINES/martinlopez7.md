@@ -22,10 +22,48 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-21, 2026-05-28
-        Analisis     :done, 2026-05-21, 2026-05-28
-        Diseno       :done, 2026-05-27, 2026-05-28
+        UML          :done, 2026-05-21, 2026-05-29
+        Analisis     :done, 2026-05-21, 2026-05-29
+        Diseno       :done, 2026-05-27, 2026-05-29
 ```
+
+## Trazabilidad por caso de uso
+
+| Caso de uso | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| `verAsignaturas` | A |   |   |   |   |   |   |   |
+| `verGrados` | A |   |   |   |   |   |   |   |
+| `cerrarSesion` |   | A |   |   |   |   | D |   |
+| `iniciarSesion` |   | A |   |   |   |   | D |   |
+| `verAlumnos` |   | A |   |   |   |   |   | D |
+| `completarGestion` |   |   | A |   |   |   |   | D |
+| `verDocentes` |   |   | A |   |   |   | D |   |
+| `verPreguntas` |   |   | A |   |   |   |   |   |
+| `verRespuestas` |   |   | A |   |   |   |   |   |
+| `crearDocente` |   |   |   | A |   |   | D |   |
+| `crearGrado` |   |   |   | A |   |   |   |   |
+| `editarDocente` |   |   |   | A |   |   | D |   |
+| `eliminarDocente` |   |   |   | A |   |   |   | D |
+| `exportarConfiguracionGlobal` |   |   |   | A |   |   |   |   |
+| `importarConfiguracionGlobal` |   |   |   | A |   |   |   |   |
+| `crearAlumno` |   |   |   |   | A |   |   | D |
+| `crearAsignatura` |   |   |   |   | A |   |   |   |
+| `editarAlumno` |   |   |   |   | A |   |   | D |
+| `editarGrado` |   |   |   |   | A |   |   |   |
+| `eliminarAlumno` |   |   |   |   | A |   |   | D |
+| `eliminarGrado` |   |   |   |   | A |   |   |   |
+| `crearPregunta` |   |   |   |   |   | A |   |   |
+| `crearRespuesta` |   |   |   |   |   | A |   |   |
+| `editarAsignatura` |   |   |   |   |   | A |   |   |
+| `editarPregunta` |   |   |   |   |   | A |   |   |
+| `editarRespuesta` |   |   |   |   |   | A |   |   |
+| `eliminarAsignatura` |   |   |   |   |   | A |   |   |
+| `eliminarPregunta` |   |   |   |   |   | A |   |   |
+| `eliminarRespuesta` |   |   |   |   |   | A |   |   |
+| `generarExamenes` |   |   |   |   |   | A |   |   |
+| `asignarExamenes` |   |   |   |   |   |   | A |   |
+| `cancelarGeneracion` |   |   |   |   |   |   | A |   |
+| `corregirExamenes` |   |   |   |   |   |   | A |   |
 
 ---
 

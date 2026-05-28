@@ -159,6 +159,61 @@ while IFS= read -r date; do
     elif [ "$HAS_COMMIT" -eq 1 ]; then COMMIT_ONLY=$((COMMIT_ONLY + 1)); fi
 done < "$TMPDIR/all_dates.txt"
 
+# --- Trazabilidad por CU (precalculo) ---
+log "Calculando trazabilidad por CU..."
+
+detect_cu_path() {
+    for p in "$@"; do
+        local encoded result ndirs
+        encoded=$(url_encode_path "$p")
+        result=$(gh api "repos/$USER/25-26-idsw2-sdVC/contents/$encoded" 2>/dev/null) || continue
+        ndirs=$(echo "$result" | jq '[.[] | select(.type == "dir")] | length' 2>/dev/null || echo "0")
+        [ "${ndirs:-0}" -gt 0 ] && echo "$p" && return
+    done
+    echo ""
+}
+
+CU_ANALISIS_PATH=$(detect_cu_path "RUP/01-analisis" "documents/analisis")
+CU_DISENO_PATH=$(detect_cu_path "RUP/02-diseño" "documents/diseño")
+CU_DESARROLLO_PATH=$(detect_cu_path "RUP/03-desarrollo" "documents/desarrollo")
+
+declare -A CU_CELL CU_FIRST_DAY
+CU_LIST=()
+CU_TABLE_DAYS=()
+
+if [ -n "$CU_ANALISIS_PATH" ]; then
+    encoded=$(url_encode_path "$CU_ANALISIS_PATH")
+    mapfile -t CU_LIST < <(gh api "repos/$USER/25-26-idsw2-sdVC/contents/$encoded" 2>/dev/null | \
+        jq -r '[.[] | select(.type == "dir") | .name] | .[]' 2>/dev/null || true)
+
+    if [ "${#CU_LIST[@]}" -gt 0 ]; then
+        declare -A _DAYS_WITH_CU
+
+        for cu in "${CU_LIST[@]}"; do
+            CU_FIRST_DAY["$cu"]=9999
+            for phase_pair in "A:$CU_ANALISIS_PATH" "D:$CU_DISENO_PATH" "d:$CU_DESARROLLO_PATH"; do
+                phase="${phase_pair%%:*}"
+                ppath="${phase_pair##*:}"
+                [ -z "$ppath" ] && continue
+                encoded_cu=$(url_encode_path "$ppath/$cu")
+                first_date=$(gh api "repos/$USER/25-26-idsw2-sdVC/commits?path=$encoded_cu&per_page=100" 2>/dev/null | \
+                    jq -r --arg sha "$INICIAL_SHA" \
+                    '[.[] | select(.sha != $sha)] | if length > 0 then last | .commit.author.date | split("T")[0] else "null" end' \
+                    2>/dev/null || echo "null")
+                if [ -n "$first_date" ] && [ "$first_date" != "null" ]; then
+                    epoch=$(date -d "$first_date" +%s 2>/dev/null) || continue
+                    daynum=$(( (epoch - INICIAL_EPOCH) / 86400 + 1 ))
+                    CU_CELL["$cu|$daynum"]+="$phase"
+                    _DAYS_WITH_CU["$daynum"]=1
+                    [ "$daynum" -lt "${CU_FIRST_DAY[$cu]:-9999}" ] && CU_FIRST_DAY["$cu"]=$daynum
+                fi
+            done
+        done
+
+        mapfile -t CU_TABLE_DAYS < <(printf '%s\n' "${!_DAYS_WITH_CU[@]}" | sort -n)
+    fi
+fi
+
 # --- Render ---
 mkdir -p TIMELINES
 OUTPUT="TIMELINES/${USER}.md"
@@ -207,6 +262,34 @@ OUTPUT="TIMELINES/${USER}.md"
         echo '```'
     fi
     echo ""
+
+    # --- Trazabilidad por CU ---
+    if [ "${#CU_TABLE_DAYS[@]}" -gt 0 ]; then
+        echo "## Trazabilidad por caso de uso"
+        echo ""
+        HEADER="| Caso de uso |"
+        SEP="|---|"
+        for d in "${CU_TABLE_DAYS[@]}"; do
+            HEADER+=" D$d |"
+            SEP+=":---:|"
+        done
+        echo "$HEADER"
+        echo "$SEP"
+        while IFS=' ' read -r _ cu; do
+            ROW="| \`$cu\` |"
+            for d in "${CU_TABLE_DAYS[@]}"; do
+                cell="${CU_CELL[$cu|$d]:-}"
+                ROW+=" ${cell:- } |"
+            done
+            echo "$ROW"
+        done < <(
+            for cu in "${CU_LIST[@]}"; do
+                [ "${CU_FIRST_DAY[$cu]:-9999}" -lt 9999 ] && echo "${CU_FIRST_DAY[$cu]} $cu"
+            done | sort -n
+        )
+        echo ""
+    fi
+
     echo "---"
     echo ""
 
