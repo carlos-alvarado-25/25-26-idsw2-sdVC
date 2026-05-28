@@ -1,15 +1,15 @@
 # Timeline - 31Diego
 
 > Repo: [31Diego/25-26-idsw2-sdVC](https://github.com/31Diego/25-26-idsw2-sdVC)
-> Commits: 7 | Días activos: 4 | Sesiones log: 0
+> Commits: 8 | Días activos: 5 | Sesiones log: 0
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 7 (5 feat / 2 fix / 0 other) |
+| Commits propios | 8 (5 feat / 2 fix / 1 other) |
 | Ratio fix/feat | 0.40 |
-| Días activos | 4 |
+| Días activos | 5 |
 | Sesiones documentadas | 0 |
 
 ```mermaid
@@ -73,6 +73,18 @@ gantt
 | 21:49 | [fix: entradas secundarias faltantes en diagramas de coordinador](https://github.com/31Diego/25-26-idsw2-sdVC/commit/d80b4c93400859bf6ba37aa0f3f7d38c5f59ddbc) |
 | 21:29 | [fix: split casos de uso con múltiples entradas por comportamiento](https://github.com/31Diego/25-26-idsw2-sdVC/commit/388167c7a3e6affad42cd5f3243ef5f91e66b9a0) |
 | 20:22 | [feat: plantilla de navegación estados vs colaboraciones](https://github.com/31Diego/25-26-idsw2-sdVC/commit/033f41402ef0232dafa4226cc439e81b30e45b32) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 10 · 2026-05-28
+
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 22:26 | [docs: log de sesión — exploración de stack tecnológico](https://github.com/31Diego/25-26-idsw2-sdVC/commit/a968208408a156bc5bbe86fbf5f85f8c60c8bb68) |
 
 > ⚠️ Commits sin entrada en log
 

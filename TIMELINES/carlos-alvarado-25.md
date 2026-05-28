@@ -1,16 +1,16 @@
 # Timeline - carlos-alvarado-25
 
 > Repo: [carlos-alvarado-25/25-26-idsw2-sdVC](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)
-> Commits: 34 | Días activos: 8 | Sesiones log: 13
+> Commits: 38 | Días activos: 8 | Sesiones log: 17
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 34 (28 feat / 3 fix / 3 other) |
-| Ratio fix/feat | 0.10 |
+| Commits propios | 38 (32 feat / 3 fix / 3 other) |
+| Ratio fix/feat | 0.09 |
 | Días activos | 8 |
-| Sesiones documentadas | 13 |
+| Sesiones documentadas | 17 |
 | Días log+commits | 2 |
 | Días solo log | 0 |
 | Días solo commits | 6 |
@@ -151,15 +151,23 @@ gantt
 
 ## Día 10 · 2026-05-28
 
-### Commits (1: 1 feat / 0 fix)
+### Commits (5: 5 feat / 0 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 23:37 | [feat: Add analysis documentation and collaboration diagram for eliminarAlumno use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/dfb7c70366a462381bf7db2e9c0333a9ea26dae5) |
+| 23:18 | [feat: Add analysis documentation and collaboration diagram for editarAlumno use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/205dad5d7b850384f1b82601e3c62f2c35835886) |
+| 22:48 | [feat: Added analysis documentation for crearAlumnos use case and diagrams](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/c6d0b8b3724329335ceb08a7e118512e2f5a45f8) |
+| 21:14 | [feat: Add analysis documentation and collaboration diagram for importarAlumnos use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/c7a1dd5b71d84cef35bb4c82fedd31056e9f5506) |
 | 09:38 | [feat: Add analysis for use case abrirAlumnos and corrected listing method on abrir entities](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/b8e5c6be68003d41ef3487c8f84d91ff68870e48) |
 
-### 💬 Conversation-log (1 sesión)
+### 💬 Conversation-log (5 sesiónes)
 
 - Sesión 29: Rama de Alumnos y Estandarización Global de Listados
+- Sesión 30: Rama de Alumnos - Importación y Resolución de Dependencias
+- Sesión 31: Rama de Alumnos - Creación Manual y Vinculación Académica
+- Sesión 32: Rama de Alumnos - Edición y Navegación por Estados
+- Sesión 33: Rama de Alumnos - Eliminación y Rigor de Requisitos
 
 > 💬 + commits = proceso documentado
 

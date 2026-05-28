@@ -1,17 +1,17 @@
 # Timeline - Alejandrojuarez0105
 
 > Repo: [Alejandrojuarez0105/25-26-idsw2-sdVC](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)
-> Commits: 24 | Días activos: 5 | Sesiones log: 18
+> Commits: 25 | Días activos: 6 | Sesiones log: 19
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 24 (15 feat / 1 fix / 8 other) |
+| Commits propios | 25 (16 feat / 1 fix / 8 other) |
 | Ratio fix/feat | 0.06 |
-| Días activos | 5 |
-| Sesiones documentadas | 18 |
-| Días log+commits | 5 |
+| Días activos | 6 |
+| Sesiones documentadas | 19 |
+| Días log+commits | 6 |
 | Días solo log | 0 |
 | Días solo commits | 0 |
 
@@ -139,6 +139,22 @@ gantt
 - Sesión 15: Análisis RUP - abrirExamenes()
 - Sesión 16: Análisis RUP - eliminarExamen()
 - Sesión 17: Análisis RUP - crearExamen() y expansión no solicitada de casos de uso
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 10 · 2026-05-28
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 23:24 | [feat: desarrollar la rama Aulas y cierre de sesión 18](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/d7c2f163ca3cc271e963307d3e7501f60f2ac312) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 18: Análisis RUP - Rama Aulas
 
 > 💬 + commits = proceso documentado
 

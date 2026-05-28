@@ -1,17 +1,17 @@
 # Timeline - Pareyor
 
 > Repo: [Pareyor/25-26-idsw2-sdVC](https://github.com/Pareyor/25-26-idsw2-sdVC)
-> Commits: 44 | Días activos: 8 | Sesiones log: 8
+> Commits: 52 | Días activos: 9 | Sesiones log: 9
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 44 (31 feat / 13 fix / 0 other) |
-| Ratio fix/feat | 0.41 |
-| Días activos | 8 |
-| Sesiones documentadas | 8 |
-| Días log+commits | 8 |
+| Commits propios | 52 (38 feat / 14 fix / 0 other) |
+| Ratio fix/feat | 0.36 |
+| Días activos | 9 |
+| Sesiones documentadas | 9 |
+| Días log+commits | 9 |
 | Días solo log | 0 |
 | Días solo commits | 0 |
 
@@ -189,6 +189,29 @@ gantt
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 8: Análisis de Casos de Uso 31-34 y Refinamiento de Navegación y Sesión
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 10 · 2026-05-28
+
+### Commits (8: 7 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 22:02 | [feat: Actualiza y agrega la nueva sesión con la IA, etapa de análisis finalizada.](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/1c3083bba3a6def8f45fd60b64670dec0a47191a) |
+| 21:58 | [feat: Análisis de exportarGrados](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/205669937f321d705540755bb7d710be2e5de64d) |
+| 21:55 | [feat: Análisis exportarAsignaturas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/4a01122946f6900c0495b4d82c52a2f40714d370) |
+| 21:49 | [feat: Análisis importarGrados](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/a02653b9606eca23f03cfec0e6ca5421c54a2d30) |
+| 21:46 | [feat: Análisis importarAsignaturas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/dd7d5b0e87c2226c61248e33308124c6a9e2ba93) |
+| 21:41 | [fix: corrige pequeño fallo en cancelarGeneración](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/544e99dcc42e3ab45c40b9a86a62d406876ba96f) |
+| 21:37 | [feat: Análisis cancelarGeneracion](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/60aaf45dd30c47a5b83050a48431c0c3f0e75790) |
+| 21:10 | [feat: Análisis de editarAsignatura y eliminarAsignatura](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/3db6b88ee02da2b86b41a4b7c19f8e99ea176da4) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 9: Finalización del Análisis de los 41 Casos de Uso
 
 > 💬 + commits = proceso documentado
 
