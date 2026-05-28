@@ -228,6 +228,8 @@ OUTPUT="TIMELINES/${USER}.md"
     # --- Patron observado ---
     echo "## Patrón observado"
     echo ""
+    echo "<div align=\"center\">"
+    echo ""
     echo "| Métrica | Valor |"
     echo "|---|---|"
     echo "| Commits propios | $OWN_COMMITS ($TOTAL_FEATS feat / $TOTAL_FIXES fix / $TOTAL_OTHER other) |"
@@ -245,6 +247,8 @@ OUTPUT="TIMELINES/${USER}.md"
         [ "$DATED_LOG" -gt 0 ] && echo "| Días solo commits | $COMMIT_ONLY |"
         [ "$NO_DATE_LOG" -gt 0 ] && echo "| Sesiones sin fecha en log | $NO_DATE_LOG |"
     fi
+    echo ""
+    echo "</div>"
     if [ -n "$UML_DAY" ] || [ -n "$R01_DAY" ] || [ -n "$R02_DAY" ] || [ -n "$R03_DAY" ] || [ -n "$SRC_DAY" ]; then
         echo ""
         echo '```mermaid'
@@ -267,6 +271,8 @@ OUTPUT="TIMELINES/${USER}.md"
     if [ "${#CU_TABLE_DAYS[@]}" -gt 0 ]; then
         echo "## Trazabilidad por caso de uso"
         echo ""
+        echo "<div align=\"center\">"
+        echo ""
         HEADER="| Caso de uso |"
         SEP="|---|"
         for d in "${CU_TABLE_DAYS[@]}"; do
@@ -287,6 +293,8 @@ OUTPUT="TIMELINES/${USER}.md"
                 [ "${CU_FIRST_DAY[$cu]:-9999}" -lt 9999 ] && echo "${CU_FIRST_DAY[$cu]} $cu"
             done | sort -n
         )
+        echo ""
+        echo "</div>"
         echo ""
     fi
 

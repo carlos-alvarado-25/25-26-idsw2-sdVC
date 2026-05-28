@@ -5,6 +5,8 @@
 
 ## Patrón observado
 
+<div align="center">
+
 | Métrica | Valor |
 |---|---|
 | Commits propios | 99 (46 feat / 36 fix / 17 other) |
@@ -14,6 +16,8 @@
 | Días log+commits | 9 |
 | Días solo log | 0 |
 | Días solo commits | 0 |
+
+</div>
 
 ```mermaid
 gantt
@@ -28,6 +32,8 @@ gantt
 ```
 
 ## Trazabilidad por caso de uso
+
+<div align="center">
 
 | Caso de uso | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -64,6 +70,8 @@ gantt
 | `asignarExamenes` |   |   |   |   |   |   | A |   |
 | `cancelarGeneracion` |   |   |   |   |   |   | A |   |
 | `corregirExamenes` |   |   |   |   |   |   | A |   |
+
+</div>
 
 ---
 
