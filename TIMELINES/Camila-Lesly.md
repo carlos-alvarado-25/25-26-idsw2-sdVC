@@ -20,11 +20,11 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-21, 2026-05-27
-        Analisis     :done, 2026-05-23, 2026-05-27
-        Diseno       :done, 2026-05-23, 2026-05-27
-        Desarrollo   :done, 2026-05-25, 2026-05-27
-        Codigo       :done, 2026-05-24, 2026-05-27
+        UML          :done, 2026-05-21, 2026-05-28
+        Analisis     :done, 2026-05-23, 2026-05-28
+        Diseno       :done, 2026-05-23, 2026-05-28
+        Desarrollo   :done, 2026-05-25, 2026-05-28
+        Codigo       :done, 2026-05-24, 2026-05-28
 ```
 
 ---

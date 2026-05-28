@@ -19,7 +19,7 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-05-27
+        UML          :done, 2026-05-22, 2026-05-28
 ```
 
 ---

@@ -1,16 +1,16 @@
 # Timeline - martinlopez7
 
 > Repo: [martinlopez7/25-26-idsw2-sdVC](https://github.com/martinlopez7/25-26-idsw2-sdVC)
-> Commits: 86 | Días activos: 9 | Sesiones log: 40
+> Commits: 97 | Días activos: 9 | Sesiones log: 44
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 86 (41 feat / 31 fix / 14 other) |
-| Ratio fix/feat | 0.75 |
+| Commits propios | 97 (45 feat / 36 fix / 16 other) |
+| Ratio fix/feat | 0.80 |
 | Días activos | 9 |
-| Sesiones documentadas | 40 |
+| Sesiones documentadas | 44 |
 | Días log+commits | 9 |
 | Días solo log | 0 |
 | Días solo commits | 0 |
@@ -266,16 +266,31 @@ gantt
 
 ## Día 10 · 2026-05-28
 
-### Commits (2: 1 feat / 0 fix)
+### Commits (13: 5 feat / 5 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 11:44 | [docs: aceptación de diseño editarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/127bbd605fe8b332f49e230a27035d12508474a3) |
+| 11:43 | [feat: diseño de editarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/52e47aa75c18798852941e446504fb15232eb352) |
+| 11:19 | [docs: concrecion protocolo de diseño](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/154145bf7150303f1dfe75683dc0a7f2ee81125b) |
+| 11:12 | [fix: correccion diseño crearAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/bcfae34103200133a086b77a11d9ca5795fcbd98) |
+| 11:07 | [fix: concreciones de JWT de diseño de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/68eaaa51895bbab9aee94795858075c986fd658a) |
+| 10:55 | [feat: diseño de crearAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/667a52021316684c24f3960600c97da49a858d90) |
+| 10:51 | [fix: adicion de validacion de token en el diseño de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/c1494d28aaf061bb060c6d744e4cfa1cd5206bf7) |
+| 10:41 | [fix: correccion diseño verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/ba44b52473e51790de4708aba8a2010505da3549) |
+| 10:24 | [feat: diseño de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/bfac79d848fe9fdc382deffd360195921c037c72) |
+| 09:54 | [fix: correccion diseño completarGestion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/61a52b7c71f896cc22fbe25e4f3f4c8f32539063) |
+| 09:34 | [feat: diseño de completarGestion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/d9802703645d67d6952746faad2da090833c9711) |
 | 09:20 | [docs: pendiente correccion del diseño de eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/14e115b3eca8e66001156e40772310cd8e29268e) |
 | 09:12 | [feat: análisis de eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/f0f82eb70d3c601ce1321a90849a37b39792f316) |
 
-### 💬 Conversation-log (1 sesión)
+### 💬 Conversation-log (5 sesiónes)
 
 - Diseño de eliminarDocente()
+- Diseño de completarGestion()
+- Diseño de verAlumnos()
+- Diseño de crearAlumno()
+- Diseño de editarAlumno()
 
 > 💬 + commits = proceso documentado
 

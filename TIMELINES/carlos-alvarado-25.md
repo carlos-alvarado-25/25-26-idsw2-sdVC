@@ -1,17 +1,17 @@
 # Timeline - carlos-alvarado-25
 
 > Repo: [carlos-alvarado-25/25-26-idsw2-sdVC](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)
-> Commits: 33 | Días activos: 7 | Sesiones log: 12
+> Commits: 34 | Días activos: 8 | Sesiones log: 13
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 33 (27 feat / 3 fix / 3 other) |
-| Ratio fix/feat | 0.11 |
-| Días activos | 7 |
-| Sesiones documentadas | 12 |
-| Días log+commits | 1 |
+| Commits propios | 34 (28 feat / 3 fix / 3 other) |
+| Ratio fix/feat | 0.10 |
+| Días activos | 8 |
+| Sesiones documentadas | 13 |
+| Días log+commits | 2 |
 | Días solo log | 0 |
 | Días solo commits | 6 |
 | Sesiones sin fecha en log | 9 |
@@ -144,6 +144,22 @@ gantt
 - Sesión 26: Rama de Aulas - Estandarización de Importación
 - Sesión 27: Blindaje de Protocolos y Cierre de Jornada
 - Sesión 28: Rama de Aulas - Refinamiento y Consistencia Semántica
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 10 · 2026-05-28
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 09:38 | [feat: Add analysis for use case abrirAlumnos and corrected listing method on abrir entities](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/b8e5c6be68003d41ef3487c8f84d91ff68870e48) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 29: Rama de Alumnos y Estandarización Global de Listados
 
 > 💬 + commits = proceso documentado
 
