@@ -513,3 +513,18 @@
 - **Integridad Documental:** Actualización del índice central de análisis en \`RUP/01-analisis/casos-uso/README.md\` para reflejar el progreso de la rama de alumnos.
 
 **Decisión:** Se ratifica el uso de la **Navegación por Estados** como pilar de la Experiencia de Usuario en entornos administrativos complejos. Se decide que la edición de entidades con dependencias críticas (como el Alumno con su Grado) debe gestionarse centralizadamente en el controlador de edición para asegurar la coherencia de la vinculación académica en cada guardado incremental.
+
+---
+
+## [28/05/2026 23:34] Sesión 33: Rama de Alumnos - Eliminación y Rigor de Requisitos
+
+**Prompt:** "Perfecto, ahora iniciemos una última sesión para el caso de uso de eliminarAlumnos()... El caso de uso no menciona nada acerca de verificar los exámenes asociados... Será necesario demostrar en el diagrama que muestra el grado y el curso actual tal y como lo dicen los requisitos?"
+
+**Resultado:** 
+- **Análisis de `eliminarAlumno()`:** Diseño de la colaboración MVC para la eliminación de perfiles de estudiantes. 
+- **Refinamiento de Rigor:** Corrección de una desviación proactiva donde se había incluido una verificación de impacto no solicitada. Se eliminó la interacción con \`ExamenRepository\` para ceñirse estrictamente a la especificación.
+- **Modelado de Dependencias de Visualización:** Inclusión de la entidad \`Grado\` vinculada a \`Alumno\` en el diagrama de colaboración. Esta adición técnica justifica el cumplimiento del requisito de mostrar el grado y curso del alumno en la pantalla de confirmación.
+- **Artefactos Técnicos:** Actualización y regeneración de diagramas \`.puml\`, activos \`SVG\` y redacción del \`README.md\` con la secuencia de operaciones corregida y la tabla de correspondencia de requisitos.
+- **Integridad Documental:** Actualización final del índice de análisis en \`RUP/01-analisis/casos-uso/README.md\` cerrando formalmente la Rama de Alumnos.
+
+**Decisión:** Se eleva el **Apego Riguroso a Requisitos** por encima de la inercia de patrones previos. Se decide que las entidades relacionadas solo deben aparecer en los diagramas de colaboración si justifican un requisito explícito (como la visualización de datos académicos), evitando sobrecargar el modelo con validaciones de negocio que no han sido formalmente solicitadas. Se ratifica la importancia de la trazabilidad visual para demostrar el cumplimiento de la especificación de requisitos en la fase de análisis.

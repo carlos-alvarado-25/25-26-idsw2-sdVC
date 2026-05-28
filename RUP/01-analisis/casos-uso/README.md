@@ -36,6 +36,7 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 - [abrirAlumnos](abrirAlumnos/README.md) - Hub de gestión y listado paginado de estudiantes.
 - [crearAlumno](crearAlumno/README.md) - Análisis de creación manual de perfiles de estudiantes con vinculación académica.
 - [editarAlumno](editarAlumno/README.md) - Análisis de modificación de alumnos con persistencia incremental y gestión de dependencias.
+- [eliminarAlumno](eliminarAlumno/README.md) - Análisis de eliminación de perfiles de alumnos con confirmación de datos.
 - [importarAlumnos](importarAlumnos/README.md) - Análisis de carga masiva de alumnos con resolución de dependencias académicas.
 
 ### Gestión de Exámenes (Administrador)
