@@ -1,16 +1,19 @@
 # Timeline - carlos-alvarado-25
 
 > Repo: [carlos-alvarado-25/25-26-idsw2-sdVC](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)
-> Commits: 31 | Días activos: 7 | Sesiones log: 9
+> Commits: 33 | Días activos: 7 | Sesiones log: 12
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 31 (25 feat / 3 fix / 3 other) |
-| Ratio fix/feat | 0.12 |
+| Commits propios | 33 (27 feat / 3 fix / 3 other) |
+| Ratio fix/feat | 0.11 |
 | Días activos | 7 |
-| Sesiones documentadas | 9 |
+| Sesiones documentadas | 12 |
+| Días log+commits | 1 |
+| Días solo log | 0 |
+| Días solo commits | 6 |
 | Sesiones sin fecha en log | 9 |
 
 ```mermaid
@@ -20,8 +23,8 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-23, 2026-05-27
-        Analisis     :done, 2026-05-22, 2026-05-27
+        UML          :done, 2026-05-23, 2026-05-28
+        Analisis     :done, 2026-05-22, 2026-05-28
 ```
 
 ---
@@ -127,14 +130,22 @@ gantt
 
 ## Día 9 · 2026-05-27
 
-### Commits (2: 1 feat / 0 fix)
+### Commits (4: 3 feat / 0 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 23:08 | [feat: Implementar análisis y diagramas para editarAula y eliminarAula](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/e7f4b32626b2276227a69873b8d4d703f79d824f) |
+| 22:18 | [feat: Add analysis documentation and collaboration diagram for importarAulas use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/292d1ef2fe2ad39a58b18df477907bff8cc2ea93) |
 | 20:54 | [feat: Add analysis documentation and collaboration diagrams for abrirAulas and crearAula use cases](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/82be3f90dba2e76b5a624c05f03cba15227abd60) |
 | 20:37 | [Refactor use case diagrams for editing entities](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/a47154ad0208f80f98205c0110351b3e20878e9a) |
 
-> ⚠️ Commits sin entrada en log
+### 💬 Conversation-log (3 sesiónes)
+
+- Sesión 26: Rama de Aulas - Estandarización de Importación
+- Sesión 27: Blindaje de Protocolos y Cierre de Jornada
+- Sesión 28: Rama de Aulas - Refinamiento y Consistencia Semántica
+
+> 💬 + commits = proceso documentado
 
 ---
 

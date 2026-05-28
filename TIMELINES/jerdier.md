@@ -1,17 +1,17 @@
 # Timeline - jerdier
 
 > Repo: [jerdier/25-26-idsw2-sdVC](https://github.com/jerdier/25-26-idsw2-sdVC)
-> Commits: 17 | Días activos: 5 | Sesiones log: 5
+> Commits: 18 | Días activos: 6 | Sesiones log: 6
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 17 (8 feat / 3 fix / 6 other) |
+| Commits propios | 18 (8 feat / 3 fix / 7 other) |
 | Ratio fix/feat | 0.37 |
-| Días activos | 5 |
-| Sesiones documentadas | 5 |
-| Sesiones sin fecha en log | 5 |
+| Días activos | 6 |
+| Sesiones documentadas | 6 |
+| Sesiones sin fecha en log | 6 |
 
 ```mermaid
 gantt
@@ -20,9 +20,9 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-25, 2026-05-27
-        Diseno       :done, 2026-05-25, 2026-05-27
-        Codigo       :done, 2026-05-22, 2026-05-27
+        Analisis     :done, 2026-05-25, 2026-05-28
+        Diseno       :done, 2026-05-25, 2026-05-28
+        Codigo       :done, 2026-05-22, 2026-05-28
 ```
 
 ---
@@ -98,6 +98,18 @@ gantt
 |---|---|
 | 22:26 | [docs: finalización de la fase de análisis MVC](https://github.com/jerdier/25-26-idsw2-sdVC/commit/f7144e14b6b83d4b03c5277408b50390891d1a92) |
 | 22:19 | [docs: reorganización de activos UML y consolidación de la fase de](https://github.com/jerdier/25-26-idsw2-sdVC/commit/a286408836ec251d16c7470240ef706b208ea1c9) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 9 · 2026-05-27
+
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 22:45 | [design: especificación de contratos de API REST y estructuración de la](https://github.com/jerdier/25-26-idsw2-sdVC/commit/c1ae9fd485ec6ebff15d9c9d0a9b7d82b7c79f74) |
 
 > ⚠️ Commits sin entrada en log
 
