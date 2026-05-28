@@ -469,3 +469,17 @@
 - **Actualización de Artefactos:** Modificación de diagramas \`.puml\`, regeneración de activos \`SVG\` y ajuste de la secuencia de operaciones en los \`README.md\` de todas las ramas afectadas para garantizar la coherencia total del sistema de análisis.
 
 **Decisión:** Se adopta la **Separación de Responsabilidades por Evento de UI** como estándar de oro para listados paginados. Se decide que la carga inicial de una pantalla no debe acarrear la complejidad de estructuras de filtrado, optimizando así los contratos del controlador y repositorio. Esta normalización elimina la inercia técnica y consolida una arquitectura más limpia y trazable en todo el proyecto.
+
+---
+
+## [28/05/2026 21:07] Sesión 30: Rama de Alumnos - Importación y Resolución de Dependencias
+
+**Prompt:** "Hola, abramos sesión para el caso de uso de importarAlumnos... para el importarAulas utiliza los otros ejemplos de importar para el diagrama de colaboración"
+
+**Resultado:** 
+- **Análisis de `importarAlumnos()`:** Diseño de la colaboración MVC para la carga masiva de estudiantes. Se aplicó el estándar de importación estandarizada del proyecto.
+- **Validación de Integridad:** Se integró la resolución obligatoria de dependencias con la entidad `Grado`. El `AlumnoController` asume la responsabilidad de validar la existencia de los grados indicados en el archivo antes de proceder con la persistencia.
+- **Muestreo y Feedback:** Uso de la entidad conceptual `ImportResult` para informar al Administrador sobre el balance de la operación, detallando éxitos, matrículas duplicadas y grados no encontrados.
+- **Artefactos Técnicos:** Generación del diagrama \`.puml\`, activo \`SVG\` y documentación detallada en el \`README.md\` de la disciplina de análisis, incluyendo el mapeado con la especificación detallada.
+
+**Decisión:** Se ratifica el uso de **Entidades de Validación Secundarias** (como `GradoRepository`) dentro de los controladores de importación para blindar la integridad referencial del sistema. Se establece que ningún alumno puede ser importado sin un vínculo válido a un grado preexistente, garantizando la calidad de los datos operativos desde su origen masivo.

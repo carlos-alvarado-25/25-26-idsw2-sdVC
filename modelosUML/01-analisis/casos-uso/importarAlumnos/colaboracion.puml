@@ -1,0 +1,37 @@
+@startuml importarAlumnos-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Alumnos Abierto" as AlumnosAbierto
+
+package importarAlumnos as "importarAlumnos()" {
+    rectangle #629EF9 ImportarAlumnosView
+    rectangle #b5bd68 AlumnoController
+    rectangle #F2AC4E AlumnoRepository
+    rectangle #F2AC4E GradoRepository
+    rectangle #F2AC4E Alumno
+    rectangle #F2AC4E Grado
+}
+
+rectangle #CDEBA5 ":Alumnos Abierto" as AlumnosAbiertoSalida
+
+AlumnosAbierto -r-> ImportarAlumnosView: importarAlumnos()
+
+ImportarAlumnosView -d-> AlumnoController: obtenerFormatoRequerido() : String
+ImportarAlumnosView -d-> AlumnoController: obtenerGradosDisponibles() : List<Grado>
+AlumnoController -d-> GradoRepository: obtenerTodos() : List<Grado>
+
+ImportarAlumnosView -d-> AlumnoController: importar(archivo) : ImportResult
+
+AlumnoController -d-> AlumnoRepository: guardarLote(alumnos) : List<Alumno>
+
+AlumnoRepository -- Alumno
+Alumno -- Grado
+
+ImportarAlumnosView ..> AlumnosAbiertoSalida: finalizarImportacion()
+ImportarAlumnosView ..> AlumnosAbiertoSalida: cancelarImportacion()
+
+@enduml
