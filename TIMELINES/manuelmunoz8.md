@@ -13,6 +13,16 @@
 | Sesiones documentadas | 8 |
 | Sesiones sin fecha en log | 8 |
 
+```mermaid
+gantt
+    title Progresion de artefactos
+    dateFormat YYYY-MM-DD
+    axisFormat %d/%m
+    section Artefactos
+        Inicio       :milestone, 2026-05-19, 0d
+        Codigo       :done, 2026-05-25, 2026-05-28
+```
+
 ---
 
 ## Día 3 · 2026-05-21
@@ -48,6 +58,8 @@
 | 16:21 | [feat: eleccion de tecnologias para frontend y backend](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f9031a74424ebebbc20b3b4b8c213aa65e47a615) |
 | 15:51 | [feat: Creacion de reglas para gemini CLI](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c3c5ed12ef89919a726a954df6e141dfd0903984) |
 | 15:47 | [feat: agregacion del modelo del domino](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c77ec85f69a5a0b21be623c4e4163c3a987a52d9) |
+
+**Artefactos nuevos:** 🔌 
 
 > ⚠️ Commits sin entrada en log
 

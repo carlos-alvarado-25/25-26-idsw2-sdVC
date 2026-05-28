@@ -20,6 +20,7 @@ gantt
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
         UML          :done, 2026-05-25, 2026-05-28
+        Analisis     :done, 2026-05-25, 2026-05-28
         Codigo       :done, 2026-05-21, 2026-05-28
 ```
 
@@ -64,7 +65,7 @@ gantt
 | 19:33 | [feat: Analisis del caso de uso de corregirExamenes](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/b7e2e1c38b0708ea17d03991994669cb60c6863c) |
 | 19:17 | [feat: Estandarización para el analisis](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/b0eaef59905b50aab21195a492d15c37290a03bf) |
 
-**Artefactos nuevos:** 📐 
+**Artefactos nuevos:** 📐 🔍 
 
 > ⚠️ Commits sin entrada en log
 

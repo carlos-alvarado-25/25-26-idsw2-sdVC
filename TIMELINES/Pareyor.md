@@ -23,6 +23,7 @@ gantt
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
         UML          :done, 2026-05-21, 2026-05-28
+        Analisis     :done, 2026-05-21, 2026-05-28
 ```
 
 ---
@@ -58,7 +59,7 @@ gantt
 
 - Sesión 2: Análisis de los 5 primeros casos de uso (MVC)
 
-**Artefactos nuevos:** 📐 
+**Artefactos nuevos:** 📐 🔍 
 
 > 💬 + commits = proceso documentado
 

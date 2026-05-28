@@ -11,6 +11,16 @@
 | Días activos | 3 |
 | Sesiones documentadas | 0 |
 
+```mermaid
+gantt
+    title Progresion de artefactos
+    dateFormat YYYY-MM-DD
+    axisFormat %d/%m
+    section Artefactos
+        Inicio       :milestone, 2026-05-19, 0d
+        Codigo       :done, 2026-05-21, 2026-05-28
+```
+
 ---
 
 ## Día 3 · 2026-05-21
@@ -22,6 +32,8 @@
 | 21:04 | [Stack inicial y gestión de commits](https://github.com/rubentresgallob/25-26-idsw2-sdVC/commit/6822ab2a8852df78cbbf66c807ecf330e5793a90) |
 | 21:03 | [feat: setup stack NestJS + Angular + Prisma](https://github.com/rubentresgallob/25-26-idsw2-sdVC/commit/e1aa18a69557357b9b2e6edaf9b20982a93afd68) |
 | 20:46 | [Inicio proyecto](https://github.com/rubentresgallob/25-26-idsw2-sdVC/commit/b76cc77f405e3e82fe6302b3774e2bd8498e31ea) |
+
+**Artefactos nuevos:** 🔌 
 
 > ⚠️ Commits sin entrada en log
 

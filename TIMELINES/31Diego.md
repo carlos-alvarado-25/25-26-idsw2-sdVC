@@ -20,6 +20,7 @@ gantt
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
         UML          :done, 2026-05-22, 2026-05-28
+        Analisis     :done, 2026-05-22, 2026-05-28
 ```
 
 ---
@@ -45,7 +46,7 @@ gantt
 | 22:44 | [feat: análisis de abrirConvocatorias y corrección de estructura de carpetas](https://github.com/31Diego/25-26-idsw2-sdVC/commit/5dcc693f105aa41de1f884d7934c3780c7b38dfa) |
 | 22:10 | [feat: CLAUDE.md, análisis abrirConvocatoria y registro de sesión](https://github.com/31Diego/25-26-idsw2-sdVC/commit/eeaebde9532bcc546ee2a47610e6559a2fcd0ee3) |
 
-**Artefactos nuevos:** 📐 
+**Artefactos nuevos:** 📐 🔍 
 
 > ⚠️ Commits sin entrada en log
 
