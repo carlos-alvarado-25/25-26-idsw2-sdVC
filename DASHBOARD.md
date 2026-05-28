@@ -1,7 +1,7 @@
 <!-- monitor-format: v3378f8b5 -->
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-28 15:29:47 CEST | 8 días totales
+> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-28 19:03:17 CEST | 8 días totales
 
 ## Leyenda
 
@@ -19,7 +19,7 @@
 
 ## Tabla
 
-<sub>Ultimas actualizaciones: [KelviaBarros05](https://github.com/KelviaBarros05/25-26-idsw2-sdVC), [enmabry](https://github.com/enmabry/25-26-idsw2-sdVC), [eirik-rosete](https://github.com/eirik-rosete/25-26-idsw2-sdVC), [beatriizorozco](https://github.com/beatriizorozco/25-26-idsw2-sdVC), [xImRaul](https://github.com/xImRaul/25-26-idsw2-sdVC)</sub>
+<sub>Ultimas actualizaciones: [SdeCos](https://github.com/SdeCos/25-26-idsw2-sdVC), [martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC), [carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC), [alejandrofondo](https://github.com/alejandrofondo/25-26-idsw2-sdVC), [jerdier](https://github.com/jerdier/25-26-idsw2-sdVC)</sub>
 
 | Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | 📐 | 🔍 | 🧩 | ⚙️ | 🔌 | SHA |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -55,5 +55,5 @@
 ## Resumen
 
 - Forks totales: 28
-- Alumnos con actividad (>0 commits propios): 24
-- Alumnos sin actividad: 4
+- Alumnos con actividad (>0 commits propios): 28
+- Alumnos sin actividad: 0
