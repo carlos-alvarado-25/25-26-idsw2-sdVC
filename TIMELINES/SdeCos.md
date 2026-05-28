@@ -30,9 +30,14 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D7 |
-|---|:---:|
-| `casos-uso` | A |
+| Caso de uso | D7 | D8 | D10 |
+|---|:---:|:---:|:---:|
+| `Usuario` | A |   |   |
+| `Administrador` |   | A |   |
+| `Alumno` |   | A |   |
+| `DirectorDeGrado` |   |   | A |
+| `Profesor` |   |   | A |
+| `Secretaria` |   |   | A |
 
 </div>
 
