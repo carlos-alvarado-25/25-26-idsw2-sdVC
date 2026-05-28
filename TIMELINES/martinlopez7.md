@@ -1,16 +1,16 @@
 # Timeline - martinlopez7
 
 > Repo: [martinlopez7/25-26-idsw2-sdVC](https://github.com/martinlopez7/25-26-idsw2-sdVC)
-> Commits: 97 | Días activos: 9 | Sesiones log: 44
+> Commits: 99 | Días activos: 9 | Sesiones log: 45
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 97 (45 feat / 36 fix / 16 other) |
-| Ratio fix/feat | 0.80 |
+| Commits propios | 99 (46 feat / 36 fix / 17 other) |
+| Ratio fix/feat | 0.78 |
 | Días activos | 9 |
-| Sesiones documentadas | 44 |
+| Sesiones documentadas | 45 |
 | Días log+commits | 9 |
 | Días solo log | 0 |
 | Días solo commits | 0 |
@@ -270,10 +270,12 @@ gantt
 
 ## Día 10 · 2026-05-28
 
-### Commits (13: 5 feat / 5 fix)
+### Commits (15: 6 feat / 5 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 12:15 | [docs: aceptacion del diseño de eliminarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/433a791745f23b6ce1422d3c96d6041d28445cdc) |
+| 12:14 | [feat: diseño de eliminarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/fb39cf8377c8200815c288c873b3bee6afb67684) |
 | 11:44 | [docs: aceptación de diseño editarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/127bbd605fe8b332f49e230a27035d12508474a3) |
 | 11:43 | [feat: diseño de editarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/52e47aa75c18798852941e446504fb15232eb352) |
 | 11:19 | [docs: concrecion protocolo de diseño](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/154145bf7150303f1dfe75683dc0a7f2ee81125b) |
@@ -288,13 +290,14 @@ gantt
 | 09:20 | [docs: pendiente correccion del diseño de eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/14e115b3eca8e66001156e40772310cd8e29268e) |
 | 09:12 | [feat: análisis de eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/f0f82eb70d3c601ce1321a90849a37b39792f316) |
 
-### 💬 Conversation-log (5 sesiónes)
+### 💬 Conversation-log (6 sesiónes)
 
 - Diseño de eliminarDocente()
 - Diseño de completarGestion()
 - Diseño de verAlumnos()
 - Diseño de crearAlumno()
 - Diseño de editarAlumno()
+- Diseño de eliminarAlumno()
 
 > 💬 + commits = proceso documentado
 

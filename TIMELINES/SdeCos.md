@@ -1,16 +1,16 @@
 # Timeline - SdeCos
 
 > Repo: [SdeCos/25-26-idsw2-sdVC](https://github.com/SdeCos/25-26-idsw2-sdVC)
-> Commits: 6 | Días activos: 4 | Sesiones log: 23
+> Commits: 9 | Días activos: 5 | Sesiones log: 35
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 6 (0 feat / 0 fix / 6 other) |
-| Días activos | 4 |
-| Sesiones documentadas | 23 |
-| Sesiones sin fecha en log | 23 |
+| Commits propios | 9 (0 feat / 0 fix / 9 other) |
+| Días activos | 5 |
+| Sesiones documentadas | 35 |
+| Sesiones sin fecha en log | 35 |
 
 ```mermaid
 gantt
@@ -71,6 +71,20 @@ gantt
 | Hora | Mensaje |
 |---|---|
 | 09:59 | [analisis cdu administrador y alumno](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/df0f91e9a85598d336f8c4f59847d34e28beea5b) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 10 · 2026-05-28
+
+### Commits (3: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 12:24 | [analisis cdu secretaria](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/55696a6cdce95339e582fc1dcaa2fd192faf90b6) |
+| 10:04 | [analisis cdu profesor](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/b5994d6a34cd58521ae3a3dc733b74f65ff4ef60) |
+| 09:18 | [analisis cdu director de grado](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/29159538a9fcd6787e9441f17f5f56bddf1e8a10) |
 
 > ⚠️ Commits sin entrada en log
 
