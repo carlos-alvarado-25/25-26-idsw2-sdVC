@@ -5,6 +5,8 @@
 
 ## Patrón observado
 
+<div align="center">
+
 | Métrica | Valor |
 |---|---|
 | Commits propios | 52 (38 feat / 14 fix / 0 other) |
@@ -15,6 +17,8 @@
 | Días solo log | 0 |
 | Días solo commits | 0 |
 
+</div>
+
 ```mermaid
 gantt
     title Progresion de artefactos
@@ -22,9 +26,59 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-21, 2026-05-28
-        Analisis     :done, 2026-05-21, 2026-05-28
+        UML          :done, 2026-05-21, 2026-05-29
+        Analisis     :done, 2026-05-21, 2026-05-29
 ```
+
+## Trazabilidad por caso de uso
+
+<div align="center">
+
+| Caso de uso | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| `corregirExamenes` | A |   |   |   |   |   |   |   |
+| `exportarConfiguracionGlobal` | A |   |   |   |   |   |   |   |
+| `generarExamenes` | A |   |   |   |   |   |   |   |
+| `importarAlumnos` | A |   |   |   |   |   |   |   |
+| `importarConfiguracionGlobal` | A |   |   |   |   |   |   |   |
+| `asignarExamenes` |   | A |   |   |   |   |   |   |
+| `crearPregunta` |   | A |   |   |   |   |   |   |
+| `exportarAlumnos` |   | A |   |   |   |   |   |   |
+| `exportarPreguntas` |   | A |   |   |   |   |   |   |
+| `importarPreguntas` |   | A |   |   |   |   |   |   |
+| `crearAlumno` |   |   | A |   |   |   |   |   |
+| `crearDocente` |   |   | A |   |   |   |   |   |
+| `editarAsignatura` |   |   | A |   |   |   |   |   |
+| `editarDocente` |   |   | A |   |   |   |   |   |
+| `editarPregunta` |   |   | A |   |   |   |   |   |
+| `crearAsignatura` |   |   |   | A |   |   |   |   |
+| `crearGrado` |   |   |   | A |   |   |   |   |
+| `editarAlumno` |   |   |   | A |   |   |   |   |
+| `editarGrado` |   |   |   | A |   |   |   |   |
+| `verPreguntas` |   |   |   | A |   |   |   |   |
+| `eliminarPregunta` |   |   |   |   | A |   |   |   |
+| `verAlumnos` |   |   |   |   | A |   |   |   |
+| `verAsignaturas` |   |   |   |   | A |   |   |   |
+| `verDocentes` |   |   |   |   | A |   |   |   |
+| `verGrados` |   |   |   |   | A |   |   |   |
+| `eliminarAlumno` |   |   |   |   |   | A |   |   |
+| `eliminarAsignatura` |   |   |   |   |   | A |   |   |
+| `eliminarDocente` |   |   |   |   |   | A |   |   |
+| `eliminarGrado` |   |   |   |   |   | A |   |   |
+| `iniciarSesion` |   |   |   |   |   | A |   |   |
+| `cerrarSesion` |   |   |   |   |   |   | A |   |
+| `completarGestion` |   |   |   |   |   |   | A |   |
+| `crearRespuesta` |   |   |   |   |   |   | A |   |
+| `verRespuestas` |   |   |   |   |   |   | A |   |
+| `cancelarGeneracion` |   |   |   |   |   |   |   | A |
+| `editarRespuesta` |   |   |   |   |   |   |   | A |
+| `eliminarRespuesta` |   |   |   |   |   |   |   | A |
+| `exportarAsignaturas` |   |   |   |   |   |   |   | A |
+| `exportarGrados` |   |   |   |   |   |   |   | A |
+| `importarAsignaturas` |   |   |   |   |   |   |   | A |
+| `importarGrados` |   |   |   |   |   |   |   | A |
+
+</div>
 
 ---
 

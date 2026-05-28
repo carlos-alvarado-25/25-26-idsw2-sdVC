@@ -5,6 +5,8 @@
 
 ## Patrón observado
 
+<div align="center">
+
 | Métrica | Valor |
 |---|---|
 | Commits propios | 12 (1 feat / 1 fix / 10 other) |
@@ -15,6 +17,8 @@
 | Días solo log | 0 |
 | Días solo commits | 2 |
 
+</div>
+
 ```mermaid
 gantt
     title Progresion de artefactos
@@ -22,9 +26,19 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-21, 2026-05-28
-        Diseno       :done, 2026-05-21, 2026-05-28
+        Analisis     :done, 2026-05-21, 2026-05-29
+        Diseno       :done, 2026-05-21, 2026-05-29
 ```
+
+## Trazabilidad por caso de uso
+
+<div align="center">
+
+| Caso de uso | D3 |
+|---|:---:|
+| `casos-uso` | A |
+
+</div>
 
 ---
 

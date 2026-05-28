@@ -5,12 +5,16 @@
 
 ## Patrón observado
 
+<div align="center">
+
 | Métrica | Valor |
 |---|---|
 | Commits propios | 9 (0 feat / 0 fix / 9 other) |
 | Días activos | 5 |
 | Sesiones documentadas | 35 |
 | Sesiones sin fecha en log | 35 |
+
+</div>
 
 ```mermaid
 gantt
@@ -19,8 +23,18 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-25, 2026-05-28
+        Analisis     :done, 2026-05-25, 2026-05-29
 ```
+
+## Trazabilidad por caso de uso
+
+<div align="center">
+
+| Caso de uso | D7 |
+|---|:---:|
+| `casos-uso` | A |
+
+</div>
 
 ---
 

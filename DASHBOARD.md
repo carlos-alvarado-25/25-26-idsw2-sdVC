@@ -1,7 +1,7 @@
 <!-- monitor-format: v3378f8b5 -->
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-29 00:36:21 CEST | 9 días totales
+> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-29 00:41:49 CEST | 9 días totales
 
 ## Leyenda
 

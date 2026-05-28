@@ -5,6 +5,8 @@
 
 ## Patrón observado
 
+<div align="center">
+
 | Métrica | Valor |
 |---|---|
 | Commits propios | 3 (0 feat / 0 fix / 3 other) |
@@ -13,6 +15,8 @@
 | Días log+commits | 1 |
 | Días solo log | 0 |
 | Días solo commits | 0 |
+
+</div>
 
 ---
 

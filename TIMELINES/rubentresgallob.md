@@ -5,11 +5,15 @@
 
 ## Patrón observado
 
+<div align="center">
+
 | Métrica | Valor |
 |---|---|
 | Commits propios | 8 (1 feat / 0 fix / 7 other) |
 | Días activos | 3 |
 | Sesiones documentadas | 0 |
+
+</div>
 
 ```mermaid
 gantt
@@ -18,7 +22,7 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Codigo       :done, 2026-05-21, 2026-05-28
+        Codigo       :done, 2026-05-21, 2026-05-29
 ```
 
 ---

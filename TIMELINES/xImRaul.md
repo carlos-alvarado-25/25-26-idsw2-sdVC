@@ -5,12 +5,16 @@
 
 ## Patrón observado
 
+<div align="center">
+
 | Métrica | Valor |
 |---|---|
 | Commits propios | 4 (4 feat / 0 fix / 0 other) |
 | Días activos | 2 |
 | Sesiones documentadas | 2 |
 | Sesiones sin fecha en log | 2 |
+
+</div>
 
 ---
 
