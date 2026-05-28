@@ -1,17 +1,17 @@
 # Timeline - martinlopez7
 
 > Repo: [martinlopez7/25-26-idsw2-sdVC](https://github.com/martinlopez7/25-26-idsw2-sdVC)
-> Commits: 84 | Días activos: 8 | Sesiones log: 39
+> Commits: 85 | Días activos: 9 | Sesiones log: 40
 
 ## Patrón observado
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 84 (40 feat / 31 fix / 13 other) |
-| Ratio fix/feat | 0.77 |
-| Días activos | 8 |
-| Sesiones documentadas | 39 |
-| Días log+commits | 8 |
+| Commits propios | 85 (41 feat / 31 fix / 13 other) |
+| Ratio fix/feat | 0.75 |
+| Días activos | 9 |
+| Sesiones documentadas | 40 |
+| Días log+commits | 9 |
 | Días solo log | 0 |
 | Días solo commits | 0 |
 
@@ -22,7 +22,7 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-21, 2026-05-27
+        UML          :done, 2026-05-21, 2026-05-28
 ```
 
 ---
@@ -259,6 +259,22 @@ gantt
 - Diseño de crearDocente()
 - Diseño de verDocentes()
 - Diseño de editarDocente()
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 10 · 2026-05-28
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 09:12 | [feat: análisis de eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/f0f82eb70d3c601ce1321a90849a37b39792f316) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Diseño de eliminarDocente()
 
 > 💬 + commits = proceso documentado
 
