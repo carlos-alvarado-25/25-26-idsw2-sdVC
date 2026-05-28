@@ -23,9 +23,9 @@ rectangle #CDEBA5 ":Collaboration ImportarAsignaturas" as ImportarAsignaturas
 
 SistemaDisponible -r-> ListarAsignaturasView: abrirAsignaturas()
 
-ListarAsignaturasView -d-> AsignaturaController: listarAsignaturas(filtros, pagina) : PagedResult<Asignatura>
+ListarAsignaturasView -d-> AsignaturaController: listarAsignaturas(pagina) : PagedResult<Asignatura>
 
-AsignaturaController --> AsignaturaRepository: obtenerPaginadas(filtros, pagina) : PagedResult<Asignatura>
+AsignaturaController --> AsignaturaRepository: obtenerPaginadas(pagina) : PagedResult<Asignatura>
 
 AsignaturaRepository -- Asignatura
 Asignatura -- Grado

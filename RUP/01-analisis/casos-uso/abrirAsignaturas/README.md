@@ -86,10 +86,10 @@ Análisis de colaboración del caso de uso `abrirAsignaturas()` mediante el patr
 ### secuencia de operaciones
 
 1. **Apertura**: `:Sistema Disponible` invoca `ListarAsignaturasView.abrirAsignaturas()`.
-2. **Carga Inicial**: La vista solicita la primera página del listado al `AsignaturaController`.
-3. **Consulta**: El controlador recupera los datos paginados (`PagedResult<Asignatura>`) desde `AsignaturaRepository`.
+2. **Carga Inicial**: La vista solicita la primera página del listado al `AsignaturaController` mediante `listarAsignaturas(pagina)`.
+3. **Consulta**: El controlador recupera los datos paginados (`PagedResult<Asignatura>`) desde `AsignaturaRepository.obtenerPaginadas(pagina)`.
 4. **Presentación**: La vista renderiza la tabla de asignaturas para la página actual.
-5. **Filtrado / Navegación de Páginas**: El Administrador introduce criterios o cambia de página; la vista solicita actualización al controlador.
+5. **Filtrado**: El Administrador introduce criterios de búsqueda; la vista invoca `filtrarAsignaturas(criterio, pagina)`, delegando en `AsignaturaRepository.buscarPaginadas(criterio, pagina)`.
 6. **Navegación**: El usuario selecciona una acción (Crear/Editar/Eliminar/Importar) transfiriendo el control a la colaboración correspondiente.
 
 ## correspondencia con requisitos
@@ -98,7 +98,7 @@ Análisis de colaboración del caso de uso `abrirAsignaturas()` mediante el patr
 
 |Requisito del caso de uso|Clase responsable|Método/Colaboración|
 |-|-|-|
-|Presentar lista de asignaturas|`ListarAsignaturasView`|`listarAsignaturas(filtros, pagina)`|
+|Presentar lista de asignaturas|`AsignaturaController`|`listarAsignaturas(pagina)`|
 |Código, nombre, créditos, grado|`Asignatura` / `Grado`|Atributos de las entidades|
 |Permitir filtrar lista|`AsignaturaController`|`filtrarAsignaturas(criterio, pagina)`|
 |Acciones CRUD / Importación|`ListarAsignaturasView`|Puntos de navegación|

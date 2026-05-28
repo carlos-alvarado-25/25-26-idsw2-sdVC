@@ -32,6 +32,9 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 - [eliminarAula](eliminarAula/README.md) - Análisis de eliminación segura de aulas con verificación de impacto.
 - [importarAulas](importarAulas/README.md) - Análisis de carga masiva de aulas con estandarización de formatos.
 
+### Gestión de Alumnos (Administrador)
+- [abrirAlumnos](abrirAlumnos/README.md) - Hub de gestión y listado paginado de estudiantes.
+
 ### Gestión de Exámenes (Administrador)
 - [abrirExamenes](abrirExamenes/README.md) - Hub de gestión y listado de exámenes.
 - [crearExamen](crearExamen/README.md) - Análisis de creación manual de exámenes.

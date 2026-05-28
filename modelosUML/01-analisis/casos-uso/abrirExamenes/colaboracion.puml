@@ -17,9 +17,9 @@ rectangle #CDEBA5 ":Collaboration EliminarExamen" as EliminarExamen
 
 SistemaDisponible -r-> ListarExamenesView: abrirExamenes()
 
-ListarExamenesView -d-> ExamenController: listarExamenes(filtros, pagina) : PagedResult<Examen>
+ListarExamenesView -d-> ExamenController: listarExamenes(pagina) : PagedResult<Examen>
 
-ExamenController --> ExamenRepository: obtenerPaginados(filtros, pagina) : PagedResult<Examen>
+ExamenController --> ExamenRepository: obtenerPaginados(pagina) : PagedResult<Examen>
 
 ExamenRepository -- Examen
 

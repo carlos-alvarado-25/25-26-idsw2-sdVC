@@ -1,0 +1,41 @@
+@startuml abrirAlumnos-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+package abrirAlumnos as "abrirAlumnos()" {
+    rectangle #629EF9 ListarAlumnosView
+    rectangle #b5bd68 AlumnoController
+    rectangle #F2AC4E AlumnoRepository
+    rectangle #F2AC4E Alumno
+    rectangle #F2AC4E Grado
+}
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
+rectangle #CDEBA5 ":Collaboration CrearAlumno" as CrearAlumno
+rectangle #CDEBA5 ":Collaboration EditarAlumno" as EditarAlumno
+rectangle #CDEBA5 ":Collaboration EliminarAlumno" as EliminarAlumno
+rectangle #CDEBA5 ":Collaboration ImportarAlumnos" as ImportarAlumnos
+
+SistemaDisponible -r-> ListarAlumnosView: abrirAlumnos()
+
+ListarAlumnosView -d-> AlumnoController: listarAlumnos(pagina) : PagedResult<Alumno>
+AlumnoController -d-> AlumnoRepository: obtenerPaginados(pagina) : PagedResult<Alumno>
+
+ListarAlumnosView -d-> AlumnoController: filtrarAlumnos(criterio, pagina) : PagedResult<Alumno>
+AlumnoController -d-> AlumnoRepository: buscarPaginados(criterio, pagina) : PagedResult<Alumno>
+
+AlumnoRepository -- Alumno
+Alumno -- Grado
+
+ListarAlumnosView ..> SistemaDisponibleSalida: <<finalizar>> completarGestion()
+ListarAlumnosView ..> CrearAlumno: <<crear>> crearAlumno()
+ListarAlumnosView ..> EditarAlumno: <<editar>> editarAlumno(alumno)
+ListarAlumnosView ..> EliminarAlumno: <<eliminar>> eliminarAlumno(alumno)
+ListarAlumnosView ..> ImportarAlumnos: <<importar>> importarAlumnos()
+
+@enduml

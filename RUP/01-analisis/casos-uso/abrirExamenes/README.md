@@ -80,10 +80,10 @@ Análisis de colaboración del caso de uso `abrirExamenes()` mediante el patrón
 ### secuencia de operaciones
 
 1. **Apertura**: `:Sistema Disponible` invoca `ListarExamenesView.abrirExamenes()`.
-2. **Carga Inicial**: La vista solicita la primera página del listado al `ExamenController`.
-3. **Consulta**: El controlador recupera los datos paginados (`PagedResult`) desde `ExamenRepository`.
+2. **Carga Inicial**: La vista solicita la primera página del listado al `ExamenController` mediante `listarExamenes(pagina)`.
+3. **Consulta**: El controlador recupera los datos paginados (`PagedResult<Examen>`) desde `ExamenRepository.obtenerPaginados(pagina)`.
 4. **Presentación**: La vista renderiza la tabla de exámenes programados para la página actual.
-5. **Filtrado / Navegación de Páginas**: El Administrador introduce criterios o cambia de página; la vista solicita actualización al controlador.
+5. **Filtrado**: El Administrador introduce criterios; la vista invoca `filtrarExamenes(criterio, pagina)`, delegando en `ExamenRepository.buscarPaginados(criterio, pagina)`.
 6. **Navegación**: El usuario selecciona una acción (Crear/Editar/Eliminar) transfiriendo el control a la colaboración correspondiente.
 
 ## correspondencia con requisitos
@@ -92,7 +92,7 @@ Análisis de colaboración del caso de uso `abrirExamenes()` mediante el patrón
 
 |Requisito del caso de uso|Clase responsable|Método/Colaboración|
 |-|-|-|
-|Presentar lista de exámenes|`ListarExamenesView`|`listarExamenes(filtros, pagina)`|
+|Presentar lista de exámenes|`ExamenController`|`listarExamenes(pagina)`|
 |Mostrar Asignatura, Fecha, Aula, Profesor|`Examen`|Atributos de la entidad|
 |Permitir filtrar lista|`ExamenController`|`filtrarExamenes(criterio, pagina)`|
 |Accesos CRUD|`ListarExamenesView`|Enlaces de navegación|

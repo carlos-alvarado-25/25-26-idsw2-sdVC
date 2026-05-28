@@ -23,9 +23,9 @@ rectangle #CDEBA5 ":Collaboration ImportarProfesores" as ImportarProfesores
 
 SistemaDisponible -r-> ListarProfesoresView: abrirProfesores()
 
-ListarProfesoresView -d-> ProfesorController: listarProfesores(filtros, pagina) : PagedResult<Profesor>
+ListarProfesoresView -d-> ProfesorController: listarProfesores(pagina) : PagedResult<Profesor>
 
-ProfesorController --> ProfesorRepository: obtenerPaginados(filtros, pagina) : PagedResult<Profesor>
+ProfesorController --> ProfesorRepository: obtenerPaginados(pagina) : PagedResult<Profesor>
 
 ProfesorRepository -- Profesor
 Profesor -- Asignatura

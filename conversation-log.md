@@ -455,3 +455,17 @@
 - **Mantenimiento de Índices:** Poblado completo de la Rama de Aulas en el índice central de la disciplina de análisis.
 
 **Decisión:** Se ratifica la **Consistencia Semántica Transversal** como principio de diseño. Se decide que todos los controladores de "Eliminación Segura" deben utilizar firmas de métodos específicas a la dependencia consultada, evitando generalizaciones que oscurezcan el propósito técnico del código. Se oficializa la obligación de mantener la integridad de navegación en la documentación RUP mediante la actualización sistemática de índices centrales.
+
+---
+
+## [28/05/2026 09:34] Sesión 29: Rama de Alumnos y Estandarización Global de Listados
+
+**Prompt:** "Hola Gemini, iniciemos una nueva sesión para iniciar el análisis de la rama de Alumnos. iniciemos con abrirAlumnos()... Revisa si seguiste correctamente las pautas... Mira, tenemos el filtraje pero no la lista. No sería idóneo que fuera listarAlumnos y filtrarAlumnos por separado?... identifica las entidades que tengan este problema de (filtros, página) y corrigelo."
+
+**Resultado:** 
+- **Análisis de `abrirAlumnos()`:** Inicio de la rama de gestión de estudiantes. Se diseñó la colaboración MVC aplicando la estrategia de alto volumen (`PagedResult`) y la delegación de datos del `Grado` matriculado.
+- **Refinamiento Arquitectónico Global:** Se ha establecido un nuevo estándar para casos de uso de apertura, separando estrictamente el **Listado Inicial** (`listarEntidad(pagina)`) del **Filtrado Activo** (`filtrarEntidad(criterio, pagina)`).
+- **Normalización Masiva:** Corrección de la firma de métodos en las ramas de **Asignaturas**, **Exámenes** y **Profesores**. Se eliminaron los parámetros de filtro redundantes en las llamadas iniciales para mejorar la pureza semántica y el mapeado de eventos de UI.
+- **Actualización de Artefactos:** Modificación de diagramas \`.puml\`, regeneración de activos \`SVG\` y ajuste de la secuencia de operaciones en los \`README.md\` de todas las ramas afectadas para garantizar la coherencia total del sistema de análisis.
+
+**Decisión:** Se adopta la **Separación de Responsabilidades por Evento de UI** como estándar de oro para listados paginados. Se decide que la carga inicial de una pantalla no debe acarrear la complejidad de estructuras de filtrado, optimizando así los contratos del controlador y repositorio. Esta normalización elimina la inercia técnica y consolida una arquitectura más limpia y trazable en todo el proyecto.
