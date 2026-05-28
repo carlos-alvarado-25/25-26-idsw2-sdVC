@@ -106,7 +106,7 @@ url_encode_path() {
     python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1], safe='/'))" "$1" 2>/dev/null || echo "$1"
 }
 
-get_artifact_day() {
+_get_artifact_day_single() {
     local path="$1"
     local encoded_path
     encoded_path=$(url_encode_path "$path")
@@ -122,11 +122,20 @@ get_artifact_day() {
     fi
 }
 
+get_artifact_day() {
+    for path in "$@"; do
+        local result
+        result=$(_get_artifact_day_single "$path")
+        [ -n "$result" ] && echo "$result" && return
+    done
+    echo ""
+}
+
 log "Calculando artefactos..."
-SRC_DAY=$(get_artifact_day "src")
+SRC_DAY=$(get_artifact_day "src" "backend" "frontend")
 UML_DAY=$(get_artifact_day "modelosUML")
-R01_DAY=$(get_artifact_day "RUP/01-analisis")
-R02_DAY=$(get_artifact_day "RUP/02-diseño")
+R01_DAY=$(get_artifact_day "RUP/01-analisis" "documents/analisis")
+R02_DAY=$(get_artifact_day "RUP/02-diseño" "documents/diseño")
 R03_DAY=$(get_artifact_day "RUP/03-desarrollo")
 
 # --- Metricas globales ---

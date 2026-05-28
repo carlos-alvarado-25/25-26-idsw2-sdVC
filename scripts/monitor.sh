@@ -76,22 +76,34 @@ compute_max_gap() {
     echo "$max_gap"
 }
 
-get_artifact_day_offset() {
-    local user="$1" path="$2" inicial_epoch="$3" inicial_sha="$4"
+_artifact_date_single() {
+    local user="$1" path="$2" inicial_sha="$3"
     local encoded_path
     encoded_path=$(url_encode_path "$path")
-
     local first_date
     first_date=$(gh api "repos/$user/25-26-idsw2-sdVC/commits?path=$encoded_path&per_page=100" 2>/dev/null | \
         jq -r --arg sha "$inicial_sha" \
         '[.[] | select(.sha != $sha)] | if length > 0 then last | .commit.author.date | split("T")[0] else "null" end' \
         2>/dev/null || echo "null")
-
     if [ -z "$first_date" ] || [ "$first_date" = "null" ]; then
+        echo ""
+    else
+        echo "$first_date"
+    fi
+}
+
+get_artifact_day_offset() {
+    local user="$1" inicial_epoch="$2" inicial_sha="$3"
+    shift 3
+    local first_date=""
+    for path in "$@"; do
+        first_date=$(_artifact_date_single "$user" "$path" "$inicial_sha")
+        [ -n "$first_date" ] && break
+    done
+    if [ -z "$first_date" ]; then
         echo "-"
         return
     fi
-
     local t_artifact
     t_artifact=$(date -d "$first_date" +%s 2>/dev/null) || { echo "?"; return; }
     local offset=$(( (t_artifact - inicial_epoch) / 86400 ))
@@ -223,12 +235,12 @@ for user in $FORKS; do
     CONVLOG_STATUS=$(check_file_has_content "$user" "conversation-log.md" "lo que le dijo al AI para arrancar" 2>/dev/null || echo "?")
     README=$(check_readme_rewritten "$user" 2>/dev/null || echo "?")
 
-    SRC_OFFSET=$(get_artifact_day_offset "$user" "src" "$INICIAL_EPOCH" "$INICIAL_SHA")
-    UML_OFFSET=$(get_artifact_day_offset "$user" "modelosUML" "$INICIAL_EPOCH" "$INICIAL_SHA")
-    CL_T_OFFSET=$(get_artifact_day_offset "$user" "conversation-log.md" "$INICIAL_EPOCH" "$INICIAL_SHA")
-    R01_OFFSET=$(get_artifact_day_offset "$user" "RUP/01-analisis" "$INICIAL_EPOCH" "$INICIAL_SHA")
-    R02_OFFSET=$(get_artifact_day_offset "$user" "RUP/02-diseño" "$INICIAL_EPOCH" "$INICIAL_SHA")
-    R03_OFFSET=$(get_artifact_day_offset "$user" "RUP/03-desarrollo" "$INICIAL_EPOCH" "$INICIAL_SHA")
+    SRC_OFFSET=$(get_artifact_day_offset "$user" "$INICIAL_EPOCH" "$INICIAL_SHA" "src" "backend" "frontend")
+    UML_OFFSET=$(get_artifact_day_offset "$user" "$INICIAL_EPOCH" "$INICIAL_SHA" "modelosUML")
+    CL_T_OFFSET=$(get_artifact_day_offset "$user" "$INICIAL_EPOCH" "$INICIAL_SHA" "conversation-log.md")
+    R01_OFFSET=$(get_artifact_day_offset "$user" "$INICIAL_EPOCH" "$INICIAL_SHA" "RUP/01-analisis" "documents/analisis")
+    R02_OFFSET=$(get_artifact_day_offset "$user" "$INICIAL_EPOCH" "$INICIAL_SHA" "RUP/02-diseño" "documents/diseño")
+    R03_OFFSET=$(get_artifact_day_offset "$user" "$INICIAL_EPOCH" "$INICIAL_SHA" "RUP/03-desarrollo")
 
     if [ "$QUE_HACE_STATUS" = "relleno" ]; then
         QH_COL="[💡]($QUE_HACE_URL)"
