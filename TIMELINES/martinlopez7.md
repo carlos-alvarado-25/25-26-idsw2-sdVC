@@ -23,6 +23,8 @@ gantt
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
         UML          :done, 2026-05-21, 2026-05-28
+        Analisis     :done, 2026-05-21, 2026-05-28
+        Diseno       :done, 2026-05-27, 2026-05-28
 ```
 
 ---
@@ -62,7 +64,7 @@ gantt
 - Revisión de interiorización de la naturaleza del sistema y análisis de verGrados()
 - Análisis de verAsignaturas()
 
-**Artefactos nuevos:** 📐 
+**Artefactos nuevos:** 📐 🔍 
 
 > 💬 + commits = proceso documentado
 
@@ -259,6 +261,8 @@ gantt
 - Diseño de crearDocente()
 - Diseño de verDocentes()
 - Diseño de editarDocente()
+
+**Artefactos nuevos:** 🧩 
 
 > 💬 + commits = proceso documentado
 
