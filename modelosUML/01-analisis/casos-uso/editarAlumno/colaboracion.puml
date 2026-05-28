@@ -1,0 +1,38 @@
+@startuml editarAlumno-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Alumnos Abierto" as AlumnosAbierto
+rectangle #CDEBA5 ":Alumno Abierta" as AlumnoAbierta
+
+package editarAlumno as "editarAlumno()" {
+    rectangle #629EF9 EditarAlumnoView
+    rectangle #b5bd68 AlumnoController
+    rectangle #F2AC4E AlumnoRepository
+    rectangle #F2AC4E GradoRepository
+    rectangle #F2AC4E Alumno
+    rectangle #F2AC4E Grado
+}
+
+AlumnosAbierto -r-> EditarAlumnoView: editarAlumno(alumno)
+
+EditarAlumnoView -d-> AlumnoController: obtenerGradosDisponibles() : List<Grado>
+AlumnoController -d-> GradoRepository: obtenerTodos() : List<Grado>
+
+EditarAlumnoView -d-> AlumnoController: actualizar(alumno, nombre, email, curso, id_grado) : Alumno
+
+AlumnoController -r-> Alumno: <<update>>
+AlumnoController -d-> AlumnoRepository: actualizar(alumno)
+
+Alumno -- Grado
+
+EditarAlumnoView ..> AlumnoAbierta: <<editar>>
+AlumnoAbierta --> AlumnoAbierta: editarAlumno()
+
+EditarAlumnoView ..> AlumnosAbierto: <<finalizar>> abrirAlumnos()
+EditarAlumnoView ..> AlumnosAbierto: <<cancelar>>
+
+@enduml

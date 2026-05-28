@@ -498,3 +498,18 @@
 - **Artefactos Técnicos:** Generación de diagramas \`.puml\`, activos \`SVG\` y documentación completa en el \`README.md\`, incluyendo la actualización del índice central de la rama de alumnos.
 
 **Decisión:** Se consolida el patrón de **Creación con Vinculación Mandatoria** para entidades operativas dependientes. Se decide que el formulario de creación manual debe actuar como un filtro de calidad inicial, obligando a la selección de dependencias estructurales para prevenir la inconsistencia de datos, mientras se mantiene la agilidad operativa mediante la transición automática al modo de edición completa.
+
+---
+
+## [28/05/2026 23:17] Sesión 32: Rama de Alumnos - Edición y Navegación por Estados
+
+**Prompt:** "Abramos una nueva sesión, para el caso de uso de editarAlumnos"
+
+**Resultado:** 
+- **Análisis de `editarAlumno()`:** Implementación de la colaboración MVC para la modificación de perfiles de estudiantes. Se aplicó el estándar de Navegación por Estados (Singular vs Plural).
+- **Gestión de Dependencias:** Integración de la reasignación académica mediante el `GradoRepository`, permitiendo al Administrador actualizar el vínculo del alumno con su titulación correspondiente.
+- **Flujo UX Refinado:** Configuración de la persistencia incremental que mantiene al usuario en el estado estable singular `:Alumno Abierta`, facilitando múltiples ediciones sin pérdida de contexto.
+- **Artefactos Técnicos:** Actualización y regeneración de diagramas \`.puml\`, activos visuales \`SVG\` y redacción del \`README.md\` con la secuencia de operaciones y tabla de correspondencia.
+- **Integridad Documental:** Actualización del índice central de análisis en \`RUP/01-analisis/casos-uso/README.md\` para reflejar el progreso de la rama de alumnos.
+
+**Decisión:** Se ratifica el uso de la **Navegación por Estados** como pilar de la Experiencia de Usuario en entornos administrativos complejos. Se decide que la edición de entidades con dependencias críticas (como el Alumno con su Grado) debe gestionarse centralizadamente en el controlador de edición para asegurar la coherencia de la vinculación académica en cada guardado incremental.
