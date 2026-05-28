@@ -483,3 +483,18 @@
 - **Artefactos Técnicos:** Generación del diagrama \`.puml\`, activo \`SVG\` y documentación detallada en el \`README.md\` de la disciplina de análisis, incluyendo el mapeado con la especificación detallada.
 
 **Decisión:** Se ratifica el uso de **Entidades de Validación Secundarias** (como `GradoRepository`) dentro de los controladores de importación para blindar la integridad referencial del sistema. Se establece que ningún alumno puede ser importado sin un vínculo válido a un grado preexistente, garantizando la calidad de los datos operativos desde su origen masivo.
+
+---
+
+## [28/05/2026 22:45] Sesión 31: Rama de Alumnos - Creación Manual y Vinculación Académica
+
+**Prompt:** "Abramos sesión de nuevo, para el caso de uso de crearAlumno()"
+
+**Resultado:** 
+- **Análisis de `crearAlumno()`:** Implementación de la colaboración MVC para el alta manual de estudiantes. Se aplicó con rigor el patrón "El Delgado" para la transición fluida hacia la edición.
+- **Resolución de Dependencias:** El flujo de análisis integra la selección obligatoria de la entidad `Grado`, utilizando el controlador para proveer el catálogo de grados disponibles.
+- **Validación de Identidad:** Implementación de la verificación proactiva de unicidad de matrícula mediante el `AlumnoRepository` antes de la instanciación de la entidad.
+- **Topología de Navegación:** Se configuró la salida exitosa hacia el estado singular `:Alumno Abierta` (invocando `editarAlumno()`), manteniendo la coherencia con el estándar de UX del proyecto.
+- **Artefactos Técnicos:** Generación de diagramas \`.puml\`, activos \`SVG\` y documentación completa en el \`README.md\`, incluyendo la actualización del índice central de la rama de alumnos.
+
+**Decisión:** Se consolida el patrón de **Creación con Vinculación Mandatoria** para entidades operativas dependientes. Se decide que el formulario de creación manual debe actuar como un filtro de calidad inicial, obligando a la selección de dependencias estructurales para prevenir la inconsistencia de datos, mientras se mantiene la agilidad operativa mediante la transición automática al modo de edición completa.
