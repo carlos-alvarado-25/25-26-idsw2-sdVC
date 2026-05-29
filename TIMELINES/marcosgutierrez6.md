@@ -28,6 +28,7 @@ gantt
         Codigo       :done, 2026-05-21, 2026-05-29
 ```
 
+<!-- trazabilidad: manual -->
 ## Trazabilidad por caso de uso
 
 <div align="center">

@@ -15,6 +15,7 @@
 
 </div>
 
+<!-- trazabilidad: manual -->
 ## Trazabilidad por caso de uso
 
 <div align="center">

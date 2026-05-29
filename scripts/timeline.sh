@@ -214,6 +214,13 @@ if [ -n "$CU_ANALISIS_PATH" ]; then
     fi
 fi
 
+# --- Tabla manual (leer antes de que el render trunce el fichero) ---
+MANUAL_TABLE=""
+EXISTING_FILE="TIMELINES/${USER}.md"
+if [ -f "$EXISTING_FILE" ] && grep -q "<!-- trazabilidad: manual -->" "$EXISTING_FILE"; then
+    MANUAL_TABLE=$(awk '/<!-- trazabilidad: manual -->/,/^---$/{if(/^---$/)exit; print}' "$EXISTING_FILE")
+fi
+
 # --- Render ---
 mkdir -p TIMELINES
 OUTPUT="TIMELINES/${USER}.md"
@@ -268,7 +275,10 @@ OUTPUT="TIMELINES/${USER}.md"
     echo ""
 
     # --- Trazabilidad por CU ---
-    if [ "${#CU_TABLE_DAYS[@]}" -gt 0 ]; then
+    if [ -n "$MANUAL_TABLE" ]; then
+        echo "$MANUAL_TABLE"
+        echo ""
+    elif [ "${#CU_TABLE_DAYS[@]}" -gt 0 ]; then
         echo "## Trazabilidad por caso de uso"
         echo ""
         echo "<div align=\"center\">"
