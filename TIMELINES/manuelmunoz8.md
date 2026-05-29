@@ -1,7 +1,7 @@
 # Timeline - manuelmunoz8
 
 > Repo: [manuelmunoz8/25-26-idsw2-sdVC](https://github.com/manuelmunoz8/25-26-idsw2-sdVC)
-> Commits: 24 | Días activos: 3 | Sesiones log: 8
+> Commits: 38 | Días activos: 4 | Sesiones log: 8
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 24 (10 feat / 12 fix / 2 other) |
-| Ratio fix/feat | 1.20 |
-| Días activos | 3 |
+| Commits propios | 38 (15 feat / 21 fix / 2 other) |
+| Ratio fix/feat | 1.40 |
+| Días activos | 4 |
 | Sesiones documentadas | 8 |
 | Sesiones sin fecha en log | 8 |
 
@@ -24,8 +24,19 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
+        Analisis     :done, 2026-05-28, 2026-05-29
         Codigo       :done, 2026-05-25, 2026-05-29
 ```
+
+## Trazabilidad por caso de uso
+
+<div align="center">
+
+| Caso de uso | D10 |
+|---|:---:|
+| `casosDeUsos` | A |
+
+</div>
 
 ---
 
@@ -71,10 +82,13 @@ gantt
 
 ## Día 8 · 2026-05-26
 
-### Commits (8: 2 feat / 6 fix)
+### Commits (11: 2 feat / 9 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 21:58 | [fix: point SPA fallback to root to avoid .html stripping loop](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2370176f7d1f49da70885373ddcacba943e5a6c8) |
+| 21:53 | [fix: disable html_handling to resolve infinite loop in Workers Assets](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/ba9f4e856aa05d20c3078714a273a0c4ee90d566) |
+| 21:47 | [fix: break infinite loop in _redirects for Workers Assets](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/db788b682c72ec66e1e4e264c94f5e93e5e03755) |
 | 21:36 | [fix: resolve infinite loop in _redirects for cloudflare](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/cb1f77d18c07b34e476bde3e920f4c7dbe31bdd7) |
 | 21:30 | [feat: add wrangler.jsonc for automated cloudflare deployment](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/ee3d735a65235e06e5da24d3f4e4972615a79e93) |
 | 21:24 | [fix: modernize tsconfig to avoid TS 7.0 deprecations](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/803705e1cd9e900b4b7077c103e5337130b71a0f) |
@@ -83,6 +97,30 @@ gantt
 | 21:01 | [fix: incompatibilidad de URI entre Render y Supabase](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5dc1e86548fb8551e020ed073e2a937b481e2df0) |
 | 20:01 | [fix: connecion de base de datos](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2dbe30e5aea12beb00265cdedbc6126f5acb719c) |
 | 19:42 | [fix: migracion a servicio de claudefare pages](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2270e36da9cc108be2e1cf7d0648b2394a3ef2df) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 10 · 2026-05-28
+
+### Commits (11: 5 feat / 6 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 01:48 | [feat: definicion de llamadas a API y servicios externos](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/e7eedacaf78b9afa1f77c509d22280d147c5f955) |
+| 01:10 | [fix: especificado de entidades en diagramas](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2d403ebaebc4ccef858f503faad4a10e10964b97) |
+| 00:49 | [feat: Diagramas de colaboracion de P2](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5d1777e2b00dd7d4c67a751246814b0832a0a8d5) |
+| 00:34 | [feat: Diagramas de colaboracion de casos de usos P1](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/a7889430ae413361787c91d648051c76d34265ed) |
+| 00:31 | [feat: P1 Núcleo funcional](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/3a4444eb17f42979fe17d44a5aa577cade367835) |
+| 00:27 | [fix: estructura de logs](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/97bec1f8b79ffaa0feb8ec6f75b56d90441cc1e3) |
+| 00:13 | [feat: Diagrama de colaboracion de primer nivel de priorizacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/ce914cbd76b3650bbd1eb852afa091693a54fc7f) |
+| 00:06 | [fix: estructura del proyecto](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/957fb34868c79d67b1ecfe40c20b94bb54503272) |
+| 23:46 | [fix: reglas de logs de gemini](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/d8a672258d76081d56e392ae1f472139d7e24169) |
+| 23:24 | [fix: estructura y logs de arreglo de carpetas](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/6a8eee852c1d5ee8d2a8a99b66c68808836dfba3) |
+| 23:22 | [fix: estructura de requisitado en documentacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c458feca3b6c71b528307aa210fb8cf915ab340c) |
+
+**Artefactos nuevos:** 🔍 
 
 > ⚠️ Commits sin entrada en log
 

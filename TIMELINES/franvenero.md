@@ -1,7 +1,7 @@
 # Timeline - franvenero
 
 > Repo: [franvenero/25-26-idsw2-sdVC](https://github.com/franvenero/25-26-idsw2-sdVC)
-> Commits: 12 | Días activos: 5 | Sesiones log: 10
+> Commits: 13 | Días activos: 6 | Sesiones log: 11
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 12 (1 feat / 1 fix / 10 other) |
+| Commits propios | 13 (1 feat / 1 fix / 11 other) |
 | Ratio fix/feat | 1.00 |
-| Días activos | 5 |
-| Sesiones documentadas | 10 |
-| Días log+commits | 3 |
+| Días activos | 6 |
+| Sesiones documentadas | 11 |
+| Días log+commits | 4 |
 | Días solo log | 0 |
 | Días solo commits | 2 |
 
@@ -34,14 +34,9 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D3 | D5 | D6 |
-|---|:---:|:---:|:---:|
-| `iniciarSesion` | A |   |   |
-| `cerrarSesion` | A |   |   |
-| `completarGestion` | A |   |   |
-| `gestionDeTareas` |   | A |   |
-| `gestionDeGrupos` |   |   | A |
-| `planificacionYConfiguracion` |   |   | A |
+| Caso de uso | D3 |
+|---|:---:|
+| `casos-uso` | A |
 
 </div>
 
@@ -132,6 +127,22 @@ gantt
 | 17:02 | [fix: subida de archivos erronea anteriormente](https://github.com/franvenero/25-26-idsw2-sdVC/commit/c5e052affa8564b1f8d3eae53470c6c8d3c90767) |
 
 > ⚠️ Commits sin entrada en log
+
+---
+
+## Día 11 · 2026-05-29
+
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 16:59 | [docs: define stack tecnológico y establece nuevo protocolo de registro dual](https://github.com/franvenero/25-26-idsw2-sdVC/commit/7ab4d4c694e8a33d763b583313446e61a8fcc0bc) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Establecimiento de Protocolo de Registro Dual
+
+> 💬 + commits = proceso documentado
 
 ---
 

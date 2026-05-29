@@ -1,7 +1,7 @@
 # Timeline - marcosgutierrez6
 
 > Repo: [marcosgutierrez6/25-26-idsw2-sdVC](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC)
-> Commits: 12 | Días activos: 4 | Sesiones log: 11
+> Commits: 19 | Días activos: 5 | Sesiones log: 18
 
 ## Patrón observado
 
@@ -9,10 +9,10 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 12 (12 feat / 0 fix / 0 other) |
-| Días activos | 4 |
-| Sesiones documentadas | 11 |
-| Sesiones sin fecha en log | 11 |
+| Commits propios | 19 (19 feat / 0 fix / 0 other) |
+| Días activos | 5 |
+| Sesiones documentadas | 18 |
+| Sesiones sin fecha en log | 18 |
 
 </div>
 
@@ -32,15 +32,23 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D7 | D8 |
-|---|:---:|:---:|
-| `corregirExamenes` | A |   |
-| `exportarConfiguracionGlobal` | A |   |
-| `generarExamenes` | A |   |
-| `importarConfiguracionGlobal` | A |   |
-| `exportarAlumnos` |   | A |
-| `importarAlumnos` |   | A |
-| `importarPreguntas` |   | A |
+| Caso de uso | D7 | D8 | D11 |
+|---|:---:|:---:|:---:|
+| `corregirExamenes` | A |   |   |
+| `exportarConfiguracionGlobal` | A |   |   |
+| `generarExamenes` | A |   |   |
+| `importarConfiguracionGlobal` | A |   |   |
+| `_plantilla` | A |   |   |
+| `exportarAlumnos` |   | A |   |
+| `importarAlumnos` |   | A |   |
+| `importarPreguntas` |   | A |   |
+| `asignarExamenes` |   |   | A |
+| `crearAlumno` |   |   | A |
+| `crearDocente` |   |   | A |
+| `crearPregunta` |   |   | A |
+| `editarAsignatura` |   |   | A |
+| `editarPregunta` |   |   | A |
+| `exportarPreguntas` |   |   | A |
 
 </div>
 
@@ -101,6 +109,24 @@ gantt
 | 10:21 | [feat: Analisis del caso de uso de importarPreguntas()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/189ad2615a4fc1d5cb5fade6e98e032e3ca7a20c) |
 | 10:16 | [feat: Analisis del caso de uso de importarAlumnos()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/f2000603ab841d09c8d09f8581a7ce89dc97dd64) |
 | 10:06 | [feat: Comando y regla para cleanCode](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/95cc2428dac78446ac5d06da317f7cdd14729dff) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 11 · 2026-05-29
+
+### Commits (7: 7 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 16:05 | [feat: Analisis del caso de uso de crearAlumno()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/f6b63a0bc5772f5aafb8da9bd6c635a863808cdb) |
+| 16:00 | [feat: Analisis del caso de uso de crearDocente()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/9372775dd62895ce3af67c282a005e8ffca3e653) |
+| 15:56 | [feat: Analisis del caso de uso de editarAsignatura()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/79d45f49c1bdd9dc4ca987e65b6eba2cee070d57) |
+| 15:48 | [feat: Analisis del caso de uso de editarPregunta()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/c1c22c84ea60242e5980de021c7cec530b86d8b3) |
+| 15:43 | [feat: Analisis del caso de uso de crearPregunta()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/37054c92787593b3115fb49af56a3f3323b87d7b) |
+| 15:38 | [feat: Analisis del caso de uso de asignarExamenes()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/ce80aafeb89c418e99fd6146144146304c15c0fc) |
+| 15:32 | [feat: Analisis del caso de uso de exportarPreguntas()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/fb6222fa3a19f63718d4608eb6b9cfc3c40fc112) |
 
 > ⚠️ Commits sin entrada en log
 

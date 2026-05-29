@@ -1,7 +1,7 @@
 # Timeline - martinlopez7
 
 > Repo: [martinlopez7/25-26-idsw2-sdVC](https://github.com/martinlopez7/25-26-idsw2-sdVC)
-> Commits: 99 | Días activos: 9 | Sesiones log: 50
+> Commits: 99 | Días activos: 8 | Sesiones log: 52
 
 ## Patrón observado
 
@@ -9,12 +9,12 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 99 (47 feat / 35 fix / 17 other) |
-| Ratio fix/feat | 0.74 |
-| Días activos | 9 |
-| Sesiones documentadas | 50 |
-| Días log+commits | 9 |
-| Días solo log | 1 |
+| Commits propios | 99 (48 feat / 34 fix / 17 other) |
+| Ratio fix/feat | 0.70 |
+| Días activos | 8 |
+| Sesiones documentadas | 52 |
+| Días log+commits | 8 |
+| Días solo log | 2 |
 | Días solo commits | 0 |
 
 </div>
@@ -25,7 +25,7 @@ gantt
     dateFormat YYYY-MM-DD
     axisFormat %d/%m
     section Artefactos
-        Inicio       :milestone, 2026-05-21, 0d
+        Inicio       :milestone, 2026-05-22, 0d
         UML          :done, 2026-05-19, 2026-05-29
         Analisis     :done, 2026-05-21, 2026-05-29
         Diseno       :done, 2026-05-27, 2026-05-29
@@ -36,7 +36,7 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 |
+| Caso de uso | D0 | D1 | D2 | D3 | D4 | D5 | D6 | D7 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | `verAsignaturas` | A |   |   |   |   |   |   |   |
 | `verGrados` | A |   |   |   |   |   |   |   |
@@ -76,7 +76,7 @@ gantt
 
 ---
 
-## Día 0 · 2026-05-20
+## Día -1 · 2026-05-20
 
 ### 💬 Conversation-log (1 sesión)
 
@@ -86,14 +86,7 @@ gantt
 
 ---
 
-## Día 1 · 2026-05-21
-
-### Commits (2: 1 feat / 1 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 13:34 | [feat: analisis de verAsignaturas](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/7528330087fd0a963b9ff6f6c488d10ce03e9460) |
-| 13:13 | [fix: pequeña correccion del contexto del protocolo de inicialización](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/84a691b164d24b4a98ed2221cdde4bfd199e1444) |
+## Día 0 · 2026-05-21
 
 ### 💬 Conversation-log (2 sesiónes)
 
@@ -102,13 +95,13 @@ gantt
 
 **Artefactos nuevos:** 🔍 
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 2 · 2026-05-22
+## Día 1 · 2026-05-22
 
-### Commits (9: 3 feat / 6 fix)
+### Commits (7: 3 feat / 4 fix)
 
 | Hora | Mensaje |
 |---|---|
@@ -119,8 +112,6 @@ gantt
 | 11:11 | [feat: analisis de cerrarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/6edb8fdd62833e2662a543baae6185c2dd53c11a) |
 | 10:39 | [fix: pequeña corrección de iniciarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/45cc9cbb795f3cce83cbef596cfe303a67d2a00f) |
 | 10:30 | [feat: análisis de iniciarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/9128dce0c69bacd76c2fa565ef372ac9580bbdfa) |
-| 09:50 | [fix: pequeñas mejoras en AGENTS.md](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/4b83720f032bffb945337b06084bb8f9a211bd1d) |
-| 09:35 | [fix: pequeña corrección del analisis de verAsignaturas](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b0c09108070bda33b058c55c80fee54b4a786ec7) |
 
 ### 💬 Conversation-log (3 sesiónes)
 
@@ -132,7 +123,7 @@ gantt
 
 ---
 
-## Día 3 · 2026-05-23
+## Día 2 · 2026-05-23
 
 ### Commits (8: 4 feat / 4 fix)
 
@@ -158,7 +149,7 @@ gantt
 
 ---
 
-## Día 4 · 2026-05-24
+## Día 3 · 2026-05-24
 
 ### Commits (12: 6 feat / 4 fix)
 
@@ -190,7 +181,7 @@ gantt
 
 ---
 
-## Día 5 · 2026-05-25
+## Día 4 · 2026-05-25
 
 ### Commits (12: 6 feat / 2 fix)
 
@@ -222,7 +213,7 @@ gantt
 
 ---
 
-## Día 6 · 2026-05-26
+## Día 5 · 2026-05-26
 
 ### Commits (18: 9 feat / 7 fix)
 
@@ -263,7 +254,7 @@ gantt
 
 ---
 
-## Día 7 · 2026-05-27
+## Día 6 · 2026-05-27
 
 ### Commits (17: 8 feat / 4 fix)
 
@@ -304,7 +295,7 @@ gantt
 
 ---
 
-## Día 8 · 2026-05-28
+## Día 7 · 2026-05-28
 
 ### Commits (15: 6 feat / 5 fix)
 
@@ -339,12 +330,16 @@ gantt
 
 ---
 
-## Día 9 · 2026-05-29
+## Día 8 · 2026-05-29
 
-### Commits (6: 4 feat / 2 fix)
+### Commits (10: 6 feat / 4 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 15:09 | [fix: correccion implementación caso de uso eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/ec1a96389cd725b2a4717efa4a181a99a333e9c4) |
+| 14:10 | [feat: implementacion caso de uso eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/2c36fff0ba94d667aa4f13e3969162aa078b33f5) |
+| 13:54 | [fix: correccion implementación caso de uso crearDocente para que transfiera automáticamente a editarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/5690d4e4732f1506df373661f1c61818ba4775fc) |
+| 13:41 | [feat: implementacion de caso de uso editarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/aab29c589f6629b85762bc298185236589e4dc65) |
 | 13:00 | [fix: correccion de caso de uso verDocentes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/8fdc1fe2f18d2eb06bfaec8295a783dd163a3bbf) |
 | 12:42 | [fix: correccion implementación de crearDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b14bc4971801a7aa00b767d477ce50d87623557f) |
 | 12:37 | [feat: implementacion de caso de uso crearDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/047b61d64a60751c584cb8d249bc78dca7df1f47) |
@@ -352,13 +347,15 @@ gantt
 | 09:44 | [feat: implementación del caso de uso cerrarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/41a67cfab51ce9de2a99ec2c6ccaf914685635df) |
 | 09:14 | [feat: inicialización de proyectos springboot y react e implementación del caso de uso iniciarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b7c1a82f8383563a742093bb0193de4519172803) |
 
-### 💬 Conversation-log (5 sesiónes)
+### 💬 Conversation-log (7 sesiónes)
 
 - Inicialización de proyectos e implementación de iniciarSesion
 - Implementación de cerrarSesion()
 - Implementación de verDocentes() y menús diferenciados por actor
 - Implementación de crearDocente() y corrección de JwtAuthenticationFilter
 - Corrección de verDocentes() de acuerdo a su diseño
+- Implementación de editarDocente()
+- Implementación de eliminarDocente()
 
 > 💬 + commits = proceso documentado
 
