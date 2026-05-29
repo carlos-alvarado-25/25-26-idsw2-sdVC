@@ -30,18 +30,21 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D7 | D8 | D9 |
-|---|:---:|:---:|:---:|
-| `iniciarSesion` | A |   |   |
-| `cerrarSesion` |   | A |   |
-| `completarGestion` |   | A |   |
-| `abrirGrupos` |   | A |   |
-| `crearGrupo` |   | A |   |
-| `editarGrupo` |   | A |   |
-| `eliminarGrupo` |   | A |   |
-| `invitarUsuario` |   | A |   |
-| `editarMiembro` |   | A |   |
-| `eliminarMiembro` |   |   | A |
+| Caso de uso | D7 | D8 | D9 | D11 |
+|---|:---:|:---:|:---:|:---:|
+| `iniciarSesion` | A |   |   |   |
+| `cerrarSesion` |   | A |   |   |
+| `completarGestion` |   | A |   |   |
+| `abrirGrupos` |   | A |   |   |
+| `crearGrupo` |   | A |   |   |
+| `editarGrupo` |   | A |   |   |
+| `eliminarGrupo` |   | A |   |   |
+| `invitarUsuario` |   | A |   |   |
+| `editarMiembro` |   | A |   |   |
+| `eliminarMiembro` |   |   | A |   |
+| `abrirInvitaciones` |   |   |   | A |
+| `editarInvitacion` |   |   |   | A |
+| `abrirTareas` |   |   |   | A |
 
 </div>
 
