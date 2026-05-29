@@ -1,7 +1,7 @@
 # Timeline - jerdier
 
 > Repo: [jerdier/25-26-idsw2-sdVC](https://github.com/jerdier/25-26-idsw2-sdVC)
-> Commits: 19 | Días activos: 7 | Sesiones log: 6
+> Commits: 20 | Días activos: 7 | Sesiones log: 7
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 19 (8 feat / 4 fix / 7 other) |
-| Ratio fix/feat | 0.50 |
+| Commits propios | 20 (9 feat / 4 fix / 7 other) |
+| Ratio fix/feat | 0.44 |
 | Días activos | 7 |
-| Sesiones documentadas | 6 |
-| Sesiones sin fecha en log | 6 |
+| Sesiones documentadas | 7 |
+| Sesiones sin fecha en log | 7 |
 
 </div>
 
@@ -135,10 +135,11 @@ gantt
 
 ## Día 11 · 2026-05-29
 
-### Commits (1: 0 feat / 1 fix)
+### Commits (2: 1 feat / 1 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 12:14 | [feat(design): completar refinamiento de capa de datos y tipado técnico](https://github.com/jerdier/25-26-idsw2-sdVC/commit/3267de5083de4983731f9b80ce38f66c2a121228) |
 | 11:44 | [fix: analisis](https://github.com/jerdier/25-26-idsw2-sdVC/commit/61d426dbaba53f04882678d6a73b4a6cee3ec89a) |
 
 > ⚠️ Commits sin entrada en log

@@ -1,7 +1,7 @@
 # Timeline - martinlopez7
 
 > Repo: [martinlopez7/25-26-idsw2-sdVC](https://github.com/martinlopez7/25-26-idsw2-sdVC)
-> Commits: 99 | Días activos: 9 | Sesiones log: 48
+> Commits: 99 | Días activos: 9 | Sesiones log: 50
 
 ## Patrón observado
 
@@ -9,10 +9,10 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 99 (46 feat / 36 fix / 17 other) |
-| Ratio fix/feat | 0.78 |
+| Commits propios | 99 (47 feat / 35 fix / 17 other) |
+| Ratio fix/feat | 0.74 |
 | Días activos | 9 |
-| Sesiones documentadas | 48 |
+| Sesiones documentadas | 50 |
 | Días log+commits | 9 |
 | Días solo log | 1 |
 | Días solo commits | 0 |
@@ -88,15 +88,12 @@ gantt
 
 ## Día 1 · 2026-05-21
 
-### Commits (5: 1 feat / 4 fix)
+### Commits (2: 1 feat / 1 fix)
 
 | Hora | Mensaje |
 |---|---|
 | 13:34 | [feat: analisis de verAsignaturas](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/7528330087fd0a963b9ff6f6c488d10ce03e9460) |
 | 13:13 | [fix: pequeña correccion del contexto del protocolo de inicialización](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/84a691b164d24b4a98ed2221cdde4bfd199e1444) |
-| 13:09 | [fix: pequeña corrección del analisis de verGrados() y corrección del protocolo de análisis para incluir el diagrama de secuencia en el README](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/d4b3e8e4d038ba9cb46c2b7eff67a9e13d3694ed) |
-| 11:07 | [fix: pequeña modificación del protocolo de inicialización de AGENTS.md](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/26f3c71a729bfdcc0d6612e6adf1c56a8dde6abc) |
-| 10:41 | [fix: link conversation](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/8f6781dd84085be587c11acb2e4dac0a4b3788dc) |
 
 ### 💬 Conversation-log (2 sesiónes)
 
@@ -344,19 +341,24 @@ gantt
 
 ## Día 9 · 2026-05-29
 
-### Commits (3: 3 feat / 0 fix)
+### Commits (6: 4 feat / 2 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 13:00 | [fix: correccion de caso de uso verDocentes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/8fdc1fe2f18d2eb06bfaec8295a783dd163a3bbf) |
+| 12:42 | [fix: correccion implementación de crearDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b14bc4971801a7aa00b767d477ce50d87623557f) |
+| 12:37 | [feat: implementacion de caso de uso crearDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/047b61d64a60751c584cb8d249bc78dca7df1f47) |
 | 10:37 | [feat: implementacion del caso de uso verDocentes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/a7389f4d12e34d92fb3669548b85e43365958af4) |
 | 09:44 | [feat: implementación del caso de uso cerrarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/41a67cfab51ce9de2a99ec2c6ccaf914685635df) |
 | 09:14 | [feat: inicialización de proyectos springboot y react e implementación del caso de uso iniciarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b7c1a82f8383563a742093bb0193de4519172803) |
 
-### 💬 Conversation-log (3 sesiónes)
+### 💬 Conversation-log (5 sesiónes)
 
 - Inicialización de proyectos e implementación de iniciarSesion
 - Implementación de cerrarSesion()
 - Implementación de verDocentes() y menús diferenciados por actor
+- Implementación de crearDocente() y corrección de JwtAuthenticationFilter
+- Corrección de verDocentes() de acuerdo a su diseño
 
 > 💬 + commits = proceso documentado
 
