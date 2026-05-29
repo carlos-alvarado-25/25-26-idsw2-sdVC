@@ -1,0 +1,41 @@
+@startuml generarCalendario-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+package generarCalendario as "generarCalendario()" {
+    rectangle #629EF9 GenerarCalendarioView
+    rectangle #b5bd68 CalendarioController
+    rectangle #F2AC4E ExamenRepository
+    rectangle #F2AC4E AulaRepository
+    rectangle #F2AC4E PreferenciaRepository
+    rectangle #F2AC4E Calendario
+    rectangle #F2AC4E Examen
+    rectangle #F2AC4E GeneracionResult
+}
+
+rectangle #CDEBA5 ":Calendario Generado" as CalendarioGenerado
+rectangle #CDEBA5 ":Collaboration ListarConflictos" as ListarConflictos
+
+SistemaDisponible -r-> GenerarCalendarioView: generarCalendario()
+
+GenerarCalendarioView -d-> CalendarioController: generar(inicio, fin, franjas) : GeneracionResult
+
+CalendarioController -d-> ExamenRepository: obtenerExamenesPendientes() : List<Examen>
+CalendarioController -d-> AulaRepository: consultarDisponibilidad(franja) : List<Aula>
+CalendarioController -d-> PreferenciaRepository: verificarRestriccionesDocentes(franja) : List<Profesor>
+
+CalendarioController -r-> Examen: <<update>>
+CalendarioController -r-> Calendario: <<update>>
+CalendarioController -d-> ExamenRepository: guardarLote(examenes)
+CalendarioController -r-> GeneracionResult: <<create>>
+
+GenerarCalendarioView ..> CalendarioGenerado: <<finalizar>> guardarCalendario()
+GenerarCalendarioView ..> ListarConflictos: revisarConflictos()
+GenerarCalendarioView ..> SistemaDisponible: <<cancelar>>
+
+@enduml

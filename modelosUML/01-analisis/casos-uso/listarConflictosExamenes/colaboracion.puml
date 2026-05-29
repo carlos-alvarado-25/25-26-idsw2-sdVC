@@ -6,6 +6,7 @@ skinparam DefaultFontSize 12
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Profesor Abierto" as ProfesorAbiertoEntrada
+rectangle #CDEBA5 ":GenerarCalendarioView" as GenerarCalendarioEntrada
 
 package listarConflictosExamenes as "listarConflictosExamenes()" {
     rectangle #629EF9 ListarConflictosView
@@ -17,11 +18,16 @@ package listarConflictosExamenes as "listarConflictosExamenes()" {
 }
 
 rectangle #CDEBA5 ":Profesor Preferencias Abierto" as ProfesorPreferenciasSalida
+rectangle #CDEBA5 ":Calendario Generado" as CalendarioGeneradoSalida
 
 ProfesorAbiertoEntrada -r-> ListarConflictosView: listarConflictos()
+GenerarCalendarioEntrada -d-> ListarConflictosView: revisarConflictos()
 
-ListarConflictosView -d-> ExamenController: obtenerConflictosDocente(profesor, filtros, pagina) : PagedResult<Conflicto>
-ExamenController -d-> ExamenRepository: detectarConflictosPorProfesor(profesor, filtros, pagina) : PagedResult<Conflicto>
+ListarConflictosView -d-> ExamenController: listarConflictos(pagina) : PagedResult<Conflicto>
+ExamenController -d-> ExamenRepository: detectarConflictos(pagina) : PagedResult<Conflicto>
+
+ListarConflictosView -d-> ExamenController: filtrarConflictos(criterio, pagina) : PagedResult<Conflicto>
+ExamenController -d-> ExamenRepository: buscarConflictos(criterio, pagina) : PagedResult<Conflicto>
 
 ExamenRepository -- Conflicto
 Conflicto -- Examen
@@ -35,5 +41,6 @@ ExamenController -r-> Examen: <<update>>
 ExamenController -d-> ExamenRepository: actualizar(examen)
 
 ListarConflictosView ..> ProfesorPreferenciasSalida: <<finalizar>>
+ListarConflictosView ..> CalendarioGeneradoSalida: <<finalizar>>
 
 @enduml

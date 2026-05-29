@@ -528,3 +528,19 @@
 - **Integridad Documental:** Actualización final del índice de análisis en \`RUP/01-analisis/casos-uso/README.md\` cerrando formalmente la Rama de Alumnos.
 
 **Decisión:** Se eleva el **Apego Riguroso a Requisitos** por encima de la inercia de patrones previos. Se decide que las entidades relacionadas solo deben aparecer en los diagramas de colaboración si justifican un requisito explícito (como la visualización de datos académicos), evitando sobrecargar el modelo con validaciones de negocio que no han sido formalmente solicitadas. Se ratifica la importancia de la trazabilidad visual para demostrar el cumplimiento de la especificación de requisitos en la fase de análisis.
+
+---
+
+## [29/05/2026 20:31] Sesión 34: Rama de Calendario - Motor de Generación y Hub de Conflictos
+
+**Prompt:** "Hola iniciemos una sesión hoy para los casos de uso de calendario. Hagamos el de generarCalendario. Para este quiero que seas muy minucioso y atento al detalle para analizarlo... guardarLote(examenes) implica guardar una colección de exámenes seleccionados? O todos?... describeme la secuencia que llevaría generarCalendario... este caso de uso dice que permite solicitar revisar conflictos. Pero si regresas al caso de uso de listar conflictos, se hace en la pantalla de profesores. Como se gestiona eso?"
+
+**Resultado:** 
+- **Análisis de `generarCalendario()`:** Implementación de la colaboración MVC para el motor algorítmico del sistema. Se diseñó un flujo de orquestación multi-repositorio que cruza Exámenes, Aulas y Preferencias Docentes.
+- **Definición Algorítmica:** Documentación detallada de la secuencia de generación (Cola de Trabajo -> Grid de Tiempo -> Bucle de Asignación con Verificación de Recursos -> Manejo de Conflictos -> Consolidación del Balance).
+- **Refactorización de Arquitectura de Navegación:** Transformación del caso de uso `listarConflictosExamenes` en un **Centro de Diagnóstico Compartido**. Se actualizó su análisis para soportar dos puntos de entrada (Contextual/Profesor y Global/Motor) y salidas dinámicas de retorno.
+- **Normalización de Contratos:** Aplicación del nuevo estándar de listados paginados (separación de listar/filtrar) al hub de conflictos corregido.
+- **Artefactos Técnicos:** Actualización masiva de diagramas \`.puml\`, activos visuales \`SVG\` y redacción de la documentación en \`RUP/01-analisis/\`.
+- **Registro de Diseño:** Actualización del workspace externo detallando el racional del motor de generación y la persistencia atómica por lote.
+
+**Decisión:** Se ratifica el uso de **Componentes Reutilizables de Diagnóstico** para centralizar la lógica de resolución de colisiones. Se decide que el motor de generación debe operar sobre una propuesta en memoria consolidada en \`GeneracionResult\`, delegando la persistencia final al Administrador mediante una operación de lote atómica, garantizando la seguridad transaccional del calendario académico.

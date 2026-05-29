@@ -47,6 +47,9 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 - [listarConflictosExamenes](listarConflictosExamenes/README.md) - Análisis de detección y resolución de colisiones en el calendario.
 - [asignarProfesorAExamen](asignarProfesorAExamen/README.md) - Análisis de vinculación de docentes a la programación académica.
 
+### Gestión de Calendario (Administrador)
+- [generarCalendario](generarCalendario/README.md) - Análisis del motor de orquestación y generación automática de horarios.
+
 
 ## Estructura de análisis
 

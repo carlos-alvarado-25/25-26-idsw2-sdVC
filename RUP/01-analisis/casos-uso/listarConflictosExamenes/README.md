@@ -14,7 +14,7 @@
 
 ## propósito
 
-Análisis de colaboración del caso de uso `listarConflictosExamenes()` mediante el patrón MVC. Este análisis se centra en la detección de colisiones de programación **desde el contexto de la gestión de un profesor**, permitiendo identificar y resolver conflictos que afecten la carga docente o las preferencias del personal.
+Análisis de colaboración del caso de uso `listarConflictosExamenes()` mediante el patrón MVC. Este análisis se centra en la detección y resolución de colisiones de programación, actuando como un **centro de diagnóstico compartido** que puede invocarse tanto desde el contexto individual de un profesor como de forma global tras el proceso de generación automática del calendario.
 
 ## diagrama de colaboración
 
@@ -33,24 +33,25 @@ Análisis de colaboración del caso de uso `listarConflictosExamenes()` mediante
 #### ListarConflictosView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
-- Presentar la lista de conflictos detectados para el profesor en gestión.
+- Presentar la lista de conflictos detectados (globales o contextuales al docente).
 - Mostrar detalles del conflicto (Horario, Aula, Alumnos solapados).
-- Proveer interfaces para resolver colisiones mediante cambios de programación.
-- Notificar el resultado de las actualizaciones en el calendario.
+- Proveer interfaces para resolver colisiones mediante cambios de programación asistidos.
+- Facilitar la navegación de retorno según el origen de la solicitud (Ficha de Profesor o Motor de Generación).
 
 **Colaboraciones**:
-- **Entrada**: Recibe `listarConflictos()` desde `:Profesor Abierto`.
+- **Entrada**: Recibe `listarConflictos()` (desde `:Profesor Abierto`) o `revisarConflictos()` (desde `:GenerarCalendarioView`).
 - **Control**: Se comunica con `ExamenController`.
-- **Salida**: Navega hacia `:Profesor Preferencias Abierto`.
+- **Salida**: Navega hacia `:Profesor Preferencias Abierto` o `:Calendario Generado`.
 
 ### clases de control
 
 #### ExamenController
 **Estereotipo**: Control  
 **Responsabilidades**:
-- Coordinar la detección de conflictos específicos del docente.
-- Orquestar la búsqueda de alternativas de disponibilidad, cruzando datos de aulas vacías con las restricciones del docente.
-- Aplicar resoluciones y persistir cambios en los exámenes.
+- Coordinar la detección de conflictos masivos o específicos.
+- Orquestar la búsqueda de alternativas de disponibilidad cruzando recursos y restricciones.
+- Proveer métodos estandarizados para el listado paginado y filtrado de colisiones.
+- Aplicar resoluciones y persistir cambios en el calendario académico.
 
 **Colaboraciones**:
 - **Vista**: Atiende solicitudes de `ListarConflictosView`.
@@ -85,15 +86,16 @@ Análisis de colaboración del caso de uso `listarConflictosExamenes()` mediante
 
 ### secuencia de operaciones
 
-1. **Apertura**: `:Profesor Abierto` (en la ficha del docente) invoca `ListarConflictosView.listarConflictos()`.
-2. **Detección Contextual**: La vista solicita `obtenerConflictosDocente()` para el profesor actual.
-3. **Indirección Paginada**: El controlador recupera los conflictos desde `ExamenRepository`.
-4. **Análisis de Resolución**: El Administrador selecciona un conflicto; la vista solicita `obtenerOpcionesResolucion(conflicto)`.
-5. **Búsqueda de Disponibilidad**: El controlador consulta al repositorio de exámenes por aulas o franjas horarias libres.
-6. **Cruce con Preferencias**: El controlador filtra las opciones encontradas verificando las restricciones del docente mediante `PreferenciaRepository.verificarRestricciones()`.
-7. **Aplicación**: El Administrador selecciona una opción válida; la vista llama a `resolverConflicto(conflicto, resolucion)`.
-8. **Sincronización**: El controlador actualiza el `Examen` involucrado y confirma la persistencia en el repositorio.
-9. **Finalización**: Se cierra la lista de conflictos y el sistema redirige a `:Profesor Preferencias Abierto` para permitir ajustes en su disponibilidad horaria si fuera necesario.
+1. **Apertura Dual**: 
+    - El Administrador invoca desde la ficha del docente (`listarConflictos`).
+    - El Administrador invoca tras la generación automática (`revisarConflictos`).
+2. **Carga Inicial**: La vista solicita `listarConflictos(pagina)` al controlador. El controlador detecta el contexto (si existe un profesor seleccionado o si es una consulta global).
+3. **Consulta Paginada**: El controlador recupera los datos desde `ExamenRepository.detectarConflictos(pagina)`.
+4. **Filtrado**: El usuario puede aplicar criterios de búsqueda adicionales mediante `filtrarConflictos(criterio, pagina)`, delegando en `ExamenRepository.buscarConflictos(criterio, pagina)`.
+5. **Diagnóstico**: Al seleccionar un conflicto, la vista solicita `obtenerOpcionesResolucion(conflicto)`.
+6. **Validación de Preferencias**: El controlador cruza huecos libres en aulas con las restricciones del docente involucrado (`PreferenciaRepository`).
+7. **Resolución**: El Administrador selecciona una alternativa; el sistema actualiza el `Examen` y sincroniza con el repositorio.
+8. **Finalización**: Se notifica el éxito y se retorna al punto de origen (Preferencias del Profesor o Calendario Generado).
 
 ## correspondencia con requisitos
 
@@ -101,10 +103,10 @@ Análisis de colaboración del caso de uso `listarConflictosExamenes()` mediante
 
 |Requisito del caso de uso|Clase responsable|Método/Colaboración|
 |-|-|-|
-|Inicia desde gestión de profesor|`:Profesor Abierto`|Navegación de entrada|
-|Detectar conflictos del profesor|`ExamenRepository`|`detectarConflictosPorProfesor()`|
-|Validar opciones con preferencias|`PreferenciaRepository`|`verificarRestricciones(profesor, resolucion)`|
-|Finaliza en preferencias|`:Profesor Preferencias Abierto`|Navegación de salida|
+|Soportar revisión desde Generación|`ListarConflictosView`|Navegación desde motor|
+|Soportar revisión desde Profesor|`ListarConflictosView`|Navegación desde ficha|
+|Detección de conflictos|`ExamenRepository`|`detectarConflictos(pagina)`|
+|Validar disponibilidad y preferencias|`ExamenController`|Cruce de repositorios|
 |Actualizar calendario|`ExamenRepository`|`actualizar(examen)`|
 
 ## referencias
