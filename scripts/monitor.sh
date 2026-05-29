@@ -35,7 +35,7 @@ check_readme_rewritten() {
 }
 
 compute_max_gap() {
-    local commits_json="$1" total_commits="$2"
+    local commits_json="$1" total_commits="$2" ref_epoch="${3:-$TODAY_EPOCH}"
     local dates
 
     if [ "$total_commits" -le 1 ]; then
@@ -44,7 +44,7 @@ compute_max_gap() {
         if [ -n "$first_date" ] && [ "$first_date" != "null" ]; then
             local first_epoch
             first_epoch=$(date -d "$first_date" +%s 2>/dev/null) || { echo "0"; return; }
-            echo $(( (TODAY_EPOCH - first_epoch) / 86400 ))
+            echo $(( (ref_epoch - first_epoch) / 86400 ))
         else
             echo "0"
         fi
@@ -70,10 +70,18 @@ compute_max_gap() {
         prev_epoch=$epoch
     done
 
-    local gap_to_today=$(( (TODAY_EPOCH - prev_epoch) / 86400 ))
+    local gap_to_today=$(( (ref_epoch - prev_epoch) / 86400 ))
     [ "$gap_to_today" -gt "$max_gap" ] && max_gap=$gap_to_today
 
     echo "$max_gap"
+}
+
+gap_emoji() {
+    local g="$1"
+    if   [ "$g" -ge 3 ]; then echo ":red_circle:"
+    elif [ "$g" -ge 2 ]; then echo ":yellow_circle:"
+    else                       echo ":green_circle:"
+    fi
 }
 
 _artifact_date_single() {
@@ -136,7 +144,14 @@ fi
 
 # --- PRs abiertas ---
 log "Obteniendo PRs abiertas..."
-OPEN_PR_USERS=$(gh api "repos/$REPO/pulls?state=open" --paginate --jq '.[].head.repo.owner.login' 2>/dev/null | sort -u || echo "")
+declare -A OPEN_PR_EPOCH
+OPEN_PR_USERS=""
+while IFS='|' read -r pr_user pr_date; do
+    [ -z "$pr_user" ] && continue
+    OPEN_PR_USERS+="${pr_user}"$'\n'
+    OPEN_PR_EPOCH["$pr_user"]=$(date -d "$pr_date" +%s 2>/dev/null || echo "$TODAY_EPOCH")
+done < <(gh api "repos/$REPO/pulls?state=open" --paginate --jq '.[] | "\(.head.repo.owner.login)|\(.created_at)"' 2>/dev/null || echo "")
+OPEN_PR_USERS=$(echo "$OPEN_PR_USERS" | sort -u)
 PR_COUNT=$(echo "$OPEN_PR_USERS" | grep -c . 2>/dev/null || echo "0")
 log "PRs abiertas: $PR_COUNT."
 
@@ -222,14 +237,12 @@ for user in $FORKS; do
 
     UNIQUE_DAYS=$(echo "$COMMITS_JSON" | jq '[.[:-1][].commit.author.date | split("T")[0]] | unique | length' 2>/dev/null || echo "0")
 
-    MAX_GAP=$(compute_max_gap "$COMMITS_JSON" "$COMMITS")
-    if [ "$MAX_GAP" -ge 3 ]; then
-        GAP_DISPLAY=":red_circle:"
-    elif [ "$MAX_GAP" -ge 2 ]; then
-        GAP_DISPLAY=":yellow_circle:"
-    else
-        GAP_DISPLAY=":green_circle:"
-    fi
+    LAST_DATE_ISO=$(echo "$COMMITS_JSON" | jq -r '.[0].commit.author.date | split("T")[0]' 2>/dev/null || echo "")
+    LAST_DATE_EPOCH=$(date -d "$LAST_DATE_ISO" +%s 2>/dev/null || echo "0")
+    REF_EPOCH=${OPEN_PR_EPOCH[$user]:-$TODAY_EPOCH}
+    MAX_GAP=$(compute_max_gap "$COMMITS_JSON" "$COMMITS" "$REF_EPOCH")
+    GAP_RECENT=$(( (REF_EPOCH - LAST_DATE_EPOCH) / 86400 ))
+    GAP_DISPLAY="<sub>$(gap_emoji "$GAP_RECENT")</sub><br><sub>$(gap_emoji "$MAX_GAP")</sub>"
 
     QUE_HACE_STATUS=$(check_file_has_content "$user" "QUE_HACE.md" "En una frase" 2>/dev/null || echo "?")
     CONVLOG_STATUS=$(check_file_has_content "$user" "conversation-log.md" "lo que le dijo al AI para arrancar" 2>/dev/null || echo "?")
@@ -336,7 +349,7 @@ fi
     echo ""
     echo "| Columna | Significado | Columna | Significado |"
     echo "|---|---|---|---|"
-    echo "| Días | <sub>Días únicos con actividad propia</sub> | Gap | <sub>:green_circle: hoy/ayer :yellow_circle: 2-3d :red_circle: >3d</sub> |"
+    echo "| Días | <sub>Días únicos con actividad propia</sub> | Gap | <sub>↑ último commit / ↓ máx histórico · :green_circle: hoy/ayer :yellow_circle: 2-3d :red_circle: >3d</sub> |"
     echo "| 💡 | <sub>QUE\\_HACE.md relleno</sub> | 💬 | <sub>conversation-log.md relleno</sub> |"
     echo "| 📄 | <sub>README.md reescrito</sub> | 📐 | <sub>Día en que apareció \`modelosUML/\`</sub> |"
     echo "| 🔍 | <sub>Día en que apareció \`RUP/01-analisis/\`</sub> | 🧩 | <sub>Día en que apareció \`RUP/02-diseño/\`</sub> |"
