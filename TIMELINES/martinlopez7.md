@@ -1,7 +1,7 @@
 # Timeline - martinlopez7
 
 > Repo: [martinlopez7/25-26-idsw2-sdVC](https://github.com/martinlopez7/25-26-idsw2-sdVC)
-> Commits: 99 | Días activos: 9 | Sesiones log: 45
+> Commits: 99 | Días activos: 10 | Sesiones log: 46
 
 ## Patrón observado
 
@@ -11,9 +11,9 @@
 |---|---|
 | Commits propios | 99 (46 feat / 36 fix / 17 other) |
 | Ratio fix/feat | 0.78 |
-| Días activos | 9 |
-| Sesiones documentadas | 45 |
-| Días log+commits | 9 |
+| Días activos | 10 |
+| Sesiones documentadas | 46 |
+| Días log+commits | 10 |
 | Días solo log | 0 |
 | Días solo commits | 0 |
 
@@ -25,17 +25,18 @@ gantt
     dateFormat YYYY-MM-DD
     axisFormat %d/%m
     section Artefactos
-        Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-21, 2026-05-29
+        Inicio       :milestone, 2026-05-20, 0d
+        UML          :done, 2026-05-19, 2026-05-29
         Analisis     :done, 2026-05-21, 2026-05-29
         Diseno       :done, 2026-05-27, 2026-05-29
+        Codigo       :done, 2026-05-19, 2026-05-29
 ```
 
 ## Trazabilidad por caso de uso
 
 <div align="center">
 
-| Caso de uso | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 |
+| Caso de uso | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | `verAsignaturas` | A |   |   |   |   |   |   |   |
 | `verGrados` | A |   |   |   |   |   |   |   |
@@ -75,14 +76,13 @@ gantt
 
 ---
 
-## Día 2 · 2026-05-20
+## Día 1 · 2026-05-20
 
-### Commits (2: 2 feat / 0 fix)
+### Commits (1: 1 feat / 0 fix)
 
 | Hora | Mensaje |
 |---|---|
 | 12:05 | [feat: adición de AGENTS.md, README reescrito y adición de carpeta con artefactos del requisitado y ejemplos de analisis y diseño](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b0372d4c95a3eaf1c592d7da103859ecd2f2c8d9) |
-| 10:32 | [feat: primer commit, QUE_HACE](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/2d6a01123d3cd3930c1208fedb7489e1f0b9fa7b) |
 
 ### 💬 Conversation-log (1 sesión)
 
@@ -92,7 +92,7 @@ gantt
 
 ---
 
-## Día 3 · 2026-05-21
+## Día 2 · 2026-05-21
 
 ### Commits (6: 2 feat / 4 fix)
 
@@ -110,13 +110,13 @@ gantt
 - Revisión de interiorización de la naturaleza del sistema y análisis de verGrados()
 - Análisis de verAsignaturas()
 
-**Artefactos nuevos:** 📐 🔍 
+**Artefactos nuevos:** 🔍 
 
 > 💬 + commits = proceso documentado
 
 ---
 
-## Día 4 · 2026-05-22
+## Día 3 · 2026-05-22
 
 ### Commits (9: 3 feat / 6 fix)
 
@@ -142,7 +142,7 @@ gantt
 
 ---
 
-## Día 5 · 2026-05-23
+## Día 4 · 2026-05-23
 
 ### Commits (8: 4 feat / 4 fix)
 
@@ -168,7 +168,7 @@ gantt
 
 ---
 
-## Día 6 · 2026-05-24
+## Día 5 · 2026-05-24
 
 ### Commits (12: 6 feat / 4 fix)
 
@@ -200,7 +200,7 @@ gantt
 
 ---
 
-## Día 7 · 2026-05-25
+## Día 6 · 2026-05-25
 
 ### Commits (12: 6 feat / 2 fix)
 
@@ -232,7 +232,7 @@ gantt
 
 ---
 
-## Día 8 · 2026-05-26
+## Día 7 · 2026-05-26
 
 ### Commits (18: 9 feat / 7 fix)
 
@@ -273,7 +273,7 @@ gantt
 
 ---
 
-## Día 9 · 2026-05-27
+## Día 8 · 2026-05-27
 
 ### Commits (17: 8 feat / 4 fix)
 
@@ -314,7 +314,7 @@ gantt
 
 ---
 
-## Día 10 · 2026-05-28
+## Día 9 · 2026-05-28
 
 ### Commits (15: 6 feat / 5 fix)
 
@@ -344,6 +344,22 @@ gantt
 - Diseño de crearAlumno()
 - Diseño de editarAlumno()
 - Diseño de eliminarAlumno()
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 10 · 2026-05-29
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 09:14 | [feat: inicialización de proyectos springboot y react e implementación del caso de uso iniciarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b7c1a82f8383563a742093bb0193de4519172803) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Inicialización de proyectos e implementación de iniciarSesion
 
 > 💬 + commits = proceso documentado
 
