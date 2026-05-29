@@ -28,16 +28,6 @@ gantt
         Analisis     :done, 2026-05-27, 2026-05-29
 ```
 
-## Trazabilidad por caso de uso
-
-<div align="center">
-
-| Caso de uso | D9 |
-|---|:---:|
-| `casos-uso` | A |
-
-</div>
-
 ---
 
 ## Día 5 · 2026-05-23
