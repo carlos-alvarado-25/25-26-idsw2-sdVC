@@ -1,7 +1,7 @@
 # Timeline - carlos-alvarado-25
 
 > Repo: [carlos-alvarado-25/25-26-idsw2-sdVC](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)
-> Commits: 38 | Días activos: 8 | Sesiones log: 17
+> Commits: 39 | Días activos: 9 | Sesiones log: 18
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 38 (32 feat / 3 fix / 3 other) |
+| Commits propios | 39 (32 feat / 3 fix / 4 other) |
 | Ratio fix/feat | 0.09 |
-| Días activos | 8 |
-| Sesiones documentadas | 17 |
-| Días log+commits | 2 |
+| Días activos | 9 |
+| Sesiones documentadas | 18 |
+| Días log+commits | 3 |
 | Días solo log | 0 |
 | Días solo commits | 6 |
 | Sesiones sin fecha en log | 9 |
@@ -211,6 +211,22 @@ gantt
 - Sesión 31: Rama de Alumnos - Creación Manual y Vinculación Académica
 - Sesión 32: Rama de Alumnos - Edición y Navegación por Estados
 - Sesión 33: Rama de Alumnos - Eliminación y Rigor de Requisitos
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 11 · 2026-05-29
+
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 20:35 | [Refactor UML diagrams for conflict listing and calendar generation](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/f7c033a00633756c9a89bae0b9d0f0e7925a91cd) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 34: Rama de Calendario - Motor de Generación y Hub de Conflictos
 
 > 💬 + commits = proceso documentado
 

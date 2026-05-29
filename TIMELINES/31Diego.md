@@ -1,7 +1,7 @@
 # Timeline - 31Diego
 
 > Repo: [31Diego/25-26-idsw2-sdVC](https://github.com/31Diego/25-26-idsw2-sdVC)
-> Commits: 8 | Días activos: 5 | Sesiones log: 0
+> Commits: 9 | Días activos: 6 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 8 (5 feat / 2 fix / 1 other) |
+| Commits propios | 9 (5 feat / 2 fix / 2 other) |
 | Ratio fix/feat | 0.40 |
-| Días activos | 5 |
+| Días activos | 6 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -25,6 +25,7 @@ gantt
         Inicio       :milestone, 2026-05-19, 0d
         UML          :done, 2026-05-22, 2026-05-29
         Analisis     :done, 2026-05-22, 2026-05-29
+        Diseno       :done, 2026-05-29, 2026-05-29
 ```
 
 <!-- trazabilidad: manual -->
@@ -101,6 +102,20 @@ gantt
 | Hora | Mensaje |
 |---|---|
 | 22:26 | [docs: log de sesión — exploración de stack tecnológico](https://github.com/31Diego/25-26-idsw2-sdVC/commit/a968208408a156bc5bbe86fbf5f85f8c60c8bb68) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 11 · 2026-05-29
+
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 18:56 | [docs: log de sesión — decisiones de stack y diseño abrirConvocatoria/abrirConvocatorias](https://github.com/31Diego/25-26-idsw2-sdVC/commit/44fb88600a005923a0ebb4921e0f810a51b60c75) |
+
+**Artefactos nuevos:** 🧩 
 
 > ⚠️ Commits sin entrada en log
 
