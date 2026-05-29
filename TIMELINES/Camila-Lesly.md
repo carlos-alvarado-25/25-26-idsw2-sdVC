@@ -31,6 +31,29 @@ gantt
         Codigo       :done, 2026-05-24, 2026-05-29
 ```
 
+## Trazabilidad por caso de uso
+
+<div align="center">
+
+| Caso de uso | D3 | D5 | D7 |
+|---|:---:|:---:|:---:|
+| `login` | A | D | d |
+| `abrirEspacios` | A | D | d |
+| `crearEspacio` | A | D | d |
+| `editarEspacio` | A | D | d |
+| `eliminarEspacio` | A | D | d |
+| `buscarEspacio` | A | D | d |
+| `verEspacio` | A | D | d |
+| `cambiarEspacio` | A | D | d |
+| `listarRutas` | A | D | d |
+| `seleccionarRuta` | A | D | d |
+| `abrirRuta` | A | D | d |
+| `verDetalles` | A | D | d |
+| `verEspaciosCercanos` | A | D | d |
+| `iniciarVisita` | A | D |   |
+
+</div>
+
 ---
 
 ## Día 3 · 2026-05-21
