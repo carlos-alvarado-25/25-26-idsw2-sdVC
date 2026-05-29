@@ -38,7 +38,6 @@ gantt
 | `exportarConfiguracionGlobal` | A |   |   |
 | `generarExamenes` | A |   |   |
 | `importarConfiguracionGlobal` | A |   |   |
-| `_plantilla` | A |   |   |
 | `exportarAlumnos` |   | A |   |
 | `importarAlumnos` |   | A |   |
 | `importarPreguntas` |   | A |   |
