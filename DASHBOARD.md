@@ -1,7 +1,7 @@
 <!-- monitor-format: v84f93cc4 -->
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-29 17:10:36 CEST | 9 días totales
+> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-05-29 17:20:33 CEST | 9 días totales
 
 ## Leyenda
 
@@ -19,7 +19,7 @@
 
 ## Tabla
 
-<sub>Ultimas actualizaciones: [jerdier](https://github.com/jerdier/25-26-idsw2-sdVC), [beatriizorozco](https://github.com/beatriizorozco/25-26-idsw2-sdVC), [SdeCos](https://github.com/SdeCos/25-26-idsw2-sdVC), [eirik-rosete](https://github.com/eirik-rosete/25-26-idsw2-sdVC), [carlos-alvarado-25](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)</sub>
+<sub>Ultimas actualizaciones: [franvenero](https://github.com/franvenero/25-26-idsw2-sdVC), [marcosgutierrez6](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC), [martinlopez7](https://github.com/martinlopez7/25-26-idsw2-sdVC), [jerdier](https://github.com/jerdier/25-26-idsw2-sdVC), [beatriizorozco](https://github.com/beatriizorozco/25-26-idsw2-sdVC)</sub>
 
 | Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | 📐 | 🔍 | 🧩 | ⚙️ | 🔌 | SHA |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|

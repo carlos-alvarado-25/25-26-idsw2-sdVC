@@ -29,6 +29,16 @@ gantt
         Desarrollo   :done, 2026-05-21, 2026-05-29
 ```
 
+## Trazabilidad por caso de uso
+
+<div align="center">
+
+| Caso de uso | D7 |
+|---|:---:|
+| `casos-uso` | A |
+
+</div>
+
 ---
 
 ## Día 3 · 2026-05-21

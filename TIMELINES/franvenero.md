@@ -1,7 +1,7 @@
 # Timeline - franvenero
 
 > Repo: [franvenero/25-26-idsw2-sdVC](https://github.com/franvenero/25-26-idsw2-sdVC)
-> Commits: 13 | Días activos: 6 | Sesiones log: 11
+> Commits: 15 | Días activos: 6 | Sesiones log: 12
 
 ## Patrón observado
 
@@ -9,10 +9,10 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 13 (1 feat / 1 fix / 11 other) |
+| Commits propios | 15 (1 feat / 1 fix / 13 other) |
 | Ratio fix/feat | 1.00 |
 | Días activos | 6 |
-| Sesiones documentadas | 11 |
+| Sesiones documentadas | 12 |
 | Días log+commits | 4 |
 | Días solo log | 0 |
 | Días solo commits | 2 |
@@ -138,15 +138,18 @@ gantt
 
 ## Día 11 · 2026-05-29
 
-### Commits (1: 0 feat / 0 fix)
+### Commits (3: 0 feat / 0 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 17:20 | [docs: diseño técnico de iniciarSesion y actualización de bitácora](https://github.com/franvenero/25-26-idsw2-sdVC/commit/f2492f368985077a56cb175aad50661072a54c04) |
+| 17:20 | [docs: resumen de Sesión 14 y establecimiento de protocolos](https://github.com/franvenero/25-26-idsw2-sdVC/commit/0f18be6e9906397ef2a4cc944682c4f0918b7467) |
 | 16:59 | [docs: define stack tecnológico y establece nuevo protocolo de registro dual](https://github.com/franvenero/25-26-idsw2-sdVC/commit/7ab4d4c694e8a33d763b583313446e61a8fcc0bc) |
 
-### 💬 Conversation-log (1 sesión)
+### 💬 Conversation-log (2 sesiónes)
 
 - Establecimiento de Protocolo de Registro Dual
+- Diseño Técnico: Realización de 'iniciarSesion' (Vertical Slice)
 
 > 💬 + commits = proceso documentado
 
