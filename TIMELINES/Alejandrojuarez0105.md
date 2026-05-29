@@ -34,23 +34,9 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D5 | D6 | D7 |
-|---|:---:|:---:|:---:|
-| `iniciarSesion` | A |   |   |
-| `cerrarSesion` | A |   |   |
-| `abrirGrados` |   | A |   |
-| `importarGrados` |   | A |   |
-| `eliminarGrado` |   | A |   |
-| `crearGrado` |   | A |   |
-| `editarGrado` |   | A |   |
-| `abrirAsignaturas` |   |   | A |
-| `importarAsignaturas` |   |   | A |
-| `eliminarAsignatura` |   |   | A |
-| `crearAsignatura` |   |   | A |
-| `editarAsignatura` |   |   | A |
-| `abrirExamenes` |   |   | A |
-| `eliminarExamen` |   |   | A |
-| `crearExamen` |   |   | A |
+| Caso de uso | D5 |
+|---|:---:|
+| `casos-uso` | A |
 
 </div>
 

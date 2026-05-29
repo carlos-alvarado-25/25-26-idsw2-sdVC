@@ -31,10 +31,9 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D4 | D5 |
-|---|:---:|:---:|
-| `abrirConvocatorias` | A |   |
-| *(43 CdU sin nombre en commits)* |   | A |
+| Caso de uso | D4 |
+|---|:---:|
+| `coordinador` | A |
 
 </div>
 

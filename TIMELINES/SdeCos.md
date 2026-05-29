@@ -1,7 +1,7 @@
 # Timeline - SdeCos
 
 > Repo: [SdeCos/25-26-idsw2-sdVC](https://github.com/SdeCos/25-26-idsw2-sdVC)
-> Commits: 9 | Días activos: 5 | Sesiones log: 35
+> Commits: 10 | Días activos: 6 | Sesiones log: 41
 
 ## Patrón observado
 
@@ -9,10 +9,10 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 9 (0 feat / 0 fix / 9 other) |
-| Días activos | 5 |
-| Sesiones documentadas | 35 |
-| Sesiones sin fecha en log | 35 |
+| Commits propios | 10 (0 feat / 0 fix / 10 other) |
+| Días activos | 6 |
+| Sesiones documentadas | 41 |
+| Sesiones sin fecha en log | 41 |
 
 </div>
 
@@ -24,20 +24,18 @@ gantt
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
         Analisis     :done, 2026-05-25, 2026-05-29
+        Diseno       :done, 2026-05-29, 2026-05-29
+        Desarrollo   :done, 2026-05-29, 2026-05-29
+        Codigo       :done, 2026-05-29, 2026-05-29
 ```
 
 ## Trazabilidad por caso de uso
 
 <div align="center">
 
-| Caso de uso | D7 | D8 | D10 |
-|---|:---:|:---:|:---:|
-| `Usuario` | A |   |   |
-| `Administrador` |   | A |   |
-| `Alumno` |   | A |   |
-| `DirectorDeGrado` |   |   | A |
-| `Profesor` |   |   | A |
-| `Secretaria` |   |   | A |
+| Caso de uso | D7 | D11 |
+|---|:---:|:---:|
+| `casos-uso` | A | Dd |
 
 </div>
 
@@ -104,6 +102,20 @@ gantt
 | 12:24 | [analisis cdu secretaria](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/55696a6cdce95339e582fc1dcaa2fd192faf90b6) |
 | 10:04 | [analisis cdu profesor](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/b5994d6a34cd58521ae3a3dc733b74f65ff4ef60) |
 | 09:18 | [analisis cdu director de grado](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/29159538a9fcd6787e9441f17f5f56bddf1e8a10) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 11 · 2026-05-29
+
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 10:51 | [diseno e implementacion usuario](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/8a9f13c4027e6ce79cdee81fd96907e8d339ffb4) |
+
+**Artefactos nuevos:** 🔌 🧩 ⚙️ 
 
 > ⚠️ Commits sin entrada en log
 
