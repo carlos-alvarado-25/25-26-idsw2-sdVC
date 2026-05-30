@@ -1,7 +1,7 @@
 # Timeline - martinlopez7
 
 > Repo: [martinlopez7/25-26-idsw2-sdVC](https://github.com/martinlopez7/25-26-idsw2-sdVC)
-> Commits: 99 | Días activos: 8 | Sesiones log: 52
+> Commits: 99 | Días activos: 9 | Sesiones log: 53
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 99 (48 feat / 34 fix / 17 other) |
-| Ratio fix/feat | 0.70 |
-| Días activos | 8 |
-| Sesiones documentadas | 52 |
-| Días log+commits | 8 |
+| Commits propios | 99 (48 feat / 33 fix / 18 other) |
+| Ratio fix/feat | 0.68 |
+| Días activos | 9 |
+| Sesiones documentadas | 53 |
+| Días log+commits | 9 |
 | Días solo log | 2 |
 | Días solo commits | 0 |
 
@@ -26,10 +26,10 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-22, 0d
-        UML          :done, 2026-05-19, 2026-05-29
-        Analisis     :done, 2026-05-21, 2026-05-29
-        Diseno       :done, 2026-05-27, 2026-05-29
-        Codigo       :done, 2026-05-19, 2026-05-29
+        UML          :done, 2026-05-19, 2026-05-30
+        Analisis     :done, 2026-05-21, 2026-05-30
+        Diseno       :done, 2026-05-27, 2026-05-30
+        Codigo       :done, 2026-05-19, 2026-05-30
 ```
 
 ## Trazabilidad por caso de uso
@@ -101,7 +101,7 @@ gantt
 
 ## Día 1 · 2026-05-22
 
-### Commits (7: 3 feat / 4 fix)
+### Commits (5: 2 feat / 3 fix)
 
 | Hora | Mensaje |
 |---|---|
@@ -110,8 +110,6 @@ gantt
 | 11:51 | [feat: análisis de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/dcc4d9c1282fd586947a806492a562cfba264689) |
 | 11:35 | [fix: correccion del analisis de cerrarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/0a52c92cd5c114c34a9d3845d8f3c948f39c1317) |
 | 11:11 | [feat: analisis de cerrarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/6edb8fdd62833e2662a543baae6185c2dd53c11a) |
-| 10:39 | [fix: pequeña corrección de iniciarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/45cc9cbb795f3cce83cbef596cfe303a67d2a00f) |
-| 10:30 | [feat: análisis de iniciarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/9128dce0c69bacd76c2fa565ef372ac9580bbdfa) |
 
 ### 💬 Conversation-log (3 sesiónes)
 
@@ -356,6 +354,23 @@ gantt
 - Corrección de verDocentes() de acuerdo a su diseño
 - Implementación de editarDocente()
 - Implementación de eliminarDocente()
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 9 · 2026-05-30
+
+### Commits (2: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 10:17 | [docs: aceptacion de implementacion de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/5cc80f5734351d7925270098a59d2cc60dd202d4) |
+| 10:11 | [feat: implementacion de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/440fe299bac45d338dbb9df85460af3ee1ace2d3) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Implementación de verAlumnos()
 
 > 💬 + commits = proceso documentado
 

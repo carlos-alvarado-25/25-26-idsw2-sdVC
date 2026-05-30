@@ -1,7 +1,7 @@
 # Timeline - Pareyor
 
 > Repo: [Pareyor/25-26-idsw2-sdVC](https://github.com/Pareyor/25-26-idsw2-sdVC)
-> Commits: 52 | Días activos: 9 | Sesiones log: 9
+> Commits: 53 | Días activos: 10 | Sesiones log: 9
 
 ## Patrón observado
 
@@ -9,13 +9,13 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 52 (38 feat / 14 fix / 0 other) |
-| Ratio fix/feat | 0.36 |
-| Días activos | 9 |
+| Commits propios | 53 (39 feat / 14 fix / 0 other) |
+| Ratio fix/feat | 0.35 |
+| Días activos | 10 |
 | Sesiones documentadas | 9 |
 | Días log+commits | 9 |
 | Días solo log | 0 |
-| Días solo commits | 0 |
+| Días solo commits | 1 |
 
 </div>
 
@@ -26,8 +26,9 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-21, 2026-05-29
-        Analisis     :done, 2026-05-21, 2026-05-29
+        UML          :done, 2026-05-21, 2026-05-30
+        Analisis     :done, 2026-05-21, 2026-05-30
+        Diseno       :done, 2026-05-30, 2026-05-30
 ```
 
 ## Trazabilidad por caso de uso
@@ -268,6 +269,20 @@ gantt
 - Sesión 9: Finalización del Análisis de los 41 Casos de Uso
 
 > 💬 + commits = proceso documentado
+
+---
+
+## Día 12 · 2026-05-30
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 11:47 | [feat: Implementa READme.md para definir las herramientas para el protocolo de diseño](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/a1cfa670988fc137de149ad7b0ff5cd4ea649262) |
+
+**Artefactos nuevos:** 🧩 
+
+> ⚠️ Commits sin entrada en log
 
 ---
 

@@ -1,7 +1,7 @@
 # Timeline - Alejandrojuarez0105
 
 > Repo: [Alejandrojuarez0105/25-26-idsw2-sdVC](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)
-> Commits: 25 | Días activos: 6 | Sesiones log: 19
+> Commits: 26 | Días activos: 7 | Sesiones log: 19
 
 ## Patrón observado
 
@@ -9,13 +9,13 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 25 (16 feat / 1 fix / 8 other) |
+| Commits propios | 26 (16 feat / 1 fix / 9 other) |
 | Ratio fix/feat | 0.06 |
-| Días activos | 6 |
+| Días activos | 7 |
 | Sesiones documentadas | 19 |
 | Días log+commits | 6 |
 | Días solo log | 0 |
-| Días solo commits | 0 |
+| Días solo commits | 1 |
 
 </div>
 
@@ -26,8 +26,8 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-05-29
-        Analisis     :done, 2026-05-23, 2026-05-29
+        UML          :done, 2026-05-22, 2026-05-30
+        Analisis     :done, 2026-05-23, 2026-05-30
 ```
 
 <!-- trazabilidad: manual -->
@@ -186,6 +186,18 @@ gantt
 - Sesión 18: Análisis RUP - Rama Aulas
 
 > 💬 + commits = proceso documentado
+
+---
+
+## Día 11 · 2026-05-29
+
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 00:51 | [Modificación diagrama de contexto Administrador](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/5f0fc153b14b0b76a5be13c437f0751355f7220f) |
+
+> ⚠️ Commits sin entrada en log
 
 ---
 
