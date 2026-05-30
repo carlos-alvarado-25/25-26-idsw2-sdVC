@@ -36,7 +36,26 @@ fi
 git -C "$REPO_DIR" add DASHBOARD.md
 find "$REPO_DIR/TIMELINES" -name "*.md" -exec git -C "$REPO_DIR" add {} + 2>/dev/null || true
 [ -f "$REPO_DIR/TIMELINES/.timeline-format" ] && git -C "$REPO_DIR" add "$REPO_DIR/TIMELINES/.timeline-format"
-git -C "$REPO_DIR" commit -m "audit: actualizacion $(date '+%Y-%m-%d %H:%M')" -q
+
+# --- Detectar timelines con guard manual entre los regenerados ---
+MANUAL_PENDING=""
+if [ -s "$REPO_DIR/TIMELINES/.regen" ]; then
+    while IFS= read -r regen_user; do
+        [ -z "$regen_user" ] && continue
+        timeline_file="$REPO_DIR/TIMELINES/${regen_user}.md"
+        if [ -f "$timeline_file" ] && grep -q "trazabilidad: manual" "$timeline_file"; then
+            MANUAL_PENDING="${MANUAL_PENDING:+$MANUAL_PENDING, }$regen_user"
+        fi
+    done < "$REPO_DIR/TIMELINES/.regen"
+fi
+
+COMMIT_MSG="audit: actualizacion $(date '+%Y-%m-%d %H:%M')"
+if [ -n "$MANUAL_PENDING" ]; then
+    COMMIT_MSG="${COMMIT_MSG}
+
+TIMELINES pendientes de revisión manual: ${MANUAL_PENDING}"
+fi
+git -C "$REPO_DIR" commit -m "$COMMIT_MSG" -q
 git -C "$REPO_DIR" push -q
 
 if [ "$ORIGINAL" != "$BRANCH" ]; then
