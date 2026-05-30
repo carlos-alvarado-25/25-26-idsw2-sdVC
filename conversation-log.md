@@ -544,3 +544,21 @@
 - **Registro de Diseño:** Actualización del workspace externo detallando el racional del motor de generación y la persistencia atómica por lote.
 
 **Decisión:** Se ratifica el uso de **Componentes Reutilizables de Diagnóstico** para centralizar la lógica de resolución de colisiones. Se decide que el motor de generación debe operar sobre una propuesta en memoria consolidada en \`GeneracionResult\`, delegando la persistencia final al Administrador mediante una operación de lote atómica, garantizando la seguridad transaccional del calendario académico.
+
+---
+
+## [30/05/2026 23:52] Sesión 35: Rama de Calendario - Consulta Compartida y Refinamiento Dimensional
+
+**Prompt:** "Hola iniciemos otra nueva sesión, ahora para el caso de uso de consultarCalendario()... Los profesores asignados los muestras a través de los exámenes no?... y los diferentes tipos de filtro como los demuestras? Por grado, y asignatura? Y la vista mensual/semanal/diaria?... Dame la secuencia de métodos que tendrían que pasar para consultarCalendario"
+
+**Resultado:** 
+- **Análisis de `consultarCalendario()`:** Implementación de una colaboración MVC compartida para los tres actores del sistema (Administrador, Profesor y Alumno).
+- **Contextualización por Sesión:** Se integró la interacción con el componente de `:Session` para que el controlador identifique automáticamente el perfil del usuario y aplique los filtros de visibilidad correspondientes desde el repositorio.
+- **Refinamiento de Precisión Técnica:**
+    - Se modeló el parámetro `rango` como el responsable de gestionar las diferentes vistas temporales (mensual, semanal, diaria).
+    - Se definió el objeto `criterio` para encapsular las dimensiones de filtrado académico (Grado y Asignatura).
+    - Se incluyeron las entidades `Asignatura` y `Grado` vinculadas a `Examen` en el diagrama de colaboración para justificar visualmente las capacidades de búsqueda del sistema.
+- **Definición de Secuencia Operativa:** Documentación detallada del flujo de métodos (Inicio -> Identificación de Actor -> Carga Temporal -> Delegación de Atributos -> Filtrado Dimensional -> Finalización).
+- **Artefactos Técnicos:** Actualización y regeneración de diagramas `.puml`, activos visuales `SVG` y redacción del `README.md` con la tabla de correspondencia de requisitos.
+
+**Decisión:** Se establece el patrón de **Consulta Contextual Centralizada** para evitar la fragmentación de la lógica de visualización. Se decide que la "inteligencia" del calendario debe residir en el controlador y el repositorio (filtrado por actor), mientras que la vista se limita a la representación gráfica y al cálculo de rangos temporales, garantizando un sistema escalable y seguro.

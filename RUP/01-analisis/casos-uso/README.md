@@ -49,6 +49,7 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 
 ### Gestión de Calendario (Administrador)
 - [generarCalendario](generarCalendario/README.md) - Análisis del motor de orquestación y generación automática de horarios.
+- [consultarCalendario](consultarCalendario/README.md) - Análisis de la visualización compartida del calendario (Admin/Profesor/Alumno) con filtros contextuales.
 
 
 ## Estructura de análisis

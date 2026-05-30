@@ -1,0 +1,45 @@
+@startuml consultarCalendario-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+package consultarCalendario as "consultarCalendario()" {
+    rectangle #629EF9 ConsultarCalendarioView
+    rectangle #b5bd68 CalendarioController
+    rectangle #F2AC4E ExamenRepository
+    rectangle #F2AC4E Examen
+    rectangle #F2AC4E Asignatura
+    rectangle #F2AC4E Grado
+    rectangle #F2AC4E Calendario
+    rectangle #F2AC4E ":Session" as Session
+}
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
+rectangle #CDEBA5 ":Collaboration DescargarCalendario" as DescargarCalendario
+rectangle #CDEBA5 ":Collaboration ComunicarIncidencia" as ComunicarIncidencia
+
+SistemaDisponible -r-> ConsultarCalendarioView: consultarCalendario()
+
+ConsultarCalendarioView -d-> CalendarioController: listarCalendario(rango) : List<Examen>
+
+CalendarioController -l-> Session: obtenerActor() : Actor
+CalendarioController -d-> ExamenRepository: obtenerPorRango(rango, actor) : List<Examen>
+
+ConsultarCalendarioView -d-> CalendarioController: filtrarCalendario(criterio) : List<Examen>
+
+CalendarioController -d-> ExamenRepository: buscarPorCriterio(criterio, actor) : List<Examen>
+
+ExamenRepository -- Examen
+Examen -- Asignatura
+Asignatura -- Grado
+Calendario -- Examen
+
+ConsultarCalendarioView ..> DescargarCalendario: <<descargar>>
+ConsultarCalendarioView ..> ComunicarIncidencia: <<incidencia>> (Profesor)
+ConsultarCalendarioView ..> SistemaDisponibleSalida: <<finalizar>> completarConsulta()
+
+@enduml
