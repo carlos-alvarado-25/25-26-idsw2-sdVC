@@ -29,13 +29,15 @@ gantt
         Desarrollo   :done, 2026-05-21, 2026-05-29
 ```
 
+<!-- trazabilidad: manual -->
 ## Trazabilidad por caso de uso
 
 <div align="center">
 
-| Caso de uso | D7 |
-|---|:---:|
-| `casos-uso` | A |
+| Caso de uso | D6 | D7 |
+|---|:---:|:---:|
+| *(prototipado — CUs sin nombre en commits; estructura RUP/00-casos-uso)* | A |   |
+| *(primera iteración análisis — CUs sin nombre en commits)* |   | A |
 
 </div>
 
