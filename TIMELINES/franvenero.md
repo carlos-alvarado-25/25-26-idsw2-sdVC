@@ -35,14 +35,14 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D3 | D5 | D6 |
-|---|:---:|:---:|:---:|
-| `iniciarSesion` | A |   |   |
-| `cerrarSesion` | A |   |   |
-| `completarGestion` | A |   |   |
-| `gestionDeTareas` |   | A |   |
-| `gestionDeGrupos` |   |   | A |
-| `planificacionYConfiguracion` |   |   | A |
+| Caso de uso | D3 | D5 | D6 | D11 | D12 |
+|---|:---:|:---:|:---:|:---:|:---:|
+| `iniciarSesion` | A |   |   | D |   |
+| `cerrarSesion` | A |   |   |   | D |
+| `completarGestion` | A |   |   |   | D |
+| `gestionDeTareas` |   | A |   |   |   |
+| `gestionDeGrupos` |   |   | A |   |   |
+| `planificacionYConfiguracion` |   |   | A |   |   |
 
 </div>
 

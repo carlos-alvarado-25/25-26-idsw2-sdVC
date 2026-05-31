@@ -34,13 +34,13 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D8 |
-|---|:---:|
-| `Administrador` | A |
-| `Alumno` | A |
-| `DirectorDeGrado` | A |
-| `Profesor` | A |
-| `Secretaria` | A |
+| Caso de uso | D8 | D11 | D12 |
+|---|:---:|:---:|:---:|
+| `Administrador` | A | D | d |
+| `Alumno` | A | D | d |
+| `DirectorDeGrado` | A | D | d |
+| `Profesor` | A | D | d |
+| `Secretaria` | A | D | d |
 
 </div>
 
