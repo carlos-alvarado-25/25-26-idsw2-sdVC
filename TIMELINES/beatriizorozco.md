@@ -34,10 +34,12 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D6 | D7 |
-|---|:---:|:---:|
-| *(prototipado — CUs sin nombre en commits; estructura RUP/00-casos-uso)* | A |   |
-| *(primera iteración análisis — CUs sin nombre en commits)* |   | A |
+> Rama de trabajo: `develop`. Estructura: `RUP/00-casos-uso/02-detalle/<actor>/<CU>/`
+
+| Actor | D6 | D7 | D11 | D13 |
+|---|:---:|:---:|:---:|:---:|
+| `coordinador` *(44 CUs)* | A | A | A | A |
+| `investigador` *(19 CUs)* | A | A | A | A |
 
 </div>
 
