@@ -1,7 +1,7 @@
 # Timeline - Alejandrojuarez0105
 
 > Repo: [Alejandrojuarez0105/25-26-idsw2-sdVC](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)
-> Commits: 26 | Días activos: 7 | Sesiones log: 19
+> Commits: 27 | Días activos: 8 | Sesiones log: 20
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 26 (16 feat / 1 fix / 9 other) |
-| Ratio fix/feat | 0.06 |
-| Días activos | 7 |
-| Sesiones documentadas | 19 |
-| Días log+commits | 6 |
+| Commits propios | 27 (17 feat / 1 fix / 9 other) |
+| Ratio fix/feat | 0.05 |
+| Días activos | 8 |
+| Sesiones documentadas | 20 |
+| Días log+commits | 7 |
 | Días solo log | 0 |
 | Días solo commits | 1 |
 
@@ -26,8 +26,8 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-05-30
-        Analisis     :done, 2026-05-23, 2026-05-30
+        UML          :done, 2026-05-22, 2026-05-31
+        Analisis     :done, 2026-05-23, 2026-05-31
 ```
 
 <!-- trazabilidad: manual -->
@@ -198,6 +198,22 @@ gantt
 | 00:51 | [Modificación diagrama de contexto Administrador](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/5f0fc153b14b0b76a5be13c437f0751355f7220f) |
 
 > ⚠️ Commits sin entrada en log
+
+---
+
+## Día 12 · 2026-05-30
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 18:11 | [feat: desarrollar la rama Profesor y cierre de sesión 19](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/d161c5207d50e4d840a86bca3e5365bada779ac6) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 19: Análisis RUP - Rama Profesores
+
+> 💬 + commits = proceso documentado
 
 ---
 

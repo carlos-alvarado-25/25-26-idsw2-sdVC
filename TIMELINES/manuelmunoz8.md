@@ -1,7 +1,7 @@
 # Timeline - manuelmunoz8
 
 > Repo: [manuelmunoz8/25-26-idsw2-sdVC](https://github.com/manuelmunoz8/25-26-idsw2-sdVC)
-> Commits: 39 | Días activos: 5 | Sesiones log: 9
+> Commits: 48 | Días activos: 7 | Sesiones log: 9
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 39 (16 feat / 21 fix / 2 other) |
+| Commits propios | 48 (19 feat / 25 fix / 4 other) |
 | Ratio fix/feat | 1.31 |
-| Días activos | 5 |
+| Días activos | 7 |
 | Sesiones documentadas | 9 |
 | Sesiones sin fecha en log | 9 |
 
@@ -24,17 +24,21 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-28, 2026-05-29
-        Codigo       :done, 2026-05-25, 2026-05-29
+        UML          :done, 2026-05-30, 2026-05-31
+        Analisis     :done, 2026-05-30, 2026-05-31
+        Diseno       :done, 2026-05-30, 2026-05-31
+        Desarrollo   :done, 2026-05-30, 2026-05-31
+        Codigo       :done, 2026-05-30, 2026-05-31
 ```
 
 ## Trazabilidad por caso de uso
 
 <div align="center">
 
-| Caso de uso | D10 |
+| Caso de uso | D12 |
 |---|:---:|
-| `casosDeUsos` | A |
+| `casosDeUsos` | AD |
+| `imagenes` | A |
 
 </div>
 
@@ -73,8 +77,6 @@ gantt
 | 16:21 | [feat: eleccion de tecnologias para frontend y backend](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f9031a74424ebebbc20b3b4b8c213aa65e47a615) |
 | 15:51 | [feat: Creacion de reglas para gemini CLI](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c3c5ed12ef89919a726a954df6e141dfd0903984) |
 | 15:47 | [feat: agregacion del modelo del domino](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c77ec85f69a5a0b21be623c4e4163c3a987a52d9) |
-
-**Artefactos nuevos:** 🔌 
 
 > ⚠️ Commits sin entrada en log
 
@@ -120,8 +122,6 @@ gantt
 | 23:24 | [fix: estructura y logs de arreglo de carpetas](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/6a8eee852c1d5ee8d2a8a99b66c68808836dfba3) |
 | 23:22 | [fix: estructura de requisitado en documentacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c458feca3b6c71b528307aa210fb8cf915ab340c) |
 
-**Artefactos nuevos:** 🔍 
-
 > ⚠️ Commits sin entrada en log
 
 ---
@@ -133,6 +133,39 @@ gantt
 | Hora | Mensaje |
 |---|---|
 | 18:32 | [feat: Actualizacion del README.md](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/0121f815c428387fb6bbbefe57eb1fd8d7148e91) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 12 · 2026-05-30
+
+### Commits (8: 3 feat / 3 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 01:19 | [prueba despligue](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/63a916a2823cb6bcafaa993917e55443a2c1a975) |
+| 01:16 | [feat: creacion de README en RUP/03-desarrollo](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c61da5f167dfcd8616c3afbaadd8d5241fd6a868) |
+| 01:15 | [update gitignore](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/dfd7b597b020b6b77fd52713143ebbbcc9fdec45) |
+| 01:15 | [fix: configuracion de logs para cloudfare](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/759ad393f224535eed9b09bb18dd305af9d08c05) |
+| 00:53 | [fix: acceso de cloudfare a index.html](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/33a7081e9bc4f406b74cdaca0c34b7904b9d31d7) |
+| 00:30 | [fix: codigo fuente hacia carpeta src](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5da0fcece4c535109eae45b179013ba0ac56c730) |
+| 00:30 | [feat: diagramas de secuencia](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4a1274df02d01559ef7486564f22ab58a1498f4e) |
+| 15:01 | [feat: Creacion de analisis en carpeta RUP](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/d9a81978a15515256a1e9f52a0c9e2e895826485) |
+
+**Artefactos nuevos:** 🔌 📐 🔍 🧩 ⚙️ 
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 13 · 2026-05-31
+
+### Commits (1: 0 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 02:18 | [fix: configuracion necesaria para pages](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4a8c6ed75531ee23d878667fc7daa2d6da16deeb) |
 
 > ⚠️ Commits sin entrada en log
 

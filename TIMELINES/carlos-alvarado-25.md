@@ -1,7 +1,7 @@
 # Timeline - carlos-alvarado-25
 
 > Repo: [carlos-alvarado-25/25-26-idsw2-sdVC](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)
-> Commits: 39 | Días activos: 9 | Sesiones log: 18
+> Commits: 41 | Días activos: 11 | Sesiones log: 20
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 39 (32 feat / 3 fix / 4 other) |
-| Ratio fix/feat | 0.09 |
-| Días activos | 9 |
-| Sesiones documentadas | 18 |
-| Días log+commits | 3 |
+| Commits propios | 41 (34 feat / 3 fix / 4 other) |
+| Ratio fix/feat | 0.08 |
+| Días activos | 11 |
+| Sesiones documentadas | 20 |
+| Días log+commits | 5 |
 | Días solo log | 0 |
 | Días solo commits | 6 |
 | Sesiones sin fecha en log | 9 |
@@ -27,8 +27,8 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-23, 2026-05-29
-        Analisis     :done, 2026-05-22, 2026-05-29
+        UML          :done, 2026-05-23, 2026-05-31
+        Analisis     :done, 2026-05-22, 2026-05-31
 ```
 
 <!-- trazabilidad: manual -->
@@ -228,6 +228,38 @@ gantt
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 34: Rama de Calendario - Motor de Generación y Hub de Conflictos
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 12 · 2026-05-30
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 23:52 | [feat: Add analysis for consultarCalendario use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/3b5018633cb7bb6227786815e518828b2632afcd) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 35: Rama de Calendario - Consulta Compartida y Refinamiento Dimensional
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 13 · 2026-05-31
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 14:30 | [feat: Add analysis and diagrams for descargarCalendarioExamenes use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/2f16ea8bd44a6411f9b3c18afd373803c907ddd8) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 36: Rama de Calendario - Exportación y Parámetros de Contenido
 
 > 💬 + commits = proceso documentado
 

@@ -1,7 +1,7 @@
 # Timeline - jerdier
 
 > Repo: [jerdier/25-26-idsw2-sdVC](https://github.com/jerdier/25-26-idsw2-sdVC)
-> Commits: 20 | Días activos: 7 | Sesiones log: 7
+> Commits: 22 | Días activos: 8 | Sesiones log: 9
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 20 (9 feat / 4 fix / 7 other) |
-| Ratio fix/feat | 0.44 |
-| Días activos | 7 |
-| Sesiones documentadas | 7 |
-| Sesiones sin fecha en log | 7 |
+| Commits propios | 22 (11 feat / 4 fix / 7 other) |
+| Ratio fix/feat | 0.36 |
+| Días activos | 8 |
+| Sesiones documentadas | 9 |
+| Sesiones sin fecha en log | 9 |
 
 </div>
 
@@ -24,9 +24,9 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-25, 2026-05-29
-        Diseno       :done, 2026-05-25, 2026-05-29
-        Codigo       :done, 2026-05-22, 2026-05-29
+        Analisis     :done, 2026-05-25, 2026-05-31
+        Diseno       :done, 2026-05-25, 2026-05-31
+        Codigo       :done, 2026-05-22, 2026-05-31
 ```
 
 <!-- trazabilidad: manual -->
@@ -142,6 +142,19 @@ gantt
 |---|---|
 | 12:14 | [feat(design): completar refinamiento de capa de datos y tipado técnico](https://github.com/jerdier/25-26-idsw2-sdVC/commit/3267de5083de4983731f9b80ce38f66c2a121228) |
 | 11:44 | [fix: analisis](https://github.com/jerdier/25-26-idsw2-sdVC/commit/61d426dbaba53f04882678d6a73b4a6cee3ec89a) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 12 · 2026-05-30
+
+### Commits (2: 2 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 16:25 | [feat(frontend): setup project infrastructure, routing, and core views (Phase 4)](https://github.com/jerdier/25-26-idsw2-sdVC/commit/51da10bbe1c7096571f9217fc0a9e041b4e2d90f) |
+| 16:21 | [feat(backend): implement services and controllers architecture (Phase 3 Part 3)](https://github.com/jerdier/25-26-idsw2-sdVC/commit/5627c28c508f8a9c5e236f0418645be8ca11519b) |
 
 > ⚠️ Commits sin entrada en log
 

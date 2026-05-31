@@ -1,7 +1,7 @@
 # Timeline - liamanderson873
 
 > Repo: [liamanderson873/25-26-idsw2-sdVC](https://github.com/liamanderson873/25-26-idsw2-sdVC)
-> Commits: 28 | Días activos: 4 | Sesiones log: 0
+> Commits: 61 | Días activos: 6 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 28 (6 feat / 1 fix / 21 other) |
-| Ratio fix/feat | 0.16 |
-| Días activos | 4 |
+| Commits propios | 61 (15 feat / 6 fix / 40 other) |
+| Ratio fix/feat | 0.40 |
+| Días activos | 6 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -23,8 +23,9 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-21, 2026-05-29
-        Analisis     :done, 2026-05-21, 2026-05-29
+        UML          :done, 2026-05-21, 2026-05-31
+        Analisis     :done, 2026-05-21, 2026-05-31
+        Codigo       :done, 2026-05-29, 2026-05-31
 ```
 
 <!-- trazabilidad: manual -->
@@ -149,6 +150,63 @@ gantt
 | 02:04 | [docs(log): reestructuracion definitiva del log con prompts y detalles de la sesion masiva](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/f6ef8ae10edafe4eff4ac7b257f7cfefa5ddad63) |
 | 02:02 | [docs(log): resolver conflicto de merge en log usando version de main](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/71a449a52dba22bfed45e72412cdb538158ca451) |
 | 02:01 | [docs(log): refactorizacion exhaustiva del convesation-log con prompts y detalles tecnicos](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/90255ffe19437726f8bc79abf850e8775e82291d) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 11 · 2026-05-29
+
+### Commits (15: 6 feat / 4 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 22:57 | [docs: actualizar roadmap y trazabilidad; fix: añadir estado PENDIENTE y credenciales locales de DB](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/04e6cb2b46d05befdfb1defa418291f6bfc24613) |
+| 22:24 | [feat(servicio): implementar ServicioExamen con generacion de Clave de Correccion (CU-09)](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/63c2a666bdaeb4f33ce2d7256709bca9d1ca8556) |
+| 22:20 | [fix(pom): corregir groupId de postgresql con caracteres invalidos](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/93c8bce86e2d8d9203534d4ffb906d01dce3a167) |
+| 22:08 | [docs: sync all progress to develop branch before environment restart](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/c6b2cdbf218c8d8d659c23d541ccdbb353904678) |
+| 21:54 | [feat(api): implement basic DTOs, Services and Controllers for the academic catalog](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/7ea199fe042416cce0d71f9b70ff24ab4ef36d83) |
+| 21:42 | [feat(controller): implement ControladorAlumno REST endpoints](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/0ed61b04e7878cf7ea24c19b61eefe6c51f6f5ec) |
+| 20:56 | [feat(service): implement ServicioAlumno with upsert logic and DTOs](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/4cfe93a993d8309db6903b022b8fdefd196a6897) |
+| 20:52 | [docs(log): update conversation log with construction phase start](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/e80171015293e84a7da525544b35a7ba06e47ef5) |
+| 20:50 | [feat(repo): implement remaining Spring Data JPA repositories](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/83c715cd5aa3be0ebafd7c5448719abea64935e8) |
+| 20:49 | [feat(model): implement all JPA entities and enums for Jorgestor](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/90a99617eadc10d75a933d77eed76f68ea40bdee) |
+| 19:02 | [fix(docs): increment cache busting version to force diagram update](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/f81a21d562b6ac0d39a72afcbc48e0b45c5a0fba) |
+| 19:00 | [fix(docs): force diagram refresh with cache busting parameter](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/a1f24102ce7b75052cbdde323d23d28263d96913) |
+| 18:58 | [docs(design): translate DER and DCD to Spanish for consistency](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/3b48f893b9b5e901122f74538cb469cf9ecc5952) |
+| 18:57 | [fix(docs): update diagram proxy URLs to point to develop branch](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/a552a0ceffc632b4f23f38f3883ab806988d8c6d) |
+| 18:56 | [docs(design): finalize DER and DCD for Jorgestor phase](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/9834d3fee52ed85cb9ab61f344820c6c7c059d8c) |
+
+**Artefactos nuevos:** 🔌 
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 12 · 2026-05-30
+
+### Commits (18: 3 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 23:14 | [docs: cierre de sesion y sincronizacion final en main](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/95744690d530985a46ced608d100c8e1fd37f9f2) |
+| 23:12 | [Merge pull request #8 from liamanderson873/develop](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/2e49207f9b919799d5730eb0439da3e4bfae47af) |
+| 23:08 | [chore: eliminar scripts de prueba y limpiar src/test](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/de6de07767dcc46213d2bbd626b8a9410fdeea9f) |
+| 23:02 | [feat(servicio): completar exportacion de examen (CU-04) con carga eager; docs: cerrar epica I/O en log y roadmap](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/dcc79560f8a50f6c136ea26683ff74a2d1a0ee18) |
+| 22:57 | [feat(servicio): implementar exportacion de examen (CU-04); docs: cerrar epica de Entradas/Salidas en log y roadmap](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/0e0f86162a46f706e5034c400eb8c8787c8ca1f2) |
+| 22:46 | [fix(servicio): asegurar persistencia manual de preguntas y respuestas; docs: completar log de CU-06](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/b500fbe1a77f781d46e2d853c42fc6416899e7c8) |
+| 22:11 | [docs: registrar validacion exitosa de CU-06 y actualizar roadmap](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/b347dfbd1253d299c7fea3edcf789d7fe0a4dfdc) |
+| 20:59 | [docs: registrar validacion exitosa de importacion (CU-03) en postman](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/d52dd5aed6c6f42dc332ed249db42fa792db552d) |
+| 20:45 | [chore: cambiar puerto del servidor a 9090 para evitar conflictos locales](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/028b32a3c542d510301d766aaa61a5c8d0816c65) |
+| 20:42 | [chore: ignorar archivo local de payloads para postman](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/7469afd1a9dbf94da5d14fbcfdf9e33beb6a62b4) |
+| 20:37 | [docs: registrar avance del CU-03 y correccion arquitectonica](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/cc5695e22bb3aa34ff7b0ebfb072b7460db995c5) |
+| 20:26 | [docs: actualizar log con nuevo estandar y plan I/O](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/27bb5fd3d7183a12bf8dfe8dd579d54d47c049b0) |
+| 20:23 | [docs: actualizar roadmap y log con validacion empirica de CU-09](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/2973051d31cb7559acff063176b3c376ff4a70a1) |
+| 20:13 | [Merge pull request #7 from liamanderson873/develop](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/99a8c82ee8ed898ba348d7e284b67b58b99d3d88) |
+| 19:59 | [docs: actualizar log post-validacion CU-02 y preparar BD para CU-09](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/e07762dcef75f3119192ceae5c51259c06e2d00c) |
+| 19:40 | [docs: actualizar log y roadmap tras validacion exitosa de CU-02](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/9828fbfa7d3d09cf5097faa19594a77f2c5d58da) |
+| 17:30 | [feat(servicio): implementar algoritmo de generacion estratificada (CU-02)](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/21c6affd5f907ccba787579501e49c78d3327126) |
+| 17:20 | [Merge pull request #6 from liamanderson873/develop](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/6213507efe1ff8b7a89e6b26f5c3e1f7d4c5ffb0) |
 
 > ⚠️ Commits sin entrada en log
 

@@ -1,7 +1,7 @@
 # Timeline - franvenero
 
 > Repo: [franvenero/25-26-idsw2-sdVC](https://github.com/franvenero/25-26-idsw2-sdVC)
-> Commits: 15 | Días activos: 6 | Sesiones log: 12
+> Commits: 17 | Días activos: 7 | Sesiones log: 13
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 15 (1 feat / 1 fix / 13 other) |
+| Commits propios | 17 (1 feat / 1 fix / 15 other) |
 | Ratio fix/feat | 1.00 |
-| Días activos | 6 |
-| Sesiones documentadas | 12 |
-| Días log+commits | 4 |
+| Días activos | 7 |
+| Sesiones documentadas | 13 |
+| Días log+commits | 5 |
 | Días solo log | 0 |
 | Días solo commits | 2 |
 
@@ -26,8 +26,8 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-21, 2026-05-29
-        Diseno       :done, 2026-05-21, 2026-05-29
+        Analisis     :done, 2026-05-21, 2026-05-31
+        Diseno       :done, 2026-05-21, 2026-05-31
 ```
 
 <!-- trazabilidad: manual -->
@@ -146,10 +146,27 @@ gantt
 | 17:20 | [docs: resumen de Sesión 14 y establecimiento de protocolos](https://github.com/franvenero/25-26-idsw2-sdVC/commit/0f18be6e9906397ef2a4cc944682c4f0918b7467) |
 | 16:59 | [docs: define stack tecnológico y establece nuevo protocolo de registro dual](https://github.com/franvenero/25-26-idsw2-sdVC/commit/7ab4d4c694e8a33d763b583313446e61a8fcc0bc) |
 
-### 💬 Conversation-log (2 sesiónes)
+### 💬 Conversation-log (1 sesión)
 
 - Establecimiento de Protocolo de Registro Dual
-- Diseño Técnico: Realización de 'iniciarSesion' (Vertical Slice)
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 12 · 2026-05-30
+
+### Commits (2: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 18:32 | [docs: diseño técnico completo del ramillete gestion-sesion (clases, secuencia y logs)](https://github.com/franvenero/25-26-idsw2-sdVC/commit/f95a870bb0eb0c95315374b3d71fbe4c4236afeb) |
+| 18:03 | [docs: diagrama de clases técnico para iniciarSesion (vertical slice)](https://github.com/franvenero/25-26-idsw2-sdVC/commit/20799ccab40e54a6a95f4b4867ceb4f737ae3062) |
+
+### 💬 Conversation-log (2 sesiónes)
+
+- Diseño Técnico: Diagrama de Clases 'iniciarSesion' (Vertical Slice)
+- Diseño Técnico: Ramillete Gestión de Sesión (Cerrar y Completar)
 
 > 💬 + commits = proceso documentado
 
