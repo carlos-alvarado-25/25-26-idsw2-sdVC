@@ -1,0 +1,34 @@
+@startuml descargarCalendarioExamenes-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Calendario Abierto" as CalendarioAbierto
+
+package descargarCalendarioExamenes as "descargarCalendarioExamenes()" {
+    rectangle #629EF9 DescargarCalendarioView
+    rectangle #b5bd68 CalendarioController
+    rectangle #F2AC4E ExamenRepository
+    rectangle #F2AC4E Examen
+    rectangle #F2AC4E ExportService
+    rectangle #F2AC4E ":Session" as Session
+}
+
+rectangle #CDEBA5 ":Calendario Abierto" as CalendarioAbiertoSalida
+
+CalendarioAbierto -r-> DescargarCalendarioView: descargarCalendario()
+
+DescargarCalendarioView -d-> CalendarioController: generarArchivo(periodo, formato, opciones) : File
+
+CalendarioController -l-> Session: obtenerActor() : Actor
+CalendarioController -d-> ExamenRepository: obtenerPorPeriodo(periodo, actor) : List<Examen>
+
+CalendarioController -d-> ExportService: exportar(examenes, formato, opciones) : File
+ExportService -u-> Examen: <<read>>
+
+DescargarCalendarioView ..> CalendarioAbiertoSalida: <<finalizar>>
+DescargarCalendarioView ..> CalendarioAbiertoSalida: <<cancelar>>
+
+@enduml

@@ -562,3 +562,20 @@
 - **Artefactos Técnicos:** Actualización y regeneración de diagramas `.puml`, activos visuales `SVG` y redacción del `README.md` con la tabla de correspondencia de requisitos.
 
 **Decisión:** Se establece el patrón de **Consulta Contextual Centralizada** para evitar la fragmentación de la lógica de visualización. Se decide que la "inteligencia" del calendario debe residir en el controlador y el repositorio (filtrado por actor), mientras que la vista se limita a la representación gráfica y al cálculo de rangos temporales, garantizando un sistema escalable y seguro.
+
+---
+
+## [31/05/2026 14:28] Sesión 36: Rama de Calendario - Exportación y Parámetros de Contenido
+
+**Prompt:** "Perdona si, descargarCalendarioExamenes()... creo que mejor que rango queda mejor periodo como nombre... A parte no reflejaste que también se puede seleccionar la información a incluir"
+
+**Resultado:** 
+- **Análisis de `descargarCalendarioExamenes()`:** Diseño de la colaboración MVC para la exportación del calendario a formatos portátiles (PDF/Excel), compartida para Administradores, Profesores y Alumnos.
+- **Refinamiento Semántico y Funcional:**
+    - Sustitución del parámetro `rango` por `periodo` para una mayor precisión terminológica.
+    - Inclusión explícita del parámetro `opciones` en el flujo de generación para representar la capacidad del usuario de elegir la información específica a incluir.
+- **Desacoplamiento Técnico:** Introducción de la entidad de utilidad `ExportService` para centralizar la lógica de transformación de datos y aplicación de plantillas de formato, manteniendo la cohesión del controlador.
+- **Coherencia por Actor:** Integración con `:Session` para asegurar que el documento generado respete las mismas reglas de visibilidad contextual que la consulta en pantalla.
+- **Artefactos Técnicos:** Generación de diagramas `.puml`, activos `SVG` y redacción del `README.md` con la secuencia de operaciones y tabla de correspondencia actualizadas.
+
+**Decisión:** Se ratifica el uso de **Servicios de Exportación Especializados** para gestionar la complejidad de la generación de archivos. Se decide que la parametrización del contenido (`opciones`) debe ser explícita en la capa de análisis para garantizar que el sistema cumpla con las expectativas de personalización del usuario final, manteniendo la integridad referencial y la seguridad contextual en cada descarga.
