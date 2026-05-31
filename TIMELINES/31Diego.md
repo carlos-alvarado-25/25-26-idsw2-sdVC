@@ -34,16 +34,56 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D4 | D5 | D11 | D12 |
-|---|:---:|:---:|:---:|:---:|
-| `abrirConvocatoria` | A |   | D |   |
-| `abrirConvocatorias` | A |   | D |   |
-| *(43 CdU sin nombre en commits)* |   | A |   |   |
-| `iniciarSesion` |   |   |   | Dd |
-| `cerrarSesion` |   |   |   | Dd |
-| `panelPrincipal` |   |   |   | Dd |
-| `perfil` |   |   |   | Dd |
-| `cargaTrabajo` |   |   |   | Dd |
+> D7: "fix: split casos de uso con múltiples entradas por comportamiento" — creó 3 CUs nuevos por refinamiento
+
+| Caso de uso | D4 | D5 | D7 | D11 | D12 |
+|---|:---:|:---:|:---:|:---:|:---:|
+| `abrirConvocatoria` | A |   |   | D | d |
+| `abrirConvocatorias` | A |   |   | D | d |
+| `abrirEntregable` |   | A |   |   |   |
+| `abrirEntregables` |   | A |   |   |   |
+| `abrirInvestigador` |   | A |   |   |   |
+| `abrirInvestigadores` |   | A |   |   |   |
+| `abrirMiPublicacion` |   | A |   |   |   |
+| `abrirMisPublicaciones` |   | A |   |   |   |
+| `abrirOpcionesCargaTrabajo` |   | A |   |   | d |
+| `abrirOpcionesPerfil` |   | A |   |   | Dd |
+| `abrirPanelPrincipal` |   | A |   |   | Dd |
+| `abrirProyecto` |   | A |   |   |   |
+| `abrirProyectos` |   | A |   |   |   |
+| `abrirPublicacion` |   | A |   |   |   |
+| `abrirPublicaciones` |   | A |   |   |   |
+| `abrirRecompensa` |   | A |   |   |   |
+| `abrirRecompensas` |   | A |   |   |   |
+| `abrirSolicitudEliminacionPerfil` |   | A |   |   |   |
+| `abrirSolicitudesEliminacionPerfil` |   | A |   |   |   |
+| `agregarInvestigador` |   | A |   |   |   |
+| `cerrarSesion` |   | A |   |   | Dd |
+| `crearEntregable` |   | A |   |   |   |
+| `crearInvestigador` |   | A |   |   |   |
+| `crearProyecto` |   | A |   |   |   |
+| `crearPublicacion` |   | A |   |   |   |
+| `crearRecompensa` |   | A |   |   |   |
+| `editarCargaTrabajo` |   | A |   |   | d |
+| `editarEntregable` |   | A |   |   |   |
+| `editarMiPublicacion` |   | A |   |   |   |
+| `editarPerfil` |   | A |   |   | Dd |
+| `editarProyecto` |   | A |   |   |   |
+| `editarPublicacion` |   | A |   |   |   |
+| `editarRecompensa` |   | A |   |   |   |
+| `eliminarEntregable` |   | A |   |   |   |
+| `eliminarInvestigador` |   | A |   |   |   |
+| `eliminarMiPublicacion` |   | A |   |   |   |
+| `eliminarProyecto` |   | A |   |   |   |
+| `eliminarPublicacion` |   | A |   |   |   |
+| `eliminarRecompensa` |   | A |   |   |   |
+| `importarConvocatoria` |   | A |   |   |   |
+| `iniciarSesion` |   | A |   |   | Dd |
+| `responderPublicacion` |   | A |   |   |   |
+| `solicitarEliminacionPerfil` |   | A |   |   |   |
+| `abrirInvestigadoresDeProyecto` *(split D7)* |   |   | A |   |   |
+| `abrirOpcionesPerfilInvestigador` *(split D7)* |   |   | A |   |   |
+| `abrirProyectosDeInvestigador` *(split D7)* |   |   | A |   |   |
 
 </div>
 
