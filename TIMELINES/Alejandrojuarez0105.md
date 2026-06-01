@@ -35,33 +35,39 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D5 | D6 | D7 | D10 | D12 |
-|---|:---:|:---:|:---:|:---:|:---:|
-| `iniciarSesion` | A |   |   |   |   |
-| `cerrarSesion` | A |   |   |   |   |
-| `abrirGrados` |   | A |   |   |   |
-| `importarGrados` |   | A |   |   |   |
-| `eliminarGrado` |   | A |   |   |   |
-| `crearGrado` |   | A |   |   |   |
-| `editarGrado` |   | A |   |   |   |
-| `abrirAsignaturas` |   |   | A |   |   |
-| `importarAsignaturas` |   |   | A |   |   |
-| `eliminarAsignatura` |   |   | A |   |   |
-| `crearAsignatura` |   |   | A |   |   |
-| `editarAsignatura` |   |   | A |   |   |
-| `abrirExamenes` |   |   | A |   |   |
-| `eliminarExamen` |   |   | A |   |   |
-| `crearExamen` |   |   | A |   |   |
-| `abrirAulas` |   |   |   | A |   |
-| `importarAulas` |   |   |   | A |   |
-| `crearAula` |   |   |   | A |   |
-| `editarAula` |   |   |   | A |   |
-| `eliminarAula` |   |   |   | A |   |
-| `abrirProfesores` |   |   |   |   | A |
-| `importarProfesores` |   |   |   |   | A |
-| `crearProfesor` |   |   |   |   | A |
-| `editarProfesor` |   |   |   |   | A |
-| `eliminarProfesor` |   |   |   |   | A |
+| Caso de uso | D5 | D6 | D7 | D10 | D12 | D13 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| `iniciarSesion` | A |   |   |   |   |   |
+| `cerrarSesion` | A |   |   |   |   |   |
+| `abrirGrados` |   | A |   |   |   |   |
+| `importarGrados` |   | A |   |   |   |   |
+| `eliminarGrado` |   | A |   |   |   |   |
+| `crearGrado` |   | A |   |   |   |   |
+| `editarGrado` |   | A |   |   |   |   |
+| `abrirAsignaturas` |   |   | A |   |   |   |
+| `importarAsignaturas` |   |   | A |   |   |   |
+| `eliminarAsignatura` |   |   | A |   |   |   |
+| `crearAsignatura` |   |   | A |   |   |   |
+| `editarAsignatura` |   |   | A |   |   |   |
+| `abrirExamenes` |   |   | A |   |   |   |
+| `eliminarExamen` |   |   | A |   |   |   |
+| `crearExamen` |   |   | A |   |   |   |
+| `abrirAulas` |   |   |   | A |   |   |
+| `importarAulas` |   |   |   | A |   |   |
+| `crearAula` |   |   |   | A |   |   |
+| `editarAula` |   |   |   | A |   |   |
+| `eliminarAula` |   |   |   | A |   |   |
+| `abrirProfesores` |   |   |   |   | A |   |
+| `importarProfesores` |   |   |   |   | A |   |
+| `crearProfesor` |   |   |   |   | A |   |
+| `editarProfesor` |   |   |   |   | A |   |
+| `eliminarProfesor` |   |   |   |   | A |   |
+| `generarCalendario` |   |   |   |   |   | A |
+| `completarProceso` |   |   |   |   |   | A |
+| `consultarCalendario` |   |   |   |   |   | A |
+| `completarConsulta` |   |   |   |   |   | A |
+| `descargarCalendarioExamenes` |   |   |   |   |   | A |
+| `completarGestion` |   |   |   |   |   | A |
 
 </div>
 
