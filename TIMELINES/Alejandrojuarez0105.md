@@ -1,7 +1,7 @@
 # Timeline - Alejandrojuarez0105
 
 > Repo: [Alejandrojuarez0105/25-26-idsw2-sdVC](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)
-> Commits: 27 | Días activos: 8 | Sesiones log: 20
+> Commits: 31 | Días activos: 9 | Sesiones log: 23
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 27 (17 feat / 1 fix / 9 other) |
+| Commits propios | 31 (20 feat / 1 fix / 10 other) |
 | Ratio fix/feat | 0.05 |
-| Días activos | 8 |
-| Sesiones documentadas | 20 |
-| Días log+commits | 7 |
+| Días activos | 9 |
+| Sesiones documentadas | 23 |
+| Días log+commits | 8 |
 | Días solo log | 0 |
 | Días solo commits | 1 |
 
@@ -26,8 +26,8 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-05-31
-        Analisis     :done, 2026-05-23, 2026-05-31
+        UML          :done, 2026-05-22, 2026-06-01
+        Analisis     :done, 2026-05-23, 2026-06-01
 ```
 
 <!-- trazabilidad: manual -->
@@ -222,6 +222,27 @@ gantt
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 19: Análisis RUP - Rama Profesores
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 13 · 2026-05-31
+
+### Commits (4: 3 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 00:23 | [feat: desarrollar el análisis del caso completarGestion y cierre de sesión 22](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/62cb5d4b92c9c37888400eb6b3e4d00aa539447f) |
+| 20:12 | [docs: añadiendo cambios faltantes en el README de completarConsulta](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/173f0cc5ffaef26183f785b087f67a7d5568bf31) |
+| 20:08 | [feat: desarrollar la rama Consulta de Calendario y cierre de sesión 21](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/d44882cfd41407df13b3543e928ca333365431e4) |
+| 18:05 | [feat: desarrollar la rama Calendario y cierre de sesión 20](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/8e3bda3a4ceec59a4c9d508b68e077c9464b97c3) |
+
+### 💬 Conversation-log (3 sesiónes)
+
+- Sesión 20: Análisis RUP - Rama Calendario
+- Sesión 21: Análisis RUP - Rama Consulta de Calendario
+- Sesión 22: Análisis RUP - completarGestion()
 
 > 💬 + commits = proceso documentado
 

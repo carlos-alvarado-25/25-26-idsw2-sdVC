@@ -1,7 +1,7 @@
 # Timeline - Pareyor
 
 > Repo: [Pareyor/25-26-idsw2-sdVC](https://github.com/Pareyor/25-26-idsw2-sdVC)
-> Commits: 65 | Días activos: 10 | Sesiones log: 11
+> Commits: 73 | Días activos: 11 | Sesiones log: 12
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 65 (48 feat / 17 fix / 0 other) |
+| Commits propios | 73 (54 feat / 19 fix / 0 other) |
 | Ratio fix/feat | 0.35 |
-| Días activos | 10 |
-| Sesiones documentadas | 11 |
-| Días log+commits | 10 |
+| Días activos | 11 |
+| Sesiones documentadas | 12 |
+| Días log+commits | 11 |
 | Días solo log | 0 |
 | Días solo commits | 0 |
 
@@ -26,59 +26,59 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-21, 2026-05-31
-        Analisis     :done, 2026-05-21, 2026-05-31
-        Diseno       :done, 2026-05-30, 2026-05-31
-        Codigo       :done, 2026-05-30, 2026-05-31
+        UML          :done, 2026-05-21, 2026-06-01
+        Analisis     :done, 2026-05-21, 2026-06-01
+        Diseno       :done, 2026-05-30, 2026-06-01
+        Codigo       :done, 2026-05-30, 2026-06-01
 ```
 
 ## Trazabilidad por caso de uso
 
 <div align="center">
 
-| Caso de uso | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | D12 |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| `corregirExamenes` | A |   |   |   |   |   |   |   |   |
-| `exportarConfiguracionGlobal` | A |   |   |   |   |   |   |   |   |
-| `generarExamenes` | A |   |   |   |   |   |   |   |   |
-| `importarAlumnos` | A |   |   |   |   |   |   |   |   |
-| `importarConfiguracionGlobal` | A |   |   |   |   |   |   |   |   |
-| `asignarExamenes` |   | A |   |   |   |   |   |   |   |
-| `crearPregunta` |   | A |   |   |   |   |   |   |   |
-| `exportarAlumnos` |   | A |   |   |   |   |   |   |   |
-| `exportarPreguntas` |   | A |   |   |   |   |   |   |   |
-| `importarPreguntas` |   | A |   |   |   |   |   |   |   |
-| `crearAlumno` |   |   | A |   |   |   |   |   |   |
-| `crearDocente` |   |   | A |   |   |   |   |   |   |
-| `editarAsignatura` |   |   | A |   |   |   |   |   |   |
-| `editarDocente` |   |   | A |   |   |   |   |   |   |
-| `editarPregunta` |   |   | A |   |   |   |   |   |   |
-| `crearAsignatura` |   |   |   | A |   |   |   |   |   |
-| `crearGrado` |   |   |   | A |   |   |   |   |   |
-| `editarAlumno` |   |   |   | A |   |   |   |   |   |
-| `editarGrado` |   |   |   | A |   |   |   |   |   |
-| `verPreguntas` |   |   |   | A |   |   |   |   |   |
-| `eliminarPregunta` |   |   |   |   | A |   |   |   |   |
-| `verAlumnos` |   |   |   |   | A |   |   |   |   |
-| `verAsignaturas` |   |   |   |   | A |   |   |   |   |
-| `verDocentes` |   |   |   |   | A |   |   |   |   |
-| `verGrados` |   |   |   |   | A |   |   |   |   |
-| `eliminarAlumno` |   |   |   |   |   | A |   |   |   |
-| `eliminarAsignatura` |   |   |   |   |   | A |   |   |   |
-| `eliminarDocente` |   |   |   |   |   | A |   |   |   |
-| `eliminarGrado` |   |   |   |   |   | A |   |   |   |
-| `iniciarSesion` |   |   |   |   |   | A |   |   | D |
-| `cerrarSesion` |   |   |   |   |   |   | A |   | D |
-| `completarGestion` |   |   |   |   |   |   | A |   | D |
-| `crearRespuesta` |   |   |   |   |   |   | A |   |   |
-| `verRespuestas` |   |   |   |   |   |   | A |   |   |
-| `cancelarGeneracion` |   |   |   |   |   |   |   | A |   |
-| `editarRespuesta` |   |   |   |   |   |   |   | A |   |
-| `eliminarRespuesta` |   |   |   |   |   |   |   | A |   |
-| `exportarAsignaturas` |   |   |   |   |   |   |   | A |   |
-| `exportarGrados` |   |   |   |   |   |   |   | A |   |
-| `importarAsignaturas` |   |   |   |   |   |   |   | A |   |
-| `importarGrados` |   |   |   |   |   |   |   | A |   |
+| Caso de uso | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | D12 | D13 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| `corregirExamenes` | A |   |   |   |   |   |   |   |   |   |
+| `exportarConfiguracionGlobal` | A |   |   |   |   |   |   |   |   |   |
+| `generarExamenes` | A |   |   |   |   |   |   |   |   |   |
+| `importarAlumnos` | A |   |   |   |   |   |   |   |   |   |
+| `importarConfiguracionGlobal` | A |   |   |   |   |   |   |   |   |   |
+| `asignarExamenes` |   | A |   |   |   |   |   |   |   |   |
+| `crearPregunta` |   | A |   |   |   |   |   |   |   |   |
+| `exportarAlumnos` |   | A |   |   |   |   |   |   |   |   |
+| `exportarPreguntas` |   | A |   |   |   |   |   |   |   |   |
+| `importarPreguntas` |   | A |   |   |   |   |   |   |   |   |
+| `crearAlumno` |   |   | A |   |   |   |   |   |   |   |
+| `crearDocente` |   |   | A |   |   |   |   |   |   |   |
+| `editarAsignatura` |   |   | A |   |   |   |   |   |   |   |
+| `editarDocente` |   |   | A |   |   |   |   |   |   |   |
+| `editarPregunta` |   |   | A |   |   |   |   |   |   |   |
+| `crearAsignatura` |   |   |   | A |   |   |   |   |   |   |
+| `crearGrado` |   |   |   | A |   |   |   |   |   |   |
+| `editarAlumno` |   |   |   | A |   |   |   |   |   |   |
+| `editarGrado` |   |   |   | A |   |   |   |   |   |   |
+| `verPreguntas` |   |   |   | A |   |   |   |   |   | D |
+| `eliminarPregunta` |   |   |   |   | A |   |   |   |   |   |
+| `verAlumnos` |   |   |   |   | A |   |   |   |   | D |
+| `verAsignaturas` |   |   |   |   | A |   |   |   |   | D |
+| `verDocentes` |   |   |   |   | A |   |   |   |   | D |
+| `verGrados` |   |   |   |   | A |   |   |   |   | D |
+| `eliminarAlumno` |   |   |   |   |   | A |   |   |   |   |
+| `eliminarAsignatura` |   |   |   |   |   | A |   |   |   |   |
+| `eliminarDocente` |   |   |   |   |   | A |   |   |   |   |
+| `eliminarGrado` |   |   |   |   |   | A |   |   |   |   |
+| `iniciarSesion` |   |   |   |   |   | A |   |   | D |   |
+| `cerrarSesion` |   |   |   |   |   |   | A |   | D |   |
+| `completarGestion` |   |   |   |   |   |   | A |   | D |   |
+| `crearRespuesta` |   |   |   |   |   |   | A |   |   |   |
+| `verRespuestas` |   |   |   |   |   |   | A |   |   |   |
+| `cancelarGeneracion` |   |   |   |   |   |   |   | A |   |   |
+| `editarRespuesta` |   |   |   |   |   |   |   | A |   |   |
+| `eliminarRespuesta` |   |   |   |   |   |   |   | A |   |   |
+| `exportarAsignaturas` |   |   |   |   |   |   |   | A |   |   |
+| `exportarGrados` |   |   |   |   |   |   |   | A |   |   |
+| `importarAsignaturas` |   |   |   |   |   |   |   | A |   |   |
+| `importarGrados` |   |   |   |   |   |   |   | A |   |   |
 
 </div>
 
@@ -299,6 +299,29 @@ gantt
 - Sesión 11: Diseño y Desarrollo de Completar Gestión y Logout
 
 **Artefactos nuevos:** 🔌 🧩 
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 13 · 2026-05-31
+
+### Commits (8: 6 feat / 2 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 23:20 | [feat: Nueva conversacion con la IA y sesión registrada en conversation-log.md](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/2e9c3bea61631622d31fa57876d73e8e28123e0a) |
+| 23:13 | [fix: Corrige imagen del diseño de verPreguntas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/575287d56986b398aa496404918c97869162ad8d) |
+| 23:13 | [feat: Acepta diseño de verPreguntas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/6c4008a7ca0b67d8e5604e3cab4a7c65bc9f59fd) |
+| 23:06 | [feat: Acepta diseño de verAlumnos](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/ad64988d837ab6a97de5faaac7a24b59bf62b3cb) |
+| 23:03 | [fix: Corrige aspecto en verAsignatura para asegurar la legibilidad del diagrama de secuencia](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/25f98fb176486cb6c912e4cd08a80572db9c021e) |
+| 23:00 | [feat: diseño de verAsignaturas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/b9b2483d379e503b75655648de0d4d613044921b) |
+| 22:54 | [feat: Acepta diseño de verGrados](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/2b5ac286ae61bcbbbe4edab620ead43c81907a84) |
+| 22:44 | [feat: Acepta diseño de verDocentes](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/532a8b3e27379f3f2f32815bcdf2093915de9d7e) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 12: Diseño de Módulos del Dashboard y Refinamiento del Entorno
 
 > 💬 + commits = proceso documentado
 

@@ -1,7 +1,7 @@
 # Timeline - inigovaqueroo04
 
 > Repo: [inigovaqueroo04/25-26-idsw2-sdVC](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC)
-> Commits: 18 | Días activos: 5 | Sesiones log: 0
+> Commits: 22 | Días activos: 6 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,8 +9,8 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 18 (2 feat / 0 fix / 16 other) |
-| Días activos | 5 |
+| Commits propios | 22 (2 feat / 0 fix / 20 other) |
+| Días activos | 6 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -22,7 +22,7 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-29, 2026-05-29
+        Analisis     :done, 2026-05-29, 2026-06-01
 ```
 
 <!-- trazabilidad: manual -->
@@ -120,6 +120,21 @@ gantt
 | 18:10 | [Normaliza carpeta de documentos](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/98e27bc82798e0b938dfd785cbce4168ebba1016) |
 
 **Artefactos nuevos:** 🔍 
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 13 · 2026-05-31
+
+### Commits (4: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 00:13 | [docs: analiza caso de uso eliminarTarea](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/75413a0c620814a635900e504e3e3ac6fcf26af3) |
+| 21:01 | [docs: analiza caso de uso relacionarTareas](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/32906626260aa89d06be9419ea57eb67635f8001) |
+| 20:49 | [docs: analiza caso de uso editarTarea](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/49bf63a37f375c487b5c1f367de33a37c73bc0ad) |
+| 20:39 | [docs: analiza caso de uso crearTarea](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/d71a675abf83ebb5a07ad3778b68ccce6b48ae35) |
 
 > ⚠️ Commits sin entrada en log
 

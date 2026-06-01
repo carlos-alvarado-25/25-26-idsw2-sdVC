@@ -1,7 +1,7 @@
 # Timeline - 31Diego
 
 > Repo: [31Diego/25-26-idsw2-sdVC](https://github.com/31Diego/25-26-idsw2-sdVC)
-> Commits: 10 | Días activos: 7 | Sesiones log: 0
+> Commits: 11 | Días activos: 8 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 10 (6 feat / 2 fix / 2 other) |
-| Ratio fix/feat | 0.33 |
-| Días activos | 7 |
+| Commits propios | 11 (6 feat / 3 fix / 2 other) |
+| Ratio fix/feat | 0.50 |
+| Días activos | 8 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -23,10 +23,10 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-05-31
-        Analisis     :done, 2026-05-22, 2026-05-31
-        Diseno       :done, 2026-05-29, 2026-05-31
-        Codigo       :done, 2026-05-30, 2026-05-31
+        UML          :done, 2026-05-22, 2026-06-01
+        Analisis     :done, 2026-05-22, 2026-06-01
+        Diseno       :done, 2026-05-29, 2026-06-01
+        Codigo       :done, 2026-05-30, 2026-06-01
 ```
 
 <!-- trazabilidad: manual -->
@@ -177,6 +177,18 @@ gantt
 | 19:43 | [feat: diseño y desarrollo P0 coordinador — iniciarSesion, cerrarSesion, panelPrincipal, perfil, cargaTrabajo](https://github.com/31Diego/25-26-idsw2-sdVC/commit/778956cf2b13d0546ecd118a68d0bcb5d75e60d7) |
 
 **Artefactos nuevos:** 🔌 
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 13 · 2026-05-31
+
+### Commits (1: 0 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 21:18 | [fix: corregir análisis iniciarSesion y cerrarSesion; borrar artefactos de diseño, desarrollo y código](https://github.com/31Diego/25-26-idsw2-sdVC/commit/2044578a515b7c5f27dac3f346fc86ac6265a7c0) |
 
 > ⚠️ Commits sin entrada en log
 
