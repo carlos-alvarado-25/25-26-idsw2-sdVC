@@ -1,0 +1,38 @@
+@startuml comunicarIncidenciasHorario-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+package comunicarIncidenciasHorario as "comunicarIncidenciasHorario()" {
+    rectangle #629EF9 ComunicarIncidenciaView
+    rectangle #b5bd68 IncidenciaController
+    rectangle #F2AC4E IncidenciaRepository
+    rectangle #F2AC4E ExamenRepository
+    rectangle #F2AC4E Incidencia
+    rectangle #F2AC4E Examen
+    rectangle #F2AC4E ":Session" as Session
+}
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
+
+SistemaDisponible -r-> ComunicarIncidenciaView: comunicarIncidenciasHorario()
+
+ComunicarIncidenciaView -d-> IncidenciaController: obtenerExamenesDocente() : List<Examen>
+IncidenciaController -l-> Session: obtenerActor() : Actor
+IncidenciaController -d-> ExamenRepository: obtenerAsignadosA(profesor) : List<Examen>
+
+ComunicarIncidenciaView -d-> IncidenciaController: comunicar(examen, tipo, descripcion, evidencias) : Incidencia
+
+IncidenciaController -r-> Incidencia: <<create>>
+IncidenciaController -d-> IncidenciaRepository: guardar(incidencia)
+
+Incidencia -- Examen
+
+ComunicarIncidenciaView ..> SistemaDisponibleSalida: <<finalizar>> completarComunicacion()
+ComunicarIncidenciaView ..> SistemaDisponibleSalida: <<cancelar>>
+
+@enduml

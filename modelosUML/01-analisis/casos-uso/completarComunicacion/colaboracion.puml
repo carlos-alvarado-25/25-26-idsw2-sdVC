@@ -1,0 +1,23 @@
+@startuml completarComunicacion-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Incidencias Abierto" as IncidenciasAbierto
+
+package completarComunicacion as "completarComunicacion()" {
+    rectangle #629EF9 ComunicarIncidenciaView
+    rectangle #629EF9 MenuPrincipalView
+}
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+IncidenciasAbierto -r-> ComunicarIncidenciaView: completarComunicacion()
+
+ComunicarIncidenciaView -d-> MenuPrincipalView: <<navegar>>
+
+MenuPrincipalView ..> SistemaDisponible: <<confirmar estado>>
+
+@enduml

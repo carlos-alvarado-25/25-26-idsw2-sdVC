@@ -30,10 +30,11 @@ Para garantizar la claridad administrativa, los casos de uso se organizan lógic
 - **Calendario**: [generarCalendario](generarCalendario/README.md) | [abrirExamenes](abrirExamenes/README.md) | [crearExamen](crearExamen/README.md) | [editarExamen](editarExamen/README.md) | [eliminarExamen](eliminarExamen/README.md) | [asignarProfesor](asignarProfesorAExamen/README.md)
 - **Transiciones**: [completarGestion](completarGestion/README.md) | [completarProceso](completarProceso/README.md)
 
-### 2. Contexto del Profesor (En Progreso)
+### 2. Contexto del Profesor
 *Operaciones específicas del personal docente.*
 
-- *Pendiente*: [comunicarIncidenciasHorario](comunicarIncidenciasHorario/README.md)
+- **Incidencias**: [comunicarIncidenciasHorario](comunicarIncidenciasHorario/README.md)
+- **Transiciones**: [completarComunicacion](completarComunicacion/README.md)
 
 ---
 
