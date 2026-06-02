@@ -764,3 +764,20 @@
 - **Disciplina de Desarrollo:** Creación de los artefactos en `RUP/03-desarrollo/casos-uso/` para `abrirGrados` y `crearGrado`.
 
 **Decisión:** Se ratifica el uso del **QueryBuilder de TypeORM** como el estándar para operaciones de búsqueda dimensional, dada su superioridad en el control del SQL generado. Se establece el uso de **Signals** como pilar de reactividad en el frontend para optimizar el rendimiento de los listados masivos. Se reafirma el compromiso con la integridad del esquema de base de datos, obligando a la sincronización manual de las tablas físicas con las definiciones de las entidades de diseño.
+
+---
+
+## [03/06/2026 00:38] Sesión 49: Finalización del Ramillete de Grados - CRUD Completo e Importación
+
+**Prompt:** "Perfecto, sigamos ahora con el caso de uso de abrirGrados... Pasemos ahora a implementar crearGrado... el componente de editar y de crear no es el mismo?... pasemos a la implementación de importarGrados()"
+
+**Resultado:** 
+- **Unificación de Componentes (DRY):** Refactorización estratégica hacia el `GradoFormComponent`, unificando las vistas de creación y edición en un único componente dinámico para maximizar la mantenibilidad del frontend.
+- **Implementación de `abrirGrados()`:** Desarrollo final del listado reactivo utilizando **Signals de Angular** y filtrado robusto mediante `QueryBuilder` en el backend.
+- **Implementación de `editarGrado()` y `eliminarGrado()`:** Codificación de la actualización incremental mediante `PATCH` y el flujo de borrado seguro con confirmación de impacto (conteo de asignaturas).
+- **Implementación de `importarGrados()`:** Desarrollo del motor de carga masiva CSV. Se integró `Multer` en NestJS para la gestión de archivos en memoria y se diseñó un dashboard de resultados con balance de éxitos y fallos.
+- **Aseguramiento Técnico:** Resolución de bugs de interpolación de strings en URLs y consultas SQL. Sincronización final del esquema MySQL con columnas de auditoría.
+- **Documentación de Desarrollo:** Creación de todos los artefactos descriptivos en `RUP/03-desarrollo/casos-uso/` para cada caso de uso del ramillete.
+
+**Decisión:** Se oficializa la **Refactorización hacia Componentes Unificados** como estándar para formularios CRUD, priorizando la agilidad de mantenimiento. Se ratifica la **Arquitectura de Capas** (NestJS) como garante de la estabilidad de la API. Se declara el **Ramillete de Grados como Completado**, estableciendo los patrones técnicos definitivos para el resto de entidades del sistema.
+

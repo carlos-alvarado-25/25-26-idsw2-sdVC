@@ -22,9 +22,10 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 ### Administrador
 - [abrirGrados](casos-uso/abrirGrados/README.md) ✅
 - [crearGrado](casos-uso/crearGrado/README.md) ✅
-- [editarGrado](casos-uso/editarGrado/README.md)
-- [eliminarGrado](casos-uso/eliminarGrado/README.md)
-- [importarGrados](casos-uso/importarGrados/README.md)
+- [editarGrado](casos-uso/editarGrado/README.md) ✅
+- [eliminarGrado](casos-uso/eliminarGrado/README.md) ✅
+- [importarGrados](casos-uso/importarGrados/README.md) ✅
+
 
 ## Estándares de Codificación
 Se siguen las directrices definidas en el [Documento de Configuración del Proyecto](/RUP/02-diseño/configuracion-proyecto.md).

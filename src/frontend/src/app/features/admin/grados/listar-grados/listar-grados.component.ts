@@ -53,4 +53,32 @@ export class ListarGradosComponent implements OnInit {
       this.cargarGrados(next);
     }
   }
+
+  eliminarGrado(grado: Grado): void {
+    this.gradoService.verificarImpacto(grado.id).subscribe({
+      next: (totalAsignaturas) => {
+        let mensaje = '¿Está seguro de eliminar el grado "' + grado.nombre + '"?';
+        if (totalAsignaturas > 0) {
+          mensaje += '\n\nADVERTENCIA: Este grado tiene ' + totalAsignaturas + ' asignaturas vinculadas que también podrían verse afectadas.';
+        }
+
+        if (confirm(mensaje)) {
+          this.loading.set(true);
+          this.gradoService.eliminar(grado.id)
+            .pipe(finalize(() => this.loading.set(false)))
+            .subscribe({
+              next: () => {
+                console.log('Grado eliminado');
+                this.cargarGrados(this.currentPage());
+              },
+              error: (err) => alert(err.error?.message || 'Error al eliminar el grado')
+            });
+        }
+      },
+      error: (err) => {
+        console.error('Error al verificar impacto:', err);
+        alert('No se pudo verificar el impacto de la eliminación. Por favor, intente de nuevo.');
+      }
+    });
+  }
 }

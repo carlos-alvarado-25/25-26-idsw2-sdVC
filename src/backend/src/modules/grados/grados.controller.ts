@@ -1,6 +1,8 @@
-import { Controller, Get, Post, Body, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { GradoService } from './grados.service';
 import { CrearGradoDto } from './dto/crear-grado.dto';
+import { UpdateGradoDto } from './dto/update-grado.dto';
 
 @Controller('grados')
 export class GradoController {
@@ -11,15 +13,39 @@ export class GradoController {
     return this.gradoService.create(crearGradoDto);
   }
 
+  @Post('importar')
+  @UseInterceptors(FileInterceptor('file'))
+  async importar(@UploadedFile() file: Express.Multer.File) {
+    return this.gradoService.importar(file.buffer);
+  }
+
   @Get('search')
   async search(@Query('q') q: string, @Query('page') page: string) {
-    console.log(`[GradoController] Buscando por criterio: "${q}", página: ${page}`);
     return this.gradoService.findByCriterio(q || '', page ? parseInt(page, 10) : 1);
+  }
+
+  @Get(':id/impacto')
+  async getImpacto(@Param('id', ParseIntPipe) id: number) {
+    return this.gradoService.countDependencies(id);
+  }
+
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.gradoService.findOne(id);
+  }
+
+  @Patch(':id')
+  async update(@Param('id', ParseIntPipe) id: number, @Body() updateGradoDto: UpdateGradoDto) {
+    return this.gradoService.update(id, updateGradoDto);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return this.gradoService.remove(id);
   }
 
   @Get()
   async findAll(@Query('page') page: string) {
-    console.log(`[GradoController] Listado general, página: ${page}`);
     return this.gradoService.findAll(page ? parseInt(page, 10) : 1);
   }
 }

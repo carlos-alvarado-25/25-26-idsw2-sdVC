@@ -45,7 +45,7 @@
           <td class="text-muted">{{ grado.descripcion }}</td>
           <td class="table-actions">
             <button class="btn-icon" [routerLink]="['/admin/grados/editar', grado.id]" title="Editar">✏️</button>
-            <button class="btn-icon delete" (click)="null" title="Eliminar">🗑️</button>
+            <button class="btn-icon delete" (click)="eliminarGrado(grado)" title="Eliminar">🗑️</button>
           </td>
         </tr>
         <tr *ngIf="grados().length === 0 && !loading()">

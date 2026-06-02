@@ -3,9 +3,9 @@
     <div class="breadcrumb">
       <a [routerLink]="['/home']">🏠 Inicio</a> / 
       <a [routerLink]="['/admin/grados']">🎓 Grados</a> / 
-      <span>➕ Nuevo</span>
+      <span>{{ isEditMode() ? '✏️ Editar' : '➕ Nuevo' }}</span>
     </div>
-    <h1>Crear Nuevo Grado</h1>
+    <h1>{{ isEditMode() ? 'Editar Grado' : 'Crear Nuevo Grado' }}</h1>
   </header>
 
   <div class="form-card">
@@ -19,7 +19,7 @@
           placeholder="Ej: GINF"
           [class.is-invalid]="gradoForm.get('codigo')?.invalid && gradoForm.get('codigo')?.touched"
         >
-        <small class="hint">Identificador único (máx. 20 caracteres).</small>
+        <small class="hint" *ngIf="!isEditMode()">Identificador único (máx. 20 caracteres).</small>
       </div>
 
       <div class="form-group">
@@ -34,7 +34,7 @@
       </div>
 
       <div class="form-group">
-        <label for="descripcion">Descripción (Opcional)</label>
+        <label for="descripcion">Descripción</label>
         <textarea 
           id="descripcion" 
           formControlName="descripcion" 
@@ -43,19 +43,21 @@
         ></textarea>
       </div>
 
-      <div *ngIf="error" class="error-alert">
-        {{ error }}
+      <div *ngIf="error()" class="error-alert">
+        {{ error() }}
       </div>
 
-      <div *ngIf="success" class="success-alert">
-        ✅ Grado creado con éxito. Redirigiendo a edición...
+      <div *ngIf="success()" class="success-alert">
+        ✅ {{ isEditMode() ? 'Cambios guardados correctamente.' : 'Grado creado con éxito.' }}
       </div>
 
       <div class="form-actions">
-        <button type="button" class="btn-secondary" [routerLink]="['/admin/grados']">Cancelar</button>
-        <button type="submit" class="btn-primary" [disabled]="gradoForm.invalid || loading">
-          <span *ngIf="!loading">Guardar y Continuar</span>
-          <span *ngIf="loading" class="loader"></span>
+        <button type="button" class="btn-secondary" [routerLink]="['/admin/grados']">
+          {{ isEditMode() ? 'Finalizar' : 'Cancelar' }}
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="gradoForm.invalid || loading() || (isEditMode() && gradoForm.pristine)">
+          <span *ngIf="!loading()">{{ isEditMode() ? 'Guardar Cambios' : 'Guardar y Continuar' }}</span>
+          <span *ngIf="loading()" class="loader"></span>
         </button>
       </div>
     </form>
