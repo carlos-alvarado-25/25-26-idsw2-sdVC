@@ -1,0 +1,144 @@
+@startuml clases-diseño
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Arquitectura Detallada de Dependencias y Dominio (NestJS + TypeORM)
+
+package "API Layer (Controllers)" as Controllers #E3F2FD {
+    class AuthController {
+        + login(dto: LoginDto)
+        + logout()
+    }
+    class GradoController {
+        + findAll()
+        + create(dto: CrearGradoDto)
+    }
+    class AsignaturaController {
+        + findAll()
+        + create(dto: CrearAsignaturaDto)
+    }
+    class ProfesorController {
+        + findAll()
+        + create(dto: CrearProfesorDto)
+    }
+    class AulaController {
+        + findAll()
+        + create(dto: CrearAulaDto)
+    }
+    class AlumnoController {
+        + findAll()
+        + create(dto: CrearAlumnoDto)
+    }
+    class ExamenController {
+        + findAll()
+        + create(dto: CrearExamenDto)
+    }
+    class CalendarioController {
+        + generar(dto: GenerarCalendarioDto)
+        + findConflictos()
+    }
+    class IncidenciaController {
+        + reportar(dto: CrearIncidenciaDto)
+    }
+}
+
+package "Business Logic Layer (Services)" as Services #F1F8E9 {
+    class AuthService
+    class GradoService
+    class AsignaturaService
+    class ProfesorService
+    class AulaService
+    class AlumnoService
+    class ExamenService
+    class CalendarioService
+    class IncidenciaService
+}
+
+package "Data Access Layer (Repositories)" as Repos #FFF3E0 {
+    class UsuarioRepository <<TypeORM>>
+    class GradoRepository <<TypeORM>>
+    class AsignaturaRepository <<TypeORM>>
+    class ProfesorRepository <<TypeORM>>
+    class AulaRepository <<TypeORM>>
+    class AlumnoRepository <<TypeORM>>
+    class ExamenRepository <<TypeORM>>
+    class CalendarioRepository <<TypeORM>>
+    class IncidenciaRepository <<TypeORM>>
+    class PreferenciaRepository <<TypeORM>>
+}
+
+package "Domain Layer (Entities)" as Domain #FAFAFA {
+    class Usuario <<Entity>>
+    class Grado <<Entity>>
+    class Asignatura <<Entity>>
+    class Profesor <<Entity>>
+    class Preferencia <<Entity>>
+    class Aula <<Entity>>
+    class Alumno <<Entity>>
+    class Examen <<Entity>>
+    class Calendario <<Entity>>
+    class Incidencia <<Entity>>
+}
+
+' --- Relaciones de Inyección de Dependencias ---
+
+AuthController -d-> AuthService
+AuthService -d-> UsuarioRepository
+
+GradoController -d-> GradoService
+GradoService -d-> GradoRepository
+
+AsignaturaController -d-> AsignaturaService
+AsignaturaService -d-> AsignaturaRepository
+
+ProfesorController -d-> ProfesorService
+ProfesorService -d-> ProfesorRepository
+ProfesorService -d-> PreferenciaRepository
+
+AulaController -d-> AulaService
+AulaService -d-> AulaRepository
+
+AlumnoController -d-> AlumnoService
+AlumnoService -d-> AlumnoRepository
+
+ExamenController -d-> ExamenService
+ExamenService -d-> ExamenRepository
+
+CalendarioController -d-> CalendarioService
+CalendarioService -d-> ExamenRepository
+CalendarioService -d-> AulaRepository
+CalendarioService -d-> PreferenciaRepository
+
+IncidenciaController -d-> IncidenciaService
+IncidenciaService -d-> IncidenciaRepository
+
+' --- Vínculos de Persistencia ---
+
+UsuarioRepository ..> Usuario
+GradoRepository ..> Grado
+AsignaturaRepository ..> Asignatura
+ProfesorRepository ..> Profesor
+AulaRepository ..> Aula
+AlumnoRepository ..> Alumno
+ExamenRepository ..> Examen
+CalendarioRepository ..> Calendario
+IncidenciaRepository ..> Incidencia
+PreferenciaRepository ..> Preferencia
+
+' --- Relaciones del Dominio ---
+
+Grado "1" *-- "0..*" Asignatura
+Asignatura "0..*" -- "0..*" Profesor
+Profesor "1" *-- "0..*" Preferencia
+Asignatura "1" -- "0..*" Examen
+Aula "1" -- "0..*" Examen
+Profesor "1" -- "0..*" Examen
+Grado "1" -- "0..*" Alumno
+Calendario "1" *-- "0..*" Examen
+Examen "1" *-- "0..*" Incidencia
+
+@enduml

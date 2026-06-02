@@ -1,0 +1,32 @@
+@startuml arquitectura-sistema
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+
+title Arquitectura del Sistema: IdSw 2 (Generador de Exámenes)
+
+node "Cliente (Browser)" as Cliente {
+    component "SPA Angular" as AngularApp <<Frontend>>
+}
+
+node "Servidor de Aplicaciones" as AppServer {
+    package "NestJS API" as NestApp <<Backend>> {
+        component "Controllers" as NestControllers
+        component "Services (Business Logic)" as NestServices
+        component "TypeORM (Data Access)" as NestEntities
+    }
+}
+
+database "Servidor de Base de Datos" as DBServer {
+    storage "MySQL" as MySQLDB <<Database>>
+}
+
+' Relaciones
+AngularApp -[#blue]right-> NestControllers : REST API / JSON
+NestControllers -down-> NestServices
+NestServices -down-> NestEntities
+NestEntities -[#green]right-> MySQLDB : SQL (TypeORM)
+
+@enduml

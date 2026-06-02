@@ -1,0 +1,49 @@
+# IdSw 2 > Disciplina de Diseño
+
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/README.md)|**Diseño**|Desarrollo|Pruebas|
+> |-|-|-|-|-|-|-|
+
+Esta sección documenta la **Disciplina de Diseño** del sistema, definiendo la arquitectura técnica, la persistencia en base de datos y la realización detallada de los casos de uso para guiar la implementación.
+
+## Stack Tecnológico Seleccionado
+
+Se ha adoptado una arquitectura **Full-Stack TypeScript** para maximizar la coherencia del tipado entre el frontend y el backend, asegurando un ecosistema robusto y mantenible.
+
+## Frontend: Angular
+- **Framework**: Angular (Componentes, Servicios, RxJS para programación reactiva).
+- **Rol**: Interfaz de usuario dinámica (SPA - Single Page Application).
+
+## Backend: NestJS
+- **Framework**: NestJS.
+- **Arquitectura**: Modular (Módulos, Controladores, Servicios).
+- **Rol**: Exponer la API RESTful, validación de DTOs y encapsulamiento de la lógica de negocio.
+
+## Persistencia: MySQL + TypeORM
+- **Motor**: MySQL.
+- **ORM**: TypeORM (Integración nativa con NestJS).
+- **Convención de Nombres**: **CamelCase** para tablas y columnas.
+
+---
+
+## Artefactos de Diseño Global
+
+### 1. Arquitectura del Sistema
+Visión de alto nivel de los contenedores físicos y lógicos de la aplicación.
+- [Ver Diagrama de Arquitectura](arquitectura.md)
+
+### 2. Modelo de Clases de Diseño (Persistencia y DTOs)
+Traducción de las entidades de análisis a modelos concretos de TypeORM y esquemas de validación.
+- [Ver Diagrama de Clases](clases-diseño.md)
+
+### 3. Configuración del Proyecto
+Definición de la estructura de directorios del código fuente y políticas de implementación.
+- [Ver Documento de Configuración](configuracion-proyecto.md)
+
+---
+
+## Realización de Casos de Uso (Secuencias)
+*(Los directorios mantienen la estructura plana para trazabilidad histórica, mapeando las clases de análisis a Controladores y Servicios de NestJS).*
+
+### Casos de Uso Comunes
+- [iniciarSesion](casos-uso/iniciarSesion/README.md) - Diseño de la interacción de acceso y validación de credenciales.
+

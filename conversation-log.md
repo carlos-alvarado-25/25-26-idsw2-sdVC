@@ -640,3 +640,19 @@
 - **Finalización de la Fase de Análisis:** Auditoría final del inventario de casos de uso (Comunes, Administrador, Profesor y Alumno). Se confirma que todos los arcos de los diagramas de contexto cuentan con su correspondiente análisis MVC, diagramas de colaboración `.puml`, activos `SVG` y documentación `README.md`.
 
 **Decisión:** Se declara oficialmente **Finalizada la Fase de Análisis (Disciplina de Análisis y Diseño)** para el proyecto IdSw 2. Se ratifica la integridad del modelo de análisis, que sirve como puente sólido entre la especificación de requisitos y la futura fase de diseño arquitectónico y de detalle. El proyecto queda en un estado de madurez documental óptimo para iniciar la Disciplina de Diseño.
+
+---
+
+## [02/06/2026 13:19] Sesión 41: Inicio de la Fase de Diseño - Arquitectura NestJS + Angular
+
+**Prompt:** "Quiero iniciar la fase de diseño... NestJS para el backend... Angular para el frontend... MySQL de toda la vida... CamelCase... Muestrame como se ven con decoradores y sin decoradores... pon las relaciones entre cada capa... no le pongas emojis... información del artefacto... estructura de carpetas en src/backend/"
+
+**Resultado:** 
+- **Fundamentación Tecnológica:** Establecimiento del stack Full-Stack TypeScript (NestJS + Angular + TypeORM + MySQL) con convención CamelCase para la persistencia.
+- **Arquitectura de Software:** Creación del diagrama de contenedores y nodos, definiendo una arquitectura de tres capas desacoplada.
+- **Modelado de Clases Exhaustivo:** Diseño del diagrama de clases global con inyección de dependencias detallada (Controllers -> Services -> Repositories -> Entities). Se incluyeron todas las entidades operativas y se desacopló la identidad (`Usuario`) del dominio académico.
+- **Scaffolding y Configuración:** Definición de la estructura modular del código fuente (`src/backend/` y `src/app/`) y políticas de validación mediante DTOs.
+- **Realización de Casos de Uso:** Diseño detallado del primer caso de uso `iniciarSesion()`, incluyendo diagrama de secuencia y mapeo de componentes técnicos.
+- **Refinamiento Documental:** Aplicación de políticas estéticas (eliminación de emojis en contenido) e inyección de metadatos de RUP (información del artefacto) en todos los documentos maestros.
+
+**Decisión:** Se adopta la **Arquitectura Modular Nativa de NestJS** para garantizar la simplicidad y el rendimiento del sistema. Se establece el **Desacoplamiento de Identidad** como estándar de seguridad, donde la sesión y el rol gestionan la operatividad sin contaminar estructuralmente las entidades de negocio. Se ratifica un estilo de documentación técnica profesional, estrictamente textual y rica en metadatos para asegurar la calidad de la Fase de Diseño.

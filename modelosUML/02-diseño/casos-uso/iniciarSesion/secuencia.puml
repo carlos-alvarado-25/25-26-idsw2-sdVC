@@ -1,0 +1,49 @@
+@startuml iniciarSesion-secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Usuario" as Actor
+participant "LoginComponent\n(Angular)" as UI <<Boundary>>
+participant "AuthController\n(NestJS)" as Ctrl <<Control>>
+participant "AuthService\n(NestJS)" as Srv <<Control>>
+participant "UsuarioRepository\n(TypeORM)" as Repo <<Data Access>>
+database "MySQL" as DB
+
+Actor -> UI : introducirCredenciales(email, pass)
+UI -> UI : validarFormulario()
+
+UI -> Ctrl : POST /auth/login\n(LoginDto)
+activate Ctrl
+
+Ctrl -> Srv : validateUser(email, pass)
+activate Srv
+
+Srv -> Repo : findByEmail(email)
+activate Repo
+Repo -> DB : SELECT * FROM Usuario ...
+DB --> Repo : datosUsuario
+Repo --> Srv : usuarioEntity
+deactivate Repo
+
+Srv -> Srv : compararHash(pass, usuario.password)
+
+alt Credenciales Válidas
+    Srv --> Ctrl : usuarioInfo
+    Ctrl -> Srv : createSession(usuario)
+    Srv --> Ctrl : token / sessionCookie
+    Ctrl --> UI : 200 OK (AuthResponseDto)
+    UI -> UI : guardarSesionLocal()
+    UI --> Actor : redirigirMenuPrincipal()
+else Credenciales Inválidas
+    Srv --> Ctrl : null / Throw Unauthorized
+    Ctrl --> UI : 401 Unauthorized
+    UI --> Actor : mostrarErrorLogin()
+end
+
+deactivate Srv
+deactivate Ctrl
+
+@enduml
