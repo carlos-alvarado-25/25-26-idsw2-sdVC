@@ -747,3 +747,20 @@
 - **Disciplina de Desarrollo:** Creación de los artefactos descriptivos en `RUP/03-desarrollo/casos-uso/` siguiendo el estándar de `pySigHor`.
 
 **Decisión:** Se establece el patrón de **Programación Defensiva para SSR** (evitando el acceso directo a objetos del browser en servicios) y el uso de **Finalizadores de Flujo** (`finalize`) como estándar de robustez para la UI. Se decide priorizar una estética minimalista y profesional para elevar la calidad percibida del producto final, manteniendo la coherencia técnica entre NestJS y Angular.
+
+---
+
+## [02/06/2026 23:58] Sesión 48: Desarrollo de la Rama de Grados - Hub de Gestión, Alta Manual y Depuración del Motor de Búsqueda
+
+**Prompt:** "Iniciemos la sesión para la rama de grados... pon en Home unos botones que nos redirigan... Pasemos ahora a implementar crearGrado... que muestre un aviso de que se ha creado... revisemos el filtro. Ya que no funciona... cerremos sesión ahora."
+
+**Resultado:** 
+- **Rediseño del Dashboard:** Transformación del `HomeComponent` en un panel administrativo profesional con tarjetas de navegación para todas las entidades del sistema (Grados, Alumnos, Profesores, etc.).
+- **Implementación de `abrirGrados()`:** Desarrollo completo del listado paginado y motor de búsqueda. Se aplicó el estándar de `PagedResultDto` en el backend y el uso de **Signals** de Angular para una gestión reactiva y eficiente del estado en el frontend.
+- **Sincronización de Datos:** Corrección de la tabla `Grado` en MySQL para incluir columnas de auditoría (`fechaCreacion`, `fechaActualizacion`) requeridas por el modelo de persistencia de TypeORM.
+- **Implementación de `crearGrado()`:** Codificación del flujo de alta manual. Se integró un formulario reactivo con validación de DTOs en NestJS y lógica de comprobación de códigos duplicados (`409 Conflict`).
+- **Refinamiento de UX (Alta):** Inclusión de una alerta de éxito integrada y un retardo de cortesía de 1.5s antes de la redirección automática al modo de edición para mejorar la percepción del usuario.
+- **Depuración del Motor de Búsqueda:** Identificación y resolución de bugs críticos en el filtrado. Se corrigió la interpolación de cadenas en los operadores `LIKE` y se migró la consulta de un array de condiciones a un **QueryBuilder** robusto para garantizar la correcta ejecución de la lógica `OR` en MySQL.
+- **Disciplina de Desarrollo:** Creación de los artefactos en `RUP/03-desarrollo/casos-uso/` para `abrirGrados` y `crearGrado`.
+
+**Decisión:** Se ratifica el uso del **QueryBuilder de TypeORM** como el estándar para operaciones de búsqueda dimensional, dada su superioridad en el control del SQL generado. Se establece el uso de **Signals** como pilar de reactividad en el frontend para optimizar el rendimiento de los listados masivos. Se reafirma el compromiso con la integridad del esquema de base de datos, obligando a la sincronización manual de las tablas físicas con las definiciones de las entidades de diseño.

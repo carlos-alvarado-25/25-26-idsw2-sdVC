@@ -20,8 +20,8 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 - [cerrarSesion](casos-uso/cerrarSesion/README.md) ✅
 
 ### Administrador
-- [abrirGrados](casos-uso/abrirGrados/README.md)
-- [crearGrado](casos-uso/crearGrado/README.md)
+- [abrirGrados](casos-uso/abrirGrados/README.md) ✅
+- [crearGrado](casos-uso/crearGrado/README.md) ✅
 - [editarGrado](casos-uso/editarGrado/README.md)
 - [eliminarGrado](casos-uso/eliminarGrado/README.md)
 - [importarGrados](casos-uso/importarGrados/README.md)
