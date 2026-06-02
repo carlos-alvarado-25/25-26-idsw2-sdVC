@@ -1,0 +1,32 @@
+@startuml cerrarSesion-secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Usuario" as Actor
+participant "MenuPrincipalComponent\n(Angular)" as UI <<Boundary>>
+participant "AuthController\n(NestJS)" as Ctrl <<Control>>
+participant "AuthService\n(NestJS)" as Srv <<Control>>
+participant "SessionService\n(Angular)" as LocalSession <<Boundary>>
+
+Actor -> UI : seleccionarCerrarSesion()
+
+UI -> Ctrl : POST /auth/logout
+activate Ctrl
+
+Ctrl -> Srv : logout()
+activate Srv
+Srv -> Srv : invalidarToken()
+Srv --> Ctrl : void
+deactivate Srv
+
+Ctrl --> UI : 200 OK
+deactivate Ctrl
+
+UI -> LocalSession : destruirSesion()
+UI -> UI : limpiarLocalStorage()
+UI --> Actor : redirigirLogin()
+
+@enduml

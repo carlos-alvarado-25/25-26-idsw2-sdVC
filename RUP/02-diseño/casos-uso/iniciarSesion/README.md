@@ -20,7 +20,7 @@ Realización técnica del caso de uso iniciarSesion para la plataforma NestJS + 
 
 <div align=center>
 
-|![Diseño: iniciarSesion()](/images/02-diseño/casos-uso/iniciarSesion/secuencia.svg)|
+|![Diseño: iniciarSesion()](/images/02-diseño/casos-uso/iniciarSesion/iniciarSesion-secuencia.svg)|
 |-|
 |Código fuente: [secuencia.puml](/modelosUML/02-diseño/casos-uso/iniciarSesion/secuencia.puml)|
 

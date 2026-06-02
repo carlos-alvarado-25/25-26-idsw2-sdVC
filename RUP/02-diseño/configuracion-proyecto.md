@@ -8,68 +8,136 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
+- **Versión**: 2.0
 - **Fecha**: 2026-06-02
 - **Autor**: Gemini CLI
 
 ## Propósito
-Este documento define la estructura de directorios, convenciones de nomenclatura y políticas de desarrollo para materializar la arquitectura NestJS + Angular en código fuente ejecutable.
 
-## Estructura del Código Fuente (src)
+Este documento define la estructura de directorios, configuraciones iniciales y decisiones técnicas necesarias para materializar la arquitectura NestJS + Angular en código ejecutable. Sirve como el plano de ingeniería definitivo para iniciar la fase de Construcción.
 
-Para garantizar la mantenibilidad y el desacoplamiento, se seguirá una estructura modular tanto en el backend como en el frontend.
+## Filosofía de Organización
+
+### Principios aplicados
+
+1. **Modularidad NestJS**: Organización por módulos funcionales para encapsular responsabilidades.
+2. **Full-Stack TypeScript**: Compartición conceptual de tipos y interfaces entre frontend y backend.
+3. **Persistencia Relacional**: Uso de TypeORM para gestionar la integridad en MySQL mediante CamelCase.
+4. **Trazabilidad Absoluta**: Cada componente de código debe mapear a una clase o colaboración de diseño.
+
+## Estructura del Proyecto (Scaffolding)
 
 ### Backend (NestJS)
 
 ```text
 src/backend/
-├── common/             # Decoradores, filtros de excepción, utilidades globales
-├── entities/           # Clases de entidad de dominio compartidas (TypeORM)
-└── modules/
-    ├── auth/           # Login, guardias y gestión de sesiones
-    ├── grados/         # Gestión de grados académicos
-    ├── asignaturas/    # Gestión de materias
-    ├── profesores/     # Perfiles docentes y preferencias
-    ├── aulas/          # Gestión de espacios físicos
-    ├── alumnos/        # Gestión de estudiantes
-    ├── examenes/       # Programación individual y asignación
-    ├── calendario/     # Motor de generación y consultas globales
-    └── incidencias/    # Reporte de conflictos
+├── common/                 # Decoradores, filtros de excepción, guards e interceptores globales
+├── config/                 # Configuración de variables de entorno y constantes del sistema
+├── entities/               # Modelos TypeORM de dominio centralizado (MySQL)
+├── modules/
+│   ├── auth/               # Autenticación, estrategia JWT y sesión
+│   ├── grados/             # CRUD e Importación de Grados
+│   ├── asignaturas/        # CRUD e Importación de Asignaturas
+│   ├── profesores/         # Perfiles, Preferencias y Carga Lectiva
+│   ├── aulas/              # Espacios físicos y disponibilidad
+│   ├── alumnos/            # Gestión de estudiantes
+│   ├── examenes/           # Programación y asignación de recursos
+│   ├── calendario/         # Motor de generación y consultas globales
+│   └── incidencias/        # Reporte de conflictos docentes
+├── main.ts                 # Punto de entrada de la aplicación
+└── app.module.ts           # Módulo raíz que orquesta todas las dependencias
 ```
-
-Cada módulo funcional contendrá sus propios componentes siguiendo el estándar de NestJS:
-- `*.controller.ts`
-- `*.service.ts`
-- `dto/*.dto.ts`
 
 ### Frontend (Angular)
 
-El directorio `src/frontend/app` seguirá la convención de componentes y servicios:
+```text
+src/frontend/src/app/
+├── core/                   # Servicios Singleton (Auth, API), Guards e Interceptores HTTP
+├── shared/                 # Componentes UI reutilizables, Pipes y Directivas
+├── features/               # Módulos funcionales (Lazy Loaded)
+│   ├── admin/              # Dashboard y mantenimientos del Administrador
+│   ├── profesor/           # Consulta de calendario y reporte de incidencias
+│   ├── alumno/             # Consulta de calendario personalizada
+│   └── auth/               # Pantallas de login y gestión de cuenta
+├── models/                 # Interfaces y clases de datos (espejo de DTOs del backend)
+└── app.module.ts           # Módulo raíz de Angular
+```
 
-- `core/`: Servicios singleton (Auth, API Service), guardias y modelos globales.
-- `shared/`: Componentes reutilizables (Botones, Tablas, Modales) y tuberías (Pipes).
-- `features/`: Módulos de funcionalidad (Lazy Loaded):
-    - `admin/`: Vistas de gestión para el Administrador.
-    - `profesor/`: Vistas de consulta e incidencias para docentes.
-    - `alumno/`: Vistas de consulta para estudiantes.
-    - `auth/`: Pantallas de login y recuperación.
+## Configuraciones Técnicas Iniciales
 
-## Convenciones de Nomenclatura
+### 1. Seguridad y Autenticación (NestJS + Passport)
+- **Estrategia**: JWT (JSON Web Tokens).
+- **Hashing**: Bcrypt para el almacenamiento seguro de contraseñas.
+- **Middleware**: Interceptores para inyectar automáticamente el perfil del usuario activo en las peticiones.
 
-### Base de Datos (MySQL)
-- **Tablas**: CamelCase (ej: `Asignatura`, `ExamenProgramado`).
-- **Columnas**: CamelCase (ej: `codigoGrado`, `fechaExamen`).
-- **Claves Primarias**: Siempre `id` (autoincremental).
-- **Claves Foráneas**: `id` + nombre de entidad (ej: `idGrado`).
+### 2. Comunicación API (Angular + HttpClient)
+- **Base URL**: Gestionada mediante `environment.ts`.
+- **Interceptores**:
+    - `AuthInterceptor`: Adjunta el token JWT en las cabeceras de cada petición.
+    - `ErrorInterceptor`: Captura respuestas 401/403 y gestiona la redirección al login.
 
-### Código (TypeScript)
-- **Clases**: PascalCase (ej: `AulaController`).
-- **Métodos y Variables**: camelCase (ej: `buscarPaginados`).
-- **Archivos**: kebab-case (ej: `crear-aula.dto.ts`).
+### 3. Persistencia (TypeORM + MySQL)
+- **Configuración**: Conexión asíncrona definida en el módulo raíz.
+- **Naming Strategy**: CamelCase forzado para tablas y columnas.
+- **Sincronización**: Desactivada en producción; gestionada mediante migraciones controladas.
 
-## Políticas de Desarrollo
+## Esquema de Base de Datos Inicial (MySQL)
 
-1. **Validación Obligatoria**: Todos los datos de entrada en la API deben estar tipados mediante DTOs y validados con `class-validator`.
-2. **Desacoplamiento de Servicios**: Los controladores no deben contener lógica de negocio; su única responsabilidad es manejar la petición HTTP y delegar al servicio correspondiente.
-3. **Manejo de Errores**: Se utilizarán los filtros de excepción de NestJS para retornar códigos de estado HTTP semánticos (400, 401, 403, 404, 500).
-4. **Programación Reactiva**: En el frontend se priorizará el uso de RxJS para la gestión de flujos de datos asíncronos.
+```sql
+-- Estructura simplificada para el primer ramillete funcional
+
+CREATE TABLE Usuario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    rol ENUM('Admin', 'Profesor', 'Alumno') NOT NULL,
+    fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Grado (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    codigo VARCHAR(20) UNIQUE NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    fechaActualizacion DATETIME ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Asignatura (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    codigo VARCHAR(20) UNIQUE NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    creditos INT NOT NULL,
+    idGrado INT,
+    FOREIGN KEY (idGrado) REFERENCES Grado(id)
+);
+
+-- Datos de inicialización
+INSERT INTO Usuario (email, password, rol) VALUES ('admin@idsw2.edu', 'hash_bcrypt_admin', 'Admin');
+```
+
+## Comandos de Desarrollo
+
+### Backend
+```bash
+npm install           # Instalar dependencias
+npm run start:dev     # Iniciar servidor con Hot-Reload
+npm run test          # Ejecutar suite de pruebas
+```
+
+### Frontend
+```bash
+npm install           # Instalar dependencias
+ng serve              # Levantar servidor de desarrollo Angular
+ng build --prod       # Generar build optimizado para producción
+```
+
+## Mapeo de Diseño a Código (Trazabilidad)
+
+| Artefacto UML | Archivo de Código (Path Relativo) |
+|---|---|
+| `Usuario (Entity)` | `src/backend/entities/usuario.entity.ts` |
+| `GradoController` | `src/backend/modules/grados/grados.controller.ts` |
+| `AuthService` | `src/backend/modules/auth/auth.service.ts` |
+| `LoginDto` | `src/backend/modules/auth/dto/login.dto.ts` |
+| `LoginComponent` | `src/frontend/src/app/features/auth/login/login.component.ts` |
+

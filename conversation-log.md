@@ -656,3 +656,19 @@
 - **Refinamiento Documental:** Aplicación de políticas estéticas (eliminación de emojis en contenido) e inyección de metadatos de RUP (información del artefacto) en todos los documentos maestros.
 
 **Decisión:** Se adopta la **Arquitectura Modular Nativa de NestJS** para garantizar la simplicidad y el rendimiento del sistema. Se establece el **Desacoplamiento de Identidad** como estándar de seguridad, donde la sesión y el rol gestionan la operatividad sin contaminar estructuralmente las entidades de negocio. Se ratifica un estilo de documentación técnica profesional, estrictamente textual y rica en metadatos para asegurar la calidad de la Fase de Diseño.
+
+---
+
+## [02/06/2026 13:47] Sesión 42: Ingeniería de Diseño - Arquitectura de Capas y Realización de Autenticación
+
+**Prompt:** "tomar un ramillete de casos de uso... fijate en el README.md de iniciarSesion... ponlo en GEMINI.md... porqué nos faltaron muchisimas cosas de pySigHor... quita lo último de planificación... Terminar el diseño de primer ramillete"
+
+**Resultado:** 
+- **Refinamiento Arquitectónico Global:** Evolución del Diagrama de Clases de Diseño hacia una fidelidad total de N-Capas (API, Lógica de Negocio, Acceso a Datos y Dominio). Se modeló explícitamente la inyección de dependencias entre Controladores, Servicios y Repositorios de NestJS.
+- **Independencia de Seguridad:** Desacoplamiento estructural de la entidad `Usuario` de los perfiles de `Profesor` y `Alumno`, asumiendo que la relación se gestiona mediante el contexto de sesión y roles.
+- **Gobernanza del Workflow:** Actualización de `GEMINI.md` para obligar al desarrollo iterativo por ramilletes funcionales (Bundles), priorizando el diseño completo del grupo antes de la construcción (Backend -> Frontend).
+- **Manual de Ingeniería (Scaffolding):** Redacción exhaustiva del documento de configuración siguiendo el estándar `pySigHor`, detallando la jerarquía de directorios desde `src/backend/`, el esquema SQL inicial para MySQL y las convenciones de nomenclatura CamelCase.
+- **Realización de Casos de Uso:** Finalización del diseño detallado de `iniciarSesion()` y `cerrarSesion()`. Se crearon los diagramas de secuencia que modelan el flujo técnico entre Angular (Boundary) y NestJS (Control).
+- **Aseguramiento de Calidad:** Corrección de metadatos de RUP, eliminación de emojis en contenidos técnicos y reparación de rutas de activos visuales en los READMEs.
+
+**Decisión:** Se establece la **Arquitectura de Capas Estricta** como el contrato técnico del proyecto. Se decide que la validación de entrada (DTOs) y la orquestación de servicios son requisitos mandatorios antes de cualquier persistencia. Se ratifica la estrategia de **Backend-First** dentro de cada ramillete funcional para garantizar que el frontend consuma una API estable y validada.

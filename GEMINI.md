@@ -48,9 +48,18 @@ Este archivo contiene los compromisos, protocolos y estándares de ingeniería o
 1. **Autorización Explícita:** Queda **ESTRICTAMENTE PROHIBIDO** realizar modificaciones en el código, reestructuraciones de directorios o cambios en los archivos sin la autorización previa y explícita del usuario mediante la palabra clave: **`HAZLO!`**.
 2. Si se propone un plan o análisis, se debe esperar a recibir el comando **`HAZLO!`** antes de ejecutar cualquier herramienta de modificación (`write_file`, `replace`, `run_shell_command` que altere estado, etc.).
 
-## Estructura de Análisis de Casos de Uso
+## Workflow de Desarrollo Iterativo e Incremental (MANDATORIO)
 
-Todos los archivos `README.md` de análisis de casos de uso deben seguir **EXACTAMENTE** la siguiente estructura de títulos, secciones, subtítulos y puntos, basándose en la plantilla a continuación:
+El proyecto se ejecutará mediante ramilletes funcionales (bundles) para validar la arquitectura de forma temprana y asegurar entregas de valor constantes.
+
+1.  **Selección del Ramillete**: Se agrupan casos de uso relacionados (ej: Autenticación + Rama de Grados).
+2.  **Fase de Diseño del Ramillete**:
+    *   Se debe completar el **Diseño Detallado** (Diagramas de Secuencia y Clases de Diseño) de **TODOS** los casos de uso del ramillete antes de iniciar la construcción.
+    *   Esto garantiza la consistencia de los contratos de la API (DTOs) y la integridad de la base de datos.
+3.  **Fase de Construcción (Desarrollo)**:
+    *   **Backend Primero (NestJS)**: Se implementan las Entidades, Repositorios, Servicios y Controladores. Se valida la API (ej. Swagger/Postman).
+    *   **Frontend Después (Angular)**: Se desarrollan los Servicios de API, Componentes y Vistas, consumiendo el backend ya funcional.
+4.  **Validación**: Cierre de la iteración con pruebas funcionales de extremo a extremo (E2E).
 
 ```markdown
 # IdSw 2 > [nombreCasoUso] > Análisis
