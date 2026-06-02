@@ -579,3 +579,21 @@
 - **Artefactos Técnicos:** Generación de diagramas `.puml`, activos `SVG` y redacción del `README.md` con la secuencia de operaciones y tabla de correspondencia actualizadas.
 
 **Decisión:** Se ratifica el uso de **Servicios de Exportación Especializados** para gestionar la complejidad de la generación de archivos. Se decide que la parametrización del contenido (`opciones`) debe ser explícita en la capa de análisis para garantizar que el sistema cumpla con las expectativas de personalización del usuario final, manteniendo la integridad referencial y la seguridad contextual en cada descarga.
+
+---
+
+## [02/06/2026 10:23] Sesión 37: Transiciones de Navegación - Rigor en el Cierre de Estados
+
+**Prompt:** "Pero si debes hacer el análisis, aún siendo únicamente navegación se debe analizar... Vamos en este orden entonces: Transiciones, Autenticación y Sesión, Incidencias"
+
+**Resultado:** 
+- **Análisis de Transiciones Individuales:** Implementación de la colaboración MVC para los flujos de cierre de ciclo del sistema. Siguiendo el máximo rigor de RUP, cada transición de retorno al menú principal fue analizada en su propio directorio.
+- **Casos de Uso Procesados:**
+    - `completarGestion()`: Retorno al menú principal desde los hubs de administración de datos (Grados, Asignaturas, etc.).
+    - `completarProceso()`: Cierre formal tras la generación automática del calendario.
+    - `completarConsulta()`: Retorno al menú tras la visualización compartida del calendario (Común).
+- **Modelado de Estados:** Se documentó la colaboración Boundary-Boundary que justifica el cambio del estado activo hacia `:Sistema Disponible` (`MenuPrincipalView`).
+- **Artefactos Técnicos:** Generación masiva de diagramas `.puml`, activos `SVG` y redacción de los `README.md` correspondientes.
+- **Integridad Documental:** Creación de la sección "Transiciones de Navegación" en el índice central de la disciplina de análisis.
+
+**Decisión:** Se ratifica el compromiso con el **Rigor Metodológico de RUP**. Se decide que ninguna transición de estado, por simple que parezca, debe carecer de su correspondiente análisis MVC. Esta práctica garantiza que la navegación del sistema sea tratada como un ciudadano de primera clase en la arquitectura, facilitando la trazabilidad total con los Diagramas de Contexto.

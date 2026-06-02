@@ -1,0 +1,23 @@
+@startuml completarProceso-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Calendario Generado" as CalendarioGenerado
+
+package completarProceso as "completarProceso()" {
+    rectangle #629EF9 GenerarCalendarioView
+    rectangle #629EF9 MenuPrincipalView
+}
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+CalendarioGenerado -r-> GenerarCalendarioView: completarProceso()
+
+GenerarCalendarioView -d-> MenuPrincipalView: <<navegar>>
+
+MenuPrincipalView ..> SistemaDisponible: <<confirmar estado>>
+
+@enduml

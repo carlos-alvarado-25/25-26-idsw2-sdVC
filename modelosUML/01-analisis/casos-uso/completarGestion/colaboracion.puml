@@ -1,0 +1,23 @@
+@startuml completarGestion-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":[Entidades] Abierto" as EntidadesAbierto
+
+package completarGestion as "completarGestion()" {
+    rectangle #629EF9 "Listar[Entidad]View" as ListarView
+    rectangle #629EF9 MenuPrincipalView
+}
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+EntidadesAbierto -r-> ListarView: completarGestion()
+
+ListarView -d-> MenuPrincipalView: <<navegar>>
+
+MenuPrincipalView ..> SistemaDisponible: <<confirmar estado>>
+
+@enduml

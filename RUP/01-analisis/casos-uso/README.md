@@ -52,6 +52,11 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 - [consultarCalendario](consultarCalendario/README.md) - Análisis de la visualización compartida del calendario (Admin/Profesor/Alumno) con filtros contextuales.
 - [descargarCalendarioExamenes](descargarCalendarioExamenes/README.md) - Análisis de la exportación del calendario a formatos PDF/Excel para todos los actores.
 
+### Transiciones de Navegación
+- [completarConsulta](completarConsulta/README.md) - Análisis del retorno al menú principal tras la consulta del calendario.
+- [completarGestion](completarGestion/README.md) - Análisis del retorno al menú principal desde los hubs de gestión.
+- [completarProceso](completarProceso/README.md) - Análisis del retorno al menú principal tras la generación automática.
+
 
 ## Estructura de análisis
 
