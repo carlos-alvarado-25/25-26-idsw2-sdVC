@@ -672,3 +672,18 @@
 - **Aseguramiento de Calidad:** Corrección de metadatos de RUP, eliminación de emojis en contenidos técnicos y reparación de rutas de activos visuales en los READMEs.
 
 **Decisión:** Se establece la **Arquitectura de Capas Estricta** como el contrato técnico del proyecto. Se decide que la validación de entrada (DTOs) y la orquestación de servicios son requisitos mandatorios antes de cualquier persistencia. Se ratifica la estrategia de **Backend-First** dentro de cada ramillete funcional para garantizar que el frontend consuma una API estable y validada.
+
+---
+
+## [02/06/2026 14:35] Sesión 43: Rama de Grados - Diseño Detallado de Importación Masiva
+
+**Prompt:** "Iniciemos sesión de nuevo ahora sí, pera diseñar la rama de grados. Empecemos con importarGrados... soporta csv o xlsx verdad?"
+
+**Resultado:** 
+- **Realización de `importarGrados()`:** Implementación del diseño detallado para la carga masiva de datos académicos. Se modeló el flujo técnico completo desde Angular hasta la persistencia en MySQL.
+- **Estrategia de Lote (Batch):** Se definió el uso de `Multipart/Form-Data` para la transferencia de archivos y la delegación del parsing (`CSV/XLSX`) en la capa de servicios de NestJS.
+- **Validación y Resiliencia:** El diseño contempla una fase de validación previa en el servicio para detectar duplicados antes de ejecutar la persistencia atómica mediante el método `save()` de TypeORM.
+- **Infraestructura de Diseño:** Creación de los directorios de diseño para Grados, generación del diagrama de secuencia (`secuencia.puml`) y redacción del `README.md` con especificaciones de DTOs y protocolos API.
+- **Sincronización del Índice:** Actualización del índice maestro de diseño en `RUP/02-diseño/README.md` inaugurando la sección de Gestión de Grados.
+
+**Decisión:** Se ratifica el soporte multiformato (`CSV/XLSX`) en la capa de servicios para maximizar la flexibilidad del Administrador. Se decide centralizar la lógica de parsing y validación de negocio en el `GradoService`, manteniendo el controlador enfocado únicamente en la gestión del protocolo HTTP y los DTOs, garantizando una arquitectura limpia y testeable.

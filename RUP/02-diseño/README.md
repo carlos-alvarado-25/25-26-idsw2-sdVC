@@ -48,3 +48,6 @@ Definición de la estructura de directorios del código fuente y políticas de i
 - [iniciarSesion](casos-uso/iniciarSesion/README.md) - Diseño de la interacción de acceso y validación de credenciales.
 - [cerrarSesion](casos-uso/cerrarSesion/README.md) - Diseño del protocolo de desconexión y limpieza de sesión.
 
+### Gestión de Grados
+- [importarGrados](casos-uso/importarGrados/README.md) - Diseño del procesamiento por lotes de archivos y persistencia masiva.
+

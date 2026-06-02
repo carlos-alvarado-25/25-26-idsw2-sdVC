@@ -1,0 +1,58 @@
+@startuml importarGrados-secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Administrador" as Actor
+participant "ImportarGradosComponent\n(Angular)" as UI <<Boundary>>
+participant "GradoService\n(Angular)" as UISrv <<Boundary>>
+participant "GradoController\n(NestJS)" as Ctrl <<Control>>
+participant "GradoService\n(NestJS)" as Srv <<Control>>
+participant "GradoRepository\n(TypeORM)" as Repo <<Data Access>>
+database "MySQL" as DB
+
+Actor -> UI : seleccionarArchivo(file)
+UI -> UI : validarFormatoLocal(file)
+
+UI -> UISrv : importar(file)
+activate UISrv
+
+UISrv -> Ctrl : POST /grados/importar\n(Multipart/Form-Data)
+activate Ctrl
+
+Ctrl -> Srv : procesarImportacion(file)
+activate Srv
+
+Srv -> Srv : parsearArchivo(file)
+note right: Uso de librerías como csv-parse o xlsx
+
+loop para cada registro
+    Srv -> Srv : validarEsquema(registro)
+    Srv -> Repo : findByCodigo(codigo)
+    activate Repo
+    Repo -> DB : SELECT ...
+    Repo --> Srv : gradoExistente?
+    deactivate Repo
+end
+
+Srv -> Repo : save(listaGrados)
+activate Repo
+Repo -> DB : INSERT INTO Grado (batch)
+Repo --> Srv : void
+deactivate Repo
+
+Srv -> Srv : generarBalance()
+Srv --> Ctrl : ImportResultDto
+deactivate Srv
+
+Ctrl --> UISrv : 201 Created (ImportResultDto)
+deactivate Ctrl
+
+UISrv --> UI : ImportResultDto
+deactivate UISrv
+
+UI --> Actor : mostrarResultados(exitos, fallos)
+
+@enduml
