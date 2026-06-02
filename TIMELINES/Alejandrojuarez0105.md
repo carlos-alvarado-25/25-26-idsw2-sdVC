@@ -1,7 +1,7 @@
 # Timeline - Alejandrojuarez0105
 
 > Repo: [Alejandrojuarez0105/25-26-idsw2-sdVC](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)
-> Commits: 31 | Días activos: 9 | Sesiones log: 23
+> Commits: 36 | Días activos: 10 | Sesiones log: 28
 
 ## Patrón observado
 
@@ -9,12 +9,12 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 31 (20 feat / 1 fix / 10 other) |
-| Ratio fix/feat | 0.05 |
-| Días activos | 9 |
-| Sesiones documentadas | 23 |
-| Días log+commits | 8 |
-| Días solo log | 0 |
+| Commits propios | 36 (22 feat / 1 fix / 13 other) |
+| Ratio fix/feat | 0.04 |
+| Días activos | 10 |
+| Sesiones documentadas | 28 |
+| Días log+commits | 9 |
+| Días solo log | 1 |
 | Días solo commits | 1 |
 
 </div>
@@ -26,8 +26,9 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-06-01
-        Analisis     :done, 2026-05-23, 2026-06-01
+        UML          :done, 2026-05-22, 2026-06-02
+        Analisis     :done, 2026-05-23, 2026-06-02
+        Diseno       :done, 2026-06-01, 2026-06-02
 ```
 
 <!-- trazabilidad: manual -->
@@ -251,6 +252,41 @@ gantt
 - Sesión 22: Análisis RUP - completarGestion()
 
 > 💬 + commits = proceso documentado
+
+---
+
+## Día 14 · 2026-06-01
+
+### Commits (5: 2 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 01:18 | [refactor: refinamiento de la documentación de diseño y cierre de sesión 27](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/b92e9783c774bf93bbae22a38d71c5b7755d986e) |
+| 00:28 | [docs: Creación de carpetas y del README principal de diseño](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/6b6b23a6b83e0c61505bb368ad178422a3dacb3f) |
+| 21:31 | [feat: desarrollar analisis de todo el actor Alumno y cierre de sesión 25](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/2953b62848dbd737b1d93b4fd2da4927407df829) |
+| 20:57 | [feat: desarrollar analisis de todo el actor Profesor y cierre de sesión 24](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/11eff8ff6b89b00e2d4befca22b32f875b39aebb) |
+| 16:21 | [refactor: agrupar todos los analisis de los casos de uso de administrador en 0-Administrador](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/c370a98c98428bfee1ebaf8a53e002b2ca88d860) |
+
+### 💬 Conversation-log (3 sesiónes)
+
+- Sesión 23: Reorganización estructural - Actor Administrador
+- Sesión 24: Análisis RUP - Actor Profesor
+- Sesión 25: Análisis RUP - Actor Alumno
+
+**Artefactos nuevos:** 🧩 
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 15 · 2026-06-02
+
+### 💬 Conversation-log (2 sesiónes)
+
+- Sesión 26: Inicio de la fase de Diseño RUP
+- Sesión 27: Refinamiento de la Documentación de Diseño
+
+> ⚠️ Log sin commits
 
 ---
 

@@ -1,7 +1,7 @@
 # Timeline - inigovaqueroo04
 
 > Repo: [inigovaqueroo04/25-26-idsw2-sdVC](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC)
-> Commits: 22 | Días activos: 6 | Sesiones log: 0
+> Commits: 30 | Días activos: 7 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,8 +9,8 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 22 (2 feat / 0 fix / 20 other) |
-| Días activos | 6 |
+| Commits propios | 30 (2 feat / 0 fix / 28 other) |
+| Días activos | 7 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -22,7 +22,7 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-29, 2026-06-01
+        Analisis     :done, 2026-05-29, 2026-06-02
 ```
 
 <!-- trazabilidad: manual -->
@@ -139,6 +139,25 @@ gantt
 | 21:01 | [docs: analiza caso de uso relacionarTareas](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/32906626260aa89d06be9419ea57eb67635f8001) |
 | 20:49 | [docs: analiza caso de uso editarTarea](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/49bf63a37f375c487b5c1f367de33a37c73bc0ad) |
 | 20:39 | [docs: analiza caso de uso crearTarea](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/d71a675abf83ebb5a07ad3778b68ccce6b48ae35) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 14 · 2026-06-01
+
+### Commits (8: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 20:20 | [docs: cerrar criterios previos al diseño](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/e57e45faa6f5215d8ffdda03e50ac2be3e4cdad0) |
+| 20:05 | [docs: analizar asignarTareaAUsuario](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/7555f058fa42ec9773a8eead1fb41e6b753f8619) |
+| 19:50 | [docs: analizar configurarRecordatorio](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/5a038d27aaccbc9ff7332310943dbd9dc9378618) |
+| 19:44 | [docs: analizar definirLocalizacion](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/7ae091d73e7dd6514ed8c448cb6c6597059fc934) |
+| 19:36 | [docs: analizar establecerHorario](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/d4ea98a7b798f033bea7adf48320208c7d89e4e0) |
+| 19:29 | [docs: analizar abrirPlanificacion](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/d092af137ac0513f54e10071e9ebbbd660df9578) |
+| 19:23 | [docs: analizar validarConflicto](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/a8eefa6ab100643a0118ce96b49058cd6a174081) |
+| 18:58 | [docs: analiza caso de uso marcarCompletada](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/00c02acbc4f77f67fb6aeffdffcecaa5c0509d92) |
 
 > ⚠️ Commits sin entrada en log
 

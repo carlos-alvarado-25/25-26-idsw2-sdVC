@@ -1,7 +1,7 @@
 # Timeline - 31Diego
 
 > Repo: [31Diego/25-26-idsw2-sdVC](https://github.com/31Diego/25-26-idsw2-sdVC)
-> Commits: 11 | Días activos: 8 | Sesiones log: 0
+> Commits: 14 | Días activos: 10 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 11 (6 feat / 3 fix / 2 other) |
+| Commits propios | 14 (8 feat / 4 fix / 2 other) |
 | Ratio fix/feat | 0.50 |
-| Días activos | 8 |
+| Días activos | 10 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -23,10 +23,10 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-06-01
-        Analisis     :done, 2026-05-22, 2026-06-01
-        Diseno       :done, 2026-05-29, 2026-06-01
-        Codigo       :done, 2026-05-30, 2026-06-01
+        UML          :done, 2026-05-22, 2026-06-02
+        Analisis     :done, 2026-05-22, 2026-06-02
+        Diseno       :done, 2026-05-29, 2026-06-02
+        Codigo       :done, 2026-05-30, 2026-06-02
 ```
 
 <!-- trazabilidad: manual -->
@@ -189,6 +189,31 @@ gantt
 | Hora | Mensaje |
 |---|---|
 | 21:18 | [fix: corregir análisis iniciarSesion y cerrarSesion; borrar artefactos de diseño, desarrollo y código](https://github.com/31Diego/25-26-idsw2-sdVC/commit/2044578a515b7c5f27dac3f346fc86ac6265a7c0) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 14 · 2026-06-01
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 19:41 | [feat: corregir análisis coordinador y añadir diseño e implementación de proyectos](https://github.com/31Diego/25-26-idsw2-sdVC/commit/cf475b0efe5fc5b19c64bad88f30dab7b34ace92) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 15 · 2026-06-02
+
+### Commits (2: 1 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 18:46 | [feat: archivo de revision de casos de analisis de ayer](https://github.com/31Diego/25-26-idsw2-sdVC/commit/1625a209848b0c99edd09aec0edbad2580ef481f) |
+| 18:41 | [fix: corregir diagramas de secuencia de diseño — añadir navegador antes de la petición HTTP](https://github.com/31Diego/25-26-idsw2-sdVC/commit/8248ee788929582477e4ef09d939b4039b840d8e) |
 
 > ⚠️ Commits sin entrada en log
 

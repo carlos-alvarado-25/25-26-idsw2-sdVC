@@ -1,7 +1,7 @@
 # Timeline - jerdier
 
 > Repo: [jerdier/25-26-idsw2-sdVC](https://github.com/jerdier/25-26-idsw2-sdVC)
-> Commits: 23 | Días activos: 9 | Sesiones log: 10
+> Commits: 25 | Días activos: 10 | Sesiones log: 11
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 23 (11 feat / 4 fix / 8 other) |
-| Ratio fix/feat | 0.36 |
-| Días activos | 9 |
-| Sesiones documentadas | 10 |
-| Sesiones sin fecha en log | 10 |
+| Commits propios | 25 (12 feat / 5 fix / 8 other) |
+| Ratio fix/feat | 0.41 |
+| Días activos | 10 |
+| Sesiones documentadas | 11 |
+| Sesiones sin fecha en log | 11 |
 
 </div>
 
@@ -24,9 +24,9 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-25, 2026-06-01
-        Diseno       :done, 2026-05-25, 2026-06-01
-        Codigo       :done, 2026-05-22, 2026-06-01
+        Analisis     :done, 2026-05-25, 2026-06-02
+        Diseno       :done, 2026-05-25, 2026-06-02
+        Codigo       :done, 2026-05-22, 2026-06-02
 ```
 
 <!-- trazabilidad: manual -->
@@ -167,6 +167,19 @@ gantt
 | Hora | Mensaje |
 |---|---|
 | 19:44 | [func(asistencia): sincronizar tipos y crear servicio de conexión en el frontend](https://github.com/jerdier/25-26-idsw2-sdVC/commit/2feef8eaa909c5bbdad6b846a44e4486f75061f4) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 14 · 2026-06-01
+
+### Commits (2: 1 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 17:07 | [fix: corrección archivos backend src](https://github.com/jerdier/25-26-idsw2-sdVC/commit/10a7728eee8d656b2188ec7b760ac8ec705da57f) |
+| 16:42 | [feat: implement attendance vertical slice and professor](https://github.com/jerdier/25-26-idsw2-sdVC/commit/7f2767ba6bb9c9c59ef31e2793d80f271c1e61e4) |
 
 > ⚠️ Commits sin entrada en log
 

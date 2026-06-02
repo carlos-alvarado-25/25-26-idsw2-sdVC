@@ -1,7 +1,7 @@
 # Timeline - carlos-alvarado-25
 
 > Repo: [carlos-alvarado-25/25-26-idsw2-sdVC](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)
-> Commits: 41 | Días activos: 11 | Sesiones log: 20
+> Commits: 50 | Días activos: 12 | Sesiones log: 29
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 41 (34 feat / 3 fix / 4 other) |
-| Ratio fix/feat | 0.08 |
-| Días activos | 11 |
-| Sesiones documentadas | 20 |
-| Días log+commits | 5 |
+| Commits propios | 50 (42 feat / 4 fix / 4 other) |
+| Ratio fix/feat | 0.09 |
+| Días activos | 12 |
+| Sesiones documentadas | 29 |
+| Días log+commits | 6 |
 | Días solo log | 0 |
 | Días solo commits | 6 |
 | Sesiones sin fecha en log | 9 |
@@ -27,8 +27,9 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-23, 2026-05-31
-        Analisis     :done, 2026-05-22, 2026-05-31
+        UML          :done, 2026-05-23, 2026-06-02
+        Analisis     :done, 2026-05-22, 2026-06-02
+        Diseno       :done, 2026-06-02, 2026-06-02
 ```
 
 <!-- trazabilidad: manual -->
@@ -262,6 +263,40 @@ gantt
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 36: Rama de Calendario - Exportación y Parámetros de Contenido
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 15 · 2026-06-02
+
+### Commits (9: 8 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 18:52 | [feat: Add sequence diagrams for editing and deleting grades](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/b7c9e75a3f190838efc60f306637dd80757e14b7) |
+| 18:36 | [Add sequence diagrams for creating and listing grades](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/3b7be7263027cd9b9e1e2ed16671ed69967236b8) |
+| 14:37 | [feat: add diseño y documentación para el caso de uso importarGrados](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/1a6adca1cc45ef7ae0e5d513d5e0eed08343e678) |
+| 13:49 | [feat: Implementar diseño y flujo para el caso de uso cerrarSesion](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/6994002aec91d004217ac795927ac824e73ce7f1) |
+| 13:21 | [feat: Add UML diagrams for system architecture, login sequence, and detailed class design](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/57dc595819df561810dd4da81d96492f834f7d53) |
+| 11:32 | [feat: Enhance Professor Context with Incident Reporting and Communication Closure](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/29b6d116565cece8e1e1df56bab392da2a00fd08) |
+| 11:17 | [fix: Restructure use case analysis documentation for clarity and organization considering observability tools](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/e4423c35baf71ebdeb451e959508a5444fb32fc3) |
+| 10:36 | [feat: Add authentication use cases for iniciarSesion and cerrarSesion](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/3928f8c6f792f80789c39fc5092e94539b8bf40c) |
+| 10:25 | [feat: Add navigation transition analyses for completing consultation, management, and process](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/35265893033cd45941dfd1eef2cebb912630e780) |
+
+### 💬 Conversation-log (9 sesiónes)
+
+- Sesión 37: Transiciones de Navegación - Rigor en el Cierre de Estados
+- Sesión 38: Autenticación y Cierre del Contexto Administrador
+- Sesión 39: Reestructuración Arquitectónica y Rescate de la Auditabilidad
+- Sesión 40: Contexto del Profesor y Cierre de la FASE DE ANÁLISIS
+- Sesión 41: Inicio de la Fase de Diseño - Arquitectura NestJS + Angular
+- Sesión 42: Ingeniería de Diseño - Arquitectura de Capas y Realización de Autenticación
+- Sesión 43: Rama de Grados - Diseño Detallado de Importación Masiva
+- Sesión 44: Rama de Grados - Listado Paginado y Patrón El Delgado
+- Sesión 45: Rama de Grados - Diseño Detallado de Edición y Borrado Seguro
+
+**Artefactos nuevos:** 🧩 
 
 > 💬 + commits = proceso documentado
 

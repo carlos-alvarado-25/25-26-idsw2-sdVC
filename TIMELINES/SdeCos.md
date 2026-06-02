@@ -1,7 +1,7 @@
 # Timeline - SdeCos
 
 > Repo: [SdeCos/25-26-idsw2-sdVC](https://github.com/SdeCos/25-26-idsw2-sdVC)
-> Commits: 11 | Días activos: 7 | Sesiones log: 51
+> Commits: 13 | Días activos: 9 | Sesiones log: 59
 
 ## Patrón observado
 
@@ -9,10 +9,10 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 11 (0 feat / 0 fix / 11 other) |
-| Días activos | 7 |
-| Sesiones documentadas | 51 |
-| Sesiones sin fecha en log | 51 |
+| Commits propios | 13 (0 feat / 0 fix / 13 other) |
+| Días activos | 9 |
+| Sesiones documentadas | 59 |
+| Sesiones sin fecha en log | 59 |
 
 </div>
 
@@ -23,10 +23,10 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-25, 2026-05-31
-        Diseno       :done, 2026-05-29, 2026-05-31
-        Desarrollo   :done, 2026-05-29, 2026-05-31
-        Codigo       :done, 2026-05-29, 2026-05-31
+        Analisis     :done, 2026-05-25, 2026-06-02
+        Diseno       :done, 2026-05-29, 2026-06-02
+        Desarrollo   :done, 2026-05-29, 2026-06-02
+        Codigo       :done, 2026-05-29, 2026-06-02
 ```
 
 <!-- trazabilidad: manual -->
@@ -134,6 +134,30 @@ gantt
 | Hora | Mensaje |
 |---|---|
 | 15:37 | [diseno e implementacion administrador, alumno y directordegrado](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/87d694765bc64817ce44c3119332e26979e7cd26) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 14 · 2026-06-01
+
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 09:10 | [diseno e implementacion secretaria](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/bdd0004b0178689062b787d8515e6006f714383d) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 15 · 2026-06-02
+
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 08:48 | [diseno cdu profesor](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/d8fc81492d76d1f8f27e6818e00a7cd593389862) |
 
 > ⚠️ Commits sin entrada en log
 

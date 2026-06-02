@@ -1,7 +1,7 @@
 # Timeline - Pareyor
 
 > Repo: [Pareyor/25-26-idsw2-sdVC](https://github.com/Pareyor/25-26-idsw2-sdVC)
-> Commits: 73 | Días activos: 11 | Sesiones log: 12
+> Commits: 78 | Días activos: 12 | Sesiones log: 13
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 73 (54 feat / 19 fix / 0 other) |
+| Commits propios | 78 (57 feat / 20 fix / 1 other) |
 | Ratio fix/feat | 0.35 |
-| Días activos | 11 |
-| Sesiones documentadas | 12 |
-| Días log+commits | 11 |
+| Días activos | 12 |
+| Sesiones documentadas | 13 |
+| Días log+commits | 12 |
 | Días solo log | 0 |
 | Días solo commits | 0 |
 
@@ -26,10 +26,10 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-21, 2026-06-01
-        Analisis     :done, 2026-05-21, 2026-06-01
-        Diseno       :done, 2026-05-30, 2026-06-01
-        Codigo       :done, 2026-05-30, 2026-06-01
+        UML          :done, 2026-05-21, 2026-06-02
+        Analisis     :done, 2026-05-21, 2026-06-02
+        Diseno       :done, 2026-05-30, 2026-06-02
+        Codigo       :done, 2026-05-30, 2026-06-02
 ```
 
 ## Trazabilidad por caso de uso
@@ -322,6 +322,26 @@ gantt
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 12: Diseño de Módulos del Dashboard y Refinamiento del Entorno
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 14 · 2026-06-01
+
+### Commits (5: 3 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 13:31 | [feat: nueva conversación y sesión con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/aec1667e440908ba0d86865d5af6d9bc466b169e) |
+| 13:25 | [feat: Implementación de verGrados](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/65f8643d623ac448b80ff18de0500dd4a9299fc7) |
+| 13:20 | [chore: eliminar carpetas target del seguimiento de git](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/25547957f57f0b28374f8657996210ea45a256e2) |
+| 13:15 | [fix: Corrección final en verDocentes que dejaba la pantalla en blanco por fallo con los tokens y exportaciones de tipos.](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/09e577e3838ae03707f0bc054f8bf8625b0ac1f5) |
+| 13:12 | [feat: Implementación de verDocentes](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/a04f89a1077e5147ad4aabbec4a4e03f72461263) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 13: Implementación de verDocentes, verGrados y Estabilización del Entorno
 
 > 💬 + commits = proceso documentado
 
