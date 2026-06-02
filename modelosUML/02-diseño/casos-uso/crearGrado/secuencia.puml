@@ -1,0 +1,59 @@
+@startuml crearGrado-secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Administrador" as Actor
+participant "CrearGradoComponent\n(Angular)" as UI <<Boundary>>
+participant "GradoService\n(Angular)" as UISrv <<Boundary>>
+participant "GradoController\n(NestJS)" as Ctrl <<Control>>
+participant "GradoService\n(NestJS)" as Srv <<Control>>
+participant "GradoRepository\n(TypeORM)" as Repo <<Data Access>>
+database "MySQL" as DB
+
+Actor -> UI : introducirDatos(codigo, nombre, desc)
+UI -> UI : validarFormulario()
+
+UI -> UISrv : crear(crearGradoDto)
+activate UISrv
+
+UISrv -> Ctrl : POST /grados\n(CrearGradoDto)
+activate Ctrl
+
+Ctrl -> Srv : create(dto)
+activate Srv
+
+Srv -> Repo : findOneBy({ codigo: dto.codigo })
+activate Repo
+Repo -> DB : SELECT ...
+Repo --> Srv : grado?
+deactivate Repo
+
+alt Codigo Duplicado
+    Srv --> Ctrl : throw ConflictException
+    Ctrl --> UISrv : 409 Conflict
+    UISrv --> UI : error
+    UI --> Actor : mostrarError("Código ya existe")
+else Codigo Unico
+    Srv -> Repo : create(dto)
+    Srv -> Repo : save(grado)
+    activate Repo
+    Repo -> DB : INSERT INTO Grado ...
+    Repo --> Srv : gradoPersistido
+    deactivate Repo
+    
+    Srv --> Ctrl : gradoPersistido
+    Ctrl --> UISrv : 201 Created (GradoDto)
+    deactivate Srv
+    deactivate Ctrl
+
+    UISrv --> UI : GradoDto
+    deactivate UISrv
+
+    UI -> UI : navegarAEditar(grado.id)
+    UI --> Actor : mostrarFormularioEdicion()
+end
+
+@enduml

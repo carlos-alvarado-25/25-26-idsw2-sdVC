@@ -687,3 +687,17 @@
 - **Sincronización del Índice:** Actualización del índice maestro de diseño en `RUP/02-diseño/README.md` inaugurando la sección de Gestión de Grados.
 
 **Decisión:** Se ratifica el soporte multiformato (`CSV/XLSX`) en la capa de servicios para maximizar la flexibilidad del Administrador. Se decide centralizar la lógica de parsing y validación de negocio en el `GradoService`, manteniendo el controlador enfocado únicamente en la gestión del protocolo HTTP y los DTOs, garantizando una arquitectura limpia y testeable.
+
+---
+
+## [02/06/2026 18:34] Sesión 44: Rama de Grados - Listado Paginado y Patrón El Delgado
+
+**Prompt:** "Perfecto, sigamos ahora con el caso de uso de abrirGrados... en el diagrama pones listar(1), es correcto?... Sigamos ahora con crearGrado()"
+
+**Resultado:** 
+- **Realización de `abrirGrados()`:** Diseño del flujo técnico para el hub de gestión. Se modeló la interacción entre el componente de listado en Angular y el controlador en NestJS, especificando la paginación (`?page=1`) y el filtrado por criterios.
+- **Estandarización de Consultas:** Se consolidó el uso del método `findAndCount()` de TypeORM para resolver la carga de datos masivos y el recuento total en una única transacción hacia MySQL.
+- **Realización de `crearGrado()`:** Implementación del patrón "El Delgado" en la capa de diseño. Se modeló el flujo de captura minimalista con validación DTO en NestJS, inyección de dependencias para comprobar códigos únicos y redirección inmediata en Angular (`Router`) hacia la pantalla de edición.
+- **Trazabilidad:** Generación de los correspondientes diagramas de secuencia (`.puml` y `.svg`) y redacción de los artefactos `README.md` integrándolos en el índice general de la disciplina de diseño.
+
+**Decisión:** Se adopta el estándar de mantener los parámetros de paginación (`listar(1)`) de manera explícita en los diagramas de secuencia para reflejar la realidad del ciclo de vida en Angular. Se ratifica la estrategia técnica del patrón "El Delgado" asegurando que las validaciones de unicidad se ejecuten siempre a nivel de Repositorio (backend) antes de autorizar el cambio de estado en el cliente (frontend).

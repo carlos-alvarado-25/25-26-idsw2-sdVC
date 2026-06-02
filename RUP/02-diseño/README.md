@@ -49,5 +49,7 @@ Definición de la estructura de directorios del código fuente y políticas de i
 - [cerrarSesion](casos-uso/cerrarSesion/README.md) - Diseño del protocolo de desconexión y limpieza de sesión.
 
 ### Gestión de Grados
+- [abrirGrados](casos-uso/abrirGrados/README.md) - Diseño del hub de gestión y listado paginado.
+- [crearGrado](casos-uso/crearGrado/README.md) - Diseño de la creación minimalista con transición a edición.
 - [importarGrados](casos-uso/importarGrados/README.md) - Diseño del procesamiento por lotes de archivos y persistencia masiva.
 

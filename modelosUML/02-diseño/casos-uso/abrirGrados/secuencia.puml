@@ -1,0 +1,69 @@
+@startuml abrirGrados-secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Administrador" as Actor
+participant "ListarGradosComponent\n(Angular)" as UI <<Boundary>>
+participant "GradoService\n(Angular)" as UISrv <<Boundary>>
+participant "GradoController\n(NestJS)" as Ctrl <<Control>>
+participant "GradoService\n(NestJS)" as Srv <<Control>>
+participant "GradoRepository\n(TypeORM)" as Repo <<Data Access>>
+database "MySQL" as DB
+
+Actor -> UI : navegarAGrados()
+activate UI
+
+UI -> UISrv : listar(1)
+activate UISrv
+
+UISrv -> Ctrl : GET /grados?page=1
+activate Ctrl
+
+Ctrl -> Srv : findAll(1)
+activate Srv
+
+Srv -> Repo : findAndCount({ skip, take })
+activate Repo
+Repo -> DB : SELECT ...
+Repo --> Srv : [data, total]
+deactivate Repo
+
+Srv --> Ctrl : PagedResultDto<Grado>
+deactivate Srv
+
+Ctrl --> UISrv : 200 OK (PagedResultDto)
+deactivate Ctrl
+
+UISrv --> UI : PagedResultDto
+deactivate UISrv
+
+UI --> Actor : mostrarLista(grados)
+deactivate UI
+
+== Filtrado ==
+
+Actor -> UI : buscar(criterio)
+activate UI
+UI -> UISrv : filtrar(criterio, 1)
+activate UISrv
+UISrv -> Ctrl : GET /grados/search?q=criterio&page=1
+activate Ctrl
+Ctrl -> Srv : findByCriterio(criterio, 1)
+activate Srv
+Srv -> Repo : findAndCount({ where: ... })
+activate Repo
+Repo --> Srv : [data, total]
+deactivate Repo
+Srv --> Ctrl : PagedResultDto
+deactivate Srv
+Ctrl --> UISrv : 200 OK
+deactivate Ctrl
+UISrv --> UI : PagedResultDto
+deactivate UISrv
+UI --> Actor : mostrarListaFiltrada()
+deactivate UI
+
+@enduml
