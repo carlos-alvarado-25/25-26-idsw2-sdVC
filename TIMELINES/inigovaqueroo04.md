@@ -30,25 +30,32 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D7 | D8 | D9 | D11 | D13 |
-|---|:---:|:---:|:---:|:---:|:---:|
-| `iniciarSesion` | A |   |   |   |   |
-| `cerrarSesion` |   | A |   |   |   |
-| `completarGestion` |   | A |   |   |   |
-| `abrirGrupos` |   | A |   |   |   |
-| `crearGrupo` |   | A |   |   |   |
-| `editarGrupo` |   | A |   |   |   |
-| `eliminarGrupo` |   | A |   |   |   |
-| `invitarUsuario` |   | A |   |   |   |
-| `editarMiembro` |   | A |   |   |   |
-| `eliminarMiembro` |   |   | A |   |   |
-| `abrirInvitaciones` |   |   |   | A |   |
-| `editarInvitacion` |   |   |   | A |   |
-| `abrirTareas` |   |   |   | A |   |
-| `crearTarea` |   |   |   |   | A |
-| `editarTarea` |   |   |   |   | A |
-| `relacionarTareas` |   |   |   |   | A |
-| `eliminarTarea` |   |   |   |   | A |
+| Caso de uso | D7 | D8 | D9 | D11 | D13 | D14 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| `iniciarSesion` | A |   |   |   |   |   |
+| `cerrarSesion` |   | A |   |   |   |   |
+| `completarGestion` |   | A |   |   |   |   |
+| `abrirGrupos` |   | A |   |   |   |   |
+| `crearGrupo` |   | A |   |   |   |   |
+| `editarGrupo` |   | A |   |   |   |   |
+| `eliminarGrupo` |   | A |   |   |   |   |
+| `invitarUsuario` |   | A |   |   |   |   |
+| `editarMiembro` |   | A |   |   |   |   |
+| `eliminarMiembro` |   |   | A |   |   |   |
+| `abrirInvitaciones` |   |   |   | A |   |   |
+| `editarInvitacion` |   |   |   | A |   |   |
+| `abrirTareas` |   |   |   | A |   |   |
+| `crearTarea` |   |   |   |   | A |   |
+| `editarTarea` |   |   |   |   | A |   |
+| `relacionarTareas` |   |   |   |   | A |   |
+| `eliminarTarea` |   |   |   |   | A |   |
+| `abrirPlanificacion` |   |   |   |   |   | A |
+| `validarConflicto` |   |   |   |   |   | A |
+| `marcarCompletada` |   |   |   |   |   | A |
+| `establecerHorario` |   |   |   |   |   | A |
+| `definirLocalizacion` |   |   |   |   |   | A |
+| `configurarRecordatorio` |   |   |   |   |   | A |
+| `asignarTareaAUsuario` |   |   |   |   |   | A |
 
 </div>
 

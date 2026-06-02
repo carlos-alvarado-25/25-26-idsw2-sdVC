@@ -39,81 +39,81 @@ gantt
 > Rama de trabajo: `develop`. Estructura: `RUP/01-analisis/casos-uso/<actor>/<CU>/`
 > D6: prototipado (estructura + especificación) — análisis en `RUP/00-casos-uso/02-detalle/`, no en `RUP/01-analisis/`
 
-| Caso de uso | D7 | D11 | D13 |
-|---|:---:|:---:|:---:|
-| *coordinador* | | | |
-| `abrirConvocatoria` | A | | |
-| `abrirConvocatorias` | A | A | |
-| `abrirEntregable` | A | | |
-| `abrirEntregables` | A | A | |
-| `abrirInvestigador` | A | A | |
-| `abrirInvestigadores` | A | A | |
-| `abrirMiPublicacion` | A | | |
-| `abrirMisPublicaciones` | A | A | |
-| `abrirOpcionesCargaTrabajo` | A | | |
-| `abrirOpcionesPerfil` | A | | |
-| `abrirPanelPrincipal` | A | A | A |
-| `abrirProyecto` | A | A | |
-| `abrirProyectos` | A | A | |
-| `abrirPublicacion` | A | | |
-| `abrirPublicaciones` | A | A | |
-| `abrirRecompensa` | A | | |
-| `abrirRecompensas` | A | A | |
-| `abrirSolicitudEliminacionPerfil` | A | | |
-| `abrirSolicitudesEliminacionPerfil` | A | | |
-| `agregarInvestigador` | A | | |
-| `cerrarSesion` | A | | A |
-| `crearEntregable` | A | | |
-| `crearInvestigador` | A | | |
-| `crearProyecto` | A | | |
-| `crearPublicacion` | A | | |
-| `crearRecompensa` | A | | |
-| `editarCargaTrabajo` | A | | |
-| `editarEntregable` | A | | |
-| `editarMiPublicacion` | A | | |
-| `editarPerfil` | A | | |
-| `editarProyecto` | A | | |
-| `editarPublicacion` | A | | |
-| `editarRecompensa` | A | | |
-| `eliminarEntregable` | A | | |
-| `eliminarInvestigador` | A | | |
-| `eliminarMiPublicacion` | A | | |
-| `eliminarPerfil` | A | | |
-| `eliminarProyecto` | A | | |
-| `eliminarPublicacion` | A | | |
-| `eliminarRecompensa` | A | | |
-| `importarConvocatoria` | A | | |
-| `iniciarSesion` | A | | A |
-| `responderPublicacion` | A | | |
-| `solicitarEliminacionPerfil` | A | | |
-| *investigador* | | | |
-| `abrirEntregable` | A | | |
-| `abrirEntregables` | A | A | |
-| `abrirInvestigador` | A | | |
-| `abrirInvestigadores` | A | A | |
-| `abrirMiPublicacion` | A | | |
-| `abrirMisPublicaciones` | A | A | |
-| `abrirOpcionesCargaTrabajo` | A | | |
-| `abrirOpcionesPerfil` | A | | |
-| `abrirPanelPrincipal` | A | A | A |
-| `abrirProyecto` | A | A | |
-| `abrirProyectos` | A | A | |
-| `abrirPublicacion` | A | | |
-| `abrirPublicaciones` | A | A | |
-| `abrirRecompensa` | A | | |
-| `abrirRecompensas` | A | A | |
-| `cerrarSesion` | A | | A |
-| `crearEntregable` | A | | |
-| `crearPublicacion` | A | | |
-| `editarCargaTrabajo` | A | | |
-| `editarEntregable` | A | | |
-| `editarPerfil` | A | | |
-| `editarPublicacion` | A | | |
-| `eliminarEntregable` | A | | |
-| `eliminarPublicacion` | A | | |
-| `iniciarSesion` | A | | A |
-| `responderPublicacion` | A | | |
-| `solicitarEliminacionPerfil` | A | | |
+| Caso de uso | D7 | D11 | D13 | D14 |
+|---|:---:|:---:|:---:|:---:|
+| *coordinador* | | | | |
+| `abrirConvocatoria` | A | | | |
+| `abrirConvocatorias` | A | A | | |
+| `abrirEntregable` | A | | | |
+| `abrirEntregables` | A | A | | |
+| `abrirInvestigador` | A | A | | |
+| `abrirInvestigadores` | A | A | | |
+| `abrirMiPublicacion` | A | | | |
+| `abrirMisPublicaciones` | A | A | | |
+| `abrirOpcionesCargaTrabajo` | A | | | |
+| `abrirOpcionesPerfil` | A | | | |
+| `abrirPanelPrincipal` | A | A | A | Dd |
+| `abrirProyecto` | A | A | | |
+| `abrirProyectos` | A | A | | |
+| `abrirPublicacion` | A | | | |
+| `abrirPublicaciones` | A | A | | |
+| `abrirRecompensa` | A | | | |
+| `abrirRecompensas` | A | A | | |
+| `abrirSolicitudEliminacionPerfil` | A | | | |
+| `abrirSolicitudesEliminacionPerfil` | A | | | |
+| `agregarInvestigador` | A | | | |
+| `cerrarSesion` | A | | A | Dd |
+| `crearEntregable` | A | | | |
+| `crearInvestigador` | A | | | |
+| `crearProyecto` | A | | | |
+| `crearPublicacion` | A | | | |
+| `crearRecompensa` | A | | | |
+| `editarCargaTrabajo` | A | | | |
+| `editarEntregable` | A | | | |
+| `editarMiPublicacion` | A | | | |
+| `editarPerfil` | A | | | |
+| `editarProyecto` | A | | | |
+| `editarPublicacion` | A | | | |
+| `editarRecompensa` | A | | | |
+| `eliminarEntregable` | A | | | |
+| `eliminarInvestigador` | A | | | |
+| `eliminarMiPublicacion` | A | | | |
+| `eliminarPerfil` | A | | | |
+| `eliminarProyecto` | A | | | |
+| `eliminarPublicacion` | A | | | |
+| `eliminarRecompensa` | A | | | |
+| `importarConvocatoria` | A | | | |
+| `iniciarSesion` | A | | A | Dd |
+| `responderPublicacion` | A | | | |
+| `solicitarEliminacionPerfil` | A | | | |
+| *investigador* | | | | |
+| `abrirEntregable` | A | | | |
+| `abrirEntregables` | A | A | | |
+| `abrirInvestigador` | A | | | |
+| `abrirInvestigadores` | A | A | | |
+| `abrirMiPublicacion` | A | | | |
+| `abrirMisPublicaciones` | A | A | | |
+| `abrirOpcionesCargaTrabajo` | A | | | |
+| `abrirOpcionesPerfil` | A | | | |
+| `abrirPanelPrincipal` | A | A | A | Dd |
+| `abrirProyecto` | A | A | | |
+| `abrirProyectos` | A | A | | |
+| `abrirPublicacion` | A | | | |
+| `abrirPublicaciones` | A | A | | |
+| `abrirRecompensa` | A | | | |
+| `abrirRecompensas` | A | A | | |
+| `cerrarSesion` | A | | A | Dd |
+| `crearEntregable` | A | | | |
+| `crearPublicacion` | A | | | |
+| `editarCargaTrabajo` | A | | | |
+| `editarEntregable` | A | | | |
+| `editarPerfil` | A | | | |
+| `editarPublicacion` | A | | | |
+| `eliminarEntregable` | A | | | |
+| `eliminarPublicacion` | A | | | |
+| `iniciarSesion` | A | | A | Dd |
+| `responderPublicacion` | A | | | |
+| `solicitarEliminacionPerfil` | A | | | |
 
 </div>
 
