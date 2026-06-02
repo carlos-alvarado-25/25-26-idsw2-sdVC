@@ -1,92 +1,46 @@
-# Análisis de Casos de Uso
+# IdSw 2 > Análisis de Casos de Uso
 
-Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de uso prioritario especificado, incluyendo diagramas de colaboración.
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |-|-|-|-|-|-|-|
 
-## Casos de uso analizados
+Esta sección documenta la **Disciplina de Análisis** del sistema, traduciendo los requisitos funcionales en colaboraciones de objetos siguiendo el patrón **MVC (Model-View-Controller)**.
 
-### Gestión de Grados (Administrador)
-- [abrirGrados](abrirGrados/README.md) - Hub de gestión y listado de grados académicos.
-- [crearGrado](crearGrado/README.md) - Análisis de creación manual de grados.
-- [editarGrado](editarGrado/README.md) - Análisis de modificación de grados existentes.
-- [eliminarGrado](eliminarGrado/README.md) - Análisis de eliminación segura de grados.
-- [importarGrados](importarGrados/README.md) - Análisis de carga masiva de grados académicos.
+---
 
-### Gestión de Asignaturas (Administrador)
-- [abrirAsignaturas](abrirAsignaturas/README.md) - Hub de gestión y listado paginado de asignaturas.
-- [crearAsignatura](crearAsignatura/README.md) - Análisis de creación manual de asignaturas vinculadas a Grados.
-- [editarAsignatura](editarAsignatura/README.md) - Análisis de modificación de asignaturas existentes y reasignación de grados.
-- [eliminarAsignatura](eliminarAsignatura/README.md) - Análisis de eliminación segura de materias con control de impacto.
-- [importarAsignaturas](importarAsignaturas/README.md) - Análisis de carga masiva de asignaturas con resolución de dependencias.
+## Organización por Contexto
 
-### Gestión de Profesores (Administrador)
-- [abrirProfesores](abrirProfesores/README.md) - Hub de gestión y listado paginado de profesores.
-- [crearProfesor](crearProfesor/README.md) - Análisis de creación manual de perfiles docentes.
-- [editarProfesor](editarProfesor/README.md) - Análisis de modificación de perfiles y gestión de carga lectiva.
-- [eliminarProfesor](eliminarProfesor/README.md) - Análisis de eliminación segura de perfiles docentes y limpieza de preferencias.
-- [importarProfesores](importarProfesores/README.md) - Análisis de carga masiva de profesores con validación de emails.
+Para garantizar la claridad administrativa, los casos de uso se organizan lógicamente aunque mantengan una estructura de directorios plana.
 
-### Gestión de Aulas (Administrador)
-- [abrirAulas](abrirAulas/README.md) - Hub de gestión y listado de espacios físicos.
-- [crearAula](crearAula/README.md) - Análisis de creación manual de aulas.
-- [editarAula](editarAula/README.md) - Análisis de modificación de aulas con persistencia incremental.
-- [eliminarAula](eliminarAula/README.md) - Análisis de eliminación segura de aulas con verificación de impacto.
-- [importarAulas](importarAulas/README.md) - Análisis de carga masiva de aulas con estandarización de formatos.
+### 0. Casos de Uso Comunes (Transversales)
+*Funcionalidades compartidas por Administradores, Profesores y Alumnos.*
 
-### Gestión de Alumnos (Administrador)
-- [abrirAlumnos](abrirAlumnos/README.md) - Hub de gestión y listado paginado de estudiantes.
-- [crearAlumno](crearAlumno/README.md) - Análisis de creación manual de perfiles de estudiantes con vinculación académica.
-- [editarAlumno](editarAlumno/README.md) - Análisis de modificación de alumnos con persistencia incremental y gestión de dependencias.
-- [eliminarAlumno](eliminarAlumno/README.md) - Análisis de eliminación de perfiles de alumnos con confirmación de datos.
-- [importarAlumnos](importarAlumnos/README.md) - Análisis de carga masiva de alumnos con resolución de dependencias académicas.
+- **Acceso**: [iniciarSesion](iniciarSesion/README.md) | [cerrarSesion](cerrarSesion/README.md)
+- **Visualización**: [consultarCalendario](consultarCalendario/README.md)
+- **Utilidades**: [descargarCalendarioExamenes](descargarCalendarioExamenes/README.md) | [completarConsulta](completarConsulta/README.md)
+- **Diagnóstico**: [listarConflictosExamenes](listarConflictosExamenes/README.md)
 
-### Gestión de Exámenes (Administrador)
-- [abrirExamenes](abrirExamenes/README.md) - Hub de gestión y listado de exámenes.
-- [crearExamen](crearExamen/README.md) - Análisis de creación manual de exámenes.
-- [editarExamen](editarExamen/README.md) - Análisis de modificación de exámenes y asignación de recursos.
-- [eliminarExamen](eliminarExamen/README.md) - Análisis de eliminación de exámenes programados.
-- [listarConflictosExamenes](listarConflictosExamenes/README.md) - Análisis de detección y resolución de colisiones en el calendario.
-- [asignarProfesorAExamen](asignarProfesorAExamen/README.md) - Análisis de vinculación de docentes a la programación académica.
+### 1. Contexto del Administrador
+*Operaciones exclusivas de gestión académica y motor de generación.*
 
-### Gestión de Calendario (Administrador)
-- [generarCalendario](generarCalendario/README.md) - Análisis del motor de orquestación y generación automática de horarios.
-- [consultarCalendario](consultarCalendario/README.md) - Análisis de la visualización compartida del calendario (Admin/Profesor/Alumno) con filtros contextuales.
-- [descargarCalendarioExamenes](descargarCalendarioExamenes/README.md) - Análisis de la exportación del calendario a formatos PDF/Excel para todos los actores.
+- **Grados**: [abrir](abrirGrados/README.md) | [crear](crearGrado/README.md) | [editar](editarGrado/README.md) | [eliminar](eliminarGrado/README.md) | [importar](importarGrados/README.md)
+- **Asignaturas**: [abrir](abrirAsignaturas/README.md) | [crear](crearAsignatura/README.md) | [editar](editarAsignatura/README.md) | [eliminar](eliminarAsignatura/README.md) | [importar](importarAsignaturas/README.md)
+- **Profesores**: [abrir](abrirProfesores/README.md) | [crear](crearProfesor/README.md) | [editar](editarProfesor/README.md) | [eliminar](eliminarProfesor/README.md) | [importar](importarProfesores/README.md)
+- **Aulas**: [abrir](abrirAulas/README.md) | [crear](crearAula/README.md) | [editar](editarAula/README.md) | [eliminar](eliminarAula/README.md) | [importar](importarAulas/README.md)
+- **Alumnos**: [abrir](abrirAlumnos/README.md) | [crear](crearAlumno/README.md) | [editar](editarAlumno/README.md) | [eliminar](eliminarAlumno/README.md) | [importar](importarAlumnos/README.md)
+- **Calendario**: [generarCalendario](generarCalendario/README.md) | [abrirExamenes](abrirExamenes/README.md) | [crearExamen](crearExamen/README.md) | [editarExamen](editarExamen/README.md) | [eliminarExamen](eliminarExamen/README.md) | [asignarProfesor](asignarProfesorAExamen/README.md)
+- **Transiciones**: [completarGestion](completarGestion/README.md) | [completarProceso](completarProceso/README.md)
 
-### Transiciones de Navegación
-- [completarConsulta](completarConsulta/README.md) - Análisis del retorno al menú principal tras la consulta del calendario.
-- [completarGestion](completarGestion/README.md) - Análisis del retorno al menú principal desde los hubs de gestión.
-- [completarProceso](completarProceso/README.md) - Análisis del retorno al menú principal tras la generación automática.
+### 2. Contexto del Profesor (En Progreso)
+*Operaciones específicas del personal docente.*
 
-### Autenticación y Sesión (Comunes)
-- [iniciarSesion](iniciarSesion/README.md) - Análisis del protocolo de acceso y establecimiento de sesión.
-- [cerrarSesion](cerrarSesion/README.md) - Análisis de la finalización de sesión e invalidación del contexto de seguridad.
+- *Pendiente*: [comunicarIncidenciasHorario](comunicarIncidenciasHorario/README.md)
 
+---
 
-## Estructura de análisis
+## Estándares de Análisis Aplicados
 
-Cada carpeta de análisis contiene:
-
-- **README.md** - Análisis MVC completo del caso de uso.
-- **colaboracion.puml** - Diagrama de colaboración entre clases de análisis.
-- **secuencia.puml** - Diagrama de secuencia (para casos complejos).
-
-## Clases de análisis aplicadas
-
-### Boundary (Vista)
-- Clases de interfaz que manejan la interacción con el actor.
-- Responsables de presentar datos y capturar solicitudes.
-
-### Control (Controlador)
-- Clases que coordinan la lógica del caso de uso.
-- Orquestan las colaboraciones entre boundary y entity.
-
-### Entity (Entidad)
-- Clases que representan conceptos del dominio.
-- Repositories y entidades de negocio.
-
-## Metodología de análisis
-
-- **Patrón MVC** aplicado sistemáticamente.
-- **Colaboraciones explícitas** entre clases de análisis.
-- **Trazabilidad** desde especificación hasta análisis.
-- **Agnosticismo tecnológico** en la definición de responsabilidades.
+1.  **Patrón MVC Estricto**: Separación clara entre `Boundary` (Vista), `Control` (Controlador) y `Entity` (Entidades/Repositories).
+2.  **Principio de Delegación**: Aplicación de la **Ley de Demeter** en las entidades para evitar acoplamiento innecesario.
+3.  **Navegación por Estados**: Diferenciación entre estados **Plurales** (listados) y **Singulares** (detalle/edición) con persistencia incremental.
+4.  **Escalabilidad (Alto Volumen)**: Uso sistemático de `PagedResult` para entidades con gran volumen de datos (Exámenes, Alumnos, Profesores).
+5.  **Single Source of Truth**: Componentes transversales analizados una sola vez para asegurar consistencia sistémica.

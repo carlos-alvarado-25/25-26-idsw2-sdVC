@@ -612,3 +612,17 @@
 - **Finalización del Contexto Administrador:** Con estos artefactos, se completa la cobertura total de los casos de uso definidos en el Diagrama de Contexto del Administrador para la disciplina de análisis.
 
 **Decisión:** Se oficializa el **Contexto Administrador como Completado** en la fase de análisis. Se ratifica el uso de un componente de sesión centralizado para unificar la lógica de seguridad y visibilidad polimórfica (basada en el perfil del usuario), garantizando la integridad sistémica desde el punto de entrada al sistema.
+
+---
+
+## [02/06/2026 11:15] Sesión 39: Reestructuración Arquitectónica y Rescate de la Auditabilidad
+
+**Prompt:** "Perfecto, me parece el plan. Iniciemos la sesión y hagamos la reestructuración... fuera de sesión tengo una pregunta... mover a carpetas el análisis... Mejor la estructura plana, ya que los scripts no puedo cambiarlos."
+
+**Resultado:** 
+- **Restructuración de Directorios:** Inicialmente se propuso una jerarquía profunda por actor, pero tras un análisis de impacto con los scripts de auditoría (`monitor.sh`, `timeline.sh`), se decidió revertir a una **Estructura Plana**.
+- **Preservación del Historial:** Se mantuvieron los nombres de carpeta originales para todos los casos de uso analizados, garantizando que el script de Timeline siga detectando los commits históricos y no resetee la trazabilidad del proyecto.
+- **Optimización Documental:** Redacción de un nuevo `README.md` en la raíz de casos de uso que actúa como un mapa lógico, agrupando visualmente los componentes en "Comunes" y "Administrador" sin alterar la ubicación física de los archivos.
+- **Mantenimiento Técnico:** Ejecución de scripts de corrección para asegurar que todos los enlaces raíz-relativos a imágenes y diagramas sigan siendo válidos tras los movimientos de carpetas.
+
+**Decisión:** Se antepone el **Rigor de Observabilidad** y la **Integridad Histórica** por encima de la estética de la jerarquía de carpetas. Se establece que la organización del proyecto debe ser compatible con las herramientas de monitoreo externas, delegando la clasificación semántica al índice documental (`README.md`) en lugar de a la estructura de archivos, asegurando una "Single Source of Truth" estable y auditable.
