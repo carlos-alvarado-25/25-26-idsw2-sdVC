@@ -1,6 +1,6 @@
 # IdSw 2 > abrirGrados > Análisis
 
-> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|[Diseño](/RUP/02-diseño/casos-uso/abrirGrados/README.md)|[Desarrollo](/RUP/03-desarrollo/casos-uso/abrirGrados/README.md)|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto

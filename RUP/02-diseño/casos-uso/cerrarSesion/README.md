@@ -1,6 +1,6 @@
 # IdSw 2 > cerrarSesion > Diseño
 
-> |[🏠️](/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/cerrarSesion/README.md)|**Diseño**|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/cerrarSesion/README.md)|**Diseño**|[Desarrollo](/RUP/03-desarrollo/casos-uso/cerrarSesion/README.md)|Pruebas|
 > |-|-|-|-|-|
 
 ## información del artefacto

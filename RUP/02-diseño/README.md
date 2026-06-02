@@ -1,6 +1,6 @@
 # IdSw 2 > Disciplina de Diseño
 
-> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/README.md)|**Diseño**|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/README.md)|**Diseño**|[⚙️ Desarrollo](/RUP/03-desarrollo/README.md)|Pruebas|
 > |-|-|-|-|-|-|-|
 
 Esta sección documenta la **Disciplina de Diseño** del sistema, definiendo la arquitectura técnica, la persistencia en base de datos y la realización detallada de los casos de uso para guiar la implementación.

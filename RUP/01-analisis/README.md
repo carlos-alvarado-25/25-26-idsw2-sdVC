@@ -1,5 +1,8 @@
 # Análisis - Disciplina de Análisis y Diseño
 
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|[📂 Diseño](/RUP/02-diseño/README.md)|[⚙️ Desarrollo](/RUP/03-desarrollo/README.md)|Pruebas|
+> |-|-|-|-|-|-|-|
+
 Esta sección contiene el análisis arquitectónico de los casos de uso especificados, aplicando el patrón MVC e identificando las clases de análisis necesarias para la implementación.
 
 ## Contenido de la disciplina

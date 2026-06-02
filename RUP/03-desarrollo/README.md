@@ -1,6 +1,6 @@
 # IdSw 2 > Disciplina de Desarrollo
 
-> |[🏠️](/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/README.md)|[📂 Diseño](/RUP/02-diseño/README.md)|**Desarrollo**|Pruebas|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/README.md)|[📂 Diseño](/RUP/02-diseño/README.md)|**Desarrollo**|Pruebas|
 > |-|-|-|-|-|
 
 Esta sección documenta la **Disciplina de Desarrollo** (Implementación) del sistema, detallando la codificación de los componentes del backend (NestJS) y frontend (Angular) basándose en los artefactos de diseño.

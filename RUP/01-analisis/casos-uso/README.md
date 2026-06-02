@@ -1,6 +1,6 @@
 # IdSw 2 > Análisis de Casos de Uso
 
-> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|[📂 Diseño](/RUP/02-diseño/README.md)|[⚙️ Desarrollo](/RUP/03-desarrollo/README.md)|Pruebas|
 > |-|-|-|-|-|-|-|
 
 Esta sección documenta la **Disciplina de Análisis** del sistema, traduciendo los requisitos funcionales en colaboraciones de objetos siguiendo el patrón **MVC (Model-View-Controller)**.

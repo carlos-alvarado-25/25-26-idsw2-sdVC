@@ -1,6 +1,6 @@
 # IdSw 2 > eliminarGrado > Diseño
 
-> |[🏠️](/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/eliminarGrado/README.md)|**Diseño**|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/eliminarGrado/README.md)|**Diseño**|[Desarrollo](/RUP/03-desarrollo/casos-uso/eliminarGrado/README.md)|Pruebas|
 > |-|-|-|-|-|
 
 ## información del artefacto

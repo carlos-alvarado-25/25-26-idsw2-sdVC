@@ -1,6 +1,6 @@
 # IdSw 2 > crearGrado > Diseño
 
-> |[🏠️](/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/crearGrado/README.md)|**Diseño**|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/crearGrado/README.md)|**Diseño**|[Desarrollo](/RUP/03-desarrollo/casos-uso/crearGrado/README.md)|Pruebas|
 > |-|-|-|-|-|
 
 ## información del artefacto
