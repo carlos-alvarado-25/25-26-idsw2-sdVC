@@ -16,8 +16,8 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 *(Se irá poblando a medida que se completen las implementaciones reales)*
 
 ### Comunes
-- [iniciarSesion](casos-uso/iniciarSesion/README.md)
-- [cerrarSesion](casos-uso/cerrarSesion/README.md)
+- [iniciarSesion](casos-uso/iniciarSesion/README.md) ✅
+- [cerrarSesion](casos-uso/cerrarSesion/README.md) ✅
 
 ### Administrador
 - [abrirGrados](casos-uso/abrirGrados/README.md)

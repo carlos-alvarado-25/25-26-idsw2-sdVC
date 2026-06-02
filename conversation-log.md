@@ -731,3 +731,19 @@
 - **Disciplina de Desarrollo:** Apertura del directorio `RUP/03-desarrollo/` siguiendo el estándar documental de `pySigHor`.
 
 **Decisión:** Se declara el inicio formal de la **Fase de Construcción**. Se establece el cumplimiento del **Rigor de Seguridad** mediante la exclusión mandatoria de archivos de configuración sensible (`.env`) del control de versiones. El proyecto queda técnicamente cimentado para iniciar la codificación del primer ramillete funcional (Autenticación + Grados).
+
+---
+
+## [02/06/2026 21:41] Sesión 47: Desarrollo de Autenticación y Refinamiento de UX
+
+**Prompt:** "Vamos a ir desarrollando del ramillete de casos de uso... como pruebo que funciona... ya me compiló. Probemos iniciar sesión... EL diseño del login lo tomaste de los prototipos no? Que tal si haces un diseño más profesional y minimalista... Puse un usuario que no existe y se quedó pegado en el spinner animado... Perfecto, ahora el cerrar sesión"
+
+**Resultado:** 
+- **Implementación de `iniciarSesion()`:** Codificación completa del flujo de acceso. Se resolvieron errores críticos de compilación (TS2345) y de entorno (SSR/localStorage) mediante el uso de `isPlatformBrowser`. Se habilitó CORS y `ValidationPipe` global en NestJS.
+- **Refinamiento de Datos:** Sincronización del hash de contraseña en MySQL (Bcrypt) para garantizar la operatividad de las credenciales del Administrador.
+- **Rediseño UI/UX Profesional:** Transformación de la pantalla de login básica en una interfaz minimalista de grado industrial, utilizando CSS moderno, layouts de tarjeta, tipografía `Inter` y feedback visual dinámico (spinners y loaders).
+- **Implementación de `cerrarSesion()`:** Desarrollo del protocolo de salida segura, integrando la llamada al servidor (`POST /auth/logout`) con la destrucción asíncrona del estado local mediante el operador `finalize` de RxJS.
+- **Infraestructura de Aplicación:** Configuración del sistema de rutas de Angular, inyección de `HttpClient` y creación del `HomeComponent` como punto de aterrizaje post-login.
+- **Disciplina de Desarrollo:** Creación de los artefactos descriptivos en `RUP/03-desarrollo/casos-uso/` siguiendo el estándar de `pySigHor`.
+
+**Decisión:** Se establece el patrón de **Programación Defensiva para SSR** (evitando el acceso directo a objetos del browser en servicios) y el uso de **Finalizadores de Flujo** (`finalize`) como estándar de robustez para la UI. Se decide priorizar una estética minimalista y profesional para elevar la calidad percibida del producto final, manteniendo la coherencia técnica entre NestJS y Angular.
