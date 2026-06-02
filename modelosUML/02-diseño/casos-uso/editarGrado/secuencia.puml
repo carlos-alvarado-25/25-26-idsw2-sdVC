@@ -1,0 +1,87 @@
+@startuml editarGrado-secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Administrador" as Actor
+participant "EditarGradoComponent\n(Angular)" as UI <<Boundary>>
+participant "GradoService\n(Angular)" as UISrv <<Boundary>>
+participant "GradoController\n(NestJS)" as Ctrl <<Control>>
+participant "GradoService\n(NestJS)" as Srv <<Control>>
+participant "GradoRepository\n(TypeORM)" as Repo <<Data Access>>
+database "MySQL" as DB
+
+== Carga de Datos ==
+
+Actor -> UI : navegarAEditar(id)
+activate UI
+UI -> UISrv : obtenerPorId(id)
+activate UISrv
+UISrv -> Ctrl : GET /grados/:id
+activate Ctrl
+Ctrl -> Srv : findOne(id)
+activate Srv
+Srv -> Repo : findOneBy({ id })
+activate Repo
+Repo -> DB : SELECT ...
+Repo --> Srv : gradoEntity
+deactivate Repo
+Srv --> Ctrl : gradoEntity
+deactivate Srv
+Ctrl --> UISrv : 200 OK (GradoDto)
+deactivate Ctrl
+UISrv --> UI : GradoDto
+deactivate UISrv
+UI --> Actor : mostrarFormulario(datos)
+deactivate UI
+
+== Edición Incremental ==
+
+Actor -> UI : modificarDatos(dto)
+activate UI
+UI -> UI : validarFormulario()
+
+UI -> UISrv : actualizar(id, updateDto)
+activate UISrv
+
+UISrv -> Ctrl : PATCH /grados/:id\n(UpdateGradoDto)
+activate Ctrl
+
+Ctrl -> Srv : update(id, updateDto)
+activate Srv
+
+alt Validar Unicidad (si el código cambia)
+    Srv -> Repo : findOneBy({ codigo: dto.codigo })
+    activate Repo
+    Repo --> Srv : otroGrado?
+    deactivate Repo
+    alt Conflicto
+        Srv --> Ctrl : throw ConflictException
+        Ctrl --> UISrv : 409 Conflict
+        UISrv --> UI : error
+        UI --> Actor : mostrarError("Código ya en uso")
+    end
+end
+
+Srv -> Repo : update(id, updateDto)
+activate Repo
+Repo -> DB : UPDATE Grado SET ...
+Repo --> Srv : void
+deactivate Repo
+
+Srv --> Ctrl : gradoActualizado
+deactivate Srv
+
+Ctrl --> UISrv : 200 OK (GradoDto)
+deactivate Ctrl
+
+UISrv --> UI : GradoDto
+deactivate UISrv
+
+UI --> Actor : confirmarExito()
+note right: Permanece en EditarGradoComponent\n(Navegación por Estado Singular)
+deactivate UI
+
+@enduml

@@ -701,3 +701,18 @@
 - **Trazabilidad:** Generación de los correspondientes diagramas de secuencia (`.puml` y `.svg`) y redacción de los artefactos `README.md` integrándolos en el índice general de la disciplina de diseño.
 
 **Decisión:** Se adopta el estándar de mantener los parámetros de paginación (`listar(1)`) de manera explícita en los diagramas de secuencia para reflejar la realidad del ciclo de vida en Angular. Se ratifica la estrategia técnica del patrón "El Delgado" asegurando que las validaciones de unicidad se ejecuten siempre a nivel de Repositorio (backend) antes de autorizar el cambio de estado en el cliente (frontend).
+
+---
+
+## [02/06/2026 18:50] Sesión 45: Rama de Grados - Diseño Detallado de Edición y Borrado Seguro
+
+**Prompt:** "Abramos ahora otra sesión para los casos de uso de editar y eliminar grado... EN efecto, cerremos la sesión para hacer commit de esto, y procedamos a levantar el proyecto"
+
+**Resultado:** 
+- **Realización de `editarGrado()`:** Implementación del diseño detallado para la actualización incremental. Se modeló el uso del método `PATCH` en la API REST y la navegación por estado estable en Angular, permitiendo guardados sucesivos sin pérdida de contexto.
+- **Realización de `eliminarGrado()`:** Diseño del flujo de borrado seguro. Se definió un endpoint específico de diagnóstico (`/impacto`) que consulta al `AsignaturaRepository` para cuantificar dependencias antes de autorizar la eliminación física en MySQL.
+- **Refinamiento de Contratos:** Se especificaron los DTOs de actualización y las reglas de validación de unicidad en la capa de servicios de NestJS.
+- **Consolidación del Bundle de Diseño:** Con estos artefactos, se completa el diseño detallado de todo el ciclo de vida de la entidad Grado, cumpliendo con el estándar de inyección de dependencias y arquitectura de capas.
+- **Integridad Documental:** Actualización y regeneración de diagramas `.puml`, activos visuales `SVG` e inclusión en el índice maestro de diseño.
+
+**Decisión:** Se ratifica el patrón de **Diagnóstico Pre-Eliminación** como requisito arquitectónico mandatorio para proteger la integridad referencial. Se decide utilizar el método `PATCH` para todas las ediciones de perfiles para optimizar el tráfico de red y permitir actualizaciones parciales de campos, manteniendo la consistencia con el estándar de desarrollo empresarial propuesto.

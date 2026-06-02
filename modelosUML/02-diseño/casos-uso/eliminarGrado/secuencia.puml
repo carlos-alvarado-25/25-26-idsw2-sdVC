@@ -1,0 +1,69 @@
+@startuml eliminarGrado-secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Administrador" as Actor
+participant "ListarGradosComponent\n(Angular)" as UI <<Boundary>>
+participant "GradoService\n(Angular)" as UISrv <<Boundary>>
+participant "GradoController\n(NestJS)" as Ctrl <<Control>>
+participant "GradoService\n(NestJS)" as Srv <<Control>>
+participant "AsignaturaRepository\n(TypeORM)" as AsigRepo <<Data Access>>
+participant "GradoRepository\n(TypeORM)" as Repo <<Data Access>>
+database "MySQL" as DB
+
+Actor -> UI : seleccionarEliminar(grado)
+
+== Verificación de Impacto ==
+
+UI -> UISrv : verificarImpacto(id)
+activate UISrv
+UISrv -> Ctrl : GET /grados/:id/impacto
+activate Ctrl
+Ctrl -> Srv : countDependencies(id)
+activate Srv
+Srv -> AsigRepo : countBy({ idGrado: id })
+activate AsigRepo
+AsigRepo -> DB : SELECT COUNT ...
+DB --> AsigRepo : totalAsignaturas
+AsigRepo --> Srv : total
+deactivate AsigRepo
+Srv --> Ctrl : total
+deactivate Srv
+Ctrl --> UISrv : 200 OK (number)
+deactivate Ctrl
+UISrv --> UI : total
+deactivate UISrv
+
+UI --> Actor : mostrarConfirmacion(totalAsignaturas)
+
+== Ejecución ==
+
+Actor -> UI : confirmar()
+activate UI
+
+UI -> UISrv : eliminar(id)
+activate UISrv
+UISrv -> Ctrl : DELETE /grados/:id
+activate Ctrl
+Ctrl -> Srv : remove(id)
+activate Srv
+Srv -> Repo : delete(id)
+activate Repo
+Repo -> DB : DELETE FROM Grado ...
+Repo --> Srv : void
+deactivate Repo
+Srv --> Ctrl : void
+deactivate Srv
+Ctrl --> UISrv : 200 OK
+deactivate Ctrl
+UISrv --> UI : exito
+deactivate UISrv
+
+UI -> UI : refrescarLista()
+UI --> Actor : notificarExito()
+deactivate UI
+
+@enduml

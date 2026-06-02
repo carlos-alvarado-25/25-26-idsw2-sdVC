@@ -51,5 +51,7 @@ Definición de la estructura de directorios del código fuente y políticas de i
 ### Gestión de Grados
 - [abrirGrados](casos-uso/abrirGrados/README.md) - Diseño del hub de gestión y listado paginado.
 - [crearGrado](casos-uso/crearGrado/README.md) - Diseño de la creación minimalista con transición a edición.
+- [editarGrado](casos-uso/editarGrado/README.md) - Diseño de la modificación incremental y persistencia por PATCH.
+- [eliminarGrado](casos-uso/eliminarGrado/README.md) - Diseño del borrado seguro con verificación de dependencias.
 - [importarGrados](casos-uso/importarGrados/README.md) - Diseño del procesamiento por lotes de archivos y persistencia masiva.
 
