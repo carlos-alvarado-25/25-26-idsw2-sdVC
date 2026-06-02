@@ -716,3 +716,18 @@
 - **Integridad Documental:** Actualización y regeneración de diagramas `.puml`, activos visuales `SVG` e inclusión en el índice maestro de diseño.
 
 **Decisión:** Se ratifica el patrón de **Diagnóstico Pre-Eliminación** como requisito arquitectónico mandatorio para proteger la integridad referencial. Se decide utilizar el método `PATCH` para todas las ediciones de perfiles para optimizar el tráfico de red y permitir actualizaciones parciales de campos, manteniendo la consistencia con el estándar de desarrollo empresarial propuesto.
+
+---
+
+## [02/06/2026 19:15] Sesión 46: Levantamiento de Infraestructura y Configuración de Persistencia
+
+**Prompt:** "HAZLO! busca en internet las versiones más actuales... quiero que la base de datos se llame generador_calendarios... entra con el comando mysql... Cierra la sesión para documentar que ya levantamos la infraestructura. Solo considera que el backend no tiene .gitignore"
+
+**Resultado:** 
+- **Scaffolding de Aplicaciones:** Inicialización de los proyectos base en `src/`: Backend en **NestJS v11** y Frontend en **Angular v21** (versiones estables a junio 2026).
+- **Infraestructura de Datos:** Creación de la base de datos MySQL `generador_calendarios` e inserción del esquema inicial (Usuario, Grado, Asignatura) mediante el cliente de sistema.
+- **Configuración de Entorno:** Creación y parametrización del archivo `.env` en el backend con las credenciales reales del usuario `carlos.lima`.
+- **Seguridad y Hardening:** Creación de un archivo `.gitignore` exhaustivo en la raíz del backend para proteger las variables de entorno y excluir artefactos de compilación.
+- **Disciplina de Desarrollo:** Apertura del directorio `RUP/03-desarrollo/` siguiendo el estándar documental de `pySigHor`.
+
+**Decisión:** Se declara el inicio formal de la **Fase de Construcción**. Se establece el cumplimiento del **Rigor de Seguridad** mediante la exclusión mandatoria de archivos de configuración sensible (`.env`) del control de versiones. El proyecto queda técnicamente cimentado para iniciar la codificación del primer ramillete funcional (Autenticación + Grados).
