@@ -30,8 +30,9 @@ Realización técnica del caso de uso editarGrado para la plataforma NestJS + An
 
 | Clase de Análisis | Clase de Diseño (Frontend) | Clase de Diseño (Backend) |
 |---|---|---|
-| EditarGradoView | EditarGradoComponent (Angular) | - |
+| EditarGradoView | GradoFormComponent (Angular) | - |
 | - | GradoService (Angular) | - |
+
 | GradoController | - | GradoController (NestJS) |
 | - | - | GradoService (NestJS) |
 | GradoRepository | - | GradoRepository (TypeORM) |
@@ -48,6 +49,15 @@ Realización técnica del caso de uso editarGrado para la plataforma NestJS + An
 ### 2. Lógica de Persistencia Incremental
 - El diseño utiliza el método `PATCH` para permitir actualizaciones parciales.
 - El controlador y servicio aseguran que si el `codigo` es modificado, se valide su unicidad en la base de datos antes de aplicar el cambio, lanzando un `409 Conflict` en caso de duplicidad.
+
+## Frontend
+
+### Implementación
+
+#### GradoFormComponent
+- **Navegación por Estado Estable**: Implementación de una UX circular que confirma el guardado pero no redirige al listado, permitiendo ediciones sucesivas.
+- **Modo Edición**: El componente detecta el ID en la URL y carga los datos existentes desde la API.
+- **Signals**: Uso de signals para gestionar estados de `success` y `loading`.
 
 ## Referencias
 

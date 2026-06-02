@@ -30,7 +30,7 @@ Realización técnica del caso de uso crearGrado para la plataforma NestJS + Ang
 
 | Clase de Análisis | Clase de Diseño (Frontend) | Clase de Diseño (Backend) |
 |---|---|---|
-| CrearGradoView | CrearGradoComponent (Angular) | - |
+| CrearGradoView | GradoFormComponent (Angular) | - |
 | - | GradoService (Angular) | - |
 | GradoController | - | GradoController (NestJS) |
 | - | - | GradoService (NestJS) |
@@ -46,11 +46,20 @@ Realización técnica del caso de uso crearGrado para la plataforma NestJS + Ang
 - **Validación**: Uso de `class-validator` en el DTO para asegurar que los campos cumplan con el formato y longitud requeridos.
 
 ### 2. Flujo de Navegación (Patrón El Delgado)
-- Tras recibir la respuesta `201 Created`, el `CrearGradoComponent` utiliza el `Router` de Angular para navegar automáticamente a la ruta de edición: `/admin/grados/editar/:id`.
+- Tras recibir la respuesta `201 Created`, el `GradoFormComponent` utiliza el `Router` de Angular para navegar automáticamente a la ruta de edición: `/admin/grados/editar/:id`.
 - Este cambio de estado permite que el Administrador continúe con el refinamiento de la entidad sin interrupciones.
 
 ### 3. Gestión de Errores
 - Si el código ya existe, el servicio de NestJS lanza un `ConflictException`, que se traduce en un código `409 Conflict` para el cliente.
+
+## Frontend
+
+### Implementación
+
+#### GradoFormComponent
+- **Reactive Forms**: Uso de `FormBuilder` para gestionar el estado y la validación del formulario.
+- **Modo Creación**: El componente opera en modo "alta" al no recibir un ID en la ruta.
+- **UX Flow**: Tras recibir el objeto creado con su ID, el componente utiliza el `Router` de Angular para enviar al usuario a la vista de edición.
 
 ## Referencias
 

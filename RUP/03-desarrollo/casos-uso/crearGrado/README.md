@@ -4,7 +4,7 @@
 > |-|-|-|-|-|
 
 - **Backend:** [grados.controller.ts](/src/backend/src/modules/grados/grados.controller.ts) · [grados.service.ts](/src/backend/src/modules/grados/grados.service.ts) · [crear-grado.dto.ts](/src/backend/src/modules/grados/dto/crear-grado.dto.ts)
-- **Frontend:** [crear-grado.component.ts](/src/frontend/src/app/features/admin/grados/crear-grado/crear-grado.component.ts)
+- **Frontend:** [grado-form.component.ts](/src/frontend/src/app/features/admin/grados/grado-form/grado-form.component.ts)
 
 ## Descripción
 Implementación del alta manual de grados académicos. Sigue el patrón "El Delgado", permitiendo una creación rápida con validación de unicidad de código y redirección automática al modo de edición.
@@ -31,7 +31,8 @@ Crea un nuevo grado.
 
 ### Implementación
 
-#### CrearGradoComponent
+#### GradoFormComponent
+- **Componente Unificado**: Se utiliza un único componente para los flujos de creación y edición para maximizar el reúso de código (DRY).
 - **Reactive Forms**: Uso de `FormBuilder` para gestionar el estado y la validación del formulario.
 - **UX Flow**: Tras recibir el objeto creado con su ID, el componente utiliza el `Router` de Angular para enviar al usuario a la vista de edición.
 
@@ -42,8 +43,8 @@ Crea un nuevo grado.
 ### Backend (cURL)
 ```bash
 curl -X POST http://localhost:3000/grados \
-  -H \"Content-Type: application/json\" \
-  -d '{\"codigo\": \"GINF\", \"nombre\": \"Grado en Ingeniería Informática\"}'
+  -H "Content-Type: application/json" \
+  -d '{"codigo": "GINF", "nombre": "Grado en Ingeniería Informática"}'
 ```
 
 ## Notas de implementación

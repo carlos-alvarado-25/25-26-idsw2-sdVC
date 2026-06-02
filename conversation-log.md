@@ -781,3 +781,21 @@
 
 **Decisión:** Se oficializa la **Refactorización hacia Componentes Unificados** como estándar para formularios CRUD, priorizando la agilidad de mantenimiento. Se ratifica la **Arquitectura de Capas** (NestJS) como garante de la estabilidad de la API. Se declara el **Ramillete de Grados como Completado**, estableciendo los patrones técnicos definitivos para el resto de entidades del sistema.
 
+
+---
+
+## [03/06/2026 00:49] Sesión 50: Finalización del Ramillete de Grados - Consolidación de Componentes y Depuración Técnica
+
+**Prompt:** "Abramos ahora otra sesión para los casos de uso de editar y eliminar grado... componente de editar y de crear no es el mismo?... pasemos a la implementación de importarGrados()... corrige eso del frontend... actualiza los READMEs de desarrollo"
+
+**Resultado:** 
+- **Consolidación Arquitectónica (DRY):** Ejecución de una refactorización masiva en Angular para unificar los flujos de creación y edición en el nuevo `GradoFormComponent`. Se eliminó la duplicidad de lógica y plantillas, mejorando la mantenibilidad.
+- **Implementación de `editarGrado()` y `eliminarGrado()`:** Codificación de la persistencia incremental mediante `PATCH` y el flujo de borrado seguro con verificación de impacto integrada.
+- **Implementación de `importarGrados()`:** Desarrollo del motor de carga masiva CSV en NestJS con validación de integridad y balance de resultados en el frontend.
+- **Depuración Técnica Crítica:** 
+    - Corrección de escapes de strings en los `template literals` del backend que impedían la visualización de variables en los mensajes de error.
+    - Resolución de conflictos de SSR mediante el uso de `isPlatformBrowser` para proteger el acceso a `localStorage` en el `AuthService`.
+    - Corrección de la URL base en los servicios de Angular.
+- **Sincronización Documental Total:** Actualización de todos los archivos `README.md` en las disciplinas de Diseño y Desarrollo para reflejar el uso de los componentes unificados y los endpoints reales.
+
+**Decisión:** Se oficializa el **Componente Único Dinámico** como el estándar de diseño para formularios CRUD en el proyecto. Se ratifica la importancia de la **Validación Cruzada** entre el código real y los artefactos RUP, asegurando que la documentación sea una fuente de verdad técnica fiable. Se declara el **Bundle 1 (Autenticación + Grados) como Cerrado**, con todos sus componentes operativos y documentados.
