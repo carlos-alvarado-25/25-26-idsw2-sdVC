@@ -1,0 +1,25 @@
+@startuml cerrarSesion-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+package cerrarSesion as "cerrarSesion()" {
+    rectangle #629EF9 MenuPrincipalView
+    rectangle #b5bd68 AuthController
+    rectangle #F2AC4E ":Session" as SessionComponent
+}
+
+rectangle #CDEBA5 ":Sesión Cerrada" as SesionCerrada
+
+SistemaDisponible -r-> MenuPrincipalView: cerrarSesion()
+
+MenuPrincipalView -d-> AuthController: logout()
+AuthController -r-> SessionComponent: destruir()
+
+MenuPrincipalView ..> SesionCerrada: <<navegar>>
+
+@enduml

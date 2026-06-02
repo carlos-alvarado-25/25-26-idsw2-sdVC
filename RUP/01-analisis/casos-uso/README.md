@@ -57,6 +57,10 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 - [completarGestion](completarGestion/README.md) - Análisis del retorno al menú principal desde los hubs de gestión.
 - [completarProceso](completarProceso/README.md) - Análisis del retorno al menú principal tras la generación automática.
 
+### Autenticación y Sesión (Comunes)
+- [iniciarSesion](iniciarSesion/README.md) - Análisis del protocolo de acceso y establecimiento de sesión.
+- [cerrarSesion](cerrarSesion/README.md) - Análisis de la finalización de sesión e invalidación del contexto de seguridad.
+
 
 ## Estructura de análisis
 

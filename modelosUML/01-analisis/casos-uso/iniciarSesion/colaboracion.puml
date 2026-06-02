@@ -1,0 +1,27 @@
+@startuml iniciarSesion-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sesión Cerrada" as SesionCerrada
+
+package iniciarSesion as "iniciarSesion()" {
+    rectangle #629EF9 LoginView
+    rectangle #b5bd68 AuthController
+    rectangle #F2AC4E UsuarioRepository
+    rectangle #F2AC4E ":Session" as SessionComponent
+}
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+SesionCerrada -r-> LoginView: iniciarSesion()
+
+LoginView -d-> AuthController: login(email, password)
+AuthController -d-> UsuarioRepository: validarCredenciales(email, password) : Usuario
+AuthController -r-> SessionComponent: crear(usuario)
+
+LoginView ..> SistemaDisponible: <<navegar>>
+
+@enduml
