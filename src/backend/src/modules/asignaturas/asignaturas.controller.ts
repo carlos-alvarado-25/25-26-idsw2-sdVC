@@ -41,6 +41,11 @@ export class AsignaturaController {
     return this.asignaturaService.findOne(id);
   }
 
+  @Delete('bulk')
+  async removeBulk(@Body('ids') ids: number[]) {
+    return this.asignaturaService.removeBulk(ids);
+  }
+
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
     return this.asignaturaService.remove(id);

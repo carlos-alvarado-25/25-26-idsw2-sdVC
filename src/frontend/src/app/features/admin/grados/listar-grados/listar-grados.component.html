@@ -6,6 +6,9 @@
     <div class="header-main">
       <h1>Gestión de Grados</h1>
       <div class="actions">
+        <button *ngIf="selectedIds().size > 0" class="btn-danger" (click)="eliminarSeleccionados()">
+          🗑️ Eliminar ({{ selectedIds().size }})
+        </button>
         <button class="btn-secondary" [routerLink]="['/admin/grados/importar']">📥 Importar</button>
         <button class="btn-primary" [routerLink]="['/admin/grados/crear']">➕ Nuevo Grado</button>
       </div>
@@ -32,6 +35,9 @@
     <table class="data-table">
       <thead>
         <tr>
+          <th class="col-check">
+            <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($event)">
+          </th>
           <th>Código</th>
           <th>Nombre</th>
           <th>Descripción</th>
@@ -39,7 +45,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let grado of grados()">
+        <tr *ngFor="let grado of grados()" [class.selected]="selectedIds().has(grado.id)">
+          <td class="col-check">
+            <input type="checkbox" [checked]="selectedIds().has(grado.id)" (change)="toggleSelection(grado.id)">
+          </td>
           <td class="font-mono">{{ grado.codigo }}</td>
           <td><strong>{{ grado.nombre }}</strong></td>
           <td class="text-muted">{{ grado.descripcion }}</td>
@@ -49,7 +58,7 @@
           </td>
         </tr>
         <tr *ngIf="grados().length === 0 && !loading()">
-          <td colspan="4" class="no-data">No se encontraron grados registrados.</td>
+          <td colspan="5" class="no-data">No se encontraron grados registrados.</td>
         </tr>
       </tbody>
     </table>

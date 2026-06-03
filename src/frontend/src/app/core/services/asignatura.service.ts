@@ -49,6 +49,10 @@ export class AsignaturaService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  eliminarBulk(ids: number[]): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/bulk`, { body: { ids } });
+  }
+
   importar(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);

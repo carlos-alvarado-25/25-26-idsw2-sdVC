@@ -19,6 +19,9 @@ export class ListarGradosComponent implements OnInit {
   loading = signal(false);
   criterio = '';
 
+  // Selección múltiple
+  selectedIds = signal<Set<number>>(new Set());
+
   constructor(private gradoService: GradoService) {}
 
   ngOnInit(): void {
@@ -28,6 +31,7 @@ export class ListarGradosComponent implements OnInit {
   cargarGrados(page: number = 1): void {
     this.loading.set(true);
     this.currentPage.set(page);
+    this.selectedIds.set(new Set()); // Limpiar selección al cambiar página
 
     const request = this.criterio 
       ? this.gradoService.filtrar(this.criterio, page)
@@ -41,6 +45,46 @@ export class ListarGradosComponent implements OnInit {
         },
         error: (err) => console.error('Error al cargar grados:', err)
       });
+  }
+
+  // Lógica de selección
+  toggleSelectAll(event: any): void {
+    const checked = event.target.checked;
+    if (checked) {
+      const ids = this.grados().map(g => g.id);
+      this.selectedIds.set(new Set(ids));
+    } else {
+      this.selectedIds.set(new Set());
+    }
+  }
+
+  toggleSelection(id: number): void {
+    const next = new Set(this.selectedIds());
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    this.selectedIds.set(next);
+  }
+
+  isAllSelected(): boolean {
+    return this.grados().length > 0 && this.selectedIds().size === this.grados().length;
+  }
+
+  eliminarSeleccionados(): void {
+    const ids = Array.from(this.selectedIds());
+    if (ids.length === 0) return;
+
+    if (confirm(`¿Está seguro de eliminar los ${ids.length} grados seleccionados?`)) {
+      this.loading.set(true);
+      this.gradoService.eliminarBulk(ids)
+        .pipe(finalize(() => this.loading.set(false)))
+        .subscribe({
+          next: () => {
+            this.selectedIds.set(new Set());
+            this.cargarGrados(this.currentPage());
+          },
+          error: (err) => alert('Error al eliminar los grados seleccionados')
+        });
+    }
   }
 
   onSearch(): void {

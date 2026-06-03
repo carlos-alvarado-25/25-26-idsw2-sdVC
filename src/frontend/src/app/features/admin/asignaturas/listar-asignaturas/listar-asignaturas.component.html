@@ -6,6 +6,9 @@
     <div class="header-main">
       <h1>Gestión de Asignaturas</h1>
       <div class="actions">
+        <button *ngIf="selectedIds().size > 0" class="btn-danger" (click)="eliminarSeleccionados()">
+          🗑️ Eliminar ({{ selectedIds().size }})
+        </button>
         <button class="btn-secondary" [routerLink]="['/admin/asignaturas/importar']">📥 Importar</button>
         <button class="btn-primary" [routerLink]="['/admin/asignaturas/crear']">➕ Nueva Asignatura</button>
       </div>
@@ -32,6 +35,9 @@
     <table class="data-table">
       <thead>
         <tr>
+          <th class="col-check">
+            <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($event)">
+          </th>
           <th>Código</th>
           <th>Nombre</th>
           <th>Créditos</th>
@@ -40,7 +46,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let asignatura of asignaturas()">
+        <tr *ngFor="let asignatura of asignaturas()" [class.selected]="selectedIds().has(asignatura.id)">
+          <td class="col-check">
+            <input type="checkbox" [checked]="selectedIds().has(asignatura.id)" (change)="toggleSelection(asignatura.id)">
+          </td>
           <td class="font-mono">{{ asignatura.codigo }}</td>
           <td><strong>{{ asignatura.nombre }}</strong></td>
           <td>{{ asignatura.creditos }} ECTS</td>
@@ -51,7 +60,7 @@
           </td>
         </tr>
         <tr *ngIf="asignaturas().length === 0 && !loading()">
-          <td colspan="5" class="no-data">No se encontraron asignaturas registradas.</td>
+          <td colspan="6" class="no-data">No se encontraron asignaturas registradas.</td>
         </tr>
       </tbody>
     </table>

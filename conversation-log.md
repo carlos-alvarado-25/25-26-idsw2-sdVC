@@ -935,3 +935,18 @@
 - **Trazabilidad 360º:** Activación de enlaces cruzados en toda la documentación RUP del ramillete.
 
 **Decisión:** Se ratifica la consistencia visual del sistema administrativo basándose en el estándar de Grados/Asignaturas. Se establece la estructura CSV (`codigo, nombre, capacidad, edificio, planta, tipo`) como contrato oficial para la integración de infraestructuras.
+
+---
+
+## [04/06/2026 00:54] Sesión 59: Acciones Masivas - Implementación de Eliminación Múltiple
+
+**Prompt:** "Para los componentes de listar, si te das cuenta en los prototipos, al costado izquierda de cada registro tiene un cuadrado de selección donde si selecciono varios y le doy eliminar, me elimina los que yo seleccione. Es posible hacerlo?"
+
+**Resultado:** 
+- **Estandarización de Bulk Actions:** Implementación de la funcionalidad de eliminación múltiple en los ramilletes de Grados, Asignaturas y Aulas.
+- **Backend Refactor:** Activación de endpoints `DELETE /bulk` y métodos `removeBulk` en los servicios de NestJS utilizando `repository.delete([ids])` para eficiencia atómica.
+- **UI de Selección:** Integración de checkboxes en cada fila y selector maestro en el encabezado de las tablas. Se habilitó un botón dinámico "Eliminar (X)" que aparece únicamente al detectar una selección activa.
+- **Lógica Reactiva:** Uso de `signals` para gestionar el estado del `Set` de IDs seleccionados, asegurando que la selección se limpie al cambiar de página o criterio de búsqueda.
+- **Consistencia Visual:** Normalización de estilos CSS (`.col-check`, `.btn-danger`, `tr.selected`) en todos los componentes de listado para coincidir con los prototipos de la fase de requisitos.
+
+**Decisión:** Se establece la selección múltiple como una característica estándar de todos los listados administrativos del sistema. Se decide mantener la simplicidad técnica mediante el uso de diálogos de confirmación nativos para las acciones masivas en esta iteración.

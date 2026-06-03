@@ -6,6 +6,9 @@
     <div class="header-main">
       <h1>Gestión de Aulas (Espacios Físicos)</h1>
       <div class="actions">
+        <button *ngIf="selectedIds().size > 0" class="btn-danger" (click)="eliminarSeleccionados()">
+          🗑️ Eliminar ({{ selectedIds().size }})
+        </button>
         <button class="btn-secondary" [routerLink]="['/admin/aulas/importar']">📥 Importar</button>
         <button class="btn-primary" [routerLink]="['/admin/aulas/crear']">➕ Nueva Aula</button>
       </div>
@@ -32,6 +35,9 @@
     <table class="data-table">
       <thead>
         <tr>
+          <th class="col-check">
+            <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($event)">
+          </th>
           <th>Código</th>
           <th>Nombre</th>
           <th>Capacidad</th>
@@ -41,7 +47,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let aula of aulas()">
+        <tr *ngFor="let aula of aulas()" [class.selected]="selectedIds().has(aula.id)">
+          <td class="col-check">
+            <input type="checkbox" [checked]="selectedIds().has(aula.id)" (change)="toggleSelection(aula.id)">
+          </td>
           <td class="font-mono">{{ aula.codigo }}</td>
           <td><strong>{{ aula.nombre }}</strong></td>
           <td>{{ aula.capacidad }} pers.</td>
@@ -53,7 +62,7 @@
           </td>
         </tr>
         <tr *ngIf="aulas().length === 0 && !loading()">
-          <td colspan="6" class="no-data">No se encontraron aulas registradas.</td>
+          <td colspan="7" class="no-data">No se encontraron aulas registradas.</td>
         </tr>
       </tbody>
     </table>

@@ -39,6 +39,11 @@ export class GradoController {
     return this.gradoService.update(id, updateGradoDto);
   }
 
+  @Delete('bulk')
+  async removeBulk(@Body('ids') ids: number[]) {
+    return this.gradoService.removeBulk(ids);
+  }
+
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
     return this.gradoService.remove(id);

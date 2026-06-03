@@ -20,6 +20,9 @@ export class ListarAsignaturasComponent implements OnInit {
   loading = signal(false);
   criterio = '';
 
+  // Selección múltiple
+  selectedIds = signal<Set<number>>(new Set());
+
   constructor(private asignaturaService: AsignaturaService) {}
 
   ngOnInit(): void {
@@ -29,6 +32,7 @@ export class ListarAsignaturasComponent implements OnInit {
   cargarAsignaturas(page: number = 1): void {
     this.loading.set(true);
     this.currentPage.set(page);
+    this.selectedIds.set(new Set()); // Limpiar selección
 
     const request = this.criterio 
       ? this.asignaturaService.filtrar(this.criterio, page)
@@ -42,6 +46,46 @@ export class ListarAsignaturasComponent implements OnInit {
         },
         error: (err) => console.error('Error al cargar asignaturas:', err)
       });
+  }
+
+  // Lógica de selección
+  toggleSelectAll(event: any): void {
+    const checked = event.target.checked;
+    if (checked) {
+      const ids = this.asignaturas().map(a => a.id);
+      this.selectedIds.set(new Set(ids));
+    } else {
+      this.selectedIds.set(new Set());
+    }
+  }
+
+  toggleSelection(id: number): void {
+    const next = new Set(this.selectedIds());
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    this.selectedIds.set(next);
+  }
+
+  isAllSelected(): boolean {
+    return this.asignaturas().length > 0 && this.selectedIds().size === this.asignaturas().length;
+  }
+
+  eliminarSeleccionados(): void {
+    const ids = Array.from(this.selectedIds());
+    if (ids.length === 0) return;
+
+    if (confirm(`¿Está seguro de eliminar las ${ids.length} asignaturas seleccionadas?`)) {
+      this.loading.set(true);
+      this.asignaturaService.eliminarBulk(ids)
+        .pipe(finalize(() => this.loading.set(false)))
+        .subscribe({
+          next: () => {
+            this.selectedIds.set(new Set());
+            this.cargarAsignaturas(this.currentPage());
+          },
+          error: (err) => alert('Error al eliminar las asignaturas seleccionadas')
+        });
+    }
   }
 
   onSearch(): void {

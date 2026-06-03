@@ -40,6 +40,11 @@ export class AulaController {
     return this.aulaService.update(id, updateAulaDto);
   }
 
+  @Delete('bulk')
+  async removeBulk(@Body('ids') ids: number[]) {
+    return this.aulaService.removeBulk(ids);
+  }
+
   @Delete(':id')
   async remove(@Param('id', ParseIntPipe) id: number) {
     return this.aulaService.remove(id);

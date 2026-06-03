@@ -59,6 +59,10 @@ export class GradoService {
     await this.gradoRepository.remove(grado);
   }
 
+  async removeBulk(ids: number[]): Promise<void> {
+    await this.gradoRepository.delete(ids);
+  }
+
   async importar(buffer: Buffer): Promise<ImportResultDto> {
     const content = buffer.toString('utf-8');
     const lines = content.split(/\r?\n/).filter(line => line.trim().length > 0);

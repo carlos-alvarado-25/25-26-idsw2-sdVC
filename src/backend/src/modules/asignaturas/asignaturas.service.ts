@@ -168,4 +168,8 @@ export class AsignaturaService {
     const asignatura = await this.findOne(id);
     await this.asignaturaRepository.remove(asignatura);
   }
+
+  async removeBulk(ids: number[]): Promise<void> {
+    await this.asignaturaRepository.delete(ids);
+  }
 }

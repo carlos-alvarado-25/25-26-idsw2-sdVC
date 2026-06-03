@@ -17,6 +17,9 @@ export class ListarAulasComponent implements OnInit {
   loading = signal(false);
   criterio = '';
 
+  // Selección múltiple
+  selectedIds = signal<Set<number>>(new Set());
+
   constructor(private aulaService: AulaService) {}
 
   ngOnInit(): void {
@@ -25,6 +28,8 @@ export class ListarAulasComponent implements OnInit {
 
   cargarAulas(): void {
     this.loading.set(true);
+    this.selectedIds.set(new Set()); // Limpiar selección
+
     const request = this.criterio 
       ? this.aulaService.filtrar(this.criterio)
       : this.aulaService.listar();
@@ -34,6 +39,46 @@ export class ListarAulasComponent implements OnInit {
         next: (res) => this.aulas.set(res),
         error: (err) => console.error('Error al cargar aulas:', err)
       });
+  }
+
+  // Lógica de selección
+  toggleSelectAll(event: any): void {
+    const checked = event.target.checked;
+    if (checked) {
+      const ids = this.aulas().map(a => a.id);
+      this.selectedIds.set(new Set(ids));
+    } else {
+      this.selectedIds.set(new Set());
+    }
+  }
+
+  toggleSelection(id: number): void {
+    const next = new Set(this.selectedIds());
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    this.selectedIds.set(next);
+  }
+
+  isAllSelected(): boolean {
+    return this.aulas().length > 0 && this.selectedIds().size === this.aulas().length;
+  }
+
+  eliminarSeleccionados(): void {
+    const ids = Array.from(this.selectedIds());
+    if (ids.length === 0) return;
+
+    if (confirm(`¿Está seguro de eliminar las ${ids.length} aulas seleccionadas?`)) {
+      this.loading.set(true);
+      this.aulaService.eliminarBulk(ids)
+        .pipe(finalize(() => this.loading.set(false)))
+        .subscribe({
+          next: () => {
+            this.selectedIds.set(new Set());
+            this.cargarAulas();
+          },
+          error: (err) => alert('Error al eliminar las aulas seleccionadas')
+        });
+    }
   }
 
   onSearch(): void {

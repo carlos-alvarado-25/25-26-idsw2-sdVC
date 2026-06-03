@@ -100,6 +100,10 @@ export class AulaService {
     await this.aulaRepository.remove(aula);
   }
 
+  async removeBulk(ids: number[]): Promise<void> {
+    await this.aulaRepository.delete(ids);
+  }
+
   async getImpacto(id: number): Promise<{ examenesAsociados: number }> {
     // TODO: Inyectar ExamenRepository y realizar el conteo real cuando se implemente el ramillete de Exámenes.
     return { examenesAsociados: 0 };
