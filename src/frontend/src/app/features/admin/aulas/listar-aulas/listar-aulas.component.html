@@ -1,0 +1,67 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> / <span>🏢 Aulas</span>
+    </div>
+    <div class="header-main">
+      <h1>Gestión de Aulas (Espacios Físicos)</h1>
+      <div class="actions">
+        <button class="btn-secondary" [routerLink]="['/admin/aulas/importar']">📥 Importar</button>
+        <button class="btn-primary" [routerLink]="['/admin/aulas/crear']">➕ Nueva Aula</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="filters-section">
+    <div class="search-box">
+      <input 
+        type="text" 
+        [(ngModel)]="criterio" 
+        (keyup.enter)="onSearch()"
+        placeholder="Buscar por nombre, código o edificio..."
+      >
+      <button (click)="onSearch()" [disabled]="loading()">🔍</button>
+    </div>
+  </section>
+
+  <div class="table-wrapper">
+    <div *ngIf="loading()" class="table-overlay">
+      <div class="loader"></div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Capacidad</th>
+          <th>Edificio / Planta</th>
+          <th>Tipo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aula of aulas()">
+          <td class="font-mono">{{ aula.codigo }}</td>
+          <td><strong>{{ aula.nombre }}</strong></td>
+          <td>{{ aula.capacidad }} pers.</td>
+          <td>{{ aula.edificio }} ({{ aula.planta }})</td>
+          <td><span class="badge">{{ aula.tipo }}</span></td>
+          <td class="table-actions">
+            <button class="btn-icon" [routerLink]="['/admin/aulas/editar', aula.id]" title="Editar">✏️</button>
+            <button class="btn-icon delete" (click)="eliminarAula(aula)" title="Eliminar">🗑️</button>
+          </td>
+        </tr>
+        <tr *ngIf="aulas().length === 0 && !loading()">
+          <td colspan="6" class="no-data">No se encontraron aulas registradas.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="pagination">
+    <div class="pagination-info">
+      Mostrando {{ aulas().length }} registros
+    </div>
+  </footer>
+</div>

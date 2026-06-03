@@ -1,0 +1,73 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> / 
+      <a [routerLink]="['/admin/aulas']">🏢 Aulas</a> / 
+      <span>{{ isEditMode() ? '✏️ Editar' : '➕ Nueva' }}</span>
+    </div>
+    <div class="header-main">
+      <h1>{{ isEditMode() ? 'Editar Aula' : 'Nueva Aula' }}</h1>
+      <button class="btn-secondary" [routerLink]="['/admin/aulas']">Volver al listado</button>
+    </div>
+  </header>
+
+  <form [formGroup]="aulaForm" (ngSubmit)="onSubmit()" class="data-form">
+    <div class="form-grid">
+      <!-- Código -->
+      <div class="form-group">
+        <label for="codigo">Código de Aula*</label>
+        <input id="codigo" type="text" formControlName="codigo" placeholder="Ej: A-101" [readonly]="loading()">
+        <small class="error" *ngIf="aulaForm.get('codigo')?.touched && aulaForm.get('codigo')?.errors?.['required']">
+          El código es obligatorio.
+        </small>
+      </div>
+
+      <!-- Nombre -->
+      <div class="form-group">
+        <label for="nombre">Nombre Descriptivo*</label>
+        <input id="nombre" type="text" formControlName="nombre" placeholder="Ej: Aula de Teoría 1" [readonly]="loading()">
+      </div>
+
+      <!-- Capacidad -->
+      <div class="form-group">
+        <label for="capacidad">Capacidad (Aforo)*</label>
+        <input id="capacidad" type="number" formControlName="capacidad" [readonly]="loading()">
+      </div>
+
+      <!-- Tipo -->
+      <div class="form-group">
+        <label for="tipo">Tipo de Espacio*</label>
+        <select id="tipo" formControlName="tipo">
+          <option value="Teoría">Teoría</option>
+          <option value="Laboratorio">Laboratorio</option>
+          <option value="Salón de Actos">Salón de Actos</option>
+          <option value="Informática">Informática</option>
+        </select>
+      </div>
+
+      <!-- Edificio -->
+      <div class="form-group">
+        <label for="edificio">Edificio*</label>
+        <input id="edificio" type="text" formControlName="edificio" placeholder="Ej: Edificio Central" [readonly]="loading()">
+      </div>
+
+      <!-- Planta -->
+      <div class="form-group">
+        <label for="planta">Planta*</label>
+        <input id="planta" type="text" formControlName="planta" placeholder="Ej: 1ª Planta" [readonly]="loading()">
+      </div>
+    </div>
+
+    <div class="form-feedback" *ngIf="success() || error()">
+      <div class="alert success" *ngIf="success()">✅ Operación completada con éxito.</div>
+      <div class="alert error" *ngIf="error()">❌ {{ error() }}</div>
+    </div>
+
+    <footer class="form-actions">
+      <button type="button" class="btn-ghost" [routerLink]="['/admin/aulas']" [disabled]="loading()">Cancelar</button>
+      <button type="submit" class="btn-primary" [disabled]="aulaForm.invalid || loading()">
+        {{ loading() ? 'Guardando...' : (isEditMode() ? 'Actualizar Cambios' : 'Crear Aula') }}
+      </button>
+    </footer>
+  </form>
+</div>

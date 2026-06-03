@@ -33,6 +33,13 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 - [eliminarAsignatura](casos-uso/eliminarAsignatura/README.md) ✅
 - [importarAsignaturas](casos-uso/importarAsignaturas/README.md) ✅
 
+#### Gestión de Aulas
+- [abrirAulas](casos-uso/abrirAulas/README.md) ✅
+- [crearAula](casos-uso/crearAula/README.md) ✅
+- [editarAula](casos-uso/editarAula/README.md) ✅
+- [eliminarAula](casos-uso/eliminarAula/README.md) ✅
+- [importarAulas](casos-uso/importarAulas/README.md) ✅
+
 
 ## Estándares de Codificación
 Se siguen las directrices definidas en el [Documento de Configuración del Proyecto](/RUP/02-diseño/configuracion-proyecto.md).

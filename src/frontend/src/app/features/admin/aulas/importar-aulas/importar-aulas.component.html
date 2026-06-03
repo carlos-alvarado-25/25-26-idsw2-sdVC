@@ -1,0 +1,72 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> / 
+      <a [routerLink]="['/admin/aulas']">🏢 Aulas</a> / 
+      <span>📥 Importar</span>
+    </div>
+    <h1>Importar Aulas desde Archivo</h1>
+  </header>
+
+  <div class="import-card">
+    <div class="import-instructions">
+      <h3>Instrucciones</h3>
+      <p>Cargue un archivo CSV con el siguiente formato (incluyendo cabecera opcional):</p>
+      <code class="format-code">codigo, nombre, capacidad, edificio, planta, tipo</code>
+      <p>Formatos soportados: <strong>.csv</strong></p>
+    </div>
+
+    <div class="upload-section">
+      <div class="file-drop-area">
+        <input 
+          type="file" 
+          id="fileInput" 
+          (change)="onFileSelected($event)" 
+          accept=".csv"
+          class="file-input"
+        >
+        <label for="fileInput" class="file-label">
+          <span class="icon">📁</span>
+          <span>{{ selectedFile ? selectedFile.name : 'Seleccione o arrastre un archivo' }}</span>
+        </label>
+      </div>
+
+      <div *ngIf="error()" class="error-alert">
+        {{ error() }}
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-secondary" [routerLink]="['/admin/aulas']">Regresar</button>
+        <button 
+          class="btn-primary" 
+          [disabled]="!selectedFile || loading()" 
+          (click)="onUpload()"
+        >
+          <span *ngIf="!loading()">Iniciar Importación</span>
+          <span *ngIf="loading()" class="loader"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Resultados -->
+    <div *ngIf="result()" class="results-section">
+      <div class="result-summary">
+        <div class="stat success">
+          <span class="value">{{ result().exitos }}</span>
+          <span class="label">Éxitos</span>
+        </div>
+        <div class="stat failure">
+          <span class="value">{{ result().fallos }}</span>
+          <span class="label">Fallos</span>
+        </div>
+      </div>
+
+      <div *ngIf="result().detalles.length > 0" class="details-list">
+        <h4>Detalles del proceso:</h4>
+        <ul>
+          <li *ngFor="let msg of result().detalles">{{ msg }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
