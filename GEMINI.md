@@ -35,6 +35,7 @@ Este archivo contiene los compromisos, protocolos y estándares de ingeniería o
     *   Este formato es vital para la compatibilidad con los scripts de generación de Timeline.
 4.  **Actualización de Índices (CRÍTICO):** Al finalizar el análisis de un caso de uso o una rama funcional, es **OBLIGATORIO** actualizar el archivo `RUP/01-analisis/casos-uso/README.md` incluyendo los nuevos artefactos en la lista de casos de uso analizados, manteniendo la estructura de categorías por actor o entidad.
 6. **Mantenimiento de Trazabilidad (Breadcrumbs):** Al finalizar cada sesión, es **OBLIGATORIO** revisar y actualizar los breadcrumbs (menús de navegación superior) de los READMEs afectados. Se deben incluir enlaces funcionales a las fases completadas (Análisis, Diseño, Desarrollo) para asegurar la navegación 360º del proyecto.
+7. **Consistencia Visual (UI/UX):** Todos los nuevos ramilletes funcionales deben heredar y replicar estrictamente los estilos CSS y estructuras HTML definidos en el ramillete de referencia (Grados). Se debe priorizar la reutilización de clases utilitarias (`admin-container`, `data-table`, `data-form`, etc.) para garantizar una experiencia de usuario cohesiva en todo el sistema administrativo.
 
 
 ## Estándares de Documentación

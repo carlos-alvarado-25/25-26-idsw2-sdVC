@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="450px" preserveAspectRatio="none" style="width:833px;height:450px;" version="1.1" viewBox="0 0 833 450" width="833px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="289" x="275.5" y="12.8281">Esquema de Base de Datos (Modelo Físico - MySQL)</text><!--MD5=[0e9ce6df5b8205fa3c94ed60aa73539a]
+class usuario--><rect fill="#FEFECE" height="127.7206" id="usuario" style="stroke: #A80036; stroke-width: 1.5;" width="250" x="6" y="32.3441"/><ellipse cx="105" cy="47.3441" fill="#ADD1B2" rx="10" ry="10" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M107.4375,51.8441 L101.9844,51.8441 L101.9844,43.0941 L107.4375,43.0941 L107.4375,44.6254 L103.7188,44.6254 L103.7188,46.5004 L107.0781,46.5004 L107.0781,48.0316 L103.7188,48.0316 L103.7188,50.3129 L107.4375,50.3129 L107.4375,51.8441 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="44" x="124" y="52.0001">Usuario</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="255" y1="62.3441" y2="62.3441"/><ellipse cx="17" cy="73.3441" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="68" x="25" y="79.1722">id : INT «PK»</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="7" x2="255" y1="86.6882" y2="86.6882"/><ellipse cx="17" cy="97.6882" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="160" x="25" y="103.5163">email : VARCHAR(100) «UNI»</text><ellipse cx="17" cy="114.0323" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="146" x="25" y="119.8604">password : VARCHAR(255)</text><ellipse cx="17" cy="130.3765" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="225" x="25" y="136.2045">rol : ENUM('Admin', 'Profesor', 'Alumno')</text><ellipse cx="17" cy="146.7206" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="159" x="25" y="152.5487">fechaCreacion : TIMESTAMP</text><!--MD5=[c17c606a7cf4c7bfb9d170d8cf9c6c6c]
+class grado--><rect fill="#FEFECE" height="144.0647" id="grado" style="stroke: #A80036; stroke-width: 1.5;" width="208" x="291" y="24.3441"/><ellipse cx="373.5" cy="39.3441" fill="#ADD1B2" rx="10" ry="10" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M375.9375,43.8441 L370.4844,43.8441 L370.4844,35.0941 L375.9375,35.0941 L375.9375,36.6254 L372.2188,36.6254 L372.2188,38.5004 L375.5781,38.5004 L375.5781,40.0316 L372.2188,40.0316 L372.2188,42.3129 L375.9375,42.3129 L375.9375,43.8441 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="35" x="392.5" y="44.0001">Grado</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="292" x2="498" y1="54.3441" y2="54.3441"/><ellipse cx="302" cy="65.3441" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="68" x="310" y="71.1722">id : INT «PK»</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="292" x2="498" y1="78.6882" y2="78.6882"/><ellipse cx="302" cy="89.6882" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="159" x="310" y="95.5163">codigo : VARCHAR(20) «UNI»</text><ellipse cx="302" cy="106.0323" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="136" x="310" y="111.8604">nombre : VARCHAR(100)</text><ellipse cx="302" cy="122.3765" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="101" x="310" y="128.2045">descripcion : TEXT</text><ellipse cx="302" cy="138.7206" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="159" x="310" y="144.5487">fechaCreacion : TIMESTAMP</text><ellipse cx="302" cy="155.0647" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="183" x="310" y="160.8928">fechaActualizacion : TIMESTAMP</text><!--MD5=[c1bb4b88454d8ba78c8ed4d80a7a0060]
+class curso--><rect fill="#FEFECE" height="127.7206" id="curso" style="stroke: #A80036; stroke-width: 1.5;" width="288" x="534" y="32.3441"/><ellipse cx="626.5" cy="47.3441" fill="#ADD1B2" rx="10" ry="10" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M628.9375,51.8441 L623.4844,51.8441 L623.4844,43.0941 L628.9375,43.0941 L628.9375,44.6254 L625.2188,44.6254 L625.2188,46.5004 L628.5781,46.5004 L628.5781,48.0316 L625.2188,48.0316 L625.2188,50.3129 L628.9375,50.3129 L628.9375,51.8441 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="95" x="645.5" y="52.0001">CursoAcademico</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="535" x2="821" y1="62.3441" y2="62.3441"/><ellipse cx="545" cy="73.3441" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="68" x="553" y="79.1722">id : INT «PK»</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="535" x2="821" y1="86.6882" y2="86.6882"/><ellipse cx="545" cy="97.6882" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="263" x="553" y="103.5163">nombre : VARCHAR(20) «UNI» (ej. "2025/2026")</text><ellipse cx="545" cy="114.0323" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="98" x="553" y="119.8604">activo : BOOLEAN</text><ellipse cx="545" cy="130.3765" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="159" x="553" y="136.2045">fechaCreacion : TIMESTAMP</text><ellipse cx="545" cy="146.7206" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="183" x="553" y="152.5487">fechaActualizacion : TIMESTAMP</text><!--MD5=[9153bce481745059500235327cb44c9a]
+class asignatura--><rect fill="#FEFECE" height="193.097" id="asignatura" style="stroke: #A80036; stroke-width: 1.5;" width="208" x="432" y="246.3441"/><ellipse cx="501.5" cy="261.3441" fill="#ADD1B2" rx="10" ry="10" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M503.9375,265.8441 L498.4844,265.8441 L498.4844,257.0941 L503.9375,257.0941 L503.9375,258.6254 L500.2188,258.6254 L500.2188,260.5004 L503.5781,260.5004 L503.5781,262.0316 L500.2188,262.0316 L500.2188,264.3129 L503.9375,264.3129 L503.9375,265.8441 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="61" x="520.5" y="266.0001">Asignatura</text><line style="stroke: #A80036; stroke-width: 1.5;" x1="433" x2="639" y1="276.3441" y2="276.3441"/><ellipse cx="443" cy="287.3441" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="68" x="451" y="293.1722">id : INT «PK»</text><line style="stroke: #A80036; stroke-width: 1.0;" x1="433" x2="639" y1="300.6882" y2="300.6882"/><ellipse cx="443" cy="311.6882" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="159" x="451" y="317.5163">codigo : VARCHAR(20) «UNI»</text><ellipse cx="443" cy="328.0323" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="136" x="451" y="333.8604">nombre : VARCHAR(150)</text><ellipse cx="443" cy="344.3765" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="74" x="451" y="350.2045">creditos : INT</text><ellipse cx="443" cy="360.7206" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="108" x="451" y="366.5487">nivel : INT (1, 2, 3...)</text><ellipse cx="443" cy="377.0647" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="101" x="451" y="382.8928">gradoId : INT «FK»</text><ellipse cx="443" cy="393.4088" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="161" x="451" y="399.2369">cursoAcademicoId : INT «FK»</text><ellipse cx="443" cy="409.7529" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="159" x="451" y="415.581">fechaCreacion : TIMESTAMP</text><ellipse cx="443" cy="426.097" fill="#000000" rx="3" ry="3" style="stroke: #000000; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="183" x="451" y="431.9251">fechaActualizacion : TIMESTAMP</text><!--MD5=[d949f8491ae917490b5fd2e45ea457e0]
+link grado to asignatura--><path d="M465.5,176.6341 C465.5,176.6341 465.5,238.2841 465.5,238.2841 " fill="none" id="grado-asignatura" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="465.5" x2="471.5" y1="238.2841" y2="246.2841"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="465.5" x2="459.5" y1="238.2841" y2="246.2841"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="465.5" x2="465.5" y1="238.2841" y2="246.2841"/><ellipse cx="465.5" cy="232.2841" fill="none" rx="4" ry="4" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="461.5" x2="469.5" y1="172.6341" y2="172.6341"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="461.5" x2="469.5" y1="175.6341" y2="175.6341"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="465.5" x2="465.5" y1="176.6341" y2="168.6341"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="67" x="396" y="212.1722">pertenece a</text><!--MD5=[417bf62f05e95832a2bd19f84cd270c7]
+link curso to asignatura--><path d="M587,168.4641 C587,168.4641 587,238.0441 587,238.0441 " fill="none" id="curso-asignatura" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="587" x2="593" y1="238.0441" y2="246.0441"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="587" x2="581" y1="238.0441" y2="246.0441"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="587" x2="587" y1="238.0441" y2="246.0441"/><ellipse cx="587" cy="232.0441" fill="none" rx="4" ry="4" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="583" x2="591" y1="164.4641" y2="164.4641"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="583" x2="591" y1="167.4641" y2="167.4641"/><line style="stroke: #A80036; stroke-width: 1.0;" x1="587" x2="587" y1="168.4641" y2="160.4641"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="51" x="679" y="212.1722">oferta en</text><!--MD5=[a1245d0384da713bd0b427e406cce1e2]
+@startuml esquema-er
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype ortho
+
+title Esquema de Base de Datos (Modelo Físico - MySQL)
+
+entity "Usuario" as usuario {
+  * id : INT <<PK>>
+  - -
+  * email : VARCHAR(100) <<UNI>>
+  * password : VARCHAR(255)
+  * rol : ENUM('Admin', 'Profesor', 'Alumno')
+  * fechaCreacion : TIMESTAMP
+}
+
+entity "Grado" as grado {
+  * id : INT <<PK>>
+  - -
+  * codigo : VARCHAR(20) <<UNI>>
+  * nombre : VARCHAR(100)
+  * descripcion : TEXT
+  * fechaCreacion : TIMESTAMP
+  * fechaActualizacion : TIMESTAMP
+}
+
+entity "CursoAcademico" as curso {
+  * id : INT <<PK>>
+  - -
+  * nombre : VARCHAR(20) <<UNI>> (ej. "2025/2026")
+  * activo : BOOLEAN
+  * fechaCreacion : TIMESTAMP
+  * fechaActualizacion : TIMESTAMP
+}
+
+entity "Asignatura" as asignatura {
+  * id : INT <<PK>>
+  - -
+  * codigo : VARCHAR(20) <<UNI>>
+  * nombre : VARCHAR(150)
+  * creditos : INT
+  * nivel : INT (1, 2, 3...)
+  * gradoId : INT <<FK>>
+  * cursoAcademicoId : INT <<FK>>
+  * fechaCreacion : TIMESTAMP
+  * fechaActualizacion : TIMESTAMP
+}
+
+grado ||- -o{ asignatura : "pertenece a"
+curso ||- -o{ asignatura : "oferta en"
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.10+7-Ubuntu-125.10
+Operating System: Linux
+Default Encoding: UTF-8
+Language: es
+Country: ES
+--></g></svg>

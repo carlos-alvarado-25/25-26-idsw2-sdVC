@@ -1,0 +1,59 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> / 
+      <a [routerLink]="['/admin/asignaturas']">📚 Asignaturas</a> / 
+      <span>{{ isEditMode() ? '✏️ Editar' : '➕ Nueva' }}</span>
+    </div>
+    <div class="header-main">
+      <h1>{{ isEditMode() ? 'Editar Asignatura' : 'Nueva Asignatura' }}</h1>
+      <button class="btn-secondary" [routerLink]="['/admin/asignaturas']">Volver al listado</button>
+    </div>
+  </header>
+
+  <form [formGroup]="asignaturaForm" (ngSubmit)="onSubmit()" class="data-form">
+    <div class="form-grid">
+      <!-- Código -->
+      <div class="form-group">
+        <label for="codigo">Código de Asignatura*</label>
+        <input id="codigo" type="text" formControlName="codigo" placeholder="Ej: INF101" [readonly]="loading()">
+        <small class="error" *ngIf="asignaturaForm.get('codigo')?.touched && asignaturaForm.get('codigo')?.errors?.['required']">
+          El código es obligatorio.
+        </small>
+      </div>
+
+      <!-- Nombre -->
+      <div class="form-group">
+        <label for="nombre">Nombre de la Materia*</label>
+        <input id="nombre" type="text" formControlName="nombre" placeholder="Ej: Álgebra Lineal" [readonly]="loading()">
+      </div>
+
+      <!-- Créditos -->
+      <div class="form-group">
+        <label for="creditos">Créditos ECTS*</label>
+        <input id="creditos" type="number" formControlName="creditos" [readonly]="loading()">
+      </div>
+
+      <!-- Grado Selector -->
+      <div class="form-group">
+        <label for="gradoId">Grado Académico*</label>
+        <select id="gradoId" formControlName="gradoId">
+          <option value="" disabled>Seleccione un grado...</option>
+          <option *ngFor="let g of grados()" [value]="g.id">{{ g.nombre }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-feedback" *ngIf="success() || error()">
+      <div class="alert success" *ngIf="success()">✅ Operación completada con éxito.</div>
+      <div class="alert error" *ngIf="error()">❌ {{ error() }}</div>
+    </div>
+
+    <footer class="form-actions">
+      <button type="button" class="btn-ghost" [routerLink]="['/admin/asignaturas']" [disabled]="loading()">Cancelar</button>
+      <button type="submit" class="btn-primary" [disabled]="asignaturaForm.invalid || loading()">
+        {{ loading() ? 'Guardando...' : (isEditMode() ? 'Actualizar Cambios' : 'Crear Asignatura') }}
+      </button>
+    </footer>
+  </form>
+</div>

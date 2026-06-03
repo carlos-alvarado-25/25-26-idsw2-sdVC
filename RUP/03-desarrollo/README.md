@@ -1,7 +1,7 @@
 # IdSw 2 > Disciplina de Desarrollo
 
 > |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/README.md)|[📂 Diseño](/RUP/02-diseño/README.md)|**Desarrollo**|Pruebas|
-> |-|-|-|-|-|
+> |-|-|-|-|-|-|-|
 
 Esta sección documenta la **Disciplina de Desarrollo** (Implementación) del sistema, detallando la codificación de los componentes del backend (NestJS) y frontend (Angular) basándose en los artefactos de diseño.
 
@@ -25,6 +25,13 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 - [editarGrado](casos-uso/editarGrado/README.md) ✅
 - [eliminarGrado](casos-uso/eliminarGrado/README.md) ✅
 - [importarGrados](casos-uso/importarGrados/README.md) ✅
+
+#### Gestión de Asignaturas
+- [abrirAsignaturas](casos-uso/abrirAsignaturas/README.md) ✅
+- [crearAsignatura](casos-uso/crearAsignatura/README.md) ✅
+- [editarAsignatura](casos-uso/editarAsignatura/README.md) ✅
+- [eliminarAsignatura](casos-uso/eliminarAsignatura/README.md) ✅
+- [importarAsignaturas](casos-uso/importarAsignaturas/README.md) ✅
 
 
 ## Estándares de Codificación

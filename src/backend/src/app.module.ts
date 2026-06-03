@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { Usuario } from './entities/usuario.entity';
 import { Grado } from './entities/grado.entity';
+import { Asignatura } from './entities/asignatura.entity';
 import { AuthModule } from './modules/auth/auth.module';
 import { GradoModule } from './modules/grados/grados.module';
+import { AsignaturasModule } from './modules/asignaturas/asignaturas.module';
 
 @Module({
   imports: [
@@ -20,13 +20,14 @@ import { GradoModule } from './modules/grados/grados.module';
       username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || 'password',
       database: process.env.DB_DATABASE || 'generador_calendarios',
-      entities: [Usuario, Grado],
+      entities: [Usuario, Grado, Asignatura],
       synchronize: false,
     }),
     AuthModule,
     GradoModule,
+    AsignaturasModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

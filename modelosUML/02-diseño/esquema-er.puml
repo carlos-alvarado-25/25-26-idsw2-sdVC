@@ -1,0 +1,54 @@
+@startuml esquema-er
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype ortho
+
+title Esquema de Base de Datos (Modelo Físico - MySQL)
+
+entity "Usuario" as usuario {
+  * id : INT <<PK>>
+  --
+  * email : VARCHAR(100) <<UNI>>
+  * password : VARCHAR(255)
+  * rol : ENUM('Admin', 'Profesor', 'Alumno')
+  * fechaCreacion : TIMESTAMP
+}
+
+entity "Grado" as grado {
+  * id : INT <<PK>>
+  --
+  * codigo : VARCHAR(20) <<UNI>>
+  * nombre : VARCHAR(100)
+  * descripcion : TEXT
+  * fechaCreacion : TIMESTAMP
+  * fechaActualizacion : TIMESTAMP
+}
+
+entity "CursoAcademico" as curso {
+  * id : INT <<PK>>
+  --
+  * nombre : VARCHAR(20) <<UNI>> (ej. "2025/2026")
+  * activo : BOOLEAN
+  * fechaCreacion : TIMESTAMP
+  * fechaActualizacion : TIMESTAMP
+}
+
+entity "Asignatura" as asignatura {
+  * id : INT <<PK>>
+  --
+  * codigo : VARCHAR(20) <<UNI>>
+  * nombre : VARCHAR(150)
+  * creditos : INT
+  * nivel : INT (1, 2, 3...)
+  * gradoId : INT <<FK>>
+  * cursoAcademicoId : INT <<FK>>
+  * fechaCreacion : TIMESTAMP
+  * fechaActualizacion : TIMESTAMP
+}
+
+grado ||--o{ asignatura : "pertenece a"
+curso ||--o{ asignatura : "oferta en"
+
+@enduml

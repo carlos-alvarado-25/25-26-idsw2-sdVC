@@ -81,11 +81,19 @@ src/frontend/src/app/
 - **Naming Strategy**: CamelCase forzado para tablas y columnas.
 - **Sincronización**: Desactivada en producción; gestionada mediante migraciones controladas.
 
-## Esquema de Base de Datos Inicial (MySQL)
+## Esquema de Base de Datos Refinado (MySQL)
+
+<div align=center>
+
+|![Esquema ER](/images/02-diseño/esquema-er.svg)|
+|-|
+|Código fuente: [esquema-er.puml](/modelosUML/02-diseño/esquema-er.puml)|
+
+</div>
+
+### Definición de Tablas
 
 ```sql
--- Estructura simplificada para el primer ramillete funcional
-
 CREATE TABLE Usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -99,17 +107,32 @@ CREATE TABLE Grado (
     codigo VARCHAR(20) UNIQUE NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
-    fechaActualizacion DATETIME ON UPDATE CURRENT_TIMESTAMP
+    fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE CursoAcademico (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(20) UNIQUE NOT NULL, -- Ej: "2025/2026"
+    activo BOOLEAN DEFAULT TRUE,
+    fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE Asignatura (
     id INT PRIMARY KEY AUTO_INCREMENT,
     codigo VARCHAR(20) UNIQUE NOT NULL,
-    nombre VARCHAR(100) NOT NULL,
+    nombre VARCHAR(150) NOT NULL,
     creditos INT NOT NULL,
-    idGrado INT,
-    FOREIGN KEY (idGrado) REFERENCES Grado(id)
+    nivel INT NOT NULL, -- 1º, 2º, 3º...
+    gradoId INT NOT NULL,
+    cursoAcademicoId INT NOT NULL,
+    fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (gradoId) REFERENCES Grado(id) ON DELETE CASCADE,
+    FOREIGN KEY (cursoAcademicoId) REFERENCES CursoAcademico(id)
 );
+```
 
 -- Datos de inicialización
 INSERT INTO Usuario (email, password, rol) VALUES ('admin@idsw2.edu', 'hash_bcrypt_admin', 'Admin');

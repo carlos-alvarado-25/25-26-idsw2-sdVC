@@ -1,6 +1,6 @@
 # IdSw 2 > importarAsignaturas > Diseño
 
-> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/importarAsignaturas/README.md)|**Diseño**|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/importarAsignaturas/README.md)|**Diseño**|[⚙️ Desarrollo](/RUP/03-desarrollo/casos-uso/importarAsignaturas/README.md)|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -39,7 +39,7 @@ Realización del diseño detallado para el caso de uso `importarAsignaturas()`, 
 |---------|-------------|------|
 | `codigo` | Código único de la asignatura | String |
 | `nombre` | Nombre de la asignatura | String |
-| `curso` | Curso al que pertenece | Number |
+| `creditos` | Número de créditos ECTS | Number |
 | `grado_codigo` | Código del Grado asociado | String |
 
 #### ImportResultDto
