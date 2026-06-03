@@ -57,5 +57,8 @@ Definición de la estructura de directorios del código fuente y políticas de i
 
 ### Gestión de Asignaturas
 - [abrirAsignaturas](casos-uso/abrirAsignaturas/README.md) - Diseño del listado paginado con vinculación de Grado.
+- [crearAsignatura](casos-uso/crearAsignatura/README.md) - Diseño de la creación rápida y transición a edición.
+- [editarAsignatura](casos-uso/editarAsignatura/README.md) - Diseño de la actualización incremental y estado singular.
+- [eliminarAsignatura](casos-uso/eliminarAsignatura/README.md) - Diseño del borrado seguro con diagnóstico de impacto.
 - [importarAsignaturas](casos-uso/importarAsignaturas/README.md) - Diseño de la carga masiva y resolución de integridad referencial.
 

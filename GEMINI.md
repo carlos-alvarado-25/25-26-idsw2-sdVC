@@ -28,7 +28,7 @@ Este archivo contiene los compromisos, protocolos y estándares de ingeniería o
 2.  **Registro Interno:** Durante la sesión, Gemini recopilará internamente todos los cambios, decisiones y razonamientos sin escribirlos en el log público.
 3.  **Actualización del Log (`conversation-log.md`):**
     *   **PROHIBIDO** reescribir o modificar entradas anteriores. El log es una bitácora histórica incremental.
-    *   **ÚNICAMENTE** se realizará una **nueva entrada** (append) al final del archivo cuando el usuario indique explícitamente: *"Terminamos la sesión"*, *"Cerramos la sesión"* o similar.
+    *   **ÚNICAMENTE** se realizará una **nueva entrada** (append) al final del archivo cuando el usuario indique explícitamente: *"Terminamos la sesión"*, *"Cerramos la sesión"* o similar. Debe incluirse siempre un separador `---` antes del título de la nueva sesión.
     *   **EXCEPCIÓN:** Solo se puede escribir en el log durante la sesión si el usuario lo ordena explícitamente mediante un comando directo.
     *   **Formato de Cabecera (CRÍTICO):** Todas las entradas deben comenzar con un encabezado de segundo nivel (`##`) siguiendo **ESTRICTAMENTE** el formato: `## [DD/MM/YYYY HH:MM] Título de la Sesión`.
     *   **Ejemplo:** `## [27/05/2026 22:15] Rama de Aulas - Estandarización`.

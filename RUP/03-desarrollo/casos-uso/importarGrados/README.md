@@ -1,7 +1,7 @@
 # IdSw 2 > importarGrados > Desarrollo
 
-> |[🏠️](/RUP/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/importarGrados/README.md)|[📂 Diseño](/RUP/02-diseño/casos-uso/importarGrados/README.md)|**Desarrollo**|Pruebas|
-> |-|-|-|-|-|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/importarGrados/README.md)|[📂 Diseño](/RUP/02-diseño/casos-uso/importarGrados/README.md)|**Desarrollo**|Pruebas|
+> |-|-|-|-|-|-|-|
 
 - **Backend:** [grados.controller.ts](/src/backend/src/modules/grados/grados.controller.ts) · [grados.service.ts](/src/backend/src/modules/grados/grados.service.ts) · [import-result.dto.ts](/src/backend/src/modules/grados/dto/import-result.dto.ts)
 - **Frontend:** [importar-grados.component.ts](/src/frontend/src/app/features/admin/grados/importar-grados/importar-grados.component.ts) · [grado.service.ts](/src/frontend/src/app/core/services/grado.service.ts)

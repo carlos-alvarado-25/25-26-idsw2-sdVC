@@ -1,7 +1,7 @@
 # IdSw 2 > cerrarSesion > Desarrollo
 
-> |[🏠️](/RUP/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/cerrarSesion/README.md)|[📂 Diseño](/RUP/02-diseño/casos-uso/cerrarSesion/README.md)|**Desarrollo**|Pruebas|
-> |-|-|-|-|-|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/cerrarSesion/README.md)|[📂 Diseño](/RUP/02-diseño/casos-uso/cerrarSesion/README.md)|**Desarrollo**|Pruebas|
+> |-|-|-|-|-|-|-|
 
 - **Backend:** [auth.controller.ts](/src/backend/src/modules/auth/auth.controller.ts) · [auth.service.ts](/src/backend/src/modules/auth/auth.service.ts)
 - **Frontend:** [auth.service.ts](/src/frontend/src/app/core/services/auth.service.ts) · [home.component.ts](/src/frontend/src/app/features/home/home.component.ts)

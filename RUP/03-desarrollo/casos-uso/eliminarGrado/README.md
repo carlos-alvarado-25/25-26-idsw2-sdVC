@@ -1,7 +1,7 @@
 # IdSw 2 > eliminarGrado > Desarrollo
 
-> |[🏠️](/RUP/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/eliminarGrado/README.md)|[📂 Diseño](/RUP/02-diseño/casos-uso/eliminarGrado/README.md)|**Desarrollo**|Pruebas|
-> |-|-|-|-|-|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/eliminarGrado/README.md)|[📂 Diseño](/RUP/02-diseño/casos-uso/eliminarGrado/README.md)|**Desarrollo**|Pruebas|
+> |-|-|-|-|-|-|-|
 
 - **Backend:** [grados.controller.ts](/src/backend/src/modules/grados/grados.controller.ts) · [grados.service.ts](/src/backend/src/modules/grados/grados.service.ts)
 - **Frontend:** [listar-grados.component.ts](/src/frontend/src/app/features/admin/grados/listar-grados/listar-grados.component.ts)

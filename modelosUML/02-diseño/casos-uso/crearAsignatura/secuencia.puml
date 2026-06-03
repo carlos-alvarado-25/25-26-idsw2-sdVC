@@ -1,0 +1,46 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: crearAsignatura() (Patrón El Delgado)
+
+actor Administrador
+boundary AsignaturaFormComponent <<Angular>>
+control AsignaturaApiService <<Angular>>
+control AsignaturaController <<NestJS>>
+participant AsignaturaService <<NestJS>>
+participant GradoRepository <<TypeORM>>
+participant AsignaturaRepository <<TypeORM>>
+database MySQL
+
+Administrador -> AsignaturaFormComponent : ingresarDatosMinimos(codigo, nombre, curso, gradoId)
+AsignaturaFormComponent -> AsignaturaApiService : crear(dto)
+AsignaturaApiService -> AsignaturaController : POST /asignaturas
+activate AsignaturaController
+
+AsignaturaController -> AsignaturaService : create(dto)
+activate AsignaturaService
+
+AsignaturaService -> GradoRepository : findOne(gradoId)
+AsignaturaService -> AsignaturaRepository : findByCodigo(codigo)
+AsignaturaService -> AsignaturaRepository : save(nuevaAsignatura)
+activate AsignaturaRepository
+AsignaturaRepository -> MySQL : INSERT INTO asignatura ...
+MySQL --> AsignaturaRepository : OK (id)
+deactivate AsignaturaRepository
+
+AsignaturaService --> AsignaturaController : asignaturaCreada
+deactivate AsignaturaService
+
+AsignaturaController --> AsignaturaApiService : 201 Created (asignatura)
+deactivate AsignaturaController
+
+AsignaturaApiService --> AsignaturaFormComponent : asignatura
+AsignaturaFormComponent -> AsignaturaFormComponent : redireccionarAEditar(id)
+AsignaturaFormComponent --> Administrador : mostrarMensajeExito()
+
+@enduml

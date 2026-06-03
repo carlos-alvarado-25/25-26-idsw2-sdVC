@@ -829,3 +829,35 @@
 - **Protocolo de Ingeniería:** Actualización de `GEMINI.md` para automatizar la revisión de breadcrumbs al cierre de cada sesión.
 
 **Decisión:** Se ratifica el orden de construcción basado en dependencias de dominio (`Grado -> Asignatura -> Examen`). Se decide centralizar la validación de integridad referencial en el `AsignaturaService` durante la importación para evitar inconsistencias en la base de datos MySQL.
+
+---
+
+## [03/06/2026 17:50] Sesión 52: Rama de Asignaturas - Diseño Detallado Completo
+
+**Prompt:** "Hagamos el diseño entonces del ramillete de Asignaturas entonces. ... Vamos ahora con crear y editar Asignaturas ... Finalicemos la sesión, con esos 2 casos de uso diseñados ya (luego rectificado para continuar)"
+
+**Resultado:** 
+- **Realización de Diseño del Ramillete de Asignaturas:** Finalización de los 5 casos de uso de la rama funcional de Asignaturas en la disciplina de diseño.
+- **Caso `importarAsignaturas()`:** Diseño de carga masiva con resolución de integridad referencial contra `Grado`.
+- **Caso `abrirAsignaturas()`:** Diseño de listado paginado y joins de base de datos.
+- **Casos `crearAsignatura()` y `editarAsignatura()`:** Diseño del componente unificado `AsignaturaFormComponent` aplicando el patrón "El Delgado" y navegación por estado singular.
+- **Caso `eliminarAsignatura()`:** Diseño de borrado seguro con diagnóstico de impacto cuantitativo contra `ExamenRepository`.
+- **Artefactos Técnicos:** Generación de diagramas de secuencia (`.puml` + `.svg`) y documentación RUP para cada caso de uso.
+- **Gobernanza:** Actualización de `GEMINI.md` para incluir el mantenimiento de breadcrumbs como protocolo obligatorio y actualización del índice maestro de diseño.
+
+**Decisión:** Se consolida la arquitectura de 3 capas para la gestión de asignaturas. Se decide utilizar el método `PATCH` para actualizaciones parciales y el patrón de diagnóstico previo a la eliminación para proteger la integridad del calendario académico. Se ratifica la dependencia estructural `Grado -> Asignatura` como eje de las validaciones en el backend.
+
+---
+
+## [03/06/2026 17:54] Sesión 53: Excelencia en Trazabilidad - Normalización Global de Breadcrumbs
+
+**Prompt:** "Pero verifica los breadcrumps de análisis también y en general de todo el proyecto"
+
+**Resultado:** 
+- **Auditoría y Normalización 360º:** Se ha realizado una revisión exhaustiva de todos los archivos `README.md` del directorio `RUP/` para asegurar la consistencia total de la navegación superior (breadcrumbs).
+- **Estandarización de 7 Columnas:** Se ha aplicado el formato de 7 columnas (`🏠️|📊|Detalle|Análisis|Diseño|Desarrollo|Pruebas`) en todos los casos de uso, permitiendo saltar entre fases de forma inmediata.
+- **Vinculación Dinámica:** Se han activado enlaces a las fases de Análisis, Diseño y Desarrollo para todos los casos de uso que ya cuentan con artefactos en dichas carpetas (ej. Grados, Asignaturas, Autenticación).
+- **Trazabilidad de Requisitos:** Todos los breadcrumbs ahora incluyen accesos directos al Diagrama de Contexto y al Detalle de Casos de Uso de la fase de Requisitos.
+- **Integridad Visual:** Se han normalizado los iconos (`🔍`, `📂`, `⚙️`) y el resaltado en negrita de la fase activa en cada documento.
+
+**Decisión:** Se eleva la **Navegación Circular** a estándar de calidad de la documentación del proyecto. Se establece que la arquitectura del repositorio debe ser totalmente explorable desde cualquier artefacto de caso de uso, reforzando la trazabilidad RUP y la facilidad de auditoría técnica.

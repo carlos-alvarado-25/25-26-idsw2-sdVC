@@ -1,0 +1,65 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: eliminarAsignatura()
+
+actor Administrador
+boundary AsignaturaListComponent <<Angular>>
+boundary ConfirmDialog <<Angular>>
+control AsignaturaApiService <<Angular>>
+control AsignaturaController <<NestJS>>
+participant AsignaturaService <<NestJS>>
+participant ExamenRepository <<TypeORM>>
+participant AsignaturaRepository <<TypeORM>>
+database MySQL
+
+Administrador -> AsignaturaListComponent : clicEliminar(asignatura)
+AsignaturaListComponent -> AsignaturaApiService : verificarImpacto(id)
+AsignaturaApiService -> AsignaturaController : GET /asignaturas/:id/impacto
+activate AsignaturaController
+
+AsignaturaController -> AsignaturaService : getImpacto(id)
+activate AsignaturaService
+AsignaturaService -> ExamenRepository : countByAsignaturaId(id)
+activate ExamenRepository
+ExamenRepository -> MySQL : SELECT COUNT(*) FROM examen ...
+MySQL --> ExamenRepository : count
+deactivate ExamenRepository
+AsignaturaService --> AsignaturaController : { examenesAsociados: count }
+deactivate AsignaturaService
+
+AsignaturaController --> AsignaturaApiService : 200 OK (impacto)
+deactivate AsignaturaController
+
+AsignaturaApiService --> AsignaturaListComponent : impacto
+AsignaturaListComponent -> ConfirmDialog : abrir(asignatura, impacto)
+ConfirmDialog --> Administrador : mostrarConfirmacion(impacto)
+
+Administrador -> ConfirmDialog : confirmar()
+ConfirmDialog -> AsignaturaApiService : eliminar(id)
+AsignaturaApiService -> AsignaturaController : DELETE /asignaturas/:id
+activate AsignaturaController
+
+AsignaturaController -> AsignaturaService : remove(id)
+activate AsignaturaService
+AsignaturaService -> AsignaturaRepository : delete(id)
+activate AsignaturaRepository
+AsignaturaRepository -> MySQL : DELETE FROM asignatura ...
+MySQL --> AsignaturaRepository : OK
+deactivate AsignaturaRepository
+AsignaturaService --> AsignaturaController : OK
+deactivate AsignaturaService
+
+AsignaturaController --> AsignaturaApiService : 200 OK
+deactivate AsignaturaController
+
+AsignaturaApiService --> ConfirmDialog : OK
+ConfirmDialog -> AsignaturaListComponent : cerrarYRefrescar()
+AsignaturaListComponent --> Administrador : mostrarMensajeExito()
+
+@enduml

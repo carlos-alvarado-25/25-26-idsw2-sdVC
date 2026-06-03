@@ -1,0 +1,52 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: editarAsignatura() (Estado Singular)
+
+actor Administrador
+boundary AsignaturaFormComponent <<Angular>>
+control AsignaturaApiService <<Angular>>
+control AsignaturaController <<NestJS>>
+participant AsignaturaService <<NestJS>>
+participant AsignaturaRepository <<TypeORM>>
+database MySQL
+
+== Carga de Datos ==
+Administrador -> AsignaturaFormComponent : acceder(id)
+AsignaturaFormComponent -> AsignaturaApiService : obtener(id)
+AsignaturaApiService -> AsignaturaController : GET /asignaturas/:id
+AsignaturaController -> AsignaturaService : findOne(id)
+AsignaturaService -> AsignaturaRepository : findOne(id, { relations: ['grado'] })
+AsignaturaRepository -> MySQL : SELECT ...
+MySQL --> AsignaturaRepository : data
+AsignaturaService --> AsignaturaController : asignatura
+AsignaturaController --> AsignaturaApiService : 200 OK
+AsignaturaApiService --> AsignaturaFormComponent : asignatura
+AsignaturaFormComponent -> AsignaturaFormComponent : poblarFormulario()
+
+== Actualización Incremental ==
+Administrador -> AsignaturaFormComponent : modificarDatos()
+AsignaturaFormComponent -> AsignaturaApiService : actualizar(id, dto)
+AsignaturaApiService -> AsignaturaController : PATCH /asignaturas/:id
+activate AsignaturaController
+
+AsignaturaController -> AsignaturaService : update(id, dto)
+activate AsignaturaService
+AsignaturaService -> AsignaturaRepository : update(id, dto)
+AsignaturaRepository -> MySQL : UPDATE asignatura SET ...
+MySQL --> AsignaturaRepository : OK
+deactivate AsignaturaService
+
+AsignaturaController --> AsignaturaApiService : 200 OK
+deactivate AsignaturaController
+
+AsignaturaApiService --> AsignaturaFormComponent : OK
+AsignaturaFormComponent --> Administrador : mostrarMensajeActualizado()
+AsignaturaFormComponent -> AsignaturaFormComponent : permanecerEnVista()
+
+@enduml
