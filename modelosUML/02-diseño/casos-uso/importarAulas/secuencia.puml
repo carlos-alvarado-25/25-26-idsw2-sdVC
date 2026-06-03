@@ -1,0 +1,58 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: importarAulas()
+
+actor Administrador
+boundary ImportarAulasComponent <<Angular>>
+control AulaApiService <<Angular>>
+control AulaController <<NestJS>>
+participant AulaService <<NestJS>>
+participant AulaRepository <<TypeORM>>
+database MySQL
+
+Administrador -> ImportarAulasComponent : seleccionarArchivo(file)
+ImportarAulasComponent -> AulaApiService : importar(file)
+AulaApiService -> AulaController : POST /aulas/importar (FormData)
+
+activate AulaController
+AulaController -> AulaService : importar(fileData)
+activate AulaService
+
+AulaService -> AulaService : parsearArchivo(fileData)
+
+loop para cada fila de aula
+    AulaService -> AulaRepository : findOneBy({ codigo })
+    activate AulaRepository
+    AulaRepository -> MySQL : SELECT ...
+    MySQL --> AulaRepository : aula?
+    deactivate AulaRepository
+    
+    alt Código Único
+        AulaService -> AulaService : agregarALote()
+    else Código Duplicado
+        AulaService -> AulaService : registrarFallo()
+    end
+end
+
+AulaService -> AulaRepository : save(loteAulas)
+activate AulaRepository
+AulaRepository -> MySQL : INSERT INTO aula ...
+MySQL --> AulaRepository : OK
+deactivate AulaRepository
+
+AulaService --> AulaController : ImportResultDto (éxitos, fallos, detalles)
+deactivate AulaService
+
+AulaController --> AulaApiService : 201 Created (ImportResultDto)
+deactivate AulaController
+
+AulaApiService --> ImportarAulasComponent : ImportResultDto
+ImportarAulasComponent --> Administrador : mostrarResumen(ImportResultDto)
+
+@enduml

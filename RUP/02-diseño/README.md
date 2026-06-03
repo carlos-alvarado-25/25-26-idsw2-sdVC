@@ -67,3 +67,4 @@ Definición de la estructura de directorios del código fuente y políticas de i
 - [crearAula](casos-uso/crearAula/README.md) - Diseño de la creación rápida y transición a edición.
 - [editarAula](casos-uso/editarAula/README.md) - Diseño de la actualización incremental y estado singular.
 - [eliminarAula](casos-uso/eliminarAula/README.md) - Diseño del borrado seguro con diagnóstico de impacto.
+- [importarAulas](casos-uso/importarAulas/README.md) - Diseño del procesamiento por lotes y validación de unicidad.
