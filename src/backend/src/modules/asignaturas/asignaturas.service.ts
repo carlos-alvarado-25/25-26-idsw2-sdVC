@@ -29,7 +29,6 @@ export class AsignaturaService {
     const detalles: string[] = [];
     const asignaturasParaGuardar: Asignatura[] = [];
 
-    // Cargar todos los grados en memoria para búsqueda rápida por código
     const todosLosGrados = await this.gradoRepository.find();
     const gradosMap = new Map(todosLosGrados.map(g => [g.codigo.toUpperCase(), g]));
 
@@ -54,7 +53,6 @@ export class AsignaturaService {
         continue;
       }
 
-      // Validar si ya existe la asignatura
       const existente = await this.asignaturaRepository.findOneBy({ codigo });
       if (existente) {
         fallos++;
@@ -62,7 +60,6 @@ export class AsignaturaService {
         continue;
       }
 
-      // Validar si existe el grado
       const grado = gradosMap.get(gradoCodigo.toUpperCase());
       if (!grado) {
         fallos++;

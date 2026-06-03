@@ -1,0 +1,56 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: crearAula() (Patrón El Delgado)
+
+actor Administrador
+boundary AulaFormComponent <<Angular>>
+control AulaApiService <<Angular>>
+control AulaController <<NestJS>>
+participant AulaService <<NestJS>>
+participant AulaRepository <<TypeORM>>
+database MySQL
+
+Administrador -> AulaFormComponent : ingresarDatos(codigo, nombre, ...)
+AulaFormComponent -> AulaApiService : crear(dto)
+AulaApiService -> AulaController : POST /aulas
+activate AulaController
+
+AulaController -> AulaService : create(dto)
+activate AulaService
+
+AulaService -> AulaRepository : findOneBy({ codigo: dto.codigo })
+activate AulaRepository
+AulaRepository -> MySQL : SELECT * FROM aula WHERE codigo = ?
+MySQL --> AulaRepository : aula?
+deactivate AulaRepository
+
+alt Código Duplicado
+    AulaService --> AulaController : throw ConflictException
+    AulaController --> AulaApiService : 409 Conflict
+    AulaApiService --> AulaFormComponent : Error
+    AulaFormComponent --> Administrador : mostrarMensajeError("Código ya existe")
+else Código Único
+    AulaService -> AulaRepository : save(nuevaAula)
+    activate AulaRepository
+    AulaRepository -> MySQL : INSERT INTO aula ...
+    MySQL --> AulaRepository : OK (id)
+    deactivate AulaRepository
+
+    AulaService --> AulaController : aulaCreada
+    deactivate AulaService
+
+    AulaController --> AulaApiService : 201 Created (aula)
+    deactivate AulaController
+
+    AulaApiService --> AulaFormComponent : aula
+    AulaFormComponent -> AulaFormComponent : redireccionarAEditar(id)
+    AulaFormComponent --> Administrador : mostrarMensajeExito()
+end
+
+@enduml

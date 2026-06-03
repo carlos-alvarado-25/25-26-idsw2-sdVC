@@ -1,0 +1,51 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: abrirAulas()
+
+actor Administrador
+boundary AulaListComponent <<Angular>>
+control AulaApiService <<Angular>>
+control AulaController <<NestJS>>
+participant AulaService <<NestJS>>
+participant AulaRepository <<TypeORM>>
+database MySQL
+
+Administrador -> AulaListComponent : acceder()
+activate AulaListComponent
+
+AulaListComponent -> AulaApiService : listar()
+activate AulaApiService
+
+AulaApiService -> AulaController : GET /aulas
+activate AulaController
+
+AulaController -> AulaService : findAll()
+activate AulaService
+
+AulaService -> AulaRepository : find()
+activate AulaRepository
+
+AulaRepository -> MySQL : SELECT * FROM aula ORDER BY nombre ASC
+MySQL --> AulaRepository : listaAulas
+deactivate AulaRepository
+
+AulaService --> AulaController : listaAulas
+deactivate AulaService
+
+AulaController --> AulaApiService : 200 OK (AulaDto[])
+deactivate AulaController
+
+AulaApiService --> AulaListComponent : data
+deactivate AulaApiService
+
+AulaListComponent -> AulaListComponent : renderizar(data)
+AulaListComponent --> Administrador : mostrarListado()
+deactivate AulaListComponent
+
+@enduml

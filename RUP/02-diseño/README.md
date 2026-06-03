@@ -62,5 +62,6 @@ Definición de la estructura de directorios del código fuente y políticas de i
 - [eliminarAsignatura](casos-uso/eliminarAsignatura/README.md) - Diseño del borrado seguro con diagnóstico de impacto.
 - [importarAsignaturas](casos-uso/importarAsignaturas/README.md) - Diseño de la carga masiva y resolución de integridad referencial.
 
-> **Nota de Diseño (Externalización del Curso)**: Se ha decidido desacoplar el concepto de "Curso" en dos: **Nivel Académico** (int: 1º, 2º...) y **Curso Académico** (Entidad: "2025/26"). Esto garantiza la precisión semántica, evita redundancia de strings y permite gestionar la vigencia temporal del calendario de forma centralizada.
-
+### Gestión de Aulas
+- [abrirAulas](casos-uso/abrirAulas/README.md) - Diseño del listado de inventario de espacios físicos.
+- [crearAula](casos-uso/crearAula/README.md) - Diseño de la creación rápida y transición a edición.

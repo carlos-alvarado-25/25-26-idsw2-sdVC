@@ -876,3 +876,18 @@
 - **Trazabilidad 360º:** Activación de enlaces cruzados entre las fases de Análisis, Diseño y Desarrollo para toda la rama de asignaturas.
 
 **Decisión:** Se ratifica el cumplimiento estricto de los requisitos originales del cliente como máxima prioridad, evitando introducciones de campos no solicitados que compliquen la arquitectura prematuramente. Se establece el ramillete de Grados como el estándar de oro para el diseño de interfaces administrativas.
+
+---
+
+## [03/06/2026 21:56] Sesión 55: Rama de Aulas - Inicio del Diseño Detallado
+
+**Prompt:** "Iniciemos una nueva sesión, sigamos con el diseño del ramillete de Exámenes ahora ... Me estoy dando cuenta que examenes depende de varias entidades ... iniciemos la sesión para diseñar el ramillete de casos de uso de Aulas ... Vamos UNO A UNO. Iniciemos con abrirAulas ... Listo cerremos esta sesión de momento."
+
+**Resultado:** 
+- **Cambio de Estrategia:** Re-priorización del ramillete de Aulas sobre el de Exámenes para resolver dependencias físicas de datos antes de abordar el núcleo del sistema.
+- **Realización de `abrirAulas()`:** Diseño detallado para el listado de inventario. Se optó por una carga completa sin paginación, respetando la decisión del análisis (bajo volumen de datos).
+- **Realización de `crearAula()`:** Modelado del flujo de creación siguiendo el patrón "El Delgado". Tras un ajuste de rigor, se incluyó la validación detallada de unicidad de código (bloque alt) para asegurar la precisión del plano técnico.
+- **Artefactos Técnicos:** Generación de diagramas de secuencia (`.puml` + `.svg`) y documentación RUP en `RUP/02-diseño/casos-uso/`.
+- **Integridad Documental:** Actualización del índice maestro de diseño y activación de breadcrumbs entre Análisis y Diseño.
+
+**Decisión:** Se ratifica el cumplimiento técnico de los artefactos de análisis respecto a la volumetría de datos. Se establece la obligatoriedad de representar los caminos alternativos de validación de negocio en los diagramas de secuencia para garantizar la consistencia sistémica con ramilletes anteriores (Grados/Asignaturas).
