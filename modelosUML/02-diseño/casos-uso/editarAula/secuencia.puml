@@ -1,0 +1,70 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: editarAula() (Estado Singular)
+
+actor Administrador
+boundary AulaFormComponent <<Angular>>
+control AulaApiService <<Angular>>
+control AulaController <<NestJS>>
+participant AulaService <<NestJS>>
+participant AulaRepository <<TypeORM>>
+database MySQL
+
+== Carga de Datos ==
+Administrador -> AulaFormComponent : acceder(id)
+AulaFormComponent -> AulaApiService : obtener(id)
+AulaApiService -> AulaController : GET /aulas/:id
+AulaController -> AulaService : findOne(id)
+AulaService -> AulaRepository : findOneBy({ id })
+AulaRepository -> MySQL : SELECT ... WHERE id = ?
+MySQL --> AulaRepository : aula
+AulaService --> AulaController : aula
+AulaController --> AulaApiService : 200 OK (aula)
+AulaApiService --> AulaFormComponent : aula
+AulaFormComponent -> AulaFormComponent : poblarFormulario()
+
+== Actualización Incremental ==
+Administrador -> AulaFormComponent : modificarDatos(nombre, capacidad, ...)
+AulaFormComponent -> AulaApiService : actualizar(id, dto)
+AulaApiService -> AulaController : PATCH /aulas/:id
+activate AulaController
+
+AulaController -> AulaService : update(id, dto)
+activate AulaService
+
+alt Si el código cambia
+    AulaService -> AulaRepository : findOneBy({ codigo: dto.codigo })
+    AulaRepository -> MySQL : SELECT ...
+    MySQL --> AulaRepository : aulaExistente?
+    
+    alt Código ya en uso
+        AulaService --> AulaController : throw ConflictException
+        AulaController --> AulaApiService : 409 Conflict
+        AulaApiService --> AulaFormComponent : Error
+        AulaFormComponent --> Administrador : mostrarMensajeError("El código ya está en uso")
+    end
+end
+
+AulaService -> AulaRepository : update(id, dto)
+activate AulaRepository
+AulaRepository -> MySQL : UPDATE aula SET ... WHERE id = ?
+MySQL --> AulaRepository : OK
+deactivate AulaRepository
+
+AulaService --> AulaController : aulaActualizada
+deactivate AulaService
+
+AulaController --> AulaApiService : 200 OK
+deactivate AulaController
+
+AulaApiService --> AulaFormComponent : OK
+AulaFormComponent --> Administrador : mostrarMensajeExito()
+AulaFormComponent -> AulaFormComponent : permanecerEnVista()
+
+@enduml

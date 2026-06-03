@@ -65,3 +65,5 @@ Definición de la estructura de directorios del código fuente y políticas de i
 ### Gestión de Aulas
 - [abrirAulas](casos-uso/abrirAulas/README.md) - Diseño del listado de inventario de espacios físicos.
 - [crearAula](casos-uso/crearAula/README.md) - Diseño de la creación rápida y transición a edición.
+- [editarAula](casos-uso/editarAula/README.md) - Diseño de la actualización incremental y estado singular.
+- [eliminarAula](casos-uso/eliminarAula/README.md) - Diseño del borrado seguro con diagnóstico de impacto.

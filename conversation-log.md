@@ -891,3 +891,17 @@
 - **Integridad Documental:** Actualización del índice maestro de diseño y activación de breadcrumbs entre Análisis y Diseño.
 
 **Decisión:** Se ratifica el cumplimiento técnico de los artefactos de análisis respecto a la volumetría de datos. Se establece la obligatoriedad de representar los caminos alternativos de validación de negocio en los diagramas de secuencia para garantizar la consistencia sistémica con ramilletes anteriores (Grados/Asignaturas).
+
+---
+
+## [04/06/2026 00:03] Sesión 56: Rama de Aulas - Diseño Detallado de Gestión y Borrado Seguro
+
+**Prompt:** "Iniciemos una nueva sesión ahora. Vamos con editarAula ... pasemos al siguiente eliminarAula ... cerramos sesión'ahora."
+
+**Resultado:** 
+- **Realización de `editarAula()`:** Diseño detallado del flujo de actualización incremental mediante `PATCH`. Se modeló la permanencia en el estado singular de edición y la validación de unicidad de código ante modificaciones del identificador del aula.
+- **Realización de `eliminarAula()`:** Diseño del protocolo de borrado seguro. Se especificó la interacción con el backend para el diagnóstico previo de impacto destructivo (conteo de exámenes asociados) antes de solicitar la confirmación final del Administrador.
+- **Artefactos Técnicos:** Generación de diagramas de secuencia (`.puml` + `.svg`) y documentación RUP descriptiva en `RUP/02-diseño/casos-uso/`.
+- **Mantenimiento de Trazabilidad:** Actualización del índice maestro de diseño y activación de enlaces cruzados (breadcrumbs) en los artefactos de análisis correspondientes.
+
+**Decisión:** Se establece el diagnóstico de impacto cuantitativo como un estándar de calidad para todas las operaciones de eliminación en el ramillete de Aulas, asegurando que el Administrador sea consciente de la pérdida de datos vinculados (exámenes) antes de proceder con la persistencia destructiva.

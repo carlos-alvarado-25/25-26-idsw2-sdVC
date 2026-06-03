@@ -1,0 +1,65 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: eliminarAula() (Borrado Seguro)
+
+actor Administrador
+boundary AulaListComponent <<Angular>>
+boundary ConfirmDialog <<Angular>>
+control AulaApiService <<Angular>>
+control AulaController <<NestJS>>
+participant AulaService <<NestJS>>
+participant ExamenRepository <<TypeORM>>
+participant AulaRepository <<TypeORM>>
+database MySQL
+
+Administrador -> AulaListComponent : clicEliminar(aula)
+AulaListComponent -> AulaApiService : verificarImpacto(id)
+AulaApiService -> AulaController : GET /aulas/:id/impacto
+activate AulaController
+
+AulaController -> AulaService : getImpacto(id)
+activate AulaService
+AulaService -> ExamenRepository : countByAulaId(id)
+activate ExamenRepository
+ExamenRepository -> MySQL : SELECT COUNT(*) FROM examen WHERE aulaId = ?
+MySQL --> ExamenRepository : count
+deactivate ExamenRepository
+AulaService --> AulaController : { examenesAsociados: count }
+deactivate AulaService
+
+AulaController --> AulaApiService : 200 OK (impacto)
+deactivate AulaController
+
+AulaApiService --> AulaListComponent : impacto
+AulaListComponent -> ConfirmDialog : abrir(aula, impacto)
+ConfirmDialog --> Administrador : mostrarConfirmacion(impacto)
+
+Administrador -> ConfirmDialog : confirmar()
+ConfirmDialog -> AulaApiService : eliminar(id)
+AulaApiService -> AulaController : DELETE /aulas/:id
+activate AulaController
+
+AulaController -> AulaService : remove(id)
+activate AulaService
+AulaService -> AulaRepository : delete(id)
+activate AulaRepository
+AulaRepository -> MySQL : DELETE FROM aula WHERE id = ?
+MySQL --> AulaRepository : OK
+deactivate AulaRepository
+AulaService --> AulaController : OK
+deactivate AulaService
+
+AulaController --> AulaApiService : 200 OK
+deactivate AulaController
+
+AulaApiService --> ConfirmDialog : OK
+ConfirmDialog -> AulaListComponent : cerrarYRefrescar()
+AulaListComponent --> Administrador : mostrarMensajeExito()
+
+@enduml
