@@ -1,0 +1,52 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: importarAsignaturas()
+
+actor Administrador
+boundary ImportarAsignaturasComponent <<Angular>>
+control AsignaturaApiService <<Angular>>
+control AsignaturaController <<NestJS>>
+participant AsignaturaService <<NestJS>>
+participant GradoRepository <<TypeORM>>
+participant AsignaturaRepository <<TypeORM>>
+database MySQL
+
+Administrador -> ImportarAsignaturasComponent : seleccionarArchivo(file)
+ImportarAsignaturasComponent -> AsignaturaApiService : importar(file)
+AsignaturaApiService -> AsignaturaController : POST /asignaturas/importar (FormData)
+
+AsignaturaController -> AsignaturaService : importar(fileData)
+activate AsignaturaService
+
+AsignaturaService -> AsignaturaService : parsearArchivo(fileData)
+AsignaturaService -> GradoRepository : find() (validar grados referenciados)
+activate GradoRepository
+GradoRepository -> MySQL : SELECT * FROM grado
+MySQL --> GradoRepository : listaGrados
+deactivate GradoRepository
+
+loop para cada fila de asignatura
+    AsignaturaService -> AsignaturaService : validarDatos()
+    AsignaturaService -> AsignaturaService : vincularConGrado(gradoId)
+end
+
+AsignaturaService -> AsignaturaRepository : save(loteAsignaturas)
+activate AsignaturaRepository
+AsignaturaRepository -> MySQL : INSERT INTO asignatura ...
+MySQL --> AsignaturaRepository : OK
+deactivate AsignaturaRepository
+
+AsignaturaService --> AsignaturaController : ImportResult (éxitos, fallos)
+deactivate AsignaturaService
+
+AsignaturaController --> AsignaturaApiService : 201 Created (ImportResult)
+AsignaturaApiService --> ImportarAsignaturasComponent : ImportResult
+ImportarAsignaturasComponent --> Administrador : mostrarResumen(ImportResult)
+
+@enduml

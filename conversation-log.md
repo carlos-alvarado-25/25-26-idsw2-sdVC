@@ -813,3 +813,19 @@
 - **Normalización Visual:** Estandarización del uso de iconos y enlaces en las raíces de cada disciplina RUP para garantizar la consistencia sistémica del repositorio.
 
 **Decisión:** Se establece la **Navegación Operativa en el Breadcrumb** como un requisito de calidad obligatorio para el cierre de cada ramillete funcional. Se prioriza la coherencia documental para asegurar que el repositorio sea un artefacto autocontenido, facilitando el seguimiento del progreso técnico y el cumplimiento de los estándares de ingeniería definidos en `GEMINI.md`.
+
+---
+
+## [03/06/2026 17:35] Sesión 52: Rama de Asignaturas - Inicio del Diseño Detallado
+
+**Prompt:** "Hagamos el diseño entonces del ramillete de Asignaturas entonces. ... No, el modelado de clases-diseño ya está hecho. Eso ya no se toca. ... Finalicemos la sesión, con esos 2 casos de uso diseñados ya"
+
+**Resultado:** 
+- **Inicio de la Fase de Diseño (Ramillete 2):** Apertura de la disciplina de diseño para la entidad Asignatura, priorizando su construcción sobre Exámenes debido a la jerarquía de dependencias.
+- **Realización de `importarAsignaturas()`:** Diseño detallado del flujo de carga masiva CSV. Se especificó la resolución de integridad referencial con la entidad `Grado` y el contrato de `ImportResultDto`.
+- **Realización de `abrirAsignaturas()`:** Diseño del listado paginado (`PagedResultDto`) integrando joins para mostrar el nombre del grado asociado.
+- **Artefactos Técnicos:** Generación de diagramas de secuencia (`.puml` + `.svg`) y documentación descriptiva en `RUP/02-diseño/casos-uso/`.
+- **Mantenimiento de Trazabilidad:** Actualización del índice maestro de diseño y verificación de breadcrumbs para garantizar la navegación 360º.
+- **Protocolo de Ingeniería:** Actualización de `GEMINI.md` para automatizar la revisión de breadcrumbs al cierre de cada sesión.
+
+**Decisión:** Se ratifica el orden de construcción basado en dependencias de dominio (`Grado -> Asignatura -> Examen`). Se decide centralizar la validación de integridad referencial en el `AsignaturaService` durante la importación para evitar inconsistencias en la base de datos MySQL.

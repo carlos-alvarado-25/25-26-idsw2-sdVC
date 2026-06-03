@@ -1,0 +1,45 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: abrirAsignaturas()
+
+actor Administrador
+boundary AsignaturaListComponent <<Angular>>
+control AsignaturaApiService <<Angular>>
+control AsignaturaController <<NestJS>>
+participant AsignaturaService <<NestJS>>
+participant AsignaturaRepository <<TypeORM>>
+database MySQL
+
+Administrador -> AsignaturaListComponent : acceder()
+activate AsignaturaListComponent
+AsignaturaListComponent -> AsignaturaApiService : listar(1) 
+AsignaturaApiService -> AsignaturaController : GET /asignaturas?page=1
+activate AsignaturaController
+
+AsignaturaController -> AsignaturaService : findAll(options)
+activate AsignaturaService
+
+AsignaturaService -> AsignaturaRepository : findAndCount(query)
+activate AsignaturaRepository
+AsignaturaRepository -> MySQL : SELECT * FROM asignatura JOIN grado ...
+MySQL --> AsignaturaRepository : [asignaturas, total]
+deactivate AsignaturaRepository
+
+AsignaturaService --> AsignaturaController : PagedResultDto<Asignatura>
+deactivate AsignaturaService
+
+AsignaturaController --> AsignaturaApiService : 200 OK (PagedResultDto)
+deactivate AsignaturaController
+
+AsignaturaApiService --> AsignaturaListComponent : data
+AsignaturaListComponent -> AsignaturaListComponent : renderizar(data)
+AsignaturaListComponent --> Administrador : mostrarListado()
+deactivate AsignaturaListComponent
+
+@enduml

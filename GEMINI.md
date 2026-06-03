@@ -34,7 +34,8 @@ Este archivo contiene los compromisos, protocolos y estándares de ingeniería o
     *   **Ejemplo:** `## [27/05/2026 22:15] Rama de Aulas - Estandarización`.
     *   Este formato es vital para la compatibilidad con los scripts de generación de Timeline.
 4.  **Actualización de Índices (CRÍTICO):** Al finalizar el análisis de un caso de uso o una rama funcional, es **OBLIGATORIO** actualizar el archivo `RUP/01-analisis/casos-uso/README.md` incluyendo los nuevos artefactos en la lista de casos de uso analizados, manteniendo la estructura de categorías por actor o entidad.
-5.  **Decisiones de Diseño:** Las decisiones técnicas deben registrarse en el archivo externo de `Explicaciones de Diseño` en el workspace del usuario al final de cada hito relevante.
+6. **Mantenimiento de Trazabilidad (Breadcrumbs):** Al finalizar cada sesión, es **OBLIGATORIO** revisar y actualizar los breadcrumbs (menús de navegación superior) de los READMEs afectados. Se deben incluir enlaces funcionales a las fases completadas (Análisis, Diseño, Desarrollo) para asegurar la navegación 360º del proyecto.
+
 
 ## Estándares de Documentación
 

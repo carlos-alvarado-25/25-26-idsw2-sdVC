@@ -55,3 +55,7 @@ Definición de la estructura de directorios del código fuente y políticas de i
 - [eliminarGrado](casos-uso/eliminarGrado/README.md) - Diseño del borrado seguro con verificación de dependencias.
 - [importarGrados](casos-uso/importarGrados/README.md) - Diseño del procesamiento por lotes de archivos y persistencia masiva.
 
+### Gestión de Asignaturas
+- [abrirAsignaturas](casos-uso/abrirAsignaturas/README.md) - Diseño del listado paginado con vinculación de Grado.
+- [importarAsignaturas](casos-uso/importarAsignaturas/README.md) - Diseño de la carga masiva y resolución de integridad referencial.
+
