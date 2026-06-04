@@ -1,0 +1,67 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: importarAlumnos()
+
+actor Administrador
+boundary ImportarAlumnosComponent <<Angular>>
+control AlumnoApiService <<Angular>>
+control AlumnoController <<NestJS>>
+participant AlumnoService <<NestJS>>
+participant GradoRepository <<TypeORM>>
+participant AlumnoRepository <<TypeORM>>
+database MySQL
+
+Administrador -> ImportarAlumnosComponent : seleccionarArchivo(file)
+ImportarAlumnosComponent -> AlumnoApiService : importar(file)
+AlumnoApiService -> AlumnoController : POST /alumnos/importar (FormData)
+
+activate AlumnoController
+AlumnoController -> AlumnoService : importar(fileData)
+activate AlumnoService
+
+AlumnoService -> AlumnoService : parsearArchivo(fileData)
+AlumnoService -> GradoRepository : find() (validar grados referenciados)
+activate GradoRepository
+GradoRepository -> MySQL : SELECT * FROM grado
+MySQL --> GradoRepository : listaGrados
+deactivate GradoRepository
+
+loop para cada fila de alumno
+    AlumnoService -> AlumnoService : validarDatos()
+    AlumnoService -> AlumnoService : vincularConGrado(gradoCodigo)
+    
+    AlumnoService -> AlumnoRepository : findOneBy({ matricula })
+    activate AlumnoRepository
+    AlumnoRepository -> MySQL : SELECT ...
+    MySQL --> AlumnoRepository : alumno?
+    deactivate AlumnoRepository
+    
+    alt Matrícula Única y Grado Existe
+        AlumnoService -> AlumnoService : agregarALote()
+    else Error de Validación
+        AlumnoService -> AlumnoService : registrarFallo()
+    end
+end
+
+AlumnoService -> AlumnoRepository : save(loteAlumnos)
+activate AlumnoRepository
+AlumnoRepository -> MySQL : INSERT INTO alumno ...
+MySQL --> AlumnoRepository : OK
+deactivate AlumnoRepository
+
+AlumnoService --> AlumnoController : ImportResultDto (éxitos, fallos, detalles)
+deactivate AlumnoService
+
+AlumnoController --> AlumnoApiService : 201 Created (ImportResultDto)
+deactivate AlumnoController
+
+AlumnoApiService --> ImportarAlumnosComponent : ImportResultDto
+ImportarAlumnosComponent --> Administrador : mostrarResumen(ImportResultDto)
+
+@enduml

@@ -980,3 +980,17 @@
 - **Integridad Documental:** Actualización del índice maestro de diseño y verificación de breadcrumbs de trazabilidad.
 
 **Decisión:** Se establece el principio de "Simplicidad Basada en Requisitos" para la entidad Alumno, eliminando capas de validación de impacto que no fueron solicitadas en la fase de análisis. Se mantiene el estándar técnico de tipos numéricos para el campo "Curso" para facilitar la ordenación y lógica de negocio en el backend.
+
+---
+
+## [04/06/2026 18:32] Sesión 62: Rama de Alumnos - Finalización del Diseño Detallado
+
+**Prompt:** "Perfecto, finalicemos el diseño de este ramillete con el importarAlumno. Abre sesión de nuevo"
+
+**Resultado:** 
+- **Realización de `importarAlumnos()`:** Diseño detallado del flujo de carga masiva CSV. Se modeló el parsing de archivos multipart, la validación de unicidad de matrícula por fila y la resolución dinámica de titulaciones académicas (`grado_codigo`).
+- **Cierre del Ramillete de Diseño (Alumnos):** Finalización exitosa de los 5 casos de uso de la rama de gestión de estudiantes en la disciplina de diseño.
+- **Artefactos Técnicos:** Generación del diagrama de secuencia (`.puml` + `.svg`) y documentación RUP en `RUP/02-diseño/casos-uso/importarAlumnos/`.
+- **Integridad Documental:** Actualización final del índice maestro de diseño y activación de breadcrumbs de trazabilidad 360º entre Análisis y Diseño.
+
+**Decisión:** Se ratifica el uso de la estructura CSV estándar (`matricula, nombre, email, curso, grado_codigo`) para la integración masiva, asegurando que la validación de integridad referencial con la entidad Grado sea un requisito bloqueante para la persistencia de cada registro del lote.
