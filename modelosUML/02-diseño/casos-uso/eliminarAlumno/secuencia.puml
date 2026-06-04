@@ -1,0 +1,46 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: eliminarAlumno()
+
+actor Administrador
+boundary AlumnoListComponent <<Angular>>
+boundary ConfirmDialog <<Angular>>
+control AlumnoApiService <<Angular>>
+control AlumnoController <<NestJS>>
+participant AlumnoService <<NestJS>>
+participant AlumnoRepository <<TypeORM>>
+database MySQL
+
+Administrador -> AlumnoListComponent : clicEliminar(alumno)
+AlumnoListComponent -> ConfirmDialog : abrir(alumno)
+ConfirmDialog --> Administrador : mostrarConfirmacion(alumno)
+
+Administrador -> ConfirmDialog : confirmar()
+ConfirmDialog -> AlumnoApiService : eliminar(id)
+AlumnoApiService -> AlumnoController : DELETE /alumnos/:id
+activate AlumnoController
+
+AlumnoController -> AlumnoService : remove(id)
+activate AlumnoService
+AlumnoService -> AlumnoRepository : delete(id)
+activate AlumnoRepository
+AlumnoRepository -> MySQL : DELETE FROM alumno WHERE id = ?
+MySQL --> AlumnoRepository : OK
+deactivate AlumnoRepository
+AlumnoService --> AlumnoController : OK
+deactivate AlumnoService
+
+AlumnoController --> AlumnoApiService : 200 OK
+deactivate AlumnoController
+
+AlumnoApiService --> ConfirmDialog : OK
+ConfirmDialog -> AlumnoListComponent : cerrarYRefrescar()
+AlumnoListComponent --> Administrador : mostrarMensajeExito()
+
+@enduml

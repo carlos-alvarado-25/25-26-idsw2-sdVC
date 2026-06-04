@@ -52,7 +52,7 @@ class AlumnoDto {
     matricula: string;
     nombre: string;
     email: string;
-    curso: number; // Nivel (1º, 2º, 3º...)
+    curso: number; // Nivel académico (1, 2, 3, 4...)
     grado: {
         id: number;
         nombre: string;

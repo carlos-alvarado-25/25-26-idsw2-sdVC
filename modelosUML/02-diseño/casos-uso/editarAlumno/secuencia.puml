@@ -1,0 +1,80 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: editarAlumno() (Estado Singular)
+
+actor Administrador
+boundary AlumnoFormComponent <<Angular>>
+control AlumnoApiService <<Angular>>
+control AlumnoController <<NestJS>>
+participant AlumnoService <<NestJS>>
+participant GradoRepository <<TypeORM>>
+participant AlumnoRepository <<TypeORM>>
+database MySQL
+
+== Carga de Datos ==
+Administrador -> AlumnoFormComponent : acceder(id)
+AlumnoFormComponent -> AlumnoApiService : obtener(id)
+AlumnoApiService -> AlumnoController : GET /alumnos/:id
+AlumnoController -> AlumnoService : findOne(id)
+AlumnoService -> AlumnoRepository : findOneBy({ id })
+AlumnoRepository -> MySQL : SELECT ... WHERE id = ?
+MySQL --> AlumnoRepository : alumno
+AlumnoService --> AlumnoController : alumno
+AlumnoController --> AlumnoApiService : 200 OK (alumno)
+AlumnoApiService --> AlumnoFormComponent : alumno
+
+AlumnoFormComponent -> AlumnoApiService : obtenerGrados()
+AlumnoApiService -> AlumnoController : GET /grados
+AlumnoController -> MySQL : SELECT * FROM grado
+MySQL --> AlumnoController : listaGrados
+AlumnoController --> AlumnoFormComponent : listaGrados
+
+AlumnoFormComponent -> AlumnoFormComponent : poblarFormulario()
+
+== Actualización Incremental ==
+Administrador -> AlumnoFormComponent : modificarDatos(nombre, email, curso, gradoId)
+AlumnoFormComponent -> AlumnoApiService : actualizar(id, dto)
+AlumnoApiService -> AlumnoController : PATCH /alumnos/:id
+activate AlumnoController
+
+AlumnoController -> AlumnoService : update(id, dto)
+activate AlumnoService
+
+alt Si el grado cambia
+    AlumnoService -> GradoRepository : findOneBy({ id: dto.gradoId })
+    activate GradoRepository
+    GradoRepository -> MySQL : SELECT ...
+    MySQL --> GradoRepository : grado?
+    deactivate GradoRepository
+    
+    alt Grado no existe
+        AlumnoService --> AlumnoController : throw NotFoundException
+        AlumnoController --> AlumnoApiService : 404 Not Found
+        AlumnoApiService --> AlumnoFormComponent : Error
+        AlumnoFormComponent --> Administrador : mostrarMensajeError("Grado no encontrado")
+    end
+end
+
+AlumnoService -> AlumnoRepository : update(id, dto)
+activate AlumnoRepository
+AlumnoRepository -> MySQL : UPDATE alumno SET ... WHERE id = ?
+MySQL --> AlumnoRepository : OK
+deactivate AlumnoRepository
+
+AlumnoService --> AlumnoController : alumnoActualizado
+deactivate AlumnoService
+
+AlumnoController --> AlumnoApiService : 200 OK
+deactivate AlumnoController
+
+AlumnoApiService --> AlumnoFormComponent : OK
+AlumnoFormComponent --> Administrador : mostrarMensajeExito()
+AlumnoFormComponent -> AlumnoFormComponent : permanecerEnVista()
+
+@enduml

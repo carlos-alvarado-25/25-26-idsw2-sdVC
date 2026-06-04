@@ -965,3 +965,18 @@
 - **Mantenimiento de Trazabilidad:** Actualización del índice maestro de diseño y activación de breadcrumbs para garantizar la navegación circular 360º.
 
 **Decisión:** Se ratifica el uso de inyección de dependencias cruzada (`GradoRepository` en `AlumnoService`) para asegurar la integridad referencial en el momento de la creación, evitando huérfanos académicos en el sistema.
+
+---
+
+## [04/06/2026 18:09] Sesión 61: Rama de Alumnos - Diseño Detallado de Mantenimiento y Borrado
+
+**Prompt:** "Perfecto, abramos una nueva sesión ahora. Iniciemos con editarAlumno ... pero el nombre debe ser curso, no nivel ... procede a eliminarAlumno ... Fijate bien que en el caso de uso eliminarAlumno ... no tiene un impacto sobre otra entidad ... Termina la sesión ahora."
+
+**Resultado:** 
+- **Realización de `editarAlumno()`:** Diseño detallado del flujo de actualización mediante `PATCH`. Se modeló la carga reactiva de datos y la validación de integridad referencial para la reasignación de grados académicos.
+- **Normalización de Negocio:** Ratificación de la nomenclatura "Curso" (numérico: 1, 2, 3...) en lugar de "Nivel" para mantener la fidelidad absoluta a los artefactos de análisis y requisitos del cliente.
+- **Realización de `eliminarAlumno()`:** Diseño del protocolo de eliminación. Tras un ajuste de rigor técnico, se eliminó el diagnóstico de impacto innecesario, simplificando el flujo a una confirmación directa del Administrador y persistencia destructiva, alineándose al 100% con el análisis de colaboración.
+- **Artefactos Técnicos:** Actualización de diagramas de secuencia (`.puml` + `.svg`) y documentación RUP en `RUP/02-diseño/casos-uso/`.
+- **Integridad Documental:** Actualización del índice maestro de diseño y verificación de breadcrumbs de trazabilidad.
+
+**Decisión:** Se establece el principio de "Simplicidad Basada en Requisitos" para la entidad Alumno, eliminando capas de validación de impacto que no fueron solicitadas en la fase de análisis. Se mantiene el estándar técnico de tipos numéricos para el campo "Curso" para facilitar la ordenación y lógica de negocio en el backend.

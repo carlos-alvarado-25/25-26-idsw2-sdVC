@@ -72,3 +72,5 @@ Definición de la estructura de directorios del código fuente y políticas de i
 ### Gestión de Alumnos
 - [abrirAlumnos](casos-uso/abrirAlumnos/README.md) - Diseño del listado paginado y vinculación académica.
 - [crearAlumno](casos-uso/crearAlumno/README.md) - Diseño de la creación ágil y transición a edición.
+- [editarAlumno](casos-uso/editarAlumno/README.md) - Diseño de la actualización incremental y estado singular.
+- [eliminarAlumno](casos-uso/eliminarAlumno/README.md) - Diseño del borrado seguro con diagnóstico de impacto.
