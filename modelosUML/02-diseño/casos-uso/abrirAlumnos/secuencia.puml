@@ -1,0 +1,51 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: abrirAlumnos()
+
+actor Administrador
+boundary AlumnoListComponent <<Angular>>
+control AlumnoApiService <<Angular>>
+control AlumnoController <<NestJS>>
+participant AlumnoService <<NestJS>>
+participant AlumnoRepository <<TypeORM>>
+database MySQL
+
+Administrador -> AlumnoListComponent : acceder()
+activate AlumnoListComponent
+
+AlumnoListComponent -> AlumnoApiService : listar(1)
+activate AlumnoApiService
+
+AlumnoApiService -> AlumnoController : GET /alumnos?page=1
+activate AlumnoController
+
+AlumnoController -> AlumnoService : findAll(options)
+activate AlumnoService
+
+AlumnoService -> AlumnoRepository : findAndCount(query)
+activate AlumnoRepository
+
+AlumnoRepository -> MySQL : SELECT * FROM alumno \nJOIN grado ... \nORDER BY nombre ASC \nLIMIT 10 OFFSET 0
+MySQL --> AlumnoRepository : [alumnos, total]
+deactivate AlumnoRepository
+
+AlumnoService --> AlumnoController : PagedResultDto<Alumno>
+deactivate AlumnoService
+
+AlumnoController --> AlumnoApiService : 200 OK (PagedResultDto)
+deactivate AlumnoController
+
+AlumnoApiService --> AlumnoListComponent : data
+deactivate AlumnoApiService
+
+AlumnoListComponent -> AlumnoListComponent : renderizar(data)
+AlumnoListComponent --> Administrador : mostrarListado()
+deactivate AlumnoListComponent
+
+@enduml

@@ -950,3 +950,18 @@
 - **Consistencia Visual:** Normalización de estilos CSS (`.col-check`, `.btn-danger`, `tr.selected`) en todos los componentes de listado para coincidir con los prototipos de la fase de requisitos.
 
 **Decisión:** Se establece la selección múltiple como una característica estándar de todos los listados administrativos del sistema. Se decide mantener la simplicidad técnica mediante el uso de diálogos de confirmación nativos para las acciones masivas en esta iteración.
+
+---
+
+## [04/06/2026 17:43] Sesión 60: Rama de Alumnos - Inicio del Diseño Detallado
+
+**Prompt:** "Hola amigo, hoy abramos la sesion para diseñar el ramillete de alumnos uno a uno. Iniciemos con abrirAlumnos ... procedamos a crearAlumno ... Perfecto. De momento cerremos sesión y añade la entrada al conversation-log.md"
+
+**Resultado:** 
+- **Inicio de la Fase de Diseño (Alumnos):** Apertura de la disciplina de diseño para la entidad Alumno, continuando con el flujo de construcción del sistema académico.
+- **Realización de `abrirAlumnos()`:** Diseño detallado del listado paginado. Se especificó el uso de `PagedResultDto` y la integración de `leftJoin` para visualizar el nombre del grado asociado en la tabla administrativa.
+- **Realización de `crearAlumno()`:** Diseño del flujo de alta manual siguiendo el patrón "El Delgado". Se modeló la validación técnica de unicidad de matrícula y la comprobación de existencia de la titulación académica mediante `GradoRepository`.
+- **Artefactos Técnicos:** Generación de diagramas de secuencia (`.puml` + `.svg`) y documentación RUP en `RUP/02-diseño/casos-uso/`.
+- **Mantenimiento de Trazabilidad:** Actualización del índice maestro de diseño y activación de breadcrumbs para garantizar la navegación circular 360º.
+
+**Decisión:** Se ratifica el uso de inyección de dependencias cruzada (`GradoRepository` en `AlumnoService`) para asegurar la integridad referencial en el momento de la creación, evitando huérfanos académicos en el sistema.

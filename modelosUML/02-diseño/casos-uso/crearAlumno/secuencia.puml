@@ -1,0 +1,63 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: crearAlumno()
+
+actor Administrador
+boundary AlumnoFormComponent <<Angular>>
+control AlumnoApiService <<Angular>>
+control AlumnoController <<NestJS>>
+participant AlumnoService <<NestJS>>
+participant GradoRepository <<TypeORM>>
+participant AlumnoRepository <<TypeORM>>
+database MySQL
+
+Administrador -> AlumnoFormComponent : ingresarDatos(matricula, nombre, email, curso, gradoId)
+AlumnoFormComponent -> AlumnoApiService : crear(dto)
+AlumnoApiService -> AlumnoController : POST /alumnos
+activate AlumnoController
+
+AlumnoController -> AlumnoService : create(dto)
+activate AlumnoService
+
+AlumnoService -> AlumnoRepository : findOneBy({ matricula: dto.matricula })
+activate AlumnoRepository
+AlumnoRepository -> MySQL : SELECT * FROM alumno WHERE matricula = ?
+MySQL --> AlumnoRepository : alumno?
+deactivate AlumnoRepository
+
+alt Matrícula Duplicada
+    AlumnoService --> AlumnoController : throw ConflictException
+    AlumnoController --> AlumnoApiService : 409 Conflict
+    AlumnoApiService --> AlumnoFormComponent : Error
+    AlumnoFormComponent --> Administrador : mostrarMensajeError("Matrícula ya existe")
+else Matrícula Única
+    AlumnoService -> GradoRepository : findOneBy({ id: dto.gradoId })
+    activate GradoRepository
+    GradoRepository -> MySQL : SELECT * FROM grado WHERE id = ?
+    MySQL --> GradoRepository : grado
+    deactivate GradoRepository
+
+    AlumnoService -> AlumnoRepository : save(nuevoAlumno)
+    activate AlumnoRepository
+    AlumnoRepository -> MySQL : INSERT INTO alumno ...
+    MySQL --> AlumnoRepository : OK (id)
+    deactivate AlumnoRepository
+
+    AlumnoService --> AlumnoController : alumnoCreado
+    deactivate AlumnoService
+
+    AlumnoController --> AlumnoApiService : 201 Created (alumno)
+    deactivate AlumnoController
+
+    AlumnoApiService --> AlumnoFormComponent : alumno
+    AlumnoFormComponent -> AlumnoFormComponent : redireccionarAEditar(id)
+    AlumnoFormComponent --> Administrador : mostrarMensajeExito()
+end
+
+@enduml
