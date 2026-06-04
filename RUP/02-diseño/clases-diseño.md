@@ -35,6 +35,7 @@ Este artefacto define el modelo de datos detallado y la estructura de clases del
 2.  **Independencia de la Identidad (Desacoplamiento)**: La entidad `Usuario` se mantiene como un componente de seguridad independiente. No existe un vínculo estructural (FK) entre `Usuario` y `Profesor` o `Alumno`. La relación se gestiona a nivel de **Sesión**, donde el rol incrustado en el usuario determina las capacidades operativas del actor activo, evitando el acoplamiento innecesario entre la seguridad y el dominio académico.
 3.  **Inyección de Dependencias Total**: El diseño refleja la jerarquía de colaboración desde los controladores hasta las entidades, asegurando una arquitectura modular y testeable.
 4.  **Objetos de Transferencia y Resultado**: Uso sistemático de DTOs para la entrada y Value Objects (`GeneracionResult`, `ImportResult`) para estructurar las respuestas complejas del servidor.
+5.  **Arquitectura de Importación (Estrategia)**: Se abstrae el procesamiento de archivos mediante la interfaz `IFileParser` y la factoría `FileParserFactory`. Esto permite que los servicios de negocio reciban datos en formato JSON independientemente de si el origen es CSV o Excel. El sistema garantiza la integridad de los datos mediante el saneamiento automático de espacios en blanco (`trim`) y el soporte nativo para codificación **UTF-8** (codepage 65001), asegurando el tratamiento correcto de caracteres especiales del español.
 
 ## Relaciones Principales
 

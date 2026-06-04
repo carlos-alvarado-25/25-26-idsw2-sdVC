@@ -6,6 +6,7 @@ import { PagedResultDto } from '../../common/dto/paged-result.dto';
 import { CrearGradoDto } from './dto/crear-grado.dto';
 import { UpdateGradoDto } from './dto/update-grado.dto';
 import { ImportResultDto } from './dto/import-result.dto';
+import { FileParserFactory } from '../../common/services/file-parser.factory';
 
 @Injectable()
 export class GradoService {
@@ -14,6 +15,7 @@ export class GradoService {
   constructor(
     @InjectRepository(Grado)
     private readonly gradoRepository: Repository<Grado>,
+    private readonly fileParserFactory: FileParserFactory,
   ) {}
 
   async create(crearGradoDto: CrearGradoDto): Promise<Grado> {
@@ -63,31 +65,30 @@ export class GradoService {
     await this.gradoRepository.delete(ids);
   }
 
-  async importar(buffer: Buffer): Promise<ImportResultDto> {
-    const content = buffer.toString('utf-8');
-    const lines = content.split(/\r?\n/).filter(line => line.trim().length > 0);
+  async importar(buffer: Buffer, mimetype: string): Promise<ImportResultDto> {
+    const parser = this.fileParserFactory.getParser(mimetype);
+    // Para CSV se asume que no hay cabecera (mapeo posicional)
+    const rawData = parser.parse<any>(buffer, ['codigo', 'nombre', 'descripcion']);
     
     let exitos = 0;
     let fallos = 0;
     const detalles: string[] = [];
     const gradosParaGuardar: Grado[] = [];
 
-    const startIdx = lines[0].toLowerCase().includes('codigo') ? 1 : 0;
+    for (let i = 0; i < rawData.length; i++) {
+      const row = rawData[i];
+      const { codigo, nombre, descripcion } = row;
 
-    for (let i = startIdx; i < lines.length; i++) {
-      const line = lines[i];
-      const [codigo, nombre, descripcion] = line.split(',').map(s => s.trim());
-      
       if (!codigo || !nombre) {
         fallos++;
-        detalles.push(`Fila \${i + 1}: Datos incompletos.`);
+        detalles.push(`Fila ${i + 2}: El código y el nombre son obligatorios.`);
         continue;
       }
 
       const existente = await this.gradoRepository.findOneBy({ codigo });
       if (existente) {
         fallos++;
-        detalles.push(`Fila ${i + 1}: El código "${codigo}" ya existe.`);
+        detalles.push(`Fila ${i + 2}: El código "${codigo}" ya existe.`);
       } else {
         gradosParaGuardar.push(this.gradoRepository.create({ codigo, nombre, descripcion }));
         exitos++;
@@ -127,4 +128,3 @@ export class GradoService {
     return new PagedResultDto(data, total, page, this.PAGE_SIZE);
   }
 }
-

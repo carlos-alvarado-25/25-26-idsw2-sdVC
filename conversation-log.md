@@ -994,3 +994,19 @@
 - **Integridad Documental:** Actualización final del índice maestro de diseño y activación de breadcrumbs de trazabilidad 360º entre Análisis y Diseño.
 
 **Decisión:** Se ratifica el uso de la estructura CSV estándar (`matricula, nombre, email, curso, grado_codigo`) para la integración masiva, asegurando que la validación de integridad referencial con la entidad Grado sea un requisito bloqueante para la persistencia de cada registro del lote.
+
+---
+
+## [04/06/2026 19:51] Sesión 63: Infraestructura - Motor de Importación Multi-formato (SOLID)
+
+**Prompt:** "Imaginate que me dicen, quiero que se puedan importar también desde archivos excel. Mi sistema es capaz de extenderse a ese requisito? ... Hagamos la refactorización entonces. ... arregla las instrucciones ... para CSV no hay que incluir las cabeceras, y para XLSX si ... corrobora estas actualizaciones en los READMEs"
+
+**Resultado:** 
+- **Refactorización de Infraestructura:** Evolución del motor de importación hacia el **Patrón Estrategia (SOLID)**. Se eliminó el parsing manual rígido por una arquitectura agnóstica al formato.
+- **Abstracción Técnica:** Implementación de la interfaz `IFileParser` y estrategias concretas (`CsvParserService`, `ExcelParserService`) orquestadas por una `FileParserFactory`.
+- **Soporte Excel (.xlsx):** Integración de la librería `xlsx` (SheetJS) permitiendo la carga masiva desde hojas de cálculo binarias.
+- **Robustez de Datos:** Implementación de saneamiento automático (`trim`) en todas las celdas de texto y soporte forzado para codificación **UTF-8** (codepage 65001) para garantizar la integridad de acentos y caracteres especiales del español.
+- **UI Adaptativa:** Diferenciación de instrucciones en el frontend según el formato: CSV sin cabeceras (mapeo posicional) y Excel con cabeceras (mapeo por nombre).
+- **Actualización Documental:** Registro de las decisiones arquitectónicas en `RUP/02-diseño/` y actualización de los manuales de desarrollo y testing en `RUP/03-desarrollo/`.
+
+**Decisión:** Se establece el motor multi-formato como el estándar obligatorio para toda carga masiva del sistema. Se prioriza el uso de UTF-8 y el saneamiento pos-parsing para evitar errores de integridad referencial debidos a espacios en blanco o caracteres corruptos.

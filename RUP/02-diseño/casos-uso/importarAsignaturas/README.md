@@ -65,5 +65,5 @@ class ImportResultDto {
 |-------------------|----------------------|--------------------------|
 | `ImportarAsignaturasView` | `ImportarAsignaturasComponent` | Gestión de la UI y carga de archivo mediante `FormData`. |
 | `AsignaturaController` | `AsignaturaController` | Orquestación de la petición multipart y manejo de `Multer`. |
-| `AsignaturaController` | `AsignaturaService` | Parsing de CSV/XLSX y resolución de `grado_codigo` via `GradoRepository`. |
+| `AsignaturaController` | `AsignaturaService` | Delegación del parsing al `ExcelParserService` y orquestación de la lógica de negocio y resolución de `grado_codigo` via `GradoRepository`. |
 | `AsignaturaRepository` | `AsignaturaRepository` | Inserción atómica del lote mediante `save()`. |

@@ -4,7 +4,7 @@
       <a [routerLink]="['/home']">🏠 Inicio</a> / <span>🏢 Aulas</span>
     </div>
     <div class="header-main">
-      <h1>Gestión de Aulas (Espacios Físicos)</h1>
+      <h1>Gestión de Aulas</h1>
       <div class="actions">
         <button *ngIf="selectedIds().size > 0" class="btn-danger" (click)="eliminarSeleccionados()">
           🗑️ Eliminar ({{ selectedIds().size }})

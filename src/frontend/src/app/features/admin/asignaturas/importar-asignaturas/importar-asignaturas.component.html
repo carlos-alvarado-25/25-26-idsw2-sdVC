@@ -11,9 +11,9 @@
   <div class="import-card">
     <div class="import-instructions">
       <h3>Instrucciones</h3>
-      <p>Cargue un archivo CSV con el siguiente formato (incluyendo cabecera opcional):</p>
+      <p>Cargue un archivo CSV o XLSX con el siguiente formato (incluyendo cabecera):</p>
       <code class="format-code">codigo, nombre, creditos, grado_codigo</code>
-      <p>Formatos soportados: <strong>.csv</strong></p>
+      <p>Formatos soportados: <strong>.csv, .xlsx</strong></p>
     </div>
 
     <div class="upload-section">
@@ -22,7 +22,7 @@
           type="file" 
           id="fileInput" 
           (change)="onFileSelected($event)" 
-          accept=".csv"
+          accept=".csv, .xlsx"
           class="file-input"
         >
         <label for="fileInput" class="file-label">

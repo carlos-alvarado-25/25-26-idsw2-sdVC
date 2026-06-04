@@ -31,8 +31,15 @@ Este documento define la estructura de directorios, configuraciones iniciales y 
 
 ```text
 src/backend/
-├── common/                 # Decoradores, filtros de excepción, guards e interceptores globales
-├── config/                 # Configuración de variables de entorno y constantes del sistema
+├── common/                 # Componentes transversales
+│   ├── interfaces/         # Contratos globales (ej. IFileParser)
+│   ├── services/           # Servicios de utilidad (ej. FileParserFactory)
+│   │   └── parsers/        # Estrategias concretas (CSV, Excel)
+│   ├── dto/                # DTOs compartidos (ej. PagedResultDto)
+│   ├── filters/            # Filtros de excepción
+│   ├── guards/             # Guardianes de seguridad
+│   └── interceptors/       # Interceptores de respuesta
+├── config/                 # Configuración de variables de entorno
 ├── entities/               # Modelos TypeORM de dominio centralizado (MySQL)
 ├── modules/
 │   ├── auth/               # Autenticación, estrategia JWT y sesión

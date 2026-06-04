@@ -7,7 +7,7 @@
 - **Frontend:** [importar-grados.component.ts](/src/frontend/src/app/features/admin/grados/importar-grados/importar-grados.component.ts) · [grado.service.ts](/src/frontend/src/app/core/services/grado.service.ts)
 
 ## Descripción
-Implementación de la carga masiva de grados mediante archivos CSV. El sistema parsea el archivo, valida la integridad de cada registro y realiza una persistencia atómica por lote.
+Implementación de la carga masiva de grados mediante archivos CSV y Excel (.xlsx). El sistema parsea el archivo, valida la integridad de cada registro y realiza una persistencia atómica por lote.
 
 ## Estado
 ✅ **Completado** - Iteración 1

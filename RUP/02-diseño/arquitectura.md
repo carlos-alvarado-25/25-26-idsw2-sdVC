@@ -49,3 +49,4 @@ Este artefacto describe la arquitectura técnica del sistema, identificando los 
 1.  **Desacoplamiento Total**: El frontend y el backend son proyectos independientes que podrían desplegarse en servidores distintos, comunicándose exclusivamente vía API.
 2.  **Seguridad por Capas**: La validación de datos ocurre tanto en el Frontend (UX) como en el Backend (Integridad), asegurando que ninguna petición malformada llegue a la base de datos.
 3.  **Escalabilidad**: El uso de NestJS permite una organización modular que facilita el crecimiento del sistema sin aumentar la complejidad del mantenimiento.
+4.  **Abstracción de Datos (Multi-formato)**: Se implementa un motor de importación basado en el **Patrón Estrategia**, permitiendo que el sistema sea agnóstico al formato de archivo de origen (CSV, XLSX, etc.), delegando el parsing en componentes especializados de infraestructura.

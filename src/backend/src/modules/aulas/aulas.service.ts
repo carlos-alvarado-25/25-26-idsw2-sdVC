@@ -4,59 +4,49 @@ import { Repository } from 'typeorm';
 import { Aula } from '../../entities/aula.entity';
 import { CreateAulaDto } from './dto/create-aula.dto';
 import { UpdateAulaDto } from './dto/update-aula.dto';
-
 import { ImportResultDto } from './dto/import-result.dto';
+import { FileParserFactory } from '../../common/services/file-parser.factory';
 
 @Injectable()
 export class AulaService {
   constructor(
     @InjectRepository(Aula)
     private readonly aulaRepository: Repository<Aula>,
+    private readonly fileParserFactory: FileParserFactory,
   ) {}
 
-  async importar(buffer: Buffer): Promise<ImportResultDto> {
-    const content = buffer.toString('utf-8');
-    const lines = content.split(/\r?\n/).filter(line => line.trim().length > 0);
+  async importar(buffer: Buffer, mimetype: string): Promise<ImportResultDto> {
+    const parser = this.fileParserFactory.getParser(mimetype);
+    // Para CSV se asume que no hay cabecera (mapeo posicional)
+    const rawData = parser.parse<any>(buffer, ['codigo', 'nombre', 'capacidad', 'edificio', 'planta', 'tipo']);
     
     let exitos = 0;
     let fallos = 0;
     const detalles: string[] = [];
     const aulasParaGuardar: Aula[] = [];
 
-    // Omitir cabecera si existe
-    const startIdx = lines[0].toLowerCase().includes('codigo') ? 1 : 0;
+    for (let i = 0; i < rawData.length; i++) {
+      const row = rawData[i];
+      const { codigo, nombre, capacidad, edificio, planta, tipo } = row;
+      const capacidadNum = parseInt(capacidad, 10);
 
-    for (let i = startIdx; i < lines.length; i++) {
-      const line = lines[i];
-      const parts = line.split(',').map(s => s.trim());
-      
-      if (parts.length < 6) {
+      if (!codigo || !nombre || isNaN(capacidadNum) || !edificio || !planta || !tipo) {
         fallos++;
-        detalles.push(`Fila ${i + 1}: Datos insuficientes (se requieren 6 columnas: codigo, nombre, capacidad, edificio, planta, tipo).`);
+        detalles.push(`Fila ${i + 2}: Datos inválidos o incompletos.`);
         continue;
       }
 
-      const [codigo, nombre, capacidadStr, edificio, planta, tipo] = parts;
-      const capacidad = parseInt(capacidadStr, 10);
-
-      if (!codigo || !nombre || isNaN(capacidad) || !edificio || !planta || !tipo) {
-        fallos++;
-        detalles.push(`Fila ${i + 1}: Datos inválidos o incompletos.`);
-        continue;
-      }
-
-      // Validar si ya existe el aula
       const existente = await this.aulaRepository.findOneBy({ codigo });
       if (existente) {
         fallos++;
-        detalles.push(`Fila ${i + 1}: El código de aula "${codigo}" ya existe.`);
+        detalles.push(`Fila ${i + 2}: El código de aula "${codigo}" ya existe.`);
         continue;
       }
 
       aulasParaGuardar.push(this.aulaRepository.create({
         codigo,
         nombre,
-        capacidad,
+        capacidad: capacidadNum,
         edificio,
         planta,
         tipo

@@ -18,7 +18,7 @@ export class AsignaturaController {
   @Post('importar')
   @UseInterceptors(FileInterceptor('file'))
   async importar(@UploadedFile() file: Express.Multer.File) {
-    return this.asignaturaService.importar(file.buffer);
+    return this.asignaturaService.importar(file.buffer, file.mimetype);
   }
 
   @Patch(':id')

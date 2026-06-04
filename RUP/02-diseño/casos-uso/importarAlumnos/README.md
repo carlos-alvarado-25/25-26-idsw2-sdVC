@@ -13,7 +13,7 @@
 
 ## propósito
 
-Realización del diseño detallado para el caso de uso `importarAlumnos()`, especificando el flujo de procesamiento masivo de archivos CSV, la resolución de integridad referencial con la entidad `Grado` y la validación de unicidad de matrículas estudiantiles.
+Realización del diseño detallado para el caso de uso `importarAlumnos()`, especificando el flujo de procesamiento masivo de archivos CSV y Excel (.xlsx), la resolución de integridad referencial con la entidad `Grado` y la validación de unicidad de matrículas estudiantiles.
 
 ## diagrama de secuencia
 
@@ -65,6 +65,6 @@ class ImportResultDto {
 |-------------------|----------------------|--------------------------|
 | `ImportarAlumnosView` | `ImportarAlumnosComponent` | Gestión de la carga de archivos y muestreo de estadísticas finales. |
 | `AlumnoController` | `AlumnoController` | Gestión de la petición multipart y orquestación del proceso. |
-| `AlumnoController` | `AlumnoService` | Parsing del CSV, resolución de `grado_codigo` y carga en lote. |
+| `AlumnoController` | `AlumnoService` | Delegación del parsing al `ExcelParserService` y orquestación de la lógica de negocio, resolución de `grado_codigo` y carga en lote. |
 | `GradoRepository` | `GradoRepository` | Validación de existencia de las titulaciones académicas referenciadas. |
 | `AlumnoRepository` | `AlumnoRepository` | Verificación de unicidad de matrícula y persistencia masiva en MySQL. |

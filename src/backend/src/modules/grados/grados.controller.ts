@@ -16,7 +16,7 @@ export class GradoController {
   @Post('importar')
   @UseInterceptors(FileInterceptor('file'))
   async importar(@UploadedFile() file: Express.Multer.File) {
-    return this.gradoService.importar(file.buffer);
+    return this.gradoService.importar(file.buffer, file.mimetype);
   }
 
   @Get('search')

@@ -7,7 +7,7 @@
 - **Frontend:** [importar-asignaturas.component.ts](/src/frontend/src/app/features/admin/asignaturas/importar-asignaturas/importar-asignaturas.component.ts) · [asignatura.service.ts](/src/frontend/src/app/core/services/asignatura.service.ts)
 
 ## Descripción
-Implementación de la carga masiva de asignaturas mediante archivos CSV. El sistema procesa cada línea del archivo, validando la integridad referencial con la entidad `Grado` mediante su código único antes de persistir los datos.
+Implementación de la carga masiva de asignaturas mediante archivos CSV y Excel (.xlsx). El sistema procesa cada línea del archivo, validando la integridad referencial con la entidad `Grado` mediante su código único antes de persistir los datos.
 
 ## Estado
 ✅ **Completado** - Iteración 2
@@ -18,7 +18,7 @@ Implementación de la carga masiva de asignaturas mediante archivos CSV. El sist
 #### POST `/asignaturas/importar`
 Procesa un archivo multipart/form-data.
 - **Form-data key**: `file`.
-- **Formato CSV**: `codigo, nombre, creditos, grado_codigo`.
+- **Formato**: `codigo, nombre, creditos, grado_codigo`.
 
 ### Lógica de Negocio
 - **Carga en Lote**: Uso de `repository.save()` con un array de entidades para optimizar la persistencia.

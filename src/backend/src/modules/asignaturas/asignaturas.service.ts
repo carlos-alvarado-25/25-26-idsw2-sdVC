@@ -6,8 +6,8 @@ import { Grado } from '../../entities/grado.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 import { CrearAsignaturaDto } from './dto/crear-asignatura.dto';
 import { UpdateAsignaturaDto } from './dto/update-asignatura.dto';
-
 import { ImportResultDto } from './dto/import-result.dto';
+import { FileParserFactory } from '../../common/services/file-parser.factory';
 
 @Injectable()
 export class AsignaturaService {
@@ -18,13 +18,16 @@ export class AsignaturaService {
     private readonly asignaturaRepository: Repository<Asignatura>,
     @InjectRepository(Grado)
     private readonly gradoRepository: Repository<Grado>,
-  ) {}
+    private readonly fileParserFactory: FileParserFactory,
+    ) {}
 
-  async importar(buffer: Buffer): Promise<ImportResultDto> {
-    const content = buffer.toString('utf-8');
-    const lines = content.split(/\r?\n/).filter(line => line.trim().length > 0);
-    
-    let exitos = 0;
+    async importar(buffer: Buffer, mimetype: string): Promise<ImportResultDto> {
+      const parser = this.fileParserFactory.getParser(mimetype);
+      // Para CSV se asume que no hay cabecera (mapeo posicional)
+      const rawData = parser.parse<any>(buffer, ['codigo', 'nombre', 'creditos', 'grado_codigo']);
+
+      let exitos = 0;
+
     let fallos = 0;
     const detalles: string[] = [];
     const asignaturasParaGuardar: Asignatura[] = [];
@@ -32,45 +35,35 @@ export class AsignaturaService {
     const todosLosGrados = await this.gradoRepository.find();
     const gradosMap = new Map(todosLosGrados.map(g => [g.codigo.toUpperCase(), g]));
 
-    const startIdx = lines[0].toLowerCase().includes('codigo') ? 1 : 0;
+    for (let i = 0; i < rawData.length; i++) {
+      const row = rawData[i];
+      const { codigo, nombre, creditos, grado_codigo } = row;
+      const creditosNum = parseInt(creditos, 10);
 
-    for (let i = startIdx; i < lines.length; i++) {
-      const line = lines[i];
-      const parts = line.split(',').map(s => s.trim());
-      
-      if (parts.length < 4) {
+      if (!codigo || !nombre || isNaN(creditosNum) || !grado_codigo) {
         fallos++;
-        detalles.push(`Fila ${i + 1}: Datos insuficientes (se requieren 4 columnas).`);
-        continue;
-      }
-
-      const [codigo, nombre, creditosStr, gradoCodigo] = parts;
-      const creditos = parseInt(creditosStr, 10);
-
-      if (!codigo || !nombre || isNaN(creditos) || !gradoCodigo) {
-        fallos++;
-        detalles.push(`Fila ${i + 1}: Datos inválidos o incompletos.`);
+        detalles.push(`Fila ${i + 2}: Datos inválidos o incompletos.`);
         continue;
       }
 
       const existente = await this.asignaturaRepository.findOneBy({ codigo });
       if (existente) {
         fallos++;
-        detalles.push(`Fila ${i + 1}: El código de asignatura "${codigo}" ya existe.`);
+        detalles.push(`Fila ${i + 2}: El código de asignatura "${codigo}" ya existe.`);
         continue;
       }
 
-      const grado = gradosMap.get(gradoCodigo.toUpperCase());
+      const grado = gradosMap.get(grado_codigo.toUpperCase());
       if (!grado) {
         fallos++;
-        detalles.push(`Fila ${i + 1}: El grado con código "${gradoCodigo}" no existe.`);
+        detalles.push(`Fila ${i + 2}: El grado con código "${grado_codigo}" no existe.`);
         continue;
       }
 
       asignaturasParaGuardar.push(this.asignaturaRepository.create({
         codigo,
         nombre,
-        creditos,
+        creditos: creditosNum,
         gradoId: grado.id
       }));
       exitos++;

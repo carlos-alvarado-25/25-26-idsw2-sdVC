@@ -17,7 +17,7 @@ export class AulaController {
   @Post('importar')
   @UseInterceptors(FileInterceptor('file'))
   async importar(@UploadedFile() file: Express.Multer.File) {
-    return this.aulaService.importar(file.buffer);
+    return this.aulaService.importar(file.buffer, file.mimetype);
   }
 
   @Get('search')

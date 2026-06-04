@@ -7,7 +7,7 @@
 - **Frontend:** [importar-aulas.component.ts](/src/frontend/src/app/features/admin/aulas/importar-aulas/importar-aulas.component.ts) · [aula.service.ts](/src/frontend/src/app/core/services/aula.service.ts)
 
 ## Descripción
-Implementación de la carga masiva de aulas mediante archivos CSV. El sistema procesa cada línea validando la unicidad del código del aula antes de la persistencia atómica en el motor de base de datos.
+Implementación de la carga masiva de aulas mediante archivos CSV y Excel (.xlsx). El sistema procesa cada línea validando la unicidad del código del aula antes de la persistencia atómica en el motor de base de datos.
 
 ## Estado
 ✅ **Completado** - Iteración 2
@@ -17,7 +17,7 @@ Implementación de la carga masiva de aulas mediante archivos CSV. El sistema pr
 ### Endpoints
 #### POST `/aulas/importar`
 Procesa un archivo multipart/form-data con la lista de aulas.
-- **Formato CSV**: `codigo, nombre, capacidad, edificio, planta, tipo`.
+- **Formato**: `codigo, nombre, capacidad, edificio, planta, tipo`.
 
 ### Lógica de Negocio
 - **Validación de Identidad**: Se comprueba fila por fila que el código no exista previamente en el inventario.

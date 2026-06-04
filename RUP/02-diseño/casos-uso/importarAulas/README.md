@@ -13,7 +13,7 @@
 
 ## propósito
 
-Realización del diseño detallado para el caso de uso `importarAulas()`, especificando el flujo de procesamiento masivo de archivos CSV, la validación de unicidad de los recursos físicos y la estructura de reporte de resultados.
+Realización del diseño detallado para el caso de uso `importarAulas()`, especificando el flujo de procesamiento masivo de archivos CSV y Excel (.xlsx), la validación de unicidad de los recursos físicos y la estructura de reporte de resultados.
 
 ## diagrama de secuencia
 
@@ -66,5 +66,5 @@ class ImportResultDto {
 |-------------------|----------------------|--------------------------|
 | `ImportarAulasView` | `ImportarAulasComponent` | Gestión de la carga de archivos y muestreo de estadísticas. |
 | `AulaController` | `AulaController` | Gestión de la petición multipart y orquestación del proceso. |
-| `AulaController` | `AulaService` | Parsing del CSV, validación de reglas de negocio y carga en lote. |
+| `AulaController` | `AulaService` | Delegación del parsing al `ExcelParserService` y orquestación de la lógica de negocio, validación de reglas de negocio y carga en lote. |
 | `AulaRepository` | `AulaRepository` | Persistencia masiva en MySQL mediante `save()`. |

@@ -9,6 +9,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { GradoModule } from './modules/grados/grados.module';
 import { AsignaturasModule } from './modules/asignaturas/asignaturas.module';
 import { AulasModule } from './modules/aulas/aulas.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AulasModule } from './modules/aulas/aulas.module';
       entities: [Usuario, Grado, Asignatura, Aula],
       synchronize: false,
     }),
+    CommonModule,
     AuthModule,
     GradoModule,
     AsignaturasModule,

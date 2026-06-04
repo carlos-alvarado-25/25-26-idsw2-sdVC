@@ -11,6 +11,10 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 - [/src/backend](/src/backend): API REST con NestJS y TypeORM.
 - [/src/frontend](/src/frontend): Aplicación SPA con Angular.
 
+### Infraestructura y Utilidades
+- **CommonModule**: Provee componentes transversales al sistema.
+    - `FileParserFactory`: Motor inteligente de importación con soporte para **CSV** y **Excel (.xlsx)** mediante el Patrón Estrategia. Incluye saneamiento automático de celdas (`trim`) y soporte para codificación **UTF-8** para caracteres especiales.
+
 ## Casos de Uso Implementados
 
 *(Se irá poblando a medida que se completen las implementaciones reales)*
