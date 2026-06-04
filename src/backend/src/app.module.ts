@@ -5,10 +5,12 @@ import { Usuario } from './entities/usuario.entity';
 import { Grado } from './entities/grado.entity';
 import { Asignatura } from './entities/asignatura.entity';
 import { Aula } from './entities/aula.entity';
+import { Alumno } from './entities/alumno.entity';
 import { AuthModule } from './modules/auth/auth.module';
 import { GradoModule } from './modules/grados/grados.module';
 import { AsignaturasModule } from './modules/asignaturas/asignaturas.module';
 import { AulasModule } from './modules/aulas/aulas.module';
+import { AlumnosModule } from './modules/alumnos/alumnos.module';
 import { CommonModule } from './common/common.module';
 
 @Module({
@@ -23,7 +25,7 @@ import { CommonModule } from './common/common.module';
       username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || 'password',
       database: process.env.DB_DATABASE || 'generador_calendarios',
-      entities: [Usuario, Grado, Asignatura, Aula],
+      entities: [Usuario, Grado, Asignatura, Aula, Alumno],
       synchronize: false,
     }),
     CommonModule,
@@ -31,6 +33,7 @@ import { CommonModule } from './common/common.module';
     GradoModule,
     AsignaturasModule,
     AulasModule,
+    AlumnosModule,
   ],
   controllers: [],
   providers: [],

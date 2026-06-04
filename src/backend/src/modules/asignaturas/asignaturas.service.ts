@@ -23,7 +23,6 @@ export class AsignaturaService {
 
     async importar(buffer: Buffer, mimetype: string): Promise<ImportResultDto> {
       const parser = this.fileParserFactory.getParser(mimetype);
-      // Para CSV se asume que no hay cabecera (mapeo posicional)
       const rawData = parser.parse<any>(buffer, ['codigo', 'nombre', 'creditos', 'grado_codigo']);
 
       let exitos = 0;

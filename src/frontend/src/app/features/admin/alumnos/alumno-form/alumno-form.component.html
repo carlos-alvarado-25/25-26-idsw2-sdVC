@@ -1,0 +1,72 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> / 
+      <a [routerLink]="['/admin/alumnos']">🎓 Alumnos</a> / 
+      <span>{{ isEditMode() ? '✏️ Editar' : '➕ Nuevo' }}</span>
+    </div>
+    <div class="header-main">
+      <h1>{{ isEditMode() ? 'Editar Alumno' : 'Nuevo Alumno' }}</h1>
+      <button class="btn-secondary" [routerLink]="['/admin/alumnos']">Volver al listado</button>
+    </div>
+  </header>
+
+  <form [formGroup]="alumnoForm" (ngSubmit)="onSubmit()" class="data-form">
+    <div class="form-grid">
+      <!-- Matrícula -->
+      <div class="form-group">
+        <label for="matricula">Matrícula*</label>
+        <input id="matricula" type="text" formControlName="matricula" placeholder="Ej: ALU123456" [readonly]="loading()">
+        <small class="error" *ngIf="alumnoForm.get('matricula')?.touched && alumnoForm.get('matricula')?.errors?.['required']">
+          La matrícula es obligatoria.
+        </small>
+      </div>
+
+      <!-- Nombre -->
+      <div class="form-group">
+        <label for="nombre">Nombre Completo*</label>
+        <input id="nombre" type="text" formControlName="nombre" placeholder="Ej: Juan Pérez García" [readonly]="loading()">
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Correo Electrónico*</label>
+        <input id="email" type="email" formControlName="email" placeholder="Ej: juan.perez@universidad.edu" [readonly]="loading()">
+      </div>
+
+      <!-- Curso (Nivel) -->
+      <div class="form-group">
+        <label for="curso">Curso (Nivel)*</label>
+        <select id="curso" formControlName="curso">
+          <option [value]="1">1º Curso</option>
+          <option [value]="2">2º Curso</option>
+          <option [value]="3">3º Curso</option>
+          <option [value]="4">4º Curso</option>
+          <option [value]="5">5º Curso</option>
+          <option [value]="6">6º Curso</option>
+        </select>
+      </div>
+
+      <!-- Grado Selector -->
+      <div class="form-group">
+        <label for="gradoId">Grado Académico*</label>
+        <select id="gradoId" formControlName="gradoId">
+          <option value="" disabled>Seleccione un grado...</option>
+          <option *ngFor="let g of grados()" [value]="g.id">{{ g.nombre }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-feedback" *ngIf="success() || error()">
+      <div class="alert success" *ngIf="success()">✅ Operación completada con éxito.</div>
+      <div class="alert error" *ngIf="error()">❌ {{ error() }}</div>
+    </div>
+
+    <footer class="form-actions">
+      <button type="button" class="btn-ghost" [routerLink]="['/admin/alumnos']" [disabled]="loading()">Cancelar</button>
+      <button type="submit" class="btn-primary" [disabled]="alumnoForm.invalid || loading()">
+        {{ loading() ? 'Guardando...' : (isEditMode() ? 'Actualizar Cambios' : 'Crear Alumno') }}
+      </button>
+    </footer>
+  </form>
+</div>

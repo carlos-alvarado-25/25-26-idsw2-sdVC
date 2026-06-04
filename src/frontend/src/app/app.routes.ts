@@ -10,6 +10,9 @@ import { ImportarAsignaturasComponent } from './features/admin/asignaturas/impor
 import { ListarAulasComponent } from './features/admin/aulas/listar-aulas/listar-aulas.component';
 import { AulaFormComponent } from './features/admin/aulas/aula-form/aula-form.component';
 import { ImportarAulasComponent } from './features/admin/aulas/importar-aulas/importar-aulas.component';
+import { ListarAlumnosComponent } from './features/admin/alumnos/listar-alumnos/listar-alumnos.component';
+import { AlumnoFormComponent } from './features/admin/alumnos/alumno-form/alumno-form.component';
+import { ImportarAlumnosComponent } from './features/admin/alumnos/importar-alumnos/importar-alumnos.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,5 +29,9 @@ export const routes: Routes = [
   { path: 'admin/aulas/crear', component: AulaFormComponent },
   { path: 'admin/aulas/editar/:id', component: AulaFormComponent },
   { path: 'admin/aulas/importar', component: ImportarAulasComponent },
+  { path: 'admin/alumnos', component: ListarAlumnosComponent },
+  { path: 'admin/alumnos/crear', component: AlumnoFormComponent },
+  { path: 'admin/alumnos/editar/:id', component: AlumnoFormComponent },
+  { path: 'admin/alumnos/importar', component: ImportarAlumnosComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

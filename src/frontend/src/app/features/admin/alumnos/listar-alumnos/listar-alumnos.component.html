@@ -1,0 +1,81 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> / <span>🎓 Alumnos</span>
+    </div>
+    <div class="header-main">
+      <h1>Gestión de Alumnos</h1>
+      <div class="actions">
+        <button *ngIf="selectedIds().size > 0" class="btn-danger" (click)="eliminarSeleccionados()">
+          🗑️ Eliminar ({{ selectedIds().size }})
+        </button>
+        <button class="btn-secondary" [routerLink]="['/admin/alumnos/importar']">📥 Importar</button>
+        <button class="btn-primary" [routerLink]="['/admin/alumnos/crear']">➕ Nuevo Alumno</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="filters-section">
+    <div class="search-box">
+      <input 
+        type="text" 
+        [(ngModel)]="criterio" 
+        (keyup.enter)="onSearch()"
+        placeholder="Buscar por nombre, matrícula, email o grado..."
+      >
+      <button (click)="onSearch()" [disabled]="loading()">🔍</button>
+    </div>
+  </section>
+
+  <div class="table-wrapper">
+    <div *ngIf="loading()" class="table-overlay">
+      <div class="loader"></div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="col-check">
+            <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($event)">
+          </th>
+          <th>Matrícula</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Curso</th>
+          <th>Grado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let alumno of alumnos()" [class.selected]="selectedIds().has(alumno.id)">
+          <td class="col-check">
+            <input type="checkbox" [checked]="selectedIds().has(alumno.id)" (change)="toggleSelection(alumno.id)">
+          </td>
+          <td class="font-mono">{{ alumno.matricula }}</td>
+          <td><strong>{{ alumno.nombre }}</strong></td>
+          <td>{{ alumno.email }}</td>
+          <td>{{ alumno.curso }}º</td>
+          <td class="text-accent">{{ alumno.grado?.nombre }}</td>
+          <td class="table-actions">
+            <button class="btn-icon" [routerLink]="['/admin/alumnos/editar', alumno.id]" title="Editar">✏️</button>
+            <button class="btn-icon delete" (click)="eliminarAlumno(alumno)" title="Eliminar">🗑️</button>
+          </td>
+        </tr>
+        <tr *ngIf="alumnos().length === 0 && !loading()">
+          <td colspan="7" class="no-data">No se encontraron alumnos registrados.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="pagination">
+    <div class="pagination-info">
+      Mostrando {{ alumnos().length }} de {{ total() }} registros
+    </div>
+    <div class="pagination-controls">
+      <button (click)="cambiarPagina(-1)" [disabled]="currentPage() === 1 || loading()">Anterior</button>
+      <span class="page-number">{{ currentPage() }}</span>
+      <button (click)="cambiarPagina(1)" [disabled]="alumnos().length < 10 || loading()">Siguiente</button>
+    </div>
+  </footer>
+</div>
