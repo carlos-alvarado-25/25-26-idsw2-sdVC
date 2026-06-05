@@ -1,0 +1,71 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+title Diseño Detallado: eliminarExamen() (Confirmación y Borrado en Cascada)
+
+actor Administrador as Actor
+boundary ListarExamenesComponent <<Angular>>
+boundary ConfirmDialogComponent <<Angular>>
+control ExamenApiService <<Angular>>
+control ExamenController <<NestJS>>
+participant ExamenService <<NestJS>>
+participant ExamenRepository <<TypeORM>>
+database MySQL as DB
+
+Actor -> ListarExamenesComponent : clickEliminar(examen)
+activate ListarExamenesComponent
+
+ListarExamenesComponent -> ConfirmDialogComponent : abrir(examen)
+activate ConfirmDialogComponent
+ConfirmDialogComponent --> Actor : mostrarModalConfirmacion(materia, fecha, aula, profesor)
+
+Actor -> ConfirmDialogComponent : clickConfirmar()
+ConfirmDialogComponent --> ListarExamenesComponent : confirmado
+deactivate ConfirmDialogComponent
+
+ListarExamenesComponent -> ExamenApiService : eliminar(id)
+activate ExamenApiService
+
+ExamenApiService -> ExamenController : DELETE /examenes/:id
+activate ExamenController
+
+ExamenController -> ExamenService : remove(id)
+activate ExamenService
+
+ExamenService -> ExamenRepository : findOneBy({ id })
+activate ExamenRepository
+ExamenRepository -> DB : SELECT ...
+ExamenRepository --> ExamenService : examenExistente?
+deactivate ExamenRepository
+
+alt Examen No Existe
+    ExamenService --> ExamenController : throw NotFoundException("Examen no encontrado")
+    ExamenController --> ExamenApiService : 404 Not Found
+    ExamenApiService --> ListarExamenesComponent : error
+    ListarExamenesComponent --> Actor : mostrarMensajeError("El examen ya no existe")
+else Examen Encontrado
+    ExamenService -> ExamenRepository : remove(examenExistente)
+    activate ExamenRepository
+    ExamenRepository -> DB : DELETE FROM Examen WHERE id = ?\n(Cascades: Incidencia)
+    ExamenRepository --> ExamenService : examenEliminado
+    deactivate ExamenRepository
+
+    ExamenService --> ExamenController : void
+    ExamenController --> ExamenApiService : 200 OK
+    deactivate ExamenService
+    deactivate ExamenController
+
+    ExamenApiService --> ListarExamenesComponent : void
+    deactivate ExamenApiService
+
+    ListarExamenesComponent -> ListarExamenesComponent : recargarListado()
+    ListarExamenesComponent --> Actor : mostrarMensajeExito("Examen eliminado correctamente")
+end
+
+deactivate ListarExamenesComponent
+
+@enduml

@@ -1,0 +1,117 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+title Diseño Detallado: editarExamen() (Gestión Avanzada y Conflictos)
+
+actor Administrador as Actor
+boundary ExamenFormComponent <<Angular>>
+control ExamenApiService <<Angular>>
+control ExamenController <<NestJS>>
+participant ExamenService <<NestJS>>
+participant ExamenRepository <<TypeORM>>
+participant AsignaturaRepository <<TypeORM>>
+participant AulaRepository <<TypeORM>>
+participant ProfesorRepository <<TypeORM>>
+database MySQL as DB
+
+== Fase 1: Carga de Datos y Dependencias ==
+
+Actor -> ExamenFormComponent : abrirEditarExamen(id)
+activate ExamenFormComponent
+
+ExamenFormComponent -> ExamenApiService : obtener(id)
+activate ExamenApiService
+ExamenApiService -> ExamenController : GET /examenes/:id
+activate ExamenController
+ExamenController -> ExamenService : findOne(id)
+activate ExamenService
+ExamenService -> ExamenRepository : findOne({ where: { id }, relations: [...] })
+activate ExamenRepository
+ExamenRepository -> DB : SELECT ...
+ExamenRepository --> ExamenService : examen
+deactivate ExamenRepository
+ExamenService --> ExamenController : examen
+deactivate ExamenService
+ExamenController --> ExamenApiService : ExamenDto
+deactivate ExamenController
+ExamenApiService --> ExamenFormComponent : ExamenDto
+deactivate ExamenApiService
+
+ExamenFormComponent --> Actor : mostrarFormularioConDatos(examen)
+
+== Fase 2: Actualización con Validación de Conflictos ==
+
+Actor -> ExamenFormComponent : modificarCampos(codigo, fecha, hora, duracion, aulaId, profesorId)
+Actor -> ExamenFormComponent : clickGuardar()
+
+ExamenFormComponent -> ExamenFormComponent : validarFormulario()
+
+ExamenFormComponent -> ExamenApiService : actualizar(id, updateExamenDto)
+activate ExamenApiService
+
+ExamenApiService -> ExamenController : PATCH /examenes/:id\n(UpdateExamenDto)
+activate ExamenController
+
+ExamenController -> ExamenService : update(id, dto)
+activate ExamenService
+
+alt Validar Código Único (si cambia)
+    ExamenService -> ExamenRepository : findOneBy({ codigo: dto.codigo })
+    activate ExamenRepository
+    ExamenRepository --> ExamenService : codigoExiste?
+    deactivate ExamenRepository
+    alt Código Duplicado
+        ExamenService --> ExamenController : throw ConflictException("Código ya registrado")
+    end
+end
+
+alt Validar Conflicto de Aula (si se asigna aulaId)
+    ExamenService -> ExamenRepository : buscarSolapamientoAula(aulaId, fecha, hora, duracion, id)
+    activate ExamenRepository
+    ExamenRepository --> ExamenService : aulaConflictiva?
+    deactivate ExamenRepository
+    alt Aula Ocupada
+        ExamenService --> ExamenController : throw ConflictException("Aula ocupada en esta franja horaria")
+    end
+end
+
+alt Validar Conflicto de Profesor (si se asigna profesorId)
+    ExamenService -> ExamenRepository : buscarSolapamientoProfesor(profesorId, fecha, hora, duracion, id)
+    activate ExamenRepository
+    ExamenRepository --> ExamenService : profesorConflictivo?
+    deactivate ExamenRepository
+    alt Profesor Ocupado
+        ExamenService --> ExamenController : throw ConflictException("Profesor supervisando otro examen en esta franja")
+    end
+end
+
+ExamenService -> ExamenRepository : merge(examenExistente, dto)
+ExamenService -> ExamenRepository : save(examenActualizado)
+activate ExamenRepository
+ExamenRepository -> DB : UPDATE Examen ...
+ExamenRepository --> ExamenService : examenGuardado
+deactivate ExamenRepository
+
+ExamenService --> ExamenController : examenGuardado
+ExamenController --> ExamenApiService : 200 OK (ExamenDto)
+deactivate ExamenService
+deactivate ExamenController
+
+ExamenApiService --> ExamenFormComponent : ExamenDto
+deactivate ExamenApiService
+
+ExamenFormComponent --> Actor : mostrarMensajeExito()
+
+alt Click Finalizar o Cancelar
+    Actor -> ExamenFormComponent : clickFinalizar()
+    ExamenFormComponent -> ExamenFormComponent : navegarAListado()
+    ExamenFormComponent --> Actor : mostrarPantallaListadoExamenes()
+end
+
+deactivate ExamenFormComponent
+
+@enduml

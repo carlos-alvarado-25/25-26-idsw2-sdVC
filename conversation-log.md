@@ -1135,3 +1135,23 @@
 
 **Decisión:** Se acuerda extender el patrón "El Delgado" para la entidad Examen con relaciones opcionales (nullable) a Aula y Profesor, garantizando la inserción limpia del registro básico del examen antes de gestionar sus reservas físicas y supervisores.
 
+---
+
+## [05/06/2026 21:07] Sesión 71: Rama de Exámenes - Diseño Detallado de Edición y Borrado Seguro
+
+**Prompt:** "Iniciemos una nueva sesión, ahora hagamos el diseño de editar exámen ... HAZLO! ... Procedamos ahora con eliminarExamen ... HAZLO! ... Por el momento, vamos a dejar el diseño hasta estos 2 casos de uso. Y procederemos a implementarlos... Así que finalicemos la sesión y escribe en el conversation-log.md ahora"
+
+**Resultado:**
+- **Diseño Detallado de `editarExamen()`:** Planificación detallada del formulario de edición avanzada y las validaciones de solapamiento de horarios (cruce de aulas y cruce de profesores supervisores). Se definieron los contratos del endpoint `PATCH /examenes/:id` y el formato de `UpdateExamenDto`.
+- **Diseño Detallado de `eliminarExamen()`:** Diseño del borrado físico y en cascada de exámenes programados. Se especificó la interacción visual mediante un diálogo modal de confirmación detallado y la remoción automática de dependencias operativas (`Incidencia`) en MySQL.
+- **Artefactos Técnicos Creados:**
+  - Diagramas de secuencia PlantUML (**[secuencia.puml de editarExamen](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/casos-uso/editarExamen/secuencia.puml)** y **[secuencia.puml de eliminarExamen](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/casos-uso/eliminarExamen/secuencia.puml)**).
+  - Archivos compilados en SVG (**[secuencia.svg de editarExamen](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/images/02-diseño/casos-uso/editarExamen/secuencia.svg)** y **[secuencia.svg de eliminarExamen](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/images/02-diseño/casos-uso/eliminarExamen/secuencia.svg)**).
+  - Documentos de especificación RUP de diseño detallado en **[README.md de editarExamen](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/editarExamen/README.md)** y **[README.md de eliminarExamen](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/eliminarExamen/README.md)**.
+- **Trazabilidad 360º:**
+  - Registro de los nuevos casos de uso en el índice general de diseño **[RUP/02-diseño/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/README.md)**.
+  - Sincronización de los breadcrumbs bidireccionales en los READMEs de análisis correspondientes: **[RUP/01-analisis/casos-uso/editarExamen/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/editarExamen/README.md)** y **[RUP/01-analisis/casos-uso/eliminarExamen/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/eliminarExamen/README.md)**.
+
+**Decisión:** Se ratifica la descentralización de las validaciones de cruce horario y de espacio hacia el backend en el controlador y servicio del examen, devolviendo excepciones `409 Conflict` estructuradas para que la interfaz resalte los campos causantes del cruce.
+
+
