@@ -1,0 +1,51 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam packageStyle rectangle
+skinparam linetype polyline
+
+title Diseño Detallado: abrirProfesores()
+
+actor Administrador
+boundary ProfesorListComponent <<Angular>>
+control ProfesorApiService <<Angular>>
+control ProfesorController <<NestJS>>
+participant ProfesorService <<NestJS>>
+participant ProfesorRepository <<TypeORM>>
+database MySQL
+
+Administrador -> ProfesorListComponent : acceder()
+activate ProfesorListComponent
+
+ProfesorListComponent -> ProfesorApiService : listar(1)
+activate ProfesorApiService
+
+ProfesorApiService -> ProfesorController : GET /profesores?page=1
+activate ProfesorController
+
+ProfesorController -> ProfesorService : findAll(options)
+activate ProfesorService
+
+ProfesorService -> ProfesorRepository : findAndCount(query)
+activate ProfesorRepository
+
+ProfesorRepository -> MySQL : SELECT * FROM profesor \nLEFT JOIN profesor_asignaturas ... \nLEFT JOIN asignatura ... \nORDER BY nombre ASC \nLIMIT 10 OFFSET 0
+MySQL --> ProfesorRepository : [profesores (incl. asignaturas), total]
+deactivate ProfesorRepository
+
+ProfesorService --> ProfesorController : PagedResultDto<Profesor>
+deactivate ProfesorService
+
+ProfesorController --> ProfesorApiService : 200 OK (PagedResultDto)
+deactivate ProfesorController
+
+ProfesorApiService --> ProfesorListComponent : data
+deactivate ProfesorApiService
+
+ProfesorListComponent -> ProfesorListComponent : renderizar(data)
+ProfesorListComponent --> Administrador : mostrarListado()
+deactivate ProfesorListComponent
+
+@enduml

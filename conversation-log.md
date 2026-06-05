@@ -1028,3 +1028,18 @@
 - **Auditoría Técnica:** Realización de una revisión profunda del código basada en los principios de IDSW2 (SOLID, Cohesión, Acoplamiento), confirmando un estado de alta calidad estructural.
 
 **Decisión:** Se ratifica el campo "Curso" como atributo numérico obligatorio para alumnos. Se establece el `CommonModule` (Parsers) como el estándar de oro para toda futura funcionalidad de carga masiva en el sistema.
+
+---
+
+## [05/06/2026 15:51] Sesión 65: Rama de Profesores - Inicio del Diseño Detallado
+
+**Prompt:** "Perfecto, abramos sesión para seguir ahora UNICAMENTE con el CRUD inicial de Profesores abrir, crear, editar, eliminar e importar. Iniciemos el diseño con abrir ... El caso de uso también presenta las asignaturas que imparte. ... Perfecto cierra la sesión por ahora."
+
+**Resultado:** 
+- **Inicio de la Fase de Diseño (Profesores):** Apertura de la disciplina de diseño para la entidad Profesor, enfocándose en el mantenimiento del censo docente.
+- **Realización de `abrirProfesores()`:** Diseño detallado del listado paginado. Se especificó la interacción técnica para recuperar los perfiles y la integración de la relación Muchos-a-Muchos con la entidad `Asignatura`.
+- **Contratos de Datos:** Definición del `ProfesorDto` incluyendo la colección de asignaturas impartidas, asegurando que la vista administrativa cumpla con la responsabilidad de visualización de carga docente.
+- **Artefactos Técnicos:** Generación de diagramas de secuencia (`.puml` + `.svg`) y documentación RUP en `RUP/02-diseño/casos-uso/abrirProfesores/`.
+- **Integridad Documental:** Actualización del índice maestro de diseño y activación de breadcrumbs de trazabilidad 360º.
+
+**Decisión:** Se establece el uso de `LEFT JOIN` para la recuperación eficiente de las asignaturas vinculadas al profesor durante el listado, evitando el problema de consultas N+1 y garantizando el cumplimiento de la Ley de Demeter mediante una estructura de datos plana en el DTO.

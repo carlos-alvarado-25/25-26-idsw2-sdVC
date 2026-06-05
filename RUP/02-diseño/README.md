@@ -75,3 +75,6 @@ Definición de la estructura de directorios del código fuente y políticas de i
 - [editarAlumno](casos-uso/editarAlumno/README.md) - Diseño de la actualización incremental y estado singular.
 - [eliminarAlumno](casos-uso/eliminarAlumno/README.md) - Diseño del borrado seguro con diagnóstico de impacto.
 - [importarAlumnos](casos-uso/importarAlumnos/README.md) - Diseño del procesamiento por lotes y resolución de titulaciones.
+
+### Gestión de Profesores
+- [abrirProfesores](casos-uso/abrirProfesores/README.md) - Diseño del listado paginado y personal docente.
