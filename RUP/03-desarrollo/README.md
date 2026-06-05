@@ -13,10 +13,16 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 
 ### Infraestructura y Utilidades
 - **CommonModule**: Provee componentes transversales al sistema.
-    - `FileParserFactory`: Motor inteligente de importación con soporte para **CSV** y **Excel (.xlsx)** mediante el Patrón Estrategia. Incluye saneamiento automático de celdas (`trim`) y soporte para codificación **UTF-8** para caracteres especiales.
+    - `FileParserFactory`: Motor inteligente de importación con soporte para **CSV** y **Excel (.xlsx)** mediante el Patrón Estrategia. Incluye una jerarquía de clases basada en `BaseParser` para garantizar el saneamiento automático de celdas (`trim`) sin duplicidad de lógica.
+
+## Estándares de Ingeniería Aplicados
+
+1.  **Principio de Delegación (Backend)**: Implementación de getters con `@Expose()` en las entidades para proveer nombres y códigos de asociaciones, eliminando la navegación profunda en las plantillas HTML.
+2.  **Serialización Reactiva**: Uso sistemático de `ClassSerializerInterceptor` en controladores administrativos para garantizar que el modelo de datos enviado al Frontend sea semántico y plano.
+3.  **Refactorización DRY**: Centralización de validaciones de solapamiento horario en `ExamenService` y de limpieza de datos en `BaseParser`.
 
 ## Casos de Uso Implementados
-
+...
 *(Se irá poblando a medida que se completen las implementaciones reales)*
 
 ### Comunes
@@ -57,6 +63,7 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 - [editarProfesor](casos-uso/editarProfesor/README.md) ✅
 - [importarProfesores](casos-uso/importarProfesores/README.md) ✅
 - [eliminarProfesor](casos-uso/eliminarProfesor/README.md) ✅
+- [asignarProfesorAExamen](casos-uso/asignarProfesorAExamen/README.md) ✅
 
 #### Gestión de Exámenes y Calendario
 - [abrirExamenes](casos-uso/abrirExamenes/README.md) ✅

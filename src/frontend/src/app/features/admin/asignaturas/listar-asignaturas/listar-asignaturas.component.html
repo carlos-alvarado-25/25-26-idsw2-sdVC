@@ -53,7 +53,7 @@
           <td class="font-mono">{{ asignatura.codigo }}</td>
           <td><strong>{{ asignatura.nombre }}</strong></td>
           <td>{{ asignatura.creditos }} ECTS</td>
-          <td class="text-accent">{{ asignatura.grado?.nombre }}</td>
+          <td class="text-accent">{{ asignatura.nombreGrado }}</td>
           <td class="table-actions">
             <button class="btn-icon" [routerLink]="['/admin/asignaturas/editar', asignatura.id]" title="Editar">✏️</button>
             <button class="btn-icon delete" (click)="eliminarAsignatura(asignatura)" title="Eliminar">🗑️</button>

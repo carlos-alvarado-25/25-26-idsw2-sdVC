@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, UseInterceptors, UploadedFile, ClassSerializerInterceptor } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ProfesorService } from './profesores.service';
 import { Profesor } from '../../entities/profesor.entity';
@@ -7,6 +7,7 @@ import { CrearProfesorDto } from './dto/crear-profesor.dto';
 import { UpdateProfesorDto } from './dto/update-profesor.dto';
 
 @Controller('profesores')
+@UseInterceptors(ClassSerializerInterceptor)
 export class ProfesorController {
   constructor(private readonly profesorService: ProfesorService) {}
 

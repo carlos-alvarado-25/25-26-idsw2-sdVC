@@ -10,6 +10,7 @@ export interface Profesor {
   nombre: string;
   email: string;
   departamento: string;
+  cargaLectivaTexto: string;
   asignaturas?: {
     id: number;
     nombre: string;

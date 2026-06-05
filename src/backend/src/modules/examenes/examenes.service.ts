@@ -1,6 +1,6 @@
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Not } from 'typeorm';
+import { Repository, Not, IsNull } from 'typeorm';
 import { Examen } from '../../entities/examen.entity';
 import { Asignatura } from '../../entities/asignatura.entity';
 import { Aula } from '../../entities/aula.entity';
@@ -148,12 +148,9 @@ export class ExamenService {
           },
         });
 
-        for (const ex of examenesAula) {
-          const exStart = this.convertTimeToMinutes(ex.hora);
-          const exEnd = exStart + ex.duracion;
-          if (startMinutes < exEnd && exStart < endMinutes) {
-            throw new ConflictException(`El aula "${aula.codigo}" ya está ocupada en esta franja horaria por el examen "${ex.codigo}"`);
-          }
+        const conflicto = this.detectarSolapamiento(examenesAula, startMinutes, endMinutes);
+        if (conflicto) {
+          throw new ConflictException(`El aula "${aula.codigo}" ya está ocupada en esta franja horaria por el examen "${conflicto.codigo}"`);
         }
 
         examen.aulaId = dto.aulaId;
@@ -178,12 +175,9 @@ export class ExamenService {
           },
         });
 
-        for (const ex of examenesProf) {
-          const exStart = this.convertTimeToMinutes(ex.hora);
-          const exEnd = exStart + ex.duracion;
-          if (startMinutes < exEnd && exStart < endMinutes) {
-            throw new ConflictException(`El profesor "${profesor.nombre}" ya supervisa otro examen en esta franja horaria ("${ex.codigo}")`);
-          }
+        const conflicto = this.detectarSolapamiento(examenesProf, startMinutes, endMinutes);
+        if (conflicto) {
+          throw new ConflictException(`El profesor "${profesor.nombre}" ya supervisa otro examen en esta franja horaria ("${conflicto.codigo}")`);
         }
 
         examen.profesorId = dto.profesorId;
@@ -198,8 +192,82 @@ export class ExamenService {
     await this.examenRepository.remove(examen);
   }
 
+  async findSinProfesor(criterio: string = '', page: number = 1): Promise<PagedResultDto<Examen>> {
+    const skip = (page - 1) * this.PAGE_SIZE;
+    const queryBuilder = this.examenRepository.createQueryBuilder('examen');
+
+    queryBuilder
+      .leftJoinAndSelect('examen.asignatura', 'asignatura')
+      .leftJoinAndSelect('examen.aula', 'aula')
+      .where('examen.profesorId IS NULL');
+
+    if (criterio) {
+      queryBuilder.andWhere(
+        '(examen.codigo LIKE :q OR asignatura.nombre LIKE :q OR asignatura.codigo LIKE :q)',
+        { q: `%${criterio}%` },
+      );
+    }
+
+    queryBuilder
+      .orderBy('examen.fecha', 'ASC')
+      .addOrderBy('examen.hora', 'ASC')
+      .skip(skip)
+      .take(this.PAGE_SIZE);
+
+    const [data, total] = await queryBuilder.getManyAndCount();
+    return new PagedResultDto(data, total, page, this.PAGE_SIZE);
+  }
+
+  async verificarConflictoProfesor(
+    examenId: number,
+    profesorId: number,
+  ): Promise<{ tieneConflicto: boolean; descripcion?: string }> {
+    const examen = await this.findOne(examenId);
+    const startMinutes = this.convertTimeToMinutes(examen.hora);
+    const endMinutes = startMinutes + examen.duracion;
+
+    const examenesProf = await this.examenRepository.find({
+      where: {
+        profesorId,
+        fecha: examen.fecha,
+        id: Not(examenId),
+      },
+    });
+
+    const conflicto = this.detectarSolapamiento(examenesProf, startMinutes, endMinutes);
+    if (conflicto) {
+      const exEnd = this.convertTimeToMinutes(conflicto.hora) + conflicto.duracion;
+      return {
+        tieneConflicto: true,
+        descripcion: `El profesor ya supervisa el examen "${conflicto.codigo}" el ${conflicto.fecha} de ${conflicto.hora} a ${this.minutesToTime(exEnd)}.`,
+      };
+    }
+
+    return { tieneConflicto: false };
+  }
+
+  /**
+   * Detecta si un rango horario se solapa con una lista de exámenes
+   */
+  private detectarSolapamiento(examenes: Examen[], start: number, end: number): Examen | null {
+    for (const ex of examenes) {
+      const exStart = this.convertTimeToMinutes(ex.hora);
+      const exEnd = exStart + ex.duracion;
+      if (start < exEnd && exStart < end) {
+        return ex;
+      }
+    }
+    return null;
+  }
+
   private convertTimeToMinutes(timeStr: string): number {
     const [hours, minutes] = timeStr.split(':').map(Number);
     return hours * 60 + minutes;
+  }
+
+  private minutesToTime(totalMinutes: number): string {
+    const h = Math.floor(totalMinutes / 60).toString().padStart(2, '0');
+    const m = (totalMinutes % 60).toString().padStart(2, '0');
+    return `${h}:${m}`;
   }
 }

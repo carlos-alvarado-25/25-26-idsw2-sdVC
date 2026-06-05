@@ -1,11 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, UseInterceptors, UploadedFile, ClassSerializerInterceptor } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { AulaService } from './aulas.service';
+import { AulaService } from './aula.service';
 import { Aula } from '../../entities/aula.entity';
 import { CreateAulaDto } from './dto/create-aula.dto';
 import { UpdateAulaDto } from './dto/update-aula.dto';
 
 @Controller('aulas')
+@UseInterceptors(ClassSerializerInterceptor)
 export class AulaController {
   constructor(private readonly aulaService: AulaService) {}
 

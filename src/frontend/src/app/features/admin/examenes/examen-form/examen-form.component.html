@@ -90,12 +90,22 @@
         </small>
       </div>
 
-      <!-- Profesor Supervisor (Solo Lectura, gestionado por asignarProfesorAExamen) -->
+      <!-- Profesor Supervisor -->
       <div class="form-group" *ngIf="isEditMode()">
-        <label>Profesor Supervisor (Lectura)</label>
-        <input type="text" [value]="profesorAsignadoNombre()" readonly style="background: #f1f5f9; cursor: not-allowed;" title="Se gestiona desde 'Asignar Profesor a Examen'">
-        <small class="text-muted">La asignación de supervisor se realiza desde el caso de uso "Asignar Profesor a Examen".</small>
+        <label>Profesor Supervisor</label>
+        <div *ngIf="profesorSeleccionado() as prof" class="relation-card-inline">
+          <div class="relation-card-info-inline">
+            <strong>{{ prof.nombre }}</strong>
+            <span class="text-muted">{{ prof.codigo }} · {{ prof.departamento }}</span>
+          </div>
+          <button type="button" class="btn-remove" (click)="desasignarProfesor()" [disabled]="loading()" title="Desasignar profesor">✕</button>
+        </div>
+        <div *ngIf="!profesorSeleccionado()" class="empty-inline">
+          Sin supervisor asignado.
+          <small class="text-muted"> — Asigna uno desde la pantalla de Editar Profesor.</small>
+        </div>
       </div>
+
 
     </div>
 

@@ -7,7 +7,12 @@
     </div>
     <div class="header-main">
       <h1>{{ isEditMode() ? 'Editar Profesor' : 'Nuevo Profesor' }}</h1>
-      <button class="btn-secondary" [routerLink]="['/admin/profesores']">Volver al listado</button>
+      <div class="header-actions">
+        <button *ngIf="isEditMode()" class="btn-accent" [routerLink]="['/admin/profesores', profesorId, 'asignar-examen']">
+          📋 Asignar Examen
+        </button>
+        <button class="btn-secondary" [routerLink]="['/admin/profesores']">Volver al listado</button>
+      </div>
     </div>
   </header>
 

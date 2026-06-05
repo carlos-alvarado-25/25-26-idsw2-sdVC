@@ -24,7 +24,9 @@ Filtra alumnos por matrícula, nombre, email o nombre del grado.
 - **Query Params**: `q`, `page`.
 
 ### Implementación
-- **Relaciones**: Uso de `leftJoinAndSelect` en el QueryBuilder para recuperar el nombre del grado asociado de forma eficiente.
+- **Principio de Delegación**: La entidad `Alumno` provee la propiedad `nombreGrado` mediante un getter serializado, eliminando la navegación profunda en la vista.
+- **Relaciones**: Uso de `leftJoinAndSelect` en el QueryBuilder para recuperar el grado asociado.
+- **Serialización**: Uso de `ClassSerializerInterceptor` en el controlador para exponer las propiedades delegadas.
 - **Paginación**: Aplicación del estándar `PagedResultDto` con un tamaño de página de 10 registros.
 
 ---

@@ -55,7 +55,7 @@
           <td><strong>{{ alumno.nombre }}</strong></td>
           <td>{{ alumno.email }}</td>
           <td>{{ alumno.curso }}º</td>
-          <td class="text-accent">{{ alumno.grado?.nombre }}</td>
+          <td class="text-accent">{{ alumno.nombreGrado }}</td>
           <td class="table-actions">
             <button class="btn-icon" [routerLink]="['/admin/alumnos/editar', alumno.id]" title="Editar">✏️</button>
             <button class="btn-icon delete" (click)="eliminarAlumno(alumno)" title="Eliminar">🗑️</button>

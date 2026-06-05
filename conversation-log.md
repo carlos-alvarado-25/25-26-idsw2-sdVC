@@ -1169,5 +1169,35 @@
 
 **Decisión:** Se ratifica la política de "Confirmación Informada" a nivel de UX, asegurando que el frontend alerte explícitamente de los impactos de cascada (`CASCADE`) o de desvinculación a nulo (`SET NULL`) de todas las entidades antes de confirmar la eliminación física de cualquier registro de la base de datos.
 
+---
 
+## [06/06/2026 12:50] Auditoría de Calidad, Refactorización de Delegación y Cierre de Ramillete de Profesores
+
+**Prompt:** "Revisa los últimos cambios que tenemos y como vamos. Logramos implementar asignarProfesorAExamen? ... Auditoría de código ... Revisa los archivos para utilizar las delegaciones que creamos en la entidad de exámenes ... documentar todos estos cambios en los READMEs correspondientes"
+
+### Actividades Realizadas:
+
+1.  **Auditoría de Integridad:** Se verificó el estado funcional de `asignarProfesorAExamen()`. El caso de uso está 100% operativo con validación de conflictos horarios tanto en el Frontend (UX reactiva) como en el Backend (Integridad persistente).
+2.  **Refactorización Estructural (Ley de Demeter):**
+    *   **Delegación en Entidades:** Se aplicó el Principio de Delegación en las entidades `Asignatura`, `Examen`, `Alumno` y `Profesor`. Se añadieron getters con `@Expose()` (ej. `nombreGrado`, `cargaLectivaTexto`) para evitar la navegación profunda en las capas superiores.
+    *   **Serialización API:** Se activó el `ClassSerializerInterceptor` en todos los controladores administrativos (`ExamenController`, `AsignaturaController`, `AlumnoController`, etc.) para estandarizar la entrega de modelos semánticos planos.
+3.  **Refactorización DRY (Don't Repeat Yourself):**
+    *   **Motor de Importación:** Creación de la clase abstracta `BaseParser` para centralizar el saneamiento de datos (`trim`), eliminando duplicidad de código en `CsvParserService` y `ExcelParserService`.
+    *   **Lógica de Negocio:** Extracción del algoritmo de detección de solapamiento horario en `ExamenService` a un método privado centralizado, reduciendo la complejidad del método `update`.
+4.  **Saneamiento del Frontend:**
+    *   Actualización de interfaces de modelos en Angular.
+    *   Limpieza de plantillas HTML y componentes de listado para eliminar el code-smell de "Train Wreck" (navegación manual por asociaciones opcionales).
+5.  **Consolidación Documental RUP:**
+    *   **Nuevo Artefacto:** Creación de `RUP/03-desarrollo/casos-uso/asignarProfesorAExamen/README.md`.
+    *   **Actualización Arquitectónica:** Inclusión de las decisiones sobre delegación y serialización en `RUP/02-diseño/arquitectura.md`.
+    *   **Trazabilidad:** Refinamiento de los READMEs de desarrollo de Alumnos, Profesores, Asignaturas y Exámenes para reflejar los nuevos estándares de ingeniería aplicados.
+    *   **Índices:** Actualización de `RUP/01-analisis/casos-uso/README.md` y `RUP/03-desarrollo/README.md`.
+
+### Decisiones Técnicas:
+*   **Delegación vs. Asociación:** Se establece como norma que el Frontend nunca navegará por asociaciones para obtener datos descriptivos; siempre utilizará propiedades delegadas proporcionadas por el Backend.
+*   **Intercepción Estándar:** La serialización reactiva se delega a los interceptores de NestJS para mantener los controladores limpios y enfocados en el transporte.
+*   **Jerarquía de Parsers:** Se adopta una estructura de herencia para el motor de archivos, facilitando futuras extensiones de formatos (JSON, XML) con limpieza garantizada.
+
+### Estado Final:
+El ramillete de administración y gestión docente queda en estado de excelencia técnica. El sistema es robusto, cumple con los principios de diseño de RUP e IdSw II, y está preparado para la implementación de la lógica algorítmica de generación de calendarios.
 

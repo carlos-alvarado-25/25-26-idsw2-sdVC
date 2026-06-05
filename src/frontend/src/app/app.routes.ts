@@ -16,6 +16,7 @@ import { ImportarAlumnosComponent } from './features/admin/alumnos/importar-alum
 import { ListarProfesoresComponent } from './features/admin/profesores/listar-profesores/listar-profesores.component';
 import { ProfesorFormComponent } from './features/admin/profesores/profesor-form/profesor-form.component';
 import { ImportarProfesoresComponent } from './features/admin/profesores/importar-profesores/importar-profesores.component';
+import { AsignarProfesorExamenComponent } from './features/admin/profesores/asignar-profesor-examen/asignar-profesor-examen.component';
 import { ListarExamenesComponent } from './features/admin/examenes/listar-examenes/listar-examenes.component';
 import { ExamenFormComponent } from './features/admin/examenes/examen-form/examen-form.component';
 
@@ -42,6 +43,7 @@ export const routes: Routes = [
   { path: 'admin/profesores/crear', component: ProfesorFormComponent },
   { path: 'admin/profesores/editar/:id', component: ProfesorFormComponent },
   { path: 'admin/profesores/importar', component: ImportarProfesoresComponent },
+  { path: 'admin/profesores/:profesorId/asignar-examen', component: AsignarProfesorExamenComponent },
   { path: 'admin/examenes', component: ListarExamenesComponent },
   { path: 'admin/examenes/crear', component: ExamenFormComponent },
   { path: 'admin/examenes/editar/:id', component: ExamenFormComponent },

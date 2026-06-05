@@ -24,8 +24,10 @@ Permite buscar exámenes de manera dimensional a partir de su código de examen,
 - **Query Params**: `q` (criterio de búsqueda), `page` (opcional).
 
 ### Implementación
-- **Carga de Relaciones**: Uso de `leftJoinAndSelect` (o TypeORM relations mapping) para recuperar de manera eficiente las relaciones y evitar consultas N+1 en la base de datos MySQL.
-- **Paginación**: Utiliza `PagedResultDto` basándose en un tamaño de página de 10 elementos por página.
+- **Principio de Delegación**: La entidad `Examen` provee las propiedades `nombreAsignatura`, `codigoAsignatura`, `nombreAula` y `nombreProfesor` mediante getters serializados, cumpliendo con la Ley de Demeter.
+- **Serialización**: Uso de `ClassSerializerInterceptor` en el controlador para exponer las propiedades delegadas de forma plana hacia el Frontend.
+- **Carga de Relaciones**: Uso de `leftJoinAndSelect` para recuperar eficientemente las dependencias.
+- **Paginación**: Utiliza `PagedResultDto` con un tamaño de página de 10 elementos.
 
 ---
 
@@ -33,8 +35,8 @@ Permite buscar exámenes de manera dimensional a partir de su código de examen,
 
 ### Implementación
 #### ListarExamenesComponent
-- **Control con Signals**: Gestión reactiva del estado de carga, total de registros, página actual y la colección de exámenes mediante `signals` de Angular.
-- **Formateado de Relaciones**: El componente utiliza helpers para concatenar y visualizar limpiamente los códigos y nombres de las dependencias (`Asignatura`, `Aula` y `Profesor`), manejando estados sin asignar con valores descriptivos predeterminados.
+- **Uso de Delegación**: El componente utiliza directamente las propiedades delegadas del Backend (`examen.nombreAsignatura`, etc.), simplificando drásticamente los helpers de formateo en la vista.
+- **Control con Signals**: Gestión reactiva del estado mediante `signals` de Angular.
 - **Consistencia de Estilos (UI/UX)**: Implementa las clases utilitarias del diseño global del panel de administración (`admin-container`, `data-table`, `filters-section`, etc.) heredadas estrictamente del ramillete de referencia de Grados.
 
 ---

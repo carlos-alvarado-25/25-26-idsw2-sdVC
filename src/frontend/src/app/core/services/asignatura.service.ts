@@ -10,6 +10,7 @@ export interface Asignatura {
   nombre: string;
   creditos: number;
   gradoId: number;
+  nombreGrado: string;
   grado?: {
     id: number;
     nombre: string;

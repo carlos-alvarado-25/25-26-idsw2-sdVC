@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, UseInterceptors, UploadedFile, ClassSerializerInterceptor } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { GradoService } from './grados.service';
 import { CrearGradoDto } from './dto/crear-grado.dto';
 import { UpdateGradoDto } from './dto/update-grado.dto';
 
 @Controller('grados')
+@UseInterceptors(ClassSerializerInterceptor)
 export class GradoController {
   constructor(private readonly gradoService: GradoService) {}
 

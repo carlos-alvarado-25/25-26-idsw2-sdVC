@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, JoinColumn } from 'typeorm';
+import { Expose } from 'class-transformer';
 import { Grado } from './grado.entity';
 
 @Entity('Asignatura')
@@ -21,6 +22,14 @@ export class Asignatura {
 
   @Column()
   gradoId: number;
+
+  /**
+   * Delegación: Provee el nombre del grado sin navegar por la asociación
+   */
+  @Expose()
+  get nombreGrado(): string {
+    return this.grado ? this.grado.nombre : 'Sin Grado';
+  }
 
   @CreateDateColumn()
   fechaCreacion: Date;

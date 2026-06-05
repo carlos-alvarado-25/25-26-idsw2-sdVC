@@ -1,0 +1,165 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> /
+      <a [routerLink]="['/admin/profesores']">🎓 Profesores</a> /
+      <a [routerLink]="['/admin/profesores/editar', profesorId]">{{ profesor()?.nombre || 'Editar' }}</a> /
+      <span>📋 Asignar Examen</span>
+    </div>
+    <div class="header-main">
+      <h1>Asignar Examen a Supervisor</h1>
+      <button class="btn-secondary" (click)="volver()">← Volver al Profesor</button>
+    </div>
+  </header>
+
+  <!-- Contexto: Profesor pre-seleccionado -->
+  <div class="context-card" *ngIf="profesor() as p">
+    <div class="context-icon">🎓</div>
+    <div class="context-info">
+      <span class="context-label">Profesor Supervisor</span>
+      <strong class="context-name">{{ p.nombre }}</strong>
+      <span class="context-detail">{{ p.codigo }} · {{ p.departamento }}</span>
+    </div>
+    <span class="badge-fixed">Pre-seleccionado</span>
+  </div>
+
+  <div class="assignment-layout">
+
+    <!-- Panel Izquierdo: Buscador de Exámenes -->
+    <div class="panel">
+      <div class="panel-header">
+        <h2>📋 Exámenes Sin Supervisor</h2>
+        <span class="counter-badge">{{ totalExamenes() }} disponibles</span>
+      </div>
+
+      <div class="search-box">
+        <input
+          type="text"
+          [(ngModel)]="criterio"
+          (keyup.enter)="onSearch()"
+          placeholder="Buscar por código, asignatura..."
+        >
+        <button (click)="onSearch()" [disabled]="loadingExamenes()">🔍</button>
+      </div>
+
+      <div class="exam-list">
+        <div *ngIf="loadingExamenes()" class="loading-state">
+          <div class="spinner"></div>
+          <span>Cargando exámenes...</span>
+        </div>
+
+        <div
+          *ngFor="let ex of examenes()"
+          class="exam-card"
+          [class.selected]="examenSeleccionado()?.id === ex.id"
+          (click)="seleccionarExamen(ex)"
+        >
+          <div class="exam-card-top">
+            <span class="exam-code">{{ ex.codigo }}</span>
+            <span class="exam-tipo" [class.ordinaria]="ex.tipo === 'Ordinaria'" [class.extraordinaria]="ex.tipo === 'Extraordinaria'">
+              {{ ex.tipo }}
+            </span>
+          </div>
+          <div class="exam-asignatura">{{ getAsignaturaTexto(ex) }}</div>
+          <div class="exam-meta">
+            <span>📅 {{ ex.fecha }}</span>
+            <span>🕐 {{ ex.hora }}</span>
+            <span>⏱ {{ ex.duracion }} min</span>
+          </div>
+          <div class="exam-aula" *ngIf="ex.aulaId">
+            🏢 {{ ex.aula?.codigo }} - {{ ex.nombreAula }}
+          </div>
+          <div class="exam-aula text-muted" *ngIf="!ex.aulaId">
+            🏢 Sin aula asignada
+          </div>
+        </div>
+
+        <div *ngIf="examenes().length === 0 && !loadingExamenes()" class="empty-state">
+          No hay exámenes sin supervisor{{ criterio ? ' para "' + criterio + '"' : '' }}.
+        </div>
+      </div>
+
+      <!-- Paginación -->
+      <div class="pagination-controls" *ngIf="totalExamenes() > 0">
+        <button (click)="cambiarPagina(-1)" [disabled]="paginaExamenes() === 1 || loadingExamenes()">‹ Anterior</button>
+        <span>Página {{ paginaExamenes() }}</span>
+        <button (click)="cambiarPagina(1)" [disabled]="examenes().length < 10 || loadingExamenes()">Siguiente ›</button>
+      </div>
+    </div>
+
+    <!-- Panel Derecho: Confirmación -->
+    <div class="panel confirmation-panel">
+      <div class="panel-header">
+        <h2>✅ Confirmar Asignación</h2>
+      </div>
+
+      <!-- Estado inicial -->
+      <div *ngIf="!examenSeleccionado()" class="empty-state confirmation-hint">
+        👈 Selecciona un examen de la lista para ver la disponibilidad del profesor y confirmar la asignación.
+      </div>
+
+      <!-- Examen seleccionado -->
+      <div *ngIf="examenSeleccionado() as ex" class="confirmation-content">
+
+        <div class="selected-exam-card">
+          <h3>Examen Seleccionado</h3>
+          <div class="selected-exam-detail">
+            <div class="detail-row">
+              <span class="detail-label">Código</span>
+              <span class="detail-value font-mono">{{ ex.codigo }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Asignatura</span>
+              <span class="detail-value">{{ getAsignaturaTexto(ex) }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Fecha</span>
+              <span class="detail-value">{{ ex.fecha }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Horario</span>
+              <span class="detail-value">{{ ex.hora }} ({{ ex.duracion }} min)</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Aula</span>
+              <span class="detail-value">{{ ex.aulaId ? (ex.aula?.codigo + ' - ' + ex.nombreAula) : 'Sin asignar' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Verificación de disponibilidad -->
+        <div *ngIf="loadingConflicto()" class="availability-check loading">
+          <div class="spinner small"></div>
+          <span>Verificando disponibilidad del profesor...</span>
+        </div>
+
+        <div *ngIf="!loadingConflicto() && conflicto() as conf">
+          <div class="availability-check" [class.disponible]="!conf.tieneConflicto" [class.conflicto]="conf.tieneConflicto">
+            <span class="availability-icon">{{ conf.tieneConflicto ? '⚠️' : '✅' }}</span>
+            <div class="availability-text">
+              <strong>{{ conf.tieneConflicto ? 'Conflicto de horario' : 'Profesor disponible' }}</strong>
+              <span *ngIf="conf.descripcion">{{ conf.descripcion }}</span>
+              <span *ngIf="!conf.tieneConflicto">El profesor no tiene otros exámenes en esta franja horaria.</span>
+            </div>
+          </div>
+
+          <button
+            class="btn-confirm"
+            [disabled]="conf.tieneConflicto || loadingAsignacion()"
+            (click)="confirmarAsignacion()"
+          >
+            {{ loadingAsignacion() ? '⏳ Asignando...' : '✅ Confirmar Asignación' }}
+          </button>
+        </div>
+
+        <!-- Feedback -->
+        <div class="alert success" *ngIf="success()">
+          ✅ ¡Asignación realizada con éxito! Redirigiendo al perfil del profesor...
+        </div>
+        <div class="alert error" *ngIf="error()">
+          ❌ {{ error() }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

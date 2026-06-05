@@ -41,7 +41,7 @@ Para garantizar la claridad administrativa, los casos de uso se organizan lógic
 ## Estándares de Análisis Aplicados
 
 1.  **Patrón MVC Estricto**: Separación clara entre `Boundary` (Vista), `Control` (Controlador) y `Entity` (Entidades/Repositories).
-2.  **Principio de Delegación**: Aplicación de la **Ley de Demeter** en las entidades para evitar acoplamiento innecesario.
+2.  **Principio de Delegación**: Aplicación de la **Ley de Demeter** mediante la exposición de propiedades de asociaciones directamente en la entidad raíz (ej. `nombreGrado`), evitando que la vista navegue por relaciones opcionales.
 3.  **Navegación por Estados**: Diferenciación entre estados **Plurales** (listados) y **Singulares** (detalle/edición) con persistencia incremental.
 4.  **Escalabilidad (Alto Volumen)**: Uso sistemático de `PagedResult` para entidades con gran volumen de datos (Exámenes, Alumnos, Profesores).
 5.  **Single Source of Truth**: Componentes transversales analizados una sola vez para asegurar consistencia sistémica.

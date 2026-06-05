@@ -24,8 +24,10 @@ Permite buscar profesores de manera dimensional a partir de su código, nombre, 
 - **Query Params**: `q` (cadena de búsqueda), `page` (opcional).
 
 ### Implementación
-- **Optimización de Consultas**: Uso de `leftJoinAndSelect` sobre la relación Muchos-a-Muchos `profesor.asignaturas` para traer en una sola consulta toda la información relevante, previniendo el problema de rendimiento N+1.
-- **Formato de Paginación**: Utiliza `PagedResultDto` para estructurar la respuesta con el total de registros, página actual y páginas totales, basándose en un tamaño fijo de 10 elementos por página.
+- **Principio de Delegación**: La entidad `Profesor` provee la propiedad `cargaLectivaTexto` (lista de nombres de asignaturas) mediante un getter serializado, cumpliendo con la Ley de Demeter y simplificando la lógica del cliente.
+- **Optimización de Consultas**: Uso de `leftJoinAndSelect` sobre la relación Muchos-a-Muchos `profesor.asignaturas` para prevenir el problema N+1.
+- **Serialización**: Uso de `ClassSerializerInterceptor` para exponer la carga lectiva aplanada.
+- **Formato de Paginación**: Utiliza `PagedResultDto` con un tamaño de página de 10 elementos.
 
 ---
 
@@ -33,8 +35,8 @@ Permite buscar profesores de manera dimensional a partir de su código, nombre, 
 
 ### Implementación
 #### ListarProfesoresComponent
-- **Mapeo de Datos (Law of Demeter)**: El componente recibe al profesor y aplana la colección de asignaturas en una cadena separada por comas (`getAsignaturasNombres()`), evitando acoplar la vista directamente a la entidad Asignatura.
-- **Estructura del Listado**: Incluye selectores (checkboxes) para cada fila con soporte para selección múltiple (utilizando `signals` y `Set`) con vistas a futuras acciones masivas de eliminación.
+- **Consumo de Delegación**: Utiliza directamente `profesor.cargaLectivaTexto` proporcionado por el Backend, eliminando lógica de mapeo manual en el componente.
+- **Estructura del Listado**: Incluye selectores (checkboxes) para cada fila con soporte para selección múltiple utilizando `signals`.
 - **Diseño Responsivo y Cohesivo**: Reutilización total de la hoja de estilos global y las clases utilitarias del sistema administrativo (`admin-container`, `data-table`, `filters-section`, etc.) heredadas del ramillete de referencia de Grados/Alumnos.
 
 ---

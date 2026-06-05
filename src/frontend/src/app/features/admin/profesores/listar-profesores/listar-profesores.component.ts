@@ -129,9 +129,6 @@ export class ListarProfesoresComponent implements OnInit {
   }
 
   getAsignaturasNombres(profesor: Profesor): string {
-    if (!profesor.asignaturas || profesor.asignaturas.length === 0) {
-      return 'Ninguna';
-    }
-    return profesor.asignaturas.map(a => a.nombre).join(', ');
+    return profesor.cargaLectivaTexto;
   }
 }

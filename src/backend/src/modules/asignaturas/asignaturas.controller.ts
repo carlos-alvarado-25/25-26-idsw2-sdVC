@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe, UseInterceptors, UploadedFile, ClassSerializerInterceptor } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AsignaturaService } from './asignaturas.service';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
@@ -7,6 +7,7 @@ import { CrearAsignaturaDto } from './dto/crear-asignatura.dto';
 import { UpdateAsignaturaDto } from './dto/update-asignatura.dto';
 
 @Controller('asignaturas')
+@UseInterceptors(ClassSerializerInterceptor)
 export class AsignaturaController {
   constructor(private readonly asignaturaService: AsignaturaService) {}
 

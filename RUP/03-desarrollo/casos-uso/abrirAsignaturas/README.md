@@ -25,7 +25,9 @@ Busca asignaturas por nombre, código, grado o año académico.
 - **Query Params**: `q`, `page`.
 
 ### Implementación
-- **Relaciones**: Uso de `leftJoinAndSelect` para las entidades `Grado` y `CursoAcademico`.
+- **Principio de Delegación**: La entidad `Asignatura` provee la propiedad `nombreGrado` mediante un getter serializado, cumpliendo con la Ley de Demeter.
+- **Relaciones**: Uso de `leftJoinAndSelect` para la entidad `Grado`.
+- **Serialización**: Uso de `ClassSerializerInterceptor` en el controlador para exponer propiedades delegadas.
 - **Seguridad**: Protegido mediante `JwtAuthGuard`.
 
 ---
@@ -35,9 +37,9 @@ Busca asignaturas por nombre, código, grado o año académico.
 ### Implementación
 
 #### ListarAsignaturasComponent
-- **Signals**: Gestión reactiva del estado para `asignaturas`, `total` y `loading`.
-- **UI**: Tabla administrativa con columnas para Código, Nombre, Curso y Grado.
-- **Integridad**: Implementación de la lógica de confirmación informada para la eliminación (diagonal a diseño).
+- **Signals**: Gestión reactiva del estado.
+- **UI**: Tabla administrativa que utiliza directamente `asignatura.nombreGrado`.
+- **Integridad**: Implementación de la lógica de confirmación informada para la eliminación.
 
 ---
 

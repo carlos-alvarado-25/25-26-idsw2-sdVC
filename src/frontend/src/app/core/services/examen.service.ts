@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { PagedResult } from './grado.service';
-
 export interface Examen {
   id: number;
   codigo: string;
@@ -12,7 +11,12 @@ export interface Examen {
   duracion: number;
   tipo: string;
   asignaturaId: number;
+  nombreAsignatura: string;
+  codigoAsignatura: string;
+  nombreAula: string;
+  nombreProfesor: string;
   asignatura?: {
+...
     id: number;
     codigo: string;
     nombre: string;
@@ -68,5 +72,19 @@ export class ExamenService {
       .set('q', criterio)
       .set('page', page.toString());
     return this.http.get<PagedResult<Examen>>(`${this.apiUrl}/search`, { params });
+  }
+
+  buscarSinProfesor(criterio: string = '', page: number = 1): Observable<PagedResult<Examen>> {
+    const params = new HttpParams()
+      .set('q', criterio)
+      .set('page', page.toString());
+    return this.http.get<PagedResult<Examen>>(`${this.apiUrl}/sin-profesor`, { params });
+  }
+
+  verificarConflictoProfesor(examenId: number, profesorId: number): Observable<{ tieneConflicto: boolean; descripcion?: string }> {
+    const params = new HttpParams().set('profesorId', profesorId.toString());
+    return this.http.get<{ tieneConflicto: boolean; descripcion?: string }>(
+      `${this.apiUrl}/${examenId}/conflicto-profesor`, { params }
+    );
   }
 }

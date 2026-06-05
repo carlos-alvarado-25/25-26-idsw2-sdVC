@@ -88,3 +88,4 @@ Definición de la estructura de directorios del código fuente y políticas de i
 - [crearExamen](casos-uso/crearExamen/README.md) - Diseño de la creación de examen con patrón El Delgado y validación de unicidad de código.
 - [editarExamen](casos-uso/editarExamen/README.md) - Diseño de la actualización incremental de examen con verificación de conflictos de aulas y supervisores.
 - [eliminarExamen](casos-uso/eliminarExamen/README.md) - Diseño del borrado seguro de examen y confirmación interactiva.
+- [asignarProfesorAExamen](casos-uso/asignarProfesorAExamen/README.md) - Diseño de la vinculación de docente supervisor a examen con verificación de conflicto horario.

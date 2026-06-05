@@ -56,15 +56,15 @@ export class ListarExamenesComponent implements OnInit {
   }
 
   getAsignaturaTexto(examen: Examen): string {
-    return examen.asignatura ? `${examen.asignatura.codigo} - ${examen.asignatura.nombre}` : 'Ninguna';
+    return `${examen.codigoAsignatura} - ${examen.nombreAsignatura}`;
   }
 
   getAulaTexto(examen: Examen): string {
-    return examen.aula ? `${examen.aula.codigo} (${examen.aula.nombre})` : 'Sin asignar';
+    return examen.aulaId ? `${examen.aula?.codigo} (${examen.nombreAula})` : 'Sin asignar';
   }
 
   getProfesorTexto(examen: Examen): string {
-    return examen.profesor ? examen.profesor.nombre : 'Sin asignar';
+    return examen.nombreProfesor;
   }
 
   eliminarExamen(examen: Examen): void {

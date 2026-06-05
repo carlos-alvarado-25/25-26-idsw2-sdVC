@@ -1,4 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller, Get, Post, Body, Patch, Param, Delete,
+  Query, ParseIntPipe, DefaultValuePipe, Optional,
+  UseInterceptors, ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { ExamenService } from './examenes.service';
 import { Examen } from '../../entities/examen.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
@@ -6,6 +10,7 @@ import { CrearExamenDto } from './dto/crear-examen.dto';
 import { UpdateExamenDto } from './dto/update-examen.dto';
 
 @Controller('examenes')
+@UseInterceptors(ClassSerializerInterceptor)
 export class ExamenController {
   constructor(private readonly examenService: ExamenService) {}
 
@@ -15,13 +20,35 @@ export class ExamenController {
   }
 
   @Patch(':id')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateExamenDto: UpdateExamenDto): Promise<Examen> {
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateExamenDto: UpdateExamenDto,
+  ): Promise<Examen> {
     return this.examenService.update(id, updateExamenDto);
   }
 
   @Get('search')
-  async search(@Query('q') q: string, @Query('page') page: string): Promise<PagedResultDto<Examen>> {
-    return this.examenService.findByCriterio(q || '', page ? parseInt(page, 10) : 1);
+  async search(
+    @Query('q') q: string,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+  ): Promise<PagedResultDto<Examen>> {
+    return this.examenService.findByCriterio(q || '', page);
+  }
+
+  @Get('sin-profesor')
+  async findSinProfesor(
+    @Query('q') q: string,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+  ): Promise<PagedResultDto<Examen>> {
+    return this.examenService.findSinProfesor(q || '', page);
+  }
+
+  @Get(':id/conflicto-profesor')
+  async verificarConflictoProfesor(
+    @Param('id', ParseIntPipe) id: number,
+    @Query('profesorId', new DefaultValuePipe(0), ParseIntPipe) profesorId: number,
+  ): Promise<{ tieneConflicto: boolean; descripcion?: string }> {
+    return this.examenService.verificarConflictoProfesor(id, profesorId);
   }
 
   @Get(':id')
@@ -30,8 +57,10 @@ export class ExamenController {
   }
 
   @Get()
-  async findAll(@Query('page') page: string): Promise<PagedResultDto<Examen>> {
-    return this.examenService.findAll(page ? parseInt(page, 10) : 1);
+  async findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+  ): Promise<PagedResultDto<Examen>> {
+    return this.examenService.findAll(page);
   }
 
   @Delete(':id')

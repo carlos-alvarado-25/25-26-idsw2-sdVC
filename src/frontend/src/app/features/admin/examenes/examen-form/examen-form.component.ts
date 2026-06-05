@@ -26,6 +26,7 @@ export class ExamenFormComponent implements OnInit {
   asignaturas = signal<Asignatura[]>([]);
 
   aulaSeleccionada = signal<any | null>(null);
+  profesorSeleccionado = signal<any | null>(null);
   profesorAsignadoNombre = signal<string>('Sin asignar');
 
   aulasBusqueda = signal<Aula[]>([]);
@@ -143,6 +144,26 @@ export class ExamenFormComponent implements OnInit {
     return this.aulaSeleccionada()?.id === id;
   }
 
+  desasignarProfesor(): void {
+    if (!this.examenId) return;
+    this.loading.set(true);
+    this.error.set(null);
+    this.examenService.actualizar(this.examenId, { profesorId: null })
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: () => {
+          this.profesorSeleccionado.set(null);
+          this.profesorAsignadoNombre.set('Sin asignar');
+          this.examenForm.patchValue({ profesorId: null }, { emitEvent: false });
+          this.success.set(true);
+          setTimeout(() => this.success.set(false), 3000);
+        },
+        error: (err) => {
+          this.error.set(err.error?.message || 'Error al desasignar el profesor.');
+        },
+      });
+  }
+
   cargarExamen(): void {
     if (!this.examenId) return;
     this.loading.set(true);
@@ -158,9 +179,10 @@ export class ExamenFormComponent implements OnInit {
           }
 
           this.aulaSeleccionada.set(examen.aula || null);
-          this.profesorAsignadoNombre.set(examen.profesor ? examen.profesor.nombre : 'Sin asignar');
+          this.profesorSeleccionado.set(examen.profesor || null);
+          this.profesorAsignadoNombre.set(examen.nombreProfesor);
 
-          const asigText = examen.asignatura ? `${examen.asignatura.codigo} - ${examen.asignatura.nombre}` : '';
+          const asigText = `${examen.codigoAsignatura} - ${examen.nombreAsignatura}`;
 
           this.examenForm.patchValue({
             codigo: examen.codigo,

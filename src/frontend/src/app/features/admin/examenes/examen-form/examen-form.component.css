@@ -354,3 +354,36 @@ small.error {
   font-size: 0.875rem;
   font-style: italic;
 }
+
+/* Inline relation card (profesor en form-grid) */
+.relation-card-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.relation-card-info-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.relation-card-info-inline strong {
+  font-size: 0.875rem;
+  color: #1e293b;
+}
+
+.empty-inline {
+  padding: 0.625rem 0.875rem;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: #94a3b8;
+  font-style: italic;
+}

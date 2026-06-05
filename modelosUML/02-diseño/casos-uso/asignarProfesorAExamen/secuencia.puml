@@ -1,0 +1,135 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+title Diseño Detallado: asignarProfesorAExamen() (desde :Profesor Abierto)
+
+actor Administrador as Actor
+boundary AsignarProfesorExamenComponent <<Angular>>
+control ExamenApiService <<Angular>>
+control ProfesorApiService <<Angular>>
+control ExamenController <<NestJS>>
+participant ExamenService <<NestJS>>
+participant ExamenRepository <<TypeORM>>
+participant ProfesorRepository <<TypeORM>>
+database MySQL as DB
+
+== Fase 1: Carga de Contexto (Profesor Pre-Seleccionado) ==
+
+Actor -> AsignarProfesorExamenComponent : abrirAsignarProfesor(profesorId)
+activate AsignarProfesorExamenComponent
+
+AsignarProfesorExamenComponent -> ProfesorApiService : obtener(profesorId)
+activate ProfesorApiService
+ProfesorApiService -> ExamenController : GET /profesores/:id
+activate ExamenController
+ExamenController -> ExamenService : findOneProfesor(id)
+activate ExamenService
+ExamenService -> ProfesorRepository : findOne({ where: { id } })
+activate ProfesorRepository
+ProfesorRepository -> DB : SELECT * FROM Profesor WHERE id=:id
+ProfesorRepository --> ExamenService : profesor
+deactivate ProfesorRepository
+ExamenService --> ExamenController : profesor
+deactivate ExamenService
+ExamenController --> ProfesorApiService : ProfesorDto
+deactivate ExamenController
+ProfesorApiService --> AsignarProfesorExamenComponent : ProfesorDto
+deactivate ProfesorApiService
+
+AsignarProfesorExamenComponent --> Actor : mostrarProfesorContexto(profesor.nombre)
+
+== Fase 2: Búsqueda de Exámenes Sin Supervisor ==
+
+Actor -> AsignarProfesorExamenComponent : buscarExamenes(criterio)
+AsignarProfesorExamenComponent -> ExamenApiService : buscarSinProfesor(criterio, pagina)
+activate ExamenApiService
+ExamenApiService -> ExamenController : GET /examenes?sinProfesor=true&q=:criterio&page=:n
+activate ExamenController
+ExamenController -> ExamenService : findSinProfesor(criterio, pagina)
+activate ExamenService
+ExamenService -> ExamenRepository : findSinProfesor(criterio, pagina)
+activate ExamenRepository
+ExamenRepository -> DB : SELECT ... FROM Examen\nWHERE profesorId IS NULL\nAND (codigo LIKE :q OR asignatura LIKE :q)\nLIMIT 10 OFFSET :skip
+ExamenRepository --> ExamenService : PagedResult<Examen>
+deactivate ExamenRepository
+ExamenService --> ExamenController : PagedResult<Examen>
+deactivate ExamenService
+ExamenController --> ExamenApiService : PagedResult<ExamenDto>
+deactivate ExamenController
+ExamenApiService --> AsignarProfesorExamenComponent : PagedResult<ExamenDto>
+deactivate ExamenApiService
+
+AsignarProfesorExamenComponent --> Actor : mostrarListaExamenes(examenes)
+
+== Fase 3: Selección y Verificación de Conflicto Horario ==
+
+Actor -> AsignarProfesorExamenComponent : seleccionarExamen(examen)
+
+AsignarProfesorExamenComponent -> ExamenApiService : verificarConflictoProfesor(examen.id, profesorId)
+activate ExamenApiService
+ExamenApiService -> ExamenController : GET /examenes/:id/conflictoProfesor?profesorId=:profesorId
+activate ExamenController
+ExamenController -> ExamenService : verificarConflictoProfesor(examenId, profesorId)
+activate ExamenService
+ExamenService -> ExamenRepository : buscarSolapamientoProfesor(profesorId, fecha, hora, duracion, examenId)
+activate ExamenRepository
+ExamenRepository -> DB : SELECT COUNT(*) FROM Examen\nWHERE profesorId=:profesorId\nAND fecha=:fecha\nAND id != :examenId\nAND (solapamiento horario)
+ExamenRepository --> ExamenService : tieneConflicto: boolean
+deactivate ExamenRepository
+ExamenService --> ExamenController : { tieneConflicto, descripcion? }
+deactivate ExamenService
+ExamenController --> ExamenApiService : 200 OK { tieneConflicto, descripcion? }
+deactivate ExamenController
+ExamenApiService --> AsignarProfesorExamenComponent : { tieneConflicto, descripcion? }
+deactivate ExamenApiService
+
+alt Sin Conflicto Horario
+    AsignarProfesorExamenComponent --> Actor : mostrarBotonConfirmar() [disponible]
+else Con Conflicto Horario
+    AsignarProfesorExamenComponent --> Actor : mostrarAdvertenciaConflicto(descripcion)\n[botón Confirmar deshabilitado]
+end
+
+== Fase 4: Confirmación y Persistencia de la Asignación ==
+
+Actor -> AsignarProfesorExamenComponent : clickConfirmar()
+
+AsignarProfesorExamenComponent -> ExamenApiService : asignarProfesor(examen.id, { profesorId })
+activate ExamenApiService
+ExamenApiService -> ExamenController : PATCH /examenes/:id\n{ profesorId: number }
+activate ExamenController
+ExamenController -> ExamenService : update(id, { profesorId })
+activate ExamenService
+
+ExamenService -> ExamenRepository : buscarSolapamientoProfesor(profesorId, fecha, hora, duracion, id)
+activate ExamenRepository
+ExamenRepository --> ExamenService : validaciónFinal: ok
+deactivate ExamenRepository
+
+ExamenService -> ExamenRepository : save(examen con profesorId asignado)
+activate ExamenRepository
+ExamenRepository -> DB : UPDATE Examen SET profesorId=:profesorId WHERE id=:id
+ExamenRepository --> ExamenService : examenActualizado
+deactivate ExamenRepository
+
+ExamenService --> ExamenController : examenActualizado
+deactivate ExamenService
+ExamenController --> ExamenApiService : 200 OK (ExamenDto)
+deactivate ExamenController
+ExamenApiService --> AsignarProfesorExamenComponent : ExamenDto
+deactivate ExamenApiService
+
+AsignarProfesorExamenComponent --> Actor : mostrarMensajeExito()
+
+== Fase 5: Retorno a :Profesor Abierto ==
+
+Actor -> AsignarProfesorExamenComponent : clickVolver()
+AsignarProfesorExamenComponent -> AsignarProfesorExamenComponent : navegarAProfesor(profesorId)
+AsignarProfesorExamenComponent --> Actor : mostrarFormularioProfesor(profesorId)
+
+deactivate AsignarProfesorExamenComponent
+
+@enduml

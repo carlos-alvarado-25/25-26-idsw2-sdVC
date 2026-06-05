@@ -11,6 +11,7 @@ export interface Alumno {
   email: string;
   curso: number;
   gradoId: number;
+  nombreGrado: string;
   grado?: {
     id: number;
     nombre: string;
