@@ -60,7 +60,7 @@ import { Router, RouterModule } from '@angular/router';
           </div>
 
           <!-- Gestión de Calendario -->
-          <div class="card accent" [routerLink]="['/admin/calendario']">
+          <div class="card accent" [routerLink]="['/admin/examenes']">
             <div class="card-icon">🗓️</div>
             <h3>Calendario</h3>
             <p>Motor de generación y consulta de exámenes.</p>

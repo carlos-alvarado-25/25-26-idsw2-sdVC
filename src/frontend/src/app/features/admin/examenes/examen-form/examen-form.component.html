@@ -1,0 +1,183 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> / 
+      <a [routerLink]="['/admin/examenes']">📅 Exámenes</a> / 
+      <span>{{ isEditMode() ? '✏️ Editar' : '➕ Nuevo' }}</span>
+    </div>
+    <div class="header-main">
+      <h1>{{ isEditMode() ? 'Editar Examen' : 'Nuevo Examen' }}</h1>
+      <button class="btn-secondary" [routerLink]="['/admin/examenes']">Volver al listado</button>
+    </div>
+  </header>
+
+  <form [formGroup]="examenForm" (ngSubmit)="onSubmit()" class="data-form">
+    <div class="form-grid">
+      <!-- Código de Examen -->
+      <div class="form-group">
+        <label for="codigo">Código de Examen*</label>
+        <input id="codigo" type="text" formControlName="codigo" placeholder="Ej: EX-MAT1-2026" [readonly]="loading()">
+        <small class="error" *ngIf="examenForm.get('codigo')?.touched && examenForm.get('codigo')?.errors?.['required']">
+          El código de examen es obligatorio.
+        </small>
+      </div>
+
+      <!-- Asignatura Selector Auto-completable (datalist) -->
+      <div class="form-group">
+        <label for="asignaturaSearch">Asignatura*</label>
+        <input 
+          id="asignaturaSearch" 
+          type="text" 
+          formControlName="asignaturaSearch" 
+          list="asignaturas-list" 
+          placeholder="Escribe código o nombre de asignatura para buscar..." 
+          [readonly]="loading()"
+          autocomplete="off"
+        >
+        <datalist id="asignaturas-list">
+          <option *ngFor="let asig of asignaturas()" [value]="asig.codigo + ' - ' + asig.nombre"></option>
+        </datalist>
+        <small class="error" *ngIf="examenForm.get('asignaturaSearch')?.touched && examenForm.get('asignaturaSearch')?.errors?.['required']">
+          La asignatura es obligatoria.
+        </small>
+        <small class="error" *ngIf="examenForm.get('asignaturaSearch')?.touched && examenForm.get('asignaturaSearch')?.value && !examenForm.get('asignaturaId')?.value">
+          Seleccione una asignatura válida de la lista de sugerencias.
+        </small>
+      </div>
+
+      <!-- Fecha del Examen -->
+      <div class="form-group">
+        <label for="fecha">Fecha del Examen*</label>
+        <input id="fecha" type="date" formControlName="fecha" [readonly]="loading()">
+        <small class="error" *ngIf="examenForm.get('fecha')?.touched && examenForm.get('fecha')?.errors?.['required']">
+          La fecha del examen es obligatoria.
+        </small>
+      </div>
+
+      <!-- Hora del Examen -->
+      <div class="form-group">
+        <label for="hora">Hora de Inicio (HH:MM)*</label>
+        <input id="hora" type="text" formControlName="hora" placeholder="Ej: 09:00" [readonly]="loading()">
+        <small class="error" *ngIf="examenForm.get('hora')?.touched && examenForm.get('hora')?.errors?.['required']">
+          La hora de inicio es obligatoria.
+        </small>
+        <small class="error" *ngIf="examenForm.get('hora')?.touched && examenForm.get('hora')?.errors?.['pattern']">
+          El formato de la hora debe ser HH:MM (ej. 09:00 o 16:30).
+        </small>
+      </div>
+
+      <!-- Duración -->
+      <div class="form-group">
+        <label for="duracion">Duración (minutos)*</label>
+        <input id="duracion" type="number" formControlName="duracion" placeholder="Ej: 120" [readonly]="loading()">
+        <small class="error" *ngIf="examenForm.get('duracion')?.touched && examenForm.get('duracion')?.errors?.['required']">
+          La duración es obligatoria.
+        </small>
+        <small class="error" *ngIf="examenForm.get('duracion')?.touched && examenForm.get('duracion')?.errors?.['min']">
+          La duración mínima es de 1 minuto.
+        </small>
+      </div>
+
+      <!-- Tipo de Examen -->
+      <div class="form-group">
+        <label for="tipo">Convocatoria / Tipo*</label>
+        <select id="tipo" formControlName="tipo">
+          <option value="Ordinaria">Ordinaria</option>
+          <option value="Extraordinaria">Extraordinaria</option>
+        </select>
+        <small class="error" *ngIf="examenForm.get('tipo')?.touched && examenForm.get('tipo')?.errors?.['required']">
+          El tipo es obligatorio.
+        </small>
+      </div>
+
+      <!-- Profesor Supervisor (Solo Lectura, gestionado por asignarProfesorAExamen) -->
+      <div class="form-group" *ngIf="isEditMode()">
+        <label>Profesor Supervisor (Lectura)</label>
+        <input type="text" [value]="profesorAsignadoNombre()" readonly style="background: #f1f5f9; cursor: not-allowed;" title="Se gestiona desde 'Asignar Profesor a Examen'">
+        <small class="text-muted">La asignación de supervisor se realiza desde el caso de uso "Asignar Profesor a Examen".</small>
+      </div>
+
+    </div>
+
+    <!-- Gestión de Recursos Asignados (Solo en Modo Edición) -->
+    <div *ngIf="isEditMode()" class="relations-section">
+      <h2>Asignación de Aula</h2>
+      <div class="relations-container">
+        <!-- Columna Izquierda: Aula Seleccionada -->
+        <div class="relations-column">
+          <h3>Aula Asignada</h3>
+          <div class="selected-list">
+            <div *ngIf="aulaSeleccionada() as aula" class="relation-card">
+              <div class="relation-card-info">
+                <strong>{{ aula.codigo }} - {{ aula.nombre }}</strong>
+                <span class="text-muted">Capacidad: {{ aula.capacidad }} personas</span>
+              </div>
+              <button type="button" class="btn-remove" (click)="desasignarAula()" title="Desvincular">✕</button>
+            </div>
+            <div *ngIf="!aulaSeleccionada()" class="empty-state">
+              No se ha asignado ningún aula.
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Buscador de Aulas -->
+        <div class="relations-column">
+          <h3>Buscar Aula</h3>
+          <div class="relation-search-box">
+            <input 
+              type="text" 
+              [(ngModel)]="busquedaAulaCriterio" 
+              [ngModelOptions]="{standalone: true}"
+              (keyup.enter)="buscarAulas()"
+              placeholder="Buscar por código o nombre de aula..."
+            >
+            <button type="button" (click)="buscarAulas()" class="btn-search">🔍</button>
+          </div>
+          
+          <div class="search-results">
+            <div *ngIf="busquedaAulaLoading()" class="loading-spinner-inline">Buscando aulas...</div>
+            <div *ngFor="let au of aulasBusqueda()" class="result-card">
+              <div class="result-card-info">
+                <strong>{{ au.codigo }} - {{ au.nombre }}</strong>
+                <span class="text-muted">Capacidad: {{ au.capacidad }} personas</span>
+              </div>
+              <button 
+                type="button" 
+                *ngIf="!isAulaAsignada(au.id)" 
+                class="btn-add" 
+                (click)="asignarAula(au)"
+              >
+                ➕ Asignar
+              </button>
+              <span *ngIf="isAulaAsignada(au.id)" class="badge-assigned">Asignada</span>
+            </div>
+            <div *ngIf="aulasBusqueda().length === 0 && !busquedaAulaLoading()" class="empty-state">
+              No se encontraron aulas.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Indicación del patrón El Delgado -->
+    <div class="info-box-slim" *ngIf="!isEditMode()">
+      💡 <strong>Nota:</strong> Al crear el examen, se guardarán los datos mínimos y se le redirigirá a la vista de edición avanzada para asignar el aula y el profesor supervisor.
+    </div>
+
+    <div class="form-feedback" *ngIf="success() || error()">
+      <div class="alert success" *ngIf="success()">
+        ✅ Operación completada con éxito. {{ !isEditMode() ? 'Redirigiendo a edición avanzada...' : '' }}
+      </div>
+      <div class="alert error" *ngIf="error()">❌ {{ error() }}</div>
+    </div>
+
+    <footer class="form-actions">
+      <button type="button" class="btn-ghost" [routerLink]="['/admin/examenes']" [disabled]="loading()">Cancelar</button>
+      <button type="submit" class="btn-primary" [disabled]="examenForm.invalid || !examenForm.value.asignaturaId || loading()">
+        {{ loading() ? 'Guardando...' : (isEditMode() ? 'Actualizar Examen' : 'Crear Examen') }}
+      </button>
+    </footer>
+  </form>
+</div>

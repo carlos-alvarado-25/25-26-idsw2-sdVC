@@ -1154,4 +1154,20 @@
 
 **Decisión:** Se ratifica la descentralización de las validaciones de cruce horario y de espacio hacia el backend en el controlador y servicio del examen, devolviendo excepciones `409 Conflict` estructuradas para que la interfaz resalte los campos causantes del cruce.
 
+---
+
+## [05/06/2026 22:59] Sesión 72: Rama de Exámenes - Implementación, Ajustes del Frontend e Impacto del Borrado
+
+**Prompt:** "Y el frontend?" -> "dale" -> "No pero revisa los casos de uso de eliminar de cada entidad, y verifica que el frontend esté mostrando el impacto, si es que lo tienen. No solo de Examen, también tiene impacto en Aulas, y en asignaturas sobre Examenes. y en grados tiene impacto sobre asignaturas. Y profesores tiene impacto sobre examenes" -> "Perfecto, entonces con todos estos cambios. Finalicemos la sesión y añade la entrada al conversation-log.md"
+
+**Resultado:**
+- **Implementación de Impacto de Grados (Backend):** Se inyectó el repositorio de `Asignatura` en `GradoService` y se implementó `countDependencies(id)` para calcular de forma real y devolver la cantidad de asignaturas vinculadas a un grado.
+- **Diálogo Detallado de Confirmación (Exámenes - Frontend):** Se actualizó `listar-examenes.component.ts` para que el confirm de eliminación presente los detalles completos del examen (Asignatura, Horario, Aula y Profesor Supervisor), cumpliendo estrictamente con el caso de uso `eliminarExamen` de RUP.
+- **Auditoría e Integridad del Frontend:** Se auditó que las plantillas de listado de Grados, Asignaturas, Aulas y Profesores consumen adecuadamente los endpoints de impacto (`/impacto`) y advierten de forma cuantitativa al Administrador antes de realizar borrados destructivos en el sistema.
+- **Verificación de Compilación:** Ambos proyectos (NestJS y Angular) compilan exitosamente sin advertencias o fallos de tipado tras los cambios.
+- **Navegabilidad de RUP:** Se enlazó el breadcrumb "Desarrollo" en el README de Análisis de `eliminarExamen` para establecer la trazabilidad 360º.
+
+**Decisión:** Se ratifica la política de "Confirmación Informada" a nivel de UX, asegurando que el frontend alerte explícitamente de los impactos de cascada (`CASCADE`) o de desvinculación a nulo (`SET NULL`) de todas las entidades antes de confirmar la eliminación física de cualquier registro de la base de datos.
+
+
 

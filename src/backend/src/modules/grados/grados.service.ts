@@ -2,6 +2,7 @@ import { Injectable, ConflictException, NotFoundException } from '@nestjs/common
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Grado } from '../../entities/grado.entity';
+import { Asignatura } from '../../entities/asignatura.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 import { CrearGradoDto } from './dto/crear-grado.dto';
 import { UpdateGradoDto } from './dto/update-grado.dto';
@@ -15,6 +16,8 @@ export class GradoService {
   constructor(
     @InjectRepository(Grado)
     private readonly gradoRepository: Repository<Grado>,
+    @InjectRepository(Asignatura)
+    private readonly asignaturaRepository: Repository<Asignatura>,
     private readonly fileParserFactory: FileParserFactory,
   ) {}
 
@@ -53,7 +56,7 @@ export class GradoService {
   }
 
   async countDependencies(id: number): Promise<number> {
-    return 0;
+    return this.asignaturaRepository.countBy({ gradoId: id });
   }
 
   async remove(id: number): Promise<void> {

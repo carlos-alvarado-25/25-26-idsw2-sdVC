@@ -58,6 +58,12 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 - [importarProfesores](casos-uso/importarProfesores/README.md) ✅
 - [eliminarProfesor](casos-uso/eliminarProfesor/README.md) ✅
 
+#### Gestión de Exámenes y Calendario
+- [abrirExamenes](casos-uso/abrirExamenes/README.md) ✅
+- [crearExamen](casos-uso/crearExamen/README.md) ✅
+- [editarExamen](casos-uso/editarExamen/README.md) ✅
+- [eliminarExamen](casos-uso/eliminarExamen/README.md) ✅
+
 
 
 ## Estándares de Codificación

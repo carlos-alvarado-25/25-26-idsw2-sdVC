@@ -2,6 +2,7 @@ import { Injectable, NotFoundException, ConflictException } from '@nestjs/common
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Aula } from '../../entities/aula.entity';
+import { Examen } from '../../entities/examen.entity';
 import { CreateAulaDto } from './dto/create-aula.dto';
 import { UpdateAulaDto } from './dto/update-aula.dto';
 import { ImportResultDto } from './dto/import-result.dto';
@@ -12,6 +13,8 @@ export class AulaService {
   constructor(
     @InjectRepository(Aula)
     private readonly aulaRepository: Repository<Aula>,
+    @InjectRepository(Examen)
+    private readonly examenRepository: Repository<Examen>,
     private readonly fileParserFactory: FileParserFactory,
   ) {}
 
@@ -94,8 +97,8 @@ export class AulaService {
   }
 
   async getImpacto(id: number): Promise<{ examenesAsociados: number }> {
-    // TODO: Inyectar ExamenRepository y realizar el conteo real cuando se implemente el ramillete de Exámenes.
-    return { examenesAsociados: 0 };
+    const examenesAsociados = await this.examenRepository.countBy({ aulaId: id });
+    return { examenesAsociados };
   }
 
   async findAll(): Promise<Aula[]> {

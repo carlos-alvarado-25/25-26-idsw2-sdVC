@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
 import { Profesor } from '../../entities/profesor.entity';
 import { Asignatura } from '../../entities/asignatura.entity';
+import { Examen } from '../../entities/examen.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 import { CrearProfesorDto } from './dto/crear-profesor.dto';
 import { UpdateProfesorDto } from './dto/update-profesor.dto';
@@ -18,6 +19,8 @@ export class ProfesorService {
     private readonly profesorRepository: Repository<Profesor>,
     @InjectRepository(Asignatura)
     private readonly asignaturaRepository: Repository<Asignatura>,
+    @InjectRepository(Examen)
+    private readonly examenRepository: Repository<Examen>,
     private readonly fileParserFactory: FileParserFactory,
   ) {}
 
@@ -131,8 +134,8 @@ export class ProfesorService {
   }
 
   async getImpacto(id: number): Promise<{ examenesCount: number }> {
-    // TODO: Inyectar ExamenRepository y contar los exámenes asignados a este profesor cuando se implemente dicho ramillete.
-    return { examenesCount: 0 };
+    const examenesCount = await this.examenRepository.countBy({ profesorId: id });
+    return { examenesCount };
   }
 
   async importar(buffer: Buffer, mimetype: string): Promise<ImportResultDto> {

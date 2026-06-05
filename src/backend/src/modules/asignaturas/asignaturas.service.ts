@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Asignatura } from '../../entities/asignatura.entity';
 import { Grado } from '../../entities/grado.entity';
+import { Examen } from '../../entities/examen.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 import { CrearAsignaturaDto } from './dto/crear-asignatura.dto';
 import { UpdateAsignaturaDto } from './dto/update-asignatura.dto';
@@ -18,6 +19,8 @@ export class AsignaturaService {
     private readonly asignaturaRepository: Repository<Asignatura>,
     @InjectRepository(Grado)
     private readonly gradoRepository: Repository<Grado>,
+    @InjectRepository(Examen)
+    private readonly examenRepository: Repository<Examen>,
     private readonly fileParserFactory: FileParserFactory,
     ) {}
 
@@ -152,8 +155,8 @@ export class AsignaturaService {
   }
 
   async getImpacto(id: number): Promise<{ examenesAsociados: number }> {
-    // TODO: Inyectar ExamenRepository y realizar el conteo real cuando se implemente el ramillete de Exámenes.
-    return { examenesAsociados: 0 };
+    const examenesAsociados = await this.examenRepository.countBy({ asignaturaId: id });
+    return { examenesAsociados };
   }
 
   async remove(id: number): Promise<void> {
