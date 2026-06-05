@@ -1,0 +1,47 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Administrador" as Actor
+participant "ListarExamenesComponent\n(Angular)" as UI <<Boundary>>
+participant "ExamenService\n(Angular)" as UISrv <<Boundary>>
+participant "ExamenController\n(NestJS)" as Ctrl <<Control>>
+participant "ExamenService\n(NestJS)" as Srv <<Control>>
+participant "ExamenRepository\n(TypeORM)" as Repo <<Data Access>>
+database "MySQL" as DB
+
+Actor -> UI : abrirExamenes()
+activate UI
+
+UI -> UI : cargarExamenes(page = 1)
+UI -> UISrv : listar(page)
+activate UISrv
+
+UISrv -> Ctrl : GET /examenes?page=1
+activate Ctrl
+
+Ctrl -> Srv : findAll(page)
+activate Srv
+
+Srv -> Repo : findAndCount({ relations: { asignatura: true, aula: true, profesor: true } })
+activate Repo
+Repo -> DB : SELECT ... LEFT JOIN Asignatura, Aula, Profesor
+Repo --> Srv : [examenes, total]
+deactivate Repo
+
+Srv --> Ctrl : PagedResultDto<Examen>
+deactivate Srv
+
+Ctrl --> UISrv : 200 OK (PagedResultDto<ExamenDto>)
+deactivate Ctrl
+
+UISrv --> UI : PagedResultDto<ExamenDto>
+deactivate UISrv
+
+UI --> Actor : mostrarListadoExamenes(examenes)
+deactivate UI
+
+@enduml

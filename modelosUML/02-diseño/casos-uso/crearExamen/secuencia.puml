@@ -1,0 +1,75 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+title Diseño Detallado: crearExamen() (Patrón El Delgado)
+
+actor Administrador as Actor
+boundary ExamenFormComponent <<Angular>>
+control ExamenApiService <<Angular>>
+control ExamenController <<NestJS>>
+participant ExamenService <<NestJS>>
+participant AsignaturaRepository <<TypeORM>>
+participant ExamenRepository <<TypeORM>>
+database MySQL as DB
+
+Actor -> ExamenFormComponent : introducirDatos(codigo, fecha, hora, duracion, tipo, asignaturaId)
+ExamenFormComponent -> ExamenFormComponent : validarFormulario()
+
+ExamenFormComponent -> ExamenApiService : crear(crearExamenDto)
+activate ExamenApiService
+
+ExamenApiService -> ExamenController : POST /examenes\n(CrearExamenDto)
+activate ExamenController
+
+ExamenController -> ExamenService : create(dto)
+activate ExamenService
+
+ExamenService -> ExamenRepository : findOneBy({ codigo: dto.codigo })
+activate ExamenRepository
+ExamenRepository -> DB : SELECT ...
+ExamenRepository --> ExamenService : examenExistente?
+deactivate ExamenRepository
+
+alt Código Duplicado
+    ExamenService --> ExamenController : throw ConflictException
+    ExamenController --> ExamenApiService : 409 Conflict
+    ExamenApiService --> ExamenFormComponent : error
+    ExamenFormComponent --> Actor : mostrarError("El código de examen ya existe")
+else Código Único
+    ExamenService -> AsignaturaRepository : findOneBy({ id: dto.asignaturaId })
+    activate AsignaturaRepository
+    AsignaturaRepository -> DB : SELECT ...
+    AsignaturaRepository --> ExamenService : asignatura?
+    deactivate AsignaturaRepository
+    
+    alt Asignatura no existe
+        ExamenService --> ExamenController : throw NotFoundException
+        ExamenController --> ExamenApiService : 404 Not Found
+        ExamenApiService --> ExamenFormComponent : error
+        ExamenFormComponent --> Actor : mostrarError("La asignatura seleccionada no existe")
+    else Asignatura válida
+        ExamenService -> ExamenRepository : create(dto)
+        ExamenService -> ExamenRepository : save(nuevoExamen)
+        activate ExamenRepository
+        ExamenRepository -> DB : INSERT INTO Examen ...
+        ExamenRepository --> ExamenService : examenPersistido
+        deactivate ExamenRepository
+        
+        ExamenService --> ExamenController : examenPersistido
+        ExamenController --> ExamenApiService : 201 Created (ExamenDto)
+        deactivate ExamenService
+        deactivate ExamenController
+
+        ExamenApiService --> ExamenFormComponent : ExamenDto
+        deactivate ExamenApiService
+
+        ExamenFormComponent -> ExamenFormComponent : navegarAEditar(examen.id)
+        ExamenFormComponent --> Actor : mostrarFormularioEdicion()
+    end
+end
+
+@enduml

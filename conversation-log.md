@@ -1115,3 +1115,23 @@
 - **Trazabilidad 360º:** Creación de los 5 READMEs de desarrollo y sincronización circular de breadcrumbs de todas las fases del ramillete de profesores.
 
 **Decisión:** Se oficializa el patrón de "Componente Único Dinámico Muchos-a-Muchos" para la asociación visual de relaciones complejas N:M. Se establece la redirección diferida de alta manual a edición avanzada como el estándar del proyecto para simplificar el flujo de censo inicial.
+
+---
+
+## [05/06/2026 20:47] Sesión 70: Rama de Exámenes - Diseño Detallado de Apertura y Alta Manual
+
+**Prompt:** "Iniciemos la sesión de diseño entoneces del ramillete de Examenes. ... vamos con abrirExamenes entonces ... HAZLO! ... Porque pones la secuencia de esa forma? primero mostrarlistado sin filtro y luego con filtro? No lo tenemos así en las dem{as entidades? ... HAZLO! ... Procedamos con crearExamen ahora ... HAZLO! ... Perfecto, finalicemos por ahora la sesión. Añade la entrada al conversation-log.md"
+
+**Resultado:**
+- **Diseño Detallado de `abrirExamenes()`:** Planificación técnica para la pantalla principal de exámenes. Se modeló el flujo de consulta paginada inicial (`listar(page)`) sin filtros iniciales para ser consistente con las demás entidades, permitiendo búsquedas condicionales subsecuentes.
+- **Diseño Detallado de `crearExamen()`:** Diseño del alta de exámenes empleando el patrón **"El Delgado"** para capturar los datos mínimos requeridos (`codigo`, `fecha`, `hora`, `duracion`, `tipo`, `asignaturaId`) y redirigir inmediatamente al Administrador a la edición avanzada (`editarExamen/:id`) para asociar recursos complejos como `Aula` y `Profesor`.
+- **Artefactos Técnicos Creados:**
+  - Diagramas de secuencia PlantUML (**[secuencia.puml de abrirExamenes](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/casos-uso/abrirExamenes/secuencia.puml)** y **[secuencia.puml de crearExamen](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/casos-uso/crearExamen/secuencia.puml)**).
+  - Archivos compilados en SVG (**[secuencia.svg de abrirExamenes](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/images/02-diseño/casos-uso/abrirExamenes/secuencia.svg)** y **[secuencia.svg de crearExamen](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/images/02-diseño/casos-uso/crearExamen/secuencia.svg)**).
+  - Documentos de especificación RUP de diseño detallado en **[README.md de abrirExamenes](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/abrirExamenes/README.md)** y **[README.md de crearExamen](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/crearExamen/README.md)**.
+- **Trazabilidad 360º:**
+  - Registro de los nuevos casos de uso en el índice general de diseño **[RUP/02-diseño/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/README.md)**.
+  - Sincronización de los breadcrumbs bidireccionales en los READMEs de análisis correspondientes: **[RUP/01-analisis/casos-uso/abrirExamenes/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/abrirExamenes/README.md)** y **[RUP/01-analisis/casos-uso/crearExamen/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/crearExamen/README.md)**.
+
+**Decisión:** Se acuerda extender el patrón "El Delgado" para la entidad Examen con relaciones opcionales (nullable) a Aula y Profesor, garantizando la inserción limpia del registro básico del examen antes de gestionar sus reservas físicas y supervisores.
+
