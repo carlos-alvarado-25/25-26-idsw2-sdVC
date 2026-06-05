@@ -1,0 +1,82 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Administrador" as Actor
+participant "ProfesorListComponent\n(Angular)" as UI <<Boundary>>
+participant "ProfesorApiService\n(Angular)" as UISrv <<Boundary>>
+participant "ProfesorController\n(NestJS)" as Ctrl <<Control>>
+participant "ProfesorService\n(NestJS)" as Srv <<Control>>
+participant "ExamenRepository\n(TypeORM)" as ExamenRepo <<Data Access>>
+participant "PreferenciaRepository\n(TypeORM)" as PrefRepo <<Data Access>>
+participant "ProfesorRepository\n(TypeORM)" as Repo <<Data Access>>
+database "MySQL" as DB
+
+Actor -> UI : solicitarEliminar(profesorId)
+activate UI
+
+UI -> UISrv : obtenerImpacto(profesorId)
+activate UISrv
+UISrv -> Ctrl : GET /profesores/:id/impacto
+activate Ctrl
+Ctrl -> Srv : getImpacto(id)
+activate Srv
+
+Srv -> ExamenRepo : count({ where: { profesorId: id } })
+activate ExamenRepo
+ExamenRepo -> DB : SELECT COUNT(*) FROM examen ...
+ExamenRepo --> Srv : examenesCount
+deactivate ExamenRepo
+
+Srv --> Ctrl : { examenesCount }
+deactivate Srv
+Ctrl --> UISrv : 200 OK ({ examenesCount })
+deactivate Ctrl
+UISrv --> UI : { examenesCount }
+deactivate UISrv
+
+UI -> UI : mostrarModalConfirmacion(examenesCount)
+UI --> Actor : visualizaAdvertencia("El profesor tiene X exámenes asignados")
+
+alt Confirmar Eliminación
+    Actor -> UI : confirmar()
+    UI -> UISrv : eliminar(profesorId)
+    activate UISrv
+    UISrv -> Ctrl : DELETE /profesores/:id
+    activate Ctrl
+    
+    Ctrl -> Srv : remove(id)
+    activate Srv
+    
+    Srv -> PrefRepo : delete({ profesorId: id })
+    activate PrefRepo
+    PrefRepo -> DB : DELETE FROM preferencia ...
+    PrefRepo --> Srv : ok
+    deactivate PrefRepo
+    
+    Srv -> Repo : delete(id)
+    activate Repo
+    Repo -> DB : DELETE FROM profesor ...
+    Repo --> Srv : ok
+    deactivate Repo
+    
+    Srv --> Ctrl : void
+    deactivate Srv
+    Ctrl --> UISrv : 200 OK
+    deactivate Ctrl
+    UISrv --> UI : ok
+    deactivate UISrv
+    
+    UI -> UI : refrescarListado()
+    UI --> Actor : mostrarExito("Profesor eliminado correctamente")
+else Cancelar Eliminación
+    Actor -> UI : cancelar()
+    UI -> UI : cerrarModal()
+    UI --> Actor : permaneceEnListado()
+end
+
+deactivate UI
+@enduml

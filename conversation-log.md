@@ -1078,3 +1078,21 @@
   - Actualización de breadcrumbs de navegación bidireccional en los READMEs de análisis: **[RUP/01-analisis/casos-uso/editarProfesor/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/editarProfesor/README.md)** y **[RUP/01-analisis/casos-uso/importarProfesores/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/importarProfesores/README.md)**.
 
 **Decisión**: Se establece el consumo de la API de asignaturas existente (`GET /asignaturas/search`) para optimizar el rendimiento y evitar la carga masiva en memoria del cliente. La persistencia de la colección Many-to-Many se delega a TypeORM asignando directamente el array de entidades `Asignatura` recuperadas mediante `In(dto.asignaturasIds)` y ejecutando `save()`.
+
+---
+
+## [05/06/2026 16:22] Sesión 68: Rama de Profesores - Diseño Detallado de Borrado Seguro
+
+**Prompt:** "Abramos la ultima sesión, para el caso de uso de eliminarProfesor() ... cerremos la sesión ahora. Añade la entrada al conversation-log.md"
+
+**Resultado:**
+- **Diseño Detallado de `eliminarProfesor()`**: Planificación del flujo de borrado seguro para docentes, implementando una consulta de impacto previa (`GET /profesores/:id/impacto`) para verificar la existencia de exámenes programados asignados al profesor y advertir al Administrador a través de la UI.
+- **Limpieza en Cascada**: Detalle técnico de la remoción de las restricciones de disponibilidad en `PreferenciaRepository` y la desvinculación automática de relaciones Many-to-Many por parte de TypeORM al eliminar el registro principal en `ProfesorRepository`.
+- **Artefactos Técnicos**:
+  - Creación del diagrama de secuencia PlantUML (**[secuencia.puml de eliminar](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/casos-uso/eliminarProfesor/secuencia.puml)**) y compilación a SVG (**[secuencia.svg de eliminar](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/images/02-diseño/casos-uso/eliminarProfesor/secuencia.svg)**).
+  - Documento de diseño detallado en **[README.md de eliminarProfesor](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/eliminarProfesor/README.md)**.
+- **Trazabilidad 360º**:
+  - Registro del caso de uso en el índice general **[RUP/02-diseño/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/README.md)**.
+  - Actualización de breadcrumbs de navegación bidireccional en el README de análisis: **[RUP/01-analisis/casos-uso/eliminarProfesor/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/eliminarProfesor/README.md)**.
+
+**Decisión**: Se ratifica la consulta al `ExamenRepository` en el backend para cuantificar las dependencias del docente antes de permitir su borrado. Las preferencias del profesor son eliminadas físicamente antes de borrar el perfil docente para garantizar la integridad referencial.
