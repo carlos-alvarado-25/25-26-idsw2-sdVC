@@ -1060,3 +1060,21 @@
   - Actualización de los breadcrumbs de navegación bidireccional en el artefacto de análisis **[RUP/01-analisis/casos-uso/crearProfesor/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/crearProfesor/README.md)**.
 
 **Decisión**: Se ratifica el desacoplamiento de la asignación de asignaturas (relación Muchos a Muchos) del formulario de creación inicial. El flujo de alta se mantiene puramente minimalista ("El Delgado") y redirige automáticamente al usuario hacia el formulario de edición avanzada (`editarProfesor()`) para gestionar la vinculación de materias académicas.
+
+---
+
+## [05/06/2026 16:18] Sesión 67: Rama de Profesores - Diseño Detallado de Edición e Importación Masiva
+
+**Prompt:** "Abramos la siguiente sesión ahora. con editarProfesor() ... Solo explicame el flujo de editar ... Perfecto. Continuemos con importarProfesor ahora entonces. ... Perfecto, cerremos la sesión y añade la entrada al conversation-log.md"
+
+**Resultado:**
+- **Diseño Detallado de `editarProfesor()`**: Modelado técnico de la modificación de perfiles docentes y gestión interactiva de su carga lectiva (relación Muchos a Muchos) mediante buscador paginado, asegurando la unicidad de email y el mapeo correspondiente a objetos de transferencia en NestJS y Angular.
+- **Diseño Detallado de `importarProfesores()`**: Planificación del procesamiento de archivos por lote en CSV (posicional sin cabecera) y Excel (coincidencia de cabeceras) reutilizando el motor modular agnóstico al formato y aplicando la validación de duplicados.
+- **Artefactos Técnicos**:
+  - Creación de diagramas de secuencia PlantUML (**[secuencia.puml de editar](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/casos-uso/editarProfesor/secuencia.puml)**, **[secuencia.puml de importar](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/casos-uso/importarProfesores/secuencia.puml)**) y compilación a SVG (**[secuencia.svg de editar](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/images/02-diseño/casos-uso/editarProfesor/secuencia.svg)**, **[secuencia.svg de importar](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/images/02-diseño/casos-uso/importarProfesores/secuencia.svg)**).
+  - Documentos de diseño detallado en **[README.md de editarProfesor](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/editarProfesor/README.md)** y **[README.md de importarProfesores](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/importarProfesores/README.md)**.
+- **Trazabilidad 360º**:
+  - Registro de los nuevos casos de uso en el índice general **[RUP/02-diseño/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/README.md)**.
+  - Actualización de breadcrumbs de navegación bidireccional en los READMEs de análisis: **[RUP/01-analisis/casos-uso/editarProfesor/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/editarProfesor/README.md)** y **[RUP/01-analisis/casos-uso/importarProfesores/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/importarProfesores/README.md)**.
+
+**Decisión**: Se establece el consumo de la API de asignaturas existente (`GET /asignaturas/search`) para optimizar el rendimiento y evitar la carga masiva en memoria del cliente. La persistencia de la colección Many-to-Many se delega a TypeORM asignando directamente el array de entidades `Asignatura` recuperadas mediante `In(dto.asignaturasIds)` y ejecutando `save()`.

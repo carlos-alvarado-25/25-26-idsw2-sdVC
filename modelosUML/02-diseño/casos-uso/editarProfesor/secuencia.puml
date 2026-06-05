@@ -1,0 +1,102 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Administrador" as Actor
+participant "ProfesorFormComponent\n(Angular)" as UI <<Boundary>>
+participant "ProfesorApiService\n(Angular)" as UISrv <<Boundary>>
+participant "AsignaturaApiService\n(Angular)" as AsigSrv <<Boundary>>
+participant "ProfesorController\n(NestJS)" as Ctrl <<Control>>
+participant "ProfesorService\n(NestJS)" as Srv <<Control>>
+participant "ProfesorRepository\n(TypeORM)" as Repo <<Data Access>>
+participant "AsignaturaRepository\n(TypeORM)" as AsigRepo <<Data Access>>
+database "MySQL" as DB
+
+== Carga Inicial ==
+Actor -> UI : abrirEdicion(id)
+activate UI
+
+UI -> UISrv : obtener(id)
+activate UISrv
+UISrv -> Ctrl : GET /profesores/:id
+activate Ctrl
+Ctrl -> Srv : findOne(id)
+activate Srv
+Srv -> Repo : findOne({ id, relations: ['asignaturas'] })
+activate Repo
+Repo -> DB : SELECT ... (join)
+Repo --> Srv : profesor
+deactivate Repo
+Srv --> Ctrl : profesor
+deactivate Srv
+Ctrl --> UISrv : 200 OK (ProfesorDto con asignaturas)
+deactivate Ctrl
+UISrv --> UI : profesor
+deactivate UISrv
+UI -> UI : renderizarDatos()
+
+== Búsqueda de Asignaturas ==
+Actor -> UI : buscarAsignaturas("Matematicas", pagina=1)
+UI -> AsigSrv : search("Matematicas", 1)
+activate AsigSrv
+AsigSrv -> DB : GET /asignaturas/search?q=Matematicas&page=1
+AsigSrv --> UI : PagedResultDto<Asignatura>
+deactivate AsigSrv
+UI -> UI : renderizarListadoAsignaturas()
+
+== Modificación y Persistencia ==
+Actor -> UI : seleccionarAsignatura(id)
+UI -> UI : actualizarColeccionLocal()
+
+Actor -> UI : solicitarGuardar()
+UI -> UI : validarFormulario()
+
+UI -> UISrv : actualizar(id, updateDto)
+activate UISrv
+UISrv -> Ctrl : PATCH /profesores/:id\n(UpdateProfesorDto)
+activate Ctrl
+
+Ctrl -> Srv : update(id, dto)
+activate Srv
+
+alt Validar Email Único
+    Srv -> Repo : findOneBy({ email: dto.email })
+    activate Repo
+    Repo --> Srv : otroProfesor?
+    deactivate Repo
+    alt Email Duplicado
+        Srv --> Ctrl : throw ConflictException
+        Ctrl --> UISrv : 409 Conflict
+        UISrv --> UI : error
+        UI --> Actor : mostrarError("El email ya está registrado")
+    end
+end
+
+alt Actualizar Carga Lectiva (Asignaturas)
+    Srv -> AsigRepo : findBy({ id: In(dto.asignaturasIds) })
+    activate AsigRepo
+    AsigRepo --> Srv : asignaturas
+    deactivate AsigRepo
+    Srv -> Srv : profesor.asignaturas = asignaturas
+end
+
+Srv -> Repo : save(profesor)
+activate Repo
+Repo -> DB : UPDATE / INSERT relation table
+Repo --> Srv : profesorActualizado
+deactivate Repo
+
+Srv --> Ctrl : profesorActualizado
+Ctrl --> UISrv : 200 OK (ProfesorDto)
+deactivate Srv
+deactivate Ctrl
+
+UISrv --> UI : ProfesorDto
+deactivate UISrv
+UI --> Actor : mostrarExito("Datos guardados")
+
+deactivate UI
+@enduml

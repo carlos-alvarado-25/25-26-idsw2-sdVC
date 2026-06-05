@@ -1,0 +1,89 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Administrador" as Actor
+participant "ProfesorImportComponent\n(Angular)" as UI <<Boundary>>
+participant "ProfesorApiService\n(Angular)" as UISrv <<Boundary>>
+participant "ProfesorController\n(NestJS)" as Ctrl <<Control>>
+participant "ProfesorService\n(NestJS)" as Srv <<Control>>
+participant "FileParserFactory\n(NestJS)" as Factory <<Control>>
+participant "IFileParser\n(NestJS)" as Parser <<Control>>
+participant "ProfesorRepository\n(TypeORM)" as Repo <<Data Access>>
+database "MySQL" as DB
+
+Actor -> UI : seleccionarArchivo(archivo)
+UI -> UI : validarTipoArchivo()
+
+Actor -> UI : solicitarImportacion()
+UI -> UISrv : importar(archivo)
+activate UISrv
+
+UISrv -> Ctrl : POST /profesores/importar\n(multipart/form-data)
+activate Ctrl
+
+Ctrl -> Srv : importar(buffer, mimetype)
+activate Srv
+
+Srv -> Factory : getParser(mimetype)
+activate Factory
+Factory --> Srv : parser (CsvParser / ExcelParser)
+deactivate Factory
+
+Srv -> Parser : parse(buffer, ['codigo', 'nombre', 'email', 'departamento'])
+activate Parser
+Parser --> Srv : rawRows
+deactivate Parser
+
+loop Para cada fila (row) en rawRows
+    Srv -> Srv : limpiar y validar campos (codigo, nombre, email, dpto)
+    
+    alt Datos Inválivos o Vacíos
+        Srv -> Srv : incrementarFallos()\nregistrarError("Datos incompletos")
+    else Datos Completos
+        Srv -> Repo : findOneBy({ email: row.email })
+        activate Repo
+        Repo --> Srv : profesorExistenteEmail?
+        deactivate Repo
+        
+        alt Email Duplicado
+            Srv -> Srv : incrementarFallos()\nregistrarError("Email ya registrado")
+        else Email Único
+            Srv -> Repo : findOneBy({ codigo: row.codigo })
+            activate Repo
+            Repo --> Srv : profesorExistenteCodigo?
+            deactivate Repo
+            
+            alt Código Duplicado
+                Srv -> Srv : incrementarFallos()\nregistrarError("Código ya registrado")
+            else Datos Válidos
+                Srv -> Srv : crearInstanciaProfesor()\nincrementarExitos()
+            end
+        end
+    end
+end
+
+alt Exitos > 0
+    Srv -> Repo : save(profesoresValidos)
+    activate Repo
+    Repo -> DB : INSERT INTO Profesor ...
+    Repo --> Srv : ok
+    deactivate Repo
+end
+
+Srv --> Ctrl : ImportResultDto(exitos, fallos, detalles)
+Ctrl --> UISrv : 200 OK (ImportResultDto)
+deactivate Srv
+deactivate Ctrl
+
+UISrv --> UI : ImportResultDto
+deactivate UISrv
+
+UI -> UI : renderizarResultados(ImportResultDto)
+UI --> Actor : mostrarResumenYErrores()
+deactivate UI
+
+@enduml
