@@ -1043,3 +1043,20 @@
 - **Integridad Documental:** Actualización del índice maestro de diseño y activación de breadcrumbs de trazabilidad 360º.
 
 **Decisión:** Se establece el uso de `LEFT JOIN` para la recuperación eficiente de las asignaturas vinculadas al profesor durante el listado, evitando el problema de consultas N+1 y garantizando el cumplimiento de la Ley de Demeter mediante una estructura de datos plana en el DTO.
+
+---
+
+## [05/06/2026 16:02] Sesión 66: Rama de Profesores - Diseño Detallado de Alta Manual
+
+**Prompt:** "A ver entonces, te pondré a prueba. Quiero que abramos sesión y diseñemos el caso de uso de crearProfesor. ... HAZLO! ... perfecto. Finalicemos la sesión y añade la entrada al conversation-log.md"
+
+**Resultado:**
+- **Diseño Detallado de `crearProfesor()`**: Modelado técnico del alta de profesores aplicando el patrón "El Delgado" (creación simplificada) y la validación de unicidad en base de datos para el correo electrónico y el código docente.
+- **Artefactos Técnicos**:
+  - Creación del diagrama de secuencia en PlantUML (**[secuencia.puml](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/casos-uso/crearProfesor/secuencia.puml)**) y compilación en SVG (**[secuencia.svg](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/images/02-diseño/casos-uso/crearProfesor/secuencia.svg)**).
+  - Documentación de diseño en **[README.md de crearProfesor](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/crearProfesor/README.md)**.
+- **Trazabilidad 360º**:
+  - Vinculación del caso de uso en el índice general **[RUP/02-diseño/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/README.md)**.
+  - Actualización de los breadcrumbs de navegación bidireccional en el artefacto de análisis **[RUP/01-analisis/casos-uso/crearProfesor/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/crearProfesor/README.md)**.
+
+**Decisión**: Se ratifica el desacoplamiento de la asignación de asignaturas (relación Muchos a Muchos) del formulario de creación inicial. El flujo de alta se mantiene puramente minimalista ("El Delgado") y redirige automáticamente al usuario hacia el formulario de edición avanzada (`editarProfesor()`) para gestionar la vinculación de materias académicas.

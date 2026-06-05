@@ -1,0 +1,72 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Administrador" as Actor
+participant "ProfesorFormComponent\n(Angular)" as UI <<Boundary>>
+participant "ProfesorApiService\n(Angular)" as UISrv <<Boundary>>
+participant "ProfesorController\n(NestJS)" as Ctrl <<Control>>
+participant "ProfesorService\n(NestJS)" as Srv <<Control>>
+participant "ProfesorRepository\n(TypeORM)" as Repo <<Data Access>>
+database "MySQL" as DB
+
+Actor -> UI : introducirDatos(codigo, nombre, email, departamento)
+UI -> UI : validarFormulario()
+
+UI -> UISrv : crear(crearProfesorDto)
+activate UISrv
+
+UISrv -> Ctrl : POST /profesores\n(CrearProfesorDto)
+activate Ctrl
+
+Ctrl -> Srv : create(dto)
+activate Srv
+
+Srv -> Repo : findOneBy({ email: dto.email })
+activate Repo
+Repo -> DB : SELECT ...
+Repo --> Srv : profesor?
+deactivate Repo
+
+alt Email Duplicado
+    Srv --> Ctrl : throw ConflictException
+    Ctrl --> UISrv : 409 Conflict
+    UISrv --> UI : error
+    UI --> Actor : mostrarError("El email ya está registrado")
+else Email Único
+    Srv -> Repo : findOneBy({ codigo: dto.codigo })
+    activate Repo
+    Repo -> DB : SELECT ...
+    Repo --> Srv : profesorCodigo?
+    deactivate Repo
+    
+    alt Código Duplicado
+        Srv --> Ctrl : throw ConflictException
+        Ctrl --> UISrv : 409 Conflict
+        UISrv --> UI : error
+        UI --> Actor : mostrarError("El código ya existe")
+    else Código Único
+        Srv -> Repo : create(dto)
+        Srv -> Repo : save(profesor)
+        activate Repo
+        Repo -> DB : INSERT INTO Profesor ...
+        Repo --> Srv : profesorPersistido
+        deactivate Repo
+        
+        Srv --> Ctrl : profesorPersistido
+        Ctrl --> UISrv : 201 Created (ProfesorDto)
+        deactivate Srv
+        deactivate Ctrl
+
+        UISrv --> UI : ProfesorDto
+        deactivate UISrv
+
+        UI -> UI : navegarAEditar(profesor.id)
+        UI --> Actor : mostrarFormularioEdicion()
+    end
+end
+
+@enduml

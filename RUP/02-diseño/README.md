@@ -78,3 +78,4 @@ Definición de la estructura de directorios del código fuente y políticas de i
 
 ### Gestión de Profesores
 - [abrirProfesores](casos-uso/abrirProfesores/README.md) - Diseño del listado paginado y personal docente.
+- [crearProfesor](casos-uso/crearProfesor/README.md) - Diseño de la creación de docente con patrón El Delgado y validación de unicidad.
