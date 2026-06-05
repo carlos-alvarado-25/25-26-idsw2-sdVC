@@ -99,8 +99,11 @@ export class ListarGradosComponent implements OnInit {
   }
 
   eliminarGrado(grado: Grado): void {
-    this.gradoService.verificarImpacto(grado.id).subscribe({
-      next: (totalAsignaturas) => {
+    this.loading.set(true);
+    this.gradoService.verificarImpacto(grado.id)
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: (totalAsignaturas) => {
         let mensaje = '¿Está seguro de eliminar el grado "' + grado.nombre + '"?';
         if (totalAsignaturas > 0) {
           mensaje += '\n\nADVERTENCIA: Este grado tiene ' + totalAsignaturas + ' asignaturas vinculadas que también podrían verse afectadas.';

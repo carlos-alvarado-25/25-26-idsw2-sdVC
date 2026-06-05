@@ -16,7 +16,6 @@ export interface Examen {
   nombreAula: string;
   nombreProfesor: string;
   asignatura?: {
-...
     id: number;
     codigo: string;
     nombre: string;

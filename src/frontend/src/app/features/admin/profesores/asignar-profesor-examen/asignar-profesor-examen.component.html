@@ -64,10 +64,10 @@
           <div class="exam-meta">
             <span>📅 {{ ex.fecha }}</span>
             <span>🕐 {{ ex.hora }}</span>
-            <span>⏱ {{ ex.duracion }} min</span>
+            <span>⏱️ {{ ex.duracion }} min</span>
           </div>
           <div class="exam-aula" *ngIf="ex.aulaId">
-            🏢 {{ ex.aula?.codigo }} - {{ ex.nombreAula }}
+            🏢 {{ ex.aula?.codigo }} — {{ ex.nombreAula }}
           </div>
           <div class="exam-aula text-muted" *ngIf="!ex.aulaId">
             🏢 Sin aula asignada

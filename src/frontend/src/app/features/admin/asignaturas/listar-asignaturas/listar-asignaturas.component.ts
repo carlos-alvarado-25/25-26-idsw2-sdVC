@@ -100,8 +100,11 @@ export class ListarAsignaturasComponent implements OnInit {
   }
 
   eliminarAsignatura(asignatura: Asignatura): void {
-    this.asignaturaService.verificarImpacto(asignatura.id).subscribe({
-      next: (res) => {
+    this.loading.set(true);
+    this.asignaturaService.verificarImpacto(asignatura.id)
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: (res) => {
         let mensaje = '¿Está seguro de eliminar la asignatura "' + asignatura.nombre + '"?';
         if (res.examenesAsociados > 0) {
           mensaje += '\n\nADVERTENCIA: Esta asignatura tiene ' + res.examenesAsociados + ' exámenes programados que también serán eliminados.';

@@ -5,7 +5,10 @@
       <a [routerLink]="['/admin/asignaturas']">📚 Asignaturas</a> / 
       <span>📥 Importar</span>
     </div>
-    <h1>Importar Asignaturas desde Archivo</h1>
+    <div class="header-main">
+      <h1>Importar Asignaturas desde Archivo</h1>
+      <button class="btn-secondary" [routerLink]="['/admin/asignaturas']">Volver al listado</button>
+    </div>
   </header>
 
   <div class="import-card">
@@ -36,7 +39,6 @@
       </div>
 
       <div class="form-actions">
-        <button class="btn-secondary" [routerLink]="['/admin/asignaturas']">Regresar</button>
         <button 
           class="btn-primary" 
           [disabled]="!selectedFile || loading()" 

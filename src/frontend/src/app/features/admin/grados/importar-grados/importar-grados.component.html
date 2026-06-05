@@ -5,7 +5,10 @@
       <a [routerLink]="['/admin/grados']">🎓 Grados</a> / 
       <span>📥 Importar</span>
     </div>
-    <h1>Importar Grados desde Archivo</h1>
+    <div class="header-main">
+      <h1>Importar Grados desde Archivo</h1>
+      <button class="btn-secondary" [routerLink]="['/admin/grados']">Volver al listado</button>
+    </div>
   </header>
 
   <div class="import-card">
@@ -36,7 +39,6 @@
       </div>
 
       <div class="form-actions">
-        <button class="btn-secondary" [routerLink]="['/admin/grados']">Regresar</button>
         <button 
           class="btn-primary" 
           [disabled]="!selectedFile || loading()" 

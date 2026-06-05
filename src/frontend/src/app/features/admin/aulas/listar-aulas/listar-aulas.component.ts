@@ -86,8 +86,11 @@ export class ListarAulasComponent implements OnInit {
   }
 
   eliminarAula(aula: Aula): void {
-    this.aulaService.verificarImpacto(aula.id).subscribe({
-      next: (res) => {
+    this.loading.set(true);
+    this.aulaService.verificarImpacto(aula.id)
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: (res) => {
         let mensaje = `¿Está seguro de eliminar el aula "${aula.nombre}"?`;
         if (res.examenesAsociados > 0) {
           mensaje += `\n\nADVERTENCIA: Esta aula tiene ${res.examenesAsociados} exámenes programados que quedarán sin espacio asignado.`;
