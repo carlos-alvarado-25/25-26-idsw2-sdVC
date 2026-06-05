@@ -1,0 +1,81 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> / <span>🎓 Profesores</span>
+    </div>
+    <div class="header-main">
+      <h1>Gestión de Profesores</h1>
+      <div class="actions">
+        <button *ngIf="selectedIds().size > 0" class="btn-danger" (click)="eliminarSeleccionados()">
+          🗑️ Eliminar ({{ selectedIds().size }})
+        </button>
+        <button class="btn-secondary" [routerLink]="['/admin/profesores/importar']">📥 Importar</button>
+        <button class="btn-primary" [routerLink]="['/admin/profesores/crear']">➕ Nuevo Profesor</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="filters-section">
+    <div class="search-box">
+      <input 
+        type="text" 
+        [(ngModel)]="criterio" 
+        (keyup.enter)="onSearch()"
+        placeholder="Buscar por nombre, código, email, departamento o asignatura..."
+      >
+      <button (click)="onSearch()" [disabled]="loading()">🔍</button>
+    </div>
+  </section>
+
+  <div class="table-wrapper">
+    <div *ngIf="loading()" class="table-overlay">
+      <div class="loader"></div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="col-check">
+            <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($event)">
+          </th>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Departamento</th>
+          <th>Asignaturas que Imparte</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let profesor of profesores()" [class.selected]="selectedIds().has(profesor.id)">
+          <td class="col-check">
+            <input type="checkbox" [checked]="selectedIds().has(profesor.id)" (change)="toggleSelection(profesor.id)">
+          </td>
+          <td class="font-mono">{{ profesor.codigo }}</td>
+          <td><strong>{{ profesor.nombre }}</strong></td>
+          <td>{{ profesor.email }}</td>
+          <td>{{ profesor.departamento }}</td>
+          <td class="text-accent">{{ getAsignaturasNombres(profesor) }}</td>
+          <td class="table-actions">
+            <button class="btn-icon" [routerLink]="['/admin/profesores/editar', profesor.id]" title="Editar">✏️</button>
+            <button class="btn-icon delete" (click)="eliminarProfesor(profesor)" title="Eliminar">🗑️</button>
+          </td>
+        </tr>
+        <tr *ngIf="profesores().length === 0 && !loading()">
+          <td colspan="7" class="no-data">No se encontraron profesores registrados.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="pagination">
+    <div class="pagination-info">
+      Mostrando {{ profesores().length }} de {{ total() }} registros
+    </div>
+    <div class="pagination-controls">
+      <button (click)="cambiarPagina(-1)" [disabled]="currentPage() === 1 || loading()">Anterior</button>
+      <span class="page-number">{{ currentPage() }}</span>
+      <button (click)="cambiarPagina(1)" [disabled]="profesores().length < 10 || loading()">Siguiente</button>
+    </div>
+  </footer>
+</div>

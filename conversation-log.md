@@ -1096,3 +1096,22 @@
   - Actualización de breadcrumbs de navegación bidireccional en el README de análisis: **[RUP/01-analisis/casos-uso/eliminarProfesor/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/eliminarProfesor/README.md)**.
 
 **Decisión**: Se ratifica la consulta al `ExamenRepository` en el backend para cuantificar las dependencias del docente antes de permitir su borrado. Las preferencias del profesor son eliminadas físicamente antes de borrar el perfil docente para garantizar la integridad referencial.
+
+---
+
+## [05/06/2026 20:22] Sesión 69: Rama de Profesores - Desarrollo Full-Stack Completo y Consistencia de Diseño
+
+**Prompt:** "Abramos de nuevo sesión, para el desarrollo de estos casos de uso. Iniciemos con abrirProfesores ... Vamos ahora con crearProfesor ... Haz la corrección ... HAZLO! ... si implementemos editarProfesor ... Sigamos con la opción A mejor entonces. Procedamos a importarProfesores ... Perfecto finalicemos la sesión. Añade la entrada al conversation-log.md"
+
+**Resultado:**
+- **Desarrollo Integral del Ramillete de Profesores:** Implementación completa de los 5 casos de uso de gestión docente en el backend (NestJS) y frontend (Angular) garantizando acoplamiento débil e integridad de datos.
+- **Fase de Base de Datos y Persistencia:** Creación y ejecución de [add_profesor.sql](/src/backend/sql/add_profesor.sql) para inicializar las tablas `Profesor` y `ProfesorAsignatura` con datos de censo iniciales.
+- **Caso `abrirProfesores()`:** Creación de listado paginado con signals y buscador integrado, cargando asignaturas asignadas mediante `leftJoinAndSelect` en backend para prevenir N+1.
+- **Casos `crearProfesor()` y `editarProfesor()`:** Implementación del componente de formulario unificado [profesor-form](/src/frontend/src/app/features/admin/profesores/profesor-form/). Se programó la validación reactiva de unicidad y el patrón **"El Delgado"** en la creación con redirección diferida a edición.
+- **Gestión interactiva Muchos-a-Muchos:** Desarrollo en el formulario de edición de una rejilla interactiva de dos columnas (Asignaturas Impartidas / Buscador y Selector de Materias) para asignar de forma visual y reactiva la carga lectiva al docente.
+- **Caso `importarProfesores()`:** Carga masiva de censo docente mediante motor multi-formato (CSV posicional/Excel por nombre) y validación previa de colisión de unicidad de emails o códigos.
+- **Caso `eliminarProfesor()`:** Borrado seguro con diagnóstico preventivo de impacto cuantitativo (conteo de exámenes programados que dependen de él) antes de solicitar confirmación.
+- **Resolución de SSR:** Corrección del renderMode por defecto en [app.routes.server.ts](/src/frontend/src/app/app.routes.server.ts) a `RenderMode.Server`, posibilitando la compilación exitosa de toda la suite de Angular con SSR activo ante rutas con parámetros dinámicos.
+- **Trazabilidad 360º:** Creación de los 5 READMEs de desarrollo y sincronización circular de breadcrumbs de todas las fases del ramillete de profesores.
+
+**Decisión:** Se oficializa el patrón de "Componente Único Dinámico Muchos-a-Muchos" para la asociación visual de relaciones complejas N:M. Se establece la redirección diferida de alta manual a edición avanzada como el estándar del proyecto para simplificar el flujo de censo inicial.
