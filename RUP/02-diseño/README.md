@@ -89,3 +89,4 @@ Definición de la estructura de directorios del código fuente y políticas de i
 - [editarExamen](casos-uso/editarExamen/README.md) - Diseño de la actualización incremental de examen con verificación de conflictos de aulas y supervisores.
 - [eliminarExamen](casos-uso/eliminarExamen/README.md) - Diseño del borrado seguro de examen y confirmación interactiva.
 - [asignarProfesorAExamen](casos-uso/asignarProfesorAExamen/README.md) - Diseño de la vinculación de docente supervisor a examen con verificación de conflicto horario.
+- [generarCalendario](casos-uso/generarCalendario/README.md) - Diseño del motor algorítmico de asignación automática y resolución de colisiones.

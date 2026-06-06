@@ -1201,3 +1201,23 @@
 ### Estado Final:
 El ramillete de administración y gestión docente queda en estado de excelencia técnica. El sistema es robusto, cumple con los principios de diseño de RUP e IdSw II, y está preparado para la implementación de la lógica algorítmica de generación de calendarios.
 
+---
+
+## [06/06/2026 22:15] Sesión 73: Rama de Calendario - Diseño Detallado del Motor de Asignación
+
+**Prompt:** "Iniciemos sesión para realizar el diseño de generarCalendario()... No pero sigue los estándares de los diagramas que ya tenemos en el proyecto... actualiza el diagrama de secuencia y describe esto en el README..."
+
+**Resultado:**
+- **Diseño Detallado de `generarCalendario()`**: Se modeló el diseño detallado del motor de asignación automática de exámenes.
+- **Desacoplamiento Arquitectónico (SOLID)**: Se introdujo la clase de dominio pura **`CalendarioEngine`** (Invención Pura) para aislar la lógica combinatorial de la persistencia de datos (TypeORM) y del framework (NestJS).
+- **Responsabilidad Experta**: Se definieron métodos de validación de disponibilidad y capacidad directamente en las entidades de dominio **`Aula`** (`tieneCapacidadSuficiente()`, `esTipoAdecuado()`, `estaDisponibleEn()`) y **`Profesor`** (`estaDisponibleEn()`, `tieneCruceHorario()`), eliminando el code smell de *Feature Envy* en la capa de servicios.
+- **Artefactos Técnicos Creados**:
+  - Diagrama de secuencia PlantUML (**[secuencia.puml](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/casos-uso/generarCalendario/secuencia.puml)**) y renderizado SVG (**[secuencia.svg](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/images/02-diseño/casos-uso/generarCalendario/secuencia.svg)**) estandarizados visualmente.
+  - Documento de diseño detallado en **[README.md de generarCalendario](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/generarCalendario/README.md)**.
+- **Trazabilidad 360º**:
+  - Conexión del caso de uso en el índice general **[RUP/02-diseño/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/README.md)**.
+  - Vinculación bidireccional con el análisis en **[RUP/01-analisis/casos-uso/generarCalendario/README.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/generarCalendario/README.md)**.
+- **Reversión Preventiva**: Saneamiento de las carpetas creadas prematuramente para otros casos de uso con el fin de respetar el workflow incremental paso a paso.
+
+**Decisión:** Se ratifica el patrón **CalendarioEngine** como el estándar de oro para aislar la lógica compleja del dominio de las capas de persistencia y controladores. Se establece que el cálculo de capacidad y solapamientos de recursos debe ser delegado de forma experta a las propias entidades del modelo (`Aula` y `Profesor`) para mantener el tamaño y la cohesión de los controladores y servicios de NestJS en límites óptimos.
+

@@ -1,6 +1,6 @@
 # IdSw 2 > generarCalendario > Análisis
 
-> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|[📂 Diseño](/RUP/02-diseño/casos-uso/generarCalendario/README.md)|Desarrollo|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -123,3 +123,4 @@ Análisis de colaboración del caso de uso `generarCalendario()` mediante el pat
 
 - [Especificación detallada: Detalle de Casos de Uso](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/0-Administrador/README.md)
 - [Análisis: listarConflictosExamenes()](/RUP/01-analisis/casos-uso/listarConflictosExamenes/README.md)
+- [Diseño Detallado: generarCalendario()](/RUP/02-diseño/casos-uso/generarCalendario/README.md)

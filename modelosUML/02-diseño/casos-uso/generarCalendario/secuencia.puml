@@ -1,0 +1,127 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+title Diseño Detallado: generarCalendario() (Desacoplado mediante CalendarioEngine)
+
+actor Administrador as Actor
+boundary GenerarCalendarioComponent <<Angular>>
+control CalendarioApiService <<Angular>>
+control CalendarioController <<NestJS>>
+participant CalendarioService <<NestJS>>
+participant CalendarioEngine <<Engine>>
+participant "examen : Examen" as Examen <<Entity>>
+participant "aula : Aula" as Aula <<Entity>>
+participant "profesor : Profesor" as Profesor <<Entity>>
+database ExamenRepository <<TypeORM>>
+database AulaRepository <<TypeORM>>
+database PreferenciaRepository <<TypeORM>>
+database MySQL as DB
+
+Actor -> GenerarCalendarioComponent : configurarParametros(fechaInicio, fechaFin, franjas)
+activate GenerarCalendarioComponent
+GenerarCalendarioComponent -> GenerarCalendarioComponent : validarFormulario()
+Actor -> GenerarCalendarioComponent : clickGenerar()
+
+GenerarCalendarioComponent -> CalendarioApiService : generarCalendario(dto)
+activate CalendarioApiService
+
+CalendarioApiService -> CalendarioController : POST /calendario/generar\n(GenerarCalendarioDto)
+activate CalendarioController
+
+CalendarioController -> CalendarioService : generar(dto)
+activate CalendarioService
+
+CalendarioService -> ExamenRepository : obtenerPendientes()
+activate ExamenRepository
+ExamenRepository -> DB : SELECT * FROM Examen WHERE fecha IS NULL
+ExamenRepository --> CalendarioService : listaExamenesPendientes
+deactivate ExamenRepository
+
+CalendarioService -> AulaRepository : obtenerAulas()
+activate AulaRepository
+AulaRepository -> DB : SELECT * FROM Aula
+AulaRepository --> CalendarioService : listaAulas
+deactivate AulaRepository
+
+CalendarioService -> PreferenciaRepository : obtenerPreferencias()
+activate PreferenciaRepository
+PreferenciaRepository -> DB : SELECT * FROM Preferencia
+PreferenciaRepository --> CalendarioService : listaPreferencias
+deactivate PreferenciaRepository
+
+CalendarioService -> CalendarioEngine : generar(config)
+activate CalendarioEngine
+
+CalendarioEngine -> CalendarioEngine : generarRanurasTemporales()
+
+loop Para cada Examen Pendiente
+    CalendarioEngine -> CalendarioEngine : buscarSlotOptimo()
+    
+    loop Para cada Slot Temporal y Aula
+        CalendarioEngine -> Aula : tieneCapacidadSuficiente(alumnos)
+        activate Aula
+        Aula --> CalendarioEngine : boolean
+        deactivate Aula
+        
+        CalendarioEngine -> Aula : esTipoAdecuado(tipo)
+        activate Aula
+        Aula --> CalendarioEngine : boolean
+        deactivate Aula
+        
+        CalendarioEngine -> Aula : estaDisponibleEn(fecha, franja, asignados)
+        activate Aula
+        Aula --> CalendarioEngine : boolean
+        deactivate Aula
+        
+        CalendarioEngine -> Profesor : estaDisponibleEn(fecha, franja, preferencias)
+        activate Profesor
+        Profesor --> CalendarioEngine : boolean
+        deactivate Profesor
+        
+        CalendarioEngine -> Profesor : tieneCruceHorario(fecha, franja, asignados)
+        activate Profesor
+        Profesor --> CalendarioEngine : boolean
+        deactivate Profesor
+        
+        alt Slot es Válido y Libre
+            CalendarioEngine -> CalendarioEngine : registrarAsignacion(examen, slot, aula)
+        end
+    end
+end
+
+CalendarioEngine --> CalendarioService : generacionResultDto
+deactivate CalendarioEngine
+
+alt Examenes Programados Exitosamente
+    CalendarioService -> ExamenRepository : guardarLote(examenesProgramados)
+    activate ExamenRepository
+    ExamenRepository -> DB : UPDATE Examen SET fecha = ?, horaInicio = ?, horaFin = ?, aulaId = ?, profesorId = ? WHERE id = ?
+    ExamenRepository --> CalendarioService : confirmacion
+    deactivate ExamenRepository
+end
+
+CalendarioService --> CalendarioController : generacionResultDto
+deactivate CalendarioService
+
+CalendarioController --> CalendarioApiService : 201 Created (GeneracionResultDto)
+deactivate CalendarioController
+
+CalendarioApiService --> GenerarCalendarioComponent : GeneracionResultDto
+deactivate CalendarioApiService
+
+GenerarCalendarioComponent -> GenerarCalendarioComponent : mostrarResultados(GeneracionResultDto)
+alt Exito (Sin Conflictos)
+    GenerarCalendarioComponent -> GenerarCalendarioComponent : habilitarNavegacionAExamenes()
+    GenerarCalendarioComponent --> Actor : mostrarMensajeExito("Calendario generado correctamente")
+else Conflictos Detectados
+    GenerarCalendarioComponent -> GenerarCalendarioComponent : mostrarAlertasConflictos()
+    GenerarCalendarioComponent -> GenerarCalendarioComponent : habilitarNavegacionAConflictos()
+    GenerarCalendarioComponent --> Actor : mostrarMensajeAdvertencia("Se generaron conflictos en algunos exámenes")
+end
+deactivate GenerarCalendarioComponent
+
+@enduml
