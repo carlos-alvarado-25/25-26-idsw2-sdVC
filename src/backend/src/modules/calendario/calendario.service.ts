@@ -43,7 +43,7 @@ export class CalendarioService {
       where: {
         fecha: Between(dto.fechaInicio, dto.fechaFin),
       },
-      relations: { aula: true, profesor: true },
+      relations: { aula: true, profesor: true, asignatura: true },
     });
 
     const aulas = await this.aulaRepository.find();

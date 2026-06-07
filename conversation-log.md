@@ -1439,3 +1439,45 @@ Se realizó una auditoría de trazabilidad completa **Requisitos → Análisis �
   - Se actualizaron los READMEs de diseño [generarCalendario/README.md](/RUP/02-diseño/casos-uso/generarCalendario/README.md) y de desarrollo [generarCalendario/README.md](/RUP/03-desarrollo/casos-uso/generarCalendario/README.md) detallando estas decisiones de ingeniería de software.
 
 **Decisión:** Se da por concluida la sesión habiendo auditado y refinado satisfactoriamente los dos casos de uso, documentando todas las optimizaciones y correcciones del diseño e implementando el caso de uso de consulta.
+
+---
+
+## [07/06/2026 11:12] Sesión 77: Corrección de Carga de Relaciones en Consultar Calendario
+
+**Prompt:** "Mira, a la hora de consultar el calendario me salen los exámenes Grado: Sin Grado en la pantalla diaria... HAZLO! ... Perfecto, finalicemos esta sesión ahora sí. Añade la entrada al conversation-log.md"
+
+**Resultado:**
+- **Resolución de Relación Grado**: Se identificó que la pantalla diaria mostraba "Grado: Sin Grado" porque la consulta en `ExamenService.findCalendario()` cargaba la relación `asignatura`, pero no la relación anidada `grado`. Al no estar cargada, el getter `Asignatura.nombreGrado` retornaba el fallback `'Sin Grado'`.
+- **Modificación**: Se añadió `.leftJoinAndSelect('asignatura.grado', 'grado')` al QueryBuilder en [examenes.service.ts](/src/backend/src/modules/examenes/examenes.service.ts).
+- **Despliegue**: Se compiló el backend con éxito y se reinició el servidor backend en segundo plano para aplicar los cambios inmediatamente en el entorno local.
+
+**Decisión:** Se corrige la visualización del nombre del grado en la vista de consulta de calendario y se da por finalizada la sesión de forma definitiva.
+
+---
+
+## [07/06/2026 11:17] Sesión 78: Heurística de Dispersión Temporal por Grado
+
+**Prompt:** "Aún sabiendo quel os requisitos no explicitan esto, o si? Como podríamos agregar esta dispersión realista... HAZLO! Además documenta el flujo a seguir para el testeo, en un archivo externo, no dentro del proyecto."
+
+**Resultado:**
+- **Heurística de Dispersión**: Se diseñó e implementó un algoritmo de puntuación por penalizaciones en `CalendarioEngine` para repartir de manera equilibrada los exámenes del mismo Grado en el rango de fechas. Si hay ranuras libres, se prioriza la separación temporal (mismo día: -100, día consecutivo: -50, 2 días: -20, 3 días: -5). Al ser una *soft constraint*, el motor sigue garantizando la asignación exitosa en rangos cortos.
+- **Modificación**:
+  - En [calendario-engine.ts](/src/backend/src/modules/calendario/calendario-engine.ts): Se implementó `buscarSlotOptimo()` evaluando todas las opciones y seleccionando la de mayor puntuación, además de los métodos de soporte `calcularPuntuacionDispersion()` y `getDaysDifference()`.
+  - En [calendario.service.ts](/src/backend/src/modules/calendario/calendario.service.ts): Se añadió la relación `asignatura` a `examenesExistentes` para que los exámenes ya guardados cuenten correctamente en la dispersión por Grado.
+- **Documentación de Diseño**: Se actualizó el README de diseño [generarCalendario/README.md](/RUP/02-diseño/casos-uso/generarCalendario/README.md) detallando la heurística.
+- **Plan de Pruebas Externo**: Se generó el archivo de pruebas externo [plan_testeo_dispersion.md](file:///home/carlos-lima/.gemini/antigravity-cli/brain/d36113a5-7488-429c-96e3-d646bb4f7188/plan_testeo_dispersion.md) en el directorio de artefactos con escenarios detallados y cURL de prueba.
+
+**Decisión:** Se integra con éxito la heurística de dispersión y se despliega el backend reiniciado en segundo plano para su inmediata validación.
+
+---
+
+## [07/06/2026 11:30] Sesión 79: Cierre de la Iteración y Cierre de Sesión
+
+**Prompt:** "Perfecto, ahora sí cerremos esta sesión, documentala bién y añade la entrada al conversation-log.md"
+
+**Resultado:**
+- **Validación del Sistema**: Se comprobó la integridad del sistema. El motor de calendarización, la consulta contextual del calendario de exámenes por rol y el detector de conflictos se encuentran plenamente operativos con las optimizaciones arquitectónicas integradas.
+- **Cierre de Iteración**: Se finalizan las tareas de auditoría de diseño detallado de RUP para los casos de uso `generarCalendario` y `consultarCalendario`.
+- **Estatus**: Código compilado al 100% en backend y frontend. El servidor local está en ejecución en segundo plano para las pruebas.
+
+**Decisión:** Se cierra de forma formal y definitiva la sesión habiendo cumplido con todos los objetivos técnicos y de documentación de la iteración.

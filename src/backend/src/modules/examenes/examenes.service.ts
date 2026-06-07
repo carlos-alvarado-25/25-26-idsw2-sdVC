@@ -482,6 +482,7 @@ export class ExamenService {
 
     const queryBuilder = this.examenRepository.createQueryBuilder('examen')
       .leftJoinAndSelect('examen.asignatura', 'asignatura')
+      .leftJoinAndSelect('asignatura.grado', 'grado')
       .leftJoinAndSelect('examen.aula', 'aula')
       .leftJoinAndSelect('examen.profesor', 'profesor')
       .where('examen.fecha IS NOT NULL');

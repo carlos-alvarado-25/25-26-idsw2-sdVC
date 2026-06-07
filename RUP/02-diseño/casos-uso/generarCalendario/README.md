@@ -35,7 +35,8 @@ Para asegurar un diseño modular óptimo, se distribuyen las responsabilidades d
 Es una clase pura de dominio en memoria, libre de dependencias con TypeORM o el framework NestJS. Su única responsabilidad es ejecutar el algoritmo combinatorial de calendarización.
 *   **`generar(config: GeneracionConfig): GeneracionResultDto`**: Entrada principal. Orquesta la calendarización en base a los datos provistos en memoria (incluyendo `examenesExistentes` para evitar colisiones con ejecuciones previas).
 *   **`generarRanurasTemporales(inicio: string, fin: string, franjas: string[]): Slot[]`**: Genera la cuadrícula de días hábiles y franjas para asignar exámenes.
-*   **`buscarSlotOptimo(...)`**: Busca la combinación de slot y aula válida, evaluando de forma exhaustiva a todos los profesores candidatos capacitados para la asignatura hasta encontrar uno disponible libre de conflictos en la franja horaria.
+*   **`buscarSlotOptimo(...)`**: Busca la combinación de slot, aula y profesor óptima, evaluando de forma exhaustiva los candidatos válidos y puntuando cada opción en base a su dispersión temporal para exámenes del mismo Grado, de modo que se maximice la separación en días.
+*   **`calcularPuntuacionDispersion(...)`**: Evalúa la proximidad en días de un slot propuesto con otros exámenes ya asignados al mismo Grado, aplicando penalizaciones por cercanía (mismo día: -100, día consecutivo: -50, etc.).
 *   **`registrarAsignacion(...)`**: Reserva en memoria el aula y profesor en el slot asignado para prevenir cruces en las siguientes iteraciones.
 
 ### 2. Entidad `Aula`
@@ -138,7 +139,7 @@ class ConfirmarCalendarioDto {
 
 ## Auditoría de Diseño y Refactorizaciones
 
-Durante la sesión del 07/06/2026, se realizó una auditoría y refactorización del código de `generarCalendario` para asegurar el cumplimiento estricto de las directrices arquitectónicas:
+Durante la sesión del 07/06/2026, se realizó una auditoría y refactorización del código de `generarCalendario` para asegurar el cumplimiento estricto de las directrices arquitectónicas y la usabilidad del sistema:
 
 1. **Ley de Demeter (Decoupling)**: 
    - Se identificó que `CalendarioEngine` consultaba directamente el array de asignaturas del profesor (`profesor.asignaturas.some(...)`). Esto violaba la Ley de Demeter y el principio de encapsulamiento.
@@ -149,6 +150,10 @@ Durante la sesión del 07/06/2026, se realizó una auditoría y refactorización
    - **Solución**: Se modificaron `Aula.estaDisponibleEn()` y `Profesor.tieneCruceHorario()` para usar una fórmula matemática de intersección de intervalos:
      $$\text{slotStart} < \text{exEnd} \quad \land \quad \text{exStart} < \text{slotEnd}$$
      Las horas se transforman a minutos desde la medianoche usando la función auxiliar `convertTimeToMinutes(timeStr)` garantizando una protección del 100% contra el doble booking.
+
+3. **Heurística de Dispersión Académica por Grado**:
+   - El motor original asignaba el primer slot disponible de forma secuencial y codiciosa, lo que concentraba la mayoría de los exámenes de un mismo Grado en un par de días (aglomeración).
+   - **Solución**: Se modificó `buscarSlotOptimo()` en `CalendarioEngine` para que evalúe y asigne puntuaciones de penalización a todos los huecos libres válidos basándose en la distancia temporal (en días) con otros exámenes ya asignados al mismo `gradoId` (mismo día: -100, día consecutivo: -50, 2 días de separación: -20, 3 días de separación: -5). Se elige la combinación de slot y aula que obtenga la puntuación máxima (menor penalización).
 
 ## referencias
 

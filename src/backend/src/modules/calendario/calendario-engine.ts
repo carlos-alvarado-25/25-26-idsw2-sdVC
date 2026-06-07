@@ -92,6 +92,42 @@ export class CalendarioEngine {
     return slots;
   }
 
+  private getDaysDifference(date1: string, date2: string): number {
+    const [y1, m1, d1] = date1.split('-').map(Number);
+    const [y2, m2, d2] = date2.split('-').map(Number);
+    const utc1 = Date.UTC(y1, m1 - 1, d1);
+    const utc2 = Date.UTC(y2, m2 - 1, d2);
+    return Math.round(Math.abs(utc2 - utc1) / (1000 * 60 * 60 * 24));
+  }
+
+  private calcularPuntuacionDispersion(
+    fechaPropuesta: string,
+    gradoId: number,
+    asignados: Examen[]
+  ): number {
+    let puntuacion = 0;
+
+    for (const ex of asignados) {
+      if (ex.asignatura?.gradoId !== gradoId || !ex.fecha) {
+        continue;
+      }
+
+      const diffDias = this.getDaysDifference(fechaPropuesta, ex.fecha);
+
+      if (diffDias === 0) {
+        puntuacion -= 100; // Penalización máxima: mismo día
+      } else if (diffDias === 1) {
+        puntuacion -= 50;  // Penalización alta: días consecutivos
+      } else if (diffDias === 2) {
+        puntuacion -= 20;  // Penalización media: 2 días de separación
+      } else if (diffDias === 3) {
+        puntuacion -= 5;   // Penalización baja: 3 días de separación
+      }
+    }
+
+    return puntuacion;
+  }
+
   private buscarSlotOptimo(
     examen: Examen,
     slots: Slot[],
@@ -99,6 +135,9 @@ export class CalendarioEngine {
     profesores: Profesor[],
     asignados: Examen[]
   ): { slot: Slot; aula: Aula } | null {
+    let mejorAsignacion: { slot: Slot; aula: Aula; profesor: Profesor; puntuacion: number } | null = null;
+    const gradoId = examen.asignatura?.gradoId;
+
     for (const slot of slots) {
       for (const aula of aulas) {
         if (!aula.tieneCapacidadSuficiente(examen.totalAlumnos)) continue;
@@ -117,12 +156,33 @@ export class CalendarioEngine {
             continue;
           }
 
-          examen.profesor = profesorDisponible;
-        }
+          const puntuacion = gradoId 
+            ? this.calcularPuntuacionDispersion(slot.fecha, gradoId, asignados)
+            : 0;
 
-        return { slot, aula };
+          if (!mejorAsignacion || puntuacion > mejorAsignacion.puntuacion) {
+            mejorAsignacion = {
+              slot,
+              aula,
+              profesor: profesorDisponible,
+              puntuacion
+            };
+
+            // Optimización: si la puntuación es perfecta (0), la asignamos directamente
+            if (puntuacion === 0) {
+              examen.profesor = mejorAsignacion.profesor;
+              return { slot: mejorAsignacion.slot, aula: mejorAsignacion.aula };
+            }
+          }
+        }
       }
     }
+
+    if (mejorAsignacion) {
+      examen.profesor = mejorAsignacion.profesor;
+      return { slot: mejorAsignacion.slot, aula: mejorAsignacion.aula };
+    }
+
     return null;
   }
 }
