@@ -126,6 +126,13 @@ export class AsignaturaService {
     return new PagedResultDto(data, total, page, this.PAGE_SIZE);
   }
 
+  async findByGrado(gradoId: number): Promise<Asignatura[]> {
+    return this.asignaturaRepository.find({
+      where: { gradoId },
+      order: { nombre: 'ASC' },
+    });
+  }
+
   async findByCriterio(criterio: string, page: number = 1): Promise<PagedResultDto<Asignatura>> {
     const skip = (page - 1) * this.PAGE_SIZE;
     const queryBuilder = this.asignaturaRepository.createQueryBuilder('asignatura');

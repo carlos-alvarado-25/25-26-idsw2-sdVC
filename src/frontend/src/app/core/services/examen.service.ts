@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { PagedResult } from './grado.service';
+import { Asignatura } from './asignatura.service';
 
 export interface ConflictoAlumno {
   examenId: number;
@@ -31,12 +32,7 @@ export interface Examen {
   codigoAsignatura: string;
   nombreAula: string;
   nombreProfesor: string;
-  asignatura?: {
-    id: number;
-    codigo: string;
-    nombre: string;
-    creditos: number;
-  };
+  asignatura?: Asignatura;
   aulaId?: number | null;
   aula?: {
     id: number;
@@ -106,5 +102,24 @@ export class ExamenService {
   obtenerConflictos(profesorId: number): Observable<ConflictoAlumno[]> {
     const params = new HttpParams().set('profesorId', profesorId.toString());
     return this.http.get<ConflictoAlumno[]>(`${this.apiUrl}/conflictos`, { params });
+  }
+
+  obtenerCalendario(queryParams: {
+    fechaInicio?: string;
+    fechaFin?: string;
+    gradoId?: number;
+    asignaturaId?: number;
+    rol?: string;
+    email?: string;
+  }): Observable<Examen[]> {
+    let params = new HttpParams();
+    if (queryParams.fechaInicio) params = params.set('fechaInicio', queryParams.fechaInicio);
+    if (queryParams.fechaFin) params = params.set('fechaFin', queryParams.fechaFin);
+    if (queryParams.gradoId) params = params.set('gradoId', queryParams.gradoId.toString());
+    if (queryParams.asignaturaId) params = params.set('asignaturaId', queryParams.asignaturaId.toString());
+    if (queryParams.rol) params = params.set('rol', queryParams.rol);
+    if (queryParams.email) params = params.set('email', queryParams.email);
+
+    return this.http.get<Examen[]>(`${this.apiUrl}/calendario`, { params });
   }
 }

@@ -5,6 +5,7 @@ import { Examen } from '../../entities/examen.entity';
 import { Asignatura } from '../../entities/asignatura.entity';
 import { Aula } from '../../entities/aula.entity';
 import { Profesor } from '../../entities/profesor.entity';
+import { Alumno } from '../../entities/alumno.entity';
 import { Preferencia } from '../../entities/preferencia.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 
@@ -26,6 +27,8 @@ export class ExamenService {
     private readonly aulaRepository: Repository<Aula>,
     @InjectRepository(Profesor)
     private readonly profesorRepository: Repository<Profesor>,
+    @InjectRepository(Alumno)
+    private readonly alumnoRepository: Repository<Alumno>,
   ) {}
 
   async findAll(page: number = 1): Promise<PagedResultDto<Examen>> {
@@ -465,5 +468,57 @@ export class ExamenService {
     const h = Math.floor(totalMinutes / 60).toString().padStart(2, '0');
     const m = (totalMinutes % 60).toString().padStart(2, '0');
     return `${h}:${m}`;
+  }
+
+  async findCalendario(params: {
+    fechaInicio?: string;
+    fechaFin?: string;
+    gradoId?: number;
+    asignaturaId?: number;
+    rol?: string;
+    email?: string;
+  }): Promise<Examen[]> {
+    const { fechaInicio, fechaFin, gradoId, asignaturaId, rol, email } = params;
+
+    const queryBuilder = this.examenRepository.createQueryBuilder('examen')
+      .leftJoinAndSelect('examen.asignatura', 'asignatura')
+      .leftJoinAndSelect('examen.aula', 'aula')
+      .leftJoinAndSelect('examen.profesor', 'profesor')
+      .where('examen.fecha IS NOT NULL');
+
+    if (fechaInicio) {
+      queryBuilder.andWhere('examen.fecha >= :fechaInicio', { fechaInicio });
+    }
+    if (fechaFin) {
+      queryBuilder.andWhere('examen.fecha <= :fechaFin', { fechaFin });
+    }
+
+    // Cargar contexto del actor una sola vez
+    let forcedGradoId: number | undefined = undefined;
+
+    if (rol === 'Profesor' && email) {
+      const profesor = await this.profesorRepository.findOneBy({ email });
+      if (!profesor) return [];
+      queryBuilder.andWhere('examen.profesorId = :profesorId', { profesorId: profesor.id });
+    } else if (rol === 'Alumno' && email) {
+      const alumno = await this.alumnoRepository.findOneBy({ email });
+      if (!alumno) return [];
+      forcedGradoId = alumno.gradoId;
+      queryBuilder.andWhere('asignatura.gradoId = :alumnoGradoId', { alumnoGradoId: forcedGradoId });
+    }
+
+    // Aplicar filtros manuales (para Alumno se fuerza su gradoId original)
+    const finalGradoId = forcedGradoId !== undefined ? forcedGradoId : gradoId;
+    if (finalGradoId) {
+      queryBuilder.andWhere('asignatura.gradoId = :finalGradoId', { finalGradoId });
+    }
+
+    if (asignaturaId) {
+      queryBuilder.andWhere('examen.asignaturaId = :asignaturaId', { asignaturaId });
+    }
+
+    queryBuilder.orderBy('examen.fecha', 'ASC').addOrderBy('examen.hora', 'ASC');
+
+    return queryBuilder.getMany();
   }
 }

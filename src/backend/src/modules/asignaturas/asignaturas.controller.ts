@@ -37,6 +37,11 @@ export class AsignaturaController {
     return this.asignaturaService.getImpacto(id);
   }
 
+  @Get('por-grado/:gradoId')
+  async findByGrado(@Param('gradoId', ParseIntPipe) gradoId: number): Promise<Asignatura[]> {
+    return this.asignaturaService.findByGrado(gradoId);
+  }
+
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<Asignatura> {
     return this.asignaturaService.findOne(id);

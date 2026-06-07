@@ -47,6 +47,7 @@ Definición de la estructura de directorios del código fuente y políticas de i
 ### Casos de Uso Comunes
 - [iniciarSesion](casos-uso/iniciarSesion/README.md) - Diseño de la interacción de acceso y validación de credenciales.
 - [cerrarSesion](casos-uso/cerrarSesion/README.md) - Diseño del protocolo de desconexión y limpieza de sesión.
+- [consultarCalendario](casos-uso/consultarCalendario/README.md) - Diseño del visualizador interactivo del calendario con filtros por Grado/Asignatura y políticas de visibilidad por actor.
 
 ### Gestión de Grados
 - [abrirGrados](casos-uso/abrirGrados/README.md) - Diseño del hub de gestión y listado paginado.

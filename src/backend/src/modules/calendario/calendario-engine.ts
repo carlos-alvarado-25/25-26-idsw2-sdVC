@@ -104,7 +104,7 @@ export class CalendarioEngine {
         if (!aula.tieneCapacidadSuficiente(examen.totalAlumnos)) continue;
         if (!aula.estaDisponibleEn(slot.fecha, slot.franja, asignados)) continue;
 
-        const candidatos = profesores.filter(p => p.asignaturas?.some(a => a.id === examen.asignaturaId));
+        const candidatos = profesores.filter(p => p.puedeImpartirAsignatura(examen.asignaturaId));
         const profesoresAEvaluar = examen.profesor ? [examen.profesor] : candidatos;
 
         if (profesoresAEvaluar.length > 0) {

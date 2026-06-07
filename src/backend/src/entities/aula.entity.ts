@@ -29,10 +29,26 @@ export class Aula {
   }
 
   estaDisponibleEn(fecha: string, franja: string, examenesAsignados: Examen[]): boolean {
-    const [horaInicio] = franja.split('-');
-    return !examenesAsignados.some(
-      examen => (examen.aula?.id === this.id || examen.aulaId === this.id) && examen.fecha === fecha && examen.hora === horaInicio
-    );
+    const [slotStartStr, slotEndStr] = franja.split('-');
+    const slotStart = this.convertTimeToMinutes(slotStartStr);
+    const slotEnd = this.convertTimeToMinutes(slotEndStr);
+
+    return !examenesAsignados.some(examen => {
+      if ((examen.aula?.id !== this.id && examen.aulaId !== this.id) || examen.fecha !== fecha) {
+        return false;
+      }
+      if (!examen.hora) return false;
+
+      const exStart = this.convertTimeToMinutes(examen.hora);
+      const exEnd = exStart + examen.duracion;
+
+      return slotStart < exEnd && exStart < slotEnd;
+    });
+  }
+
+  private convertTimeToMinutes(timeStr: string): number {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    return hours * 60 + minutes;
   }
 
   @CreateDateColumn()

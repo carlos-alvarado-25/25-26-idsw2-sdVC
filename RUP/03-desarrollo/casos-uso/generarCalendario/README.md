@@ -22,9 +22,8 @@ Recibe los parámetros temporales de la planificación para ejecutar el motor co
   * `201 Created` + `GeneracionResultDto` (contiene estadísticas y listado de exámenes en conflicto).
 
 ### Implementación
-- **Entidades de Comportamiento Experto**:
-  * **`Aula`**: Expone `estaDisponibleEn()` para autoevaluar colisiones físicas de espacios contra los exámenes ya existentes en el rango.
-  * **`Profesor`**: Expone `estaDisponibleEn()` (cruce contra preferencias/exclusiones horarias de la base de datos) y `tieneCruceHorario()` (para asegurar un rol de supervisor único a esa hora).
+  * **`Aula`**: Expone `estaDisponibleEn()` para autoevaluar colisiones físicas de espacios contra los exámenes ya existentes en el rango (auditado para usar intersección de intervalos de tiempo en minutos para prevenir solapamientos).
+  * **`Profesor`**: Expone `estaDisponibleEn()` (cruce contra preferencias/exclusiones horarias de la base de datos), `tieneCruceHorario()` (usando intersección de intervalos en minutos) y `puedeImpartirAsignatura()` (encapsulado para cumplir la Ley de Demeter).
 - **Motor Combinatorial (`CalendarioEngine`)**: Clase pura de dominio en memoria que realiza la simulación atómica y devuelve el balance de planificación.
 
 ---

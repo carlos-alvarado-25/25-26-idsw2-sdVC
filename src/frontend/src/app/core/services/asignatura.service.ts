@@ -66,4 +66,8 @@ export class AsignaturaService {
       .set('page', page.toString());
     return this.http.get<PagedResult<Asignatura>>(`${this.apiUrl}/search`, { params });
   }
+
+  buscarPorGrado(gradoId: number): Observable<Asignatura[]> {
+    return this.http.get<Asignatura[]>(`${this.apiUrl}/por-grado/${gradoId}`);
+  }
 }

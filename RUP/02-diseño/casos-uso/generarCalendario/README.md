@@ -43,13 +43,14 @@ Es una clase pura de dominio en memoria, libre de dependencias con TypeORM o el 
 Encapsula la validación de sus capacidades físicas e idoneidad:
 *   **`tieneCapacidadSuficiente(cantidadAlumnos: number): boolean`**: Compara si `this.capacidad >= cantidadAlumnos`.
 *   **`esTipoAdecuado(tipoRequerido: string): boolean`**: Valida si el tipo de aula coincide con las necesidades del examen.
-*   **`estaDisponibleEn(fecha: string, franja: string, examenesAsignados: Examen[]): boolean`**: Compara contra la lista de exámenes que se están programando para ver si su identificador `aulaId` ya se encuentra ocupado en ese slot.
+*   **`estaDisponibleEn(fecha: string, franja: string, examenesAsignados: Examen[]): boolean`**: Compara contra la lista de exámenes que se están programando para ver si su identificador `aulaId` ya se encuentra ocupado en ese slot. **Nota de Auditoría (Intervalo Temporal)**: En lugar de comparar coincidencias exactas de hora de inicio, realiza una intersección matemática de intervalos en minutos (`slotStart < exEnd && exStart < slotEnd`), evitando cruces con exámenes de diferente hora de inicio o duración.
 
 ### 3. Entidad `Profesor`
 *Estereotipo: Entidad / Experto en Información (Docente)*  
 Encapsula la lógica de disponibilidad horaria y cruces docentes:
 *   **`estaDisponibleEn(fecha: string, franja: string, preferencias: Preferencia[]): boolean`**: Compara el slot propuesto contra sus exclusiones de horario registradas en `Preferencia`.
-*   **`tieneCruceHorario(fecha: string, franja: string, examenesAsignados: Examen[]): boolean`**: Comprueba que no esté supervisando simultáneamente otro examen (`examen.profesorId === this.id`) en el slot propuesto.
+*   **`tieneCruceHorario(fecha: string, franja: string, examenesAsignados: Examen[]): boolean`**: Comprueba que no esté supervisando simultáneamente otro examen en el slot propuesto. **Nota de Auditoría (Intervalo Temporal)**: Implementa la intersección matemática de intervalos en minutos para prevenir el doble booking físico.
+*   **`puedeImpartirAsignatura(asignaturaId: number): boolean`**: Comprueba si la asignatura pertenece a las asignaturas que el profesor puede impartir. **Nota de Auditoría (Ley de Demeter)**: Evita que el `CalendarioEngine` consulte la estructura interna del array de asignaturas del profesor, delegando la responsabilidad en el Experto en Información (`Profesor`).
 
 ---
 
@@ -134,6 +135,20 @@ class ConfirmarCalendarioDto {
 | `Examen` | `Examen` (Entity) | Encapsula el resultado de la asignación. |
 | `AulaRepository` / `Aula` | `AulaRepository` / `Aula` (Entity) | Provisión de capacidades físicas y verificación de disponibilidad experta. |
 | `PreferenciaRepository` / `Profesor` | `PreferenciaRepository` / `Profesor` (Entity) | Provisión de exclusiones horarias y comprobación de cruces de supervisor experto. |
+
+## Auditoría de Diseño y Refactorizaciones
+
+Durante la sesión del 07/06/2026, se realizó una auditoría y refactorización del código de `generarCalendario` para asegurar el cumplimiento estricto de las directrices arquitectónicas:
+
+1. **Ley de Demeter (Decoupling)**: 
+   - Se identificó que `CalendarioEngine` consultaba directamente el array de asignaturas del profesor (`profesor.asignaturas.some(...)`). Esto violaba la Ley de Demeter y el principio de encapsulamiento.
+   - **Solución**: Se encapsuló la validación agregando el método `puedeImpartirAsignatura(asignaturaId)` en la entidad `Profesor` (Experto en Información). El motor ahora delega la consulta a este método.
+   
+2. **Mitigación de Solapamiento Temporal Físico**:
+   - Anteriormente, el motor comprobaba coincidencias exactas de hora de inicio (`examen.hora === horaSlot`). Esto provocaba un bug potencial si dos exámenes en la misma aula/profesor tenían diferentes horas de inicio u horas solapadas por su duración.
+   - **Solución**: Se modificaron `Aula.estaDisponibleEn()` y `Profesor.tieneCruceHorario()` para usar una fórmula matemática de intersección de intervalos:
+     $$\text{slotStart} < \text{exEnd} \quad \land \quad \text{exStart} < \text{slotEnd}$$
+     Las horas se transforman a minutos desde la medianoche usando la función auxiliar `convertTimeToMinutes(timeStr)` garantizando una protección del 100% contra el doble booking.
 
 ## referencias
 

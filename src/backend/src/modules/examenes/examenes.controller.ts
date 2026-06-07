@@ -29,6 +29,25 @@ export class ExamenController {
     return this.examenService.update(id, updateExamenDto);
   }
 
+  @Get('calendario')
+  async findCalendario(
+    @Query('fechaInicio') fechaInicio?: string,
+    @Query('fechaFin') fechaFin?: string,
+    @Query('gradoId') gradoId?: string,
+    @Query('asignaturaId') asignaturaId?: string,
+    @Query('rol') rol?: string,
+    @Query('email') email?: string,
+  ): Promise<Examen[]> {
+    return this.examenService.findCalendario({
+      fechaInicio,
+      fechaFin,
+      gradoId: gradoId ? parseInt(gradoId, 10) : undefined,
+      asignaturaId: asignaturaId ? parseInt(asignaturaId, 10) : undefined,
+      rol,
+      email,
+    });
+  }
+
   @Get('conflictos')
   async findConflictos(
     @Query('profesorId', ParseIntPipe) profesorId: number,

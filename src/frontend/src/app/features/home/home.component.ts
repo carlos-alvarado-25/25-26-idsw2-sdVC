@@ -23,47 +23,57 @@ import { Router, RouterModule } from '@angular/router';
           <p>Seleccione una entidad para gestionar los recursos del sistema.</p>
         </header>
 
-        <div class="grid-container">
-          <!-- Gestión de Grados -->
-          <div class="card" [routerLink]="['/admin/grados']">
-            <div class="card-icon">🎓</div>
-            <h3>Grados</h3>
-            <p>Mantenimiento de titulaciones y facultades.</p>
-          </div>
+        <div class="grid-container" *ngIf="user$ | async as user">
+          <!-- Tarjetas de Administración (Solo Admin) -->
+          <ng-container *ngIf="user.rol === 'Admin'">
+            <!-- Gestión de Grados -->
+            <div class="card" [routerLink]="['/admin/grados']">
+              <div class="card-icon">🎓</div>
+              <h3>Grados</h3>
+              <p>Mantenimiento de titulaciones y facultades.</p>
+            </div>
 
-          <!-- Gestión de Asignaturas -->
-          <div class="card" [routerLink]="['/admin/asignaturas']">
-            <div class="card-icon">📚</div>
-            <h3>Asignaturas</h3>
-            <p>Administración de materias y créditos.</p>
-          </div>
+            <!-- Gestión de Asignaturas -->
+            <div class="card" [routerLink]="['/admin/asignaturas']">
+              <div class="card-icon">📚</div>
+              <h3>Asignaturas</h3>
+              <p>Administración de materias y créditos.</p>
+            </div>
 
-          <!-- Gestión de Profesores -->
-          <div class="card" [routerLink]="['/admin/profesores']">
-            <div class="card-icon">👨‍🏫</div>
-            <h3>Profesores</h3>
-            <p>Gestión de docentes y carga lectiva.</p>
-          </div>
+            <!-- Gestión de Profesores -->
+            <div class="card" [routerLink]="['/admin/profesores']">
+              <div class="card-icon">👨‍🏫</div>
+              <h3>Profesores</h3>
+              <p>Gestión de docentes y carga lectiva.</p>
+            </div>
 
-          <!-- Gestión de Aulas -->
-          <div class="card" [routerLink]="['/admin/aulas']">
-            <div class="card-icon">🏫</div>
-            <h3>Aulas</h3>
-            <p>Espacios físicos y capacidades.</p>
-          </div>
+            <!-- Gestión de Aulas -->
+            <div class="card" [routerLink]="['/admin/aulas']">
+              <div class="card-icon">🏫</div>
+              <h3>Aulas</h3>
+              <p>Espacios físicos y capacidades.</p>
+            </div>
 
-          <!-- Gestión de Alumnos -->
-          <div class="card" [routerLink]="['/admin/alumnos']">
-            <div class="card-icon">👤</div>
-            <h3>Alumnos</h3>
-            <p>Listado y matriculación de estudiantes.</p>
-          </div>
+            <!-- Gestión de Alumnos -->
+            <div class="card" [routerLink]="['/admin/alumnos']">
+              <div class="card-icon">👤</div>
+              <h3>Alumnos</h3>
+              <p>Listado y matriculación de estudiantes.</p>
+            </div>
 
-          <!-- Gestión de Calendario -->
-          <div class="card accent" [routerLink]="['/admin/examenes']">
+            <!-- Gestión de Calendario -->
+            <div class="card" [routerLink]="['/admin/examenes']">
+              <div class="card-icon">⚙️</div>
+              <h3>Gestión Exámenes</h3>
+              <p>Motor de generación y asignación de exámenes.</p>
+            </div>
+          </ng-container>
+
+          <!-- Tarjeta de Consulta de Calendario (Común a todos los roles) -->
+          <div class="card accent" [routerLink]="['/calendario/consultar']">
             <div class="card-icon">🗓️</div>
-            <h3>Calendario</h3>
-            <p>Motor de generación y consulta de exámenes.</p>
+            <h3>Consultar Calendario</h3>
+            <p>Visualización interactiva y búsqueda de exámenes.</p>
           </div>
         </div>
       </main>

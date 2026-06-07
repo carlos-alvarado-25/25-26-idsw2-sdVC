@@ -1,0 +1,187 @@
+<div class="calendar-wrapper">
+  <!-- Barra de Navegación superior -->
+  <nav class="top-nav">
+    <div class="nav-left">
+      <button class="btn-back" (click)="volver()">
+        <span class="icon">⬅</span> Volver al Menú
+      </button>
+      <h2 class="title">Calendario de Exámenes</h2>
+    </div>
+    <div class="user-info" *ngIf="currentUser() as user">
+      <span class="user-email">{{ user.email }}</span>
+      <span class="badge" [ngClass]="user.rol">{{ user.rol }}</span>
+    </div>
+  </nav>
+
+  <!-- Filtros y Controles Temporales -->
+  <div class="controls-panel">
+    <!-- Controles de Vista y Navegación -->
+    <div class="time-controls">
+      <div class="view-selectors">
+        <button [class.active]="viewMode() === 'month'" (click)="setViewMode('month')">Mensual</button>
+        <button [class.active]="viewMode() === 'week'" (click)="setViewMode('week')">Semanal</button>
+        <button [class.active]="viewMode() === 'day'" (click)="setViewMode('day')">Diario</button>
+      </div>
+
+      <div class="navigator">
+        <button class="btn-nav" (click)="prev()">◀</button>
+        <button class="btn-today" (click)="today()">Hoy</button>
+        <button class="btn-nav" (click)="next()">▶</button>
+        <span class="period-text">{{ periodLabel }}</span>
+      </div>
+    </div>
+
+    <!-- Controles de Filtros Académicos -->
+    <div class="academic-filters" *ngIf="currentUser() as user">
+      <!-- Filtro de Grado (No visible para Alumnos ya que se pre-filtra por backend) -->
+      <div class="filter-group" *ngIf="user.rol !== 'Alumno'">
+        <label for="grado-select">Grado</label>
+        <select id="grado-select" [ngModel]="selectedGradoId()" (ngModelChange)="onGradoChange($event)">
+          <option [ngValue]="null">Todos los Grados</option>
+          <option *ngFor="let g of grados()" [ngValue]="g.id">{{ g.nombre }}</option>
+        </select>
+      </div>
+
+      <!-- Filtro de Asignatura -->
+      <div class="filter-group">
+        <label for="asignatura-select">Asignatura</label>
+        <select id="asignatura-select" [ngModel]="selectedAsignaturaId()" (ngModelChange)="onAsignaturaChange($event)">
+          <option [ngValue]="null">Todas las Asignaturas</option>
+          <option *ngFor="let a of asignaturas()" [ngValue]="a.id">{{ a.nombre }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estado de Carga y Errores -->
+  <div class="loading-overlay" *ngIf="loading()">
+    <div class="spinner"></div>
+    <p>Cargando exámenes...</p>
+  </div>
+
+  <div class="error-banner" *ngIf="errorMsg()">
+    <span>⚠️ {{ errorMsg() }}</span>
+  </div>
+
+  <!-- Contenedor Principal del Calendario -->
+  <div class="calendar-container" [ngSwitch]="viewMode()" *ngIf="!loading()">
+    
+    <!-- VISTA MENSUAL -->
+    <div class="month-grid-view" *ngSwitchCase="'month'">
+      <!-- Cabeceras de Días -->
+      <div class="day-headers">
+        <div class="day-header" *ngFor="let day of weekDays">{{ day }}</div>
+      </div>
+      <!-- Cuadrícula de Días -->
+      <div class="days-grid">
+        <div class="day-cell" 
+             *ngFor="let d of calendarDays()" 
+             [class.out-of-month]="!d.isCurrentMonth"
+             [class.today]="d.isToday">
+          <div class="day-number">{{ d.date.getDate() }}</div>
+          <div class="day-exams">
+            <div class="mini-exam-card" 
+                 *ngFor="let ex of d.exams"
+                 [title]="ex.nombreAsignatura">
+              <span class="exam-time">{{ ex.hora }}</span>
+              <span class="exam-subject">{{ ex.codigoAsignatura }}</span>
+              <span class="exam-room">{{ ex.nombreAula }}</span>
+              
+              <!-- Reportar Incidencia (Solo Profesor asignado) -->
+              <button class="btn-incident" 
+                      *ngIf="currentUser()?.rol === 'Profesor'"
+                      (click)="reportarIncidencia(ex.id)"
+                      title="Reportar incidencia de horario">
+                ⚠️
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA SEMANAL -->
+    <div class="week-grid-view" *ngSwitchCase="'week'">
+      <div class="weekly-columns">
+        <div class="weekly-column" 
+             *ngFor="let d of weeklyDays(); let idx = index" 
+             [class.today]="d.isToday">
+          <div class="column-header">
+            <span class="day-name">{{ weekDays[idx] }}</span>
+            <span class="day-date">{{ d.date.getDate() }}</span>
+          </div>
+          <div class="column-body">
+            <div class="no-exams" *ngIf="d.exams.length === 0">
+              Sin exámenes
+            </div>
+            <div class="detailed-exam-card" *ngFor="let ex of d.exams">
+              <div class="card-header-info">
+                <span class="exam-badge-time">{{ ex.hora }} ({{ ex.duracion }}m)</span>
+                <span class="exam-badge-type">{{ ex.tipo }}</span>
+              </div>
+              <h4 class="subject-name">{{ ex.nombreAsignatura }}</h4>
+              <span class="subject-code">{{ ex.codigoAsignatura }}</span>
+              
+              <div class="location-details">
+                <span class="detail-item"><strong>Aula:</strong> {{ ex.nombreAula }}</span>
+                <span class="detail-item"><strong>Profesor:</strong> {{ ex.nombreProfesor }}</span>
+              </div>
+              
+              <!-- Botón de incidencia para profesores -->
+              <button class="btn-report-inc" 
+                      *ngIf="currentUser()?.rol === 'Profesor'"
+                      (click)="reportarIncidencia(ex.id)">
+                ⚠️ Incidencia
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA DIARIA -->
+    <div class="day-list-view" *ngSwitchCase="'day'">
+      <div class="empty-day" *ngIf="dailyExams().length === 0">
+        <div class="empty-icon">📅</div>
+        <h3>No hay exámenes programados</h3>
+        <p>No se encontraron eventos para el día de hoy.</p>
+      </div>
+
+      <div class="exams-timeline" *ngIf="dailyExams().length > 0">
+        <div class="timeline-item" *ngFor="let ex of dailyExams()">
+          <div class="time-marker">
+            <span class="time">{{ ex.hora }}</span>
+            <span class="duration">{{ ex.duracion }} minutos</span>
+          </div>
+          <div class="timeline-card">
+            <div class="card-main">
+              <span class="exam-type-tag">{{ ex.tipo }}</span>
+              <h3>{{ ex.nombreAsignatura }}</h3>
+              <div class="card-meta">
+                <span><strong>Código:</strong> {{ ex.codigoAsignatura }}</span>
+                <span><strong>Grado:</strong> {{ ex.asignatura?.nombreGrado }}</span>
+              </div>
+              <div class="card-details">
+                <div class="detail-box">
+                  <span class="label">Aula asignada</span>
+                  <span class="value">{{ ex.nombreAula }}</span>
+                </div>
+                <div class="detail-box">
+                  <span class="label">Profesor supervisor</span>
+                  <span class="value">{{ ex.nombreProfesor }}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-actions" *ngIf="currentUser()?.rol === 'Profesor'">
+              <button class="btn-action-incident" (click)="reportarIncidencia(ex.id)">
+                ⚠️ Reportar Incidencia
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

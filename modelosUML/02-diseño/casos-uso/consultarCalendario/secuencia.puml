@@ -1,0 +1,121 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+title Diseño Detallado: consultarCalendario()
+
+actor Usuario as Actor
+boundary ConsultarCalendarioComponent <<Angular>>
+control ExamenApiService <<Angular>>
+control ExamenController <<NestJS>>
+participant ExamenService <<NestJS>>
+database ExamenRepository <<TypeORM>>
+database ProfesorRepository <<TypeORM>>
+database AlumnoRepository <<TypeORM>>
+database MySQL as DB
+
+== Carga Inicial del Calendario (Vista Temporal) ==
+
+Actor -> ConsultarCalendarioComponent : clickConsultarCalendario()
+activate ConsultarCalendarioComponent
+
+ConsultarCalendarioComponent -> ExamenApiService : obtenerCalendario(fechaInicio, fechaFin, rol, email)
+activate ExamenApiService
+
+ExamenApiService -> ExamenController : GET /examenes/calendario\n?fechaInicio=:fi&fechaFin=:ff&rol=:rol&email=:email
+activate ExamenController
+
+ExamenController -> ExamenService : findCalendario(fi, ff, rol, email)
+activate ExamenService
+
+alt rol === 'Admin'
+  ExamenService -> ExamenRepository : findInRango(fi, ff)
+  activate ExamenRepository
+  ExamenRepository -> DB : SELECT * FROM Examen\nWHERE fecha BETWEEN :fi AND :ff
+  ExamenRepository --> ExamenService : examenes[]
+  deactivate ExamenRepository
+
+else rol === 'Profesor'
+  ExamenService -> ProfesorRepository : findOneByEmail(email)
+  activate ProfesorRepository
+  ProfesorRepository -> DB : SELECT * FROM Profesor WHERE email = :email
+  ProfesorRepository --> ExamenService : profesor
+  deactivate ProfesorRepository
+  
+  ExamenService -> ExamenRepository : findInRangoByProfesor(fi, ff, profesorId)
+  activate ExamenRepository
+  ExamenRepository -> DB : SELECT * FROM Examen\nWHERE fecha BETWEEN :fi AND :ff\n  AND profesorId = :profesorId
+  ExamenRepository --> ExamenService : examenes[]
+  deactivate ExamenRepository
+
+else rol === 'Alumno'
+  ExamenService -> AlumnoRepository : findOneByEmail(email)
+  activate AlumnoRepository
+  AlumnoRepository -> DB : SELECT * FROM Alumno WHERE email = :email
+  AlumnoRepository --> ExamenService : alumno
+  deactivate AlumnoRepository
+  
+  ExamenService -> ExamenRepository : findInRangoByGrado(fi, ff, gradoId)
+  activate ExamenRepository
+  ExamenRepository -> DB : SELECT e.* FROM Examen e\nJOIN Asignatura a ON e.asignaturaId = a.id\nWHERE e.fecha BETWEEN :fi AND :ff\n  AND a.gradoId = :gradoId
+  ExamenRepository --> ExamenService : examenes[]
+  deactivate ExamenRepository
+end
+
+ExamenService --> ExamenController : Examen[]
+deactivate ExamenService
+
+ExamenController --> ExamenApiService : 200 OK (Examen[])
+deactivate ExamenController
+
+ExamenApiService --> ConsultarCalendarioComponent : Examen[]
+deactivate ExamenApiService
+
+ConsultarCalendarioComponent -> ConsultarCalendarioComponent : renderizarCalendario()
+
+== Aplicar Filtros Dimensionales (Grado / Asignatura) ==
+
+Actor -> ConsultarCalendarioComponent : seleccionarFiltros(gradoId, asignaturaId)
+
+ConsultarCalendarioComponent -> ExamenApiService : obtenerCalendario(fechaInicio, fechaFin, rol, email, gradoId, asignaturaId)
+activate ExamenApiService
+
+ExamenApiService -> ExamenController : GET /examenes/calendario\n?fechaInicio=:fi&fechaFin=:ff&rol=:rol&email=:email\n&gradoId=:gId&asignaturaId=:aId
+activate ExamenController
+
+ExamenController -> ExamenService : findCalendario(fi, ff, rol, email, gId, aId)
+activate ExamenService
+
+note over ExamenService
+  Se combinan las restricciones del actor y los filtros seleccionados.
+  Ej: Para un Alumno (gradoId = 1) que filtra por asignaturaId = 5:
+  se valida que asignaturaId pertenezca a su gradoId.
+end note
+
+ExamenService -> ExamenRepository : findFiltered(fi, ff, actorFilters, userFilters)
+activate ExamenRepository
+ExamenRepository -> DB : SELECT e.* FROM Examen e ...
+ExamenRepository --> ExamenService : examenes[]
+deactivate ExamenRepository
+
+ExamenService --> ExamenController : Examen[]
+deactivate ExamenService
+
+ExamenController --> ExamenApiService : 200 OK (Examen[])
+deactivate ExamenController
+
+ExamenApiService --> ConsultarCalendarioComponent : Examen[]
+deactivate ExamenApiService
+
+ConsultarCalendarioComponent -> ConsultarCalendarioComponent : renderizarCalendario()
+
+== Completar Consulta ==
+
+Actor -> ConsultarCalendarioComponent : clickVolver()
+ConsultarCalendarioComponent -> ConsultarCalendarioComponent : router.navigate(['/home'])
+deactivate ConsultarCalendarioComponent
+
+@enduml

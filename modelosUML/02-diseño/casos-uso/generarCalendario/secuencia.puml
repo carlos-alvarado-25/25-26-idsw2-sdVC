@@ -84,15 +84,22 @@ loop Para cada Examen Pendiente
         deactivate Aula
         
         loop Para cada Profesor Candidato (hasta encontrar uno disponible)
-            CalendarioEngine -> Profesor : estaDisponibleEn(fecha, franja, preferencias)
+            CalendarioEngine -> Profesor : puedeImpartirAsignatura(asignaturaId)
             activate Profesor
             Profesor --> CalendarioEngine : boolean
             deactivate Profesor
             
-            CalendarioEngine -> Profesor : tieneCruceHorario(fecha, franja, asignados)
-            activate Profesor
-            Profesor --> CalendarioEngine : boolean
-            deactivate Profesor
+            alt Profesor puede impartir la asignatura
+                CalendarioEngine -> Profesor : estaDisponibleEn(fecha, franja, preferencias)
+                activate Profesor
+                Profesor --> CalendarioEngine : boolean
+                deactivate Profesor
+                
+                CalendarioEngine -> Profesor : tieneCruceHorario(fecha, franja, asignados)
+                activate Profesor
+                Profesor --> CalendarioEngine : boolean
+                deactivate Profesor
+            end
         end
         
         alt Slot es Válido y Libre

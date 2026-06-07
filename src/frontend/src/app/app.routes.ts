@@ -22,10 +22,12 @@ import { ProfesorPreferenciasComponent } from './features/admin/profesores/profe
 import { ListarExamenesComponent } from './features/admin/examenes/listar-examenes/listar-examenes.component';
 import { ExamenFormComponent } from './features/admin/examenes/examen-form/examen-form.component';
 import { GenerarCalendarioComponent } from './features/admin/calendario/generar-calendario/generar-calendario.component';
+import { ConsultarCalendarioComponent } from './features/calendario/consultar-calendario/consultar-calendario.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'calendario/consultar', component: ConsultarCalendarioComponent },
   { path: 'admin/grados', component: ListarGradosComponent },
   { path: 'admin/grados/crear', component: GradoFormComponent },
   { path: 'admin/grados/editar/:id', component: GradoFormComponent },

@@ -1418,3 +1418,24 @@ Se realizó una auditoría de trazabilidad completa **Requisitos → Análisis �
 **Decisión:** Se declara implementado en su totalidad y de forma robusta el ramillete funcional de conflictos y preferencias horarias de profesores, respetando preventivamente los bloqueos temporales del docente tanto en la generación automática como en la reubicación manual de exámenes.
 
 
+
+---
+
+## [07/06/2026 11:02] Sesión 76: Caso de Uso - consultarCalendario y Auditoría de generarCalendario
+
+**Prompt:** "HAZLO! Asegurate de documentarlo en los READMEs de diseño de este caso de uso, si es que hay algo que documentar... Perfecto, finalicemos esta sesión ahora sí. Añade la entrada al conversation-log.md"
+
+**Resultado:**
+- **Realización del Caso de Uso**: Implementación completa de `consultarCalendario()` y `completarConsulta()`.
+- **Auditoría del Caso de Uso `generarCalendario`**:
+  - *Ley de Demeter (Decoupling)*: Se refactorizó la dependencia del array de asignaturas del profesor en `CalendarioEngine`. Se encapsuló la validación agregando el método `puedeImpartirAsignatura(asignaturaId)` en la entidad `Profesor`, delegando la consulta en el experto en información.
+  - *Mitigación de Solapamiento Temporal Físico*: Se modificaron `Aula.estaDisponibleEn()` y `Profesor.tieneCruceHorario()` para utilizar una fórmula matemática de intersección de intervalos basada en minutos ($slotStart < exEnd \land exStart < slotEnd$), previniendo solapamientos por exámenes con duraciones variables u horarios de inicio escalonados.
+- **Auditoría del Caso de Uso `consultarCalendario`**:
+  - *Query Optimization*: Se optimizó el servicio en el backend (`ExamenService.findCalendario`) para que resuelva la entidad `Alumno` y su `gradoId` una sola vez por email, evitando hits adicionales a la base de datos MySQL.
+  - *Algorithmic Complexity (UX)*: En `ConsultarCalendarioComponent`, se redujo el renderizado de la rejilla de $O(C \times N)$ a $O(N)$ indexando previamente los exámenes programados en un mapa en tiempo lineal $O(1)$ por día.
+- **Trazabilidad 360º de RUP**:
+  - Se actualizó el diagrama de secuencia [secuencia.puml](/modelosUML/02-diseño/casos-uso/generarCalendario/secuencia.puml) y se recompiló a [secuencia.svg](/images/02-diseño/casos-uso/generarCalendario/secuencia.svg).
+  - Se recompiló el diagrama de secuencia para [secuencia.svg (consultarCalendario)](/images/02-diseño/casos-uso/consultarCalendario/secuencia.svg).
+  - Se actualizaron los READMEs de diseño [generarCalendario/README.md](/RUP/02-diseño/casos-uso/generarCalendario/README.md) y de desarrollo [generarCalendario/README.md](/RUP/03-desarrollo/casos-uso/generarCalendario/README.md) detallando estas decisiones de ingeniería de software.
+
+**Decisión:** Se da por concluida la sesión habiendo auditado y refinado satisfactoriamente los dos casos de uso, documentando todas las optimizaciones y correcciones del diseño e implementando el caso de uso de consulta.
