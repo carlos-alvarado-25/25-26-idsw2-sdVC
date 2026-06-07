@@ -5,6 +5,9 @@
       <button class="btn-back" (click)="volver()">
         <span class="icon">⬅</span> Volver al Menú
       </button>
+      <button class="btn-download-header" (click)="abrirModalDescarga()">
+        <span class="icon">📥</span> Descargar Calendario
+      </button>
       <h2 class="title">Calendario de Exámenes</h2>
     </div>
     <div class="user-info" *ngIf="currentUser() as user">
@@ -185,3 +188,88 @@
 
   </div>
 </div>
+
+<!-- Modal de Descarga de Calendario -->
+<div class="modal-overlay" *ngIf="isDownloadModalOpen()" (click)="cerrarModalDescarga()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">📥 Descargar Calendario</h3>
+      <button class="btn-close-modal" (click)="cerrarModalDescarga()">×</button>
+    </div>
+    <div class="modal-body">
+      <!-- Selección de Formato -->
+      <div class="form-group">
+        <label class="form-label">Formato de Exportación</label>
+        <div class="format-selector">
+          <button type="button" 
+                  [class.active]="downloadFormat() === 'pdf'" 
+                  (click)="downloadFormat.set('pdf')">
+            <span class="format-icon">📄</span> PDF (.pdf)
+          </button>
+          <button type="button" 
+                  [class.active]="downloadFormat() === 'excel'" 
+                  (click)="downloadFormat.set('excel')">
+            <span class="format-icon">📊</span> Excel (.xlsx)
+          </button>
+        </div>
+      </div>
+
+      <!-- Rango de Fechas -->
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="download-fecha-inicio" class="form-label">Fecha de Inicio</label>
+          <input type="date" 
+                 id="download-fecha-inicio" 
+                 [ngModel]="downloadFechaInicio()" 
+                 (ngModelChange)="downloadFechaInicio.set($event)" 
+                 class="form-control" />
+        </div>
+        <div class="form-group col">
+          <label for="download-fecha-fin" class="form-label">Fecha de Fin</label>
+          <input type="date" 
+                 id="download-fecha-fin" 
+                 [ngModel]="downloadFechaFin()" 
+                 (ngModelChange)="downloadFechaFin.set($event)" 
+                 class="form-control" />
+        </div>
+      </div>
+
+      <!-- Criterios de Columnas a Incluir -->
+      <div class="form-group">
+        <label class="form-label">Información a Incluir</label>
+        <div class="options-checklist">
+          <label class="checkbox-container">
+            <input type="checkbox" 
+                   [ngModel]="includeAula()" 
+                   (ngModelChange)="includeAula.set($event)" />
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-label">Incluir Aula de examen</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" 
+                   [ngModel]="includeProfesor()" 
+                   (ngModelChange)="includeProfesor.set($event)" />
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-label">Incluir Profesor supervisor</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" 
+                   [ngModel]="includeGrado()" 
+                   (ngModelChange)="includeGrado.set($event)" />
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-label">Incluir Nombre del Grado</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="cerrarModalDescarga()">Cancelar</button>
+      <button class="btn-confirm-download" (click)="confirmarDescarga()">
+        🚀 Descargar Archivo
+      </button>
+    </div>
+  </div>
+</div>
+

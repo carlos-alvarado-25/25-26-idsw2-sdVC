@@ -1,0 +1,88 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+title Diseño Detallado: descargarCalendarioExamenes()
+
+actor Usuario as Actor
+boundary ConsultarCalendarioComponent <<Angular>>
+boundary DescargarCalendarioModal <<Angular>>
+control ExamenServiceAngular <<Angular>>
+control ExamenController <<NestJS>>
+participant ExamenService <<NestJS>>
+database ExamenRepository <<TypeORM>>
+database MySQL as DB
+participant ExamenExporterFactory <<NestJS>>
+participant "exporter : ExamenExporter" as ExamenExporter <<Interface>>
+
+== Selección de Preferencias de Descarga ==
+
+Actor -> ConsultarCalendarioComponent : clickDescargarCalendario()
+activate ConsultarCalendarioComponent
+
+ConsultarCalendarioComponent -> DescargarCalendarioModal : abrir(periodoActual)
+activate DescargarCalendarioModal
+DescargarCalendarioModal --> Actor : muestra opciones (Formato PDF/Excel, Checkboxes de campos)
+
+Actor -> DescargarCalendarioModal : seleccionarOpciones(formato, incluirAula, incluirProfesor, incluirGrado)
+Actor -> DescargarCalendarioModal : clickConfirmarDescargar()
+
+DescargarCalendarioModal -> ExamenServiceAngular : descargarArchivo(filtros, opciones)
+activate ExamenServiceAngular
+
+note over ExamenServiceAngular
+  Para descargar un archivo binario directamente, se genera un enlace dinámico
+  <a> con los QueryParams y se simula un click, delegando la descarga al navegador.
+end note
+
+ExamenServiceAngular -> ExamenController : GET /examenes/exportar\n?formato=:f&fechaInicio=:fi&fechaFin=:ff&rol=:r&email=:e\n&incluirAula=:ia&incluirProfesor=:ip&incluirGrado=:ig
+activate ExamenController
+
+ExamenController -> ExamenService : findCalendario(fi, ff, rol, email, gradoId, asignaturaId)
+activate ExamenService
+
+ExamenService -> ExamenRepository : findFiltered(fi, ff, actorFilters, userFilters)
+activate ExamenRepository
+ExamenRepository -> DB : SELECT * FROM Examen ...
+ExamenRepository --> ExamenService : examenes[]
+deactivate ExamenRepository
+
+ExamenService --> ExamenController : examenes[]
+deactivate ExamenService
+
+note over ExamenController
+  Aplanado de datos para resolver el dilema de mutabilidad:
+  Mapea examenes[] a DTO inmutable datosPlanos: ExamenExportData[]
+end note
+
+ExamenController -> ExamenExporterFactory : getExporter(formato)
+activate ExamenExporterFactory
+ExamenExporterFactory --> ExamenController : exporter
+deactivate ExamenExporterFactory
+
+ExamenController -> ExamenExporter : exportar(datosPlanos, opciones)
+activate ExamenExporter
+
+note over ExamenExporter
+  Estrategia de exportación concreta 
+  (ExcelExporterService o PdfExporterService)
+end note
+
+ExamenExporter --> ExamenController : buffer
+deactivate ExamenExporter
+
+alt formato === 'pdf'
+  ExamenController --> Actor : 200 OK (Content-Type: application/pdf, Content-Disposition: attachment)
+else formato === 'excel'
+  ExamenController --> Actor : 200 OK (Content-Type: application/vnd.openxml..., Content-Disposition: attachment)
+end
+
+deactivate ExamenController
+deactivate ExamenServiceAngular
+deactivate DescargarCalendarioModal
+deactivate ConsultarCalendarioComponent
+
+@enduml

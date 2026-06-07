@@ -122,4 +122,30 @@ export class ExamenService {
 
     return this.http.get<Examen[]>(`${this.apiUrl}/calendario`, { params });
   }
+  obtenerUrlExportacion(queryParams: {
+    fechaInicio?: string;
+    fechaFin?: string;
+    gradoId?: number | null;
+    asignaturaId?: number | null;
+    rol?: string;
+    email?: string;
+    formato: string;
+    incluirAula: boolean;
+    incluirProfesor: boolean;
+    incluirGrado: boolean;
+  }): string {
+    const params = new URLSearchParams();
+    if (queryParams.fechaInicio) params.set('fechaInicio', queryParams.fechaInicio);
+    if (queryParams.fechaFin) params.set('fechaFin', queryParams.fechaFin);
+    if (queryParams.gradoId) params.set('gradoId', queryParams.gradoId.toString());
+    if (queryParams.asignaturaId) params.set('asignaturaId', queryParams.asignaturaId.toString());
+    if (queryParams.rol) params.set('rol', queryParams.rol);
+    if (queryParams.email) params.set('email', queryParams.email);
+    params.set('formato', queryParams.formato);
+    params.set('incluirAula', queryParams.incluirAula ? 'true' : 'false');
+    params.set('incluirProfesor', queryParams.incluirProfesor ? 'true' : 'false');
+    params.set('incluirGrado', queryParams.incluirGrado ? 'true' : 'false');
+
+    return `${this.apiUrl}/exportar?${params.toString()}`;
+  }
 }

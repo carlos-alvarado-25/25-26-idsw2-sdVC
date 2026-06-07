@@ -30,6 +30,7 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 - [cerrarSesion](casos-uso/cerrarSesion/README.md) ✅
 - [listarConflictosExamenes](casos-uso/listarConflictosExamenes/README.md) ✅
 - [consultarCalendario](casos-uso/consultarCalendario/README.md) ✅
+- [descargarCalendarioExamenes](casos-uso/descargarCalendarioExamenes/README.md) (En Desarrollo) ⏳
 
 
 ### Administrador

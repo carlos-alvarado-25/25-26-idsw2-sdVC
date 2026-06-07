@@ -7,11 +7,19 @@ import { Profesor } from '../../entities/profesor.entity';
 import { Alumno } from '../../entities/alumno.entity';
 import { ExamenService } from './examenes.service';
 import { ExamenController } from './examenes.controller';
+import { ExcelExporterService } from './services/exporters/excel-exporter.service';
+import { PdfExporterService } from './services/exporters/pdf-exporter.service';
+import { ExamenExporterFactory } from './services/exporters/exporter.factory';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Examen, Asignatura, Aula, Profesor, Alumno])],
   controllers: [ExamenController],
-  providers: [ExamenService],
-  exports: [ExamenService],
+  providers: [
+    ExamenService,
+    ExcelExporterService,
+    PdfExporterService,
+    ExamenExporterFactory,
+  ],
+  exports: [ExamenService, ExamenExporterFactory],
 })
 export class ExamenesModule {}

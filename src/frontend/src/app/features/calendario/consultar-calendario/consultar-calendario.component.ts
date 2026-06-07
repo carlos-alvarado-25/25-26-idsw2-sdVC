@@ -363,4 +363,60 @@ export class ConsultarCalendarioComponent implements OnInit {
   volver(): void {
     this.router.navigate(['/home']);
   }
+
+  // Modal de descarga
+  isDownloadModalOpen = signal(false);
+  downloadFormat = signal<'pdf' | 'excel'>('pdf');
+  downloadFechaInicio = signal<string>('');
+  downloadFechaFin = signal<string>('');
+  includeAula = signal(true);
+  includeProfesor = signal(true);
+  includeGrado = signal(true);
+
+  abrirModalDescarga(): void {
+    const dates = this.getRangeDates();
+    if (dates) {
+      this.downloadFechaInicio.set(this.formatDate(dates.start));
+      this.downloadFechaFin.set(this.formatDate(dates.end));
+    }
+    this.isDownloadModalOpen.set(true);
+  }
+
+  cerrarModalDescarga(): void {
+    this.isDownloadModalOpen.set(false);
+  }
+
+  confirmarDescarga(): void {
+    const user = this.currentUser();
+    const queryParams: any = {
+      fechaInicio: this.downloadFechaInicio(),
+      fechaFin: this.downloadFechaFin(),
+      rol: user?.rol,
+      email: user?.email,
+      formato: this.downloadFormat(),
+      incluirAula: this.includeAula(),
+      incluirProfesor: this.includeProfesor(),
+      incluirGrado: this.includeGrado()
+    };
+
+    if (this.selectedGradoId()) {
+      queryParams.gradoId = this.selectedGradoId();
+    }
+    if (this.selectedAsignaturaId()) {
+      queryParams.asignaturaId = this.selectedAsignaturaId();
+    }
+
+    const downloadUrl = this.examenService.obtenerUrlExportacion(queryParams);
+    
+    // Simular descarga
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.target = '_blank';
+    link.download = `calendario.${this.downloadFormat() === 'pdf' ? 'pdf' : 'xlsx'}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    this.cerrarModalDescarga();
+  }
 }

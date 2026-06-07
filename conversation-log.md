@@ -1498,3 +1498,25 @@ Se realizó una auditoría de trazabilidad completa **Requisitos → Análisis �
 - **Despliegue**: Se compiló el backend y se reinició el servidor backend en segundo plano para su validación inmediata.
 
 **Decisión:** Se corrigen las actualizaciones de relación de claves foráneas de forma global para Asignaturas, Alumnos y Exámenes, y se reactiva el servidor de desarrollo.
+
+---
+
+## [07/06/2026 12:03] Sesión 81: Caso de Uso - descargarCalendarioExamenes y Patrón Strategy
+
+**Prompt:** "HAZLO! / Tengo un dilema con esa interfaz, y es que si le pasas objetos examenes, el ExamenExporter va a poder acceder y escribir sobre los objetos examenes también. / Me parece, documentala y diseñala. HAZLO! / Perfecto, entonces finalicemos la sesión para este caso de uso, y añade la entrada al convresation-log.md"
+
+**Resultado:**
+- **Realización del Caso de Uso**: Implementación completa y robusta de `descargarCalendarioExamenes()` común a Administrador, Profesor y Alumno.
+- **Arquitectura de Exportación (Strategy & Factory)**: Se implementó un diseño modular que cumple con el principio de *Open/Closed* mediante la interfaz `ExamenExporter`, las estrategias `ExcelExporterService`, `PdfExporterService` y la fábrica `ExamenExporterFactory`.
+- **Mitigación de Mutabilidad (DTO Inmutable)**: Para resolver el dilema de seguridad de mutación de entidades del dominio en la exportación, se introdujo el DTO plano de solo lectura `ExamenExportData`. Las entidades se mapean a este DTO antes de pasar a las clases de formateo, garantizando el aislamiento de capas de Clean Architecture.
+- **Construcción y Compilación**:
+  - *Backend (NestJS)*: Implementación del endpoint `GET /examenes/exportar` que sirve los flujos binarios con sus cabeceras HTTP de adjunto y MIME correspondientes.
+  - *Frontend (Angular)*: Diseño e integración de un diálogo modal reactivo con parámetros configurables (formato de salida, intervalo de fechas, checkboxes de columnas opcionales a incluir).
+  - *Ajuste de Presupuesto*: Se incrementó el límite de presupuesto de estilos `anyComponentStyle` a `24kB` en `angular.json` para permitir la compilación exitosa del frontend con los estilos del modal y la cuadrícula.
+- **Trazabilidad 360º de RUP**:
+  - Actualización del diagrama de secuencia detallado PlantUML `secuencia.puml` y compilación de la imagen vectorial `secuencia.svg`.
+  - Documentación de diseño en `RUP/02-diseño/casos-uso/descargarCalendarioExamenes/README.md`.
+  - Documentación de desarrollo en `RUP/03-desarrollo/casos-uso/descargarCalendarioExamenes/README.md`.
+  - Plan de pruebas de descarga en un artefacto externo independiente `plan_testeo_descarga.md`.
+
+**Decisión:** Se cierra de forma formal la sesión habiendo diseñado, documentado, implementado y validado satisfactoriamente el caso de uso `descargarCalendarioExamenes` con arquitectura limpia, inmutable y totalmente extensible.
