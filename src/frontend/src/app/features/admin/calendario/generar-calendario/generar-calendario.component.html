@@ -1,0 +1,158 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> / 
+      <a [routerLink]="['/admin/examenes']">📅 Calendario</a> / 
+      <span>⚙️ Generación Automática</span>
+    </div>
+    <h1>Generar Calendario de Exámenes</h1>
+  </header>
+
+  <div class="form-card">
+    <!-- Loader de procesamiento o guardado -->
+    <div class="table-overlay" *ngIf="loading() || saving()">
+      <div class="loader-wrapper">
+        <div class="loader"></div>
+        <p class="loader-text">{{ loading() ? 'Ejecutando algoritmo de calendarización en el servidor...' : 'Guardando asignaciones de exámenes en la base de datos...' }}</p>
+      </div>
+    </div>
+
+    <!-- Sección de Mensajes de Error -->
+    <div class="error-alert" *ngIf="errorMsg()">
+      ⚠️ {{ errorMsg() }}
+    </div>
+
+    <!-- FORMULARIO DE CONFIGURACIÓN -->
+    <div *ngIf="!result() && !loading()">
+      <form (ngSubmit)="generar()" class="admin-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fechaInicio">Fecha de Inicio</label>
+            <input 
+              type="date" 
+              id="fechaInicio" 
+              name="fechaInicio" 
+              [(ngModel)]="fechaInicio" 
+              required>
+          </div>
+          <div class="form-group">
+            <label for="fechaFin">Fecha de Fin</label>
+            <input 
+              type="date" 
+              id="fechaFin" 
+              name="fechaFin" 
+              [(ngModel)]="fechaFin" 
+              required>
+          </div>
+        </div>
+
+        <div class="franjas-section">
+          <div class="section-header">
+            <h3>Configurar Franjas Horarias</h3>
+            <div class="add-franja-form">
+              <input 
+                type="text" 
+                name="nuevaFranja" 
+                [(ngModel)]="nuevaFranja" 
+                placeholder="HH:mm-HH:mm"
+                class="input-small">
+              <button type="button" class="btn-add" (click)="addFranja()">+ Añadir</button>
+            </div>
+          </div>
+          <p class="section-desc">Seleccione o añada las franjas horarias habilitadas para la programación:</p>
+          
+          <div class="franjas-grid">
+            <div 
+              *ngFor="let franja of franjas(); let i = index" 
+              class="franja-card" 
+              [class.selected]="franja.seleccionada"
+              (click)="toggleFranja(i)">
+              <div class="franja-content">
+                <input 
+                  type="checkbox" 
+                  [checked]="franja.seleccionada" 
+                  (click)="$event.stopPropagation(); toggleFranja(i)">
+                <span>{{ franja.valor }}</span>
+              </div>
+              <button type="button" class="btn-remove" (click)="removeFranja(i, $event)" title="Eliminar franja">
+                &times;
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" [routerLink]="['/admin/examenes']">Cancelar</button>
+          <button type="submit" class="btn-primary" [disabled]="loading()">Generar Calendario</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- PANEL DE RESULTADOS Y BALANCE -->
+    <div *ngIf="result() && !loading()" class="results-panel">
+      
+      <!-- Banner de Éxito / Alerta -->
+      <div class="status-banner" [class.success]="result()?.exito" [class.warning]="!result()?.exito">
+        <div class="banner-icon">{{ result()?.exito ? '✓' : '⚠️' }}</div>
+        <div class="banner-text">
+          <h2>{{ result()?.exito ? '¡Calendario Generado Exitosamente!' : 'Calendario Generado con Conflictos' }}</h2>
+          <p>{{ result()?.exito ? 'Todos los exámenes pendientes han sido asignados correctamente a aulas y fechas sin solapamientos.' : 'Algunos exámenes no pudieron ser programados debido a cruces de horario o falta de espacio físico.' }}</p>
+        </div>
+      </div>
+
+      <!-- Grid de Resumen Estadístico -->
+      <div class="summary-grid">
+        <div class="summary-card">
+          <span class="card-label">Total Exámenes</span>
+          <span class="card-value">{{ result()?.totalExamenes }}</span>
+        </div>
+        <div class="summary-card success-card">
+          <span class="card-label">Programados</span>
+          <span class="card-value">{{ result()?.programados }}</span>
+        </div>
+        <div class="summary-card" [class.danger-card]="result()?.noProgramados! > 0">
+          <span class="card-label">Sin Programar</span>
+          <span class="card-value">{{ result()?.noProgramados }}</span>
+        </div>
+      </div>
+
+      <!-- Listado de Exámenes en Conflicto -->
+      <div *ngIf="result()?.conflictos?.length! > 0" class="conflict-section">
+        <h3>Detalle de Exámenes No Programados</h3>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Código Examen</th>
+                <th>Asignatura</th>
+                <th>Motivo de Conflicto</th>
+                <th style="width: 100px; text-align: center;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let conflicto of result()?.conflictos">
+                <td class="font-mono">{{ conflicto.examenCodigo }}</td>
+                <td>{{ conflicto.asignaturaNombre }}</td>
+                <td class="conflict-reason">
+                  <span class="bullet-alert"></span> {{ conflicto.motivo }}
+                </td>
+                <td style="text-align: center;">
+                  <button type="button" class="btn-action-resolve" [routerLink]="['/admin/examenes/editar', conflicto.examenId]">
+                    Resolver
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="results-actions">
+        <button type="button" (click)="result.set(null); propuesta.set(null)" class="btn-secondary" [disabled]="saving()">Nueva Configuración</button>
+        <button type="button" (click)="confirmar()" class="btn-primary" [disabled]="saving() || !result() || result()?.programados === 0">Guardar Calendario</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

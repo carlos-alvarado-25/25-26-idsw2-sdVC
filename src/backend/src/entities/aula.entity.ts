@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Examen } from './examen.entity';
 
 @Entity('Aula')
 export class Aula {
@@ -22,6 +23,17 @@ export class Aula {
 
   @Column({ length: 50 })
   tipo: string;
+
+  tieneCapacidadSuficiente(cantidadAlumnos: number): boolean {
+    return this.capacidad >= cantidadAlumnos;
+  }
+
+  estaDisponibleEn(fecha: string, franja: string, examenesAsignados: Examen[]): boolean {
+    const [horaInicio] = franja.split('-');
+    return !examenesAsignados.some(
+      examen => (examen.aula?.id === this.id || examen.aulaId === this.id) && examen.fecha === fecha && examen.hora === horaInicio
+    );
+  }
 
   @CreateDateColumn()
   fechaCreacion: Date;

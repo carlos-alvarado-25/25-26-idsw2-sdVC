@@ -26,6 +26,7 @@ SistemaDisponible -r-> GenerarCalendarioView: generarCalendario()
 GenerarCalendarioView -d-> CalendarioController: generar(inicio, fin, franjas) : GeneracionResult
 
 CalendarioController -d-> ExamenRepository: obtenerExamenesPendientes() : List<Examen>
+CalendarioController -d-> ExamenRepository: obtenerExamenesExistentes(inicio, fin) : List<Examen>
 CalendarioController -d-> AulaRepository: consultarDisponibilidad(franja) : List<Aula>
 CalendarioController -d-> PreferenciaRepository: verificarRestriccionesDocentes(franja) : List<Profesor>
 

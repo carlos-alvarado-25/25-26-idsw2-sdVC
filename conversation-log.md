@@ -1221,3 +1221,174 @@ El ramillete de administración y gestión docente queda en estado de excelencia
 
 **Decisión:** Se ratifica el patrón **CalendarioEngine** como el estándar de oro para aislar la lógica compleja del dominio de las capas de persistencia y controladores. Se establece que el cálculo de capacidad y solapamientos de recursos debe ser delegado de forma experta a las propias entidades del modelo (`Aula` y `Profesor`) para mantener el tamaño y la cohesión de los controladores y servicios de NestJS en límites óptimos.
 
+
+---
+
+## [07/06/2026 09:02] Sesión 74: Rama de Calendario - Construcción, Auditoría y Revisión de Diseño del Motor de Asignación
+
+**Prompt:** "HAZLO!" [construcción del motor] / Revisión de puntos de diseño detectados en auditoría previa / "Pasemos al #3" / "Antes identifica donde tendrémos que hacer cambios..." / "HAZLO! ahora si" / "EY pero mira también..." / "HAZLO! DOcumentalo también" / "Quiero que reviertas los cambios de este punto #3... Y debatamos este tema" / Revisión del Punto #4 / Auditoría final de `generarCalendario`.
+
+---
+
+### 1. Construcción Completa del Motor de Calendarización (`generarCalendario`)
+
+Se implementó íntegramente el caso de uso `generarCalendario()` siguiendo el diseño detallado de la sesión anterior:
+
+#### Backend (NestJS)
+
+- **`CalendarioEngine`** ([calendario-engine.ts](/src/backend/src/modules/calendario/calendario-engine.ts)): Clase pura de dominio sin dependencias de TypeORM ni NestJS. Implementa el algoritmo de asignación combinatorial greedy con el método `generar()` que itera `examenesPendientes × fechas × franjas × aulas × profesores` en memoria. Retorna un objeto `{ result: GeneracionResultDto, examenesProgramados: Examen[] }`. Al ser una clase pura, es 100% testeable unitariamente.
+  - **`buscarSlotOptimo()`**: Método interno que para cada examen itera el espacio de búsqueda y aplica los tres filtros de validación: (1) disponibilidad temporal del aula, (2) disponibilidad del profesor según preferencias, (3) ausencia de cruce horario del profesor con otros exámenes ya asignados.
+  - **Patrón Experto en Información**: La lógica de validación delega en los propios objetos de dominio: `Aula.estaDisponibleEn()` y `Profesor.estaDisponibleEn()` / `Profesor.tieneCruceHorario()`. El engine no accede directamente a las colecciones de preferencias o exámenes existentes; las pasa como parámetro a los expertos.
+
+- **`CalendarioService`** ([calendario.service.ts](/src/backend/src/modules/calendario/calendario.service.ts)): Orquestador de persistencia. Responsable de:
+  1. Cargar `examenesPendientes` (fecha IS NULL) con su relación `asignatura`.
+  2. Cargar `examenesExistentes` en el rango (fecha BETWEEN) para prevenir colisiones con exámenes ya programados (soporte para ejecuciones parciales/sucesivas).
+  3. Cargar `aulas`, `profesores` (con asignaturas) y `preferencias` para hidratar el engine.
+  4. Construir la `propuesta: AsignacionProposedDto[]` a partir de los exámenes programados en memoria.
+  5. Persistir en `confirmar()` mediante `examenRepository.save()` en lote.
+
+- **`CalendarioController`** ([calendario.controller.ts](/src/backend/src/modules/calendario/calendario.controller.ts)):
+  - `POST /calendario/generar` → Devuelve `GeneracionResultDto` (propuesta no persistida, solo en memoria).
+  - `POST /calendario/confirmar` → Persiste la propuesta aprobada por el Administrador.
+
+- **DTOs Backend**:
+  - `GenerarCalendarioDto`: `fechaInicio: string`, `fechaFin: string`, `franjasHorarias: string[]`.
+  - `GeneracionResultDto`: `exito: boolean`, `totalExamenes: number`, `programados: number`, `noProgramados: number`, `conflictos: ConflictInfo[]`, `propuesta?: AsignacionProposedDto[]`.
+  - `ConfirmarCalendarioDto`: `asignaciones: AsignacionProposedDto[]`.
+
+- **Flujo de Dos Fases (Propuesta → Confirmación)**: Decisión de diseño deliberada para que el Administrador revise el resultado antes de persistirlo, evitando escrituras en BD de calendarios incompletos o con conflictos masivos.
+
+#### Entidades de Comportamiento Experto Implementadas
+
+- **`Aula.estaDisponibleEn(fecha, franja, examenesExistentes)`**: Comprueba que no exista otro examen asignado al mismo aula, misma fecha y misma hora de inicio de la franja.
+- **`Aula.tieneCapacidadSuficiente(n)`**: Compara `this.capacidad >= n`. Método presente en la entidad por diseño, aunque el engine lo invoca con `0` (ver decisión Punto #3).
+- **`Profesor.estaDisponibleEn(fecha, franja, preferencias)`**: Valida que no exista una exclusión (`disponible: false`) en `Preferencia` que solape con la franja horaria solicitada, usando comparación de strings `HH:MM`.
+- **`Profesor.tieneCruceHorario(fecha, franja, examenesAsignados)`**: Verifica que el profesor no supervise ya otro examen en la misma fecha y hora de inicio.
+
+#### Frontend (Angular)
+
+- **`GenerarCalendarioComponent`** ([generar-calendario.component.ts](/src/frontend/src/app/features/admin/calendario/generar-calendario/generar-calendario.component.ts)):
+  - Formulario reactivo con `fechaInicio`, `fechaFin` y grid de checkboxes de franjas horarias.
+  - Validación client-side: fechas requeridas, `inicio <= fin`, al menos una franja seleccionada.
+  - Loader animado diferenciado para "generando" vs "guardando".
+  - Panel de resultados con tres tarjetas estadísticas (Total / Programados / Sin Programar).
+  - Tabla de conflictos con enlace directo a `editarExamen/:id` ("Resolver") para cada examen no programado.
+  - Botón "Guardar Calendario" deshabilitado si `programados === 0`.
+  - Botón "Nueva Configuración" que limpia el estado y vuelve al formulario sin navegar.
+
+- **`CalendarioService` (frontend)** ([calendario.service.ts](/src/frontend/src/app/core/services/calendario.service.ts)): Servicio Angular con métodos `generar()` y `confirmar()` que envuelven `HttpClient.post()`.
+
+---
+
+### 2. Punto #1 — Exámenes Existentes Preexistentes (Revisión de Diseño)
+
+**Problema detectado:** El motor cargaba como `examenesPendientes` todos los exámenes con `fecha IS NULL`, pero no consideraba los exámenes ya programados en el rango de fechas. Si se ejecutaba el motor en un rango parcial o sucesivamente, podía asignar dos exámenes distintos a la misma aula en la misma franja.
+
+**Solución implementada:** Se añadió la carga de `examenesExistentes` mediante `Between(fechaInicio, fechaFin)` en `CalendarioService`, pasándolos al `CalendarioEngine` para que `Aula.estaDisponibleEn()` y `Profesor.tieneCruceHorario()` los consideren al evaluar disponibilidad.
+
+**Conformidad con requisitos:** ✅ Explícitamente requerido. El análisis describe: *"Recuperar la colección de exámenes ya programados en un rango de fechas para prevenir colisiones"*.
+
+**Decisión:** Cambio aplicado y documentado en el README de desarrollo de `generarCalendario`.
+
+---
+
+### 3. Punto #2 — Colisión en Edición Manual de Exámenes (Revisión de Diseño)
+
+**Problema detectado:** El `ExamenService.update()` no validaba colisiones horarias al asignar manualmente un `aulaId` o `profesorId` desde la pantalla de edición. Un administrador podía programar dos exámenes en la misma aula a la misma hora mediante la UI de edición directa, eludiendo las validaciones del motor automático.
+
+**Solución implementada:** Se añadieron dos bloques de validación en `ExamenService.update()`:
+1. Al asignar `aulaId`: se consultan los exámenes del aula en la misma fecha (excluyendo el examen actual con `Not(id)`) y se invoca `detectarSolapamiento()`.
+2. Al asignar `profesorId`: se consultan los exámenes del profesor en la misma fecha y se invoca `detectarSolapamiento()`.
+3. Ambos bloques están envueltos en un guard `if (examen.fecha && examen.hora)` para correctitud con tipos TypeScript (`string | null`).
+
+**Algoritmo `detectarSolapamiento()`:** Convierte `hora` (`HH:MM`) a minutos desde medianoche. Comprueba la condición clásica de solapamiento de intervalos: `Inicio1 < Fin2 && Inicio2 < Fin1`. Si se detecta cruce, lanza `ConflictException` (HTTP 409) con el código del examen en conflicto.
+
+**Conformidad con requisitos:** ✅ La especificación detallada del caso de uso `editarExamen()` exige: *"Evitar solapamientos de aula y profesor"*.
+
+**Documentado en:** [RUP/02-diseño/casos-uso/editarExamen/README.md](/RUP/02-diseño/casos-uso/editarExamen/README.md) y [RUP/03-desarrollo/casos-uso/editarExamen/README.md](/RUP/03-desarrollo/casos-uso/editarExamen/README.md).
+
+---
+
+### 4. Punto #3 — Validación de Capacidad de Aula (Decisión de Revertir)
+
+**Contexto del debate:** Se implementó inicialmente un sistema de "censo de alumnos" para validar que la capacidad del aula fuera suficiente para la asignatura asignada al examen. Esto implicó:
+- Añadir columna `alumnosMatriculados: INT DEFAULT 0` a la tabla `Asignatura`.
+- Extender DTOs, formularios, importación CSV y listado de asignaturas con el nuevo campo.
+- Validar en `CalendarioEngine` y en `ExamenService.update()` que `aula.capacidad >= asignatura.alumnosMatriculados`.
+
+**Problema identificado:** Las aulas del campus tienen capacidad máxima de 50-60 personas, mientras que ciertas asignaturas tienen más de 100 alumnos matriculados. Con la validación activa, el motor no podría encontrar ningún aula válida para esos exámenes, resultando en conflictos insolubles de forma permanente y sistemática.
+
+**Decisión:** **Revertir completamente todos los cambios del Punto #3.** La validación de capacidad no estaba explícitamente especificada en los requisitos, y su implementación rompía el sistema para un caso de uso real documentado (asignaturas con alta matrícula).
+
+**Archivos revertidos (backend):**
+- `asignatura.entity.ts`: Eliminada columna `alumnosMatriculados`.
+- `crear-asignatura.dto.ts`: Eliminado campo opcional `alumnosMatriculados`.
+- `asignaturas.service.ts`: Revertida lógica de importación CSV (sin columna `alumnosMatriculados`).
+- `examenes.service.ts`: Eliminados bloques `ConflictException` de validación de capacidad en `asignaturaId` y `aulaId`.
+- `calendario.service.ts`: `examen.totalAlumnos = 0` (neutraliza el check de capacidad del engine).
+
+**Archivos revertidos (frontend):**
+- `asignatura.service.ts`: Eliminada propiedad `alumnosMatriculados?` del interface.
+- `asignatura-form.component.ts/.html`: Eliminado campo del FormGroup y del template.
+- `listar-asignaturas.component.html`: Eliminada columna "Alumnos" de la tabla.
+- `importar-asignaturas.component.html`: Revertido el formato de importación.
+
+**Archivos revertidos (RUP docs):**
+- `RUP/02-diseño/casos-uso/crearAsignatura/README.md`
+- `RUP/02-diseño/casos-uso/editarAsignatura/README.md`
+- `RUP/02-diseño/casos-uso/importarAsignaturas/README.md`
+- `RUP/02-diseño/casos-uso/editarExamen/README.md`
+- `RUP/02-diseño/configuracion-proyecto.md` (schema SQL)
+- `RUP/03-desarrollo/casos-uso/crearAsignatura/README.md`
+- `RUP/03-desarrollo/casos-uso/editarAsignatura/README.md`
+- `RUP/03-desarrollo/casos-uso/importarAsignaturas/README.md`
+- `RUP/03-desarrollo/casos-uso/editarExamen/README.md`
+
+**Decisión de diseño sobre capacidad (post-debate):** La Opción A (*ignorar capacidad completamente*) es la más fiel a los requisitos documentados. El término "disponible" en el diagrama de estado hace referencia exclusivamente a **disponibilidad temporal** (sin solapamiento horario), no a disponibilidad física por capacidad. El campo `Aula.capacidad` queda como dato informativo/administrativo para el Administrador. Queda prohibido añadir validación de capacidad sin documentarla previamente como nuevo requisito.
+
+---
+
+### 5. Punto #4 — Aglomeración Temporal / Dispersión Académica (Decisión de No Implementar)
+
+**Problema auditado:** El motor greedy tiende a saturar los primeros días del rango de fechas. Podría programar múltiples exámenes del mismo Grado/Curso en el mismo día, lo cual es pedagógicamente inaceptable.
+
+**Análisis técnico:** Para implementar dispersión correcta se necesitaría saber a qué año (`curso`) de un Grado pertenece cada Asignatura. La entidad `Asignatura` no tiene campo `curso`. Una dispersión por `gradoId` sin distinción de curso sería demasiado restrictiva (aumentaría masivamente los conflictos de "sin slot disponible").
+
+**Decisión:** **No se implementa.** El requisito no está documentado en el diagrama de estado ni en la especificación detallada de `generarCalendario()`. Se registra como deuda técnica / mejora futura que requeriría: (1) añadir campo `curso` a `Asignatura`, (2) documentarlo como requisito, y (3) entonces implementar el filtro en `CalendarioEngine`.
+
+---
+
+### 6. Auditoría Final del Caso de Uso `generarCalendario`
+
+Se realizó una auditoría de trazabilidad completa **Requisitos → Análisis → Diseño → Implementación**. Resultado:
+
+**Trazabilidad 100% cubierta.** Todos los requisitos del diagrama de estado están implementados y funcionando.
+
+**Aspectos positivos confirmados:**
+- `CalendarioEngine` como Invención Pura: desacoplado de TypeORM, testeable unitariamente.
+- Patrón Experto en Información en `Aula` y `Profesor`.
+- Flujo de dos fases (Propuesta → Confirmación) que previene persistencias prematuras.
+- Soporte para ejecuciones parciales y sucesivas mediante `examenesExistentes`.
+
+**Correcciones aplicadas en la auditoría:**
+
+1. **Dead dependency eliminada:** `AlumnoRepository` estaba inyectado en `CalendarioService` y `CalendarioModule` como residuo de Punto #3, sin ningún uso en el código. Eliminado de servicio y módulo.
+
+2. **README de desarrollo corregido:** La sección de implementación mencionaba una optimización N+1 con `groupBy('alumno.gradoId')` que pertenecía a Tema #3 y ya no existe. Texto actualizado para reflejar la implementación real.
+
+3. **Franjas horarias personalizables en UX:** Las franjas estaban hardcodeadas en el frontend. El Administrador ahora puede añadir franjas horarias personalizadas mediante un campo de texto con el formato `HH:MM-HH:MM`, además de las 5 predefinidas por defecto, con validación de formato en cliente.
+
+---
+
+### Artefactos Finales del Caso de Uso `generarCalendario`
+
+| Fase RUP | Artefacto | Estado |
+|---|---|---|
+| Análisis | [RUP/01-analisis/casos-uso/generarCalendario/README.md](/RUP/01-analisis/casos-uso/generarCalendario/README.md) | ✅ Vigente |
+| Diseño | [RUP/02-diseño/casos-uso/generarCalendario/README.md](/RUP/02-diseño/casos-uso/generarCalendario/README.md) | ✅ Vigente |
+| Desarrollo | [RUP/03-desarrollo/casos-uso/generarCalendario/README.md](/RUP/03-desarrollo/casos-uso/generarCalendario/README.md) | ✅ Corregido en esta sesión |
+| Engine | [src/backend/.../calendario-engine.ts](/src/backend/src/modules/calendario/calendario-engine.ts) | ✅ Implementado |
+| Service | [src/backend/.../calendario.service.ts](/src/backend/src/modules/calendario/calendario.service.ts) | ✅ Saneado (sin AlumnoRepo) |
+| Controller | [src/backend/.../calendario.controller.ts](/src/backend/src/modules/calendario/calendario.controller.ts) | ✅ Implementado |
+| Frontend | [src/frontend/.../generar-calendario.component.ts](/src/frontend/src/app/features/admin/calendario/generar-calendario/generar-calendario.component.ts) | ✅ Con franjas personalizables |
+

@@ -70,6 +70,7 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 - [crearExamen](casos-uso/crearExamen/README.md) ✅
 - [editarExamen](casos-uso/editarExamen/README.md) ✅
 - [eliminarExamen](casos-uso/eliminarExamen/README.md) ✅
+- [generarCalendario](casos-uso/generarCalendario/README.md) ✅
 
 
 

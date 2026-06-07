@@ -119,6 +119,7 @@ export class ExamenService {
       if (!asignatura) {
         throw new NotFoundException(`La asignatura con ID ${dto.asignaturaId} no existe`);
       }
+
       examen.asignaturaId = dto.asignaturaId;
     }
 
@@ -126,9 +127,6 @@ export class ExamenService {
     if (dto.hora) examen.hora = dto.hora;
     if (dto.duracion !== undefined) examen.duracion = dto.duracion;
     if (dto.tipo) examen.tipo = dto.tipo;
-
-    const startMinutes = this.convertTimeToMinutes(examen.hora);
-    const endMinutes = startMinutes + examen.duracion;
 
     if (dto.aulaId !== undefined) {
       if (dto.aulaId === null) {
@@ -140,20 +138,26 @@ export class ExamenService {
           throw new NotFoundException(`El aula con ID ${dto.aulaId} no existe`);
         }
 
-        const examenesAula = await this.examenRepository.find({
-          where: {
-            aulaId: dto.aulaId,
-            fecha: examen.fecha,
-            id: Not(id),
-          },
-        });
+        if (examen.fecha && examen.hora) {
+          const startMinutes = this.convertTimeToMinutes(examen.hora);
+          const endMinutes = startMinutes + examen.duracion;
 
-        const conflicto = this.detectarSolapamiento(examenesAula, startMinutes, endMinutes);
-        if (conflicto) {
-          throw new ConflictException(`El aula "${aula.codigo}" ya está ocupada en esta franja horaria por el examen "${conflicto.codigo}"`);
+          const examenesAula = await this.examenRepository.find({
+            where: {
+              aulaId: dto.aulaId,
+              fecha: examen.fecha,
+              id: Not(id),
+            },
+          });
+
+          const conflicto = this.detectarSolapamiento(examenesAula, startMinutes, endMinutes);
+          if (conflicto) {
+            throw new ConflictException(`El aula "${aula.codigo}" ya está ocupada en esta franja horaria por el examen "${conflicto.codigo}"`);
+          }
         }
 
         examen.aulaId = dto.aulaId;
+        examen.aula = aula;
       }
     }
 
@@ -167,17 +171,22 @@ export class ExamenService {
           throw new NotFoundException(`El profesor con ID ${dto.profesorId} no existe`);
         }
 
-        const examenesProf = await this.examenRepository.find({
-          where: {
-            profesorId: dto.profesorId,
-            fecha: examen.fecha,
-            id: Not(id),
-          },
-        });
+        if (examen.fecha && examen.hora) {
+          const startMinutes = this.convertTimeToMinutes(examen.hora);
+          const endMinutes = startMinutes + examen.duracion;
 
-        const conflicto = this.detectarSolapamiento(examenesProf, startMinutes, endMinutes);
-        if (conflicto) {
-          throw new ConflictException(`El profesor "${profesor.nombre}" ya supervisa otro examen en esta franja horaria ("${conflicto.codigo}")`);
+          const examenesProf = await this.examenRepository.find({
+            where: {
+              profesorId: dto.profesorId,
+              fecha: examen.fecha,
+              id: Not(id),
+            },
+          });
+
+          const conflicto = this.detectarSolapamiento(examenesProf, startMinutes, endMinutes);
+          if (conflicto) {
+            throw new ConflictException(`El profesor "${profesor.nombre}" ya supervisa otro examen en esta franja horaria ("${conflicto.codigo}")`);
+          }
         }
 
         examen.profesorId = dto.profesorId;
@@ -223,6 +232,10 @@ export class ExamenService {
     profesorId: number,
   ): Promise<{ tieneConflicto: boolean; descripcion?: string }> {
     const examen = await this.findOne(examenId);
+    if (!examen.fecha || !examen.hora) {
+      return { tieneConflicto: false };
+    }
+
     const startMinutes = this.convertTimeToMinutes(examen.hora);
     const endMinutes = startMinutes + examen.duracion;
 
@@ -236,10 +249,11 @@ export class ExamenService {
 
     const conflicto = this.detectarSolapamiento(examenesProf, startMinutes, endMinutes);
     if (conflicto) {
-      const exEnd = this.convertTimeToMinutes(conflicto.hora) + conflicto.duracion;
+      const horaConflicto = conflicto.hora || '00:00';
+      const exEnd = this.convertTimeToMinutes(horaConflicto) + conflicto.duracion;
       return {
         tieneConflicto: true,
-        descripcion: `El profesor ya supervisa el examen "${conflicto.codigo}" el ${conflicto.fecha} de ${conflicto.hora} a ${this.minutesToTime(exEnd)}.`,
+        descripcion: `El profesor ya supervisa el examen "${conflicto.codigo}" el ${conflicto.fecha} de ${horaConflicto} a ${this.minutesToTime(exEnd)}.`,
       };
     }
 
@@ -251,6 +265,7 @@ export class ExamenService {
    */
   private detectarSolapamiento(examenes: Examen[], start: number, end: number): Examen | null {
     for (const ex of examenes) {
+      if (!ex.hora) continue;
       const exStart = this.convertTimeToMinutes(ex.hora);
       const exEnd = exStart + ex.duracion;
       if (start < exEnd && exStart < end) {

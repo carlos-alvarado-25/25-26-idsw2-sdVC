@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsInt, IsEnum, MaxLength, Min } from 'class-validator';
+import { IsString, IsNotEmpty, IsInt, IsEnum, MaxLength, Min, IsOptional } from 'class-validator';
 
 export class CrearExamenDto {
   @IsString()
@@ -7,13 +7,13 @@ export class CrearExamenDto {
   codigo: string;
 
   @IsString()
-  @IsNotEmpty()
-  fecha: string; 
+  @IsOptional()
+  fecha?: string | null; 
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @MaxLength(5)
-  hora: string;
+  hora?: string | null;
 
   @IsInt()
   @Min(1)

@@ -47,20 +47,14 @@
 
       <!-- Fecha del Examen -->
       <div class="form-group">
-        <label for="fecha">Fecha del Examen*</label>
+        <label for="fecha">Fecha del Examen</label>
         <input id="fecha" type="date" formControlName="fecha" [readonly]="loading()">
-        <small class="error" *ngIf="examenForm.get('fecha')?.touched && examenForm.get('fecha')?.errors?.['required']">
-          La fecha del examen es obligatoria.
-        </small>
       </div>
-
+ 
       <!-- Hora del Examen -->
       <div class="form-group">
-        <label for="hora">Hora de Inicio (HH:MM)*</label>
+        <label for="hora">Hora de Inicio (HH:MM)</label>
         <input id="hora" type="text" formControlName="hora" placeholder="Ej: 09:00" [readonly]="loading()">
-        <small class="error" *ngIf="examenForm.get('hora')?.touched && examenForm.get('hora')?.errors?.['required']">
-          La hora de inicio es obligatoria.
-        </small>
         <small class="error" *ngIf="examenForm.get('hora')?.touched && examenForm.get('hora')?.errors?.['pattern']">
           El formato de la hora debe ser HH:MM (ej. 09:00 o 16:30).
         </small>

@@ -19,6 +19,7 @@ import { ImportarProfesoresComponent } from './features/admin/profesores/importa
 import { AsignarProfesorExamenComponent } from './features/admin/profesores/asignar-profesor-examen/asignar-profesor-examen.component';
 import { ListarExamenesComponent } from './features/admin/examenes/listar-examenes/listar-examenes.component';
 import { ExamenFormComponent } from './features/admin/examenes/examen-form/examen-form.component';
+import { GenerarCalendarioComponent } from './features/admin/calendario/generar-calendario/generar-calendario.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -47,5 +48,6 @@ export const routes: Routes = [
   { path: 'admin/examenes', component: ListarExamenesComponent },
   { path: 'admin/examenes/crear', component: ExamenFormComponent },
   { path: 'admin/examenes/editar/:id', component: ExamenFormComponent },
+  { path: 'admin/calendario/generar', component: GenerarCalendarioComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

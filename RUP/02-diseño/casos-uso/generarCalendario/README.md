@@ -1,6 +1,6 @@
 # IdSw 2 > generarCalendario > Diseño
 
-> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/generarCalendario/README.md)|**Diseño**|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/generarCalendario/README.md)|**Diseño**|[⚙️ Desarrollo](/RUP/03-desarrollo/casos-uso/generarCalendario/README.md)|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -33,9 +33,9 @@ Para asegurar un diseño modular óptimo, se distribuyen las responsabilidades d
 ### 1. Motor de Calendarización (`CalendarioEngine`)
 *Estereotipo: Invención Pura (Pure Fabrication)*  
 Es una clase pura de dominio en memoria, libre de dependencias con TypeORM o el framework NestJS. Su única responsabilidad es ejecutar el algoritmo combinatorial de calendarización.
-*   **`generar(config: GeneracionConfig): GeneracionResultDto`**: Entrada principal. Orquesta la calendarización en base a los datos provistos en memoria.
+*   **`generar(config: GeneracionConfig): GeneracionResultDto`**: Entrada principal. Orquesta la calendarización en base a los datos provistos en memoria (incluyendo `examenesExistentes` para evitar colisiones con ejecuciones previas).
 *   **`generarRanurasTemporales(inicio: string, fin: string, franjas: string[]): Slot[]`**: Genera la cuadrícula de días hábiles y franjas para asignar exámenes.
-*   **`buscarSlotOptimo(...)`**: Busca la combinación de slot y aula válida invocando los métodos expertos de `Aula` y `Profesor`.
+*   **`buscarSlotOptimo(...)`**: Busca la combinación de slot y aula válida, evaluando de forma exhaustiva a todos los profesores candidatos capacitados para la asignatura hasta encontrar uno disponible libre de conflictos en la franja horaria.
 *   **`registrarAsignacion(...)`**: Reserva en memoria el aula y profesor en el slot asignado para prevenir cruces en las siguientes iteraciones.
 
 ### 2. Entidad `Aula`
@@ -84,6 +84,7 @@ class GeneracionResultDto {
     programados: number;
     noProgramados: number;
     conflictos: ConflictInfo[];
+    propuesta?: AsignacionProposedDto[];
 }
 
 interface ConflictInfo {
@@ -91,6 +92,26 @@ interface ConflictInfo {
     examenCodigo: string;
     asignaturaNombre: string;
     motivo: string;
+}
+
+interface AsignacionProposedDto {
+    examenId: number;
+    fecha: string;
+    hora: string;
+    aulaId: number;
+    profesorId: number | null;
+}
+```
+
+#### ConfirmarCalendarioDto
+- **Método**: `POST`
+- **Ruta**: `/calendario/confirmar`
+```typescript
+class ConfirmarCalendarioDto {
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => AsignacionProposedDto)
+    asignaciones: AsignacionProposedDto[];
 }
 ```
 

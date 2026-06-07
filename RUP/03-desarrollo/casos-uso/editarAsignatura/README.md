@@ -20,7 +20,7 @@ Actualiza parcialmente los datos de una asignatura.
 - **Body**: `UpdateAsignaturaDto` (campos opcionales).
 
 ### Lógica de Negocio
-- **Carga de Relaciones**: Al recuperar la entidad para edición, se cargan los objetos `grado` y `cursoAcademico` para poblar los selectores.
+- **Carga de Relaciones**: Al recuperar la entidad para edición, se carga el objeto `grado` para poblar el selector.
 - **Actualización Atómica**: Uso del método `Object.assign` para combinar los cambios y `save()` para persistir.
 
 ---

@@ -39,7 +39,7 @@ Realización del diseño detallado para el caso de uso `editarAsignatura()`, est
 class UpdateAsignaturaDto {
     codigo?: string;
     nombre?: string;
-    curso?: number;
+    creditos?: number;
     gradoId?: number;
 }
 ```

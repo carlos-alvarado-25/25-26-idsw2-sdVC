@@ -39,7 +39,7 @@ Realización del diseño detallado para el caso de uso `crearAsignatura()`, apli
 class CreateAsignaturaDto {
     codigo: string;
     nombre: string;
-    curso: number;
+    creditos: number;
     gradoId: number;
 }
 ```

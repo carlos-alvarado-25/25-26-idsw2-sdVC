@@ -1,6 +1,6 @@
 # IdSw 2 > generarCalendario > Análisis
 
-> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|[📂 Diseño](/RUP/02-diseño/casos-uso/generarCalendario/README.md)|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|[📂 Diseño](/RUP/02-diseño/casos-uso/generarCalendario/README.md)|[⚙️ Desarrollo](/RUP/03-desarrollo/casos-uso/generarCalendario/README.md)|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -65,6 +65,7 @@ Análisis de colaboración del caso de uso `generarCalendario()` mediante el pat
 **Estereotipo**: Entidad (Repository)  
 **Responsabilidades**:
 - Recuperar la colección de exámenes que aún no tienen programación.
+- Recuperar la colección de exámenes ya programados en un rango de fechas para prevenir colisiones.
 - Persistir las actualizaciones de fecha, hora y aula en bloque (`guardarLote`).
 
 #### AulaRepository
@@ -98,10 +99,10 @@ Análisis de colaboración del caso de uso `generarCalendario()` mediante el pat
 
 1. **Configuración**: El Administrador introduce el rango de fechas y franjas horarias en `GenerarCalendarioView`.
 2. **Solicitud**: Se invoca `generar(inicio, fin, franjas)` en el `CalendarioController`.
-3. **Carga de Datos**: El controlador recupera los exámenes pendientes desde `ExamenRepository`.
+3. **Carga de Datos**: El controlador recupera los exámenes pendientes y los ya programados en el rango seleccionado desde `ExamenRepository`.
 4. **Iteración y Asignación**: Para cada examen y franja horaria:
-    - Se consulta la disponibilidad de aulas en `AulaRepository`.
-    - Se validan las restricciones del profesor asignado en `PreferenciaRepository`.
+    - Se consulta la disponibilidad de aulas en `AulaRepository`, considerando los exámenes ya existentes para evitar ocupaciones dobles.
+    - Se validan las restricciones y cruces de horario del profesor asignado en `PreferenciaRepository` y contra los exámenes programados.
 5. **Cambio de Estado**: El controlador actualiza los objetos `Examen` con la programación exitosa (`<<update>>`).
 6. **Sincronización**: Se persiste el lote de exámenes programados en el repositorio.
 7. **Consolidación**: El controlador instancia `GeneracionResult` con el resumen del proceso.

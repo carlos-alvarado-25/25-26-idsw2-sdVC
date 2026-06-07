@@ -41,6 +41,12 @@ ExamenRepository -> DB : SELECT * FROM Examen WHERE fecha IS NULL
 ExamenRepository --> CalendarioService : listaExamenesPendientes
 deactivate ExamenRepository
 
+CalendarioService -> ExamenRepository : obtenerExistentesEnRango(fechaInicio, fechaFin)
+activate ExamenRepository
+ExamenRepository -> DB : SELECT * FROM Examen WHERE fecha BETWEEN fechaInicio AND fechaFin
+ExamenRepository --> CalendarioService : listaExamenesExistentes
+deactivate ExamenRepository
+
 CalendarioService -> AulaRepository : obtenerAulas()
 activate AulaRepository
 AulaRepository -> DB : SELECT * FROM Aula
@@ -77,15 +83,17 @@ loop Para cada Examen Pendiente
         Aula --> CalendarioEngine : boolean
         deactivate Aula
         
-        CalendarioEngine -> Profesor : estaDisponibleEn(fecha, franja, preferencias)
-        activate Profesor
-        Profesor --> CalendarioEngine : boolean
-        deactivate Profesor
-        
-        CalendarioEngine -> Profesor : tieneCruceHorario(fecha, franja, asignados)
-        activate Profesor
-        Profesor --> CalendarioEngine : boolean
-        deactivate Profesor
+        loop Para cada Profesor Candidato (hasta encontrar uno disponible)
+            CalendarioEngine -> Profesor : estaDisponibleEn(fecha, franja, preferencias)
+            activate Profesor
+            Profesor --> CalendarioEngine : boolean
+            deactivate Profesor
+            
+            CalendarioEngine -> Profesor : tieneCruceHorario(fecha, franja, asignados)
+            activate Profesor
+            Profesor --> CalendarioEngine : boolean
+            deactivate Profesor
+        end
         
         alt Slot es Válido y Libre
             CalendarioEngine -> CalendarioEngine : registrarAsignacion(examen, slot, aula)
@@ -95,14 +103,6 @@ end
 
 CalendarioEngine --> CalendarioService : generacionResultDto
 deactivate CalendarioEngine
-
-alt Examenes Programados Exitosamente
-    CalendarioService -> ExamenRepository : guardarLote(examenesProgramados)
-    activate ExamenRepository
-    ExamenRepository -> DB : UPDATE Examen SET fecha = ?, horaInicio = ?, horaFin = ?, aulaId = ?, profesorId = ? WHERE id = ?
-    ExamenRepository --> CalendarioService : confirmacion
-    deactivate ExamenRepository
-end
 
 CalendarioService --> CalendarioController : generacionResultDto
 deactivate CalendarioService
@@ -114,14 +114,46 @@ CalendarioApiService --> GenerarCalendarioComponent : GeneracionResultDto
 deactivate CalendarioApiService
 
 GenerarCalendarioComponent -> GenerarCalendarioComponent : mostrarResultados(GeneracionResultDto)
-alt Exito (Sin Conflictos)
-    GenerarCalendarioComponent -> GenerarCalendarioComponent : habilitarNavegacionAExamenes()
-    GenerarCalendarioComponent --> Actor : mostrarMensajeExito("Calendario generado correctamente")
-else Conflictos Detectados
-    GenerarCalendarioComponent -> GenerarCalendarioComponent : mostrarAlertasConflictos()
-    GenerarCalendarioComponent -> GenerarCalendarioComponent : habilitarNavegacionAConflictos()
-    GenerarCalendarioComponent --> Actor : mostrarMensajeAdvertencia("Se generaron conflictos en algunos exámenes")
-end
 deactivate GenerarCalendarioComponent
+
+== Confirmación del Calendario por el Administrador ==
+
+alt Confirmar y Guardar Calendario
+    Actor -> GenerarCalendarioComponent : clickGuardar()
+    activate GenerarCalendarioComponent
+    
+    GenerarCalendarioComponent -> CalendarioApiService : confirmarCalendario(confirmarDto)
+    activate CalendarioApiService
+    
+    CalendarioApiService -> CalendarioController : POST /calendario/confirmar\n(ConfirmarCalendarioDto)
+    activate CalendarioController
+    
+    CalendarioController -> CalendarioService : confirmar(dto)
+    activate CalendarioService
+    
+    CalendarioService -> ExamenRepository : guardarLote(asignaciones)
+    activate ExamenRepository
+    ExamenRepository -> DB : UPDATE Examen SET fecha = ?, hora = ?, aulaId = ?, profesorId = ? WHERE id = ?
+    ExamenRepository --> CalendarioService : confirmacion
+    deactivate ExamenRepository
+    
+    CalendarioService --> CalendarioController : ok
+    deactivate CalendarioService
+    
+    CalendarioController --> CalendarioApiService : 200 OK
+    deactivate CalendarioController
+    
+    CalendarioApiService --> GenerarCalendarioComponent : ok
+    deactivate CalendarioApiService
+    
+    GenerarCalendarioComponent -> GenerarCalendarioComponent : redireccionarAListado()
+    GenerarCalendarioComponent --> Actor : mostrarMensajeExito("Calendario guardado correctamente")
+    deactivate GenerarCalendarioComponent
+else Cancelar y Descartar
+    Actor -> GenerarCalendarioComponent : clickCancelar()
+    activate GenerarCalendarioComponent
+    GenerarCalendarioComponent -> GenerarCalendarioComponent : redireccionarAListado()
+    deactivate GenerarCalendarioComponent
+end
 
 @enduml

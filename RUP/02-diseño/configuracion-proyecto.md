@@ -155,13 +155,10 @@ CREATE TABLE Asignatura (
     codigo VARCHAR(20) UNIQUE NOT NULL,
     nombre VARCHAR(150) NOT NULL,
     creditos INT NOT NULL,
-    nivel INT NOT NULL, -- 1º, 2º, 3º...
     gradoId INT NOT NULL,
-    cursoAcademicoId INT NOT NULL,
     fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (gradoId) REFERENCES Grado(id) ON DELETE CASCADE,
-    FOREIGN KEY (cursoAcademicoId) REFERENCES CursoAcademico(id)
+    FOREIGN KEY (gradoId) REFERENCES Grado(id) ON DELETE CASCADE
 );
 ```
 

@@ -44,8 +44,8 @@ export class ExamenFormComponent implements OnInit {
   ) {
     this.examenForm = this.fb.group({
       codigo: ['', [Validators.required, Validators.maxLength(50)]],
-      fecha: ['', [Validators.required]],
-      hora: ['', [Validators.required, Validators.pattern('^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$')]],
+      fecha: [null],
+      hora: ['', [Validators.pattern('^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$')]],
       duracion: [120, [Validators.required, Validators.min(1)]],
       tipo: ['Ordinaria', [Validators.required]],
       asignaturaId: ['', [Validators.required]],
@@ -212,8 +212,8 @@ export class ExamenFormComponent implements OnInit {
 
     const values: any = {
       codigo: this.examenForm.value.codigo,
-      fecha: this.examenForm.value.fecha,
-      hora: this.examenForm.value.hora,
+      fecha: this.examenForm.value.fecha || null,
+      hora: this.examenForm.value.hora || null,
       duracion: Number(this.examenForm.value.duracion),
       tipo: this.examenForm.value.tipo,
       asignaturaId: Number(this.examenForm.value.asignaturaId)

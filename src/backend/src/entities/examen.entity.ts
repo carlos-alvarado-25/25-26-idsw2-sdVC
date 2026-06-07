@@ -12,11 +12,11 @@ export class Examen {
   @Column({ unique: true, length: 50 })
   codigo: string;
 
-  @Column({ type: 'date' })
-  fecha: string;
+  @Column({ type: 'date', nullable: true })
+  fecha: string | null;
 
-  @Column({ length: 5 })
-  hora: string;
+  @Column({ type: 'varchar', length: 5, nullable: true })
+  hora: string | null;
 
   @Column({ type: 'int' })
   duracion: number;
@@ -45,37 +45,27 @@ export class Examen {
   @Column({ nullable: true })
   profesorId: number | null;
 
-  /**
-   * Delegación: Provee el nombre de la asignatura vinculada
-   */
   @Expose()
   get nombreAsignatura(): string {
     return this.asignatura ? this.asignatura.nombre : 'Sin Asignatura';
   }
 
-  /**
-   * Delegación: Provee el código de la asignatura vinculada
-   */
   @Expose()
   get codigoAsignatura(): string {
     return this.asignatura ? this.asignatura.codigo : '—';
   }
 
-  /**
-   * Delegación: Provee el nombre del aula vinculada
-   */
   @Expose()
   get nombreAula(): string {
     return this.aula ? this.aula.nombre : 'Sin Aula';
   }
 
-  /**
-   * Delegación: Provee el nombre del profesor supervisor
-   */
   @Expose()
   get nombreProfesor(): string {
     return this.profesor ? this.profesor.nombre : 'Sin Asignar';
   }
+
+  totalAlumnos: number;
 
   @CreateDateColumn()
   fechaCreacion: Date;
