@@ -8,6 +8,9 @@
     <div class="header-main">
       <h1>{{ isEditMode() ? 'Editar Profesor' : 'Nuevo Profesor' }}</h1>
       <div class="header-actions">
+        <button *ngIf="isEditMode()" class="btn-accent" [routerLink]="['/admin/profesores', profesorId, 'preferencias']">
+          ⚠️ Conflictos y Preferencias
+        </button>
         <button *ngIf="isEditMode()" class="btn-accent" [routerLink]="['/admin/profesores', profesorId, 'asignar-examen']">
           📋 Asignar Examen
         </button>

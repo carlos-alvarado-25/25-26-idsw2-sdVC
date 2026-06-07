@@ -9,6 +9,9 @@ import { CrearProfesorDto } from './dto/crear-profesor.dto';
 import { UpdateProfesorDto } from './dto/update-profesor.dto';
 import { ImportResultDto } from './dto/import-result.dto';
 import { FileParserFactory } from '../../common/services/file-parser.factory';
+import { Preferencia } from '../../entities/preferencia.entity';
+import { CrearPreferenciaDto } from './dto/crear-preferencia.dto';
+
 
 @Injectable()
 export class ProfesorService {
@@ -21,6 +24,8 @@ export class ProfesorService {
     private readonly asignaturaRepository: Repository<Asignatura>,
     @InjectRepository(Examen)
     private readonly examenRepository: Repository<Examen>,
+    @InjectRepository(Preferencia)
+    private readonly preferenciaRepository: Repository<Preferencia>,
     private readonly fileParserFactory: FileParserFactory,
   ) {}
 
@@ -186,5 +191,51 @@ export class ProfesorService {
     }
 
     return new ImportResultDto(exitos, fallos, detalles);
+  }
+
+  async findPreferencias(profesorId: number): Promise<Preferencia[]> {
+    await this.findOne(profesorId);
+    return this.preferenciaRepository.find({
+      where: { profesorId },
+      order: { diaSemana: 'ASC', horaInicio: 'ASC' },
+    });
+  }
+
+  async createPreferencia(profesorId: number, dto: CrearPreferenciaDto): Promise<Preferencia> {
+    await this.findOne(profesorId);
+    
+    if (dto.horaInicio >= dto.horaFin) {
+      throw new ConflictException('La hora de inicio debe ser menor que la hora de fin');
+    }
+
+    const existing = await this.preferenciaRepository.find({
+      where: { profesorId, diaSemana: dto.diaSemana }
+    });
+
+    const hasOverlap = existing.some(p => {
+      return dto.horaInicio < p.horaFin && p.horaInicio < dto.horaFin;
+    });
+
+    if (hasOverlap) {
+      throw new ConflictException('Ya existe una restricción horaria que se solapa con este rango');
+    }
+
+    const nueva = this.preferenciaRepository.create({
+      profesorId,
+      diaSemana: dto.diaSemana,
+      horaInicio: dto.horaInicio,
+      horaFin: dto.horaFin,
+      disponible: dto.disponible,
+    });
+
+    return this.preferenciaRepository.save(nueva);
+  }
+
+  async removePreferencia(id: number): Promise<void> {
+    const pref = await this.preferenciaRepository.findOneBy({ id });
+    if (!pref) {
+      throw new NotFoundException(`Preferencia con ID ${id} no encontrada`);
+    }
+    await this.preferenciaRepository.remove(pref);
   }
 }

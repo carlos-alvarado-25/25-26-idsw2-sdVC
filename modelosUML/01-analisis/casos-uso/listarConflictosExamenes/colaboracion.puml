@@ -6,11 +6,11 @@ skinparam DefaultFontSize 12
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Profesor Abierto" as ProfesorAbiertoEntrada
-rectangle #CDEBA5 ":GenerarCalendarioView" as GenerarCalendarioEntrada
 
 package listarConflictosExamenes as "listarConflictosExamenes()" {
     rectangle #629EF9 ListarConflictosView
     rectangle #b5bd68 ExamenController
+    rectangle #b5bd68 PreferenciaController
     rectangle #F2AC4E ExamenRepository
     rectangle #F2AC4E PreferenciaRepository
     rectangle #F2AC4E Conflicto
@@ -18,29 +18,26 @@ package listarConflictosExamenes as "listarConflictosExamenes()" {
 }
 
 rectangle #CDEBA5 ":Profesor Preferencias Abierto" as ProfesorPreferenciasSalida
-rectangle #CDEBA5 ":Calendario Generado" as CalendarioGeneradoSalida
+rectangle #CDEBA5 ":Editar Examen" as EditarExamenSalida
 
-ProfesorAbiertoEntrada -r-> ListarConflictosView: listarConflictos()
-GenerarCalendarioEntrada -d-> ListarConflictosView: revisarConflictos()
+ProfesorAbiertoEntrada -r-> ListarConflictosView: listarConflictosExamenes()
 
-ListarConflictosView -d-> ExamenController: listarConflictos(pagina) : PagedResult<Conflicto>
-ExamenController -d-> ExamenRepository: detectarConflictos(pagina) : PagedResult<Conflicto>
+ListarConflictosView -d-> ExamenController: obtenerConflictos(profesorId) : List<Conflicto>
+ExamenController -d-> ExamenRepository: detectarConflictos(profesorId) : List<Conflicto>
 
-ListarConflictosView -d-> ExamenController: filtrarConflictos(criterio, pagina) : PagedResult<Conflicto>
-ExamenController -d-> ExamenRepository: buscarConflictos(criterio, pagina) : PagedResult<Conflicto>
+ListarConflictosView -d-> PreferenciaController: listarPreferencias(profesorId) : List<Preferencia>
+PreferenciaController -d-> PreferenciaRepository: find(profesorId) : List<Preferencia>
+
+ListarConflictosView -d-> PreferenciaController: crearPreferencia(profesorId, preferencia) : Preferencia
+PreferenciaController -d-> PreferenciaRepository: save(preferencia)
+
+ListarConflictosView -d-> PreferenciaController: eliminarPreferencia(preferenciaId) : void
+PreferenciaController -d-> PreferenciaRepository: delete(preferenciaId)
 
 ExamenRepository -- Conflicto
 Conflicto -- Examen
 
-ListarConflictosView -d-> ExamenController: obtenerOpcionesResolucion(conflicto) : List<Resolucion>
-ExamenController -d-> ExamenRepository: buscarDisponibilidad(conflicto) : List<Resolucion>
-ExamenController -d-> PreferenciaRepository: verificarRestricciones(profesor, resolucion) : Boolean
-
-ListarConflictosView -d-> ExamenController: resolverConflicto(conflicto, resolucion) : Examen
-ExamenController -r-> Examen: <<update>>
-ExamenController -d-> ExamenRepository: actualizar(examen)
-
-ListarConflictosView ..> ProfesorPreferenciasSalida: <<finalizar>>
-ListarConflictosView ..> CalendarioGeneradoSalida: <<finalizar>>
+ListarConflictosView ..> ProfesorPreferenciasSalida: <<abrir>>
+ListarConflictosView ..> EditarExamenSalida: <<resolver conflicto>>
 
 @enduml

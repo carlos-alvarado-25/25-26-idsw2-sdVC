@@ -1,6 +1,6 @@
 # IdSw 2 > listarConflictosExamenes > Análisis
 
-> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|[📐 Diseño](/RUP/02-diseño/casos-uso/listarConflictosExamenes/README.md)|[⚙️ Desarrollo](/RUP/03-desarrollo/casos-uso/listarConflictosExamenes/README.md)|Pruebas|
 > |-|-|-|-|-|-|-|
 
 ## información del artefacto
@@ -8,13 +8,18 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.2
-- **Fecha**: 2026-05-26
+- **Versión**: 1.3
+- **Fecha**: 2026-06-07
 - **Autor**: Gemini CLI
 
 ## propósito
 
-Análisis de colaboración del caso de uso `listarConflictosExamenes()` mediante el patrón MVC. Este análisis se centra en la detección y resolución de colisiones de programación, actuando como un **centro de diagnóstico compartido** que puede invocarse tanto desde el contexto individual de un profesor como de forma global tras el proceso de generación automática del calendario.
+Análisis de colaboración del caso de uso `listarConflictosExamenes()` mediante el patrón MVC. Este análisis se centra en la detección de conflictos de programación y en la gestión de preferencias horarias del profesor en el estado `PROFESOR_PREFERENCIAS_ABIERTO`.
+
+El sistema detecta tres tipos de conflictos:
+1. **Conflictos de Alumnos (Solapamiento de Grado)**: Dos asignaturas del mismo grado tienen exámenes asignados a la misma fecha y hora. Esto imposibilita la asistencia de los estudiantes matriculados en ambas.
+2. **Conflictos de Profesor**: Un profesor tiene dos exámenes asignados en la misma franja horaria.
+3. **Sobreposición de Aulas**: Dos exámenes están programados en la misma aula al mismo tiempo.
 
 ## diagrama de colaboración
 
@@ -33,83 +38,78 @@ Análisis de colaboración del caso de uso `listarConflictosExamenes()` mediante
 #### ListarConflictosView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
-- Presentar la lista de conflictos detectados (globales o contextuales al docente).
-- Mostrar detalles del conflicto (Horario, Aula, Alumnos solapados).
-- Proveer interfaces para resolver colisiones mediante cambios de programación asistidos.
-- Facilitar la navegación de retorno según el origen de la solicitud (Ficha de Profesor o Motor de Generación).
+- Presentar la lista de conflictos detectados (solapamientos de grado, profesores o aulas).
+- Mostrar la interfaz de gestión de preferencias del profesor (exclusiones horarias).
+- Proveer enlace para solicitar resolver cada conflicto (redirigiendo a la edición del examen correspondiente).
+- Permitir al administrador cerrar la lista y volver a la ficha del profesor.
 
 **Colaboraciones**:
-- **Entrada**: Recibe `listarConflictos()` (desde `:Profesor Abierto`) o `revisarConflictos()` (desde `:GenerarCalendarioView`).
-- **Control**: Se comunica con `ExamenController`.
-- **Salida**: Navega hacia `:Profesor Preferencias Abierto` o `:Calendario Generado`.
+- **Entrada**: Invocado desde la ficha del docente (`listarConflictosExamenes()`).
+- **Control**: Se comunica con `ExamenController` y `PreferenciaController`.
+- **Salida**: Navega hacia `:Profesor Preferencias Abierto` (vista propia) o redirecciona a `:Editar Examen` para resolver colisiones.
 
 ### clases de control
 
 #### ExamenController
 **Estereotipo**: Control  
 **Responsabilidades**:
-- Coordinar la detección de conflictos masivos o específicos.
-- Orquestar la búsqueda de alternativas de disponibilidad cruzando recursos y restricciones.
-- Proveer métodos estandarizados para el listado paginado y filtrado de colisiones.
-- Aplicar resoluciones y persistir cambios en el calendario académico.
+- Recibir solicitudes de detección de conflictos para los exámenes de un profesor.
+- Coordinar la búsqueda de exámenes solapantes en la base de datos (mismo grado, profesor o aula).
+- Retornar la lista de objetos `Conflicto`.
 
-**Colaboraciones**:
-- **Vista**: Atiende solicitudes de `ListarConflictosView`.
-- **Repositorio**: Utiliza `ExamenRepository` y `PreferenciaRepository`.
+#### PreferenciaController
+**Estereotipo**: Control  
+**Responsabilidades**:
+- Proveer endpoints para listar, crear y eliminar preferencias horarias de un profesor.
 
 ### clases de entidad (entity)
 
 #### ExamenRepository
 **Estereotipo**: Entidad (Repository)  
 **Responsabilidades**:
-- Detectar colisiones de programación centradas en un profesor (`detectarConflictosPorProfesor`).
-- Proveer disponibilidad de recursos físicos (aulas).
-- Actualizar el estado de los exámenes resueltos.
+- Recuperar los exámenes programados de un profesor.
+- Consultar exámenes candidatos que puedan causar sobreposición de grado, profesor o aula en una fecha/hora dada.
 
 #### PreferenciaRepository
 **Estereotipo**: Entidad (Repository)  
 **Responsabilidades**:
-- Proveer los datos de restricciones y preferencias horarias del profesor (`verificarRestricciones`).
-- Asegurar que las opciones de resolución sugeridas no violen restricciones específicas del docente.
+- Persistir y gestionar las exclusiones horarias de los profesores.
 
 #### Conflicto
-**Estereotipo**: Entidad (Inventada)  
+**Estereotipo**: Entidad (DATO/DTO)  
 **Responsabilidades**:
-- Agrupar datos de la colisión académica para su visualización plana.
+- Encapsular la información de una colisión horaria (código de examen, asignatura, grado, aula, fecha, hora y descripción del motivo).
 
 #### Examen
 **Estereotipo**: Entidad  
 **Responsabilidades**:
-- Representar los eventos en conflicto.
+- Representar los eventos de exámenes programados.
 
 ## flujo de colaboración
 
 ### secuencia de operaciones
 
-1. **Apertura Dual**: 
-    - El Administrador invoca desde la ficha del docente (`listarConflictos`).
-    - El Administrador invoca tras la generación automática (`revisarConflictos`).
-2. **Carga Inicial**: La vista solicita `listarConflictos(pagina)` al controlador. El controlador detecta el contexto (si existe un profesor seleccionado o si es una consulta global).
-3. **Consulta Paginada**: El controlador recupera los datos desde `ExamenRepository.detectarConflictos(pagina)`.
-4. **Filtrado**: El usuario puede aplicar criterios de búsqueda adicionales mediante `filtrarConflictos(criterio, pagina)`, delegando en `ExamenRepository.buscarConflictos(criterio, pagina)`.
-5. **Diagnóstico**: Al seleccionar un conflicto, la vista solicita `obtenerOpcionesResolucion(conflicto)`.
-6. **Validación de Preferencias**: El controlador cruza huecos libres en aulas con las restricciones del docente involucrado (`PreferenciaRepository`).
-7. **Resolución**: El Administrador selecciona una alternativa; el sistema actualiza el `Examen` y sincroniza con el repositorio.
-8. **Finalización**: Se notifica el éxito y se retorna al punto de origen (Preferencias del Profesor o Calendario Generado).
+1. **Apertura**: El administrador solicita ver conflictos y preferencias desde la edición de un profesor.
+2. **Carga de Preferencias**: `ListarConflictosView` solicita a `PreferenciaController` la lista de exclusiones horarias actuales del profesor, quien consulta a `PreferenciaRepository`.
+3. **Carga de Conflictos**: `ListarConflictosView` solicita a `ExamenController` la lista de conflictos.
+4. **Detección de Colisiones**: `ExamenController` pide a `ExamenRepository` los exámenes programados del profesor. Para cada uno, busca otros exámenes en la misma fecha y hora que compartan el mismo `gradoId` (conflictos de alumnos), `profesorId` (conflictos de profesor), o `aulaId` (sobreposición de aula).
+5. **Visualización**: La vista muestra las exclusiones y los conflictos detectados.
+6. **Resolución**: Si el usuario pulsa "Resolver", la vista navega al flujo de `:Editar Examen` para reajustar los horarios.
+7. **Gestión de Restricciones**: El usuario puede crear o eliminar exclusiones horarias (días y horas donde el profesor no puede examinar). Estas restricciones serán tomadas en cuenta por el motor en futuras generaciones automáticas.
 
 ## correspondencia con requisitos
 
 ### mapeado con especificación detallada
 
 |Requisito del caso de uso|Clase responsable|Método/Colaboración|
-|-|-|-|
-|Soportar revisión desde Generación|`ListarConflictosView`|Navegación desde motor|
-|Soportar revisión desde Profesor|`ListarConflictosView`|Navegación desde ficha|
-|Detección de conflictos|`ExamenRepository`|`detectarConflictos(pagina)`|
-|Validar disponibilidad y preferencias|`ExamenController`|Cruce de repositorios|
-|Actualizar calendario|`ExamenRepository`|`actualizar(examen)`|
+|---|---|---|
+|Presentar lista de conflictos|`ListarConflictosView`|Renderización de conflictos|
+|Detección de solapamiento de horario, aulas, profesores y alumnos|`ExamenController` / `ExamenRepository`|`obtenerConflictos(profesorId)` / `detectarConflictos()`|
+|Permitir resolver cada conflicto|`ListarConflictosView`|Enlace a `:Editar Examen` con el ID correspondiente|
+|Gestión de exclusiones horarias|`PreferenciaController` / `PreferenciaRepository`|CRUD de Preferencias|
 
 ## referencias
 
 - [Especificación detallada: Detalle de Casos de Uso](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
-- [Análisis: editarProfesor()](/RUP/01-analisis/casos-uso/editarProfesor/README.md)
+- [Análisis: editarProfesor](/RUP/01-analisis/casos-uso/editarProfesor/README.md)
+- [Análisis: editarExamen](/RUP/01-analisis/casos-uso/editarExamen/README.md)

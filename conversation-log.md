@@ -1392,3 +1392,29 @@ Se realizó una auditoría de trazabilidad completa **Requisitos → Análisis �
 | Controller | [src/backend/.../calendario.controller.ts](/src/backend/src/modules/calendario/calendario.controller.ts) | ✅ Implementado |
 | Frontend | [src/frontend/.../generar-calendario.component.ts](/src/frontend/src/app/features/admin/calendario/generar-calendario/generar-calendario.component.ts) | ✅ Con franjas personalizables |
 
+---
+
+## [07/06/2026 10:35] Sesión 75: Caso de Uso - listarConflictosExamenes y Preferencias Horarias
+
+**Prompt:** "Continua con los cambios que estabamos realizando... Si continuemos... Antes, se corrigieron los SVGs y READMEs?... HAZLO!... Reinicia el backend para aplicar los cambios... Perfecto, ahora necesito que recopiles todos los posibles flujos y casos que tendríamos ahora a la hora de considerar conflictos.TOODS... donde encuentro el archivo... Perfecto, revisa de nuevo si todo lo desarrollado cumple exhaustivamente con los requisitosy el caso de uso presentado. Además si no hace falta actualizar la documentación de la parte de diseño... HAZLO!... Perfecto, finalicemos esta sesińo entonces. Añade la entrada al conversation-log.md"
+
+**Resultado:**
+- **Realización del Caso de Uso**: Implementación completa de `listarConflictosExamenes()` y el estado `PROFESOR_PREFERENCIAS_ABIERTO`.
+- **Detección Integral de Conflictos**: El método `ExamenService.findConflictosAlumnos` se amplió para diagnosticar los tres tipos de colisión:
+  1. *Alumnos*: Solapamientos por Grado (exámenes simultáneos).
+  2. *Aula*: Sobreposición física de aula.
+  3. *Profesor*: Doble asignación de supervisión en una misma franja.
+- **CRUD de Preferencias Horarias**:
+  - *Backend (NestJS)*: Incorporación de la entidad `Preferencia` en `ProfesoresModule`, con endpoints REST en `PreferenciaController` para listar (`GET`), crear (`POST`) y eliminar (`DELETE`) exclusiones horarias semanales de profesores.
+  - *Frontend (Angular)*: Creación de `PreferenciaService` y diseño del panel interactivo `ProfesorPreferenciasComponent`.
+- **Prevención en Edición Manual**: El método `ExamenService.update()` ahora valida y rechaza cualquier cambio manual que viole las exclusiones horarias registradas por el profesor asignado (Validación C3).
+- **Rigor de Diseño e IdSw II**:
+  - *Ley de Demeter*: Se eliminó la navegación indirecta por relaciones en el backend (`ex.asignatura.grado.nombre`) sustituyéndola por propiedades delegadas de primer nivel (`ex.nombreAula`, `ex.nombreProfesor`, `ex.asignatura.nombreGrado`).
+  - *Cohesión Temporal*: Se encapsuló la obtención del día de la semana y el mapeo de nombres en español en métodos estáticos de la entidad `Preferencia`.
+- **Trazabilidad 360º de RUP**:
+  - Actualización de los diagramas PlantUML de colaboración (Análisis) y secuencia (Diseño) y generación de SVGs legibles.
+  - Creación del README de RUP/03-desarrollo y actualización de RUP/01-analisis, RUP/02-diseño y RUP/03-desarrollo general.
+
+**Decisión:** Se declara implementado en su totalidad y de forma robusta el ramillete funcional de conflictos y preferencias horarias de profesores, respetando preventivamente los bloqueos temporales del docente tanto en la generación automática como en la reubicación manual de exámenes.
+
+

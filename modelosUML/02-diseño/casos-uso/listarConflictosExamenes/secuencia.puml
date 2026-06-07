@@ -1,0 +1,177 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+title Diseño Detallado: listarConflictosExamenes() + gestión de Preferencias (PROFESOR_PREFERENCIAS_ABIERTO)
+
+actor Administrador as Actor
+boundary ProfesorFormComponent <<Angular>>
+boundary ProfesorPreferenciasComponent <<Angular>>
+control ProfesorApiService <<Angular>>
+control PreferenciaApiService <<Angular>>
+control ExamenApiService <<Angular>>
+control ProfesorController <<NestJS>>
+control PreferenciaController <<NestJS>>
+control ExamenController <<NestJS>>
+participant ProfesorService <<NestJS>>
+participant PreferenciaService <<NestJS>>
+participant ExamenService <<NestJS>>
+database PreferenciaRepository <<TypeORM>>
+database ExamenRepository <<TypeORM>>
+database MySQL as DB
+
+== PROFESOR_ABIERTO → Navegar a Conflictos y Preferencias ==
+
+Actor -> ProfesorFormComponent : clickListarConflictos(profesorId)
+activate ProfesorFormComponent
+ProfesorFormComponent -> ProfesorFormComponent : router.navigate(['/admin/profesores', id, 'preferencias'])
+deactivate ProfesorFormComponent
+
+== PROFESOR_PREFERENCIAS_ABIERTO → Carga Inicial ==
+
+activate ProfesorPreferenciasComponent
+
+ProfesorPreferenciasComponent -> ProfesorApiService : obtener(profesorId)
+activate ProfesorApiService
+ProfesorApiService -> ProfesorController : GET /profesores/:id
+activate ProfesorController
+ProfesorController --> ProfesorApiService : ProfesorDto
+deactivate ProfesorController
+ProfesorApiService --> ProfesorPreferenciasComponent : ProfesorDto
+deactivate ProfesorApiService
+
+ProfesorPreferenciasComponent -> ExamenApiService : obtenerConflictos(profesorId)
+activate ExamenApiService
+
+ExamenApiService -> ExamenController : GET /examenes/conflictos?profesorId=:id
+activate ExamenController
+
+ExamenController -> ExamenService : findConflictosAlumnos(profesorId)
+activate ExamenService
+
+note over ExamenService
+  Algoritmo de detección:
+  1. Cargar exámenes del profesor (por asignaturaId)
+  2. Para cada examen, obtener su gradoId (via asignatura)
+  3. Buscar otros exámenes del mismo gradoId en la misma fecha
+  4. Detectar solapamiento de intervalo [hora, hora+duracion]
+  5. Si solapa → conflicto de alumno (estudiante con dos exámenes)
+end note
+
+ExamenService -> ExamenRepository : findExamenesByProfesor(profesorId)
+activate ExamenRepository
+ExamenRepository -> DB : SELECT e.*, a.gradoId FROM Examen e\nJOIN Asignatura a ON e.asignaturaId = a.id\nWHERE e.profesorId = :id AND e.fecha IS NOT NULL
+ExamenRepository --> ExamenService : examenesProfesor[]
+deactivate ExamenRepository
+
+loop Para cada examen del profesor
+  ExamenService -> ExamenRepository : findSolapantesByGrado(gradoId, fecha, hora, duracion, excludeId)
+  activate ExamenRepository
+  ExamenRepository -> DB : SELECT e.*, a.nombre AS asignaturaNombre, g.nombre AS gradoNombre\nFROM Examen e\nJOIN Asignatura a ON e.asignaturaId = a.id\nJOIN Grado g ON a.gradoId = g.id\nWHERE a.gradoId = :gradoId\n  AND e.fecha = :fecha\n  AND e.id <> :excludeId\n  AND e.fecha IS NOT NULL
+  ExamenRepository --> ExamenService : candidatos[]
+  deactivate ExamenRepository
+
+  ExamenService -> ExamenService : detectarSolapamiento(candidatos, horaInicio, horaFin)
+end
+
+ExamenService --> ExamenController : ConflictoAlumnoDto[]
+deactivate ExamenService
+
+ExamenController --> ExamenApiService : 200 OK (ConflictoAlumnoDto[])
+deactivate ExamenController
+
+ExamenApiService --> ProfesorPreferenciasComponent : ConflictoAlumnoDto[]
+deactivate ExamenApiService
+
+ProfesorPreferenciasComponent -> PreferenciaApiService : listar(profesorId)
+activate PreferenciaApiService
+
+PreferenciaApiService -> PreferenciaController : GET /profesores/:id/preferencias
+activate PreferenciaController
+
+PreferenciaController -> PreferenciaService : findByProfesor(profesorId)
+activate PreferenciaService
+PreferenciaService -> PreferenciaRepository : find({ where: { profesorId } })
+activate PreferenciaRepository
+PreferenciaRepository -> DB : SELECT * FROM Preferencia WHERE profesorId = :id
+PreferenciaRepository --> PreferenciaService : Preferencia[]
+deactivate PreferenciaRepository
+PreferenciaService --> PreferenciaController : Preferencia[]
+deactivate PreferenciaService
+
+PreferenciaController --> PreferenciaApiService : 200 OK (Preferencia[])
+deactivate PreferenciaController
+PreferenciaApiService --> ProfesorPreferenciasComponent : Preferencia[]
+deactivate PreferenciaApiService
+
+ProfesorPreferenciasComponent -> ProfesorPreferenciasComponent : renderizarTablaConflictos()\nrenderizarTablaPreferencias()
+
+== Crear nueva Preferencia (Exclusión Horaria) ==
+
+Actor -> ProfesorPreferenciasComponent : submitNuevaPreferencia(diaSemana, horaInicio, horaFin)
+activate ProfesorPreferenciasComponent
+ProfesorPreferenciasComponent -> ProfesorPreferenciasComponent : validarFormulario()
+
+ProfesorPreferenciasComponent -> PreferenciaApiService : crear(profesorId, dto)
+activate PreferenciaApiService
+PreferenciaApiService -> PreferenciaController : POST /profesores/:id/preferencias\n(CrearPreferenciaDto)
+activate PreferenciaController
+PreferenciaController -> PreferenciaService : create(profesorId, dto)
+activate PreferenciaService
+PreferenciaService -> PreferenciaRepository : save(preferencia)
+activate PreferenciaRepository
+PreferenciaRepository -> DB : INSERT INTO Preferencia\n(profesorId, diaSemana, horaInicio, horaFin, disponible)
+PreferenciaRepository --> PreferenciaService : Preferencia
+deactivate PreferenciaRepository
+PreferenciaService --> PreferenciaController : Preferencia
+deactivate PreferenciaService
+PreferenciaController --> PreferenciaApiService : 201 Created (Preferencia)
+deactivate PreferenciaController
+PreferenciaApiService --> ProfesorPreferenciasComponent : Preferencia
+deactivate PreferenciaApiService
+
+ProfesorPreferenciasComponent -> ProfesorPreferenciasComponent : añadirALista(preferencia)
+deactivate ProfesorPreferenciasComponent
+
+== Eliminar Preferencia ==
+
+Actor -> ProfesorPreferenciasComponent : clickEliminar(preferenciaId)
+activate ProfesorPreferenciasComponent
+ProfesorPreferenciasComponent -> PreferenciaApiService : eliminar(preferenciaId)
+activate PreferenciaApiService
+PreferenciaApiService -> PreferenciaController : DELETE /profesores/preferencias/:id
+activate PreferenciaController
+PreferenciaController -> PreferenciaService : remove(id)
+activate PreferenciaService
+PreferenciaService -> PreferenciaRepository : delete(id)
+activate PreferenciaRepository
+PreferenciaRepository -> DB : DELETE FROM Preferencia WHERE id = :id
+PreferenciaRepository --> PreferenciaService : ok
+deactivate PreferenciaRepository
+PreferenciaService --> PreferenciaController : void
+deactivate PreferenciaService
+PreferenciaController --> PreferenciaApiService : 200 OK
+deactivate PreferenciaController
+PreferenciaApiService --> ProfesorPreferenciasComponent : ok
+deactivate PreferenciaApiService
+ProfesorPreferenciasComponent -> ProfesorPreferenciasComponent : eliminarDeLista(id)
+deactivate ProfesorPreferenciasComponent
+
+== Resolver Conflicto → Navegar a editarExamen ==
+
+Actor -> ProfesorPreferenciasComponent : clickResolver(examenId)
+activate ProfesorPreferenciasComponent
+ProfesorPreferenciasComponent -> ProfesorPreferenciasComponent : router.navigate(['/admin/examenes/editar', examenId])
+deactivate ProfesorPreferenciasComponent
+
+== Volver a PROFESOR_ABIERTO ==
+
+Actor -> ProfesorPreferenciasComponent : clickVolver()
+activate ProfesorPreferenciasComponent
+ProfesorPreferenciasComponent -> ProfesorPreferenciasComponent : router.navigate(['/admin/profesores/editar', profesorId])
+deactivate ProfesorPreferenciasComponent
+
+@enduml

@@ -39,8 +39,7 @@ export class Profesor {
   preferencias: Preferencia[];
 
   estaDisponibleEn(fecha: string, franja: string, preferencias: Preferencia[]): boolean {
-    const date = new Date(fecha);
-    const diaSemana = date.getDay();
+    const diaSemana = Preferencia.getDiaSemanaDeFecha(fecha);
     const [horaInicio, horaFin] = franja.split('-');
 
     const tieneExclusion = (preferencias || []).some(pref => {

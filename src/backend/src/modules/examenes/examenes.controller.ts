@@ -8,6 +8,8 @@ import { Examen } from '../../entities/examen.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 import { CrearExamenDto } from './dto/crear-examen.dto';
 import { UpdateExamenDto } from './dto/update-examen.dto';
+import { ConflictoAlumnoDto } from './dto/conflicto-alumno.dto';
+
 
 @Controller('examenes')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -25,6 +27,13 @@ export class ExamenController {
     @Body() updateExamenDto: UpdateExamenDto,
   ): Promise<Examen> {
     return this.examenService.update(id, updateExamenDto);
+  }
+
+  @Get('conflictos')
+  async findConflictos(
+    @Query('profesorId', ParseIntPipe) profesorId: number,
+  ): Promise<ConflictoAlumnoDto[]> {
+    return this.examenService.findConflictosAlumnos(profesorId);
   }
 
   @Get('search')

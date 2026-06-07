@@ -82,6 +82,7 @@ Definición de la estructura de directorios del código fuente y políticas de i
 - [editarProfesor](casos-uso/editarProfesor/README.md) - Diseño de la actualización incremental de docente con asignación dinámica de asignaturas.
 - [importarProfesores](casos-uso/importarProfesores/README.md) - Diseño del procesamiento masivo por lotes y validación de unicidad.
 - [eliminarProfesor](casos-uso/eliminarProfesor/README.md) - Diseño del borrado seguro con diagnóstico previo de impacto.
+- [listarConflictosExamenes](casos-uso/listarConflictosExamenes/README.md) - Diseño de la detección de conflictos de agenda del docente y gestión de preferencias horarias (PROFESOR_PREFERENCIAS_ABIERTO).
 
 ### Gestión de Exámenes y Calendario
 - [abrirExamenes](casos-uso/abrirExamenes/README.md) - Diseño del listado paginado y hub del calendario de exámenes.

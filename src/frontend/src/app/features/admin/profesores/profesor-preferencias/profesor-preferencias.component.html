@@ -1,0 +1,170 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> / 
+      <a [routerLink]="['/admin/profesores']">🎓 Profesores</a> / 
+      <a *ngIf="profesor()" [routerLink]="['/admin/profesores/editar', profesorId]">{{ profesor()?.nombre }}</a> /
+      <span>⚠️ Conflictos y Preferencias</span>
+    </div>
+    <div class="header-main">
+      <h1>Preferencia y Conflictos de Horario</h1>
+      <div class="header-actions">
+        <a class="btn-secondary" *ngIf="profesor()" [routerLink]="['/admin/profesores/editar', profesorId]">Volver al Profesor</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="profesor-info-card" *ngIf="profesor()">
+    <div class="info-grid">
+      <div><strong>Código:</strong> {{ profesor()?.codigo }}</div>
+      <div><strong>Nombre:</strong> {{ profesor()?.nombre }}</div>
+      <div><strong>Email:</strong> {{ profesor()?.email }}</div>
+      <div><strong>Departamento:</strong> {{ profesor()?.departamento }}</div>
+    </div>
+  </div>
+
+  <div class="feedback-alert" *ngIf="error() || success()">
+    <div class="alert error" *ngIf="error()">❌ {{ error() }}</div>
+    <div class="alert success" *ngIf="success()">✅ Exclusión horaria agregada correctamente.</div>
+  </div>
+
+  <div class="preferencias-layout">
+    <!-- SECCIÓN A: Conflictos Detectados (Solapamientos por Grado, Aula o Profesor) -->
+    <div class="layout-card conflicts-section">
+      <div class="card-header">
+        <h2>⚠️ Conflictos Detectados ({{ conflictos().length }})</h2>
+        <p class="section-desc">Muestra solapamientos de grado (alumnos), sobreposición de aulas o doble asignación del profesor que requieren resolución.</p>
+      </div>
+
+      <div class="card-body">
+        <div class="table-wrapper" *ngIf="conflictos().length > 0">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Examen (Cód.)</th>
+                <th>Descripción del Conflicto</th>
+                <th>Fecha/Hora</th>
+                <th>Solapa con</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let conf of conflictos()">
+                <td>
+                  <span class="badge-tipo" [ngClass]="'badge-tipo-' + conf.tipoConflicto.toLowerCase()">
+                    {{ conf.tipoConflicto }}
+                  </span>
+                </td>
+                <td>
+                  <div class="examen-cell">
+                    <strong>{{ conf.examenCodigo }}</strong>
+                    <span class="sub-text">{{ conf.asignaturaNombre }}</span>
+                  </div>
+                </td>
+                <td class="motivo-cell">{{ conf.motivoConflicto }}</td>
+                <td>
+                  <div class="time-block">
+                    <span>📅 {{ conf.fecha }}</span>
+                    <span>⏰ {{ conf.hora }} ({{ conf.duracion }} min)</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="overlap-info">
+                    <strong>{{ conf.solapaConExamenCodigo }}</strong>
+                    <span>{{ conf.solapaConAsignaturaNombre }}</span>
+                  </div>
+                </td>
+                <td>
+                  <a [routerLink]="['/admin/examenes/editar', conf.examenId]" class="btn-resolver">
+                    🔧 Resolver
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="empty-state" *ngIf="conflictos().length === 0">
+          <div class="icon">✅</div>
+          <h3>¡No hay conflictos detectados!</h3>
+          <p>Todos los exámenes de este profesor están libres de cruces de grado, aulas duplicadas o doble supervisión docente.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN B: CRUD de Preferencias / Exclusiones -->
+    <div class="layout-card preferences-section">
+      <div class="card-header">
+        <h2>📅 Restricciones de Disponibilidad del Docente</h2>
+        <p class="section-desc">Define franjas horarias semanales en las que el profesor **no está disponible** para que el generador automático no le asigne exámenes.</p>
+      </div>
+
+      <div class="card-body">
+        <!-- Formulario inline para añadir exclusión -->
+        <form [formGroup]="preferenciaForm" (ngSubmit)="agregarPreferencia()" class="inline-form">
+          <div class="form-row">
+            <div class="form-group select-group">
+              <label for="diaSemana">Día</label>
+              <select id="diaSemana" formControlName="diaSemana">
+                <option *ngFor="let dia of diasSemana" [value]="dia.value">{{ dia.label }}</option>
+              </select>
+            </div>
+
+            <div class="form-group time-group">
+              <label for="horaInicio">Desde</label>
+              <input id="horaInicio" type="time" formControlName="horaInicio">
+            </div>
+
+            <div class="form-group time-group">
+              <label for="horaFin">Hasta</label>
+              <input id="horaFin" type="time" formControlName="horaFin">
+            </div>
+
+            <div class="form-group btn-group">
+              <button type="submit" class="btn-primary" [disabled]="preferenciaForm.invalid || loading()">
+                ➕ Bloquear
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Listado de preferencias -->
+        <div class="table-wrapper" *ngIf="preferencias().length > 0">
+          <table class="data-table small-table">
+            <thead>
+              <tr>
+                <th>Día</th>
+                <th>Franja de Bloqueo</th>
+                <th>Estado</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pref of preferencias()">
+                <td><strong>{{ getNombreDia(pref.diaSemana) }}</strong></td>
+                <td>
+                  <span class="time-range">{{ pref.horaInicio }} - {{ pref.horaFin }}</span>
+                </td>
+                <td>
+                  <span class="badge-status status-exclusion">No Disponible (Exclusión)</span>
+                </td>
+                <td>
+                  <button type="button" class="btn-delete-pref" (click)="eliminarPreferencia(pref.id)" [disabled]="loading()">
+                    ✕ Eliminar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="empty-state" *ngIf="preferencias().length === 0">
+          <div class="icon">📅</div>
+          <h3>Sin restricciones registradas</h3>
+          <p>El profesor está disponible en cualquier franja horaria. Agrega una exclusión arriba si tiene algún bloqueo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,22 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { PagedResult } from './grado.service';
+
+export interface ConflictoAlumno {
+  examenId: number;
+  examenCodigo: string;
+  asignaturaNombre: string;
+  gradoNombre: string;
+  fecha: string;
+  hora: string;
+  duracion: number;
+  solapaConExamenId: number;
+  solapaConExamenCodigo: string;
+  solapaConAsignaturaNombre: string;
+  motivoConflicto: string;
+  tipoConflicto: string;
+}
+
 export interface Examen {
   id: number;
   codigo: string;
@@ -85,5 +101,10 @@ export class ExamenService {
     return this.http.get<{ tieneConflicto: boolean; descripcion?: string }>(
       `${this.apiUrl}/${examenId}/conflicto-profesor`, { params }
     );
+  }
+
+  obtenerConflictos(profesorId: number): Observable<ConflictoAlumno[]> {
+    const params = new HttpParams().set('profesorId', profesorId.toString());
+    return this.http.get<ConflictoAlumno[]>(`${this.apiUrl}/conflictos`, { params });
   }
 }
