@@ -1481,3 +1481,20 @@ Se realizó una auditoría de trazabilidad completa **Requisitos → Análisis �
 - **Estatus**: Código compilado al 100% en backend y frontend. El servidor local está en ejecución en segundo plano para las pruebas.
 
 **Decisión:** Se cierra de forma formal y definitiva la sesión habiendo cumplido con todos los objetivos técnicos y de documentación de la iteración.
+
+---
+
+## [07/06/2026 11:42] Sesión 80: Corrección de Actualización de Relaciones (Bug de Clave Foránea en TypeORM)
+
+**Prompt:** "amigo revisa la edición de asignaturas en el sistema. Estoy intentando actualizar la asignatura marketing porque se puso con el grado de ingenieria informática, y en realidad es de ADE. Pero no me deja actualizarlo... HAZLO!"
+
+**Resultado:**
+- **Resolución de Bug de TypeORM**: Se diagnosticó un comportamiento de TypeORM por el cual la actualización de claves foráneas (`gradoId`, `profesorId`) se omitía silenciosamente al persistir las entidades mediante `.save()`. Esto sucedía porque las relaciones correspondientes (`grado`, `profesor`) se cargaban previamente en memoria y, al no actualizar el objeto de relación, TypeORM revertía el nuevo valor de ID numérico al guardar.
+- **Modificación**:
+  - En [asignaturas.service.ts](/src/backend/src/modules/asignaturas/asignaturas.service.ts): Se asigna el objeto `grado` correspondiente a `asignatura.grado` al actualizar la asignatura en `update()`.
+  - En [alumnos.service.ts](/src/backend/src/modules/alumnos/alumnos.service.ts): Se asigna el objeto `grado` correspondiente a `alumno.grado` al actualizar el alumno en `update()`.
+  - En [examenes.service.ts](/src/backend/src/modules/examenes/examenes.service.ts): Se asigna el objeto `profesor` correspondiente a `examen.profesor` al actualizar el profesor en `update()`.
+- **Documentación de Diseño**: Se documentó la corrección en el README de diseño de `editarAsignatura` en [editarAsignatura/README.md](/RUP/02-diseño/casos-uso/editarAsignatura/README.md).
+- **Despliegue**: Se compiló el backend y se reinició el servidor backend en segundo plano para su validación inmediata.
+
+**Decisión:** Se corrigen las actualizaciones de relación de claves foráneas de forma global para Asignaturas, Alumnos y Exámenes, y se reactiva el servidor de desarrollo.

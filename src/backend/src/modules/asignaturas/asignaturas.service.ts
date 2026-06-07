@@ -108,6 +108,7 @@ export class AsignaturaService {
     if (dto.gradoId) {
       const grado = await this.gradoRepository.findOneBy({ id: dto.gradoId });
       if (!grado) throw new NotFoundException('Grado no encontrado');
+      asignatura.grado = grado;
     }
 
     const actualizada = Object.assign(asignatura, dto);

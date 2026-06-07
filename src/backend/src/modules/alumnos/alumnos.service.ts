@@ -107,6 +107,7 @@ export class AlumnoService {
       if (!grado) {
         throw new NotFoundException(`Grado con ID ${dto.gradoId} no encontrado`);
       }
+      alumno.grado = grado;
     }
 
     Object.assign(alumno, dto);

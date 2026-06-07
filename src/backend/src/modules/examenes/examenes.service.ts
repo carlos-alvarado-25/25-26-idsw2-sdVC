@@ -159,6 +159,7 @@ export class ExamenService {
           throw new NotFoundException(`El profesor con ID ${dto.profesorId} no existe`);
         }
         examen.profesorId = dto.profesorId;
+        examen.profesor = profesor;
       }
     }
 
