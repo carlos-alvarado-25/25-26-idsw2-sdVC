@@ -1520,3 +1520,28 @@ Se realizó una auditoría de trazabilidad completa **Requisitos → Análisis �
   - Plan de pruebas de descarga en un artefacto externo independiente `plan_testeo_descarga.md`.
 
 **Decisión:** Se cierra de forma formal la sesión habiendo diseñado, documentado, implementado y validado satisfactoriamente el caso de uso `descargarCalendarioExamenes` con arquitectura limpia, inmutable y totalmente extensible.
+
+---
+
+## [12/06/2026 08:04] Sesión 82: Casos de Uso - comunicarIncidenciasHorario y completarComunicacion
+
+**Prompt:** "Va perfecto. Pero fijate que en el caso de uso, la entrada viene desde sistema disponible, osea es necesario un card al mismo nivel que consultar calendario en la pantalla de profesores para crear incidencias. Utiliza el mismo formulario pero que te permita escoger entre los exámenes asignados del profesor. ... Perfecto, ahora solo centra los cards para que no se vea desalineado el frontend. ... La redirección desde Reportar Inicdencia, según el caso de uso si la cancelo debería retornar al sistema disponible, no al calendario. ... Listo cerremos sesión ahora"
+
+**Resultado:**
+- **Casos de Uso Completados**: Realización completa de `comunicarIncidenciasHorario()` y la transición `completarComunicacion()`.
+- **Estructuración Base de Datos**: Creación de la tabla `incidencias` en MySQL (vinculando exámenes e identificando al profesor creador).
+- **Desarrollo Backend (NestJS)**:
+  - Creación del módulo, controlador, servicio y DTOs para `Incidencia`.
+  - Registro de endpoints: `POST /incidencias` para creación y validación, `GET /incidencias` para visualización por parte del administrador, y `PATCH /incidencias/:id/estado` para resolver o denegar incidencias de horario.
+  - Corrección en `ExamenService.findOne()` para cargar la relación anidada `asignatura.grado`, resolviendo la etiqueta de grado en el frontend.
+- **Desarrollo Frontend (Angular)**:
+  - Diseño de `ComunicarIncidenciaComponent` (con soporte doble: selección dinámica de exámenes para el profesor desde el menú principal o modo de examen fijo/bloqueado desde el calendario).
+  - Integración de `ListarIncidenciasComponent` en la sección administrativa para resolver y denegar reportes.
+  - Creación del panel de control específico del profesor (con tarjetas dinámicas para consultar calendario y reportar incidencias).
+  - Implementación de estilos responsivos centrados mediante Flexbox para evitar desalineación (3 tarjetas por fila en administrador con centrado final y 2 tarjetas centradas para profesor).
+  - Ajuste de la transición `completarComunicacion()` tanto en la acción "Cancelar" como en el envío exitoso, redirigiendo correctamente a `/home` (Sistema Disponible).
+- **Modelado UML y Trazabilidad RUP**:
+  - Creación de diagramas de secuencia detallados de Diseño (`secuencia.puml` y `secuencia.svg`) para `comunicarIncidenciasHorario` y `completarComunicacion`.
+  - Generación de documentación narrativa y técnica en las fases de análisis, diseño y desarrollo.
+
+**Decisión:** Se cierra el ramillete funcional de incidencias de horario. Se decide estructurar la navegación mediante Flexbox en el panel principal para dotar de una experiencia de usuario consistente y simétrica entre roles, y se ajusta la redirección del flujo de reporte al estado `:Sistema Disponible` para cumplir fielmente con el diagrama de transición de estados de RUP.

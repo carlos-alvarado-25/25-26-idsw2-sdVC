@@ -1,0 +1,23 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Profesor" as Actor
+participant "ComunicarIncidenciaComponent\n(Angular)" as UI <<Boundary>>
+participant "Router\n(Angular)" as Router <<Control>>
+participant "ConsultarCalendarioComponent\n(Angular)" as CalendarUI <<Boundary>>
+
+Actor -> UI : clickEnFinalizar()
+UI -> Router : navigate(['/calendario/consultar'])
+activate Router
+
+Router -> CalendarUI : instanciar()
+activate CalendarUI
+CalendarUI --> Actor : mostrarCalendarioConMensaje()
+deactivate CalendarUI
+deactivate Router
+
+@enduml

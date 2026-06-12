@@ -18,6 +18,8 @@ import { ProfesorFormComponent } from './features/admin/profesores/profesor-form
 import { ImportarProfesoresComponent } from './features/admin/profesores/importar-profesores/importar-profesores.component';
 import { AsignarProfesorExamenComponent } from './features/admin/profesores/asignar-profesor-examen/asignar-profesor-examen.component';
 import { ProfesorPreferenciasComponent } from './features/admin/profesores/profesor-preferencias/profesor-preferencias.component';
+import { ComunicarIncidenciaComponent } from './features/profesor/incidencias/comunicar-incidencia/comunicar-incidencia.component';
+import { ListarIncidenciasComponent } from './features/admin/incidencias/listar-incidencias/listar-incidencias.component';
 
 import { ListarExamenesComponent } from './features/admin/examenes/listar-examenes/listar-examenes.component';
 import { ExamenFormComponent } from './features/admin/examenes/examen-form/examen-form.component';
@@ -28,6 +30,9 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'calendario/consultar', component: ConsultarCalendarioComponent },
+  { path: 'profesor/incidencias/crear/:examenId', component: ComunicarIncidenciaComponent },
+  { path: 'profesor/incidencias/crear', component: ComunicarIncidenciaComponent },
+  { path: 'admin/incidencias', component: ListarIncidenciasComponent },
   { path: 'admin/grados', component: ListarGradosComponent },
   { path: 'admin/grados/crear', component: GradoFormComponent },
   { path: 'admin/grados/editar/:id', component: GradoFormComponent },

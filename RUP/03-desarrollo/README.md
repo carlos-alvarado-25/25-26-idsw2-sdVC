@@ -30,8 +30,10 @@ El código ejecutable se encuentra en el directorio raíz [/src](/src):
 - [cerrarSesion](casos-uso/cerrarSesion/README.md) ✅
 - [listarConflictosExamenes](casos-uso/listarConflictosExamenes/README.md) ✅
 - [consultarCalendario](casos-uso/consultarCalendario/README.md) ✅
-- [descargarCalendarioExamenes](casos-uso/descargarCalendarioExamenes/README.md) (En Desarrollo) ⏳
+- [descargarCalendarioExamenes](casos-uso/descargarCalendarioExamenes/README.md) ✅
 
+### Contexto del Profesor
+- [comunicarIncidenciasHorario](casos-uso/comunicarIncidenciasHorario/README.md) ✅ *(La navegación de retorno completarComunicacion() está integrada en el componente)*
 
 ### Administrador
 - [abrirGrados](casos-uso/abrirGrados/README.md) ✅

@@ -74,7 +74,9 @@ export class ExamenService {
     const examen = await this.examenRepository.findOne({
       where: { id },
       relations: {
-        asignatura: true,
+        asignatura: {
+          grado: true,
+        },
         aula: true,
         profesor: true,
       },

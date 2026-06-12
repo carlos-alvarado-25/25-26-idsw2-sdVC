@@ -1,0 +1,63 @@
+@startuml secuencia
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam sequenceMessageAlign center
+
+actor "Profesor" as Actor
+participant "ComunicarIncidenciaComponent\n(Angular)" as UI <<Boundary>>
+participant "IncidenciaService\n(Angular)" as UISrv <<Boundary>>
+participant "ExamenService\n(Angular)" as UISrvEx <<Boundary>>
+participant "IncidenciaController\n(NestJS)" as Ctrl <<Control>>
+participant "IncidenciaService\n(NestJS)" as Srv <<Control>>
+participant "IncidenciaRepository\n(TypeORM)" as Repo <<Data Access>>
+database "MySQL" as DB
+
+== Inicialización: Carga de Datos del Examen ==
+alt Con Examen ID específico (desde Calendario)
+    Actor -> UI : inicializaConId(examenId)
+    UI -> UISrvEx : obtenerPorId(examenId)
+    activate UISrvEx
+    UISrvEx -> UI : ExamenDetailsDto
+    deactivate UISrvEx
+else Sin Examen ID (Apertura Directa)
+    Actor -> UI : inicializaSinId()
+    UI -> UISrvEx : listarExamenesAsignados(emailProfesor)
+    activate UISrvEx
+    UISrvEx -> UI : List<ExamenDetailsDto>
+    deactivate UISrvEx
+end
+
+== Captura y Envío de la Incidencia ==
+Actor -> UI : seleccionarTipoYDescripcion(tipo, descripcion, evidencias)
+UI -> UI : validarCampos()
+
+Actor -> UI : enviarIncidencia()
+UI -> UISrv : reportar(crearIncidenciaDto)
+activate UISrv
+
+UISrv -> Ctrl : POST /incidencias\n(CrearIncidenciaDto)
+activate Ctrl
+
+Ctrl -> Srv : crear(dto)
+activate Srv
+
+Srv -> Repo : create(dto)
+Srv -> Repo : save(incidencia)
+activate Repo
+Repo -> DB : INSERT INTO Incidencia ...
+Repo --> Srv : incidenciaPersistida
+deactivate Repo
+
+Srv --> Ctrl : incidenciaPersistida
+Ctrl --> UISrv : 201 Created (IncidenciaDto)
+deactivate Srv
+deactivate Ctrl
+
+UISrv --> UI : IncidenciaDto
+deactivate UISrv
+
+UI -> UI : mostrarConfirmacionExito()
+UI -> UI : navegarAlCalendario()
+@enduml

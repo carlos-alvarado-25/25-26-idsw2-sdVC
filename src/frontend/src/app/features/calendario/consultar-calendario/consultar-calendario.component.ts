@@ -345,10 +345,7 @@ export class ConsultarCalendarioComponent implements OnInit {
 
   // Reportar Incidencia (para profesores)
   reportarIncidencia(examenId: number): void {
-    // Redirige al caso de uso de reportar incidencias (se implementará en otra rama)
-    alert(`Redirigiendo a reportar incidencia para el examen con ID ${examenId}. (Caso de uso comunicarIncidenciasHorario)`);
-    // En una fase posterior se usará:
-    // this.router.navigate(['/profesor/incidencias/crear', examenId]);
+    this.router.navigate(['/profesor/incidencias/crear', examenId]);
   }
 
   // Formateador de fecha YYYY-MM-DD

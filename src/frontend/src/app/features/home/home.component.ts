@@ -67,6 +67,13 @@ import { Router, RouterModule } from '@angular/router';
               <h3>Gestión Exámenes</h3>
               <p>Motor de generación y asignación de exámenes.</p>
             </div>
+
+            <!-- Incidencias (Solo Admin) -->
+            <div class="card" [routerLink]="['/admin/incidencias']">
+              <div class="card-icon">⚠️</div>
+              <h3>Incidencias</h3>
+              <p>Revisión de reportes de profesores.</p>
+            </div>
           </ng-container>
 
           <!-- Tarjeta de Consulta de Calendario (Común a todos los roles) -->
@@ -74,6 +81,13 @@ import { Router, RouterModule } from '@angular/router';
             <div class="card-icon">🗓️</div>
             <h3>Consultar Calendario</h3>
             <p>Visualización interactiva y búsqueda de exámenes.</p>
+          </div>
+
+          <!-- Tarjeta de Reportar Incidencia (Solo Profesor) -->
+          <div class="card warning" *ngIf="user.rol === 'Profesor'" [routerLink]="['/profesor/incidencias/crear']">
+            <div class="card-icon">⚠️</div>
+            <h3>Reportar Incidencia</h3>
+            <p>Comunica conflictos de tus exámenes asignados.</p>
           </div>
         </div>
       </main>
@@ -146,8 +160,9 @@ import { Router, RouterModule } from '@angular/router';
     }
 
     .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1.5rem;
     }
 
@@ -159,6 +174,9 @@ import { Router, RouterModule } from '@angular/router';
       cursor: pointer;
       transition: all 0.2s;
       border: 1px solid #e2e8f0;
+      width: 300px;
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
 
     .card:hover {
@@ -187,6 +205,15 @@ import { Router, RouterModule } from '@angular/router';
     .card.accent {
       background: #eff6ff;
       border-color: #bfdbfe;
+    }
+
+    .card.warning {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .card.warning:hover {
+      border-color: #d97706;
     }
   `]
 })

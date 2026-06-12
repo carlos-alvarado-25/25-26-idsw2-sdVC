@@ -86,6 +86,10 @@ Definición de la estructura de directorios del código fuente y políticas de i
 - [eliminarProfesor](casos-uso/eliminarProfesor/README.md) - Diseño del borrado seguro con diagnóstico previo de impacto.
 - [listarConflictosExamenes](casos-uso/listarConflictosExamenes/README.md) - Diseño de la detección de conflictos de agenda del docente y gestión de preferencias horarias (PROFESOR_PREFERENCIAS_ABIERTO).
 
+### Contexto del Profesor
+- [comunicarIncidenciasHorario](casos-uso/comunicarIncidenciasHorario/README.md) - Diseño del reporte de incidencias y conflictos sobre exámenes asignados.
+- [completarComunicacion](casos-uso/completarComunicacion/README.md) - Diseño de la transición de navegación y retorno tras reportar o cancelar.
+
 ### Gestión de Exámenes y Calendario
 - [abrirExamenes](casos-uso/abrirExamenes/README.md) - Diseño del listado paginado y hub del calendario de exámenes.
 - [crearExamen](casos-uso/crearExamen/README.md) - Diseño de la creación de examen con patrón El Delgado y validación de unicidad de código.

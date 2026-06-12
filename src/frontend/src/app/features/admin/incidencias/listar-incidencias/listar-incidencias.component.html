@@ -1,0 +1,97 @@
+<div class="admin-container">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a [routerLink]="['/home']">🏠 Inicio</a> / 
+      <span>⚠️ Incidencias de Horarios</span>
+    </div>
+    <h1>Bandeja de Incidencias Reportadas</h1>
+  </header>
+
+  <div *ngIf="success()" class="success-alert">
+    ✅ {{ success() }}
+  </div>
+
+  <div *ngIf="error()" class="error-alert">
+    ❌ {{ error() }}
+  </div>
+
+  <div class="table-card" *ngIf="currentUser()?.rol === 'Admin'; else unauthorized">
+    <div class="loading-overlay" *ngIf="loading()">
+      <span class="loader"></span>
+    </div>
+
+    <!-- Mensaje si no hay incidencias -->
+    <div class="empty-state" *ngIf="incidencias().length === 0 && !loading()">
+      <div class="empty-icon">🎉</div>
+      <h3>Sin Incidencias Pendientes</h3>
+      <p>Todos los profesores están conformes con sus horarios asignados.</p>
+    </div>
+
+    <!-- Tabla de Incidencias -->
+    <table class="data-table" *ngIf="incidencias().length > 0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Profesor</th>
+          <th>Examen</th>
+          <th>Tipo</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inc of incidencias()">
+          <td>#{{ inc.id }}</td>
+          <td>
+            <strong>{{ inc.nombreProfesor }}</strong>
+            <br><small>{{ inc.profesor?.departamento }}</small>
+          </td>
+          <td>
+            <strong>{{ inc.codigoExamen }}</strong>
+            <br><small>{{ inc.nombreAsignatura }}</small>
+          </td>
+          <td>
+            <span class="badge-type">{{ inc.tipo }}</span>
+          </td>
+          <td class="desc-cell" [title]="inc.descripcion">
+            {{ inc.descripcion }}
+          </td>
+          <td>
+            <span class="status-badge" [class]="inc.estado.toLowerCase()">
+              {{ inc.estado }}
+            </span>
+          </td>
+          <td class="actions-cell">
+            <!-- Acciones según el estado -->
+            <button 
+              *ngIf="inc.estado === 'PENDIENTE'"
+              class="btn-action resolve" 
+              (click)="cambiarEstado(inc.id, 'RESUELTA')"
+              title="Resolver Incidencia"
+            >
+              Resolve
+            </button>
+            <button 
+              *ngIf="inc.estado === 'PENDIENTE'"
+              class="btn-action reject" 
+              (click)="cambiarEstado(inc.id, 'RECHAZADA')"
+              title="Rechazar Incidencia"
+            >
+              Reject
+            </button>
+            <span *ngIf="inc.estado !== 'PENDIENTE'" class="text-muted">Procesada</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #unauthorized>
+    <div class="error-alert" style="margin-top: 2rem;">
+      <h3>Acceso no autorizado</h3>
+      <p>Esta pantalla está reservada para el rol de Administrador. Inicie sesión con una cuenta válida para continuar.</p>
+      <button class="btn-primary" [routerLink]="['/login']" style="margin-top: 1rem;">Ir al Login</button>
+    </div>
+  </ng-template>
+</div>

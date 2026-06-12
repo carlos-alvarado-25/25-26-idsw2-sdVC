@@ -9,6 +9,7 @@ import { Alumno } from './entities/alumno.entity';
 import { Profesor } from './entities/profesor.entity';
 import { Examen } from './entities/examen.entity';
 import { Preferencia } from './entities/preferencia.entity';
+import { Incidencia } from './entities/incidencia.entity';
 import { AuthModule } from './modules/auth/auth.module';
 import { GradoModule } from './modules/grados/grados.module';
 import { AsignaturasModule } from './modules/asignaturas/asignaturas.module';
@@ -18,6 +19,7 @@ import { ProfesoresModule } from './modules/profesores/profesores.module';
 import { ExamenesModule } from './modules/examenes/examenes.module';
 import { CommonModule } from './common/common.module';
 import { CalendarioModule } from './modules/calendario/calendario.module';
+import { IncidenciasModule } from './modules/incidencias/incidencias.module';
 
 @Module({
   imports: [
@@ -31,7 +33,7 @@ import { CalendarioModule } from './modules/calendario/calendario.module';
       username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || 'password',
       database: process.env.DB_DATABASE || 'generador_calendarios',
-      entities: [Usuario, Grado, Asignatura, Aula, Alumno, Profesor, Examen, Preferencia],
+      entities: [Usuario, Grado, Asignatura, Aula, Alumno, Profesor, Examen, Preferencia, Incidencia],
       synchronize: false,
     }),
     CommonModule,
@@ -43,6 +45,7 @@ import { CalendarioModule } from './modules/calendario/calendario.module';
     ProfesoresModule,
     ExamenesModule,
     CalendarioModule,
+    IncidenciasModule,
   ],
   controllers: [],
   providers: [],
