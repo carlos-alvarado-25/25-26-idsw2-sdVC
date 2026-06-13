@@ -173,14 +173,16 @@ export class AlumnoService {
       alumno.grado = grado;
     }
 
-    if (dto.email && dto.email !== alumno.email) {
-      if (alumno.usuarioId) {
-        await this.usersService.updateEmail(alumno.usuarioId, dto.email);
+    return this.alumnoRepository.manager.transaction(async (em) => {
+      if (dto.email && dto.email !== alumno.email) {
+        if (alumno.usuarioId) {
+          await this.usersService.updateEmail(alumno.usuarioId, dto.email, em);
+        }
       }
-    }
 
-    Object.assign(alumno, dto);
-    return this.alumnoRepository.save(alumno);
+      Object.assign(alumno, dto);
+      return em.save(Alumno, alumno);
+    });
   }
 
   async findAll(page: number = 1): Promise<PagedResultDto<Alumno>> {
@@ -225,16 +227,18 @@ export class AlumnoService {
   }
 
   async removeBulk(ids: number[]): Promise<void> {
-    const alumnos = await this.alumnoRepository.find({
-      where: { id: In(ids) },
-    });
-    const usuarioIds = alumnos
-      .map((a) => a.usuarioId)
-      .filter((uid): uid is number => uid !== null);
+    await this.alumnoRepository.manager.transaction(async (em) => {
+      const alumnos = await em.find(Alumno, {
+        where: { id: In(ids) },
+      });
+      const usuarioIds = alumnos
+        .map((a) => a.usuarioId)
+        .filter((uid): uid is number => uid !== null);
 
-    await this.alumnoRepository.delete(ids);
-    if (usuarioIds.length > 0) {
-      await this.usersService.deleteUsers(usuarioIds);
-    }
+      await em.delete(Alumno, ids);
+      if (usuarioIds.length > 0) {
+        await this.usersService.deleteUsers(usuarioIds, em);
+      }
+    });
   }
 }

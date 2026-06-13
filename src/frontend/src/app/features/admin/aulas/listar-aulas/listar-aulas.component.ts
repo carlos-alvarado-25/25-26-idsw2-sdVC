@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AulaService, Aula } from '../../../../core/services/aula.service';
-import { finalize } from 'rxjs';
+import { finalize, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-listar-aulas',
@@ -67,18 +67,33 @@ export class ListarAulasComponent implements OnInit {
     const ids = Array.from(this.selectedIds());
     if (ids.length === 0) return;
 
-    if (confirm(`¿Está seguro de eliminar las ${ids.length} aulas seleccionadas?`)) {
-      this.loading.set(true);
-      this.aulaService.eliminarBulk(ids)
-        .pipe(finalize(() => this.loading.set(false)))
-        .subscribe({
-          next: () => {
-            this.selectedIds.set(new Set());
-            this.cargarAulas();
-          },
-          error: (err) => alert('Error al eliminar las aulas seleccionadas')
-        });
-    }
+    this.loading.set(true);
+    forkJoin(ids.map(id => this.aulaService.verificarImpacto(id)))
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: (resultados) => {
+          const totalExamenes = resultados.reduce((acc, r) => acc + r.examenesAsociados, 0);
+          let mensaje = `¿Está seguro de eliminar las ${ids.length} aulas seleccionadas?`;
+          if (totalExamenes > 0) {
+            mensaje += `\n\nADVERTENCIA: Las aulas seleccionadas tienen en total ${totalExamenes} exámen(es) programado(s) que quedarán sin espacio asignado.`;
+          }
+          if (confirm(mensaje)) {
+            this.loading.set(true);
+            this.aulaService.eliminarBulk(ids)
+              .pipe(finalize(() => this.loading.set(false)))
+              .subscribe({
+                next: () => {
+                  this.selectedIds.set(new Set());
+                  this.cargarAulas();
+                },
+                error: () => alert('Error al eliminar las aulas seleccionadas')
+              });
+          }
+        },
+        error: () => {
+          alert('No se pudo verificar el impacto de la eliminación. Por favor, intente de nuevo.');
+        }
+      });
   }
 
   onSearch(): void {

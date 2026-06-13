@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProfesorService, Profesor } from '../../../../core/services/profesor.service';
 import { PagedResult } from '../../../../core/services/grado.service';
-import { finalize } from 'rxjs';
+import { finalize, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-listar-profesores',
@@ -83,18 +83,33 @@ export class ListarProfesoresComponent implements OnInit {
     const ids = Array.from(this.selectedIds());
     if (ids.length === 0) return;
 
-    if (confirm(`¿Está seguro de eliminar los ${ids.length} profesores seleccionados?`)) {
-      this.loading.set(true);
-      this.profesorService.eliminarBulk(ids)
-        .pipe(finalize(() => this.loading.set(false)))
-        .subscribe({
-          next: () => {
-            this.selectedIds.set(new Set());
-            this.cargarProfesores(this.currentPage());
-          },
-          error: (err) => alert('Error al eliminar los profesores seleccionados')
-        });
-    }
+    this.loading.set(true);
+    forkJoin(ids.map(id => this.profesorService.obtenerImpacto(id)))
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: (resultados) => {
+          const totalExamenes = resultados.reduce((acc, r) => acc + r.examenesCount, 0);
+          let mensaje = `¿Está seguro de eliminar los ${ids.length} profesores seleccionados?`;
+          if (totalExamenes > 0) {
+            mensaje += `\n\n¡ATENCIÓN! Los profesores seleccionados tienen en total ${totalExamenes} exámen(es) programado(s) asociados que quedarán desvinculados.`;
+          }
+          if (confirm(mensaje)) {
+            this.loading.set(true);
+            this.profesorService.eliminarBulk(ids)
+              .pipe(finalize(() => this.loading.set(false)))
+              .subscribe({
+                next: () => {
+                  this.selectedIds.set(new Set());
+                  this.cargarProfesores(this.currentPage());
+                },
+                error: () => alert('Error al eliminar los profesores seleccionados')
+              });
+          }
+        },
+        error: () => {
+          alert('No se pudo verificar el impacto de la eliminación. Inténtelo de nuevo.');
+        }
+      });
   }
 
   eliminarProfesor(profesor: Profesor): void {

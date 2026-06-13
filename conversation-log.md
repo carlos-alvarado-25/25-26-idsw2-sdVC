@@ -1820,3 +1820,32 @@ Todos los usuarios creados por importación CSV o creación manual de alumno/pro
 
 **Decisión:** Se cierra formalmente la sesión habiendo diseñado el flujo y estructura para el soporte de asignaturas multigrado, aplicando una refactorización preventiva de abstracción en la capa de validación de NestJS para desacoplar el motor y la inyección de dependencias.
 
+
+---
+
+## [13/06/2026 23:47] Sesión 90: Auditoría General del Sistema y Corrección de Advertencias en Eliminación Bulk
+
+**Prompt:** «Perfecto. Ahora quiero que revises el proyecto de forma general. Vayas revisando la documentación, el requisitado y todo y verifiques si mi sistema funciona de forma correcta y cumple con todo lo que promete. Además dime si hay inconsistencias en cuanto a calidad y limpieza de código considerando los principios y pautas definidos y haz una revisión exhaustiva de flujos y posibles caminos que no hayamos tomado en cuenta.» -> «HAZLO!» -> «Otra situación que detecté fue que al momento de eliminar por bulk, no me salen las advertencias.» -> «continua» -> «HAZLO!» -> «Perfecto finalicemos la sesión entonces ahora.»
+
+**Resultado:**
+
+- **Auditoría General del Sistema (Fase de Elaboración)**:
+  - Se realizó una revisión exhaustiva del backend (NestJS) y el frontend (Angular), validando que el sistema cumple con los requisitos de la fase de especificación y los principios de diseño RUP.
+  - Se verificó la integridad de las 14 pruebas unitarias de Jest y la prueba E2E de Supertest, todas en estado **PASS**.
+  - Se auditaron los flujos principales: autenticación JWT, CRUD completo de todas las entidades (Grados, Asignaturas, Aulas, Profesores, Alumnos, Exámenes), generación del calendario combinatorio y exportación a PDF/Excel.
+  - Se identificaron y documentaron inconsistencias de calidad en el código (code smells), cubriendo: violaciones menores de Ley de Demeter residuales, uso de `console.log` en producción, y la ausencia de advertencias en la eliminación bulk (principal incidencia de la sesión).
+  - Se generaron artefactos de auditoría: `reporte_auditoria_general.md`, `reporte_calidad_incidencias.md`, `reporte_auditoria_academica.md`, `reporte_auditoria_arquitectura.md` y `auditoria_servicios_backend.md`.
+- **Refactorización de Transacciones Backend (AlumnoService y ProfesorService)**:
+  - Se refactorizaron los métodos `update` y `removeBulk` en [AlumnoService](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/alumnos/alumnos.service.ts) y [ProfesorService](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/profesores/profesores.service.ts) para ejecutarse dentro de transacciones TypeORM explícitas, previniendo la creación de usuarios huérfanos ante fallos de base de datos.
+- **Corrección de Advertencias en Eliminación Bulk (Frontend)**:
+  - **Problema detectado**: Los métodos `eliminarSeleccionados()` en todos los componentes de listado ejecutaban un `confirm()` genérico sin consultar los endpoints de impacto del backend, a diferencia de la eliminación individual que sí mostraba advertencias detalladas.
+  - **Solución aplicada (Opción Frontend Paralela, sin cambios en backend)**: Se incorporó `forkJoin` de RxJS en los 4 componentes afectados para consultar en paralelo los endpoints de impacto de todos los IDs seleccionados, sumar los totales y construir un mensaje de advertencia enriquecido antes de ejecutar el bulk delete.
+  - **Componentes modificados**:
+    - [listar-grados.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/admin/grados/listar-grados/listar-grados.component.ts): `forkJoin` sobre `verificarImpacto(id)` → avisa total de asignaturas vinculadas.
+    - [listar-asignaturas.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/admin/asignaturas/listar-asignaturas/listar-asignaturas.component.ts): `forkJoin` sobre `verificarImpacto(id)` → avisa total de exámenes programados a eliminar.
+    - [listar-aulas.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/admin/aulas/listar-aulas/listar-aulas.component.ts): `forkJoin` sobre `verificarImpacto(id)` → avisa total de exámenes que quedarán sin espacio asignado.
+    - [listar-profesores.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/admin/profesores/listar-profesores/listar-profesores.component.ts): `forkJoin` sobre `obtenerImpacto(id)` → avisa total de exámenes que quedarán desvinculados.
+  - El componente de Alumnos no requirió cambios al no existir un endpoint de impacto (sin dependencias críticas).
+  - Compilación de TypeScript (`tsc --noEmit`) sin errores tras los cambios.
+
+**Decisión:** Se cierra formalmente la sesión habiendo completado una auditoría general del sistema y corregido la inconsistencia de comportamiento en la eliminación bulk, asegurando paridad de advertencias entre la eliminación individual y la masiva en todos los módulos administrativos.

@@ -127,41 +127,48 @@ export class ProfesorService {
       if (existEmail) {
         throw new ConflictException(`El email ${dto.email} ya está en uso`);
       }
-      if (profesor.usuarioId) {
-        await this.usersService.updateEmail(profesor.usuarioId, dto.email);
-      }
     }
 
-    if (dto.nombre) profesor.nombre = dto.nombre;
-    if (dto.codigo) profesor.codigo = dto.codigo;
-    if (dto.email) profesor.email = dto.email;
-    if (dto.departamento) profesor.departamento = dto.departamento;
-
-    if (dto.asignaturasIds !== undefined) {
-      if (dto.asignaturasIds.length > 0) {
-        const asignaturas = await this.asignaturaRepository.findBy({ id: In(dto.asignaturasIds) });
-        profesor.asignaturas = asignaturas;
-      } else {
-        profesor.asignaturas = [];
+    return this.profesorRepository.manager.transaction(async (em) => {
+      if (dto.email && dto.email !== profesor.email) {
+        if (profesor.usuarioId) {
+          await this.usersService.updateEmail(profesor.usuarioId, dto.email, em);
+        }
       }
-    }
 
-    return this.profesorRepository.save(profesor);
+      if (dto.nombre) profesor.nombre = dto.nombre;
+      if (dto.codigo) profesor.codigo = dto.codigo;
+      if (dto.email) profesor.email = dto.email;
+      if (dto.departamento) profesor.departamento = dto.departamento;
+
+      if (dto.asignaturasIds !== undefined) {
+        if (dto.asignaturasIds.length > 0) {
+          const asignaturas = await em.findBy(Asignatura, { id: In(dto.asignaturasIds) });
+          profesor.asignaturas = asignaturas;
+        } else {
+          profesor.asignaturas = [];
+        }
+      }
+
+      return em.save(Profesor, profesor);
+    });
   }
 
   async removeBulk(ids: number[]): Promise<void> {
-    const profesores = await this.profesorRepository.find({
-      where: { id: In(ids) },
+    await this.profesorRepository.manager.transaction(async (em) => {
+      const profesores = await em.find(Profesor, {
+        where: { id: In(ids) },
+      });
+      const usuarioIds = profesores
+        .map((p) => p.usuarioId)
+        .filter((uid): uid is number => uid !== null);
+
+      await em.delete(Profesor, ids);
+
+      if (usuarioIds.length > 0) {
+        await this.usersService.deleteUsers(usuarioIds, em);
+      }
     });
-    const usuarioIds = profesores
-      .map((p) => p.usuarioId)
-      .filter((uid): uid is number => uid !== null);
-
-    await this.profesorRepository.delete(ids);
-
-    if (usuarioIds.length > 0) {
-      await this.usersService.deleteUsers(usuarioIds);
-    }
   }
 
   async getImpacto(id: number): Promise<{ examenesCount: number }> {

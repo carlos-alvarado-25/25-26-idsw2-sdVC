@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { GradoService, Grado, PagedResult } from '../../../../core/services/grado.service';
-import { finalize } from 'rxjs';
+import { finalize, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-listar-grados',
@@ -73,18 +73,33 @@ export class ListarGradosComponent implements OnInit {
     const ids = Array.from(this.selectedIds());
     if (ids.length === 0) return;
 
-    if (confirm(`¿Está seguro de eliminar los ${ids.length} grados seleccionados?`)) {
-      this.loading.set(true);
-      this.gradoService.eliminarBulk(ids)
-        .pipe(finalize(() => this.loading.set(false)))
-        .subscribe({
-          next: () => {
-            this.selectedIds.set(new Set());
-            this.cargarGrados(this.currentPage());
-          },
-          error: (err) => alert('Error al eliminar los grados seleccionados')
-        });
-    }
+    this.loading.set(true);
+    forkJoin(ids.map(id => this.gradoService.verificarImpacto(id)))
+      .pipe(finalize(() => this.loading.set(false)))
+      .subscribe({
+        next: (resultados) => {
+          const totalAsignaturas = resultados.reduce((acc, n) => acc + n, 0);
+          let mensaje = `¿Está seguro de eliminar los ${ids.length} grados seleccionados?`;
+          if (totalAsignaturas > 0) {
+            mensaje += `\n\nADVERTENCIA: Los grados seleccionados tienen en total ${totalAsignaturas} asignatura(s) vinculada(s) que también podrían verse afectadas.`;
+          }
+          if (confirm(mensaje)) {
+            this.loading.set(true);
+            this.gradoService.eliminarBulk(ids)
+              .pipe(finalize(() => this.loading.set(false)))
+              .subscribe({
+                next: () => {
+                  this.selectedIds.set(new Set());
+                  this.cargarGrados(this.currentPage());
+                },
+                error: () => alert('Error al eliminar los grados seleccionados')
+              });
+          }
+        },
+        error: () => {
+          alert('No se pudo verificar el impacto de la eliminación. Por favor, intente de nuevo.');
+        }
+      });
   }
 
   onSearch(): void {
