@@ -7,14 +7,28 @@ import { Preferencia } from '../../../entities/preferencia.entity';
 import { TimeUtils } from '../../../common/utils/time.utils';
 import { ConflictoAlumnoDto } from '../dto/conflicto-alumno.dto';
 
+export abstract class ExamenConflictValidator {
+  abstract verificarRestricciones(examen: Examen, excludeExamenId: number): Promise<void>;
+  abstract verificarConflictoProfesor(
+    examenId: number,
+    profesorId: number,
+    fecha: string,
+    hora: string,
+    duracion: number,
+  ): Promise<{ tieneConflicto: boolean; descripcion?: string }>;
+  abstract calcularTodosConflictosAlumnos(examenesProf: Examen[]): Promise<ConflictoAlumnoDto[]>;
+}
+
 @Injectable()
-export class ExamenConflictValidator {
+export class SimpleExamenConflictValidator extends ExamenConflictValidator {
   constructor(
     @InjectRepository(Examen)
     private readonly examenRepository: Repository<Examen>,
     @InjectRepository(Profesor)
     private readonly profesorRepository: Repository<Profesor>,
-  ) {}
+  ) {
+    super();
+  }
 
   /**
    * Verifica solapamientos físicos de aula y profesor, así como preferencias horarias.

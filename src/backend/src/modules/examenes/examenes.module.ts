@@ -10,7 +10,7 @@ import { ExamenController } from './examenes.controller';
 import { ExcelExporterService } from './services/exporters/excel-exporter.service';
 import { PdfExporterService } from './services/exporters/pdf-exporter.service';
 import { ExamenExporterFactory } from './services/exporters/exporter.factory';
-import { ExamenConflictValidator } from './services/examenes-conflict.validator';
+import { ExamenConflictValidator, SimpleExamenConflictValidator } from './services/examenes-conflict.validator';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Examen, Asignatura, Aula, Profesor, Alumno])],
@@ -20,7 +20,10 @@ import { ExamenConflictValidator } from './services/examenes-conflict.validator'
     ExcelExporterService,
     PdfExporterService,
     ExamenExporterFactory,
-    ExamenConflictValidator,
+    {
+      provide: ExamenConflictValidator,
+      useClass: SimpleExamenConflictValidator,
+    },
   ],
   exports: [ExamenService, ExamenExporterFactory, ExamenConflictValidator],
 })

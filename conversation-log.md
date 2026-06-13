@@ -1798,3 +1798,25 @@ Todos los usuarios creados por importación CSV o creación manual de alumno/pro
 
 **Decisión:** Se cierra formalmente la sesión habiendo robustecido la estabilidad y reactividad de la capa de interfaz, eliminando latencias e inconsistencias operativas en el flujo de creación y depurando la precisión diagnóstica del motor combinatorial.
 
+---
+
+## [13/06/2026 23:16] Sesión 89: Abstracción del Validador de Conflictos para Co-Programación Multigrado
+
+**Prompt:** «Ahora consideremos una situación, por ejemplo Matemáticas I, la dan varios grados al mismo tiempo...» -> «Pero esto no está soportado por los requisitos no?...» -> «Y para corregirlo, que podría decir que aplique y demuestre los principios y pautas de diseño» -> «Y cual sería el flujo para esta solución» -> «Entonces si me preguntan acerca de ello...» -> «Y podríamos ya ahora abstraer la interfaz de ExamenConflictValidator...» -> «HAZLO!» -> «Clase Abstracta? No sería interfaz?...» -> «La 1. HAZLO!»
+
+**Resultado:**
+
+- **Análisis de Diseño para Asignaturas Multigrado**:
+  - Se analizó la limitación actual del dominio donde la relación de `Asignatura` con `Grado` es Many-to-One y el código es único.
+  - Se formularon justificaciones formales basadas en RUP para defender por qué esta funcionalidad está fuera del alcance de la iteración actual (Línea Base de Requisitos).
+  - Se diseñó la arquitectura lógica para su corrección mediante el patrón de **Co-Programación por Indirección** con una nueva entidad `GrupoExamen` (evitando alterar el modelo académico estable) y la aplicación del principio **Abierto/Cerrado (OCP)**.
+- **Refactorización de la Capa de Validación (Abstracción en NestJS)**:
+  - Se implementó la abstracción de la validación mediante una clase abstracta pura `ExamenConflictValidator` en [examenes-conflict.validator.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/examenes/services/examenes-conflict.validator.ts) que actúa como contrato del dominio y Token de Inyección de Dependencias.
+  - Se renombró la clase existente a `SimpleExamenConflictValidator` heredando de la clase abstracta.
+  - Se configuró el proveedor de inyección de dependencias en [examenes.module.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/examenes/examenes.module.ts) usando el mapeo `{ provide: ExamenConflictValidator, useClass: SimpleExamenConflictValidator }`.
+  - Esta arquitectura desacopla el validador preparando al sistema para inyectar nuevas estrategias de validación (como una futura `GroupedConflictValidator`) sin alterar la lógica de `ExamenService`.
+- **Verificación**:
+  - Compilación y test unitarios Jest 100% en verde.
+
+**Decisión:** Se cierra formalmente la sesión habiendo diseñado el flujo y estructura para el soporte de asignaturas multigrado, aplicando una refactorización preventiva de abstracción en la capa de validación de NestJS para desacoplar el motor y la inyección de dependencias.
+
