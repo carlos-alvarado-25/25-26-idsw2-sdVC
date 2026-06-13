@@ -3,6 +3,7 @@ import { Aula } from '../../entities/aula.entity';
 import { Profesor } from '../../entities/profesor.entity';
 import { Preferencia } from '../../entities/preferencia.entity';
 import { GeneracionResultDto, ConflictInfo } from './dto/generacion-result.dto';
+import { TimeUtils } from '../../common/utils/time.utils';
 
 export interface GeneracionConfig {
   examenesPendientes: Examen[];
@@ -110,16 +111,14 @@ export class CalendarioEngine {
     let puntuacion = 0;
 
     for (const ex of asignados) {
-      if (ex.asignatura?.gradoId !== gradoId || !ex.fecha) {
+      if (ex.gradoId !== gradoId || !ex.fecha) {
         continue;
       }
 
       const diffDias = this.getDaysDifference(fechaPropuesta, ex.fecha);
 
-      // Mismo cuatrimestre es crítico (solapamientos para alumnos)
-      if (ex.asignatura?.cuatrimestre === cuatrimestre) {
-        if (ex.asignatura?.curso === curso) {
-          // Mismo curso y mismo cuatrimestre (misma cohorte)
+      if (ex.cuatrimestre === cuatrimestre) {
+        if (ex.curso === curso) {
           if (diffDias === 0) {
             puntuacion -= 100;
           } else if (diffDias === 1) {
@@ -130,9 +129,8 @@ export class CalendarioEngine {
             puntuacion -= 5; 
           }
         } else {
-          // Distinto curso pero mismo cuatrimestre (repetidor)
           if (diffDias === 0) {
-            puntuacion -= 50;  // penalizar coincidencia de día
+            puntuacion -= 50; 
           } else if (diffDias === 1) {
             puntuacion -= 20;  
           } else if (diffDias === 2) {
@@ -140,7 +138,6 @@ export class CalendarioEngine {
           }
         }
       } else {
-        // Distinto cuatrimestre (baja probabilidad de matrícula concurrente)
         if (diffDias === 0) {
           puntuacion -= 10;
         }
@@ -158,27 +155,22 @@ export class CalendarioEngine {
     examenes: Examen[]
   ): boolean {
     const [inicio, fin] = franja.split('-');
-    const slotStart = this.convertTimeToMinutes(inicio);
-    const slotEnd = this.convertTimeToMinutes(fin);
+    const slotStart = TimeUtils.convertTimeToMinutes(inicio);
+    const slotEnd = TimeUtils.convertTimeToMinutes(fin);
 
     return examenes.some(ex => {
       if (
         ex.fecha !== fecha || 
         !ex.hora || 
-        ex.asignatura?.gradoId !== gradoId || 
-        ex.asignatura?.cuatrimestre !== cuatrimestre
+        ex.gradoId !== gradoId || 
+        ex.cuatrimestre !== cuatrimestre
       ) {
         return false;
       }
-      const exStart = this.convertTimeToMinutes(ex.hora);
+      const exStart = TimeUtils.convertTimeToMinutes(ex.hora);
       const exEnd = exStart + ex.duracion;
-      return slotStart < exEnd && exStart < slotEnd;
+      return TimeUtils.hasOverlap(slotStart, slotEnd, exStart, exEnd);
     });
-  }
-
-  private convertTimeToMinutes(timeStr: string): number {
-    const [hours, minutes] = timeStr.split(':').map(Number);
-    return hours * 60 + minutes;
   }
 
   private buscarSlotOptimo(
@@ -189,9 +181,9 @@ export class CalendarioEngine {
     asignados: Examen[]
   ): { slot: Slot; aula: Aula } | null {
     let mejorAsignacion: { slot: Slot; aula: Aula; profesor: Profesor; puntuacion: number } | null = null;
-    const gradoId = examen.asignatura?.gradoId;
-    const curso = examen.asignatura?.curso || 1;
-    const cuatrimestre = examen.asignatura?.cuatrimestre || 1;
+    const gradoId = examen.gradoId;
+    const curso = examen.curso || 1;
+    const cuatrimestre = examen.cuatrimestre || 1;
 
     const candidatos = profesores.filter(p => p.puedeImpartirAsignatura(examen.asignaturaId));
     const profesoresAEvaluar = examen.profesor ? [examen.profesor] : candidatos;
@@ -201,7 +193,6 @@ export class CalendarioEngine {
     }
 
     for (const slot of slots) {
-      // Restricción dura: No programar exámenes del mismo grado y cuatrimestre en la misma franja
       if (gradoId) {
         const tieneCruce = this.tieneCruceGradoYCuatrimestre(
           slot.fecha,

@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 import { Profesor } from '../../entities/profesor.entity';
 import { Asignatura } from '../../entities/asignatura.entity';
 import { Examen } from '../../entities/examen.entity';
@@ -13,6 +12,8 @@ import { ImportResultDto } from './dto/import-result.dto';
 import { FileParserFactory } from '../../common/services/file-parser.factory';
 import { Preferencia } from '../../entities/preferencia.entity';
 import { CrearPreferenciaDto } from './dto/crear-preferencia.dto';
+import { TimeUtils } from '../../common/utils/time.utils';
+import { UsersService } from '../auth/users.service';
 
 
 @Injectable()
@@ -28,9 +29,8 @@ export class ProfesorService {
     private readonly examenRepository: Repository<Examen>,
     @InjectRepository(Preferencia)
     private readonly preferenciaRepository: Repository<Preferencia>,
-    @InjectRepository(Usuario)
-    private readonly usuarioRepository: Repository<Usuario>,
     private readonly fileParserFactory: FileParserFactory,
+    private readonly usersService: UsersService,
   ) {}
 
   async findAll(page: number = 1): Promise<PagedResultDto<Profesor>> {
@@ -87,21 +87,13 @@ export class ProfesorService {
       throw new ConflictException(`El email ${email} ya está registrado`);
     }
 
-    const defaultPasswordHash = await bcrypt.hash('idsw2_2026', 10);
-
     return this.profesorRepository.manager.transaction(async (transactionalEntityManager) => {
-      // 1. Crear usuario
-      let usuario = await transactionalEntityManager.findOneBy(Usuario, { email });
-      if (!usuario) {
-        usuario = transactionalEntityManager.create(Usuario, {
-          email,
-          password: defaultPasswordHash,
-          rol: UserRole.PROFESOR,
-        });
-        usuario = await transactionalEntityManager.save(Usuario, usuario);
-      }
+      const usuario = await this.usersService.getOrCreateAssociatedUser(
+        email,
+        UserRole.PROFESOR,
+        transactionalEntityManager,
+      );
 
-      // 2. Crear profesor
       const nuevo = this.profesorRepository.create({
         codigo,
         nombre: dto.nombre,
@@ -136,7 +128,7 @@ export class ProfesorService {
         throw new ConflictException(`El email ${dto.email} ya está en uso`);
       }
       if (profesor.usuarioId) {
-        await this.usuarioRepository.update(profesor.usuarioId, { email: dto.email });
+        await this.usersService.updateEmail(profesor.usuarioId, dto.email);
       }
     }
 
@@ -165,11 +157,10 @@ export class ProfesorService {
       .map((p) => p.usuarioId)
       .filter((uid): uid is number => uid !== null);
 
-    // TODO: Eliminar todas las restricciones de PreferenciaRepository vinculadas a los ids de profesores.
     await this.profesorRepository.delete(ids);
 
     if (usuarioIds.length > 0) {
-      await this.usuarioRepository.delete(usuarioIds);
+      await this.usersService.deleteUsers(usuarioIds);
     }
   }
 
@@ -186,9 +177,6 @@ export class ProfesorService {
     let fallos = 0;
     const detalles: string[] = [];
 
-    const defaultPasswordHash = await bcrypt.hash('idsw2_2026', 10);
-
-    // Cada fila se procesa en su propia transacción independiente para aislar fallos
     for (let i = 0; i < rawData.length; i++) {
       const row = rawData[i];
       const { codigo, nombre, email, departamento } = row;
@@ -215,18 +203,12 @@ export class ProfesorService {
 
       try {
         await this.profesorRepository.manager.transaction(async (em) => {
-          // 1. Crear o reutilizar usuario
-          let usuario = await em.findOneBy(Usuario, { email });
-          if (!usuario) {
-            usuario = em.create(Usuario, {
-              email,
-              password: defaultPasswordHash,
-              rol: UserRole.PROFESOR,
-            });
-            usuario = await em.save(Usuario, usuario);
-          }
+          const usuario = await this.usersService.getOrCreateAssociatedUser(
+            email,
+            UserRole.PROFESOR,
+            em,
+          );
 
-          // 2. Crear profesor
           const profesor = em.create(Profesor, {
             codigo,
             nombre,
@@ -268,7 +250,12 @@ export class ProfesorService {
     });
 
     const hasOverlap = existing.some(p => {
-      return dto.horaInicio < p.horaFin && p.horaInicio < dto.horaFin;
+      return TimeUtils.hasOverlap(
+        TimeUtils.convertTimeToMinutes(dto.horaInicio),
+        TimeUtils.convertTimeToMinutes(dto.horaFin),
+        TimeUtils.convertTimeToMinutes(p.horaInicio),
+        TimeUtils.convertTimeToMinutes(p.horaFin),
+      );
     });
 
     if (hasOverlap) {

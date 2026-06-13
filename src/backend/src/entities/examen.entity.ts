@@ -65,6 +65,26 @@ export class Examen {
     return this.profesor ? this.profesor.nombre : 'Sin Asignar';
   }
 
+  @Expose()
+  get nombreGrado(): string {
+    return this.asignatura ? this.asignatura.nombreGrado : 'Sin Grado';
+  }
+
+  @Expose()
+  get gradoId(): number | undefined {
+    return this.asignatura ? this.asignatura.gradoId : undefined;
+  }
+
+  @Expose()
+  get curso(): number | undefined {
+    return this.asignatura ? this.asignatura.curso : undefined;
+  }
+
+  @Expose()
+  get cuatrimestre(): number | undefined {
+    return this.asignatura ? this.asignatura.cuatrimestre : undefined;
+  }
+
   totalAlumnos: number;
 
   @CreateDateColumn()

@@ -124,7 +124,7 @@
                 <span class="exam-badge-type">{{ ex.tipo }}</span>
               </div>
               <h4 class="subject-name">{{ ex.nombreAsignatura }}</h4>
-              <span class="subject-code">{{ ex.codigoAsignatura }}<ng-container *ngIf="ex.asignatura?.curso"> · Curso {{ ex.asignatura?.curso }}º ({{ ex.asignatura?.cuatrimestre }}º Cuatr.)</ng-container></span>
+              <span class="subject-code">{{ ex.codigoAsignatura }}<ng-container *ngIf="ex.curso"> · Curso {{ ex.curso }}º ({{ ex.cuatrimestre }}º Cuatr.)</ng-container></span>
               
               <div class="location-details">
                 <span class="detail-item"><strong>Aula:</strong> {{ ex.nombreAula }}</span>
@@ -163,8 +163,8 @@
               <h3>{{ ex.nombreAsignatura }}</h3>
               <div class="card-meta">
                 <span><strong>Código:</strong> {{ ex.codigoAsignatura }}</span>
-                <span><strong>Curso:</strong> {{ ex.asignatura?.curso }}º · {{ ex.asignatura?.cuatrimestre }}º Cuatr.</span>
-                <span><strong>Grado:</strong> {{ ex.asignatura?.nombreGrado }}</span>
+                <span><strong>Curso:</strong> {{ ex.curso }}º · {{ ex.cuatrimestre }}º Cuatr.</span>
+                <span><strong>Grado:</strong> {{ ex.nombreGrado }}</span>
               </div>
               <div class="card-details">
                 <div class="detail-box">

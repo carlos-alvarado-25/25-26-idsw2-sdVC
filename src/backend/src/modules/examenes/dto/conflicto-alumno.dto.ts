@@ -10,5 +10,5 @@ export class ConflictoAlumnoDto {
   solapaConExamenCodigo: string;
   solapaConAsignaturaNombre: string;
   motivoConflicto: string;
-  tipoConflicto: string; // 'Alumnos' | 'Aula' | 'Profesor'
+  tipoConflicto: string;
 }

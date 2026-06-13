@@ -6,12 +6,12 @@ import { Asignatura } from '../../entities/asignatura.entity';
 import { Aula } from '../../entities/aula.entity';
 import { Profesor } from '../../entities/profesor.entity';
 import { Alumno } from '../../entities/alumno.entity';
-import { Preferencia } from '../../entities/preferencia.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 
 import { CrearExamenDto } from './dto/crear-examen.dto';
 import { UpdateExamenDto } from './dto/update-examen.dto';
 import { ConflictoAlumnoDto } from './dto/conflicto-alumno.dto';
+import { ExamenConflictValidator } from './services/examenes-conflict.validator';
 
 
 @Injectable()
@@ -29,6 +29,7 @@ export class ExamenService {
     private readonly profesorRepository: Repository<Profesor>,
     @InjectRepository(Alumno)
     private readonly alumnoRepository: Repository<Alumno>,
+    private readonly examenConflictValidator: ExamenConflictValidator,
   ) {}
 
   async findAll(page: number = 1): Promise<PagedResultDto<Examen>> {
@@ -165,62 +166,8 @@ export class ExamenService {
       }
     }
 
-    // --- SECCIÓN DE VALIDACIONES UNIFICADAS ---
     if (examen.fecha && examen.hora) {
-      const startMinutes = this.convertTimeToMinutes(examen.hora);
-      const endMinutes = startMinutes + examen.duracion;
-
-      // 1. Validar sobreposición de aula
-      if (examen.aulaId) {
-        const examenesAula = await this.examenRepository.find({
-          where: {
-            aulaId: examen.aulaId,
-            fecha: examen.fecha,
-            id: Not(id),
-          },
-        });
-
-        const conflicto = this.detectarSolapamiento(examenesAula, startMinutes, endMinutes);
-        if (conflicto) {
-          throw new ConflictException(`El aula "${examen.nombreAula}" ya está ocupada en esta franja horaria por el examen "${conflicto.codigo}"`);
-        }
-      }
-
-      // 2. Validar sobreposición de profesor
-      if (examen.profesorId) {
-        const examenesProf = await this.examenRepository.find({
-          where: {
-            profesorId: examen.profesorId,
-            fecha: examen.fecha,
-            id: Not(id),
-          },
-        });
-
-        const conflicto = this.detectarSolapamiento(examenesProf, startMinutes, endMinutes);
-        if (conflicto) {
-          const prof = await this.profesorRepository.findOneBy({ id: examen.profesorId });
-          throw new ConflictException(`El profesor "${prof?.nombre || 'seleccionado'}" ya supervisa otro examen en esta franja horaria ("${conflicto.codigo}")`);
-        }
-
-        // 3. Validar preferencias / exclusiones del profesor
-        const profesor = await this.profesorRepository.findOne({
-          where: { id: examen.profesorId },
-          relations: { preferencias: true },
-        });
-
-        if (profesor) {
-          const finHoraStr = this.minutesToTime(endMinutes);
-          const franja = `${examen.hora}-${finHoraStr}`;
-          
-          if (!profesor.estaDisponibleEn(examen.fecha, franja, profesor.preferencias)) {
-            const diaSemana = Preferencia.getDiaSemanaDeFecha(examen.fecha);
-            const nombreDia = Preferencia.getNombreDia(diaSemana);
-            throw new ConflictException(
-              `El profesor "${profesor.nombre}" no está disponible en esta franja horaria por una restricción de preferencia registrada (${nombreDia} de ${examen.hora} a ${finHoraStr}).`
-            );
-          }
-        }
-      }
+      await this.examenConflictValidator.verificarRestricciones(examen, id);
     }
 
     return this.examenRepository.save(examen);
@@ -272,148 +219,7 @@ export class ExamenService {
       },
     });
 
-    const conflictos: ConflictoAlumnoDto[] = [];
-    const conflictKeys = new Set<string>();
-
-    for (const ex of examenesProf) {
-      if (!ex.fecha || !ex.hora) continue;
-      const startMinutes = this.convertTimeToMinutes(ex.hora);
-      const endMinutes = startMinutes + ex.duracion;
-
-      // 1. Solapamiento de Alumnos (mismo Grado y mismo Cuatrimestre)
-      const exGradoId = ex.asignatura?.gradoId;
-      const exCuatrimestre = ex.asignatura?.cuatrimestre;
-      if (exGradoId && exCuatrimestre !== undefined) {
-        const candidatosGrado = await this.examenRepository.find({
-          where: {
-            fecha: ex.fecha,
-            id: Not(ex.id),
-            asignatura: {
-              gradoId: exGradoId,
-              cuatrimestre: exCuatrimestre,
-            },
-          },
-          relations: {
-            asignatura: {
-              grado: true,
-            },
-          },
-        });
-
-        for (const cand of candidatosGrado) {
-          if (!cand.hora) continue;
-          const candStart = this.convertTimeToMinutes(cand.hora);
-          const candEnd = candStart + cand.duracion;
-
-          if (startMinutes < candEnd && candStart < endMinutes) {
-            const key = `Alumnos-${ex.id < cand.id ? `${ex.id}-${cand.id}` : `${cand.id}-${ex.id}`}`;
-            if (!conflictKeys.has(key)) {
-              conflictKeys.add(key);
-              conflictos.push({
-                examenId: ex.id,
-                examenCodigo: ex.codigo,
-                asignaturaNombre: ex.nombreAsignatura,
-                gradoNombre: `${ex.asignatura?.nombreGrado || 'Desconocido'} (${exCuatrimestre}º Cuatr.)`,
-                fecha: ex.fecha,
-                hora: ex.hora,
-                duracion: ex.duracion,
-                solapaConExamenId: cand.id,
-                solapaConExamenCodigo: cand.codigo,
-                solapaConAsignaturaNombre: cand.nombreAsignatura,
-                motivoConflicto: `Los alumnos de "${ex.asignatura?.nombreGrado}" (${exCuatrimestre}º Cuatr.) tienen exámenes simultáneos: ${ex.codigo} y ${cand.codigo}.`,
-                tipoConflicto: 'Alumnos',
-              });
-            }
-          }
-        }
-      }
-
-      // 2. Sobreposición de Aula
-      if (ex.aulaId) {
-        const candidatosAula = await this.examenRepository.find({
-          where: {
-            fecha: ex.fecha,
-            aulaId: ex.aulaId,
-            id: Not(ex.id),
-          },
-          relations: {
-            asignatura: true,
-            aula: true,
-          },
-        });
-
-        for (const cand of candidatosAula) {
-          if (!cand.hora) continue;
-          const candStart = this.convertTimeToMinutes(cand.hora);
-          const candEnd = candStart + cand.duracion;
-
-          if (startMinutes < candEnd && candStart < endMinutes) {
-            const key = `Aula-${ex.id < cand.id ? `${ex.id}-${cand.id}` : `${cand.id}-${ex.id}`}`;
-            if (!conflictKeys.has(key)) {
-              conflictKeys.add(key);
-              conflictos.push({
-                examenId: ex.id,
-                examenCodigo: ex.codigo,
-                asignaturaNombre: ex.nombreAsignatura,
-                gradoNombre: ex.asignatura?.nombreGrado || 'Desconocido',
-                fecha: ex.fecha,
-                hora: ex.hora,
-                duracion: ex.duracion,
-                solapaConExamenId: cand.id,
-                solapaConExamenCodigo: cand.codigo,
-                solapaConAsignaturaNombre: cand.nombreAsignatura,
-                motivoConflicto: `Sobreposición de aula física: Ambos exámenes comparten el aula "${ex.nombreAula}" a la misma hora.`,
-                tipoConflicto: 'Aula',
-              });
-            }
-          }
-        }
-      }
-
-      // 3. Sobrecarga de Profesor
-      if (ex.profesorId) {
-        const candidatosProf = await this.examenRepository.find({
-          where: {
-            fecha: ex.fecha,
-            profesorId: ex.profesorId,
-            id: Not(ex.id),
-          },
-          relations: {
-            asignatura: true,
-            profesor: true,
-          },
-        });
-
-        for (const cand of candidatosProf) {
-          if (!cand.hora) continue;
-          const candStart = this.convertTimeToMinutes(cand.hora);
-          const candEnd = candStart + cand.duracion;
-
-          if (startMinutes < candEnd && candStart < endMinutes) {
-            const key = `Profesor-${ex.id < cand.id ? `${ex.id}-${cand.id}` : `${cand.id}-${ex.id}`}`;
-            if (!conflictKeys.has(key)) {
-              conflictKeys.add(key);
-              conflictos.push({
-                examenId: ex.id,
-                examenCodigo: ex.codigo,
-                asignaturaNombre: ex.nombreAsignatura,
-                gradoNombre: ex.asignatura?.nombreGrado || 'Desconocido',
-                fecha: ex.fecha,
-                hora: ex.hora,
-                duracion: ex.duracion,
-                solapaConExamenId: cand.id,
-                solapaConExamenCodigo: cand.codigo,
-                solapaConAsignaturaNombre: cand.nombreAsignatura,
-                motivoConflicto: `Doble asignación de docente: El profesor "${ex.nombreProfesor}" supervisa ambos exámenes simultáneamente.`,
-                tipoConflicto: 'Profesor',
-              });
-            }
-          }
-        }
-      }
-    }
-
-    return conflictos;
+    return this.examenConflictValidator.calcularTodosConflictosAlumnos(examenesProf);
   }
 
   async verificarConflictoProfesor(
@@ -425,54 +231,13 @@ export class ExamenService {
       return { tieneConflicto: false };
     }
 
-    const startMinutes = this.convertTimeToMinutes(examen.hora);
-    const endMinutes = startMinutes + examen.duracion;
-
-    const examenesProf = await this.examenRepository.find({
-      where: {
-        profesorId,
-        fecha: examen.fecha,
-        id: Not(examenId),
-      },
-    });
-
-    const conflicto = this.detectarSolapamiento(examenesProf, startMinutes, endMinutes);
-    if (conflicto) {
-      const horaConflicto = conflicto.hora || '00:00';
-      const exEnd = this.convertTimeToMinutes(horaConflicto) + conflicto.duracion;
-      return {
-        tieneConflicto: true,
-        descripcion: `El profesor ya supervisa el examen "${conflicto.codigo}" el ${conflicto.fecha} de ${horaConflicto} a ${this.minutesToTime(exEnd)}.`,
-      };
-    }
-
-    return { tieneConflicto: false };
-  }
-
-  /**
-   * Detecta si un rango horario se solapa con una lista de exámenes
-   */
-  private detectarSolapamiento(examenes: Examen[], start: number, end: number): Examen | null {
-    for (const ex of examenes) {
-      if (!ex.hora) continue;
-      const exStart = this.convertTimeToMinutes(ex.hora);
-      const exEnd = exStart + ex.duracion;
-      if (start < exEnd && exStart < end) {
-        return ex;
-      }
-    }
-    return null;
-  }
-
-  private convertTimeToMinutes(timeStr: string): number {
-    const [hours, minutes] = timeStr.split(':').map(Number);
-    return hours * 60 + minutes;
-  }
-
-  private minutesToTime(totalMinutes: number): string {
-    const h = Math.floor(totalMinutes / 60).toString().padStart(2, '0');
-    const m = (totalMinutes % 60).toString().padStart(2, '0');
-    return `${h}:${m}`;
+    return this.examenConflictValidator.verificarConflictoProfesor(
+      examenId,
+      profesorId,
+      examen.fecha,
+      examen.hora,
+      examen.duracion,
+    );
   }
 
   async findCalendario(params: {
@@ -500,7 +265,6 @@ export class ExamenService {
       queryBuilder.andWhere('examen.fecha <= :fechaFin', { fechaFin });
     }
 
-    // Cargar contexto del actor una sola vez
     let forcedGradoId: number | undefined = undefined;
 
     if (rol === 'Profesor' && (usuarioId || email)) {
@@ -518,7 +282,6 @@ export class ExamenService {
       queryBuilder.andWhere('asignatura.gradoId = :alumnoGradoId', { alumnoGradoId: forcedGradoId });
     }
 
-    // Aplicar filtros manuales (para Alumno se fuerza su gradoId original)
     const finalGradoId = forcedGradoId !== undefined ? forcedGradoId : gradoId;
     if (finalGradoId) {
       queryBuilder.andWhere('asignatura.gradoId = :finalGradoId', { finalGradoId });

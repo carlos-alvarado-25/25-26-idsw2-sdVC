@@ -56,8 +56,8 @@ export class ListarExamenesComponent implements OnInit {
   }
 
   getAsignaturaTexto(examen: Examen): string {
-    const curso = examen.asignatura?.curso;
-    const cuatr = examen.asignatura?.cuatrimestre;
+    const curso = examen.curso;
+    const cuatr = examen.cuatrimestre;
     const infoTexto = (curso && cuatr) ? ` (Curso ${curso}º · ${cuatr}º Cuatr.)` : curso ? ` (Curso ${curso}º)` : '';
     return `${examen.codigoAsignatura} - ${examen.nombreAsignatura}${infoTexto}`;
   }

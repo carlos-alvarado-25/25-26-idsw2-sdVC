@@ -9,11 +9,13 @@ import { Examen } from '../../entities/examen.entity';
 import { Preferencia } from '../../entities/preferencia.entity';
 import { Usuario } from '../../entities/usuario.entity';
 import { CommonModule } from '../../common/common.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Profesor, Asignatura, Examen, Preferencia, Usuario]),
     CommonModule,
+    AuthModule,
   ],
   controllers: [ProfesorController, PreferenciaController],
   providers: [ProfesorService],

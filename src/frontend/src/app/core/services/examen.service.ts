@@ -32,6 +32,10 @@ export interface Examen {
   codigoAsignatura: string;
   nombreAula: string;
   nombreProfesor: string;
+  nombreGrado?: string;
+  gradoId?: number;
+  curso?: number;
+  cuatrimestre?: number;
   asignatura?: Asignatura;
   aulaId?: number | null;
   aula?: {

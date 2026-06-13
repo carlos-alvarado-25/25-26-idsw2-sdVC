@@ -1747,3 +1747,29 @@ Todos los usuarios creados por importación CSV o creación manual de alumno/pro
   - Actualización sistemática de **6 READMEs** de Análisis, Diseño y Desarrollo y creación de la bitácora de auditoría en `RUP/02-diseño/auditoria-funciones-diseno.md`.
 
 **Decisión:** Se da por finalizada e implementada la sesión habiendo incorporado el soporte nativo de cuatrimestre como regla del motor de asignación combinatorial para resolver y aislar preventivamente los solapamientos de horario en alumnos repetidores, preservando la trazabilidad de los artefactos RUP.
+
+---
+
+## [13/06/2026 22:01] Sesión 86: Refactorización por Ley de Demeter y Cohesión de Servicios
+
+**Prompt:** «HAZLO!» -> «Ahora verifica el tamaño de cada archivo service de cada entidad. Auditalos y dime si se puede hacer algo para tener el código más limpio...» -> «Que implicaria esa refactorización?» -> «Cumple con la cohesión y bajo acoplamiento que planteamos?» -> «HAZLO! Entonces, y asegurate de revisar la documentacińo...» -> «Ahora con estos cambios, analiza de nuevo todo el código...» -> «A ver mira ahora, te detallaré un escenario...» -> «Perfecto, finaliza la sesión entonces y añade la entrada al conversation-log.md»
+
+**Resultado:**
+
+- **Cumplimiento de la Ley de Demeter (Aplanamiento de Examen)**:
+  - En el backend, se definieron getters virtuales decorados con `@Expose()` en [Examen](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/entities/examen.entity.ts) (`nombreGrado`, `gradoId`, `curso`, `cuatrimestre`) para delegar el acceso de forma interna y aplanar la serialización JSON.
+  - En [Incidencia](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/entities/incidencia.entity.ts), se refactorizó `nombreAsignatura` para evitar la navegación profunda.
+  - Se modificaron [examenes.controller.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/examenes/examenes.controller.ts) y [examenes.service.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/examenes/examenes.service.ts) para usar estos campos planos.
+  - En el frontend, se agregaron estas propiedades a la interfaz `Examen` en [examen.service.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/core/services/examen.service.ts) y se actualizaron los componentes y templates reactivos ([listar-examenes.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/admin/examenes/listar-examenes/listar-examenes.component.ts), [consultar-calendario.component.html](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/calendario/consultar-calendario/consultar-calendario.component.html) y [comunicar-incidencia.component.html](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/profesor/incidencias/comunicar-incidencia/comunicar-incidencia.component.html)) eliminando las violaciones de la Ley de Demeter.
+- **Refactorización de Cohesión y DRY (Algoritmos Horarios)**:
+  - Creación de [TimeUtils](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/common/utils/time.utils.ts) para centralizar el parseo de horas y solapamiento matemático de rangos temporales.
+  - Creación de [ExamenConflictValidator](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/examenes/services/examenes-conflict.validator.ts) para delegar todas las reglas y restricciones físicas y de calendario de exámenes.
+  - Esto redujo el tamaño de [examenes.service.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/examenes/examenes.service.ts) de **526 a 298 líneas de código**, mejorando su mantenibilidad y cohesión.
+  - Se adaptaron [calendario-engine.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/calendario/calendario-engine.ts) y [profesores.service.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/profesores/profesores.service.ts) para usar la utilidad común de tiempo.
+- **Refactorización y Desacoplamiento de Seguridad y Negocio**:
+  - Creación del servicio unificado [UsersService](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/auth/users.service.ts) para centralizar la sincronización, hashing con bcrypt y ciclo de vida de los usuarios asociados.
+  - Se eliminó el acoplamiento con `UsuarioRepository` y `bcrypt` en [AlumnoService](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/alumnos/alumnos.service.ts) y [ProfesorService](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/profesores/profesores.service.ts).
+- **Actualización de Documentación RUP**:
+  - Actualización del diagrama UML [clases-diseño.puml](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/clases-diseño.puml) y del documento de especificación [clases-diseño.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/clases-diseño.md) registrando los nuevos componentes y las decisiones de diseño para el desacoplamiento de la identidad.
+
+**Decisión:** Se cierra formalmente la sesión habiendo finalizado la de Ley de Demeter y la refactorización sistemática de los servicios del backend para cumplir con las directrices de acoplamiento débil entre negocio, seguridad y validaciones matemáticas de agenda, logrando un código y pruebas 100% estables en verde.

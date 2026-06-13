@@ -42,7 +42,7 @@ export class Incidencia {
 
   @Expose()
   get nombreAsignatura(): string {
-    return this.examen?.asignatura ? this.examen.asignatura.nombre : '';
+    return this.examen ? this.examen.nombreAsignatura : '';
   }
 
   @Expose()

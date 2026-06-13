@@ -88,7 +88,7 @@ export class ExamenController {
       duracion: ex.duracion,
       tipo: ex.tipo,
       nombreAsignatura: ex.nombreAsignatura,
-      nombreGrado: ex.asignatura?.nombreGrado || 'Sin Grado',
+      nombreGrado: ex.nombreGrado,
       nombreAula: ex.nombreAula,
       nombreProfesor: ex.nombreProfesor,
     }));

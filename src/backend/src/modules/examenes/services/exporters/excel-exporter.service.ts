@@ -32,7 +32,6 @@ export class ExcelExporterService implements ExamenExporter {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Calendario de Exámenes');
 
-    // Auto-fit columns
     if (data.length > 0) {
       const maxLens = data.reduce((acc, row) => {
         Object.keys(row).forEach((key, colIdx) => {

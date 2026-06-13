@@ -24,13 +24,11 @@ export class IncidenciasService {
       throw new NotFoundException(`Profesor con email "${emailProfesor}" no registrado`);
     }
 
-    // Buscar examen
     const examen = await this.examenRepository.findOneBy({ id: dto.examenId });
     if (!examen) {
       throw new NotFoundException(`Examen con ID ${dto.examenId} no encontrado`);
     }
 
-    // Validar que el examen esté asignado al profesor en sesión
     if (examen.profesorId !== profesor.id) {
       throw new ForbiddenException('No tiene permisos para reportar incidencias en exámenes de otros docentes');
     }
@@ -44,7 +42,6 @@ export class IncidenciasService {
 
     const guardada = await this.incidenciaRepository.save(nueva);
     
-    // Cargar relaciones para retornar objeto completo expuesto
     const result = await this.incidenciaRepository.findOne({
       where: { id: guardada.id },
       relations: {

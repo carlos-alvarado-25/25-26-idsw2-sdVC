@@ -48,12 +48,14 @@ package "API Layer (Controllers)" as Controllers #E3F2FD {
 
 package "Business Logic Layer (Services)" as Services #F1F8E9 {
     class AuthService
+    class UsersService
     class GradoService
     class AsignaturaService
     class ProfesorService
     class AulaService
     class AlumnoService
     class ExamenService
+    class ExamenConflictValidator
     class CalendarioService
     class IncidenciaService
 }
@@ -88,6 +90,7 @@ package "Domain Layer (Entities)" as Domain #FAFAFA {
 
 AuthController -d-> AuthService
 AuthService -d-> UsuarioRepository
+UsersService -d-> UsuarioRepository
 
 GradoController -d-> GradoService
 GradoService -d-> GradoRepository
@@ -98,15 +101,20 @@ AsignaturaService -d-> AsignaturaRepository
 ProfesorController -d-> ProfesorService
 ProfesorService -d-> ProfesorRepository
 ProfesorService -d-> PreferenciaRepository
+ProfesorService -d-> UsersService
 
 AulaController -d-> AulaService
 AulaService -d-> AulaRepository
 
 AlumnoController -d-> AlumnoService
 AlumnoService -d-> AlumnoRepository
+AlumnoService -d-> UsersService
 
 ExamenController -d-> ExamenService
 ExamenService -d-> ExamenRepository
+ExamenService -d-> ExamenConflictValidator
+ExamenConflictValidator -d-> ExamenRepository
+ExamenConflictValidator -d-> ProfesorRepository
 
 CalendarioController -d-> CalendarioService
 CalendarioService -d-> ExamenRepository
