@@ -6,6 +6,7 @@ import { ExamenService, Examen } from '../../../core/services/examen.service';
 import { GradoService, Grado } from '../../../core/services/grado.service';
 import { AsignaturaService, Asignatura } from '../../../core/services/asignatura.service';
 import { AuthService, User } from '../../../core/services/auth.service';
+import { AlumnoService } from '../../../core/services/alumno.service';
 import { forkJoin, of } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -55,6 +56,7 @@ export class ConsultarCalendarioComponent implements OnInit {
     private readonly gradoService: GradoService,
     private readonly asignaturaService: AsignaturaService,
     private readonly authService: AuthService,
+    private readonly alumnoService: AlumnoService,
     private readonly router: Router
   ) {}
 
@@ -73,8 +75,21 @@ export class ConsultarCalendarioComponent implements OnInit {
   cargarFiltros(): void {
     const user = this.currentUser();
     
-    // Si el usuario es un Alumno, no necesita cargar la lista de grados para filtrar
-    if (user && user.rol !== 'Alumno') {
+    if (user && user.rol === 'Alumno') {
+      // Si el usuario es un Alumno, resolvemos su Grado a partir de su email para cargar SOLO sus asignaturas
+      this.alumnoService.filtrar(user.email).subscribe({
+        next: (res: any) => {
+          if (res.data && res.data.length > 0) {
+            const student = res.data[0];
+            this.cargarAsignaturasPorGrado(student.gradoId);
+          }
+        },
+        error: (err: any) => {
+          console.error('Error al resolver grado del alumno:', err);
+        }
+      });
+    } else if (user && user.rol === 'Admin') {
+      // Solo el Admin necesita los filtros de Grado y Asignatura
       this.gradoService.listar(1).subscribe({
         next: (res: any) => {
           this.grados.set(res.data || []);
@@ -83,10 +98,10 @@ export class ConsultarCalendarioComponent implements OnInit {
           console.error('Error al cargar grados:', err);
         }
       });
+      this.cargarAsignaturasPorGrado(null);
     }
-
-    // Cargar asignaturas globales inicialmente, o dejar que se carguen al seleccionar Grado
-    this.cargarAsignaturasPorGrado(null);
+    // Para Profesor: no se cargan filtros académicos.
+    // El backend filtra automáticamente por usuarioId.
   }
 
   onGradoChange(gradoId: number | null): void {
@@ -137,7 +152,8 @@ export class ConsultarCalendarioComponent implements OnInit {
       fechaInicio: this.formatDate(dates.start),
       fechaFin: this.formatDate(dates.end),
       rol: user?.rol,
-      email: user?.email
+      email: user?.email,
+      usuarioId: user?.id
     };
 
     if (this.selectedGradoId()) {

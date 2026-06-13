@@ -41,6 +41,7 @@ export class ExamenController {
     @Query('asignaturaId') asignaturaId?: string,
     @Query('rol') rol?: string,
     @Query('email') email?: string,
+    @Query('usuarioId') usuarioId?: string,
   ): Promise<Examen[]> {
     return this.examenService.findCalendario({
       fechaInicio,
@@ -49,6 +50,7 @@ export class ExamenController {
       asignaturaId: asignaturaId ? parseInt(asignaturaId, 10) : undefined,
       rol,
       email,
+      usuarioId: usuarioId ? parseInt(usuarioId, 10) : undefined,
     });
   }
 

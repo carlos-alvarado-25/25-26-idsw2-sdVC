@@ -480,8 +480,9 @@ export class ExamenService {
     asignaturaId?: number;
     rol?: string;
     email?: string;
+    usuarioId?: number;
   }): Promise<Examen[]> {
-    const { fechaInicio, fechaFin, gradoId, asignaturaId, rol, email } = params;
+    const { fechaInicio, fechaFin, gradoId, asignaturaId, rol, email, usuarioId } = params;
 
     const queryBuilder = this.examenRepository.createQueryBuilder('examen')
       .leftJoinAndSelect('examen.asignatura', 'asignatura')
@@ -500,12 +501,16 @@ export class ExamenService {
     // Cargar contexto del actor una sola vez
     let forcedGradoId: number | undefined = undefined;
 
-    if (rol === 'Profesor' && email) {
-      const profesor = await this.profesorRepository.findOneBy({ email });
+    if (rol === 'Profesor' && (usuarioId || email)) {
+      const profesor = usuarioId 
+        ? await this.profesorRepository.findOneBy({ usuarioId })
+        : await this.profesorRepository.findOneBy({ email });
       if (!profesor) return [];
       queryBuilder.andWhere('examen.profesorId = :profesorId', { profesorId: profesor.id });
-    } else if (rol === 'Alumno' && email) {
-      const alumno = await this.alumnoRepository.findOneBy({ email });
+    } else if (rol === 'Alumno' && (usuarioId || email)) {
+      const alumno = usuarioId
+        ? await this.alumnoRepository.findOneBy({ usuarioId })
+        : await this.alumnoRepository.findOneBy({ email });
       if (!alumno) return [];
       forcedGradoId = alumno.gradoId;
       queryBuilder.andWhere('asignatura.gradoId = :alumnoGradoId', { alumnoGradoId: forcedGradoId });

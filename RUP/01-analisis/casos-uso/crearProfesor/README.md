@@ -8,8 +8,8 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
-- **Fecha**: 2026-05-26
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
@@ -55,7 +55,8 @@ Análisis de colaboración del caso de uso `crearProfesor()` mediante el patrón
 
 **Colaboraciones**:
 - **Vista**: Atiende solicitudes de `CrearProfesorView`.
-- **Repositorio**: Utiliza `ProfesorRepository`.
+- **Repositorio**: Utiliza `ProfesorRepository` y `UsuarioRepository`.
+- **Transacción**: Orquesta la creación atómica de `Usuario` y `Profesor` dentro de una única transacción de base de datos.
 
 ### clases de entidad (entity)
 
@@ -65,10 +66,20 @@ Análisis de colaboración del caso de uso `crearProfesor()` mediante el patrón
 - Gestionar la persistencia de los perfiles docentes.
 - Verificar la existencia de emails en el sistema (`existeEmail`).
 
+#### UsuarioRepository
+**Estereotipo**: Entidad (Repository)  
+**Responsabilidades**:
+- Verificar e insertar las credenciales de acceso (`Usuario`) del nuevo docente.
+
 #### Profesor
 **Estereotipo**: Entidad  
 **Responsabilidades**:
-- Representar los datos básicos de un docente y asegurar la integridad de su estado interno.
+- Representar los datos básicos de un docente, vinculado a su `Usuario`, y asegurar la integridad de su estado interno.
+
+#### Usuario
+**Estereotipo**: Entidad  
+**Responsabilidades**:
+- Representar las credenciales de acceso creadas con rol `Profesor` para el sistema.
 
 ## flujo de colaboración
 
@@ -77,10 +88,12 @@ Análisis de colaboración del caso de uso `crearProfesor()` mediante el patrón
 1. **Apertura**: `:Profesores Abierto` invoca `CrearProfesorView.crearProfesor()`.
 2. **Guía de Usuario**: La vista solicita `obtenerDepartamentosDisponibles()` al controlador para poblar el selector.
 3. **Captura**: El Administrador introduce los datos (código, nombre, email, departamento) y solicita guardar.
-4. **Validación de Identidad**: `ProfesorController` verifica mediante el repositorio que el email no esté registrado previamente.
-5. **Instanciación**: `ProfesorController` crea la instancia de `Profesor` con los datos validados.
-6. **Persistencia**: Se delega el guardado a `ProfesorRepository.guardar(profesor)`.
-7. **Transición**: Se redirige automáticamente a `editarProfesor()` para permitir la asignación de asignaturas al nuevo docente.
+4. **Validación de Identidad**: `ProfesorController` verifica mediante el repositorio que el email no esté registrado previamente (`existeEmail`).
+5. **Transacción Atómica**: `ProfesorController` abre una transacción de base de datos que incluye:
+    - **Creación de Credencial**: Verifica si el `Usuario` con ese email ya existe. Si no, lo crea con contraseña predeterminada (`idsw2_2026`, cifrada con bcrypt) y rol `Profesor`.
+    - **Creación de Perfil**: Instancia `Profesor` vinculando el `usuarioId` del usuario y lo persiste mediante `ProfesorRepository.guardar()`.
+    - Si cualquier paso falla, la transacción entera se revierte.
+6. **Transición**: Se redirige automáticamente a `editarProfesor()` para permitir la asignación de asignaturas al nuevo docente.
 
 ## correspondencia con requisitos
 
@@ -91,7 +104,9 @@ Análisis de colaboración del caso de uso `crearProfesor()` mediante el patrón
 |Introducir código, nombre, email y departamento|`CrearProfesorView`|Captura de formulario|
 |Muestra departamentos disponibles|`ProfesorController`|`obtenerDepartamentosDisponibles()`|
 |Validar email único|`ProfesorRepository`|`existeEmail(email)`|
+|Generar credencial de acceso (`idsw2_2026`)|`UsuarioRepository`|`crearUsuario(email, password, rol)`|
 |Guardar nuevo profesor en base de datos|`ProfesorRepository`|`guardar(profesor)`|
+|Garantizar atomicidad de la operación|`ProfesorController`|Transacción `manager.transaction()`|
 
 ## referencias
 

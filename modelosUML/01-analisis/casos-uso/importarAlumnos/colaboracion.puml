@@ -12,8 +12,10 @@ package importarAlumnos as "importarAlumnos()" {
     rectangle #b5bd68 AlumnoController
     rectangle #F2AC4E AlumnoRepository
     rectangle #F2AC4E GradoRepository
+    rectangle #F2AC4E UsuarioRepository
     rectangle #F2AC4E Alumno
     rectangle #F2AC4E Grado
+    rectangle #F2AC4E Usuario
 }
 
 rectangle #CDEBA5 ":Alumnos Abierto" as AlumnosAbiertoSalida
@@ -26,10 +28,12 @@ AlumnoController -d-> GradoRepository: obtenerTodos() : List<Grado>
 
 ImportarAlumnosView -d-> AlumnoController: importar(archivo) : ImportResult
 
+AlumnoController -d-> UsuarioRepository: crearUsuario(email, password, rol) : Usuario
 AlumnoController -d-> AlumnoRepository: guardarLote(alumnos) : List<Alumno>
 
 AlumnoRepository -- Alumno
 Alumno -- Grado
+Alumno -- Usuario
 
 ImportarAlumnosView ..> AlumnosAbiertoSalida: finalizarImportacion()
 ImportarAlumnosView ..> AlumnosAbiertoSalida: cancelarImportacion()

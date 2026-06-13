@@ -1,9 +1,11 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 import { Profesor } from '../../entities/profesor.entity';
 import { Asignatura } from '../../entities/asignatura.entity';
 import { Examen } from '../../entities/examen.entity';
+import { Usuario, UserRole } from '../../entities/usuario.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 import { CrearProfesorDto } from './dto/crear-profesor.dto';
 import { UpdateProfesorDto } from './dto/update-profesor.dto';
@@ -26,6 +28,8 @@ export class ProfesorService {
     private readonly examenRepository: Repository<Examen>,
     @InjectRepository(Preferencia)
     private readonly preferenciaRepository: Repository<Preferencia>,
+    @InjectRepository(Usuario)
+    private readonly usuarioRepository: Repository<Usuario>,
     private readonly fileParserFactory: FileParserFactory,
   ) {}
 
@@ -83,20 +87,37 @@ export class ProfesorService {
       throw new ConflictException(`El email ${email} ya está registrado`);
     }
 
-    const nuevo = this.profesorRepository.create({
-      codigo,
-      nombre: dto.nombre,
-      email,
-      departamento: dto.departamento,
-      asignaturas: [],
+    const defaultPasswordHash = await bcrypt.hash('idsw2_2026', 10);
+
+    return this.profesorRepository.manager.transaction(async (transactionalEntityManager) => {
+      // 1. Crear usuario
+      let usuario = await transactionalEntityManager.findOneBy(Usuario, { email });
+      if (!usuario) {
+        usuario = transactionalEntityManager.create(Usuario, {
+          email,
+          password: defaultPasswordHash,
+          rol: UserRole.PROFESOR,
+        });
+        usuario = await transactionalEntityManager.save(Usuario, usuario);
+      }
+
+      // 2. Crear profesor
+      const nuevo = this.profesorRepository.create({
+        codigo,
+        nombre: dto.nombre,
+        email,
+        departamento: dto.departamento,
+        usuarioId: usuario.id,
+        asignaturas: [],
+      });
+
+      if (asignaturasIds && asignaturasIds.length > 0) {
+        const asignaturas = await this.asignaturaRepository.findBy({ id: In(asignaturasIds) });
+        nuevo.asignaturas = asignaturas;
+      }
+
+      return transactionalEntityManager.save(Profesor, nuevo);
     });
-
-    if (asignaturasIds && asignaturasIds.length > 0) {
-      const asignaturas = await this.asignaturaRepository.findBy({ id: In(asignaturasIds) });
-      nuevo.asignaturas = asignaturas;
-    }
-
-    return this.profesorRepository.save(nuevo);
   }
 
   async update(id: number, dto: UpdateProfesorDto): Promise<Profesor> {
@@ -113,6 +134,9 @@ export class ProfesorService {
       const existEmail = await this.profesorRepository.findOneBy({ email: dto.email });
       if (existEmail) {
         throw new ConflictException(`El email ${dto.email} ya está en uso`);
+      }
+      if (profesor.usuarioId) {
+        await this.usuarioRepository.update(profesor.usuarioId, { email: dto.email });
       }
     }
 
@@ -134,8 +158,19 @@ export class ProfesorService {
   }
 
   async removeBulk(ids: number[]): Promise<void> {
+    const profesores = await this.profesorRepository.find({
+      where: { id: In(ids) },
+    });
+    const usuarioIds = profesores
+      .map((p) => p.usuarioId)
+      .filter((uid): uid is number => uid !== null);
+
     // TODO: Eliminar todas las restricciones de PreferenciaRepository vinculadas a los ids de profesores.
     await this.profesorRepository.delete(ids);
+
+    if (usuarioIds.length > 0) {
+      await this.usuarioRepository.delete(usuarioIds);
+    }
   }
 
   async getImpacto(id: number): Promise<{ examenesCount: number }> {
@@ -150,8 +185,10 @@ export class ProfesorService {
     let exitos = 0;
     let fallos = 0;
     const detalles: string[] = [];
-    const profesoresParaGuardar: Profesor[] = [];
 
+    const defaultPasswordHash = await bcrypt.hash('idsw2_2026', 10);
+
+    // Cada fila se procesa en su propia transacción independiente para aislar fallos
     for (let i = 0; i < rawData.length; i++) {
       const row = rawData[i];
       const { codigo, nombre, email, departamento } = row;
@@ -176,18 +213,36 @@ export class ProfesorService {
         continue;
       }
 
-      profesoresParaGuardar.push(this.profesorRepository.create({
-        codigo,
-        nombre,
-        email,
-        departamento,
-        asignaturas: [],
-      }));
-      exitos++;
-    }
+      try {
+        await this.profesorRepository.manager.transaction(async (em) => {
+          // 1. Crear o reutilizar usuario
+          let usuario = await em.findOneBy(Usuario, { email });
+          if (!usuario) {
+            usuario = em.create(Usuario, {
+              email,
+              password: defaultPasswordHash,
+              rol: UserRole.PROFESOR,
+            });
+            usuario = await em.save(Usuario, usuario);
+          }
 
-    if (profesoresParaGuardar.length > 0) {
-      await this.profesorRepository.save(profesoresParaGuardar);
+          // 2. Crear profesor
+          const profesor = em.create(Profesor, {
+            codigo,
+            nombre,
+            email,
+            departamento,
+            usuarioId: usuario.id,
+            asignaturas: [],
+          });
+          await em.save(Profesor, profesor);
+        });
+        exitos++;
+      } catch (err: any) {
+        fallos++;
+        const msg = err?.sqlMessage ?? err?.message ?? 'Error desconocido';
+        detalles.push(`Fila ${i + 2}: ${msg}`);
+      }
     }
 
     return new ImportResultDto(exitos, fallos, detalles);

@@ -11,7 +11,9 @@ package crearProfesor as "crearProfesor()" {
     rectangle #629EF9 CrearProfesorView
     rectangle #b5bd68 ProfesorController
     rectangle #F2AC4E ProfesorRepository
+    rectangle #F2AC4E UsuarioRepository
     rectangle #F2AC4E Profesor
+    rectangle #F2AC4E Usuario
 }
 
 rectangle #CDEBA5 ":Profesor Abierto" as ProfesorAbierto
@@ -24,8 +26,11 @@ CrearProfesorView -d-> ProfesorController: obtenerDepartamentosDisponibles() : L
 CrearProfesorView -d-> ProfesorController: crear(codigo, nombre, email, departamento) : Profesor
 
 ProfesorController -d-> ProfesorRepository: existeEmail(email) : Boolean
+ProfesorController -d-> UsuarioRepository: crearUsuario(email, password, rol) : Usuario
 ProfesorController -r-> Profesor: <<create>>
 ProfesorController -d-> ProfesorRepository: guardar(profesor)
+
+Profesor -- Usuario
 
 CrearProfesorView ..> ProfesorAbierto: <<finalizar>> editarProfesor(nuevoProfesor)
 CrearProfesorView ..> ProfesoresAbiertoSalida: <<cancelar>>

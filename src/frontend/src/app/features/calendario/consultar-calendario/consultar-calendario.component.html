@@ -34,10 +34,10 @@
       </div>
     </div>
 
-    <!-- Controles de Filtros Académicos -->
-    <div class="academic-filters" *ngIf="currentUser() as user">
-      <!-- Filtro de Grado (No visible para Alumnos ya que se pre-filtra por backend) -->
-      <div class="filter-group" *ngIf="user.rol !== 'Alumno'">
+    <!-- Controles de Filtros Académicos: solo visibles para el Administrador -->
+    <div class="academic-filters" *ngIf="currentUser()?.rol === 'Admin'">
+      <!-- Filtro de Grado -->
+      <div class="filter-group">
         <label for="grado-select">Grado</label>
         <select id="grado-select" [ngModel]="selectedGradoId()" (ngModelChange)="onGradoChange($event)">
           <option [ngValue]="null">Todos los Grados</option>
@@ -54,6 +54,7 @@
         </select>
       </div>
     </div>
+
   </div>
 
   <!-- Estado de Carga y Errores -->

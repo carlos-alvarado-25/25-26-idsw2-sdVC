@@ -8,8 +8,8 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
-- **Fecha**: 2026-05-28
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
@@ -56,7 +56,8 @@ Análisis de colaboración del caso de uso `importarAlumnos()` mediante el patr�
 
 **Colaboraciones**:
 - **Vista**: Atiende solicitudes de `ImportarAlumnosView`.
-- **Repositorio**: Utiliza `AlumnoRepository` y `GradoRepository`.
+- **Repositorio**: Utiliza `AlumnoRepository`, `GradoRepository` y `UsuarioRepository`.
+- **Aislamiento**: Cada fila del archivo se procesa en su propia transacción independiente, garantizando que un fallo en una fila no cancele las demás.
 
 ### clases de entidad (entity)
 
@@ -71,16 +72,26 @@ Análisis de colaboración del caso de uso `importarAlumnos()` mediante el patr�
 **Responsabilidades**:
 - Proveer el catálogo de grados para la validación de dependencias durante la importación.
 
+#### UsuarioRepository
+**Estereotipo**: Entidad (Repository)  
+**Responsabilidades**:
+- Verificar e insertar en lote las credenciales de acceso (`Usuario`) de los estudiantes importados.
+
 #### Alumno
 **Estereotipo**: Entidad  
 **Responsabilidades**:
-- Encapsular los datos del estudiante (matrícula, nombre, email, curso).
+- Encapsular los datos del estudiante (matrícula, nombre, email, curso), vinculados a su `Usuario`.
 - Mantener la asociación con la entidad `Grado`.
 
 #### Grado
 **Estereotipo**: Entidad  
 **Responsabilidades**:
 - Representar la dependencia académica obligatoria del alumno.
+
+#### Usuario
+**Estereotipo**: Entidad  
+**Responsabilidades**:
+- Representar las credenciales creadas con rol `Alumno` para permitir su login tras la importación.
 
 ## flujo de colaboración
 
@@ -89,12 +100,15 @@ Análisis de colaboración del caso de uso `importarAlumnos()` mediante el patr�
 1. **Inicio**: `:Alumnos Abierto` invoca `ImportarAlumnosView.importarAlumnos()`.
 2. **Contexto**: La vista solicita al controlador el formato requerido y la lista de grados disponibles.
 3. **Carga**: El Administrador selecciona el archivo y solicita **Importar**.
-4. **Procesamiento**: `AlumnoController` lee el archivo y para cada registro:
-    - Valida la unicidad de la matrícula mediante `AlumnoRepository`.
-    - Valida que el grado indicado exista mediante `GradoRepository`.
-5. **Sincronización**: El controlador delega la persistencia a `AlumnoRepository.guardarLote(alumnos)`.
-6. **Resultado**: El sistema presenta el `ImportResult` informando de éxitos y errores (matrículas duplicadas o grados no encontrados).
-7. **Cierre**: El Administrador selecciona `finalizarImportacion()` para retornar al listado general.
+4. **Procesamiento por fila** (aislado): `AlumnoController` lee el archivo y para cada registro:
+    - Valida que los campos obligatorios estén presentes.
+    - Verifica la unicidad de la matrícula mediante `AlumnoRepository`.
+    - Resuelve si el grado indicado existe mediante `GradoRepository`.
+    - **Resolución de email único**: Si el email del CSV ya está vinculado a otro alumno, genera automáticamente un alias numerado (ej. `nombre2@dominio.es`) para mantener la trazabilidad.
+    - Abre una transacción atómica que crea el `Usuario` (con contraseña predeterminada `idsw2_2026` y rol `Alumno`) y el perfil `Alumno` vinculando su `usuarioId`.
+    - Si la transacción falla, se registra el error en `detalles[]` y se continúa con la siguiente fila.
+5. **Resultado**: El sistema presenta el `ImportResult` con el conteo de éxitos, fallos y notas de emails ajustados.
+6. **Cierre**: El Administrador selecciona `finalizarImportacion()` para retornar al listado general.
 
 ## correspondencia con requisitos
 
@@ -103,8 +117,11 @@ Análisis de colaboración del caso de uso `importarAlumnos()` mediante el patr�
 |Requisito del caso de uso|Clase responsable|Método/Colaboración|
 |-|-|-|
 |Seleccionar archivo CSV/Excel|`ImportarAlumnosView`|Interfaz de carga|
-|Validar matrículas únicas|`AlumnoController`|`AlumnoRepository`|
+|Validar matrículas únicas|`AlumnoController`|`AlumnoRepository.findOneBy()`|
 |Asignar alumnos a grados correspondientes|`AlumnoController`|`GradoRepository`|
+|Generar email único si hay duplicado en CSV|`AlumnoController`|`resolveUniqueEmail(baseEmail)`|
+|Crear credencial automática (`idsw2_2026`)|`UsuarioRepository`|`crearUsuario(email, password, rol)`|
+|Aislar fallos por fila|`AlumnoController`|Transacción individual por fila|
 |Informar resultados y errores|`ImportResult`|Muestreo en la vista|
 
 ## referencias

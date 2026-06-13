@@ -1565,3 +1565,127 @@ Se realizó una auditoría de trazabilidad completa **Requisitos → Análisis �
   - Compilación exitosa del frontend Angular y verificación de adherencia a los estándares arquitectónicos del proyecto (Ley de Demeter mediante mapeo plano, clases de diseño utilitarias coherentes con la rama de Grados).
 
 **Decisión:** Se da por finalizada e implementada la rama funcional de incidencias para profesores bajo un diseño unificado altamente responsivo y desacoplado, cumpliendo con los estándares de RUP y la consistencia de UI del sistema.
+
+---
+
+## [13/06/2026 17:51] Sesión 83: Vinculación Usuario–Perfil, Importación Transaccional y Limpieza de Filtros en Calendario
+
+**Prompt:** «Hagamos el cambio entonces, asegurate de documentar todo, hacer las actualizaciones necesarias, aplicar los principios y pautas de diseño definidas y explotar las decisiones correctas que hemos tomado en el código para hacerlo lo más limpio y óptimo posible.» → «HAZLO!» → «Editaste los diagramas de colaboración?» → «Re construye el backend para probarlo» → «Me ad 500 el backend al intentar importar alumnos» → «Me salen 29 correctos y 8 fallos... Fila 18: Duplicate entry '88' for key 'Alumno.usuarioId'...» → «Y la contraseña de los usuarios?» → «Analiza la parte de documentación de estos cambios en los READMEs y asegurate que este actualizada» → «Fijate que los buscadores de la pantalla de consultar calendario de profesor me salen con todos los grados y todas las asignaturas...» → «Termina la sesión ahora. Detalla en el conversation-log claramente estos cambios.»
+
+---
+
+### 1. Contexto y Motivación
+
+Se decidió establecer una relación explícita y trazable en la base de datos entre `Usuario` (tabla de credenciales de acceso) y los perfiles `Alumno`/`Profesor`. Antes de este cambio, el sistema identificaba al usuario autenticado comparando el `email` del JWT con el campo `email` de la tabla de perfil — un acoplamiento frágil que impedía escalar correctamente el filtrado del calendario.
+
+**Objetivo principal:** Cuando un alumno o profesor se loguea, el sistema debe ser capaz de resolverle SU calendario de exámenes usando `usuarioId` (clave foránea numérica), no un string de email.
+
+---
+
+### 2. Cambios en Base de Datos
+
+- **`Alumno.usuarioId`** (INT, NULL, UNIQUE): Nueva columna FK hacia `Usuario(id)` con política `ON DELETE SET NULL`.
+- **`Profesor.usuarioId`** (INT, NULL, UNIQUE): Ídem para profesores.
+- Script aplicado: `src/backend/sql/link_users.sql`.
+
+---
+
+### 3. Cambios en Entidades TypeORM
+
+- **`alumno.entity.ts`**: Se añadió `@OneToOne(() => Usuario)` + `@JoinColumn({ name: 'usuarioId' })`.
+- **`profesor.entity.ts`**: Ídem para profesores.
+
+---
+
+### 4. Cambios en Servicios — Lógica Transaccional
+
+#### 4.1 `AlumnoService` (alumnos.service.ts)
+
+**Método `create()`:**
+- Abre una **transacción atómica** (`manager.transaction()`).
+- Dentro de la transacción: verifica si ya existe un `Usuario` con el email dado; si no, lo crea con contraseña predeterminada `idsw2_2026` (bcrypt) y rol `UserRole.ALUMNO`.
+- Vincula el `usuarioId` al nuevo `Alumno` antes de persistirlo.
+- Si cualquier paso falla, la transacción se revierte completa.
+
+**Método `importar()`:**
+- Cada fila del CSV se procesa en su **propia transacción independiente**, garantizando que un fallo en una fila (email duplicado en DB, grado inexistente, etc.) no cancele las demás.
+- Se añadió el método privado `resolveUniqueEmail(baseEmail)`: si el email del CSV ya está asignado a OTRO alumno existente, genera automáticamente un alias numerado (`lucia.garcia2@alumnos.uneatlantico.es`) hasta encontrar uno libre. Esto resuelve el caso real de múltiples alumnos con nombres/emails coincidentes en el archivo CSV.
+- Los registros ajustados con email alternativo se notifican como éxito con una nota informativa en `detalles[]`.
+
+**Método `update()`:**
+- Si el email del alumno cambia, actualiza también el email del `Usuario` vinculado (`usuarioRepository.update()`).
+
+**Método `removeBulk()`:**
+- Antes de eliminar los alumnos, recoge los `usuarioId` de todos los perfiles afectados y los elimina en cascada de la tabla `Usuario`.
+
+#### 4.2 `ProfesorService` (profesores.service.ts)
+
+Misma lógica que AlumnoService pero con `UserRole.PROFESOR`:
+- `create()` → transacción atómica: crea `Usuario` + `Profesor` vinculado.
+- `importar()` → una transacción independiente por fila, con captura de errores por fila.
+- `update()` → sincroniza el email en `Usuario` si cambia.
+- `removeBulk()` → elimina en cascada los `Usuario` de los profesores borrados.
+
+**Corrección de tipos:** Se importó el enum `UserRole` en ambos servicios y se reemplazaron los string literales `'Alumno'` y `'Profesor'` por `UserRole.ALUMNO` y `UserRole.PROFESOR`, eliminando los errores de tipado en TypeScript.
+
+---
+
+### 5. Cambios en Consulta del Calendario
+
+- **`ExamenesService.findCalendario()`**: El filtrado ya no usa `email` string. Ahora recibe `usuarioId` numérico y lo cruza contra `Alumno.usuarioId` / `Profesor.usuarioId` para recuperar el grado o los exámenes asignados.
+- **`ExamenesController`**: Nuevo query param `usuarioId` en el endpoint `GET /examenes/calendario`.
+- **`ConsultarCalendarioComponent` (Angular)**: El componente extrae el `id` (sub) del JWT decodificado y lo envía como `usuarioId` en la petición al backend.
+
+---
+
+### 6. Filtros Académicos en el Calendario — Corrección de UX
+
+**Problema:** La pantalla de `consultar-calendario` mostraba a los **Profesores** los selectores de Grado y Asignatura con todos los datos del sistema, lo cual era inútil (el backend ya filtra por `usuarioId`) e inducía a confusión.
+
+**Solución aplicada en `consultar-calendario.component.html`:**
+- La sección `<div class="academic-filters">` ahora lleva `*ngIf="currentUser()?.rol === 'Admin'"`.
+- Los filtros de Grado y Asignatura **solo son visibles para el Administrador**.
+- Para el Profesor: interfaz limpia sin filtros — el backend ya restringe automáticamente su vista a los exámenes en que está asignado.
+- Para el Alumno: no hay filtros (pre-filtrado por grado en backend, sin cambios).
+
+**Cambio paralelo en `cargarFiltros()` (TypeScript):**
+- El bloque que cargaba grados y asignaturas para `rol !== 'Alumno'` se refactorizó a `rol === 'Admin'` exclusivamente, evitando peticiones HTTP innecesarias cuando el usuario es Profesor.
+
+---
+
+### 7. Diagramas de Colaboración UML Actualizados
+
+Se actualizaron los cuatro archivos `.puml` de análisis y se recompilaron sus respectivos SVG:
+
+| Caso de uso | `.puml` modificado | SVG regenerado |
+|---|---|---|
+| `crearAlumno` | ✅ `UsuarioRepository` + `Usuario` | ✅ |
+| `importarAlumnos` | ✅ `UsuarioRepository` + `Usuario` | ✅ |
+| `crearProfesor` | ✅ `UsuarioRepository` + `Usuario` | ✅ |
+| `importarProfesores` | ✅ `UsuarioRepository` + `Usuario` | ✅ |
+
+---
+
+### 8. READMEs de Análisis Actualizados (versión 1.0 → 1.1)
+
+Los cuatro READMEs de la disciplina de Análisis (`RUP/01-analisis/casos-uso/`) fueron actualizados:
+
+- **Versión:** 1.0 → 1.1 | **Fecha:** actualizada a 2026-06-13.
+- **Colaboraciones del Controller:** Añadida la colaboración con `UsuarioRepository` y nota de transacción atómica / aislamiento por fila.
+- **Flujo de colaboración:** Detallado paso a paso el proceso de creación de credenciales con contraseña predeterminada `idsw2_2026`, el uso de `manager.transaction()` y (en importación) la lógica de `resolveUniqueEmail()`.
+- **Tabla de requisitos → métodos:** Actualizada con métodos reales (`crearUsuario(email, password, rol)`, `resolveUniqueEmail(baseEmail)`, `manager.transaction()`).
+
+---
+
+### 9. Tests
+
+- 3 archivos de test unitario en `src/backend/test/unit/`: **8/8 tests pasando** sin cambios.
+- El build de producción (`npm run build`) finaliza con **0 errores**.
+
+---
+
+### 10. Contraseña por Defecto
+
+Todos los usuarios creados por importación CSV o creación manual de alumno/profesor reciben la contraseña predeterminada: **`idsw2_2026`** (almacenada cifrada con bcrypt, factor 10). No existe actualmente un endpoint de cambio de contraseña — queda como mejora futura a implementar.
+
+**Decisión:** Se adopta el patrón de **Vinculación Explícita de Perfil a Credencial** como estándar de la arquitectura. Cada entidad de perfil (`Alumno`, `Profesor`) referencia obligatoriamente a su `Usuario` mediante `usuarioId` FK. La creación de credenciales es siempre **atómica** (transaccional) respecto a la creación del perfil, y el sistema garantiza que no puede existir un perfil sin su `Usuario` asociado tras una operación exitosa. El filtrado de calendarios usa siempre el identificador numérico `usuarioId` para evitar colisiones de email entre roles.

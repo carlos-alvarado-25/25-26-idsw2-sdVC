@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, JoinColumn, OneToOne } from 'typeorm';
 import { Expose } from 'class-transformer';
 import { Grado } from './grado.entity';
+import { Usuario } from './usuario.entity';
 
 @Entity('Alumno')
 export class Alumno {
@@ -25,6 +26,13 @@ export class Alumno {
 
   @Column()
   gradoId: number;
+
+  @Column({ nullable: true })
+  usuarioId: number | null;
+
+  @OneToOne(() => Usuario, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'usuarioId' })
+  usuario: Usuario | null;
 
   /**
    * Delegación: Provee el nombre del grado sin navegar por la asociación

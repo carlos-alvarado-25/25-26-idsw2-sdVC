@@ -11,7 +11,9 @@ package importarProfesores as "importarProfesores()" {
     rectangle #629EF9 ImportarProfesoresView
     rectangle #b5bd68 ProfesorController
     rectangle #F2AC4E ProfesorRepository
+    rectangle #F2AC4E UsuarioRepository
     rectangle #F2AC4E Profesor
+    rectangle #F2AC4E Usuario
 }
 
 rectangle #CDEBA5 ":Profesores Abierto" as ProfesoresAbiertoSalida
@@ -23,9 +25,11 @@ ImportarProfesoresView -d-> ProfesorController: obtenerDepartamentosDisponibles(
 
 ImportarProfesoresView -d-> ProfesorController: importar(archivo) : ImportResult
 
+ProfesorController -d-> UsuarioRepository: crearUsuario(email, password, rol) : Usuario
 ProfesorController -d-> ProfesorRepository: guardarLote(profesores) : List<Profesor>
 
 ProfesorRepository -- Profesor
+Profesor -- Usuario
 
 ImportarProfesoresView ..> ProfesoresAbiertoSalida: finalizarImportacion()
 ImportarProfesoresView ..> ProfesoresAbiertoSalida: cancelarImportacion()

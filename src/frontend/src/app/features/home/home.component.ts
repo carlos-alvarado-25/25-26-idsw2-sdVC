@@ -17,13 +17,15 @@ import { Router, RouterModule } from '@angular/router';
         </div>
       </nav>
 
-      <main class="content">
+      <main class="content" *ngIf="user$ | async as user">
         <header class="hero">
-          <h1>Panel de Gestión Académica</h1>
-          <p>Seleccione una entidad para gestionar los recursos del sistema.</p>
+          <h1 *ngIf="user.rol !== 'Alumno'">Panel de Gestión Académica</h1>
+          <h1 *ngIf="user.rol === 'Alumno'">Portal del Estudiante</h1>
+          <p *ngIf="user.rol !== 'Alumno'">Seleccione una entidad para gestionar los recursos del sistema.</p>
+          <p *ngIf="user.rol === 'Alumno'">Consulta las fechas, horas y aulas asignadas para tus exámenes programados.</p>
         </header>
 
-        <div class="grid-container" *ngIf="user$ | async as user">
+        <div class="grid-container">
           <!-- Tarjetas de Administración (Solo Admin) -->
           <ng-container *ngIf="user.rol === 'Admin'">
             <!-- Gestión de Grados -->
@@ -79,8 +81,10 @@ import { Router, RouterModule } from '@angular/router';
           <!-- Tarjeta de Consulta de Calendario (Común a todos los roles) -->
           <div class="card accent" [routerLink]="['/calendario/consultar']">
             <div class="card-icon">🗓️</div>
-            <h3>Consultar Calendario</h3>
-            <p>Visualización interactiva y búsqueda de exámenes.</p>
+            <h3 *ngIf="user.rol !== 'Alumno'">Consultar Calendario</h3>
+            <h3 *ngIf="user.rol === 'Alumno'">Mi Calendario de Exámenes</h3>
+            <p *ngIf="user.rol !== 'Alumno'">Visualización interactiva y búsqueda de exámenes.</p>
+            <p *ngIf="user.rol === 'Alumno'">Visualiza las fechas, horas y aulas asignadas para tus asignaturas.</p>
           </div>
 
           <!-- Tarjeta de Reportar Incidencia (Solo Profesor) -->

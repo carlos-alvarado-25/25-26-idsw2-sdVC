@@ -8,8 +8,8 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
-- **Fecha**: 2026-05-28
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
@@ -55,7 +55,8 @@ Análisis de colaboración del caso de uso `crearAlumno()` mediante el patrón M
 
 **Colaboraciones**:
 - **Vista**: Atiende solicitudes de `CrearAlumnoView`.
-- **Repositorio**: Utiliza `AlumnoRepository` y `GradoRepository`.
+- **Repositorio**: Utiliza `AlumnoRepository`, `GradoRepository` y `UsuarioRepository`.
+- **Transacción**: Orquesta la creación atómica de `Usuario` y `Alumno` dentro de una única transacción de base de datos.
 
 ### clases de entidad (entity)
 
@@ -70,15 +71,26 @@ Análisis de colaboración del caso de uso `crearAlumno()` mediante el patrón M
 **Responsabilidades**:
 - Proporcionar la colección de grados académicos disponibles para su selección.
 
+#### UsuarioRepository
+**Estereotipo**: Entidad (Repository)  
+**Responsabilidades**:
+- Verificar la existencia del email en el sistema.
+- Persistir las credenciales de acceso vinculadas (`Usuario`).
+
 #### Alumno
 **Estereotipo**: Entidad  
 **Responsabilidades**:
-- Encapsular el estado inicial del estudiante recién creado.
+- Encapsular el estado inicial del estudiante recién creado, enlazado a su `Usuario`.
 
 #### Grado
 **Estereotipo**: Entidad  
 **Responsabilidades**:
 - Representar la dependencia académica del alumno.
+
+#### Usuario
+**Estereotipo**: Entidad  
+**Responsabilidades**:
+- Representar las credenciales y rol (`Alumno`) de acceso al sistema del estudiante.
 
 ## flujo de colaboración
 
@@ -88,9 +100,12 @@ Análisis de colaboración del caso de uso `crearAlumno()` mediante el patrón M
 2. **Carga**: `:Alumnos Abierto` invoca `CrearAlumnoView.crearAlumno()`.
 3. **Carga de Contexto**: La vista solicita al controlador los grados disponibles: `obtenerGradosDisponibles()`.
 4. **Entrada de Datos**: El Administrador completa los campos (Matrícula, Nombre, Email, Curso, Grado) y solicita **Guardar**.
-5. **Validación**: `AlumnoController` verifica que la matrícula sea única mediante `AlumnoRepository.existeMatricula()`.
-6. **Creación y Persistencia**: Se instancia la entidad `Alumno` y se sincroniza con el repositorio (`guardar`).
-7. **Transición**: Tras el éxito, se confirma el guardado y se transita automáticamente al estado de edición singular `:Alumno Abierta` (invocando `editarAlumno()`).
+5. **Validación de Matrícula**: `AlumnoController` verifica que la matrícula sea única mediante `AlumnoRepository.existeMatricula()`.
+6. **Transacción Atómica**: `AlumnoController` abre una transacción de base de datos que incluye:
+    - **Creación de Credencial**: Verifica si el `Usuario` con ese email ya existe. Si no, lo crea con contraseña predeterminada (`idsw2_2026`, cifrada con bcrypt) y rol `Alumno`.
+    - **Creación de Perfil**: Instancia `Alumno` vinculando el `usuarioId` del usuario y lo persiste mediante `AlumnoRepository.guardar()`.
+    - Si cualquier paso falla, la transacción entera se revierte (atomicidad garantizada).
+7. **Transición**: Tras el éxito, se transita automáticamente al estado de edición singular `:Alumno Abierta` invocando `editarAlumno(alumno)`.
 
 ## correspondencia con requisitos
 
@@ -101,7 +116,9 @@ Análisis de colaboración del caso de uso `crearAlumno()` mediante el patrón M
 |Introducir matrícula, nombre, email, curso|`CrearAlumnoView`|Formulario de entrada|
 |Seleccionar grado disponible|`GradoRepository`|`obtenerTodos()`|
 |Verificar matrícula única|`AlumnoController`|`AlumnoRepository.existeMatricula()`|
+|Generar credencial de acceso asociada (`idsw2_2026`)|`UsuarioRepository`|`crearUsuario(email, password, rol)`|
 |Guardar nuevo alumno en base de datos|`AlumnoRepository`|`guardar(alumno)`|
+|Garantizar atomicidad de la operación|`AlumnoController`|Transacción `manager.transaction()`|
 
 ## referencias
 

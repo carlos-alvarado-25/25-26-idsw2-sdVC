@@ -1,8 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from 'typeorm';
 import { Expose } from 'class-transformer';
 import { Asignatura } from './asignatura.entity';
 import { Preferencia } from './preferencia.entity';
 import { Examen } from './examen.entity';
+import { Usuario } from './usuario.entity';
 
 @Entity('Profesor')
 export class Profesor {
@@ -20,6 +21,13 @@ export class Profesor {
 
   @Column({ length: 100 })
   departamento: string;
+
+  @Column({ nullable: true })
+  usuarioId: number | null;
+
+  @OneToOne(() => Usuario, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn({ name: 'usuarioId' })
+  usuario: Usuario | null;
 
   @ManyToMany(() => Asignatura, { onDelete: 'CASCADE' })
   @JoinTable({

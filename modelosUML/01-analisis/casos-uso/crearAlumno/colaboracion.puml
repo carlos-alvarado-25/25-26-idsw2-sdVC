@@ -13,8 +13,10 @@ package crearAlumno as "crearAlumno()" {
     rectangle #b5bd68 AlumnoController
     rectangle #F2AC4E AlumnoRepository
     rectangle #F2AC4E GradoRepository
+    rectangle #F2AC4E UsuarioRepository
     rectangle #F2AC4E Alumno
     rectangle #F2AC4E Grado
+    rectangle #F2AC4E Usuario
 }
 
 AlumnosAbierto -r-> CrearAlumnoView: crearAlumno()
@@ -25,10 +27,12 @@ AlumnoController -d-> GradoRepository: obtenerTodos() : List<Grado>
 CrearAlumnoView -d-> AlumnoController: crear(matricula, nombre, email, curso, id_grado) : Alumno
 
 AlumnoController -d-> AlumnoRepository: existeMatricula(matricula) : Boolean
+AlumnoController -d-> UsuarioRepository: crearUsuario(email, password, rol) : Usuario
 AlumnoController -r-> Alumno: <<create>>
 AlumnoController -d-> AlumnoRepository: guardar(alumno)
 
 Alumno -- Grado
+Alumno -- Usuario
 
 CrearAlumnoView ..> AlumnoAbierta: <<finalizar>> editarAlumno(alumno)
 CrearAlumnoView ..> AlumnosAbierto: <<cancelar>> abrirAlumnos()
