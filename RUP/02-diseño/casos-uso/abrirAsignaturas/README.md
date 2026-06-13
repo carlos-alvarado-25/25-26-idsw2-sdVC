@@ -51,12 +51,8 @@ class AsignaturaDto {
     id: number;
     codigo: string;
     nombre: string;
-    nivel: number;
+    curso: number;
     grado: {
-        id: number;
-        nombre: string;
-    };
-    cursoAcademico: {
         id: number;
         nombre: string;
     };

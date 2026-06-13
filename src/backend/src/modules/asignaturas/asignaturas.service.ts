@@ -26,7 +26,7 @@ export class AsignaturaService {
 
     async importar(buffer: Buffer, mimetype: string): Promise<ImportResultDto> {
       const parser = this.fileParserFactory.getParser(mimetype);
-      const rawData = parser.parse<any>(buffer, ['codigo', 'nombre', 'creditos', 'grado_codigo']);
+      const rawData = parser.parse<any>(buffer, ['codigo', 'nombre', 'creditos', 'grado_codigo', 'curso']);
 
       let exitos = 0;
 
@@ -39,8 +39,9 @@ export class AsignaturaService {
 
     for (let i = 0; i < rawData.length; i++) {
       const row = rawData[i];
-      const { codigo, nombre, creditos, grado_codigo } = row;
+      const { codigo, nombre, creditos, grado_codigo, curso } = row;
       const creditosNum = parseInt(creditos, 10);
+      const cursoNum = curso ? parseInt(curso, 10) : 1;
 
       if (!codigo || !nombre || isNaN(creditosNum) || !grado_codigo) {
         fallos++;
@@ -66,6 +67,7 @@ export class AsignaturaService {
         codigo,
         nombre,
         creditos: creditosNum,
+        curso: isNaN(cursoNum) ? 1 : cursoNum,
         gradoId: grado.id
       }));
       exitos++;

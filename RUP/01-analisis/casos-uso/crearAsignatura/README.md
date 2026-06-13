@@ -8,13 +8,13 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.1
-- **Fecha**: 2026-05-25
+- **Versión**: 1.2
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
 
-Análisis de colaboración del caso de uso `crearAsignatura()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y las dependencias necesarias con la entidad `Grado` para la creación manual de nuevas materias académicas.
+Análisis de colaboración del caso de uso `crearAsignatura()` mediante el patrón MVC, identificando las clases de análisis, sus responsabilidades y las dependencias necesarias con la entidad `Grado` para la creación manual de nuevas materias académicas y la asignación del curso correspondiente.
 
 ## diagrama de colaboración
 
@@ -33,7 +33,7 @@ Análisis de colaboración del caso de uso `crearAsignatura()` mediante el patr�
 #### CrearAsignaturaView
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
-- Presentar el formulario de creación de asignatura (Código, Nombre, Créditos).
+- Presentar el formulario de creación de asignatura (Código, Nombre, Créditos, Curso Académico).
 - Proveer una interfaz de selección de Grado (lista conceptual).
 - Capturar la entrada del Administrador y gestionar las acciones de guardado y cancelación.
 - Notificar el éxito de la creación y redirigir a la edición completa de la materia.
@@ -99,7 +99,7 @@ Análisis de colaboración del caso de uso `crearAsignatura()` mediante el patr�
 
 |Requisito del caso de uso|Clase responsable|Método/Colaboración|
 |-|-|-|
-|Introducir código, nombre y créditos|`CrearAsignaturaView`|Captura de formulario|
+|Introducir código, nombre, créditos y curso|`CrearAsignaturaView`|Captura de formulario|
 |Seleccionar grado asociado|`GradoRepository`|`obtenerTodos()`|
 |Validar campos requeridos|`AsignaturaController`|Lógica de creación|
 |Persistir en base de datos|`AsignaturaRepository`|`guardar(asignatura)`|

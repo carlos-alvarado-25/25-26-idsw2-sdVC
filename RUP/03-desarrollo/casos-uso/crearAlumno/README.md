@@ -3,11 +3,19 @@
 > |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|[🔍 Análisis](/RUP/01-analisis/casos-uso/crearAlumno/README.md)|[📂 Diseño](/RUP/02-diseño/casos-uso/crearAlumno/README.md)|**Desarrollo**|Pruebas|
 > |-|-|-|-|-|-|-|
 
+## información del artefacto
+
+- **Fase RUP**: Construction (Construcción)
+- **Disciplina**: Implementación
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
+- **Autor**: Gemini CLI
+
 - **Backend:** [alumnos.controller.ts](/src/backend/src/modules/alumnos/alumnos.controller.ts) · [alumnos.service.ts](/src/backend/src/modules/alumnos/alumnos.service.ts) · [crear-alumno.dto.ts](/src/backend/src/modules/alumnos/dto/crear-alumno.dto.ts)
 - **Frontend:** [alumno-form.component.ts](/src/frontend/src/app/features/admin/alumnos/alumno-form/alumno-form.component.ts) · [alumno.service.ts](/src/frontend/src/app/core/services/alumno.service.ts)
 
 ## Descripción
-Implementación de la creación manual de alumnos. Sigue el patrón "El Delgado", permitiendo un alta rápida con matrícula, nombre, email, curso y grado, redirigiendo automáticamente al estado de edición detallada tras el éxito.
+Implementación de la creación manual de alumnos. Sigue el patrón "El Delgado", permitiendo un alta rápida con matrícula, nombre, email, curso y grado, asociando credenciales de usuario mediante transacción atómica, y redirigiendo automáticamente al estado de edición detallada tras el éxito.
 
 ## Estado
 ✅ **Completado** - Iteración 2
@@ -22,6 +30,9 @@ Crea un nuevo perfil de estudiante.
 ### Lógica de Negocio
 - **Validación de Unicidad**: Se verifica que la matrícula no esté registrada previamente.
 - **Integridad Académica**: Comprobación de existencia del `Grado` referenciado mediante inyección de dependencias del `GradoRepository`.
+- **Transacción Atómica**: Todo el proceso de alta se ejecuta usando un `QueryRunner` de TypeORM para asegurar atomicidad. Si falla la creación de las credenciales o del alumno, se realiza un rollback completo.
+- **Creación de Credenciales**: Generación de un registro en la tabla `Usuario` con rol `Alumno` y contraseña cifrada con bcrypt (`idsw2_2026` de manera predeterminada).
+- **Vinculación OneToOne**: Asociación del alumno con el usuario recién creado a través del campo `usuarioId`.
 
 ---
 

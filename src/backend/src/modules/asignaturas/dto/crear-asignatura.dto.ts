@@ -14,6 +14,10 @@ export class CrearAsignaturaDto {
   creditos: number;
 
   @IsInt()
+  @Min(1)
+  curso: number;
+
+  @IsInt()
   @IsNotEmpty()
   gradoId: number;
 }

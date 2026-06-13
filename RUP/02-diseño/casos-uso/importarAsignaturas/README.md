@@ -7,13 +7,13 @@
 
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
-- **Fecha**: 2026-06-03
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
 
-Realización del diseño detallado para el caso de uso `importarAsignaturas()`, especificando la interacción técnica entre los componentes de Angular y NestJS, el protocolo de transferencia de archivos y la lógica de validación de integridad referencial con la entidad `Grado`.
+Realización del diseño detallado para el caso de uso `importarAsignaturas()`, especificando la interacción técnica entre los componentes de Angular y NestJS, el protocolo de transferencia de archivos, la lógica de validación de integridad referencial con la entidad `Grado` y el parseo del curso académico.
 
 ## diagrama de secuencia
 
@@ -41,6 +41,7 @@ Realización del diseño detallado para el caso de uso `importarAsignaturas()`, 
 | `nombre` | Nombre de la asignatura | String |
 | `creditos` | Número de créditos ECTS | Number |
 | `grado_codigo` | Código del Grado asociado | String |
+| `curso` | Curso o año académico (1, 2, 3, 4) (opcional, por defecto 1) | Number |
 
 #### ImportResultDto
 ```typescript

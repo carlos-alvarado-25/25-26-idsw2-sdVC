@@ -1689,3 +1689,33 @@ Los cuatro READMEs de la disciplina de Análisis (`RUP/01-analisis/casos-uso/`) 
 Todos los usuarios creados por importación CSV o creación manual de alumno/profesor reciben la contraseña predeterminada: **`idsw2_2026`** (almacenada cifrada con bcrypt, factor 10). No existe actualmente un endpoint de cambio de contraseña — queda como mejora futura a implementar.
 
 **Decisión:** Se adopta el patrón de **Vinculación Explícita de Perfil a Credencial** como estándar de la arquitectura. Cada entidad de perfil (`Alumno`, `Profesor`) referencia obligatoriamente a su `Usuario` mediante `usuarioId` FK. La creación de credenciales es siempre **atómica** (transaccional) respecto a la creación del perfil, y el sistema garantiza que no puede existir un perfil sin su `Usuario` asociado tras una operación exitosa. El filtrado de calendarios usa siempre el identificador numérico `usuarioId` para evitar colisiones de email entre roles.
+
+---
+
+## [13/06/2026 20:33] Sesión 84: Introducción de Curso en Asignatura y Optimización del Motor de Dispersión
+
+**Prompt:** «y los READMEs de diseño y desarrollo? No se actualizan verdad?» → «HAZLO!» → «Perfecto, ahora volvamos a hacer una auditoria general del proyecto...» → «Explicame detalladamente como funciona el algoritmo de dispersión...» → «Osea que primero mira si tiene un exámen ese día...» → «A ver hazme una representación un poco mas visual...» → «Pero ponme un caso en donde genero el calendario desde 0...» → «POR EJEMPLO, yo ahora tenía Lunes, Miercoles, Viernes...» → «Y esto es iterativo no?» → «que complejidad temporal tiene?» → «Imaginate que hubieran 30 aulas, 100 exámenes pendientes... Podrías hacer un test de esto...» → «A ver y que tal si a la entidad asignatura le añadimos el campo de curso académico?» → «HAZLO! Y asegurate de documentar esta decisión...» → «Hay que editar los diagramas UML?» → «Ah pero el de base de datos actualizalo COMPLETO...» → «También define en el readme de configuracion-proyecto bien las tablas en sql» → «Perfecto, termina la sesión y añade estas decisiones al conversation-log.md»
+
+**Resultado:**
+
+- **Actualizaciones del RUP (Diseño y Desarrollo de Iteración 2)**:
+  - Se completó la actualización de **8 READMEs** (`RUP/02-diseño/` y `RUP/03-desarrollo/`) de los 4 casos de uso clave (`crearAlumno`, `importarAlumnos`, `crearProfesor`, `importarProfesores`) para reflejar la vinculación transaccional de usuarios, el cifrado bcrypt, las credenciales por defecto `idsw2_2026` y la resolución de emails duplicados.
+- **Auditoría General de Criterios de Diseño**:
+  - Creación del documento [auditoria-funciones-diseno.md](/RUP/02-diseño/auditoria-funciones-diseno.md) y registro en el índice general [README.md](/RUP/02-diseño/README.md) de la disciplina.
+  - El reporte valida las funciones clave del sistema (algoritmo de dispersión, importación de usuarios, bloqueos y preferencias) frente a las directrices de la base de conocimiento (`Diseño por Contrato`, `Patrones de Indirección`, `Cohesión y Acoplamiento`, `SOLID/OCP/LSP`).
+- **Introducción del Campo Curso en Asignatura**:
+  - Modificación de la entidad [Asignatura](/src/backend/src/entities/asignatura.entity.ts) para añadir la columna `curso` (año académico de la materia, ej. 1, 2, 3, 4).
+  - Alteración física en la base de datos MySQL para registrar la columna `curso` en la tabla `Asignatura`.
+  - Refactorización de [CrearAsignaturaDto](/src/backend/src/modules/asignaturas/dto/crear-asignatura.dto.ts) y del servicio de importación masiva [AsignaturaService](/src/backend/src/modules/asignaturas/asignaturas.service.ts) para capturar y guardar dicho parámetro.
+- **Optimización y Refinamiento del Algoritmo de Dispersión**:
+  - **Dispersión por Curso**: Se ajustó la fórmula de dispersión en [calendario-engine.ts](/src/backend/src/modules/calendario/calendario-engine.ts) para que las penalizaciones por proximidad se calculen cruzando tanto `gradoId` como `curso`. Esto evita falsas restricciones y permite que alumnos de distintos años de la misma titulación compartan fechas de examen sin penalización.
+  - **Hoisting de Profesores**: Se sacó el filtrado de profesores candidatos aptos fuera del bucle doble de slots y aulas.
+  - **Poda de Slots (Pruning)**: Si un slot posee una puntuación de dispersión inferior o igual a la mejor asignación actual, se omiten todos sus bucles internos de aulas y profesores.
+- **Resultados del Benchmark y Pruebas Unitarias**:
+  - Implementación del test [calendario-engine-benchmark.spec.ts](/src/backend/test/unit/calendario-engine-benchmark.spec.ts) (100 exámenes, 30 aulas, 150 profesores, 3 semanas).
+  - La suite de pruebas Jest pasa con éxito (9/9 tests correctos). Las optimizaciones combinadas redujeron el tiempo de ejecución del motor a gran escala de **12.8 segundos** a tan solo **352 milisegundos** (una reducción del 97.2%).
+- **Sincronización UML y DDL**:
+  - Actualización completa de la especificación física de la base de datos en [esquema-er.puml](/modelosUML/02-diseño/esquema-er.puml) y renderización de su imagen vectorial [esquema-er.svg](/images/02-diseño/esquema-er.svg). Se eliminaron las referencias obsoletas a `CursoAcademico` y se representaron fielmente las 10 tablas MySQL reales.
+  - Actualización de los scripts DDL y del listado de tablas en [configuracion-proyecto.md](/RUP/02-diseño/configuracion-proyecto.md) y en los READMEs de `abrirAsignaturas` de diseño y desarrollo.
+
+**Decisión:** Se cierra formalmente la sesión incorporando el campo `curso` a nivel de negocio, base de datos y algoritmos como el criterio estándar para resolver la dispersión de exámenes sin generar cuellos de botella temporales en el motor combinatorial.

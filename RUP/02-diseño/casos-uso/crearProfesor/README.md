@@ -8,13 +8,13 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
-- **Fecha**: 2026-06-05
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## Propósito
 
-Realización técnica del caso de uso `crearProfesor()` para la plataforma NestJS + Angular. Este diseño implementa el patrón "El Delgado", especificando el flujo desde la captura inicial de datos de docentes hasta la persistencia en base de datos y la transición automática al estado de edición para configurar su carga lectiva.
+Realización técnica del caso de uso `crearProfesor()` para la plataforma NestJS + Angular. Este diseño implementa el patrón "El Delgado", especificando el flujo desde la captura inicial de datos de docentes hasta la persistencia en base de datos, la creación atómica de credenciales de usuario asociadas y la transición automática al estado de edición para configurar su carga lectiva.
 
 ## Diagrama de Secuencia de Diseño
 
@@ -34,6 +34,8 @@ Realización técnica del caso de uso `crearProfesor()` para la plataforma NestJ
 | - | ProfesorApiService (Angular) | - |
 | ProfesorController | - | ProfesorController (NestJS) |
 | - | - | ProfesorService (NestJS) |
+| UsuarioRepository | - | UsuarioRepository (TypeORM) |
+| Usuario | - | Usuario (Entity) |
 | ProfesorRepository | - | ProfesorRepository (TypeORM) |
 | Profesor | - | Profesor (Entity) |
 
@@ -42,7 +44,7 @@ Realización técnica del caso de uso `crearProfesor()` para la plataforma NestJ
 ### 1. Comunicación API
 - **Endpoint**: `POST /profesores`
 - **Cuerpo (Request)**: `CrearProfesorDto` { codigo, nombre, email, departamento }
-- **Respuesta Exitosa**: `201 Created` + `ProfesorDto` (incluye el ID generado).
+- **Respuesta Exitosa**: `201 Created` + `ProfesorDto` (incluye el ID generado y el `usuarioId`).
 - **Validaciones**:
   - `codigo`: Requerido, único, formato texto (class-validator).
   - `nombre`: Requerido, formato texto.
@@ -53,8 +55,10 @@ Realización técnica del caso de uso `crearProfesor()` para la plataforma NestJ
 - Al recibir la respuesta exitosa `201 Created` con el ID asignado, el frontend (`ProfesorFormComponent`) utiliza el router de Angular para redirigir a la vista de edición: `/admin/profesores/editar/:id`.
 - Esto permite continuar con la edición avanzada, como la asignación de asignaturas al docente recién creado, manteniendo la fluidez de trabajo.
 
-### 3. Gestión de Errores
+### 3. Gestión de Errores y Transaccionalidad
 - Si el email o código ya existen, el controlador devuelve un `409 Conflict` tras lanzar un `ConflictException` en el service del backend.
+- **Transacción Atómica**: El proceso se envuelve en un `QueryRunner` transaccional. La creación del registro de `Usuario` (con credenciales y contraseña predeterminada `idsw2_2026` cifrada mediante bcrypt, con rol `Profesor`) y de la entidad `Profesor` se realizan de forma atómica.
+- **Vinculación 1:1**: El docente queda vinculado con su correspondiente registro de seguridad a través de la FK `usuarioId`.
 
 ## Frontend
 

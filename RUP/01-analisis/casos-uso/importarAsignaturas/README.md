@@ -8,13 +8,13 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
-- **Fecha**: 2026-05-25
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
 
-Análisis de colaboración del caso de uso `importarAsignaturas()` mediante el patrón MVC, identificando las clases de análisis, responsabilidades y colaboraciones necesarias para la carga masiva de asignaturas y su correcta vinculación con los grados académicos existentes.
+Análisis de colaboración del caso de uso `importarAsignaturas()` mediante el patrón MVC, identificando las clases de análisis, responsabilidades y colaboraciones necesarias para la carga masiva de asignaturas, su curso académico y su correcta vinculación con los grados académicos existentes.
 
 ## diagrama de colaboración
 
@@ -34,7 +34,7 @@ Análisis de colaboración del caso de uso `importarAsignaturas()` mediante el p
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Presentar la interfaz de importación al Administrador.
-- Mostrar la especificación del formato de archivo (CSV/Excel) incluyendo la columna obligatoria de vinculación con Grado.
+- Mostrar la especificación del formato de archivo (CSV/Excel) incluyendo la columna obligatoria de vinculación con Grado y el curso académico correspondiente.
 - Capturar el archivo seleccionado.
 - Presentar el resumen del procesamiento masivo (`ImportResult`).
 - Gestionar la finalización o cancelación del flujo.

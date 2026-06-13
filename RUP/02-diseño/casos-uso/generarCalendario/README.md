@@ -8,13 +8,13 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 2.0 (Desacoplado)
-- **Fecha**: 2026-06-06
+- **Versión**: 2.1 (Optimizado)
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
 
-Realización del diseño detallado para el caso de uso `generarCalendario()`. Con el fin de mitigar los code smells de **Baja Cohesión** e **Invasión de Incumbencias (Feature Envy)** propios de un enfoque centralizado, se introduce un patrón de **Invención Pura** (`CalendarioEngine`) y se aplica el **Patrón Experto en Información** en las entidades `Aula` y `Profesor`. Esto garantiza un motor de calendarización 100% testeable de forma aislada en memoria.
+Realización del diseño detallado para el caso de uso `generarCalendario()`. Con el fin de mitigar los code smells de **Baja Cohesión** e **Invasión de Incumbencias (Feature Envy)** propios de un enfoque centralizado, se introduce un patrón de **Invención Pura** (`CalendarioEngine`) y se aplica el **Patrón Experto en Información** en las entidades `Aula` y `Profesor`. Esto garantiza un motor de calendarización 100% testeable de forma aislada en memoria. Se optimiza el cálculo del algoritmo de dispersión acoplándolo al Grado y Curso académico para evitar restricciones sobredimensionadas.
 
 ## diagrama de secuencia
 
@@ -35,8 +35,8 @@ Para asegurar un diseño modular óptimo, se distribuyen las responsabilidades d
 Es una clase pura de dominio en memoria, libre de dependencias con TypeORM o el framework NestJS. Su única responsabilidad es ejecutar el algoritmo combinatorial de calendarización.
 *   **`generar(config: GeneracionConfig): GeneracionResultDto`**: Entrada principal. Orquesta la calendarización en base a los datos provistos en memoria (incluyendo `examenesExistentes` para evitar colisiones con ejecuciones previas).
 *   **`generarRanurasTemporales(inicio: string, fin: string, franjas: string[]): Slot[]`**: Genera la cuadrícula de días hábiles y franjas para asignar exámenes.
-*   **`buscarSlotOptimo(...)`**: Busca la combinación de slot, aula y profesor óptima, evaluando de forma exhaustiva los candidatos válidos y puntuando cada opción en base a su dispersión temporal para exámenes del mismo Grado, de modo que se maximice la separación en días.
-*   **`calcularPuntuacionDispersion(...)`**: Evalúa la proximidad en días de un slot propuesto con otros exámenes ya asignados al mismo Grado, aplicando penalizaciones por cercanía (mismo día: -100, día consecutivo: -50, etc.).
+*   **`buscarSlotOptimo(...)`**: Busca la combinación de slot, aula y profesor óptima, evaluando de forma exhaustiva los candidatos válidos y puntuando cada opción en base a su dispersión temporal para exámenes del mismo Grado y Curso, de modo que se maximice la separación en días.
+*   **`calcularPuntuacionDispersion(...)`**: Evalúa la proximidad en días de un slot propuesto con otros exámenes ya asignados al mismo Grado y Curso académico, aplicando penalizaciones por cercanía (mismo día: -100, día consecutivo: -50, etc.).
 *   **`registrarAsignacion(...)`**: Reserva en memoria el aula y profesor en el slot asignado para prevenir cruces en las siguientes iteraciones.
 
 ### 2. Entidad `Aula`

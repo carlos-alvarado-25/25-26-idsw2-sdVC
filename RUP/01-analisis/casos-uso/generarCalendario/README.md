@@ -8,8 +8,8 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
-- **Fecha**: 2026-05-28
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
@@ -103,6 +103,7 @@ Análisis de colaboración del caso de uso `generarCalendario()` mediante el pat
 4. **Iteración y Asignación**: Para cada examen y franja horaria:
     - Se consulta la disponibilidad de aulas en `AulaRepository`, considerando los exámenes ya existentes para evitar ocupaciones dobles.
     - Se validan las restricciones y cruces de horario del profesor asignado en `PreferenciaRepository` y contra los exámenes programados.
+    - **Optimización de Dispersión**: Se calcula la penalización de separación temporal considerando tanto el `gradoId` como el `curso` (año académico) de la asignatura para evitar falsos positivos y maximizar la capacidad de programación de exámenes del mismo grado pero diferentes cursos en el mismo día.
 5. **Cambio de Estado**: El controlador actualiza los objetos `Examen` con la programación exitosa (`<<update>>`).
 6. **Sincronización**: Se persiste el lote de exámenes programados en el repositorio.
 7. **Consolidación**: El controlador instancia `GeneracionResult` con el resumen del proceso.

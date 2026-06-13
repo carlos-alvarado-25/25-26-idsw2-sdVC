@@ -17,11 +17,11 @@ Implementación del hub de gestión de asignaturas. Permite visualizar el listad
 ### Endpoints
 
 #### GET `/asignaturas`
-Retorna la lista de asignaturas paginada con las relaciones de Grado y CursoAcademico cargadas.
+Retorna la lista de asignaturas paginada con la relación de Grado cargada.
 - **Query Params**: `page`.
 
 #### GET `/asignaturas/search`
-Busca asignaturas por nombre, código, grado o año académico.
+Busca asignaturas por nombre, código, grado o curso.
 - **Query Params**: `q`, `page`.
 
 ### Implementación

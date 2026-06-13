@@ -101,6 +101,7 @@ src/frontend/src/app/
 ### Definición de Tablas
 
 ```sql
+-- 1. Seguridad y Acceso
 CREATE TABLE Usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -109,19 +110,12 @@ CREATE TABLE Usuario (
     fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 2. Entidades Académicas y de Recursos
 CREATE TABLE Grado (
     id INT PRIMARY KEY AUTO_INCREMENT,
     codigo VARCHAR(20) UNIQUE NOT NULL,
     nombre VARCHAR(100) NOT NULL,
-    descripcion TEXT,
-    fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
-CREATE TABLE CursoAcademico (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(20) UNIQUE NOT NULL, -- Ej: "2025/2026"
-    activo BOOLEAN DEFAULT TRUE,
+    descripcion TEXT NULL,
     fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -138,29 +132,96 @@ CREATE TABLE Aula (
     fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Alumno (
+CREATE TABLE Asignatura (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    matricula VARCHAR(20) UNIQUE NOT NULL,
+    codigo VARCHAR(20) UNIQUE NOT NULL,
     nombre VARCHAR(150) NOT NULL,
-    email VARCHAR(150) NOT NULL,
-    curso INT NOT NULL, -- 1, 2, 3...
+    creditos INT NOT NULL,
+    curso INT NOT NULL DEFAULT 1,
     gradoId INT NOT NULL,
     fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (gradoId) REFERENCES Grado(id) ON DELETE CASCADE
 );
 
-CREATE TABLE Asignatura (
+-- 3. Perfiles de Usuario
+CREATE TABLE Alumno (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    codigo VARCHAR(20) UNIQUE NOT NULL,
-    nombre VARCHAR(150) NOT NULL,
-    creditos INT NOT NULL,
+    matricula VARCHAR(20) UNIQUE NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    curso INT NOT NULL,
     gradoId INT NOT NULL,
+    usuarioId INT UNIQUE NULL,
     fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (gradoId) REFERENCES Grado(id) ON DELETE CASCADE
+    FOREIGN KEY (gradoId) REFERENCES Grado(id) ON DELETE CASCADE,
+    FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE SET NULL
 );
-```
+
+CREATE TABLE Profesor (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    codigo VARCHAR(20) UNIQUE NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    departamento VARCHAR(100) NOT NULL,
+    usuarioId INT UNIQUE NULL,
+    fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuarioId) REFERENCES Usuario(id) ON DELETE SET NULL
+);
+
+-- 4. Preferencias y Asignaciones Docentes
+CREATE TABLE Preferencia (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    diaSemana INT NOT NULL,
+    horaInicio VARCHAR(5) NOT NULL,
+    horaFin VARCHAR(5) NOT NULL,
+    disponible TINYINT NULL DEFAULT 1,
+    profesorId INT NOT NULL,
+    fechaCreacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fechaActualizacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (profesorId) REFERENCES Profesor(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ProfesorAsignatura (
+    idProfesor INT NOT NULL,
+    idAsignatura INT NOT NULL,
+    PRIMARY KEY (idProfesor, idAsignatura),
+    FOREIGN KEY (idProfesor) REFERENCES Profesor(id) ON DELETE CASCADE,
+    FOREIGN KEY (idAsignatura) REFERENCES Asignatura(id) ON DELETE CASCADE
+);
+
+-- 5. Exámenes y Gestión de Discrepancias
+CREATE TABLE Examen (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    codigo VARCHAR(50) UNIQUE NOT NULL,
+    fecha DATE NULL,
+    hora VARCHAR(5) NULL,
+    duracion INT NOT NULL,
+    tipo ENUM('Ordinaria', 'Extraordinaria') NOT NULL,
+    asignaturaId INT NOT NULL,
+    aulaId INT NULL,
+    profesorId INT NULL,
+    fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (asignaturaId) REFERENCES Asignatura(id) ON DELETE CASCADE,
+    FOREIGN KEY (aulaId) REFERENCES Aula(id) ON DELETE SET NULL,
+    FOREIGN KEY (profesorId) REFERENCES Profesor(id) ON DELETE SET NULL
+);
+
+CREATE TABLE Incidencia (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo VARCHAR(100) NOT NULL,
+    descripcion TEXT NOT NULL,
+    estado ENUM('Pendiente', 'Resuelta', 'Desestimada') DEFAULT 'Pendiente',
+    examenId INT NOT NULL,
+    profesorId INT NOT NULL,
+    fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (examenId) REFERENCES Examen(id) ON DELETE CASCADE,
+    FOREIGN KEY (profesorId) REFERENCES Profesor(id) ON DELETE CASCADE
+);
 
 -- Datos de inicialización
 INSERT INTO Usuario (email, password, rol) VALUES ('admin@idsw2.edu', 'hash_bcrypt_admin', 'Admin');

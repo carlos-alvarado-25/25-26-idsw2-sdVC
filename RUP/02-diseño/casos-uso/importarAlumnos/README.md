@@ -7,13 +7,13 @@
 
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
-- **Fecha**: 2026-06-04
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
 
-Realización del diseño detallado para el caso de uso `importarAlumnos()`, especificando el flujo de procesamiento masivo de archivos CSV y Excel (.xlsx), la resolución de integridad referencial con la entidad `Grado` y la validación de unicidad de matrículas estudiantiles.
+Realización del diseño detallado para el caso de uso `importarAlumnos()`, especificando el flujo de procesamiento masivo de archivos CSV y Excel (.xlsx), la resolución de integridad referencial con la entidad `Grado`, la validación de unicidad de matrículas estudiantiles, la resolución automática de conflictos de correos electrónicos y la creación de credenciales de usuario correspondientes.
 
 ## diagrama de secuencia
 
@@ -65,6 +65,7 @@ class ImportResultDto {
 |-------------------|----------------------|--------------------------|
 | `ImportarAlumnosView` | `ImportarAlumnosComponent` | Gestión de la carga de archivos y muestreo de estadísticas finales. |
 | `AlumnoController` | `AlumnoController` | Gestión de la petición multipart y orquestación del proceso. |
-| `AlumnoController` | `AlumnoService` | Delegación del parsing al `ExcelParserService` y orquestación de la lógica de negocio, resolución de `grado_codigo` y carga en lote. |
+| `AlumnoController` | `AlumnoService` | Delegación del parsing al `ExcelParserService`, resolución de `grado_codigo`, lógica de resolución de emails duplicados mediante `resolveUniqueEmail()` y orquestación del proceso de importación. |
+| `UsuarioRepository` | `UsuarioRepository` (TypeORM) | Creación de credenciales asociadas para cada alumno importado en una transacción atómica aislada. |
 | `GradoRepository` | `GradoRepository` | Validación de existencia de las titulaciones académicas referenciadas. |
-| `AlumnoRepository` | `AlumnoRepository` | Verificación de unicidad de matrícula y persistencia masiva en MySQL. |
+| `AlumnoRepository` | `AlumnoRepository` | Verificación de unicidad de matrícula, asociación con la FK `usuarioId` y persistencia en base de datos. |

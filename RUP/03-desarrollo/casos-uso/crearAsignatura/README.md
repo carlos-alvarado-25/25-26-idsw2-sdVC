@@ -4,10 +4,18 @@
 > |-|-|-|-|-|-|-|
 
 - **Backend:** [asignaturas.controller.ts](/src/backend/src/modules/asignaturas/asignaturas.controller.ts) · [asignaturas.service.ts](/src/backend/src/modules/asignaturas/asignaturas.service.ts) · [crear-asignatura.dto.ts](/src/backend/src/modules/asignaturas/dto/crear-asignatura.dto.ts)
-- **Frontend:** [asignatura-form.component.ts](/src/frontend/src/app/features/admin/asignaturas/asignatura-form/asignatura-form.component.ts) · [asignatura.service.ts](/src/frontend/src/app/core/services/asignatura.service.ts)
+- **Frontend:** [asignatura-form.component.ts](/src/frontend/src/app/features/admin/asignaturas/asignatura-form/asignatura-form.component.ts)
+
+## información del artefacto
+
+- **Fase RUP**: Construction (Construcción)
+- **Disciplina**: Implementación
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
+- **Autor**: Gemini CLI
 
 ## Descripción
-Implementación de la creación manual de asignaturas. Sigue el patrón "El Delgado", donde tras una validación exitosa de los campos mínimos y la vinculación con un Grado, se redirige al usuario a la vista de edición para completar o refinar los datos.
+Implementación de la creación manual de asignaturas. Sigue el patrón "El Delgado", donde tras una validación exitosa de los campos mínimos, vinculación con un Grado y asignación de curso académico, se redirige al usuario a la vista de edición para completar o refinar los datos.
 
 ## Estado
 ✅ **Completado** - Iteración 2
@@ -17,11 +25,12 @@ Implementación de la creación manual de asignaturas. Sigue el patrón "El Delg
 ### Endpoints
 #### POST `/asignaturas`
 Crea una nueva asignatura.
-- **Body**: `CrearAsignaturaDto` (codigo, nombre, creditos, gradoId).
+- **Body**: `CrearAsignaturaDto` (codigo, nombre, creditos, curso, gradoId).
 
 ### Lógica de Negocio
 - **Validación de Unicidad**: Se comprueba que el código de la asignatura no exista previamente.
 - **Integridad Referencial**: Verificación de existencia del `Grado` antes de la persistencia.
+- **Curso Académico**: Persistencia del campo `curso` (1, 2, 3 o 4) para permitir un filtrado óptimo en el algoritmo de dispersión temporal.
 
 ---
 

@@ -39,6 +39,10 @@ Traducción de las entidades de análisis a modelos concretos de TypeORM y esque
 Definición de la estructura de directorios del código fuente y políticas de implementación.
 - [Ver Documento de Configuración](configuracion-proyecto.md)
 
+### 4. Auditoría de Funciones y Criterios de Diseño
+Evaluación de las funciones principales (algoritmo de dispersión, importación de usuarios, etc.) frente a los criterios y principios de diseño modular y orientado a objetos.
+- [Ver Auditoría de Funciones](auditoria-funciones-diseno.md)
+
 ---
 
 ## Realización de Casos de Uso (Secuencias)

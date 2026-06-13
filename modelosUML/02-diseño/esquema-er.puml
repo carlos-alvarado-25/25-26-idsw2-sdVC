@@ -5,7 +5,7 @@ skinparam DefaultFontColor black
 skinparam DefaultFontSize 12
 skinparam linetype ortho
 
-title Esquema de Base de Datos (Modelo Físico - MySQL)
+title Esquema de Base de Datos (Modelo Físico Completo - MySQL)
 
 entity "Usuario" as usuario {
   * id : INT <<PK>>
@@ -26,29 +26,114 @@ entity "Grado" as grado {
   * fechaActualizacion : TIMESTAMP
 }
 
-entity "CursoAcademico" as curso {
-  * id : INT <<PK>>
-  --
-  * nombre : VARCHAR(20) <<UNI>> (ej. "2025/2026")
-  * activo : BOOLEAN
-  * fechaCreacion : TIMESTAMP
-  * fechaActualizacion : TIMESTAMP
-}
-
 entity "Asignatura" as asignatura {
   * id : INT <<PK>>
   --
   * codigo : VARCHAR(20) <<UNI>>
   * nombre : VARCHAR(150)
   * creditos : INT
-  * nivel : INT (1, 2, 3...)
+  * curso : INT (1, 2, 3...)
   * gradoId : INT <<FK>>
-  * cursoAcademicoId : INT <<FK>>
   * fechaCreacion : TIMESTAMP
   * fechaActualizacion : TIMESTAMP
 }
 
+entity "Alumno" as alumno {
+  * id : INT <<PK>>
+  --
+  * matricula : VARCHAR(20) <<UNI>>
+  * nombre : VARCHAR(100)
+  * email : VARCHAR(100)
+  * curso : INT
+  * gradoId : INT <<FK>>
+  * usuarioId : INT <<FK, UNI>>
+  * fechaCreacion : TIMESTAMP
+  * fechaActualizacion : TIMESTAMP
+}
+
+entity "Profesor" as profesor {
+  * id : INT <<PK>>
+  --
+  * codigo : VARCHAR(20) <<UNI>>
+  * nombre : VARCHAR(100)
+  * email : VARCHAR(100) <<UNI>>
+  * departamento : VARCHAR(100)
+  * usuarioId : INT <<FK, UNI>>
+  * fechaCreacion : TIMESTAMP
+  * fechaActualizacion : TIMESTAMP
+}
+
+entity "Preferencia" as preferencia {
+  * id : INT <<PK>>
+  --
+  * diaSemana : INT
+  * horaInicio : VARCHAR(5)
+  * horaFin : VARCHAR(5)
+  * disponible : TINYINT
+  * profesorId : INT <<FK>>
+  * fechaCreacion : DATETIME
+  * fechaActualizacion : DATETIME
+}
+
+entity "Aula" as aula {
+  * id : INT <<PK>>
+  --
+  * codigo : VARCHAR(20) <<UNI>>
+  * nombre : VARCHAR(100)
+  * capacidad : INT
+  * edificio : VARCHAR(100)
+  * planta : VARCHAR(20)
+  * tipo : VARCHAR(50)
+  * fechaCreacion : TIMESTAMP
+  * fechaActualizacion : TIMESTAMP
+}
+
+entity "Examen" as examen {
+  * id : INT <<PK>>
+  --
+  * codigo : VARCHAR(50) <<UNI>>
+  fecha : DATE
+  hora : VARCHAR(5)
+  * duracion : INT
+  * tipo : ENUM('Ordinaria', 'Extraordinaria')
+  * asignaturaId : INT <<FK>>
+  aulaId : INT <<FK>>
+  profesorId : INT <<FK>>
+  * fechaCreacion : TIMESTAMP
+  * fechaActualizacion : TIMESTAMP
+}
+
+entity "Incidencia" as incidencia {
+  * id : INT <<PK>>
+  --
+  * tipo : VARCHAR(100)
+  * descripcion : TEXT
+  estado : ENUM('Pendiente', 'Resuelta', 'Desestimada')
+  * examenId : INT <<FK>>
+  * profesorId : INT <<FK>>
+  * fechaCreacion : TIMESTAMP
+  * fechaActualizacion : TIMESTAMP
+}
+
+entity "ProfesorAsignatura" as profesor_asignatura {
+  * idProfesor : INT <<PK, FK>>
+  * idAsignatura : INT <<PK, FK>>
+}
+
+' --- Relaciones ---
+
+usuario ||--o| alumno : "autentica a"
+usuario ||--o| profesor : "autentica a"
+grado ||--o{ alumno : "cursa"
 grado ||--o{ asignatura : "pertenece a"
-curso ||--o{ asignatura : "oferta en"
+profesor ||--o{ preferencia : "configura"
+profesor ||--o{ incidencia : "reporta"
+examen ||--o{ incidencia : "tiene"
+asignatura ||--o{ examen : "evalúa"
+aula ||--o{ examen : "alberga"
+profesor ||--o{ examen : "supervisa"
+
+profesor ||--o{ profesor_asignatura : "posee"
+asignatura ||--o{ profesor_asignatura : "es asignada a"
 
 @enduml

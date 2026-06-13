@@ -8,13 +8,13 @@
 - **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
-- **Fecha**: 2026-06-05
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
 
-Realización del diseño detallado para el caso de uso `importarProfesores()`, especificando el flujo de procesamiento masivo de archivos CSV y Excel (.xlsx) reutilizando el motor modular `FileParserFactory` (Patrón Estrategia), aplicando el saneamiento automático de celdas (`trim`) y la validación de unicidad de emails y códigos.
+Realización del diseño detallado para el caso de uso `importarProfesores()`, especificando el flujo de procesamiento masivo de archivos CSV y Excel (.xlsx) reutilizando el motor modular `FileParserFactory` (Patrón Estrategia), aplicando el saneamiento automático de celdas (`trim`), la validación de unicidad de emails y códigos, la resolución de conflictos de correos electrónicos y la creación de credenciales de usuario correspondientes.
 
 ## diagrama de secuencia
 
@@ -67,8 +67,9 @@ class ImportResultDto {
 |-------------------|----------------------|--------------------------|
 | `ImportarProfesoresView` | `ProfesorImportComponent` | Interfaz de selección de archivo y renderizado de resultados. |
 | `ProfesorController` | `ProfesorController` | Intercepción del archivo multipart y mapeado de la petición HTTP. |
-| `ProfesorController` | `ProfesorService` | Orquestación del motor de parsing e inserción en lote. |
-| `ProfesorRepository` | `ProfesorRepository` | Persistencia en bloque en base de datos. |
+| `ProfesorController` | `ProfesorService` | Orquestación del motor de parsing, lógica de resolución de emails duplicados mediante `resolveUniqueEmail()` e inserción en lote. |
+| `UsuarioRepository` | `UsuarioRepository` (TypeORM) | Creación de credenciales asociadas para cada profesor importado en una transacción atómica aislada. |
+| `ProfesorRepository` | `ProfesorRepository` | Verificación de unicidad de código, asociación con la FK `usuarioId` y persistencia en base de datos. |
 
 ## referencias
 

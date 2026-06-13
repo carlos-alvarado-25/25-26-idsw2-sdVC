@@ -7,8 +7,8 @@
 
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
-- **Fecha**: 2026-06-03
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
@@ -60,6 +60,7 @@ Tras la recepción de un HTTP 201, el sistema redirige mediante `router.navigate
 |-------------------|----------------------|--------------------------|
 | `CrearAlumnoView` | `AlumnoFormComponent` | Captura de datos iniciales y gestión de la transición a edición. |
 | `AlumnoController` | `AlumnoController` | Validación del DTO y orquestación del alta. |
-| `AlumnoController` | `AlumnoService` | Verificación de unicidad de matrícula y vinculación con `Grado`. |
+| `AlumnoController` | `AlumnoService` | Transacción atómica: verificación de unicidad de matrícula, creación de `Usuario` y vinculación con `Grado`. |
+| `UsuarioRepository` | `UsuarioRepository` (TypeORM) | Verificación y creación de credenciales de acceso (`email`, `password` bcrypt, rol `Alumno`). |
 | `GradoRepository` | `GradoRepository` | Validación de existencia de la titulación asociada. |
-| `AlumnoRepository` | `AlumnoRepository` | Inserción en la base de datos MySQL y generación de ID. |
+| `AlumnoRepository` | `AlumnoRepository` | Inserción en la base de datos MySQL y generación de ID, con FK `usuarioId`. |

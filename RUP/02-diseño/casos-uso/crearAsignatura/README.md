@@ -8,13 +8,13 @@
 
 - **Fase RUP**: Elaboration (Elaboración)
 - **Disciplina**: Análisis y Diseño
-- **Versión**: 1.0
-- **Fecha**: 2026-06-03
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
 - **Autor**: Gemini CLI
 
 ## propósito
 
-Realización del diseño detallado para el caso de uso `crearAsignatura()`, aplicando el patrón "El Delgado" para una creación rápida y la redirección automática al estado singular de edición, asegurando la integridad referencial con la entidad `Grado`.
+Realización del diseño detallado para el caso de uso `crearAsignatura()`, aplicando el patrón "El Delgado" para una creación rápida y la redirección automática al estado singular de edición, asegurando la integridad referencial con la entidad `Grado` y asignando el curso correspondiente.
 
 ## diagrama de secuencia
 
@@ -40,6 +40,7 @@ class CreateAsignaturaDto {
     codigo: string;
     nombre: string;
     creditos: number;
+    curso: number;
     gradoId: number;
 }
 ```

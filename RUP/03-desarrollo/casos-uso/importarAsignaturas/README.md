@@ -4,10 +4,18 @@
 > |-|-|-|-|-|-|-|
 
 - **Backend:** [asignaturas.controller.ts](/src/backend/src/modules/asignaturas/asignaturas.controller.ts) · [asignaturas.service.ts](/src/backend/src/modules/asignaturas/asignaturas.service.ts) · [import-result.dto.ts](/src/backend/src/modules/asignaturas/dto/import-result.dto.ts)
-- **Frontend:** [importar-asignaturas.component.ts](/src/frontend/src/app/features/admin/asignaturas/importar-asignaturas/importar-asignaturas.component.ts) · [asignatura.service.ts](/src/frontend/src/app/core/services/asignatura.service.ts)
+- **Frontend:** [importar-asignaturas.component.ts](/src/frontend/src/app/features/admin/asignaturas/importar-asignaturas/importar-asignaturas.component.ts)
+
+## información del artefacto
+
+- **Fase RUP**: Construction (Construcción)
+- **Disciplina**: Implementación
+- **Versión**: 1.1
+- **Fecha**: 2026-06-13
+- **Autor**: Gemini CLI
 
 ## Descripción
-Implementación de la carga masiva de asignaturas mediante archivos CSV y Excel (.xlsx). El sistema procesa cada línea del archivo, validando la integridad referencial con la entidad `Grado` mediante su código único antes de persistir los datos.
+Implementación de la carga masiva de asignaturas mediante archivos CSV y Excel (.xlsx). El sistema procesa cada línea del archivo, validando la integridad referencial con la entidad `Grado` mediante su código único y capturando el curso académico antes de persistir los datos.
 
 ## Estado
 ✅ **Completado** - Iteración 2
@@ -18,11 +26,12 @@ Implementación de la carga masiva de asignaturas mediante archivos CSV y Excel 
 #### POST `/asignaturas/importar`
 Procesa un archivo multipart/form-data.
 - **Form-data key**: `file`.
-- **Formato**: `codigo, nombre, creditos, grado_codigo`.
+- **Formato**: `codigo, nombre, creditos, grado_codigo, curso` (opcional, por defecto 1).
 
 ### Lógica de Negocio
 - **Carga en Lote**: Uso de `repository.save()` con un array de entidades para optimizar la persistencia.
 - **Resolución de Dependencias**: Mapeo dinámico de `grado_codigo` a `gradoId` consultando la base de datos de Grados.
+- **Parseo de Curso**: Extracción de la quinta columna (`curso`) asignándole el valor numérico correspondiente o el valor predeterminado `1` si no está presente en la fila.
 - **Feedback Detallado**: Retorno de un `ImportResultDto` detallando el balance de éxitos y errores por cada fila.
 
 ---
