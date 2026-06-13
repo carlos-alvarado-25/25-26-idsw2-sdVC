@@ -151,9 +151,15 @@ Durante la sesión del 07/06/2026, se realizó una auditoría y refactorización
      $$\text{slotStart} < \text{exEnd} \quad \land \quad \text{exStart} < \text{slotEnd}$$
      Las horas se transforman a minutos desde la medianoche usando la función auxiliar `convertTimeToMinutes(timeStr)` garantizando una protección del 100% contra el doble booking.
 
-3. **Heurística de Dispersión Académica por Grado**:
+3. **Heurística de Dispersión Académica por Grado y Curso**:
    - El motor original asignaba el primer slot disponible de forma secuencial y codiciosa, lo que concentraba la mayoría de los exámenes de un mismo Grado en un par de días (aglomeración).
-   - **Solución**: Se modificó `buscarSlotOptimo()` en `CalendarioEngine` para que evalúe y asigne puntuaciones de penalización a todos los huecos libres válidos basándose en la distancia temporal (en días) con otros exámenes ya asignados al mismo `gradoId` (mismo día: -100, día consecutivo: -50, 2 días de separación: -20, 3 días de separación: -5). Se elige la combinación de slot y aula que obtenga la puntuación máxima (menor penalización).
+   - **Solución**: Se modificó `buscarSlotOptimo()` en `CalendarioEngine` para que evalúe y asigne puntuaciones de penalización a todos los huecos libres válidos basándose en la distancia temporal (en días) con otros exámenes ya asignados al mismo `gradoId` y `curso`. Se elige la combinación de slot y aula que obtenga la puntuación máxima (menor penalización).
+
+4. **Heurística de Dispersión y Restricción Dura por Cuatrimestre (Alumnos Repetidores)**:
+   - **Problema**: Los alumnos repetidores podían sufrir solapamientos si asignaturas de diferentes cursos pero del mismo cuatrimestre se agendaban en la misma franja, o en días demasiado cercanos.
+   - **Solución**: 
+     - Se introdujo una **restricción dura** mediante `tieneCruceGradoYCuatrimestre()`, que descarta automáticamente cualquier slot donde coincidan en fecha y hora exámenes del mismo Grado y mismo Cuatrimestre.
+     - Se refinó la fórmula de dispersión en `calcularPuntuacionDispersion()` para penalizar según el semestre (mismo curso y cuatrimestre en el mismo día: -100; distinto curso pero mismo cuatrimestre en el mismo día: -50; distinto cuatrimestre en el mismo día: -10).
 
 ## referencias
 

@@ -280,15 +280,17 @@ export class ExamenService {
       const startMinutes = this.convertTimeToMinutes(ex.hora);
       const endMinutes = startMinutes + ex.duracion;
 
-      // 1. Solapamiento de Alumnos (mismo Grado)
+      // 1. Solapamiento de Alumnos (mismo Grado y mismo Cuatrimestre)
       const exGradoId = ex.asignatura?.gradoId;
-      if (exGradoId) {
+      const exCuatrimestre = ex.asignatura?.cuatrimestre;
+      if (exGradoId && exCuatrimestre !== undefined) {
         const candidatosGrado = await this.examenRepository.find({
           where: {
             fecha: ex.fecha,
             id: Not(ex.id),
             asignatura: {
               gradoId: exGradoId,
+              cuatrimestre: exCuatrimestre,
             },
           },
           relations: {
@@ -311,14 +313,14 @@ export class ExamenService {
                 examenId: ex.id,
                 examenCodigo: ex.codigo,
                 asignaturaNombre: ex.nombreAsignatura,
-                gradoNombre: ex.asignatura?.nombreGrado || 'Desconocido',
+                gradoNombre: `${ex.asignatura?.nombreGrado || 'Desconocido'} (${exCuatrimestre}º Cuatr.)`,
                 fecha: ex.fecha,
                 hora: ex.hora,
                 duracion: ex.duracion,
                 solapaConExamenId: cand.id,
                 solapaConExamenCodigo: cand.codigo,
                 solapaConAsignaturaNombre: cand.nombreAsignatura,
-                motivoConflicto: `Los alumnos de "${ex.asignatura?.nombreGrado}" tienen exámenes simultáneos: ${ex.codigo} y ${cand.codigo}.`,
+                motivoConflicto: `Los alumnos de "${ex.asignatura?.nombreGrado}" (${exCuatrimestre}º Cuatr.) tienen exámenes simultáneos: ${ex.codigo} y ${cand.codigo}.`,
                 tipoConflicto: 'Alumnos',
               });
             }

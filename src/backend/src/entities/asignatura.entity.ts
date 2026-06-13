@@ -19,6 +19,9 @@ export class Asignatura {
   @Column({ type: 'int', default: 1 })
   curso: number;
 
+  @Column({ type: 'int', default: 1 })
+  cuatrimestre: number;
+
   @ManyToOne(() => Grado, { nullable: false, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'gradoId' })
   grado: Grado;

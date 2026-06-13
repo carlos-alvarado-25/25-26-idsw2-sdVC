@@ -41,6 +41,7 @@ class CreateAsignaturaDto {
     nombre: string;
     creditos: number;
     curso: number;
+    cuatrimestre: number; // 1: Primer Cuatrimestre, 2: Segundo Cuatrimestre
     gradoId: number;
 }
 ```

@@ -9,6 +9,8 @@ export interface Asignatura {
   codigo: string;
   nombre: string;
   creditos: number;
+  curso: number;
+  cuatrimestre: number;
   gradoId: number;
   nombreGrado: string;
   grado?: {

@@ -25,12 +25,13 @@ Implementación de la creación manual de asignaturas. Sigue el patrón "El Delg
 ### Endpoints
 #### POST `/asignaturas`
 Crea una nueva asignatura.
-- **Body**: `CrearAsignaturaDto` (codigo, nombre, creditos, curso, gradoId).
+- **Body**: `CrearAsignaturaDto` (codigo, nombre, creditos, curso, cuatrimestre, gradoId).
 
 ### Lógica de Negocio
 - **Validación de Unicidad**: Se comprueba que el código de la asignatura no exista previamente.
 - **Integridad Referencial**: Verificación de existencia del `Grado` antes de la persistencia.
 - **Curso Académico**: Persistencia del campo `curso` (1, 2, 3 o 4) para permitir un filtrado óptimo en el algoritmo de dispersión temporal.
+- **Cuatrimestre / Semestre**: Persistencia del campo `cuatrimestre` (1 o 2) para posibilitar el aislamiento de exámenes por semestre en la misma titulación y mitigar solapamientos de alumnos repetidores.
 
 ---
 
@@ -54,6 +55,8 @@ curl -X POST http://localhost:3000/asignaturas \
     "codigo": "ALG102",
     "nombre": "Álgebra Lineal",
     "creditos": 6,
+    "curso": 1,
+    "cuatrimestre": 1,
     "gradoId": 13
   }'
 ```

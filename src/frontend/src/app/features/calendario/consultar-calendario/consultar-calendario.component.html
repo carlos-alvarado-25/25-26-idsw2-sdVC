@@ -50,7 +50,7 @@
         <label for="asignatura-select">Asignatura</label>
         <select id="asignatura-select" [ngModel]="selectedAsignaturaId()" (ngModelChange)="onAsignaturaChange($event)">
           <option [ngValue]="null">Todas las Asignaturas</option>
-          <option *ngFor="let a of asignaturas()" [ngValue]="a.id">{{ a.nombre }}</option>
+          <option *ngFor="let a of asignaturas()" [ngValue]="a.id">{{ a.nombre }} (Curso {{ a.curso }}º · {{ a.cuatrimestre }}º Cuatr.)</option>
         </select>
       </div>
     </div>
@@ -124,7 +124,7 @@
                 <span class="exam-badge-type">{{ ex.tipo }}</span>
               </div>
               <h4 class="subject-name">{{ ex.nombreAsignatura }}</h4>
-              <span class="subject-code">{{ ex.codigoAsignatura }}</span>
+              <span class="subject-code">{{ ex.codigoAsignatura }}<ng-container *ngIf="ex.asignatura?.curso"> · Curso {{ ex.asignatura?.curso }}º ({{ ex.asignatura?.cuatrimestre }}º Cuatr.)</ng-container></span>
               
               <div class="location-details">
                 <span class="detail-item"><strong>Aula:</strong> {{ ex.nombreAula }}</span>
@@ -163,6 +163,7 @@
               <h3>{{ ex.nombreAsignatura }}</h3>
               <div class="card-meta">
                 <span><strong>Código:</strong> {{ ex.codigoAsignatura }}</span>
+                <span><strong>Curso:</strong> {{ ex.asignatura?.curso }}º · {{ ex.asignatura?.cuatrimestre }}º Cuatr.</span>
                 <span><strong>Grado:</strong> {{ ex.asignatura?.nombreGrado }}</span>
               </div>
               <div class="card-details">

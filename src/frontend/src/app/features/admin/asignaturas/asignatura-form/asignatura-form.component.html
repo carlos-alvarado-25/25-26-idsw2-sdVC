@@ -34,6 +34,30 @@
         <input id="creditos" type="number" formControlName="creditos" [readonly]="loading()">
       </div>
 
+      <!-- Curso -->
+      <div class="form-group">
+        <label for="curso">Curso Académico*</label>
+        <input id="curso" type="number" formControlName="curso" [readonly]="loading()" min="1" max="10">
+        <small class="error" *ngIf="asignaturaForm.get('curso')?.touched && asignaturaForm.get('curso')?.errors?.['required']">
+          El curso es obligatorio.
+        </small>
+        <small class="error" *ngIf="asignaturaForm.get('curso')?.touched && asignaturaForm.get('curso')?.errors?.['min']">
+          El curso debe ser mayor o igual a 1.
+        </small>
+      </div>
+
+      <!-- Cuatrimestre -->
+      <div class="form-group">
+        <label for="cuatrimestre">Cuatrimestre*</label>
+        <select id="cuatrimestre" formControlName="cuatrimestre">
+          <option [value]="1">1º Cuatrimestre</option>
+          <option [value]="2">2º Cuatrimestre</option>
+        </select>
+        <small class="error" *ngIf="asignaturaForm.get('cuatrimestre')?.touched && asignaturaForm.get('cuatrimestre')?.errors?.['required']">
+          El cuatrimestre es obligatorio.
+        </small>
+      </div>
+
       <!-- Grado Selector -->
       <div class="form-group">
         <label for="gradoId">Grado Académico*</label>

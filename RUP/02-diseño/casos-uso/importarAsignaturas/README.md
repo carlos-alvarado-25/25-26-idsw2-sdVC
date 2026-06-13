@@ -42,6 +42,7 @@ Realización del diseño detallado para el caso de uso `importarAsignaturas()`, 
 | `creditos` | Número de créditos ECTS | Number |
 | `grado_codigo` | Código del Grado asociado | String |
 | `curso` | Curso o año académico (1, 2, 3, 4) (opcional, por defecto 1) | Number |
+| `cuatrimestre` | Cuatrimestre o semestre (1, 2) (opcional, por defecto 1) | Number |
 
 #### ImportResultDto
 ```typescript

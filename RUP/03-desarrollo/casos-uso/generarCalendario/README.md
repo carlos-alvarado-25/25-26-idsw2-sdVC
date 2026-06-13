@@ -33,10 +33,13 @@ Recibe los parámetros temporales de la planificación para ejecutar el motor co
   * **`Aula`**: Expone `estaDisponibleEn()` para autoevaluar colisiones físicas de espacios contra los exámenes ya existentes en el rango (auditado para usar intersección de intervalos de tiempo en minutos para prevenir solapamientos).
   * **`Profesor`**: Expone `estaDisponibleEn()` (cruce contra preferencias/exclusiones horarias de la base de datos), `tieneCruceHorario()` (usando intersección de intervalos en minutos) y `puedeImpartirAsignatura()` (encapsulado para cumplir la Ley de Demeter).
 - **Motor Combinatorial (`CalendarioEngine`)**: Clase pura de dominio en memoria que realiza la simulación atómica y devuelve el balance de planificación.
-- **Optimizaciones de Rendimiento**:
-  * **Dispersión por Curso**: El cálculo de la penalización de proximidad de exámenes evalúa tanto el `gradoId` como el `curso` de la asignatura, permitiendo que asignaturas del mismo grado pero de distintos años se agenden el mismo día sin penalización.
+- **Optimizaciones de Rendimiento y Reglas del Motor**:
+  * **Dispersión por Curso y Cuatrimestre**: El cálculo de la penalización de proximidad de exámenes evalúa `gradoId`, `curso` y `cuatrimestre` de la asignatura, permitiendo que asignaturas de distintos años o distintos cuatrimestres se planifiquen con menor o nula penalización.
+  * **Aislamiento por Cuatrimestre (Alumnos Repetidores)**: 
+    * Se añadió una **restricción dura** (`tieneCruceGradoYCuatrimestre()`) que descarta slots donde coincidan en la misma franja exámenes de asignaturas del mismo Grado y mismo Cuatrimestre, impidiendo solapamientos horarios directos en alumnos repetidores.
+    * Se afinó la dispersión en `calcularPuntuacionDispersion()` para penalizar según el semestre (mismo curso y cuatrimestre en el mismo día: -100; distinto curso pero mismo cuatrimestre en el mismo día: -50; distinto cuatrimestre en el mismo día: -10).
   * **Hoisting de Candidatos**: El filtro de profesores aptos para impartir la asignatura se realiza una única vez fuera del bucle anidado de slots y aulas.
-  * **Poda de Slots (Pruning)**: Si ya tenemos una asignación válida y el slot evaluado tiene una puntuación de dispersión inferior o igual a la actual, se omiten todos sus bucles de aulas y profesores. Esto redujo el tiempo de procesamiento para 100 exámenes de 12.8s a 350ms.
+  * **Poda de Slots (Pruning)**: Si ya tenemos una asignación válida y el slot evaluado tiene una puntuación de dispersión inferior o igual a la actual, se omiten todos sus bucles de aulas y profesores. Esto redujo el tiempo de procesamiento para 100 exámenes de 12.8s a 350ms (y se mantiene estable tras añadir los semestres).
 
 ---
 

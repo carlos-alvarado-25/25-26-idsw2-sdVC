@@ -41,6 +41,8 @@
           <th>Código</th>
           <th>Nombre</th>
           <th>Créditos</th>
+          <th>Curso</th>
+          <th>Cuatrimestre</th>
           <th>Grado</th>
           <th>Acciones</th>
         </tr>
@@ -53,6 +55,8 @@
           <td class="font-mono">{{ asignatura.codigo }}</td>
           <td><strong>{{ asignatura.nombre }}</strong></td>
           <td>{{ asignatura.creditos }} ECTS</td>
+          <td>{{ asignatura.curso }}º</td>
+          <td>{{ asignatura.cuatrimestre }}º Cuatr.</td>
           <td class="text-accent">{{ asignatura.nombreGrado }}</td>
           <td class="table-actions">
             <button class="btn-icon" [routerLink]="['/admin/asignaturas/editar', asignatura.id]" title="Editar">✏️</button>
@@ -60,7 +64,7 @@
           </td>
         </tr>
         <tr *ngIf="asignaturas().length === 0 && !loading()">
-          <td colspan="6" class="no-data">No se encontraron asignaturas registradas.</td>
+          <td colspan="8" class="no-data">No se encontraron asignaturas registradas.</td>
         </tr>
       </tbody>
     </table>

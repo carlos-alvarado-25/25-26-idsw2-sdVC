@@ -34,6 +34,8 @@ export class AsignaturaFormComponent implements OnInit {
       codigo: ['', [Validators.required, Validators.maxLength(20)]],
       nombre: ['', [Validators.required, Validators.maxLength(150)]],
       creditos: [6, [Validators.required, Validators.min(1)]],
+      curso: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
+      cuatrimestre: [1, [Validators.required, Validators.min(1), Validators.max(2)]],
       gradoId: ['', [Validators.required]]
     });
   }
@@ -63,6 +65,8 @@ export class AsignaturaFormComponent implements OnInit {
             codigo: asig.codigo,
             nombre: asig.nombre,
             creditos: asig.creditos,
+            curso: asig.curso,
+            cuatrimestre: asig.cuatrimestre,
             gradoId: asig.gradoId
           });
         },

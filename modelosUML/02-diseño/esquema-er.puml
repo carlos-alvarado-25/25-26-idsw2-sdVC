@@ -33,6 +33,7 @@ entity "Asignatura" as asignatura {
   * nombre : VARCHAR(150)
   * creditos : INT
   * curso : INT (1, 2, 3...)
+  * cuatrimestre : INT (1, 2)
   * gradoId : INT <<FK>>
   * fechaCreacion : TIMESTAMP
   * fechaActualizacion : TIMESTAMP

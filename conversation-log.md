@@ -1719,3 +1719,31 @@ Todos los usuarios creados por importación CSV o creación manual de alumno/pro
   - Actualización de los scripts DDL y del listado de tablas en [configuracion-proyecto.md](/RUP/02-diseño/configuracion-proyecto.md) y en los READMEs de `abrirAsignaturas` de diseño y desarrollo.
 
 **Decisión:** Se cierra formalmente la sesión incorporando el campo `curso` a nivel de negocio, base de datos y algoritmos como el criterio estándar para resolver la dispersión de exámenes sin generar cuellos de botella temporales en el motor combinatorial.
+
+---
+
+## [13/06/2026 21:32] Sesión 85: Introducción de Cuatrimestre en Asignatura y Aislamiento de Conflictos de Repetidores
+
+**Prompt:** «Ahora procede a adaptar el frontend a estos cambios» → «Y además ponte con otra situación, hay gente que puede estar cursando asignaturas de 1 curso y asignaturas de otro curso... Eso se solucionaría añadiendo semestre a la asignatura no?» → «Perfecto, hazlo! y documentalo todo en los READMEs correspondientes» → «Perfecto, ahora recalcula la complejidad temporal que tiene el motor de generación» → «Sería aprox On» → «Perfecto, revisa el código cambiado y dime si explotaste lo que hemos venido desarrollando de forma limpia siguiendo los principios y pautas de diseño» → «Perfecto, entonces terminemos la sesión aquí. Añade estas decisiones al conversation-log.md»
+
+**Resultado:**
+
+- **Base de Datos y Modelado**:
+  - Inclusión física de la columna `cuatrimestre INT NOT NULL DEFAULT 1` (valores 1 y 2) en la tabla `Asignatura` mediante alteración DDL.
+  - Sincronización en la entidad TypeORM `Asignatura` y actualización con validadores `@Min(1) @Max(2)` en `CrearAsignaturaDto`.
+  - Actualización del esquema físico en `configuracion-proyecto.md` y compilación visual del diagrama `esquema-er.puml` a `esquema-er.svg` en la carpeta de imágenes de diseño.
+- **Refactorización del Motor de Asignación y Colisiones**:
+  - **Restricción Dura**: Se introdujo `tieneCruceGradoYCuatrimestre()` en `CalendarioEngine` para evitar que exámenes del mismo Grado y mismo Cuatrimestre coincidan en la misma franja de tiempo, eliminando solapamientos horarios directos en alumnos repetidores.
+  - **Restricción Suave**: Se refinó `calcularPuntuacionDispersion()` para ponderar penalizaciones según el semestre (mismo curso y cuatrimestre en el mismo día: -100; distinto curso pero mismo cuatrimestre en el mismo día: -50; distinto cuatrimestre en el mismo día: -10).
+  - **Diagnóstico**: Se acopló el detector `findConflictosAlumnos` para catalogar y notificar conflictos únicamente cuando los exámenes pertenezcan al mismo grado y semestre.
+- **Frontend (Angular)**:
+  - Selector desplegable de `Cuatrimestre` (1º o 2º) integrado en el formulario reactivo de asignaturas.
+  - Columna **Cuatrimestre** expuesta en el listado general de asignaturas.
+  - Instrucciones actualizadas para aceptar la sexta columna opcional `cuatrimestre` en el archivo de importación masiva.
+  - El cuatrimestre se renderiza dinámicamente en el calendario en las tarjetas semanales y la vista de línea temporal diaria, además de los selectores de búsqueda administrativa.
+- **Análisis de Complejidad Temporal**:
+  - Se recalculó formalmente la complejidad del motor tras la introducción del cuatrimestre y las optimizaciones de hoisting/poda, concluyendo que la complejidad en el peor caso es $O(E \cdot P + E^2 \cdot S \cdot A \cdot P_{cand})$ y la complejidad en el caso promedio real es cuasi-lineal **$O(E)$** debido a que el tamaño de las cohortes y los recursos del sistema están acotados por constantes pequeñas de dominio.
+- **Auditoría Documental RUP**:
+  - Actualización sistemática de **6 READMEs** de Análisis, Diseño y Desarrollo y creación de la bitácora de auditoría en `RUP/02-diseño/auditoria-funciones-diseno.md`.
+
+**Decisión:** Se da por finalizada e implementada la sesión habiendo incorporado el soporte nativo de cuatrimestre como regla del motor de asignación combinatorial para resolver y aislar preventivamente los solapamientos de horario en alumnos repetidores, preservando la trazabilidad de los artefactos RUP.

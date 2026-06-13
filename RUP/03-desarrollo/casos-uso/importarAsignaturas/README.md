@@ -26,12 +26,12 @@ Implementación de la carga masiva de asignaturas mediante archivos CSV y Excel 
 #### POST `/asignaturas/importar`
 Procesa un archivo multipart/form-data.
 - **Form-data key**: `file`.
-- **Formato**: `codigo, nombre, creditos, grado_codigo, curso` (opcional, por defecto 1).
+- **Formato**: `codigo, nombre, creditos, grado_codigo, curso, cuatrimestre` (opcionales, por defecto 1).
 
 ### Lógica de Negocio
 - **Carga en Lote**: Uso de `repository.save()` con un array de entidades para optimizar la persistencia.
 - **Resolución de Dependencias**: Mapeo dinámico de `grado_codigo` a `gradoId` consultando la base de datos de Grados.
-- **Parseo de Curso**: Extracción de la quinta columna (`curso`) asignándole el valor numérico correspondiente o el valor predeterminado `1` si no está presente en la fila.
+- **Parseo de Curso y Cuatrimestre**: Extracción de la quinta columna (`curso`) y sexta columna (`cuatrimestre`), asignándoles el valor numérico correspondiente o el valor predeterminado `1` si no están presentes.
 - **Feedback Detallado**: Retorno de un `ImportResultDto` detallando el balance de éxitos y errores por cada fila.
 
 ---
@@ -50,9 +50,10 @@ Procesa un archivo multipart/form-data.
 
 ### Preparación del Archivo (test.csv)
 ```csv
-codigo, nombre, creditos, grado_codigo
-ALG001, Álgebra, 6, GINF
-CAL002, Cálculo I, 6, GINF
+codigo, nombre, creditos, grado_codigo, curso, cuatrimestre
+ALG001, Álgebra, 6, GINF, 1, 1
+CAL002, Cálculo I, 6, GINF, 1, 1
+PROG02, Programación II, 6, GINF, 1, 2
 ```
 
 ### Ejecución (cURL)
