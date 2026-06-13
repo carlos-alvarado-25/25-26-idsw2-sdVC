@@ -26,11 +26,9 @@ interface CalendarDay {
   styleUrls: ['./consultar-calendario.component.css']
 })
 export class ConsultarCalendarioComponent implements OnInit {
-  // Configuración de fecha y vista
   currentDate = signal<Date>(new Date());
   viewMode = signal<'month' | 'week' | 'day'>('month');
   
-  // Datos y filtros
   exams = signal<Examen[]>([]);
   grados = signal<Grado[]>([]);
   asignaturas = signal<Asignatura[]>([]);
@@ -42,10 +40,8 @@ export class ConsultarCalendarioComponent implements OnInit {
   errorMsg = signal<string | null>(null);
   currentUser = signal<User | null>(null);
   
-  // Días de la semana en español
   weekDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
   
-  // Nombre del mes actual en español
   monthNames = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
@@ -64,10 +60,7 @@ export class ConsultarCalendarioComponent implements OnInit {
     this.authService.user$.subscribe((user: User | null) => {
       this.currentUser.set(user);
       
-      // Cargar filtros iniciales
       this.cargarFiltros();
-      
-      // Cargar exámenes correspondientes
       this.cargarExamenes();
     });
   }
@@ -76,7 +69,6 @@ export class ConsultarCalendarioComponent implements OnInit {
     const user = this.currentUser();
     
     if (user && user.rol === 'Alumno') {
-      // Si el usuario es un Alumno, resolvemos su Grado a partir de su email para cargar SOLO sus asignaturas
       this.alumnoService.filtrar(user.email).subscribe({
         next: (res: any) => {
           if (res.data && res.data.length > 0) {
@@ -89,7 +81,6 @@ export class ConsultarCalendarioComponent implements OnInit {
         }
       });
     } else if (user && user.rol === 'Admin') {
-      // Solo el Admin necesita los filtros de Grado y Asignatura
       this.gradoService.listar(1).subscribe({
         next: (res: any) => {
           this.grados.set(res.data || []);
@@ -100,8 +91,6 @@ export class ConsultarCalendarioComponent implements OnInit {
       });
       this.cargarAsignaturasPorGrado(null);
     }
-    // Para Profesor: no se cargan filtros académicos.
-    // El backend filtra automáticamente por usuarioId.
   }
 
   onGradoChange(gradoId: number | null): void {
@@ -127,7 +116,6 @@ export class ConsultarCalendarioComponent implements OnInit {
         }
       });
     } else {
-      // Cargar algunas asignaturas iniciales (por ejemplo, página 1)
       this.asignaturaService.listar(1).subscribe({
         next: (res: any) => {
           this.asignaturas.set(res.data || []);
@@ -139,7 +127,6 @@ export class ConsultarCalendarioComponent implements OnInit {
     }
   }
 
-  // Carga exámenes según el rango de fechas de la vista actual y filtros seleccionados
   cargarExamenes(): void {
     const dates = this.getRangeDates();
     if (!dates) return;
@@ -176,7 +163,6 @@ export class ConsultarCalendarioComponent implements OnInit {
       });
   }
 
-  // Obtiene las fechas de inicio y fin para la consulta API según la vista activa
   getRangeDates(): { start: Date; end: Date } {
     const date = this.currentDate();
     const mode = this.viewMode();
@@ -184,7 +170,6 @@ export class ConsultarCalendarioComponent implements OnInit {
     if (mode === 'month') {
       const year = date.getFullYear();
       const month = date.getMonth();
-      // Obtenemos los días que se renderizan en la cuadrícula mensual (incluyendo desbordes)
       const firstDay = new Date(year, month, 1);
       let startOffset = firstDay.getDay() - 1;
       if (startOffset === -1) startOffset = 6;
@@ -202,14 +187,12 @@ export class ConsultarCalendarioComponent implements OnInit {
       end.setDate(start.getDate() + 6);
       return { start, end };
     } else {
-      // day view
       const start = new Date(date);
       const end = new Date(date);
       return { start, end };
     }
   }
 
-  // Genera la lista de días a renderizar en la vista mensual
   calendarDays = computed<CalendarDay[]>(() => {
     const date = this.currentDate();
     const year = date.getFullYear();
@@ -220,7 +203,6 @@ export class ConsultarCalendarioComponent implements OnInit {
     let startOffset = firstDay.getDay() - 1;
     if (startOffset === -1) startOffset = 6;
 
-    // Indexado lineal O(N) para acceso inmediato
     const examsByDate = new Map<string, Examen[]>();
     for (const ex of examList) {
       if (ex.fecha) {
@@ -235,7 +217,6 @@ export class ConsultarCalendarioComponent implements OnInit {
     const today = new Date();
     const todayStr = this.formatDate(today);
 
-    // 42 celdas en total (6 filas de 7 días)
     const startDate = new Date(year, month, 1 - startOffset);
     for (let i = 0; i < 42; i++) {
       const d = new Date(startDate);
@@ -254,14 +235,12 @@ export class ConsultarCalendarioComponent implements OnInit {
     return days;
   });
 
-  // Genera los días de la semana activa
   weeklyDays = computed<CalendarDay[]>(() => {
     const date = this.currentDate();
     const examList = this.exams();
     const day = date.getDay();
     const diff = date.getDate() - day + (day === 0 ? -6 : 1);
     
-    // Indexado lineal O(N)
     const examsByDate = new Map<string, Examen[]>();
     for (const ex of examList) {
       if (ex.fecha) {
@@ -293,13 +272,11 @@ export class ConsultarCalendarioComponent implements OnInit {
     return days;
   });
 
-  // Exámenes del día actual (para vista diaria)
   dailyExams = computed<Examen[]>(() => {
     const dStr = this.formatDate(this.currentDate());
     return this.exams().filter(e => e.fecha === dStr);
   });
 
-  // Navegación temporal
   prev(): void {
     const date = this.currentDate();
     const mode = this.viewMode();
@@ -344,7 +321,6 @@ export class ConsultarCalendarioComponent implements OnInit {
     this.cargarExamenes();
   }
 
-  // Texto descriptivo del período actual en la cabecera del calendario
   get periodLabel(): string {
     const date = this.currentDate();
     const mode = this.viewMode();
@@ -359,12 +335,10 @@ export class ConsultarCalendarioComponent implements OnInit {
     }
   }
 
-  // Reportar Incidencia (para profesores)
   reportarIncidencia(examenId: number): void {
     this.router.navigate(['/profesor/incidencias/crear', examenId]);
   }
 
-  // Formateador de fecha YYYY-MM-DD
   formatDate(date: Date): string {
     const y = date.getFullYear();
     const m = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -372,12 +346,10 @@ export class ConsultarCalendarioComponent implements OnInit {
     return `${y}-${m}-${d}`;
   }
 
-  // Finalizar consulta (Transition)
   volver(): void {
     this.router.navigate(['/home']);
   }
 
-  // Modal de descarga
   isDownloadModalOpen = signal(false);
   downloadFormat = signal<'pdf' | 'excel'>('pdf');
   downloadFechaInicio = signal<string>('');
@@ -421,7 +393,6 @@ export class ConsultarCalendarioComponent implements OnInit {
 
     const downloadUrl = this.examenService.obtenerUrlExportacion(queryParams);
     
-    // Simular descarga
     const link = document.createElement('a');
     link.href = downloadUrl;
     link.target = '_blank';

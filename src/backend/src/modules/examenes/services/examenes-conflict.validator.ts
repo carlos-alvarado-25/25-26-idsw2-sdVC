@@ -30,16 +30,12 @@ export class SimpleExamenConflictValidator extends ExamenConflictValidator {
     super();
   }
 
-  /**
-   * Verifica solapamientos físicos de aula y profesor, así como preferencias horarias.
-   */
   async verificarRestricciones(examen: Examen, excludeExamenId: number): Promise<void> {
     if (!examen.fecha || !examen.hora) return;
 
     const startMinutes = TimeUtils.convertTimeToMinutes(examen.hora);
     const endMinutes = startMinutes + examen.duracion;
 
-    // 1. Solapamiento de Aula
     if (examen.aulaId) {
       const examenesAula = await this.examenRepository.find({
         where: {
@@ -57,7 +53,6 @@ export class SimpleExamenConflictValidator extends ExamenConflictValidator {
       }
     }
 
-    // 2. Solapamiento de Profesor
     if (examen.profesorId) {
       const examenesProf = await this.examenRepository.find({
         where: {
@@ -75,7 +70,6 @@ export class SimpleExamenConflictValidator extends ExamenConflictValidator {
         );
       }
 
-      // 3. Preferencias del Profesor
       const profesor = await this.profesorRepository.findOne({
         where: { id: examen.profesorId },
         relations: { preferencias: true },
@@ -96,9 +90,6 @@ export class SimpleExamenConflictValidator extends ExamenConflictValidator {
     }
   }
 
-  /**
-   * Verifica puntualmente el conflicto de un profesor determinado.
-   */
   async verificarConflictoProfesor(
     examenId: number,
     profesorId: number,
@@ -130,9 +121,6 @@ export class SimpleExamenConflictValidator extends ExamenConflictValidator {
     return { tieneConflicto: false };
   }
 
-  /**
-   * Calcula todos los conflictos (Alumnos, Aulas, Profesor) para un listado de exámenes de un profesor.
-   */
   async calcularTodosConflictosAlumnos(
     examenesProf: Examen[],
   ): Promise<ConflictoAlumnoDto[]> {
@@ -144,7 +132,6 @@ export class SimpleExamenConflictValidator extends ExamenConflictValidator {
       const startMinutes = TimeUtils.convertTimeToMinutes(ex.hora);
       const endMinutes = startMinutes + ex.duracion;
 
-      // 1. Solapamientos de Alumnos (mismo Grado y mismo Cuatrimestre)
       const exGradoId = ex.gradoId;
       const exCuatrimestre = ex.cuatrimestre;
       if (exGradoId && exCuatrimestre !== undefined) {
@@ -192,7 +179,6 @@ export class SimpleExamenConflictValidator extends ExamenConflictValidator {
         }
       }
 
-      // 2. Sobreposición de Aula
       if (ex.aulaId) {
         const candidatosAula = await this.examenRepository.find({
           where: {
@@ -234,7 +220,6 @@ export class SimpleExamenConflictValidator extends ExamenConflictValidator {
         }
       }
 
-      // 3. Sobrecarga de Profesor
       if (ex.profesorId) {
         const candidatosProf = await this.examenRepository.find({
           where: {

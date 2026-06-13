@@ -61,7 +61,6 @@ export class ListarIncidenciasComponent implements OnInit {
       .subscribe({
         next: (actualizada) => {
           this.success.set(`Incidencia #${id} actualizada a estado: ${nuevoEstado}`);
-          // Actualizar lista local
           this.incidencias.update((list) => 
             list.map((inc) => inc.id === id ? { ...inc, estado: actualizada.estado } : inc)
           );

@@ -10,9 +10,6 @@ export class FileParserFactory {
     private readonly excelParser: ExcelParserService,
   ) {}
 
-  /**
-   * Retorna el parser adecuado según el mimetype del archivo.
-   */
   getParser(mimetype: string): IFileParser {
     if (mimetype === 'text/csv') {
       return this.csvParser;

@@ -21,21 +21,16 @@ export class ComunicarIncidenciaComponent implements OnInit {
   success = signal(false);
   error = signal<string | null>(null);
   
-  // Lista de exámenes asignados para cuando no viene ID específico
   examenes = signal<Examen[]>([]);
   
-  // Examen seleccionado actualmente
   examenSeleccionado = signal<Examen | null>(null);
   
-  // Modo de apertura con ID específico fijo
   examenFijo = signal(false);
   examenIdParam: number | null = null;
 
-  // Listado de incidencias y estado de carga
   incidencias = signal<Incidencia[]>([]);
   loadingIncidencias = signal(false);
 
-  // Tipos predefinidos de incidencia
   tiposIncidencia = [
     'Solapamiento de horarios',
     'Preferencia horaria',
@@ -59,13 +54,11 @@ export class ComunicarIncidenciaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // 1. Obtener datos del usuario en sesión
     this.authService.user$.subscribe((user) => {
       this.currentUser.set(user);
       
       if (user && user.rol === 'Profesor') {
         this.cargarIncidencias(user.email);
-        // 2. Comprobar si viene ID del examen por parámetro
         const idParam = this.route.snapshot.paramMap.get('examenId');
         if (idParam) {
           this.examenIdParam = parseInt(idParam, 10);
@@ -81,7 +74,6 @@ export class ComunicarIncidenciaComponent implements OnInit {
       }
     });
 
-    // Detectar cambios en la selección de exámenes si no está fijo
     this.incidenciaForm.get('examenId')?.valueChanges.subscribe((id) => {
       if (id && !this.examenFijo()) {
         const selected = this.examenes().find(ex => ex.id === parseInt(id, 10));
@@ -97,7 +89,6 @@ export class ComunicarIncidenciaComponent implements OnInit {
       .subscribe({
         next: (ex) => {
           this.examenSeleccionado.set(ex);
-          // Si es fijo, forzamos cargar la lista que contenga al menos este examen para que se muestre en el dropdown deshabilitado
           this.examenes.set([ex]);
         },
         error: (err) => {

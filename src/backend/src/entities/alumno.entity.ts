@@ -34,9 +34,6 @@ export class Alumno {
   @JoinColumn({ name: 'usuarioId' })
   usuario: Usuario | null;
 
-  /**
-   * Delegación: Provee el nombre del grado sin navegar por la asociación
-   */
   @Expose()
   get nombreGrado(): string {
     return this.grado ? this.grado.nombre : 'Sin Grado';

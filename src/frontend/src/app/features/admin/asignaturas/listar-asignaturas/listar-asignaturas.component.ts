@@ -20,7 +20,6 @@ export class ListarAsignaturasComponent implements OnInit {
   loading = signal(false);
   criterio = '';
 
-  // Selección múltiple
   selectedIds = signal<Set<number>>(new Set());
 
   constructor(private asignaturaService: AsignaturaService) {}
@@ -48,7 +47,6 @@ export class ListarAsignaturasComponent implements OnInit {
       });
   }
 
-  // Lógica de selección
   toggleSelectAll(event: any): void {
     const checked = event.target.checked;
     if (checked) {

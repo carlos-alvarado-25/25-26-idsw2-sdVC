@@ -1849,3 +1849,32 @@ Todos los usuarios creados por importación CSV o creación manual de alumno/pro
   - Compilación de TypeScript (`tsc --noEmit`) sin errores tras los cambios.
 
 **Decisión:** Se cierra formalmente la sesión habiendo completado una auditoría general del sistema y corregido la inconsistencia de comportamiento en la eliminación bulk, asegurando paridad de advertencias entre la eliminación individual y la masiva en todos los módulos administrativos.
+
+---
+
+## [13/06/2026 23:53] Sesión 91: Limpieza de Comentarios en Frontend y Backend
+
+**Prompt:** «Por cierto, revisa el código tanto del frontend y del backend y elimina los comentarios» -> «Perfecto cierra la sesión y añadelo al conversation-log.md»
+
+**Resultado:**
+
+- **Auditoría de Comentarios**:
+  - Se realizó un barrido completo sobre todos los archivos `.ts` del backend (`src/backend/src`) y del frontend (`src/frontend/src/app`) para identificar comentarios de línea (`//`) y de bloque (`/** */`).
+  - Se encontraron **7 líneas comentadas en el backend** y **48 líneas comentadas en el frontend**.
+- **Limpieza Backend (7 archivos)**:
+  - [examenes-conflict.validator.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/examenes/services/examenes-conflict.validator.ts): Eliminados 9 comentarios (3 JSDoc de métodos + 6 comentarios de sección numerada).
+  - [time.utils.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/common/utils/time.utils.ts): Eliminados 3 JSDoc de métodos utilitarios.
+  - [alumno.entity.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/entities/alumno.entity.ts) y [asignatura.entity.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/entities/asignatura.entity.ts): Eliminado 1 JSDoc de delegación en cada entidad.
+  - [file-parser.interface.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/common/interfaces/file-parser.interface.ts), [file-parser.factory.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/common/services/file-parser.factory.ts), [csv-parser.service.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/common/services/parsers/csv-parser.service.ts) y [excel-parser.service.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/common/services/parsers/excel-parser.service.ts): Eliminados JSDoc de implementación.
+  - [incidencias.service.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/modules/incidencias/incidencias.service.ts): Eliminado 1 comentario inline.
+- **Limpieza Frontend (7 archivos)**:
+  - [consultar-calendario.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/calendario/consultar-calendario/consultar-calendario.component.ts): Eliminados 25 comentarios (de sección, de flujo condicional, de implementación de computed).
+  - [comunicar-incidencia.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/profesor/incidencias/comunicar-incidencia/comunicar-incidencia.component.ts): Eliminados 8 comentarios de propiedades y flujo.
+  - [listar-grados.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/admin/grados/listar-grados/listar-grados.component.ts), [listar-asignaturas.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/admin/asignaturas/listar-asignaturas/listar-asignaturas.component.ts) y [listar-aulas.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/admin/aulas/listar-aulas/listar-aulas.component.ts): Eliminados comentarios de sección («Selección múltiple», «Lógica de selección»).
+  - [profesor-preferencias.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/admin/profesores/profesor-preferencias/profesor-preferencias.component.ts): Eliminados 3 comentarios de bloque de carga.
+  - [listar-incidencias.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/admin/incidencias/listar-incidencias/listar-incidencias.component.ts) y [generar-calendario.component.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/frontend/src/app/features/admin/calendario/generar-calendario/generar-calendario.component.ts): Eliminados comentarios inline.
+- **Verificación Final**:
+  - Barrido de comprobación post-limpieza: **0 comentarios restantes** en backend y frontend.
+  - Compilación TypeScript (`tsc --noEmit`) de ambos proyectos: **0 errores**.
+
+**Decisión:** Se cierra formalmente la sesión habiendo eliminado todos los comentarios del código fuente TypeScript del proyecto, tanto en backend como en frontend, mejorando la limpieza del código y eliminando ruido innecesario, sin alterar ningún comportamiento funcional.

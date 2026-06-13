@@ -18,7 +18,6 @@ export class IncidenciasService {
   ) {}
 
   async crear(dto: CrearIncidenciaDto, emailProfesor: string): Promise<Incidencia> {
-    // Buscar profesor por email
     const profesor = await this.profesorRepository.findOneBy({ email: emailProfesor });
     if (!profesor) {
       throw new NotFoundException(`Profesor con email "${emailProfesor}" no registrado`);

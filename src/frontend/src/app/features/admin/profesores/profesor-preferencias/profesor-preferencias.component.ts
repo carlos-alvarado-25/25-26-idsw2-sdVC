@@ -62,7 +62,6 @@ export class ProfesorPreferenciasComponent implements OnInit {
     this.loading.set(true);
     this.error.set(null);
 
-    // Cargar información del profesor
     this.profesorService.obtenerPorId(this.profesorId).subscribe({
       next: (prof) => {
         this.profesor.set(prof);
@@ -73,7 +72,6 @@ export class ProfesorPreferenciasComponent implements OnInit {
       }
     });
 
-    // Cargar conflictos de alumnos
     this.examenService.obtenerConflictos(this.profesorId).subscribe({
       next: (conf) => {
         this.conflictos.set(conf);
@@ -83,7 +81,6 @@ export class ProfesorPreferenciasComponent implements OnInit {
       }
     });
 
-    // Cargar preferencias del profesor
     this.preferenciaService.listar(this.profesorId)
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({

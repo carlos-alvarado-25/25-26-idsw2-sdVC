@@ -5,10 +5,6 @@ import { BaseParser } from './base-parser';
 
 @Injectable()
 export class CsvParserService extends BaseParser implements IFileParser {
-  /**
-   * Implementación para CSV sin cabeceras.
-   * Utiliza el array de headers proporcionado para mapear las columnas por posición.
-   */
   parse<T>(buffer: Buffer, headers?: string[]): T[] {
     const workbook = XLSX.read(buffer, { 
       type: 'buffer',

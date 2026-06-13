@@ -51,7 +51,6 @@ export class GenerarCalendarioComponent {
     const valor = this.nuevaFranja.trim();
     if (!valor) return;
 
-    // Validación básica de formato HH:mm-HH:mm
     const regex = /^([01]\d|2[0-3]):([0-5]\d)-([01]\d|2[0-3]):([0-5]\d)$/;
     if (!regex.test(valor)) {
       this.errorMsg.set('Formato de franja inválido. Use HH:mm-HH:mm (ej: 09:00-11:00)');

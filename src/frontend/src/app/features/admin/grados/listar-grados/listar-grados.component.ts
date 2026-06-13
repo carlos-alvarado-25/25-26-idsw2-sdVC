@@ -19,7 +19,6 @@ export class ListarGradosComponent implements OnInit {
   loading = signal(false);
   criterio = '';
 
-  // Selección múltiple
   selectedIds = signal<Set<number>>(new Set());
 
   constructor(private gradoService: GradoService) {}
@@ -47,7 +46,6 @@ export class ListarGradosComponent implements OnInit {
       });
   }
 
-  // Lógica de selección
   toggleSelectAll(event: any): void {
     const checked = event.target.checked;
     if (checked) {
