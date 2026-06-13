@@ -48,6 +48,12 @@ export class ProfesorFormComponent implements OnInit {
       this.profesorId = parseInt(id, 10);
       this.cargarProfesor();
       this.buscarAsignaturas();
+
+      const qp = this.route.snapshot.queryParamMap;
+      if (qp.get('creado') === 'true' || qp.get('asignado') === 'true') {
+        this.success.set(true);
+        setTimeout(() => this.success.set(false), 3000);
+      }
     }
   }
 
@@ -127,9 +133,7 @@ export class ProfesorFormComponent implements OnInit {
         next: (profesor) => {
           this.success.set(true);
           if (!this.isEditMode()) {
-            setTimeout(() => {
-              this.router.navigate(['/admin/profesores/editar', profesor.id]);
-            }, 1000);
+            this.router.navigate(['/admin/profesores/editar', profesor.id], { queryParams: { creado: 'true' } });
           } else {
             setTimeout(() => this.success.set(false), 3000);
           }

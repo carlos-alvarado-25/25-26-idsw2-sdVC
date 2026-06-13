@@ -21,6 +21,12 @@ interface Slot {
   franja: string;
 }
 
+interface BuscarSlotResult {
+  slot?: Slot;
+  aula?: Aula;
+  motivo?: string;
+}
+
 export class CalendarioEngine {
   generar(config: GeneracionConfig): { result: GeneracionResultDto; examenesProgramados: Examen[] } {
     const { examenesPendientes, aulas, profesores, preferencias, fechaInicio, fechaFin, franjasHorarias, examenesExistentes = [] } = config;
@@ -37,7 +43,7 @@ export class CalendarioEngine {
       const asignacionesParaValidar = [...examenesExistentes, ...examenesProgramados];
       const asignacion = this.buscarSlotOptimo(examen, slots, aulas, profesores, asignacionesParaValidar);
 
-      if (asignacion) {
+      if (asignacion.slot && asignacion.aula) {
         examen.fecha = asignacion.slot.fecha;
         const [horaInicio, horaFin] = asignacion.slot.franja.split('-');
         examen.hora = horaInicio;
@@ -54,7 +60,7 @@ export class CalendarioEngine {
           examenId: examen.id,
           examenCodigo: examen.codigo,
           asignaturaNombre: examen.nombreAsignatura,
-          motivo: 'Sin slots o aulas disponibles con capacidad suficiente sin cruces horarios',
+          motivo: asignacion.motivo || 'Sin slots o aulas disponibles con capacidad suficiente sin cruces horarios',
         });
       }
     }
@@ -179,7 +185,7 @@ export class CalendarioEngine {
     aulas: Aula[],
     profesores: Profesor[],
     asignados: Examen[]
-  ): { slot: Slot; aula: Aula } | null {
+  ): BuscarSlotResult {
     let mejorAsignacion: { slot: Slot; aula: Aula; profesor: Profesor; puntuacion: number } | null = null;
     const gradoId = examen.gradoId;
     const curso = examen.curso || 1;
@@ -189,8 +195,16 @@ export class CalendarioEngine {
     const profesoresAEvaluar = examen.profesor ? [examen.profesor] : candidatos;
 
     if (profesoresAEvaluar.length === 0) {
-      return null;
+      return { motivo: 'No hay profesores con esta asignatura asociada para supervisar el examen' };
     }
+
+    if (slots.length === 0) {
+      return { motivo: 'Sin slots o aulas disponibles con capacidad suficiente sin cruces horarios (No hay fechas/franjas laborables disponibles en el rango solicitado)' };
+    }
+
+    let algunAulaConCapacidad = false;
+    let algunAulaDisponible = false;
+    let algunProfesorDisponible = false;
 
     for (const slot of slots) {
       if (gradoId) {
@@ -213,15 +227,26 @@ export class CalendarioEngine {
       }
 
       for (const aula of aulas) {
-        if (!aula.tieneCapacidadSuficiente(examen.totalAlumnos)) continue;
-        if (!aula.estaDisponibleEn(slot.fecha, slot.franja, asignados)) continue;
+        if (aula.tieneCapacidadSuficiente(examen.totalAlumnos)) {
+          algunAulaConCapacidad = true;
+        } else {
+          continue;
+        }
+
+        if (aula.estaDisponibleEn(slot.fecha, slot.franja, asignados)) {
+          algunAulaDisponible = true;
+        } else {
+          continue;
+        }
 
         const profesorDisponible = profesoresAEvaluar.find(p => 
           p.estaDisponibleEn(slot.fecha, slot.franja, p.preferencias) && 
           !p.tieneCruceHorario(slot.fecha, slot.franja, asignados)
         );
 
-        if (!profesorDisponible) {
+        if (profesorDisponible) {
+          algunProfesorDisponible = true;
+        } else {
           continue;
         }
 
@@ -246,6 +271,15 @@ export class CalendarioEngine {
       return { slot: mejorAsignacion.slot, aula: mejorAsignacion.aula };
     }
 
-    return null;
+    let motivo = 'Sin slots o aulas disponibles con capacidad suficiente sin cruces horarios';
+    if (!algunAulaConCapacidad) {
+      motivo = 'Sin slots o aulas disponibles con capacidad suficiente sin cruces horarios (No hay aulas con capacidad suficiente para el total de alumnos matriculados)';
+    } else if (!algunAulaDisponible) {
+      motivo = 'Sin slots o aulas disponibles con capacidad suficiente sin cruces horarios (No hay aulas físicas disponibles en las franjas horarias solicitadas)';
+    } else if (!algunProfesorDisponible) {
+      motivo = 'No hay profesores calificados disponibles en las franjas horarias solicitadas por exclusiones de horario o cruces';
+    }
+
+    return { motivo };
   }
 }

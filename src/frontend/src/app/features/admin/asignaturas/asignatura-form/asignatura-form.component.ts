@@ -47,6 +47,11 @@ export class AsignaturaFormComponent implements OnInit {
       this.isEditMode.set(true);
       this.asignaturaId = parseInt(id, 10);
       this.cargarAsignatura();
+
+      if (this.route.snapshot.queryParamMap.get('creado') === 'true') {
+        this.success.set(true);
+        setTimeout(() => this.success.set(false), 3000);
+      }
     }
   }
 
@@ -86,7 +91,10 @@ export class AsignaturaFormComponent implements OnInit {
 
     const values = {
       ...this.asignaturaForm.value,
-      gradoId: Number(this.asignaturaForm.value.gradoId)
+      gradoId: Number(this.asignaturaForm.value.gradoId),
+      creditos: Number(this.asignaturaForm.value.creditos),
+      curso: Number(this.asignaturaForm.value.curso),
+      cuatrimestre: Number(this.asignaturaForm.value.cuatrimestre)
     };
     
     const operation = this.isEditMode() && this.asignaturaId
@@ -98,9 +106,7 @@ export class AsignaturaFormComponent implements OnInit {
         next: (asig) => {
           this.success.set(true);
           if (!this.isEditMode()) {
-            setTimeout(() => {
-              this.router.navigate(['/admin/asignaturas/editar', asig.id]);
-            }, 1000);
+            this.router.navigate(['/admin/asignaturas/editar', asig.id], { queryParams: { creado: 'true' } });
           } else {
             setTimeout(() => this.success.set(false), 3000);
           }

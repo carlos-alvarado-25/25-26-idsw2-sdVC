@@ -42,6 +42,11 @@ export class AulaFormComponent implements OnInit {
       this.isEditMode.set(true);
       this.aulaId = parseInt(id, 10);
       this.cargarAula();
+
+      if (this.route.snapshot.queryParamMap.get('creado') === 'true') {
+        this.success.set(true);
+        setTimeout(() => this.success.set(false), 3000);
+      }
     }
   }
 
@@ -68,7 +73,10 @@ export class AulaFormComponent implements OnInit {
     this.success.set(false);
     this.error.set(null);
 
-    const values = this.aulaForm.value;
+    const values = {
+      ...this.aulaForm.value,
+      capacidad: Number(this.aulaForm.value.capacidad)
+    };
     const operation = this.isEditMode() && this.aulaId
       ? this.aulaService.actualizar(this.aulaId, values)
       : this.aulaService.crear(values);
@@ -78,9 +86,7 @@ export class AulaFormComponent implements OnInit {
         next: (aula) => {
           this.success.set(true);
           if (!this.isEditMode()) {
-            setTimeout(() => {
-              this.router.navigate(['/admin/aulas/editar', aula.id]);
-            }, 1000);
+            this.router.navigate(['/admin/aulas/editar', aula.id], { queryParams: { creado: 'true' } });
           } else {
             setTimeout(() => this.success.set(false), 3000);
           }

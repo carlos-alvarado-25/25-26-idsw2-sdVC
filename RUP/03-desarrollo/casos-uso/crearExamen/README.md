@@ -34,7 +34,7 @@ Recibe los datos para la creación de un nuevo examen.
 #### ExamenFormComponent
 - **Formulario Reactivo:** Control reactivo y validación del formulario de alta manual mediante `FormBuilder` y `ReactiveFormsModule`.
 - **Selector Autocompletable (Datalist):** El selector de asignatura permite escribir directamente en el campo. Si la búsqueda supera los 2 caracteres, se realiza una consulta de filtrado en tiempo real mediante `AsignaturaService.filtrar()` aplicando un retardo (`debounceTime`) de 300ms, mapeando la selección al identificador numérico interno.
-- **Redirección Proactiva (Patrón El Delgado):** Tras recibir un código `201 Created` con el ID asignado al examen, el componente inicia una temporización (`setTimeout`) de 1 segundo para redirigir mediante el `Router` al modo edición avanzada (`/admin/examenes/editar/:id`).
+- **Redirección Proactiva (Patrón El Delgado):** Tras recibir un código `201 Created` con el ID asignado al examen, el componente redirige inmediatamente mediante el `Router` al modo edición avanzada (`/admin/examenes/editar/:id`), mostrando la alerta de éxito en la pantalla de destino.
 - **Restricción de Parámetros:** En modo creación, el payload enviado al backend excluye explícitamente `aulaId` y `profesorId`. Esto previene errores de validación de lista blanca en NestJS (`forbidNonWhitelisted`), que rechaza propiedades no definidas en `CrearExamenDto`.
 
 ---

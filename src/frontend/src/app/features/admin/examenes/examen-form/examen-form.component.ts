@@ -65,6 +65,11 @@ export class ExamenFormComponent implements OnInit {
       this.examenId = parseInt(id, 10);
       this.buscarAulas();
       this.cargarExamen();
+
+      if (this.route.snapshot.queryParamMap.get('creado') === 'true') {
+        this.success.set(true);
+        setTimeout(() => this.success.set(false), 3000);
+      }
     }
   }
 
@@ -233,9 +238,7 @@ export class ExamenFormComponent implements OnInit {
         next: (examen) => {
           this.success.set(true);
           if (!this.isEditMode()) {
-            setTimeout(() => {
-              this.router.navigate(['/admin/examenes/editar', examen.id]);
-            }, 1000);
+            this.router.navigate(['/admin/examenes/editar', examen.id], { queryParams: { creado: 'true' } });
           } else {
             setTimeout(() => this.success.set(false), 3000);
           }

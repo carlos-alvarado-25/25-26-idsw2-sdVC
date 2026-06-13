@@ -108,9 +108,7 @@ export class AsignarProfesorExamenComponent implements OnInit {
       .subscribe({
         next: () => {
           this.success.set(true);
-          setTimeout(() => {
-            this.router.navigate(['/admin/profesores/editar', this.profesorId]);
-          }, 1500);
+          this.router.navigate(['/admin/profesores/editar', this.profesorId], { queryParams: { asignado: 'true' } });
         },
         error: (err) => {
           this.error.set(err.error?.message || 'Error al realizar la asignación.');

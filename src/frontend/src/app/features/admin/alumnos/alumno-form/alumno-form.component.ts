@@ -46,6 +46,11 @@ export class AlumnoFormComponent implements OnInit {
       this.isEditMode.set(true);
       this.alumnoId = parseInt(id, 10);
       this.cargarAlumno();
+
+      if (this.route.snapshot.queryParamMap.get('creado') === 'true') {
+        this.success.set(true);
+        setTimeout(() => this.success.set(false), 3000);
+      }
     }
   }
 
@@ -97,9 +102,7 @@ export class AlumnoFormComponent implements OnInit {
         next: (alumno) => {
           this.success.set(true);
           if (!this.isEditMode()) {
-            setTimeout(() => {
-              this.router.navigate(['/admin/alumnos/editar', alumno.id]);
-            }, 1000);
+            this.router.navigate(['/admin/alumnos/editar', alumno.id], { queryParams: { creado: 'true' } });
           } else {
             setTimeout(() => this.success.set(false), 3000);
           }

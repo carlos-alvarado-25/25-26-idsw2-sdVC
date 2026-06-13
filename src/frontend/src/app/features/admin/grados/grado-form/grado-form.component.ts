@@ -39,6 +39,11 @@ export class GradoFormComponent implements OnInit {
       this.isEditMode.set(true);
       this.gradoId = parseInt(id, 10);
       this.cargarGrado();
+
+      if (this.route.snapshot.queryParamMap.get('creado') === 'true') {
+        this.success.set(true);
+        setTimeout(() => this.success.set(false), 3000);
+      }
     }
   }
 
@@ -72,9 +77,7 @@ export class GradoFormComponent implements OnInit {
         next: (grado) => {
           this.success.set(true);
           if (!this.isEditMode()) {
-            setTimeout(() => {
-              this.router.navigate(['/admin/grados/editar', grado.id]);
-            }, 1000);
+            this.router.navigate(['/admin/grados/editar', grado.id], { queryParams: { creado: 'true' } });
           } else {
             setTimeout(() => this.success.set(false), 3000);
           }

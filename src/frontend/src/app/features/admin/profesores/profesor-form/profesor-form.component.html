@@ -125,7 +125,7 @@
 
     <div class="form-feedback" *ngIf="success() || error()">
       <div class="alert success" *ngIf="success()">
-        ✅ Operación completada con éxito. {{ !isEditMode() ? 'Redirigiendo a edición avanzada...' : '' }}
+        ✅ Operación completada con éxito.
       </div>
       <div class="alert error" *ngIf="error()">❌ {{ error() }}</div>
     </div>

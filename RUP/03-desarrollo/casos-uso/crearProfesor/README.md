@@ -43,7 +43,7 @@ Crea un nuevo profesor tras validar las restricciones de unicidad.
 #### ProfesorFormComponent
 - **Componente Único Dinámico**: El formulario se adapta dinámicamente mediante `isEditMode` evaluando la presencia de un parámetro ID en la ruta. En caso de ausencia, opera en modo creación de alta manual básica.
 - **Validaciones Reactivas**: Los controles reactivos garantizan que el botón de envío permanezca deshabilitado hasta que se cumplan las restricciones sintácticas.
-- **Patrón El Delgado**: Al completarse con éxito la persistencia en el backend, el componente levanta un aviso verde y ejecuta un retraso de 1 segundo antes de redirigir al Administrador a `/admin/profesores/editar/:id` (gracias al `Router` de Angular), permitiendo continuar fluidamente con su asignación de materias.
+- **Patrón El Delgado**: Al completarse con éxito la persistencia en el backend, el componente redirige inmediatamente al Administrador a `/admin/profesores/editar/:id` (gracias al `Router` de Angular), mostrando la alerta de éxito en la pantalla de destino y permitiendo continuar fluidamente con su asignación de materias.
 
 ---
 

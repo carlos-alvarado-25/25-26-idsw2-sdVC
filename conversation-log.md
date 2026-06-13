@@ -1773,3 +1773,28 @@ Todos los usuarios creados por importación CSV o creación manual de alumno/pro
   - Actualización del diagrama UML [clases-diseño.puml](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/clases-diseño.puml) y del documento de especificación [clases-diseño.md](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/RUP/02-diseño/clases-diseño.md) registrando los nuevos componentes y las decisiones de diseño para el desacoplamiento de la identidad.
 
 **Decisión:** Se cierra formalmente la sesión habiendo finalizado la de Ley de Demeter y la refactorización sistemática de los servicios del backend para cumplir con las directrices de acoplamiento débil entre negocio, seguridad y validaciones matemáticas de agenda, logrando un código y pruebas 100% estables en verde.
+
+---
+
+## [13/06/2026 22:38] Sesión 88: Depuración de Mensajes del Motor y Optimización de Redirecciones Frontend
+
+**Prompt:** «Sin slots o aulas disponibles con capacidad suficiente sin cruces horarios (No hay profesores con esta asignatura asociada para supervisar el examen) Me sale así el mensaje.» -> «HAZLO!» -> «Ahora otro tema importante, cada que hacemos una creación el sistema espera un momento y manda a la pantalla de editar...» -> «Pero que hay de los mensajes de operación confirmada y así?» -> «HAZLO!» -> «❌ cuatrimestre must not be greater than 2,cuatrimestre must not be less than 1,cuatrimestre must be an integer number Me sale este error cuando intento mandar este payload...» -> «HAZLO!» -> «Perfecto, finaliza la sesión y registralo en conversation-log.md»
+
+**Resultado:**
+
+- **Depuración de Mensajes del Motor (`CalendarioEngine`)**:
+  - Se eliminó el prefijo genérico `"Sin slots o aulas disponibles..."` para los conflictos que corresponden exclusivamente a la asignación de profesores (docente no calificado para la asignatura o docente no disponible en la franja horaria por exclusiones o cruces).
+  - El motor ahora reporta de manera específica: `"No hay profesores con esta asignatura asociada para supervisar el examen"` o `"No hay profesores calificados disponibles en las franjas horarias solicitadas por exclusiones de horario o cruces"`.
+  - Se mantuvo la compatibilidad estricta con las pruebas unitarias que asertaban el prefijo para colisiones físicas de aulas o escasez de slots.
+- **Optimización de Redirecciones (UX Reactiva)**:
+  - Se eliminó la temporización artificial (`setTimeout`) de 1 y 1.5 segundos en la creación de todas las entidades y asignación de docentes.
+  - Implementación de redirección instantánea mediante `this.router.navigate` con paso de estado vía Query Parameters (`?creado=true` y `?asignado=true`).
+  - Los componentes receptores interceptan los parámetros en su `ngOnInit` para activar la señal de confirmación (`success.set(true)`) por un periodo acotado de 3 segundos, eliminando la fragilidad de interfaz y previniendo clics duplicados.
+- **Casteo de Tipos en Formulario (Carga Numérica)**:
+  - Corrección de discrepancia de tipos en el frontend para evitar que campos numéricos provenientes de dropdowns se envíen como cadenas (ej. `"2"` en `cuatrimestre`), lo cual infringía la validación estricta `@IsInt()` en el backend.
+  - Se implementó la conversión explícita a `Number` para `creditos`, `curso` y `cuatrimestre` en `AsignaturaFormComponent` y para `capacidad` en `AulaFormComponent`.
+- **Sincronización RUP**:
+  - Actualización de los manuales de desarrollo en `crearExamen/README.md` y `crearProfesor/README.md` para reflejar el comportamiento inmediato de redirección y confirmación en destino.
+
+**Decisión:** Se cierra formalmente la sesión habiendo robustecido la estabilidad y reactividad de la capa de interfaz, eliminando latencias e inconsistencias operativas en el flujo de creación y depurando la precisión diagnóstica del motor combinatorial.
+
