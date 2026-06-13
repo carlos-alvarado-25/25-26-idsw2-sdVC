@@ -22,8 +22,10 @@ rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponibleSalida
 SistemaDisponible -r-> ComunicarIncidenciaView: comunicarIncidenciasHorario()
 
 ComunicarIncidenciaView -d-> IncidenciaController: obtenerExamenesDocente() : List<Examen>
+ComunicarIncidenciaView -d-> IncidenciaController: obtenerIncidenciasDocente() : List<Incidencia>
 IncidenciaController -l-> Session: obtenerActor() : Actor
 IncidenciaController -d-> ExamenRepository: obtenerAsignadosA(profesor) : List<Examen>
+IncidenciaController -d-> IncidenciaRepository: obtenerPorProfesor(profesor) : List<Incidencia>
 
 ComunicarIncidenciaView -d-> IncidenciaController: comunicar(examen, tipo, descripcion, evidencias) : Incidencia
 

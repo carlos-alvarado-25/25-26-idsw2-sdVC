@@ -1545,3 +1545,23 @@ Se realizó una auditoría de trazabilidad completa **Requisitos → Análisis �
   - Generación de documentación narrativa y técnica en las fases de análisis, diseño y desarrollo.
 
 **Decisión:** Se cierra el ramillete funcional de incidencias de horario. Se decide estructurar la navegación mediante Flexbox en el panel principal para dotar de una experiencia de usuario consistente y simétrica entre roles, y se ajusta la redirección del flujo de reporte al estado `:Sistema Disponible` para cumplir fielmente con el diagrama de transición de estados de RUP.
+
+---
+
+## [13/06/2026 14:52] Rama de Profesores - Incidencias de Horario y Listado Unificado
+
+**Prompt:** "Incidencias" -> "Ya funciona, pero el listado de incidencias sale cortado. No tiene un scrollbar horizontal para verlo bien. O bien añadelo, o hazlo mas grande" -> "HAZLO!"
+
+**Resultado:**
+- **Listado Unificado de Incidencias**: Diseño e implementación de la pantalla unificada para el profesor, mostrando el formulario de reporte a la izquierda y el listado histórico de sus incidencias a la derecha en una rejilla dividida (`split-layout`). Esto permite el monitoreo de estados en tiempo real sin violar las clases frontera definidas en el análisis de RUP.
+- **Diseño Responsivo de Tabla**:
+  - En `comunicar-incidencia.component.html`, se envolvió la tabla de datos en un contenedor `.table-responsive`.
+  - En `comunicar-incidencia.component.css`, se establecieron estilos de desbordamiento horizontal (`overflow-x: auto`) y un ancho mínimo para la tabla (`min-width: 480px`), garantizando que las columnas no se contraigan de forma excesiva y que aparezca una barra de scroll horizontal suave en resoluciones reducidas o en el panel lateral.
+- **Breadcrumbs Contextuales**:
+  - Refactorización de la barra de navegación superior en la vista de incidencias para comportarse dinámicamente según el flujo de entrada: si se accede a nivel general, el breadcrumb es plano (`🏠 Inicio / ⚠️ Mis Incidencias`), y si se navega desde un examen en el calendario, se habilita el enlace de retorno hacia la bandeja unificada (`🏠 Inicio / ⚠️ Mis Incidencias / 📝 Reportar Incidencia`).
+- **Respaldo de Rutas**:
+  - Configuración de una ruta de redireccionamiento en `app.routes.ts` de `/profesor/incidencias` a `/profesor/incidencias/crear` para mitigar enlaces obsoletos y resolver correctamente las peticiones de navegación.
+- **Auditoría e Integridad**:
+  - Compilación exitosa del frontend Angular y verificación de adherencia a los estándares arquitectónicos del proyecto (Ley de Demeter mediante mapeo plano, clases de diseño utilitarias coherentes con la rama de Grados).
+
+**Decisión:** Se da por finalizada e implementada la rama funcional de incidencias para profesores bajo un diseño unificado altamente responsivo y desacoplado, cumpliendo con los estándares de RUP y la consistencia de UI del sistema.

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ExamenService, Examen } from '../../../../core/services/examen.service';
-import { IncidenciaService } from '../../../../core/services/incidencia.service';
+import { IncidenciaService, Incidencia } from '../../../../core/services/incidencia.service';
 import { AuthService, User } from '../../../../core/services/auth.service';
 import { finalize } from 'rxjs';
 
@@ -30,6 +30,10 @@ export class ComunicarIncidenciaComponent implements OnInit {
   // Modo de apertura con ID específico fijo
   examenFijo = signal(false);
   examenIdParam: number | null = null;
+
+  // Listado de incidencias y estado de carga
+  incidencias = signal<Incidencia[]>([]);
+  loadingIncidencias = signal(false);
 
   // Tipos predefinidos de incidencia
   tiposIncidencia = [
@@ -60,6 +64,7 @@ export class ComunicarIncidenciaComponent implements OnInit {
       this.currentUser.set(user);
       
       if (user && user.rol === 'Profesor') {
+        this.cargarIncidencias(user.email);
         // 2. Comprobar si viene ID del examen por parámetro
         const idParam = this.route.snapshot.paramMap.get('examenId');
         if (idParam) {
@@ -141,14 +146,38 @@ export class ComunicarIncidenciaComponent implements OnInit {
       .subscribe({
         next: () => {
           this.success.set(true);
+          this.incidenciaForm.reset({
+            examenId: this.examenFijo() ? this.examenIdParam : null,
+            tipo: '',
+            descripcion: ''
+          });
+          if (this.examenFijo()) {
+            this.incidenciaForm.get('examenId')?.disable();
+          } else {
+            this.examenSeleccionado.set(null);
+          }
+          this.cargarIncidencias(email);
           setTimeout(() => {
-            // Transición completarComunicacion()
-            this.router.navigate(['/home']);
-          }, 1500);
+            this.success.set(false);
+          }, 3000);
         },
         error: (err) => {
           console.error(err);
           this.error.set(err.error?.message || 'Error al enviar el reporte de incidencia');
+        }
+      });
+  }
+
+  cargarIncidencias(email: string): void {
+    this.loadingIncidencias.set(true);
+    this.incidenciaService.listar(email, 'Profesor')
+      .pipe(finalize(() => this.loadingIncidencias.set(false)))
+      .subscribe({
+        next: (data) => {
+          this.incidencias.set(data);
+        },
+        error: (err) => {
+          console.error(err);
         }
       });
   }

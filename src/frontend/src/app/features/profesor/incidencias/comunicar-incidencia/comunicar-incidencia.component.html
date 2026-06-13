@@ -2,90 +2,141 @@
   <header class="page-header">
     <div class="breadcrumb">
       <a [routerLink]="['/home']">🏠 Inicio</a> / 
-      <a [routerLink]="['/calendario/consultar']">🗓️ Calendario</a> / 
-      <span>⚠️ Reportar Incidencia</span>
+      <ng-container *ngIf="examenFijo(); else listBreadcrumb">
+        <a [routerLink]="['/profesor/incidencias/crear']">⚠️ Mis Incidencias</a> / 
+        <span>📝 Reportar Incidencia</span>
+      </ng-container>
+      <ng-template #listBreadcrumb>
+        <span>⚠️ Mis Incidencias</span>
+      </ng-template>
     </div>
     <h1>Reportar Incidencia de Horario</h1>
   </header>
 
-  <div class="form-card" *ngIf="currentUser()?.rol === 'Profesor'; else unauthorized">
-    <form [formGroup]="incidenciaForm" (ngSubmit)="onSubmit()" class="admin-form">
-      
-      <!-- Selector de Examen (Bloqueado/Deshabilitado si viene del calendario) -->
-      <div class="form-group">
-        <label for="examenId">Examen Afectado</label>
-        <select 
-          id="examenId" 
-          formControlName="examenId"
-          [class.is-invalid]="incidenciaForm.get('examenId')?.invalid && incidenciaForm.get('examenId')?.touched"
-        >
-          <option [ngValue]="null" disabled>-- Selecciona el examen --</option>
-          <option *ngFor="let ex of examenes()" [value]="ex.id">
-            {{ ex.codigo }} - {{ ex.nombreAsignatura }} ({{ ex.fecha }} a las {{ ex.hora }})
-          </option>
-        </select>
-        <small class="hint" *ngIf="examenFijo()">Examen seleccionado automáticamente y bloqueado.</small>
-      </div>
-
-      <!-- Detalles del Examen Seleccionado (Solo Lectura) -->
-      <div class="exam-details-card" *ngIf="examenSeleccionado() as ex">
-        <h4>Detalles del Examen</h4>
-        <div class="details-grid">
-          <div><strong>Código:</strong> {{ ex.codigo }}</div>
-          <div><strong>Asignatura:</strong> {{ ex.nombreAsignatura }} ({{ ex.codigoAsignatura }})</div>
-          <div><strong>Grado:</strong> {{ ex.asignatura?.nombreGrado }}</div>
-          <div><strong>Fecha / Hora:</strong> {{ ex.fecha || 'Sin programar' }} a las {{ ex.hora || 'Sin hora' }}</div>
-          <div><strong>Aula:</strong> {{ ex.nombreAula || 'Sin asignar' }}</div>
-          <div><strong>Duración:</strong> {{ ex.duracion }} minutos</div>
+  <div class="split-layout" *ngIf="currentUser()?.rol === 'Profesor'; else unauthorized">
+    <!-- Columna Izquierda: Formulario -->
+    <div class="form-card">
+      <form [formGroup]="incidenciaForm" (ngSubmit)="onSubmit()" class="admin-form">
+        
+        <!-- Selector de Examen (Bloqueado/Deshabilitado si viene del calendario) -->
+        <div class="form-group">
+          <label for="examenId">Examen Afectado</label>
+          <select 
+            id="examenId" 
+            formControlName="examenId"
+            [class.is-invalid]="incidenciaForm.get('examenId')?.invalid && incidenciaForm.get('examenId')?.touched"
+          >
+            <option [ngValue]="null" disabled>-- Selecciona el examen --</option>
+            <option *ngFor="let ex of examenes()" [value]="ex.id">
+              {{ ex.codigo }} - {{ ex.nombreAsignatura }} ({{ ex.fecha }} a las {{ ex.hora }})
+            </option>
+          </select>
+          <small class="hint" *ngIf="examenFijo()">Examen seleccionado automáticamente y bloqueado.</small>
         </div>
+
+        <!-- Detalles del Examen Seleccionado (Solo Lectura) -->
+        <div class="exam-details-card" *ngIf="examenSeleccionado() as ex">
+          <h4>Detalles del Examen</h4>
+          <div class="details-grid">
+            <div><strong>Código:</strong> {{ ex.codigo }}</div>
+            <div><strong>Asignatura:</strong> {{ ex.nombreAsignatura }} ({{ ex.codigoAsignatura }})</div>
+            <div><strong>Grado:</strong> {{ ex.asignatura?.nombreGrado }}</div>
+            <div><strong>Fecha / Hora:</strong> {{ ex.fecha || 'Sin programar' }} a las {{ ex.hora || 'Sin hora' }}</div>
+            <div><strong>Aula:</strong> {{ ex.nombreAula || 'Sin asignar' }}</div>
+            <div><strong>Duración:</strong> {{ ex.duracion }} minutos</div>
+          </div>
+        </div>
+
+        <!-- Tipo de Incidencia -->
+        <div class="form-group">
+          <label for="tipo">Tipo de Incidencia</label>
+          <select 
+            id="tipo" 
+            formControlName="tipo"
+            [class.is-invalid]="incidenciaForm.get('tipo')?.invalid && incidenciaForm.get('tipo')?.touched"
+          >
+            <option value="" disabled>-- Selecciona un tipo --</option>
+            <option *ngFor="let tipo of tiposIncidencia" [value]="tipo">{{ tipo }}</option>
+          </select>
+        </div>
+
+        <!-- Descripción -->
+        <div class="form-group">
+          <label for="descripcion">Descripción del Conflicto</label>
+          <textarea 
+            id="descripcion" 
+            formControlName="descripcion" 
+            rows="5"
+            placeholder="Describe de manera detallada el motivo del conflicto horario (mínimo 10 caracteres)..."
+            [class.is-invalid]="incidenciaForm.get('descripcion')?.invalid && incidenciaForm.get('descripcion')?.touched"
+          ></textarea>
+          <small class="hint">Indica solapamientos, restricciones personales, etc. justificando el cambio.</small>
+        </div>
+
+        <!-- Alertas de Estado -->
+        <div *ngIf="error()" class="error-alert">
+          {{ error() }}
+        </div>
+
+        <div *ngIf="success()" class="success-alert">
+          ✅ Incidencia registrada correctamente.
+        </div>
+
+        <!-- Acciones de Formulario -->
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" [routerLink]="['/home']">
+            Volver
+          </button>
+          <button type="submit" class="btn-primary" [disabled]="incidenciaForm.invalid || loading() || success()">
+            <span *ngIf="!loading()">Enviar Reporte</span>
+            <span *ngIf="loading()" class="loader"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Columna Derecha: Listado de incidencias -->
+    <div class="table-card">
+      <div class="table-overlay" *ngIf="loadingIncidencias()">
+        <span class="loader"></span>
+      </div>
+      <h3>Mis Incidencias Reportadas</h3>
+      
+      <div class="empty-state" *ngIf="incidencias().length === 0 && !loadingIncidencias()">
+        <div class="empty-icon">🎉</div>
+        <h4>Sin incidencias</h4>
+        <p>No has reportado ninguna incidencia de horario.</p>
       </div>
 
-      <!-- Tipo de Incidencia -->
-      <div class="form-group">
-        <label for="tipo">Tipo de Incidencia</label>
-        <select 
-          id="tipo" 
-          formControlName="tipo"
-          [class.is-invalid]="incidenciaForm.get('tipo')?.invalid && incidenciaForm.get('tipo')?.touched"
-        >
-          <option value="" disabled>-- Selecciona un tipo --</option>
-          <option *ngFor="let tipo of tiposIncidencia" [value]="tipo">{{ tipo }}</option>
-        </select>
+      <div class="table-responsive" *ngIf="incidencias().length > 0">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Examen</th>
+              <th>Detalle</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let inc of incidencias()">
+              <td>
+                <strong>{{ inc.codigoExamen }}</strong>
+                <br><small>{{ inc.nombreAsignatura }}</small>
+              </td>
+              <td>
+                <span class="badge-type" style="margin-bottom: 0.25rem;">{{ inc.tipo }}</span>
+                <br><small class="desc-cell" [title]="inc.descripcion">{{ inc.descripcion }}</small>
+              </td>
+              <td>
+                <span class="status-badge" [class]="inc.estado.toLowerCase()">
+                  {{ inc.estado }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
-      <!-- Descripción -->
-      <div class="form-group">
-        <label for="descripcion">Descripción del Conflicto</label>
-        <textarea 
-          id="descripcion" 
-          formControlName="descripcion" 
-          rows="5"
-          placeholder="Describe de manera detallada el motivo del conflicto horario (mínimo 10 caracteres)..."
-          [class.is-invalid]="incidenciaForm.get('descripcion')?.invalid && incidenciaForm.get('descripcion')?.touched"
-        ></textarea>
-        <small class="hint">Indica solapamientos, restricciones personales, etc. justificando el cambio.</small>
-      </div>
-
-      <!-- Alertas de Estado -->
-      <div *ngIf="error()" class="error-alert">
-        {{ error() }}
-      </div>
-
-      <div *ngIf="success()" class="success-alert">
-        ✅ Incidencia registrada correctamente. Notificando al administrador...
-      </div>
-
-      <!-- Acciones de Formulario -->
-      <div class="form-actions">
-        <button type="button" class="btn-secondary" [routerLink]="['/home']">
-          Cancelar
-        </button>
-        <button type="submit" class="btn-primary" [disabled]="incidenciaForm.invalid || loading() || success()">
-          <span *ngIf="!loading()">Enviar Reporte</span>
-          <span *ngIf="loading()" class="loader"></span>
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 
   <ng-template #unauthorized>

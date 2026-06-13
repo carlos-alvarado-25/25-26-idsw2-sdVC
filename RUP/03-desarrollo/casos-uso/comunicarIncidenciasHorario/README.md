@@ -51,12 +51,13 @@ Documentación de los componentes de código implementados en el Backend (NestJS
 *   **Archivo**: [incidencia.service.ts](/src/frontend/src/app/core/services/incidencia.service.ts)
 *   **Métodos**: `crear(...)`, `listar(...)`, `actualizarEstado(...)`.
 
-### 2. Formulario de Reporte (Profesor)
+### 2. Formulario de Reporte e Historial Unificado (Profesor)
 *   **Componente**: [comunicar-incidencia.component.ts](/src/frontend/src/app/features/profesor/incidencias/comunicar-incidencia/comunicar-incidencia.component.ts)
+*   **Diseño**: Se implementa una vista unificada en cuadrícula partida (split grid) de dos columnas: formulario de reporte (izquierda) e historial de incidencias en tiempo real con sus estados (derecha).
 *   **Apertura**:
     *   *Modo Fijo*: Abre con `:examenId` preseleccionado desde el botón de la consulta del calendario.
     *   *Modo Selección*: Si no hay ID, carga un listado de los exámenes asignados al profesor para su libre elección.
-*   **Navegación**: Utiliza `completarComunicacion()` al guardar con éxito (redirigiendo a `/calendario/consultar`) o el botón cancelar.
+*   **Navegación**: Al guardar con éxito se refresca la lista local instantáneamente sin recargar la página. El botón "Volver" retorna a `/home` (`completarComunicacion()`).
 
 ### 3. Bandeja de Gestión (Administrador)
 *   **Componente**: [listar-incidencias.component.ts](/src/frontend/src/app/features/admin/incidencias/listar-incidencias/listar-incidencias.component.ts)

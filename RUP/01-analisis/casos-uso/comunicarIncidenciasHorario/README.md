@@ -34,13 +34,14 @@ Análisis de colaboración del caso de uso `comunicarIncidenciasHorario()` media
 **Estereotipo**: Vista (Boundary)  
 **Responsabilidades**:
 - Presentar la interfaz de reporte de incidencias al Profesor.
+- Presentar el listado de incidencias de horario reportadas previamente por el Profesor en sesión.
 - Facilitar la selección de un examen asignado al docente.
-- Capturar la descripción, tipo de incidencia y evidencias adjuntas.
+- Capturar la descripción y el tipo de incidencia.
 - Gestionar el envío del reporte y la navegación de retorno.
 
 **Colaboraciones**:
 - **Entrada**: Recibe `comunicarIncidenciasHorario()` desde `:Sistema Disponible`.
-- **Control**: Solicita datos y envía reportes a `IncidenciaController`.
+- **Control**: Solicita incidencias y envía nuevos reportes a `IncidenciaController`.
 - **Salida**: Navega hacia `:Sistema Disponible` vía `completarComunicacion()`.
 
 ### clases de control

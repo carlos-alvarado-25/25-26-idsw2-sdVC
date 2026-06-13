@@ -14,7 +14,25 @@ participant "IncidenciaService\n(NestJS)" as Srv <<Control>>
 participant "IncidenciaRepository\n(TypeORM)" as Repo <<Data Access>>
 database "MySQL" as DB
 
-== Inicialización: Carga de Datos del Examen ==
+== Inicialización: Carga de Datos y Mis Incidencias ==
+UI -> UISrv : listar(emailProfesor, 'Profesor')
+activate UISrv
+UISrv -> Ctrl : GET /incidencias?email=...&rol=Profesor
+activate Ctrl
+Ctrl -> Srv : listarPorProfesor(email)
+activate Srv
+Srv -> Repo : find(...)
+activate Repo
+Repo -> DB : SELECT FROM Incidencia ...
+Repo --> Srv : List<Incidencia>
+deactivate Repo
+Srv --> Ctrl : List<Incidencia>
+Ctrl --> UISrv : List<IncidenciaDto>
+deactivate Srv
+deactivate Ctrl
+UISrv --> UI : List<IncidenciaDto>
+deactivate UISrv
+
 alt Con Examen ID específico (desde Calendario)
     Actor -> UI : inicializaConId(examenId)
     UI -> UISrvEx : obtenerPorId(examenId)

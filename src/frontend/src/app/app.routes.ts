@@ -32,6 +32,7 @@ export const routes: Routes = [
   { path: 'calendario/consultar', component: ConsultarCalendarioComponent },
   { path: 'profesor/incidencias/crear/:examenId', component: ComunicarIncidenciaComponent },
   { path: 'profesor/incidencias/crear', component: ComunicarIncidenciaComponent },
+  { path: 'profesor/incidencias', redirectTo: 'profesor/incidencias/crear', pathMatch: 'full' },
   { path: 'admin/incidencias', component: ListarIncidenciasComponent },
   { path: 'admin/grados', component: ListarGradosComponent },
   { path: 'admin/grados/crear', component: GradoFormComponent },
