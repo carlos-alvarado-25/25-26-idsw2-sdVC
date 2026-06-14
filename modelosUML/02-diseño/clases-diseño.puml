@@ -39,8 +39,9 @@ package "API Layer (Controllers)" as Controllers #E3F2FD {
     }
     class CalendarioController {
         + generar(dto: GenerarCalendarioDto)
-        + findConflictos()
+        + confirmar(dto: ConfirmarCalendarioDto)
     }
+
     class IncidenciaController {
         + reportar(dto: CrearIncidenciaDto)
     }
@@ -68,8 +69,8 @@ package "Data Access Layer (Repositories)" as Repos #FFF3E0 {
     class AulaRepository <<TypeORM>>
     class AlumnoRepository <<TypeORM>>
     class ExamenRepository <<TypeORM>>
-    class CalendarioRepository <<TypeORM>>
     class IncidenciaRepository <<TypeORM>>
+
     class PreferenciaRepository <<TypeORM>>
 }
 
@@ -82,8 +83,8 @@ package "Domain Layer (Entities)" as Domain #FAFAFA {
     class Aula <<Entity>>
     class Alumno <<Entity>>
     class Examen <<Entity>>
-    class Calendario <<Entity>>
     class Incidencia <<Entity>>
+
 }
 
 ' --- Relaciones de Inyección de Dependencias ---
@@ -133,7 +134,6 @@ ProfesorRepository ..> Profesor
 AulaRepository ..> Aula
 AlumnoRepository ..> Alumno
 ExamenRepository ..> Examen
-CalendarioRepository ..> Calendario
 IncidenciaRepository ..> Incidencia
 PreferenciaRepository ..> Preferencia
 
@@ -146,7 +146,6 @@ Asignatura "1" -- "0..*" Examen
 Aula "1" -- "0..*" Examen
 Profesor "1" -- "0..*" Examen
 Grado "1" -- "0..*" Alumno
-Calendario "1" *-- "0..*" Examen
 Examen "1" *-- "0..*" Incidencia
 
 @enduml

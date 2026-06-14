@@ -3,8 +3,8 @@
 CREATE TABLE IF NOT EXISTS Examen (
     id INT PRIMARY KEY AUTO_INCREMENT,
     codigo VARCHAR(50) UNIQUE NOT NULL,
-    fecha DATE NOT NULL,
-    hora VARCHAR(5) NOT NULL, -- "HH:MM"
+    fecha DATE NULL,
+    hora VARCHAR(5) NULL, -- "HH:MM"
     duracion INT NOT NULL,     -- en minutos
     tipo ENUM('Ordinaria', 'Extraordinaria') NOT NULL,
     asignaturaId INT NOT NULL,

@@ -1901,3 +1901,21 @@ Todos los usuarios creados por importación CSV o creación manual de alumno/pro
   - Se validó el frontend (`npx tsc --noEmit`) y el backend (`npm run build`) comprobando que no existen errores de TypeScript ni de compilación.
 
 **Decisión:** Se cierra formalmente la sesión habiendo consolidado la visualización de conflictos e incidencias en el Home, retirando el método de validación manual obsoleta y refactorizando los DTOs duplicados de importación en una única entidad común bajo los principios DRY.
+
+---
+
+## [14/06/2026 12:08] Sesión 93: Auditoría de Trazabilidad RUP y Consistencia de Base de Datos
+
+**Prompt:** «Perfecto, AHORA HAZME FAVOR DE REVISAR TODA LA DOCUMENTACIÓN DEL PROYECTO Y ANALIZA INCONSISTENCIAS CON LO ANALIZADO, DISEÑADO Y DESARROLLADO. AUDITA TODO Y VERIFICA QUE TODO ESTÉ EN ORDEN.» -> «Perfecto, última sesión finaliza el conversation-log.md» -> «Añade al entrada al conversaton-log.md»
+
+**Resultado:**
+
+- **Auditoría Técnica de Trazabilidad RUP**:
+  - Se analizó la consistencia cruzada de los artefactos entre Especificación, Análisis, Diseño y Desarrollo, publicando el artefacto de diagnóstico [reporte_auditoria_trazabilidad.md](file:///home/carlos-lima/.gemini/antigravity-cli/brain/ae661ef3-55c1-4658-b9ca-cddaf21d5e02/reporte_auditoria_trazabilidad.md).
+- **Corrección de Restricción de Base de Datos (Integridad Física)**:
+  - Se identificó y resolvió de forma quirúrgica una discrepancia crítica en base de datos: el script [add_examen.sql](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/sql/add_examen.sql) declaraba las columnas `fecha` y `hora` como `NOT NULL`, lo cual bloqueaba la creación de exámenes pendientes. Se modificaron las columnas a `NULL` para alinearlas con la nulabilidad real de TypeORM.
+- **Sincronización del Diagrama de Diseño (UML)**:
+  - Se actualizó el archivo fuente del diagrama de clases [clases-diseño.puml](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/modelosUML/02-diseño/clases-diseño.puml) y se regeneró la imagen técnica [clases-diseño.svg](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/images/02-diseño/clases-diseño.svg) con `plantuml` para retirar la entidad lógica virtual `Calendario` y `CalendarioRepository` (las asignaciones se almacenan directamente en `Examen`), logrando una sincronía absoluta del 100% entre el UML de diseño, la base de datos MySQL y el código real en NestJS.
+
+**Decisión:** Se cierra formalmente la sesión habiendo corregido todas las discrepancias físicas y lógicas identificadas en la auditoría, logrando que el modelo UML y el script SQL de inicialización reflejen fielmente el comportamiento de programación del calendario implementado.
+
