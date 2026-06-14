@@ -6,7 +6,7 @@ import { Asignatura } from '../../entities/asignatura.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 import { CrearGradoDto } from './dto/crear-grado.dto';
 import { UpdateGradoDto } from './dto/update-grado.dto';
-import { ImportResultDto } from './dto/import-result.dto';
+import { ImportResultDto } from '../../common/dto/import-result.dto';
 import { FileParserFactory } from '../../common/services/file-parser.factory';
 
 @Injectable()

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProfesorService, Profesor } from '../../../../core/services/profesor.service';
+import { ExamenService } from '../../../../core/services/examen.service';
 import { PagedResult } from '../../../../core/services/grado.service';
 import { finalize, forkJoin } from 'rxjs';
 
@@ -21,8 +22,12 @@ export class ListarProfesoresComponent implements OnInit {
   criterio = '';
 
   selectedIds = signal<Set<number>>(new Set());
+  conflictosMap = signal<Map<number, number>>(new Map());
 
-  constructor(private profesorService: ProfesorService) {}
+  constructor(
+    private profesorService: ProfesorService,
+    private examenService: ExamenService
+  ) {}
 
   ngOnInit(): void {
     this.cargarProfesores();
@@ -42,9 +47,32 @@ export class ListarProfesoresComponent implements OnInit {
         next: (res: PagedResult<Profesor>) => {
           this.profesores.set(res.data);
           this.total.set(res.total);
+          this.cargarConflictos(res.data);
         },
         error: (err) => console.error('Error al cargar profesores:', err)
       });
+  }
+
+  private cargarConflictos(profesores: Profesor[]): void {
+    if (profesores.length === 0) return;
+
+    const requests = profesores.map(p => this.examenService.obtenerConflictos(p.id));
+    forkJoin(requests).subscribe({
+      next: (resultados) => {
+        const mapa = new Map<number, number>();
+        resultados.forEach((conflictos, i) => {
+          if (conflictos.length > 0) {
+            mapa.set(profesores[i].id, conflictos.length);
+          }
+        });
+        this.conflictosMap.set(mapa);
+      },
+      error: () => {}
+    });
+  }
+
+  conflictosProfesor(id: number): number {
+    return this.conflictosMap().get(id) ?? 0;
   }
 
   onSearch(): void {

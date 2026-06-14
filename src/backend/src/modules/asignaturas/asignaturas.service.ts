@@ -7,7 +7,7 @@ import { Examen } from '../../entities/examen.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 import { CrearAsignaturaDto } from './dto/crear-asignatura.dto';
 import { UpdateAsignaturaDto } from './dto/update-asignatura.dto';
-import { ImportResultDto } from './dto/import-result.dto';
+import { ImportResultDto } from '../../common/dto/import-result.dto';
 import { FileParserFactory } from '../../common/services/file-parser.factory';
 
 @Injectable()

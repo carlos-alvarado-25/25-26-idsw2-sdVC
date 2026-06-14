@@ -5,7 +5,7 @@ import { Aula } from '../../entities/aula.entity';
 import { Examen } from '../../entities/examen.entity';
 import { CreateAulaDto } from './dto/create-aula.dto';
 import { UpdateAulaDto } from './dto/update-aula.dto';
-import { ImportResultDto } from './dto/import-result.dto';
+import { ImportResultDto } from '../../common/dto/import-result.dto';
 import { FileParserFactory } from '../../common/services/file-parser.factory';
 
 @Injectable()

@@ -1878,3 +1878,26 @@ Todos los usuarios creados por importación CSV o creación manual de alumno/pro
   - Compilación TypeScript (`tsc --noEmit`) de ambos proyectos: **0 errores**.
 
 **Decisión:** Se cierra formalmente la sesión habiendo eliminado todos los comentarios del código fuente TypeScript del proyecto, tanto en backend como en frontend, mejorando la limpieza del código y eliminando ruido innecesario, sin alterar ningún comportamiento funcional.
+
+
+---
+
+## [14/06/2026 11:27] Sesión 92: Rama de Profesores y Refactorización de Importaciones
+
+**Prompt:** «continua» -> «Se podría hacer lo mismo con incidencias?» -> «En home talvez el badge amarillo no se ve tan bien. Solo deja el número en la esquina.» -> «Ahora otra cosa, el método verificarRestricciones se puede eliminar o se utiliza en otra parte? Ya que dejamos de usarlo para las ediciones, y es bastante grande.» -> «Ahora quería plantearte algo para la indirección de ImportResultDTO si te das cuenta es la misma para todas las importaciones gracias a la abstracción de interfaces que realizamos de FileParser. Es posible moverla a common y que todos llamen solo a una instancia de ella y no que cada entidad cree la propia suya? Analizalo» -> «Perfecto cerremos la sesión y añadamos la entrada al converation-log.md»
+
+**Resultado:**
+
+- **Visualización de Conflictos e Incidencias en el Home**:
+  - Se implementó la consulta dinámica y visualización de un badge numérico rojo circular en la esquina superior derecha del card de **Profesores** (indicando la cantidad de conflictos de exámenes) y en el card de **Incidencias** (indicando los reportes de profesores con estado `PENDIENTE`) para el usuario con rol de Administrador.
+  - Para obtener los conflictos consolidados de profesores, se diseñó e implementó un nuevo endpoint en el backend (`GET /examenes/conflictos/total`) que consolida la suma total de conflictos de todos los profesores, eliminando la necesidad de que el frontend haga un listado paginado y ejecute múltiples consultas con `forkJoin`.
+  - Se eliminaron las etiquetas amarillas parpadeantes (`card-conflict-hint`) a petición del usuario para mantener una interfaz limpia y minimalista, mostrando únicamente el badge de contador numérico en la esquina superior derecha de cada tarjeta.
+- **Remoción de Código Muerto**:
+  - Se determinó que el método `verificarRestricciones` de `ExamenConflictValidator` (y su respectiva firma en la clase base) quedó obsoleto tras pasar a la Postura B de validación (donde las modificaciones manuales no se restringen preventivamente para permitir la visualización de los conflictos). Al comprobar que ninguna clase de negocio, motor ni test lo llamaba, se eliminó de forma segura, reduciendo 60 líneas de código innecesario.
+- **Refactorización de ImportResultDto**:
+  - Se unificaron los 5 DTOs idénticos de importación (`ImportResultDto`) duplicados en cada módulo funcional (`alumnos`, `asignaturas`, `aulas`, `grados`, `profesores`) en un solo DTO compartido y reutilizable en [import-result.dto.ts](file:///home/carlos-lima/Documentos/Code/IdSw/25-26-idsw2-sdVC/src/backend/src/common/dto/import-result.dto.ts).
+  - Se actualizaron las importaciones de todos los servicios para usar el DTO común y se eliminaron los 5 archivos DTOs duplicados de los módulos.
+- **Compilación**:
+  - Se validó el frontend (`npx tsc --noEmit`) y el backend (`npm run build`) comprobando que no existen errores de TypeScript ni de compilación.
+
+**Decisión:** Se cierra formalmente la sesión habiendo consolidado la visualización de conflictos e incidencias en el Home, retirando el método de validación manual obsoleta y refactorizando los DTOs duplicados de importación en una única entidad común bajo los principios DRY.

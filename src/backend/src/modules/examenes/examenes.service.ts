@@ -166,10 +166,6 @@ export class ExamenService {
       }
     }
 
-    if (examen.fecha && examen.hora) {
-      await this.examenConflictValidator.verificarRestricciones(examen, id);
-    }
-
     return this.examenRepository.save(examen);
   }
 
@@ -295,4 +291,15 @@ export class ExamenService {
 
     return queryBuilder.getMany();
   }
+
+  async obtenerTotalConflictosProfesores(): Promise<{ total: number }> {
+    const profesores = await this.profesorRepository.find();
+    let total = 0;
+    for (const prof of profesores) {
+      const conflictos = await this.findConflictosAlumnos(prof.id);
+      total += conflictos.length;
+    }
+    return { total };
+  }
 }
+

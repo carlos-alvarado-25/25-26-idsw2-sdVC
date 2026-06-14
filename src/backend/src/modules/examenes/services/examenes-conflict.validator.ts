@@ -8,7 +8,6 @@ import { TimeUtils } from '../../../common/utils/time.utils';
 import { ConflictoAlumnoDto } from '../dto/conflicto-alumno.dto';
 
 export abstract class ExamenConflictValidator {
-  abstract verificarRestricciones(examen: Examen, excludeExamenId: number): Promise<void>;
   abstract verificarConflictoProfesor(
     examenId: number,
     profesorId: number,
@@ -18,6 +17,7 @@ export abstract class ExamenConflictValidator {
   ): Promise<{ tieneConflicto: boolean; descripcion?: string }>;
   abstract calcularTodosConflictosAlumnos(examenesProf: Examen[]): Promise<ConflictoAlumnoDto[]>;
 }
+
 
 @Injectable()
 export class SimpleExamenConflictValidator extends ExamenConflictValidator {
@@ -30,67 +30,8 @@ export class SimpleExamenConflictValidator extends ExamenConflictValidator {
     super();
   }
 
-  async verificarRestricciones(examen: Examen, excludeExamenId: number): Promise<void> {
-    if (!examen.fecha || !examen.hora) return;
-
-    const startMinutes = TimeUtils.convertTimeToMinutes(examen.hora);
-    const endMinutes = startMinutes + examen.duracion;
-
-    if (examen.aulaId) {
-      const examenesAula = await this.examenRepository.find({
-        where: {
-          aulaId: examen.aulaId,
-          fecha: examen.fecha,
-          id: Not(excludeExamenId),
-        },
-      });
-
-      const conflicto = this.detectarSolapamiento(examenesAula, startMinutes, endMinutes);
-      if (conflicto) {
-        throw new ConflictException(
-          `El aula "${examen.nombreAula}" ya está ocupada en esta franja horaria por el examen "${conflicto.codigo}"`,
-        );
-      }
-    }
-
-    if (examen.profesorId) {
-      const examenesProf = await this.examenRepository.find({
-        where: {
-          profesorId: examen.profesorId,
-          fecha: examen.fecha,
-          id: Not(excludeExamenId),
-        },
-      });
-
-      const conflicto = this.detectarSolapamiento(examenesProf, startMinutes, endMinutes);
-      if (conflicto) {
-        const prof = await this.profesorRepository.findOneBy({ id: examen.profesorId });
-        throw new ConflictException(
-          `El profesor "${prof?.nombre || 'seleccionado'}" ya supervisa otro examen en esta franja horaria ("${conflicto.codigo}")`,
-        );
-      }
-
-      const profesor = await this.profesorRepository.findOne({
-        where: { id: examen.profesorId },
-        relations: { preferencias: true },
-      });
-
-      if (profesor) {
-        const finHoraStr = TimeUtils.minutesToTime(endMinutes);
-        const franja = `${examen.hora}-${finHoraStr}`;
-
-        if (!profesor.estaDisponibleEn(examen.fecha, franja, profesor.preferencias)) {
-          const diaSemana = Preferencia.getDiaSemanaDeFecha(examen.fecha);
-          const nombreDia = Preferencia.getNombreDia(diaSemana);
-          throw new ConflictException(
-            `El profesor "${profesor.nombre}" no está disponible en esta franja horaria por una restricción de preferencia registrada (${nombreDia} de ${examen.hora} a ${finHoraStr}).`,
-          );
-        }
-      }
-    }
-  }
-
   async verificarConflictoProfesor(
+
     examenId: number,
     profesorId: number,
     fecha: string,

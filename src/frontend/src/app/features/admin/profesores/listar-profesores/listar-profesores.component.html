@@ -47,17 +47,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let profesor of profesores()" [class.selected]="selectedIds().has(profesor.id)">
+        <tr *ngFor="let profesor of profesores()"
+            [class.selected]="selectedIds().has(profesor.id)"
+            [class.has-conflicts]="conflictosProfesor(profesor.id) > 0">
           <td class="col-check">
             <input type="checkbox" [checked]="selectedIds().has(profesor.id)" (change)="toggleSelection(profesor.id)">
           </td>
           <td class="font-mono">{{ profesor.codigo }}</td>
-          <td><strong>{{ profesor.nombre }}</strong></td>
+          <td>
+            <div class="nombre-cell">
+              <strong>{{ profesor.nombre }}</strong>
+              <span *ngIf="conflictosProfesor(profesor.id) > 0" class="conflict-inline-badge" title="Este profesor tiene {{ conflictosProfesor(profesor.id) }} conflicto(s) detectado(s). Revise el panel de Preferencias.">
+                ⚠️ {{ conflictosProfesor(profesor.id) }} conflicto{{ conflictosProfesor(profesor.id) > 1 ? 's' : '' }}
+              </span>
+            </div>
+          </td>
           <td>{{ profesor.email }}</td>
           <td>{{ profesor.departamento }}</td>
           <td class="text-accent">{{ getAsignaturasNombres(profesor) }}</td>
           <td class="table-actions">
             <button class="btn-icon" [routerLink]="['/admin/profesores/editar', profesor.id]" title="Editar">✏️</button>
+            <div class="pref-btn-wrap" title="{{ conflictosProfesor(profesor.id) > 0 ? conflictosProfesor(profesor.id) + ' conflicto(s) detectado(s)' : 'Preferencias y conflictos' }}">
+              <button class="btn-icon" [routerLink]="['/admin/profesores', profesor.id, 'preferencias']">⚙️</button>
+              <span *ngIf="conflictosProfesor(profesor.id) > 0" class="conflict-badge">
+                {{ conflictosProfesor(profesor.id) }}
+              </span>
+            </div>
             <button class="btn-icon delete" (click)="eliminarProfesor(profesor)" title="Eliminar">🗑️</button>
           </td>
         </tr>

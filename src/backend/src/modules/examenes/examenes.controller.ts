@@ -111,12 +111,18 @@ export class ExamenController {
     res.send(buffer);
   }
 
+  @Get('conflictos/total')
+  async findTotalConflictos(): Promise<{ total: number }> {
+    return this.examenService.obtenerTotalConflictosProfesores();
+  }
+
   @Get('conflictos')
   async findConflictos(
     @Query('profesorId', ParseIntPipe) profesorId: number,
   ): Promise<ConflictoAlumnoDto[]> {
     return this.examenService.findConflictosAlumnos(profesorId);
   }
+
 
   @Get('search')
   async search(

@@ -7,7 +7,7 @@ import { Usuario, UserRole } from '../../entities/usuario.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 import { CrearAlumnoDto } from './dto/crear-alumno.dto';
 import { UpdateAlumnoDto } from './dto/update-alumno.dto';
-import { ImportResultDto } from './dto/import-result.dto';
+import { ImportResultDto } from '../../common/dto/import-result.dto';
 import { FileParserFactory } from '../../common/services/file-parser.factory';
 import { UsersService } from '../auth/users.service';
 

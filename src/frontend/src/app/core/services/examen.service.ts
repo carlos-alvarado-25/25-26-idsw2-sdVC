@@ -103,10 +103,15 @@ export class ExamenService {
     );
   }
 
+  obtenerTotalConflictos(): Observable<{ total: number }> {
+    return this.http.get<{ total: number }>(`${this.apiUrl}/conflictos/total`);
+  }
+
   obtenerConflictos(profesorId: number): Observable<ConflictoAlumno[]> {
     const params = new HttpParams().set('profesorId', profesorId.toString());
     return this.http.get<ConflictoAlumno[]>(`${this.apiUrl}/conflictos`, { params });
   }
+
 
   obtenerCalendario(queryParams: {
     fechaInicio?: string;

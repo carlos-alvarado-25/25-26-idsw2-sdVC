@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService, User } from '../../core/services/auth.service';
 import { Router, RouterModule } from '@angular/router';
+import { ExamenService } from '../../core/services/examen.service';
+import { IncidenciaService } from '../../core/services/incidencia.service';
+import { take } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-home',
@@ -43,7 +48,10 @@ import { Router, RouterModule } from '@angular/router';
             </div>
 
             <!-- Gestión de Profesores -->
-            <div class="card" [routerLink]="['/admin/profesores']">
+            <div class="card" [routerLink]="['/admin/profesores']" style="position:relative">
+              <span *ngIf="totalConflictos() > 0" class="card-conflict-badge" [title]="totalConflictos() + ' conflicto(s) detectado(s) entre los profesores'">
+                {{ totalConflictos() }}
+              </span>
               <div class="card-icon">👨‍🏫</div>
               <h3>Profesores</h3>
               <p>Gestión de docentes y carga lectiva.</p>
@@ -71,12 +79,16 @@ import { Router, RouterModule } from '@angular/router';
             </div>
 
             <!-- Incidencias (Solo Admin) -->
-            <div class="card" [routerLink]="['/admin/incidencias']">
+            <div class="card" [routerLink]="['/admin/incidencias']" style="position:relative">
+              <span *ngIf="totalIncidenciasPendientes() > 0" class="card-conflict-badge" [title]="totalIncidenciasPendientes() + ' incidencia(s) pendiente(s)'">
+                {{ totalIncidenciasPendientes() }}
+              </span>
               <div class="card-icon">⚠️</div>
               <h3>Incidencias</h3>
               <p>Revisión de reportes de profesores.</p>
             </div>
           </ng-container>
+
 
           <!-- Tarjeta de Consulta de Calendario (Común a todos los roles) -->
           <div class="card accent" [routerLink]="['/calendario/consultar']">
@@ -219,13 +231,91 @@ import { Router, RouterModule } from '@angular/router';
     .card.warning:hover {
       border-color: #d97706;
     }
+
+    .card-conflict-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #dc2626;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+      border: 2px solid white;
+      box-shadow: 0 2px 6px rgba(220,38,38,0.4);
+      animation: pop-in 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes pop-in {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .card-conflict-hint {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #b45309;
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: 999px;
+      padding: 0.2rem 0.75rem;
+      animation: pulse-warn 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-warn {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.65; }
+    }
   `]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   user$;
+  totalConflictos = signal(0);
+  totalIncidenciasPendientes = signal(0);
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private examenService: ExamenService,
+    private incidenciaService: IncidenciaService
+  ) {
     this.user$ = this.authService.user$;
+  }
+
+  ngOnInit(): void {
+    this.user$.pipe(take(1)).subscribe((user: User | null) => {
+      if (user?.rol === 'Admin') {
+        this.cargarTotalConflictos();
+        this.cargarTotalIncidencias();
+      }
+    });
+  }
+
+  private cargarTotalConflictos(): void {
+    this.examenService.obtenerTotalConflictos().subscribe({
+      next: (res) => {
+        this.totalConflictos.set(res.total);
+      },
+      error: () => {}
+    });
+  }
+
+  private cargarTotalIncidencias(): void {
+    this.incidenciaService.listar(undefined, 'Admin').subscribe({
+      next: (incidencias) => {
+        const pendientes = incidencias.filter(i => i.estado === 'PENDIENTE').length;
+        this.totalIncidenciasPendientes.set(pendientes);
+      },
+      error: () => {}
+    });
   }
 
   logout() {
@@ -233,3 +323,5 @@ export class HomeComponent {
     this.router.navigate(['/login']);
   }
 }
+
+

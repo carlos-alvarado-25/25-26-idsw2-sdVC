@@ -8,7 +8,7 @@ import { Usuario, UserRole } from '../../entities/usuario.entity';
 import { PagedResultDto } from '../../common/dto/paged-result.dto';
 import { CrearProfesorDto } from './dto/crear-profesor.dto';
 import { UpdateProfesorDto } from './dto/update-profesor.dto';
-import { ImportResultDto } from './dto/import-result.dto';
+import { ImportResultDto } from '../../common/dto/import-result.dto';
 import { FileParserFactory } from '../../common/services/file-parser.factory';
 import { Preferencia } from '../../entities/preferencia.entity';
 import { CrearPreferenciaDto } from './dto/crear-preferencia.dto';
